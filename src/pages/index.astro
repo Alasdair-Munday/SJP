@@ -1,41 +1,92 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import SketchChurch from '../components/SketchChurch.astro';
-import CalendarEvents from '../components/CalendarEvents.astro';
-import content from '../data/content.json';
-import { ArrowRight, Users, Zap, Heart, MapPin, Calendar } from 'lucide-react';
+import Layout from "../layouts/Layout.astro";
+import SketchChurch from "../components/SketchChurch.astro";
+import CalendarEvents from "../components/CalendarEvents.astro";
+import content from "../data/content.json";
+import { ArrowRight, Users, Zap, Heart, MapPin, Calendar } from "lucide-react";
 
 const { hero, mission_grid } = content.pages.home;
 ---
 
 <Layout title="Home">
-	
 	<!-- HERO SECTION -->
-	<div class="relative line-drawing-hero overflow-hidden ground-line">
-		<SketchChurch class="absolute -bottom-6 left-0 w-full text-white/20" />
-		
-		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28 relative z-10">
-			<div class="max-w-3xl">
+	<div
+		class="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-[#0F2830]"
+	>
+		<!-- Background Image -->
+		<img
+			src="/images/community-park-gathering-2.jpg"
+			alt="St John's Park Community Gathering"
+			class="absolute inset-0 w-full h-full object-cover opacity-90"
+		/>
+
+		<!-- Gradient Overlays -->
+		<div
+			class="absolute inset-0 bg-linear-to-r from-[#0F2830] via-[#0F2830]/80 to-[#2f9aa4]/40 mix-blend-multiply"
+		>
+		</div>
+		<div
+			class="absolute inset-0 bg-linear-to-t from-[#0F2830] via-transparent to-transparent opacity-90"
+		>
+		</div>
+
+		<!-- SVG Texture -->
+		<div
+			class="absolute inset-0 opacity-10 pointer-events-none mix-blend-overlay"
+		>
+			<SketchChurch
+				class="w-full h-full object-cover text-white transform scale-150 translate-y-20"
+			/>
+		</div>
+
+		<div
+			class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 flex flex-col justify-center h-full w-full"
+		>
+			<div class="max-w-4xl">
 				<!-- Tag -->
-				<div class="inline-block border-2 border-white/70 px-4 py-2 font-semibold tracking-wide text-xs mb-8 bg-white/10 text-white hand-note text-xl">
-					{hero.badge}
+				<div
+					class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white mb-8 shadow-lg"
+				>
+					<span class="w-2 h-2 rounded-full bg-(--gold) animate-pulse"
+					></span>
+					<span class="hand-note text-xl tracking-wide"
+						>{hero.badge}</span
+					>
 				</div>
-				
-				<!-- Headline with Color Triad -->
-				<h1 class="font-['Newsreader'] text-5xl md:text-7xl font-bold tracking-tight leading-[1] mb-6 text-white">
+
+				<!-- Headline -->
+				<h1
+					class="font-['Newsreader'] text-6xl md:text-8xl font-bold tracking-tight leading-[0.95] mb-8 text-white drop-shadow-xl"
+				>
 					{hero.title}
 				</h1>
-				
-				<p class="text-xl md:text-2xl font-medium text-white/90 max-w-xl leading-relaxed mb-10 border-l-2 border-[color:var(--gold)] pl-8 py-2">
+
+				<!-- Subtitle -->
+				<p
+					class="text-xl md:text-2xl font-medium text-white/90 max-w-2xl leading-relaxed mb-12 border-l-4 border-(--gold) pl-6 drop-shadow-lg"
+				>
 					{hero.subtitle}
 				</p>
-				
+
+				<!-- CTA Buttons -->
 				<div class="flex flex-wrap gap-4">
-					<a href="/sundays" class="px-8 py-4 bg-white text-[color:var(--ink)] font-semibold tracking-wide border-2 border-white/80 hover:bg-[color:var(--gold)] transition-all flex items-center gap-3">
-						Visit Sunday <ArrowRight size={20} />
+					<a
+						href="/sundays"
+						class="group px-8 py-4 bg-(--gold) text-(--ink) font-bold tracking-wide rounded-lg hover:bg-white transition-all duration-300 shadow-[0_0_20px_rgba(217,173,63,0.3)] hover:shadow-[0_0_30px_rgba(255,255,255,0.4)] flex items-center gap-3 transform hover:-translate-y-1"
+					>
+						Visit Sunday <ArrowRight
+							size={20}
+							className="group-hover:translate-x-1 transition-transform"
+						/>
 					</a>
-					<a href="/contact" class="px-8 py-4 bg-transparent text-white font-semibold tracking-wide border-2 border-white/70 hover:bg-white/10 transition-all flex items-center gap-3">
-						Find Us <MapPin size={20} />
+					<a
+						href="/contact"
+						class="group px-8 py-4 bg-white/10 backdrop-blur-md text-white font-semibold tracking-wide border border-white/30 rounded-lg hover:bg-white/20 transition-all duration-300 flex items-center gap-3 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+					>
+						Find Us <MapPin
+							size={20}
+							className="group-hover:scale-110 transition-transform"
+						/>
 					</a>
 				</div>
 			</div>
@@ -43,68 +94,101 @@ const { hero, mission_grid } = content.pages.home;
 	</div>
 
 	<!-- BANNER: Upcoming -->
-	<div class="bg-[color:var(--gold)] border-b-2 border-[color:var(--ink)] p-8">
+	<div class="bg-(--gold) border-b-2 border-(--ink) p-8">
 		<div class="max-w-7xl mx-auto">
 			<div class="flex items-center gap-3 mb-6">
 				<Calendar className="w-8 h-8 text-[#0F2830]" />
-			<h2 class="text-2xl font-bold tracking-tight text-[#0F2830]">Coming Up</h2>
+				<h2 class="text-2xl font-bold tracking-tight text-[#0F2830]">
+					Coming Up
+				</h2>
 			</div>
-			
+
 			<CalendarEvents />
 		</div>
 	</div>
 
 	<!-- MISSION GRID -->
 	<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-		<div class="flex items-end gap-4 mb-12 border-b-2 border-[#0F2830] pb-4">
-			<h2 class="font-['Newsreader'] text-4xl font-bold tracking-tight text-[#0F2830]">Our Mission</h2>
-			<span class="mb-2 font-mono text-sm text-[#0F2830]/60 hidden md:inline-block">// Belong, Serve, Give</span>
+		<div
+			class="flex items-end gap-4 mb-12 border-b-2 border-[#0F2830] pb-4"
+		>
+			<h2
+				class="font-['Newsreader'] text-4xl font-bold tracking-tight text-[#0F2830]"
+			>
+				Our Mission
+			</h2>
+			<span
+				class="mb-2 font-mono text-sm text-[#0F2830]/60 hidden md:inline-block"
+				>// Belong, Serve, Give</span
+			>
 		</div>
 
 		<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-			
 			{/* CARD 1: BELONG (Eden Green Accent) */}
-			<div class="sketch-panel p-8 hover:-translate-y-1 transition-transform duration-300 group">
-				<div class="w-12 h-12 bg-[#eaf7ef] text-[color:var(--ink)] flex items-center justify-center mb-6 group-hover:bg-[#45B074] group-hover:text-white transition-colors rounded-full">
+			<div
+				class="sketch-panel p-8 hover:-translate-y-1 transition-transform duration-300 group"
+			>
+				<div
+					class="w-12 h-12 bg-[#eaf7ef] text-(--ink) flex items-center justify-center mb-6 group-hover:bg-[#45B074] group-hover:text-white transition-colors rounded-full"
+				>
 					<Users size={24} />
 				</div>
 				<h3 class="text-2xl font-bold mb-3 text-[#0F2830]">Belong</h3>
 				<p class="text-[#0F2830]/80 font-medium mb-8 leading-relaxed">
 					{mission_grid[0].desc}
 				</p>
-				<a href={mission_grid[0].link_href} class="inline-flex items-center gap-2 font-semibold text-sm tracking-wide border-b-2 border-[#0F2830] pb-1 hover:text-[#45B074] hover:border-[#45B074] transition-colors">
-					{mission_grid[0].link_text} <ArrowRight size={16} />
+				<a
+					href={mission_grid[0].link_href}
+					class="inline-flex items-center gap-2 font-semibold text-sm tracking-wide border-b-2 border-[#0F2830] pb-1 hover:text-[#45B074] hover:border-[#45B074] transition-colors"
+				>
+					{mission_grid[0].link_text}
+					<ArrowRight size={16} />
 				</a>
 			</div>
 
 			{/* CARD 2: SERVE (Teal Accent) */}
-			<div class="sketch-panel p-8 hover:-translate-y-1 transition-transform duration-300 group">
-				<div class="w-12 h-12 bg-[#e9f3f4] text-[color:var(--ink)] flex items-center justify-center mb-6 group-hover:bg-[color:var(--teal)] group-hover:text-white transition-colors rounded-full">
+			<div
+				class="sketch-panel p-8 hover:-translate-y-1 transition-transform duration-300 group"
+			>
+				<div
+					class="w-12 h-12 bg-[#e9f3f4] text-(--ink) flex items-center justify-center mb-6 group-hover:bg-(--teal) group-hover:text-white transition-colors rounded-full"
+				>
 					<Zap size={24} />
 				</div>
 				<h3 class="text-2xl font-bold mb-3 text-[#0F2830]">Serve</h3>
 				<p class="text-[#0F2830]/80 font-medium mb-8 leading-relaxed">
 					{mission_grid[1].desc}
 				</p>
-				<a href={mission_grid[1].link_href} class="inline-flex items-center gap-2 font-semibold text-sm tracking-wide border-b-2 border-[#0F2830] pb-1 hover:text-[color:var(--teal)] hover:border-[color:var(--teal)] transition-colors">
-					{mission_grid[1].link_text} <ArrowRight size={16} />
+				<a
+					href={mission_grid[1].link_href}
+					class="inline-flex items-center gap-2 font-semibold text-sm tracking-wide border-b-2 border-[#0F2830] pb-1 hover:text-(--teal) hover:border-(--teal) transition-colors"
+				>
+					{mission_grid[1].link_text}
+					<ArrowRight size={16} />
 				</a>
 			</div>
 
 			{/* CARD 3: GIVE (KINGDOM GOLD) */}
-			<div class="sketch-panel p-8 hover:-translate-y-1 transition-transform duration-300 group bg-[color:var(--gold)]/15">
-				<div class="w-12 h-12 bg-[color:var(--ink)] text-[color:var(--gold)] flex items-center justify-center mb-6 rounded-full">
+			<div
+				class="sketch-panel p-8 hover:-translate-y-1 transition-transform duration-300 group bg-(--gold)/15"
+			>
+				<div
+					class="w-12 h-12 bg-(--ink) text-(--gold) flex items-center justify-center mb-6 rounded-full"
+				>
 					<Heart size={24} />
 				</div>
 				<h3 class="text-2xl font-bold mb-3 text-[#0F2830]">Give</h3>
 				<p class="text-[#0F2830] font-bold mb-8 leading-relaxed">
 					{mission_grid[2].desc}
 				</p>
-				<a href={mission_grid[2].link_href} class="inline-flex items-center gap-2 font-semibold text-sm tracking-wide border-b-2 border-[#0F2830] pb-1 text-[#0F2830] hover:text-[color:var(--gold)] hover:border-[color:var(--gold)] transition-colors">
-					{mission_grid[2].link_text} <ArrowRight size={16} />
+				<a
+					href={mission_grid[2].link_href}
+					class="inline-flex items-center gap-2 font-semibold text-sm tracking-wide border-b-2 border-[#0F2830] pb-1 text-[#0F2830] hover:text-(--gold) hover:border-(--gold) transition-colors"
+				>
+					{mission_grid[2].link_text}
+					<ArrowRight size={16} />
 				</a>
 			</div>
-
 		</div>
 	</div>
 </Layout>

@@ -1,14 +1,100 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
+import dayjs from "dayjs";
+import { ArrowRight, Calendar, Clock, MapPin } from "lucide-react";
+import { CALENDAR_URL, getUpcomingEvents } from "../utils/calendar";
+
+const upcomingEvents = await getUpcomingEvents(6);
+const webcalUrl = CALENDAR_URL.replace(/^https:/, "webcal:");
 ---
 
 <Layout title="What's On">
   <div class="max-w-5xl mx-auto px-4 py-20 space-y-10">
-    <h1 class="font-['Newsreader'] text-5xl md:text-6xl font-bold text-[#0F2830]">What's On</h1>
+    <div class="flex flex-wrap items-start justify-between gap-4">
+      <div>
+        <h1
+          class="font-['Newsreader'] text-5xl md:text-6xl font-bold text-[#0F2830]"
+        >
+          What's On
+        </h1>
+        <p class="text-[#0F2830]/80 mt-2">
+          Weekly church life and upcoming events in one place.
+        </p>
+      </div>
+      <div class="flex flex-wrap gap-3">
+        <a
+          href={webcalUrl}
+          class="inline-flex items-center gap-2 px-4 py-2 bg-white text-[#0F2830] border-2 border-[#0F2830] hover:bg-[#0F2830] hover:text-white transition-colors font-semibold"
+        >
+          <Calendar size={16} /> Import Calendar
+        </a>
+      </div>
+    </div>
 
-    <section class="bg-white border-2 border-[#0F2830] p-8">
+    <section
+      id="upcoming-events"
+      class="bg-white border-2 border-[#0F2830] p-8 space-y-4"
+    >
+      <h2 class="text-3xl font-bold text-[#0F2830] mb-1">Upcoming Events</h2>
+      <p class="text-[#0F2830]/90">Pulled from our live church calendar.</p>
+      {
+        upcomingEvents.length > 0 ? (
+          <div class="grid gap-3">
+            {upcomingEvents.map((event) => (
+              <article class="border-2 border-[#0F2830] p-4 bg-[#F9FAF8]">
+                <div class="flex items-start gap-4">
+                  <div class="flex-1">
+                    <h3 class="text-xl font-bold text-[#0F2830]">
+                      {event.title}
+                    </h3>
+                    <div class="mt-2 flex flex-col sm:flex-row sm:flex-wrap gap-3 text-[#0F2830]/85 text-sm font-medium">
+                      <span class="inline-flex items-center gap-2">
+                        <Clock size={15} />{" "}
+                        {dayjs(event.start).format("ddd D MMM, h:mm A")}
+                      </span>
+                      {event.location && (
+                        <span class="inline-flex items-center gap-2">
+                          <MapPin size={15} /> {event.location}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                  {event.thumbnailUrl && (
+                    <img
+                      src={event.thumbnailUrl}
+                      alt={`Thumbnail for ${event.title}`}
+                      class="w-28 h-20 object-cover border-2 border-[#0F2830]"
+                      loading="lazy"
+                    />
+                  )}
+                </div>
+              </article>
+            ))}
+          </div>
+        ) : (
+          <p class="text-[#0F2830]/90">
+            No upcoming events found right now. Please check back soon.
+          </p>
+        )
+      }
+      <a
+        href="#sunday-gathering"
+        class="inline-flex items-center gap-2 font-semibold text-[#0F2830] hover:text-[#45B074] transition-colors"
+      >
+        See regular weekly activities <ArrowRight size={16} />
+      </a>
+    </section>
+
+    <section
+      id="sunday-gathering"
+      class="bg-white border-2 border-[#0F2830] p-8"
+    >
       <h2 class="text-3xl font-bold text-[#0F2830] mb-3">Sunday Gathering</h2>
-      <p class="text-[#0F2830]/90">Our Sunday gathering happens every Sunday at 10:45am and is for all ages. We gather to worship Jesus, hear from God's Word, and pray together.</p>
+      <p class="text-[#0F2830]/90">
+        Our Sunday gathering happens every Sunday at 10:45am and is for all
+        ages. We gather to worship Jesus, hear from God's Word, and pray
+        together.
+      </p>
       <img
         src="/images/community-fun-day.jpg"
         alt="Community activities in the church grounds"
@@ -17,35 +103,77 @@ import Layout from '../layouts/Layout.astro';
       />
     </section>
 
-    <section class="bg-white border-2 border-[#0F2830] p-8">
-      <h2 class="text-3xl font-bold text-[#0F2830] mb-3">Midweek Online Prayers</h2>
-      <p class="text-[#0F2830]/90">Monday to Friday at 8:00am for 30 minutes on Zoom.</p>
-      <p class="text-[#0F2830]/90">Meeting ID: <strong>323 564 9987</strong> | Passcode: <strong>483559</strong></p>
-      <p class="text-[#0F2830]/90">We also meet in church on the first Sunday of each month from 10:00-10:30am before the service.</p>
+    <section
+      id="midweek-prayers"
+      class="bg-white border-2 border-[#0F2830] p-8"
+    >
+      <h2 class="text-3xl font-bold text-[#0F2830] mb-3">
+        Midweek Online Prayers
+      </h2>
+      <p class="text-[#0F2830]/90">
+        Monday to Friday at 8:00am for 30 minutes on Zoom.
+      </p>
+      <a
+        href="https://zoom.us/j/3235649987?pwd=483559"
+        class="inline-block bg-[#0F2830] text-white px-4 py-2 font-bold mb-2 hover:bg-[#45B074] transition-colors border-2 border-transparent hover:border-[#0F2830]"
+      >
+        Join Zoom Meeting
+      </a>
+      <p class="text-[#0F2830]/90 text-sm">
+        Meeting ID: <strong>323 564 9987</strong> | Passcode: <strong
+          >483559</strong
+        >
+      </p>
+      <p class="text-[#0F2830]/90">
+        We also meet in church on the first Sunday of each month from
+        10:00-10:30am before the service.
+      </p>
     </section>
 
-    <section class="bg-white border-2 border-[#0F2830] p-8">
+    <section id="foodbank" class="bg-white border-2 border-[#0F2830] p-8">
       <h2 class="text-3xl font-bold text-[#0F2830] mb-2">Foodbank</h2>
       <p class="font-semibold text-[#0F2830] mb-3">Monday 10:00am-12:00pm</p>
-      <p class="mb-3 text-[#0F2830]/90">If you are in crisis, we can provide an emergency food parcel and practical support. Citizens Advice and Debt Support workers are available during sessions for those with referrals.</p>
+      <p class="mb-3 text-[#0F2830]/90">
+        If you are in crisis, we can provide an emergency food parcel and
+        practical support. Citizens Advice and Debt Support workers are
+        available during sessions for those with referrals.
+      </p>
       <p class="text-[#0F2830]/90 mb-2">Referral numbers:</p>
       <ul class="list-disc pl-6 space-y-1 text-[#0F2830]/90">
         <li>Help Through Hardship: 0808 208 2138 (Mon-Fri, 9:00am-5:00pm)</li>
-        <li>Citizens Advice Sheffield: 0808 278 7820 (Mon-Fri, 10:00am-4:00pm, option 4)</li>
+        <li>
+          Citizens Advice Sheffield: 0808 278 7820 (Mon-Fri, 10:00am-4:00pm,
+          option 4)
+        </li>
         <li>Sheffield S6 helpline: 0114 321 0733 (Mon-Fri, 10:00am-1:00pm)</li>
       </ul>
-      <p class="mt-3 text-[#0F2830]/90">Interested in volunteering? Contact Hannah at <a href="mailto:hannah@saintjohnspark.org" class="underline decoration-[#45B074] underline-offset-4">hannah@saintjohnspark.org</a>.</p>
+      <p class="mt-3 text-[#0F2830]/90">
+        Interested in volunteering? Contact Hannah at <a
+          href="mailto:hannah@saintjohnspark.org"
+          class="underline decoration-[#45B074] underline-offset-4"
+          >hannah@saintjohnspark.org</a
+        >.
+      </p>
     </section>
 
-    <section class="bg-white border-2 border-[#0F2830] p-8">
+    <section id="lunch-club" class="bg-white border-2 border-[#0F2830] p-8">
       <h2 class="text-3xl font-bold text-[#0F2830] mb-2">Lunch Club</h2>
       <p class="font-semibold text-[#0F2830] mb-3">Monday 11:40am-12:40pm</p>
-      <p class="text-[#0F2830]/90">Join us every Monday for soup, bread, a hot drink, and a chat. All are welcome, and it is free.</p>
+      <p class="text-[#0F2830]/90">
+        Join us every Monday for soup, bread, a hot drink, and a chat. All are
+        welcome, and it is free.
+      </p>
     </section>
 
-    <section class="bg-white border-2 border-[#0F2830] p-8">
+    <section
+      id="seasonal-events"
+      class="bg-white border-2 border-[#0F2830] p-8"
+    >
       <h2 class="text-3xl font-bold text-[#0F2830] mb-2">Seasonal Events</h2>
-      <p class="text-[#0F2830]/90 mb-4">Throughout the year we host seasonal gatherings for all ages, including Christmas events and community celebrations.</p>
+      <p class="text-[#0F2830]/90 mb-4">
+        Throughout the year we host seasonal gatherings for all ages, including
+        Christmas events and community celebrations.
+      </p>
       <div class="grid md:grid-cols-2 gap-4">
         <img
           src="/images/christingle.jpg"

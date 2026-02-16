@@ -1,16 +1,16 @@
 ---
 import { getUpcomingEvents } from "../utils/calendar";
 import dayjs from "dayjs";
-import { Calendar, MapPin, Clock } from "lucide-react";
+import { MapPin, Clock } from "lucide-react";
 
-const events = await getUpcomingEvents(3);
+const events = await getUpcomingEvents(3, true);
 ---
 
 <div class="space-y-4">
   {
     events.length === 0 ? (
       <div class="p-4 bg-white/50 border-[3px] border-[#0F2830] text-[#0F2830]">
-        <p class="font-bold">Check out our full calendar for details.</p>
+        <p class="font-bold">Check out What's On for current activities.</p>
       </div>
     ) : (
       events.map((event) => (
@@ -24,7 +24,7 @@ const events = await getUpcomingEvents(3);
                 {dayjs(event.start).format("D")}
               </span>
             </div>
-            <div>
+            <div class="flex-1">
               <h3 class="text-xl font-bold uppercase text-[#0F2830] leading-tight mb-2">
                 {event.title}
               </h3>
@@ -41,6 +41,14 @@ const events = await getUpcomingEvents(3);
                 )}
               </div>
             </div>
+            {event.thumbnailUrl && (
+              <img
+                src={event.thumbnailUrl}
+                alt={`Thumbnail for ${event.title}`}
+                class="hidden sm:block w-28 h-20 object-cover border-2 border-[#0F2830]"
+                loading="lazy"
+              />
+            )}
           </div>
         </div>
       ))
@@ -48,10 +56,10 @@ const events = await getUpcomingEvents(3);
   }
   <div class="pt-4 text-center">
     <a
-      href="/calendar"
+      href="/whats-on#upcoming-events"
       class="inline-flex items-center gap-2 font-bold uppercase tracking-wider text-[#0F2830] hover:text-[#45B074] transition-colors border-b-2 border-transparent hover:border-[#45B074]"
     >
-      View Full Calendar ->
+      View What's On ->
     </a>
   </div>
 </div>

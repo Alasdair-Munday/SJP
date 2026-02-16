@@ -1,5 +1,17 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+const socialStorySteps = [
+  "When I arrive at St John's Park Church I will see a big blue open door with a ramp for wheelchair access.",
+  "I will go inside two sets of doors and then there will be someone at the back of church to say hello to me.",
+  "There will be ear defenders and activity bags for me to use if I want to. I am allowed to borrow them without asking.",
+  "The toilets are in the side hallway. There is also an accessible toilet and I am allowed to use it even if I don't have a disability.",
+  "In church I can sit on any of the available seats. If I have a wheelchair I am welcome to sit wherever I feel most comfortable.",
+  "When the service is ready to start, the person leading will say hello and tell us what is happening.",
+  "During the service we will sing songs. I can stand up or sit down to sing. It is OK to move around, dance or wave a flag.",
+  "After the Family Song, I will be invited to go into the side hall for kids activities. There is circle time, games, stories and a craft. It is OK to stay in the main service.",
+  "After the service I can stay for a drink and a biscuit and talk to people. If I don't want to do this, that is OK and I can go home with my family when we are ready."
+];
 ---
 
 <Layout title="Park Kids">
@@ -17,14 +29,19 @@ import Layout from '../layouts/Layout.astro';
       />
     </section>
 
-    <section class="bg-white border-2 border-[#0F2830] p-8 space-y-4">
-      <h2 class="text-3xl font-bold text-[#0F2830]">What to Expect</h2>
-      <ul class="list-disc pl-6 space-y-2 text-[#0F2830]/90">
-        <li>A warm welcome for children and parents.</li>
-        <li>Simple Bible teaching, games, and creative activities.</li>
-        <li>A safe, caring environment led by DBS-checked volunteers.</li>
-      </ul>
-      <p class="text-[#0F2830]/90">If you are visiting, speak to the welcome team when you arrive and we will help you get settled.</p>
+    <section class="bg-white border-2 border-[#0F2830] p-8 space-y-6">
+      <h2 class="text-3xl font-bold text-[#0F2830]">Social Story for Visiting Church</h2>
+      <p class="text-[#0F2830]/90">
+        Here is a step-by-step guide for what happens when visiting St John's Park Church on a Sunday.
+      </p>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {socialStorySteps.map((step, index) => (
+          <article class="border-2 border-[#0F2830] bg-[#F9FAF8] p-4">
+            <p class="font-bold text-[#45B074] text-sm tracking-wide mb-2">Step {index + 1}</p>
+            <p class="text-[#0F2830]/90 leading-relaxed">{step}</p>
+          </article>
+        ))}
+      </div>
       <div class="grid md:grid-cols-2 gap-4 pt-2">
         <img
           src="/images/kids-churchyard.jpg"
