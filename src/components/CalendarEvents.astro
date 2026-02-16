@@ -1,7 +1,11 @@
 ---
 import { getUpcomingEvents } from "../utils/calendar";
-import dayjs from "dayjs";
 import { MapPin, Clock } from "lucide-react";
+import {
+  formatEventDayOfMonth,
+  formatEventMonthShort,
+  formatEventTime,
+} from "../utils/calendar";
 
 const events = await getUpcomingEvents(3, true);
 ---
@@ -14,14 +18,17 @@ const events = await getUpcomingEvents(3, true);
       </div>
     ) : (
       events.map((event) => (
-        <div class="bg-white border-[3px] border-[#0F2830] p-6 shadow-[4px_4px_0px_0px_#45B074] hover:shadow-none hover:translate-y-1 transition-all">
+        <a
+          href={`/events/${event.slug}`}
+          class="block bg-white border-[3px] border-[#0F2830] p-6 shadow-[4px_4px_0px_0px_#45B074] hover:shadow-none hover:translate-y-1 transition-all"
+        >
           <div class="flex items-start gap-4">
             <div class="bg-[#0F2830] text-white p-3 flex flex-col items-center justify-center min-w-16">
               <span class="text-xs font-bold uppercase tracking-wider">
-                {dayjs(event.start).format("MMM")}
+                {formatEventMonthShort(event.start, event.timeZone)}
               </span>
               <span class="text-2xl font-black">
-                {dayjs(event.start).format("D")}
+                {formatEventDayOfMonth(event.start, event.timeZone)}
               </span>
             </div>
             <div class="flex-1">
@@ -31,7 +38,7 @@ const events = await getUpcomingEvents(3, true);
               <div class="flex flex-col gap-1 text-sm font-medium text-[#0F2830]/80">
                 <div class="flex items-center gap-2">
                   <Clock size={16} />
-                  <span>{dayjs(event.start).format("h:mm A")}</span>
+                  <span>{formatEventTime(event.start, event.timeZone)}</span>
                 </div>
                 {event.location && (
                   <div class="flex items-center gap-2">
@@ -50,7 +57,7 @@ const events = await getUpcomingEvents(3, true);
               />
             )}
           </div>
-        </div>
+        </a>
       ))
     )
   }

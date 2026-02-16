@@ -1,6 +1,7 @@
 ---
 import Logo from "../components/Logo.astro";
 import SketchChurch from "../components/SketchChurch.astro";
+import { Menu, X } from "lucide-react";
 import content from "../data/content.json";
 import "../styles/global.css";
 
@@ -90,9 +91,84 @@ const primaryNav = content.navigation.filter(
 							I'm New
 						</a>
 					</div>
+
+					<!-- MOBILE MENU TOGGLE -->
+					<button
+						id="mobile-menu-toggle"
+						type="button"
+						class="md:hidden inline-flex items-center justify-center w-12 h-12 border-2 border-[#0F2830] text-[#0F2830] hover:bg-[#0F2830] hover:text-white transition-colors"
+						aria-expanded="false"
+						aria-controls="mobile-menu-panel"
+						aria-label="Toggle navigation menu"
+					>
+						<Menu data-menu-icon-open size={22} />
+						<X data-menu-icon-close size={22} className="hidden" />
+					</button>
+				</div>
+			</div>
+
+			<div
+				id="mobile-menu-panel"
+				class="hidden md:hidden border-t-2 border-[var(--ink)] bg-white"
+			>
+				<div class="px-4 py-4 flex flex-col gap-2">
+					{
+						primaryNav.map((item) => (
+							<a
+								data-mobile-link
+								href={item.href}
+								class="text-[#0F2830] font-semibold text-base tracking-wide border-2 border-transparent hover:border-[#0F2830] px-3 py-2 transition-colors"
+							>
+								{item.label}
+							</a>
+						))
+					}
+					<a
+						data-mobile-link
+						href="/im-new"
+						class="mt-2 bg-[var(--gold)] text-[var(--ink)] px-4 py-2.5 font-semibold text-sm tracking-wide border-2 border-[var(--ink)] hover:bg-white transition-all inline-flex w-fit"
+					>
+						I'm New
+					</a>
 				</div>
 			</div>
 		</nav>
+
+		<script is:inline>
+			(() => {
+				const toggle = document.getElementById("mobile-menu-toggle");
+				const panel = document.getElementById("mobile-menu-panel");
+				if (!toggle || !panel) return;
+
+				const openIcon = toggle.querySelector("[data-menu-icon-open]");
+				const closeIcon = toggle.querySelector("[data-menu-icon-close]");
+				const links = panel.querySelectorAll("a[data-mobile-link]");
+
+				const setOpen = (isOpen) => {
+					toggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+					panel.classList.toggle("hidden", !isOpen);
+					openIcon?.classList.toggle("hidden", isOpen);
+					closeIcon?.classList.toggle("hidden", !isOpen);
+				};
+
+				setOpen(false);
+
+				toggle.addEventListener("click", () => {
+					const expanded = toggle.getAttribute("aria-expanded") === "true";
+					setOpen(!expanded);
+				});
+
+				links.forEach((link) => {
+					link.addEventListener("click", () => setOpen(false));
+				});
+
+				window.addEventListener("resize", () => {
+					if (window.innerWidth >= 768) {
+						setOpen(false);
+					}
+				});
+			})();
+		</script>
 
 		<slot />
 

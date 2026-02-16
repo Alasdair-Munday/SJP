@@ -1,8 +1,11 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import dayjs from "dayjs";
 import { ArrowRight, Calendar, Clock, MapPin } from "lucide-react";
-import { CALENDAR_URL, getUpcomingEvents } from "../utils/calendar";
+import {
+  CALENDAR_URL,
+  formatEventDateTimeShort,
+  getUpcomingEvents,
+} from "../utils/calendar";
 
 const upcomingEvents = await getUpcomingEvents(6);
 const webcalUrl = CALENDAR_URL.replace(/^https:/, "webcal:");
@@ -42,7 +45,10 @@ const webcalUrl = CALENDAR_URL.replace(/^https:/, "webcal:");
           <div class="grid gap-3">
             {upcomingEvents.map((event) => (
               <article class="border-2 border-[#0F2830] p-4 bg-[#F9FAF8]">
-                <div class="flex items-start gap-4">
+                <a
+                  href={`/events/${event.slug}`}
+                  class="flex items-start gap-4 hover:opacity-80 transition-opacity"
+                >
                   <div class="flex-1">
                     <h3 class="text-xl font-bold text-[#0F2830]">
                       {event.title}
@@ -50,7 +56,7 @@ const webcalUrl = CALENDAR_URL.replace(/^https:/, "webcal:");
                     <div class="mt-2 flex flex-col sm:flex-row sm:flex-wrap gap-3 text-[#0F2830]/85 text-sm font-medium">
                       <span class="inline-flex items-center gap-2">
                         <Clock size={15} />{" "}
-                        {dayjs(event.start).format("ddd D MMM, h:mm A")}
+                        {formatEventDateTimeShort(event.start, event.timeZone)}
                       </span>
                       {event.location && (
                         <span class="inline-flex items-center gap-2">
@@ -67,7 +73,7 @@ const webcalUrl = CALENDAR_URL.replace(/^https:/, "webcal:");
                       loading="lazy"
                     />
                   )}
-                </div>
+                </a>
               </article>
             ))}
           </div>
