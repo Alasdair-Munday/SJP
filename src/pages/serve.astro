@@ -1,0 +1,75 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const teams = [
+  {
+    name: 'Welcome and Hospitality',
+    description:
+      "Our welcome and hospitality team create the family environment we love at St John's Park. They welcome people at the door, serve refreshments, and make sure everyone receives a warm welcome."
+  },
+  {
+    name: 'Kids',
+    description:
+      'Our Kids team disciples the youngest generation in our church, from under-5s through primary-aged children.'
+  },
+  {
+    name: 'Youth',
+    description:
+      'We disciple young people through Sunday Bible study and our midweek youth group Cornerstone, helping them meet and grow in relationship with Jesus.'
+  },
+  {
+    name: 'Worship',
+    description:
+      "Our worship team helps us encounter God's presence and give him praise."
+  },
+  {
+    name: 'Foodbank',
+    description:
+      'Our Foodbank team serves local people in crisis, providing food parcels and a listening, friendly ear.'
+  },
+  {
+    name: 'Lunch Club',
+    description:
+      'Our lunch club team helps serve lunch and build relationships in this richly diverse, lively community.'
+  },
+  {
+    name: 'Cleaning',
+    description:
+      'Our cleaning team enables us to welcome people into the building during the week and gather together on Sundays.'
+  },
+  {
+    name: 'Car Park',
+    description:
+      'Our car park team helps fit everyone in so we can gather together on a Sunday.'
+  },
+  {
+    name: 'Creative',
+    description:
+      'Our creative team uses photography, social media, and video to show what God is doing locally and help people connect with church family.'
+  },
+  {
+    name: 'Production Team',
+    description:
+      'Our production team makes sure everyone can see and hear clearly during Sunday gatherings.'
+  }
+];
+---
+
+<Layout title="Serve">
+  <div class="max-w-5xl mx-auto px-4 py-20 space-y-10">
+    <h1 class="font-['Newsreader'] text-5xl md:text-6xl font-bold text-[#0F2830]">Serve</h1>
+
+    <p class="text-xl text-[#0F2830]/90">We are a church family, and we need different people to help our family thrive. If you are part of St John's, we encourage you to join and serve one of our teams.</p>
+
+    <div class="grid md:grid-cols-2 gap-6">
+      {teams.map((team) => (
+        <div class="bg-white border-2 border-[#0F2830] p-6 space-y-3">
+          <h2 class="text-2xl font-bold text-[#0F2830]">{team.name}</h2>
+          <p class="text-[#0F2830]/90">{team.description}</p>
+        </div>
+      ))}
+    </div>
+
+    <p class="text-[#0F2830]/90">Interested in joining a team? Please <a href="/contact" class="underline decoration-[#45B074] underline-offset-4">get in touch</a>.</p>
+  </div>
+</Layout>

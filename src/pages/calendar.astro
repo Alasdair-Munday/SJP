@@ -1,0 +1,99 @@
+---
+import Layout from '../layouts/Layout.astro';
+import dayjs from 'dayjs';
+import { Calendar, Clock, MapPin } from 'lucide-react';
+import { CALENDAR_URL, getEventsForNextMonths } from '../utils/calendar';
+
+const events = await getEventsForNextMonths(2);
+const webcalUrl = CALENDAR_URL.replace(/^https:/, 'webcal:');
+
+const eventsByMonth = new Map<string, typeof events>();
+for (const event of events) {
+  const key = dayjs(event.start).format('YYYY-MM');
+  const bucket = eventsByMonth.get(key) || [];
+  bucket.push(event);
+  eventsByMonth.set(key, bucket);
+}
+
+const monthEntries = Array.from(eventsByMonth.entries()).sort((a, b) => a[0].localeCompare(b[0]));
+---
+
+<Layout title="Calendar">
+  <div class="max-w-5xl mx-auto px-4 py-20 space-y-8">
+    <div class="flex flex-wrap items-center justify-between gap-4">
+      <div>
+        <h1 class="font-['Newsreader'] text-5xl md:text-6xl font-bold text-[#0F2830]">Full Calendar</h1>
+        <p class="text-[#0F2830]/80 mt-2">Upcoming events for the next two months.</p>
+      </div>
+      <a
+        href={webcalUrl}
+        class="inline-flex items-center gap-2 px-5 py-3 bg-[#0F2830] text-white border-2 border-[#0F2830] hover:bg-white hover:text-[#0F2830] transition-colors font-semibold"
+      >
+        <Calendar size={18} /> Import Calendar
+      </a>
+    </div>
+
+    {monthEntries.length > 0 ? (
+      <>
+        <div id="calendar-pager" class="flex items-center justify-between gap-3">
+          <button id="month-prev" class="px-4 py-2 border-2 border-[#0F2830] text-[#0F2830] font-semibold disabled:opacity-40">Previous</button>
+          <p id="month-label" class="font-semibold text-lg text-[#0F2830]"></p>
+          <button id="month-next" class="px-4 py-2 border-2 border-[#0F2830] text-[#0F2830] font-semibold disabled:opacity-40">Next</button>
+        </div>
+
+        {monthEntries.map(([monthKey, monthEvents], index) => (
+          <section data-month-page={index} data-month-label={dayjs(`${monthKey}-01`).format('MMMM YYYY')} class:list={["space-y-4", index !== 0 && "hidden"]}>
+            <div class="grid gap-4">
+              {monthEvents
+                .sort((a, b) => a.start.getTime() - b.start.getTime())
+                .map((event) => (
+                  <article class="bg-white border-2 border-[#0F2830] p-5">
+                    <h2 class="text-2xl font-bold text-[#0F2830] mb-2">{event.title}</h2>
+                    <div class="flex flex-col sm:flex-row sm:flex-wrap gap-3 text-[#0F2830]/85 text-sm font-medium">
+                      <span class="inline-flex items-center gap-2"><Clock size={16} /> {dayjs(event.start).format('ddd D MMM, h:mm A')}</span>
+                      {event.location && (
+                        <span class="inline-flex items-center gap-2"><MapPin size={16} /> {event.location}</span>
+                      )}
+                    </div>
+                  </article>
+                ))}
+            </div>
+          </section>
+        ))}
+
+        <script is:inline>
+          const sections = Array.from(document.querySelectorAll('[data-month-page]'));
+          const prev = document.getElementById('month-prev');
+          const next = document.getElementById('month-next');
+          const label = document.getElementById('month-label');
+          let current = 0;
+
+          const render = () => {
+            sections.forEach((section, i) => {
+              section.classList.toggle('hidden', i !== current);
+            });
+            if (label) label.textContent = sections[current]?.dataset.monthLabel || '';
+            if (prev) prev.disabled = current <= 0;
+            if (next) next.disabled = current >= sections.length - 1;
+          };
+
+          prev?.addEventListener('click', () => {
+            current = Math.max(0, current - 1);
+            render();
+          });
+
+          next?.addEventListener('click', () => {
+            current = Math.min(sections.length - 1, current + 1);
+            render();
+          });
+
+          render();
+        </script>
+      </>
+    ) : (
+      <div class="bg-white border-2 border-[#0F2830] p-8">
+        <p class="text-[#0F2830]/90 font-medium">No upcoming events found in the next two months.</p>
+      </div>
+    )}
+  </div>
+</Layout>

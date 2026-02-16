@@ -1,0 +1,151 @@
+---
+import Logo from "../components/Logo.astro";
+import SketchChurch from "../components/SketchChurch.astro";
+import content from "../data/content.json";
+import "../styles/global.css";
+
+interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+const primaryNav = content.navigation.filter(
+	(item) => !["Belong", "Serve", "Give"].includes(item.label),
+);
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content="St John's Park Church" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Inter:wght@400;500;600;700;800&family=Newsreader:opsz,wght@6..72,500;6..72,700&display=swap"
+			rel="stylesheet"
+		/>
+		<title>{title} | {content.site.title}</title>
+	</head>
+	<body class="font-sans text-[var(--ink)]">
+		<!-- UTILITY BAR -->
+		<div
+			class="teal-field text-white text-xs font-semibold py-3 px-4 tracking-wide text-center flex justify-center gap-6"
+		>
+			<span class="flex items-center gap-2"
+				><span class="text-[#45B074]">●</span> Belong</span
+			>
+			<span class="flex items-center gap-2"
+				><span class="text-[#2f9aa4]">●</span> Serve</span
+			>
+			<span class="flex items-center gap-2"
+				><span class="text-[var(--gold)]">●</span> Give</span
+			>
+		</div>
+
+		<!-- NAVIGATION -->
+		<nav
+			class="bg-white/95 backdrop-blur border-b-2 border-[var(--ink)] sticky top-0 z-50"
+		>
+			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+				<div class="flex justify-between h-20 items-center">
+					<!-- LOGO -->
+					<a href="/" class="shrink-0 flex items-center gap-4 group">
+						<div
+							class="w-12 h-12 text-[#0F2830] group-hover:text-[#45B074] transition-colors"
+						>
+							<Logo class="w-full h-full" />
+						</div>
+						<div class="leading-none">
+							<span
+								class="block font-extrabold text-xl tracking-tight text-[#0F2830]"
+								>St John's Church</span
+							>
+							<span
+								class="block font-semibold text-xl tracking-wide text-[#45B074] -mt-1"
+								>Park</span
+							>
+						</div>
+					</a>
+
+					<!-- DESKTOP MENU -->
+					<div class="hidden md:flex items-center gap-1">
+						{
+							primaryNav.map((item) => (
+								<a
+									href={item.href}
+									class="text-[#0F2830] font-semibold text-sm tracking-wide hover:bg-[#E8E8E0] px-4 py-2 transition-colors"
+								>
+									{item.label}
+								</a>
+							))
+						}
+						<!-- THE GOLDEN TICKET BUTTON -->
+						<a
+							href="/im-new"
+							class="ml-4 bg-[var(--gold)] text-[var(--ink)] px-6 py-2.5 font-semibold text-sm tracking-wide border-2 border-[var(--ink)] hover:bg-white transition-all"
+						>
+							I'm New
+						</a>
+					</div>
+				</div>
+			</div>
+		</nav>
+
+		<slot />
+
+		<!-- FOOTER -->
+		<footer
+			class="line-drawing-footer py-16 mt-auto border-t-2 border-[var(--ink)] relative overflow-hidden text-white"
+		>
+			<SketchChurch
+				class="absolute -bottom-12 left-0 w-full text-white/12"
+			/>
+			<div class="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-12">
+				<div>
+					<div class="w-16 h-16 text-[var(--gold)] mb-6">
+						<Logo class="w-full h-full" />
+					</div>
+					<h3 class="text-2xl font-bold tracking-wide mb-2">
+						St John's Park
+					</h3>
+					<p class="text-white/80 max-w-sm">{content.site.address}</p>
+				</div>
+				<div class="md:text-right">
+					<p class="font-semibold text-[var(--gold)] tracking-wide mb-4">
+						Quick Links
+					</p>
+					<div class="flex flex-col md:items-end gap-2 text-white/85">
+						<a
+							href="/im-new"
+							class="hover:text-white hover:underline decoration-[var(--gold)] underline-offset-4"
+							>I'm New</a
+						>
+						<a
+							href="/whats-on"
+							class="hover:text-white hover:underline decoration-[var(--gold)] underline-offset-4"
+							>What's On</a
+						>
+						<a
+							href="/sermons"
+							class="hover:text-white hover:underline decoration-[var(--gold)] underline-offset-4"
+							>Talks</a
+						>
+						<a
+							href="/safeguarding"
+							class="hover:text-white hover:underline decoration-[var(--gold)] underline-offset-4"
+							>Safeguarding</a
+						>
+						<a
+							href="/contact"
+							class="hover:text-white hover:underline decoration-[var(--gold)] underline-offset-4"
+							>Contact</a
+						>
+					</div>
+				</div>
+			</div>
+		</footer>
+	</body>
+</html>

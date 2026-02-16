@@ -1,0 +1,83 @@
+{
+  "site": {
+    "title": "St John's Park Church",
+    "subtitle": "A community of Jesus-followers in Park, Sheffield.",
+    "address": "Bernard Street, Sheffield, S2 5PU",
+    "mission": "Belong, Serve, Give",
+    "vision": "Eden in the Park"
+  },
+  "navigation": [
+    {
+      "label": "Sundays",
+      "href": "/sundays"
+    },
+    {
+      "label": "Talks",
+      "href": "/sermons"
+    },
+    {
+      "label": "What's On",
+      "href": "/whats-on"
+    },
+    {
+      "label": "Belong",
+      "href": "/belong"
+    },
+    {
+      "label": "Serve",
+      "href": "/serve"
+    },
+    {
+      "label": "Give",
+      "href": "/give"
+    },
+    {
+      "label": "Team",
+      "href": "/team"
+    },
+    {
+      "label": "Contact",
+      "href": "/contact"
+    }
+  ],
+  "pages": {
+    "home": {
+      "hero": {
+        "title": "WELCOME TO ST JOHN'S PARK",
+        "subtitle": "We are a community of Jesus-followers in Park, Sheffield. We belong to the family of God. We love and serve our city. And in everything we do, we give Jesus praise.",
+        "badge": "Eden in Park"
+      },
+      "mission_grid": [
+        {
+          "title": "BELONG",
+          "desc": "Find transformation, discipleship, and growth through midweek groups, Kids, and Youth communities.",
+          "link_text": "FIND OUT MORE",
+          "link_href": "/belong",
+          "color": "teal"
+        },
+        {
+          "title": "SERVE",
+          "desc": "Join one of our teams and help our church family thrive in worship, welcome, and community service.",
+          "link_text": "JOIN A TEAM",
+          "link_href": "/serve",
+          "color": "green"
+        },
+        {
+          "title": "GIVE",
+          "desc": "Your generosity helps sustain Sunday gatherings, midweek ministries, and practical support across our city.",
+          "link_text": "SUPPORT THE VISION",
+          "link_href": "/give",
+          "color": "gold"
+        }
+      ]
+    },
+    "sundays": {
+      "time": "10:45 AM",
+      "location": "St John's Park, Bernard Street, Sheffield, S2 5PU",
+      "description": "Join us for our Sunday gathering every week at 10:45am. We gather to worship Jesus, hear the Bible read and explained, and to pray.",
+      "service_style": "Our Sunday gathering is informal and interactive, with contemporary worship songs.",
+      "kids_blurb": "We have Kids and Youth groups (0-14) that meet during our service.",
+      "after_service": "Please join us for refreshments afterwards to hang out as church family."
+    }
+  }
+}

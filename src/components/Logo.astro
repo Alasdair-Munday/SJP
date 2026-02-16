@@ -1,0 +1,59 @@
+---
+interface Props {
+  class?: string;
+}
+const { class: className } = Astro.props;
+---
+
+<svg
+  viewBox="0 0 100 100"
+  class={className}
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <!-- The Base/Ground Curve -->
+  <path
+    d="M10 88 Q 50 82 90 88"
+    stroke="currentColor"
+    stroke-width="3"
+    stroke-linecap="round"
+    fill="none"></path>
+
+  <!-- The Church Tower (Right) -->
+  <path
+    d="M60 85 V 35 L 75 10 L 90 35 V 85"
+    stroke="currentColor"
+    stroke-width="3"
+    stroke-linejoin="round"
+    fill="none"></path>
+
+  <!-- Spire Side Details (The two vertical dashes near the top) -->
+  <path d="M60 35 L 60 25" stroke="currentColor" stroke-width="2"></path>
+  <path d="M90 35 L 90 25" stroke="currentColor" stroke-width="2"></path>
+
+  <!-- Circular Window in Tower -->
+  <circle cx="75" cy="45" r="4" fill="currentColor"></circle>
+
+  <!-- Arched Doorway in Tower -->
+  <path d="M71 78 V 65 A 4 4 0 0 1 79 65 V 78 H 71 Z" fill="currentColor"
+  ></path>
+
+  <!-- The Hall (Left Section) -->
+  <!-- Outline: Up from left base, curves like a bell, meets the tower -->
+  <path
+    d="M20 86 V 60 Q 30 40 45 55 Q 55 65 60 55"
+    stroke="currentColor"
+    stroke-width="3"
+    stroke-linejoin="round"
+    fill="none"></path>
+
+  <!-- Vertical Stripes (Windows/Grill) inside Hall -->
+  <!-- 5 vertical lines -->
+  <g stroke="currentColor" stroke-width="2">
+    <path d="M28 65 V 78"></path>
+    <path d="M34 65 V 78"></path>
+    <path d="M40 65 V 78"></path>
+    <path d="M46 65 V 78"></path>
+    <path d="M52 65 V 78"></path>
+  </g>
+</svg>
