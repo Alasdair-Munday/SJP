@@ -13,7 +13,11 @@ export interface CalendarEvent {
   description?: string;
 }
 
-export async function getUpcomingEvents(limit = 3): Promise<CalendarEvent[]> {
+async function getExpandedEventsBetween(
+  rangeStart: Date,
+  rangeEnd: Date,
+  recurringPerEventLimit = 120
+): Promise<CalendarEvent[]> {
   try {
     const response = await fetch(CALENDAR_URL);
     if (!response.ok) {
@@ -25,8 +29,6 @@ export async function getUpcomingEvents(limit = 3): Promise<CalendarEvent[]> {
     const comp = new ICAL.Component(jcalData);
     const vevents = comp.getAllSubcomponents('vevent');
 
-    const now = new Date();
-    const horizon = new Date(now.getTime() + 366 * 24 * 60 * 60 * 1000);
     const upcoming: CalendarEvent[] = [];
 
     for (const vevent of vevents) {
@@ -34,7 +36,7 @@ export async function getUpcomingEvents(limit = 3): Promise<CalendarEvent[]> {
 
       if (!event.isRecurring()) {
         const start = event.startDate.toJSDate();
-        if (start >= now) {
+        if (start >= rangeStart && start <= rangeEnd) {
           upcoming.push({
             title: event.summary || 'Untitled event',
             start,
@@ -47,15 +49,14 @@ export async function getUpcomingEvents(limit = 3): Promise<CalendarEvent[]> {
       }
 
       // Expand recurring events so weekly/monthly church events appear as upcoming.
-      const iterator = event.iterator(ICAL.Time.fromJSDate(now, false));
-      const perEventLimit = Math.max(limit * 3, 10);
+      const iterator = event.iterator(ICAL.Time.fromJSDate(rangeStart, false));
       let count = 0;
       let next: ICAL.Time | null;
 
       while ((next = iterator.next())) {
         const occurrence = event.getOccurrenceDetails(next);
         const start = occurrence.startDate.toJSDate();
-        if (start > horizon) break;
+        if (start > rangeEnd) break;
 
         upcoming.push({
           title: event.summary || 'Untitled event',
@@ -66,15 +67,26 @@ export async function getUpcomingEvents(limit = 3): Promise<CalendarEvent[]> {
         });
 
         count += 1;
-        if (count >= perEventLimit) break;
+        if (count >= recurringPerEventLimit) break;
       }
     }
 
-    return upcoming
-      .sort((a, b) => a.start.getTime() - b.start.getTime())
-      .slice(0, limit);
+    return upcoming.sort((a, b) => a.start.getTime() - b.start.getTime());
   } catch (e) {
     console.error('Error parsing calendar:', e);
     return [];
   }
+}
+
+export async function getUpcomingEvents(limit = 3): Promise<CalendarEvent[]> {
+  const now = new Date();
+  const horizon = new Date(now.getTime() + 366 * 24 * 60 * 60 * 1000);
+  const events = await getExpandedEventsBetween(now, horizon, Math.max(limit * 6, 20));
+  return events.slice(0, limit);
+}
+
+export async function getEventsForNextMonths(months = 2): Promise<CalendarEvent[]> {
+  const now = new Date();
+  const end = new Date(now.getFullYear(), now.getMonth() + months, 0, 23, 59, 59, 999);
+  return getExpandedEventsBetween(now, end, 200);
 }

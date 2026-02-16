@@ -1,10 +1,21 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+const PGS_LINK =
+  'https://www.parishgiving.org.uk/donors/find-your-parish/park-st-john-the-evangelist-sheffield/';
 ---
 
 <Layout title="Give">
   <div class="max-w-5xl mx-auto px-4 py-20 space-y-10">
     <h1 class="font-['Newsreader'] text-5xl md:text-6xl font-bold text-[#0F2830]">Give</h1>
+    <a
+      href={PGS_LINK}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="inline-flex items-center gap-2 px-6 py-3 bg-[#0F2830] text-white border-2 border-[#0F2830] hover:bg-white hover:text-[#0F2830] transition-colors font-semibold"
+    >
+      Give Online (Parish Giving Scheme)
+    </a>
 
     <section class="bg-white border-2 border-[#0F2830] p-8">
       <p class="text-xl text-[#0F2830]/90 mb-4">Your generosity allows us to build and sustain our Sunday gatherings, midweek ministries, and serve our city. Thank you for giving to St John's.</p>

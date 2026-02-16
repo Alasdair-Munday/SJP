@@ -4,8 +4,6 @@ import dayjs from "dayjs";
 import { Calendar, MapPin, Clock } from "lucide-react";
 
 const events = await getUpcomingEvents(3);
-const CALENDAR_EMBED_URL =
-  "https://calendar.google.com/calendar/embed?src=c_b253bc81383f7876a658ad71f516be079528043a755a7c79713cd2c4529b1a26%40group.calendar.google.com&ctz=Europe%2FLondon";
 ---
 
 <div class="space-y-4">
@@ -50,9 +48,7 @@ const CALENDAR_EMBED_URL =
   }
   <div class="pt-4 text-center">
     <a
-      href={CALENDAR_EMBED_URL}
-      target="_blank"
-      rel="noopener noreferrer"
+      href="/calendar"
       class="inline-flex items-center gap-2 font-bold uppercase tracking-wider text-[#0F2830] hover:text-[#45B074] transition-colors border-b-2 border-transparent hover:border-[#45B074]"
     >
       View Full Calendar ->
