@@ -27,7 +27,7 @@ const webcalUrl = CALENDAR_URL.replace(/^https:/, "webcal:");
       <div class="flex flex-wrap gap-3">
         <a
           href={webcalUrl}
-          class="inline-flex items-center gap-2 px-4 py-2 bg-white text-[var(--ink)] border-2 border-[var(--ink)] hover:bg-[var(--ink)] hover:text-white transition-colors font-semibold"
+          class="inline-flex items-center gap-2 px-4 py-2 bg-white text-(--ink) border-2 border-(--ink) hover:bg-(--ink) hover:text-white transition-colors font-semibold"
         >
           <Calendar size={16} /> Import Calendar
         </a>
@@ -36,24 +36,24 @@ const webcalUrl = CALENDAR_URL.replace(/^https:/, "webcal:");
 
     <section
       id="upcoming-events"
-      class="bg-white border-2 border-[var(--ink)] p-8 space-y-4"
+      class="bg-white border-2 border-(--ink) p-8 space-y-4"
     >
-      <h2 class="text-3xl font-bold text-[var(--ink)] mb-1">Upcoming Events</h2>
-      <p class="text-[var(--ink)]/90">Pulled from our live church calendar.</p>
+      <h2 class="text-3xl font-bold text-(--ink) mb-1">Upcoming Events</h2>
+      <p class="text-(--ink)/90">Pulled from our live church calendar.</p>
       {
         upcomingEvents.length > 0 ? (
           <div class="grid gap-3">
             {upcomingEvents.map((event) => (
-              <article class="border-2 border-[var(--ink)] p-4 bg-[var(--panel-soft)]">
+              <article class="border-2 border-(--ink) p-4 bg-(--panel-soft)">
                 <a
                   href={`/events/${event.slug}`}
                   class="flex items-start gap-4 hover:opacity-80 transition-opacity"
                 >
                   <div class="flex-1">
-                    <h3 class="text-xl font-bold text-[var(--ink)]">
+                    <h3 class="text-xl font-bold text-(--ink)">
                       {event.title}
                     </h3>
-                    <div class="mt-2 flex flex-col sm:flex-row sm:flex-wrap gap-3 text-[var(--ink)]/85 text-sm font-medium">
+                    <div class="mt-2 flex flex-col sm:flex-row sm:flex-wrap gap-3 text-(--ink)/85 text-sm font-medium">
                       <span class="inline-flex items-center gap-2">
                         <Clock size={15} />{" "}
                         {formatEventDateTimeShort(event.start, event.timeZone)}
@@ -69,7 +69,7 @@ const webcalUrl = CALENDAR_URL.replace(/^https:/, "webcal:");
                     <img
                       src={event.thumbnailUrl}
                       alt={`Thumbnail for ${event.title}`}
-                      class="w-28 h-20 object-cover border-2 border-[var(--ink)]"
+                      class="w-28 h-20 object-cover border-2 border-(--ink)"
                       loading="lazy"
                     />
                   )}
@@ -78,14 +78,14 @@ const webcalUrl = CALENDAR_URL.replace(/^https:/, "webcal:");
             ))}
           </div>
         ) : (
-          <p class="text-[var(--ink)]/90">
+          <p class="text-(--ink)/90">
             No upcoming events found right now. Please check back soon.
           </p>
         )
       }
       <a
         href="#sunday-gathering"
-        class="inline-flex items-center gap-2 font-semibold text-[var(--ink)] hover:text-[var(--eden)] transition-colors"
+        class="inline-flex items-center gap-2 font-semibold text-(--ink) hover:text-(--eden) transition-colors"
       >
         See regular weekly activities <ArrowRight size={16} />
       </a>
@@ -93,12 +93,12 @@ const webcalUrl = CALENDAR_URL.replace(/^https:/, "webcal:");
 
     <section
       id="sunday-gathering"
-      class="bg-white border-2 border-[var(--ink)] p-8"
+      class="bg-white border-2 border-(--ink) p-8"
     >
-      <h2 class="text-3xl font-bold text-[var(--ink)] mb-3">
+      <h2 class="text-3xl font-bold text-(--ink) mb-3">
         Sunday Gathering
       </h2>
-      <p class="text-[var(--ink)]/90">
+      <p class="text-(--ink)/90">
         Our Sunday gathering happens every Sunday at 10:45am and is for all
         ages. We gather to worship Jesus, hear from God's Word, and pray
         together.
@@ -106,48 +106,48 @@ const webcalUrl = CALENDAR_URL.replace(/^https:/, "webcal:");
       <img
         src="/images/community-fun-day.jpg"
         alt="Community activities in the church grounds"
-        class="w-full h-72 object-cover border-2 border-[var(--ink)] mt-4"
+        class="w-full h-72 object-cover border-2 border-(--ink) mt-4"
         loading="lazy"
       />
     </section>
 
     <section
       id="midweek-prayers"
-      class="bg-white border-2 border-[var(--ink)] p-8"
+      class="bg-white border-2 border-(--ink) p-8"
     >
-      <h2 class="text-3xl font-bold text-[var(--ink)] mb-3">
+      <h2 class="text-3xl font-bold text-(--ink) mb-3">
         Midweek Online Prayers
       </h2>
-      <p class="text-[var(--ink)]/90">
+      <p class="text-(--ink)/90">
         Monday to Friday at 8:00am for 30 minutes on Zoom.
       </p>
       <a
         href="https://zoom.us/j/3235649987?pwd=483559"
-        class="inline-block bg-[var(--ink)] text-white px-4 py-2 font-bold mb-2 hover:bg-[var(--eden)] transition-colors border-2 border-transparent hover:border-[var(--ink)]"
+        class="inline-block bg-(--ink) text-white px-4 py-2 font-bold mb-2 hover:bg-(--eden) transition-colors border-2 border-transparent hover:border-(--ink)"
       >
         Join Zoom Meeting
       </a>
-      <p class="text-[var(--ink)]/90 text-sm">
+      <p class="text-(--ink)/90 text-sm">
         Meeting ID: <strong>323 564 9987</strong> | Passcode: <strong
           >483559</strong
         >
       </p>
-      <p class="text-[var(--ink)]/90">
+      <p class="text-(--ink)/90">
         We also meet in church on the first Sunday of each month from
         10:00-10:30am before the service.
       </p>
     </section>
 
-    <section id="foodbank" class="bg-white border-2 border-[var(--ink)] p-8">
-      <h2 class="text-3xl font-bold text-[var(--ink)] mb-2">Foodbank</h2>
-      <p class="font-semibold text-[var(--ink)] mb-3">Monday 10:00am-12:00pm</p>
-      <p class="mb-3 text-[var(--ink)]/90">
+    <section id="foodbank" class="bg-white border-2 border-(--ink) p-8">
+      <h2 class="text-3xl font-bold text-(--ink) mb-2">Foodbank</h2>
+      <p class="font-semibold text-(--ink) mb-3">Monday 10:00am-12:00pm</p>
+      <p class="mb-3 text-(--ink)/90">
         If you are in crisis, we can provide an emergency food parcel and
         practical support. Citizens Advice and Debt Support workers are
         available during sessions for those with referrals.
       </p>
-      <p class="text-[var(--ink)]/90 mb-2">Referral numbers:</p>
-      <ul class="list-disc pl-6 space-y-1 text-[var(--ink)]/90">
+      <p class="text-(--ink)/90 mb-2">Referral numbers:</p>
+      <ul class="list-disc pl-6 space-y-1 text-(--ink)/90">
         <li>Help Through Hardship: 0808 208 2138 (Mon-Fri, 9:00am-5:00pm)</li>
         <li>
           Citizens Advice Sheffield: 0808 278 7820 (Mon-Fri, 10:00am-4:00pm,
@@ -155,19 +155,19 @@ const webcalUrl = CALENDAR_URL.replace(/^https:/, "webcal:");
         </li>
         <li>Sheffield S6 helpline: 0114 321 0733 (Mon-Fri, 10:00am-1:00pm)</li>
       </ul>
-      <p class="mt-3 text-[var(--ink)]/90">
+      <p class="mt-3 text-(--ink)/90">
         Interested in volunteering? Contact Hannah at <a
           href="mailto:hannah@saintjohnspark.org"
-          class="underline decoration-[var(--eden)] underline-offset-4"
+          class="underline decoration-(--eden) underline-offset-4"
           >hannah@saintjohnspark.org</a
         >.
       </p>
     </section>
 
-    <section id="lunch-club" class="bg-white border-2 border-[var(--ink)] p-8">
-      <h2 class="text-3xl font-bold text-[var(--ink)] mb-2">Lunch Club</h2>
-      <p class="font-semibold text-[var(--ink)] mb-3">Monday 11:40am-12:40pm</p>
-      <p class="text-[var(--ink)]/90">
+    <section id="lunch-club" class="bg-white border-2 border-(--ink) p-8">
+      <h2 class="text-3xl font-bold text-(--ink) mb-2">Lunch Club</h2>
+      <p class="font-semibold text-(--ink) mb-3">Monday 11:40am-12:40pm</p>
+      <p class="text-(--ink)/90">
         Join us every Monday for soup, bread, a hot drink, and a chat. All are
         welcome, and it is free.
       </p>
@@ -175,10 +175,10 @@ const webcalUrl = CALENDAR_URL.replace(/^https:/, "webcal:");
 
     <section
       id="seasonal-events"
-      class="bg-white border-2 border-[var(--ink)] p-8"
+      class="bg-white border-2 border-(--ink) p-8"
     >
-      <h2 class="text-3xl font-bold text-[var(--ink)] mb-2">Seasonal Events</h2>
-      <p class="text-[var(--ink)]/90 mb-4">
+      <h2 class="text-3xl font-bold text-(--ink) mb-2">Seasonal Events</h2>
+      <p class="text-(--ink)/90 mb-4">
         Throughout the year we host seasonal gatherings for all ages, including
         Christmas events and community celebrations.
       </p>
@@ -186,13 +186,13 @@ const webcalUrl = CALENDAR_URL.replace(/^https:/, "webcal:");
         <img
           src="/images/christingle.jpg"
           alt="Children and families taking part in a Christingle service"
-          class="w-full h-64 object-cover border-2 border-[var(--ink)]"
+          class="w-full h-64 object-cover border-2 border-(--ink)"
           loading="lazy"
         />
         <img
           src="/images/carols-doorstep.jpg"
           alt="Community carol singing at the church entrance"
-          class="w-full h-64 object-cover border-2 border-[var(--ink)]"
+          class="w-full h-64 object-cover border-2 border-(--ink)"
           loading="lazy"
         />
       </div>

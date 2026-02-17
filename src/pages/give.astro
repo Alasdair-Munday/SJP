@@ -1,39 +1,47 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
+import { getSiteContent } from "../data/site-content";
 
-const PGS_LINK =
-  'https://www.parishgiving.org.uk/donors/find-your-parish/park-st-john-the-evangelist-sheffield/';
+const content = await getSiteContent();
+const page = content.pages.give;
 ---
 
-<Layout title="Give">
-  <div class="theme-give max-w-5xl mx-auto px-4 py-20 space-y-10">
-    <h1 class="heading-eden-gold theme-display-font text-5xl md:text-6xl font-bold">Give</h1>
-    <a
-      href={PGS_LINK}
-      target="_blank"
-      rel="noopener noreferrer"
-      class="inline-flex items-center gap-2 px-6 py-3 bg-[var(--ink)] text-white border-2 border-[var(--ink)] hover:bg-white hover:text-[var(--ink)] transition-colors font-semibold"
-    >
-      Give Online (Parish Giving Scheme)
-    </a>
+<Layout title={page.title}>
+	<div class="theme-give max-w-5xl mx-auto px-4 py-20 space-y-10">
+		<h1 class="heading-eden-gold theme-display-font text-5xl md:text-6xl font-bold">
+			{page.title}
+		</h1>
+		<a
+			href={page.online_giving.link}
+			target="_blank"
+			rel="noopener noreferrer"
+			class="inline-flex items-center gap-2 px-6 py-3 bg-(--ink) text-white border-2 border-(--ink) hover:bg-white hover:text-(--ink) transition-colors font-semibold"
+		>
+			{page.online_giving.button_label}
+		</a>
 
-    <section class="bg-white border-2 border-[var(--ink)] p-8">
-      <p class="text-xl text-[var(--ink)]/90 mb-4">Your generosity allows us to build and sustain our Sunday gatherings, midweek ministries, and serve our city. Thank you for giving to St John's.</p>
-      <p class="font-semibold text-[var(--ink)] mb-3">Here are the best ways for you to give:</p>
-      <ol class="list-decimal pl-6 space-y-2 text-[var(--ink)]/90">
-        <li>Via the Online Parish Giving Scheme.</li>
-        <li>Bring your collection to church on Sunday.</li>
-        <li>Use the card machine at church.</li>
-        <li>Bank transfer (BACS).</li>
-      </ol>
-    </section>
+		<section class="bg-white border-2 border-(--ink) p-8">
+			<p class="text-xl text-(--ink)/90 mb-4">{page.generosity_paragraph}</p>
+			<p class="font-semibold text-(--ink) mb-3">{page.methods_heading}</p>
+			<ol class="list-decimal pl-6 space-y-2 text-(--ink)/90">
+				{
+					page.methods.map((method) => (
+						<li>{method}</li>
+					))
+				}
+			</ol>
+		</section>
 
-    <section class="bg-white border-2 border-[var(--ink)] p-8">
-      <h2 class="text-3xl font-bold text-[var(--ink)] mb-4">Bank Details</h2>
-      <p class="text-[var(--ink)]/90">Account Name: ST JOHNS PARK P C C</p>
-      <p class="text-[var(--ink)]/90">Sort Code: 20-76-89</p>
-      <p class="text-[var(--ink)]/90">Account Number: 60362786</p>
-      <p class="mt-4 text-[var(--ink)]/90">For more information, contact Catherine at <a class="underline decoration-[var(--eden)] underline-offset-4" href="mailto:StJohnsPark@outlook.com">StJohnsPark@outlook.com</a>.</p>
-    </section>
-  </div>
+		<section class="bg-white border-2 border-(--ink) p-8">
+			<h2 class="text-3xl font-bold text-(--ink) mb-4">{page.bank_details.heading}</h2>
+			{
+				page.bank_details.lines.map((line, index) => (
+					<p class={`text-(--ink)/90 ${index === page.bank_details.lines.length - 1 ? "" : ""}`}>
+						{line}
+					</p>
+				))
+			}
+			<p class="mt-4 text-(--ink)/90" set:html={page.contact_html}></p>
+		</section>
+	</div>
 </Layout>

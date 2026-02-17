@@ -1,32 +1,54 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
+import { getSiteContent } from "../data/site-content";
+
+const content = await getSiteContent();
+const page = content.pages.contact;
 ---
 
-<Layout title="Contact">
-  <div class="max-w-5xl mx-auto px-4 py-20 space-y-8">
-    <h1 class="theme-display-font text-5xl md:text-6xl font-bold text-[var(--ink)]">How to Find Us</h1>
+<Layout title={page.title}>
+	<div class="max-w-5xl mx-auto px-4 py-20 space-y-8">
+		<h1 class="theme-display-font text-5xl md:text-6xl font-bold text-(--ink)">
+			{page.title}
+		</h1>
 
-    <section class="bg-white border-2 border-[var(--ink)] p-8 space-y-4">
-      <p class="text-lg text-[var(--ink)]/90">The address of the church is Bernard Street, Sheffield, S2 5PU.</p>
-      <p><a href="https://maps.google.com/?q=Bernard+Street,+Sheffield,+S2+5PU" class="underline decoration-[var(--eden)] underline-offset-4">Open in Google Maps</a></p>
-      <p class="text-[var(--ink)]/90">General enquiries: <a href="mailto:StJohnsPark@outlook.com" class="underline decoration-[var(--eden)] underline-offset-4">StJohnsPark@outlook.com</a></p>
-      <img
-        src="/images/community-park-gathering-2.jpg"
-        alt="St John's Park church building and grounds"
-        class="w-full h-72 object-cover border-2 border-[var(--ink)] mt-2"
-        loading="lazy"
-      />
-    </section>
+		<section class="bg-white border-2 border-(--ink) p-8 space-y-4">
+			<p class="text-lg text-(--ink)/90">{page.find_us.paragraphs[0]}</p>
+			<p>
+				<a
+					href={page.find_us.maps_link.href}
+					class="underline decoration-(--eden) underline-offset-4"
+				>
+					{page.find_us.maps_link.label}
+				</a>
+			</p>
+			<p class="text-(--ink)/90" set:html={page.find_us.paragraphs[1]}></p>
+			<img
+				src={page.find_us.image.src}
+				alt={page.find_us.image.alt}
+				class="w-full h-72 object-cover border-2 border-(--ink) mt-2"
+				loading="lazy"
+			/>
+		</section>
 
-    <section class="bg-white border-2 border-[var(--ink)] p-8 space-y-4">
-      <h2 class="text-3xl font-bold text-[var(--ink)]">Parking</h2>
-      <p class="text-[var(--ink)]/90">We have a steep driveway to a car park just off Bernard Street with limited parking.</p>
-      <p class="text-[var(--ink)]/90">Overflow parking is available in the car park behind the flats at the top of the church grounds. From Bernard Street, turn onto Cricket Inn Road, then the first major right onto Maltravers Road, then right again onto St John's Street. Follow the road to the end of the car park and use the public footpath through the old churchyard to reach church.</p>
-    </section>
+		<section class="bg-white border-2 border-(--ink) p-8 space-y-4">
+			<h2 class="text-3xl font-bold text-(--ink)">{page.parking.heading}</h2>
+			{
+				page.parking.paragraphs.map((paragraph) => (
+					<p class="text-(--ink)/90">{paragraph}</p>
+				))
+			}
+		</section>
 
-    <section class="bg-white border-2 border-[var(--ink)] p-8 space-y-4">
-      <h2 class="text-3xl font-bold text-[var(--ink)]">Public Transport</h2>
-      <p class="text-[var(--ink)]/90">We have good public transport links. Hyde Park tram stop is right next to the church.</p>
-    </section>
-  </div>
+		<section class="bg-white border-2 border-(--ink) p-8 space-y-4">
+			<h2 class="text-3xl font-bold text-(--ink)">
+				{page.public_transport.heading}
+			</h2>
+			{
+				page.public_transport.paragraphs.map((paragraph) => (
+					<p class="text-(--ink)/90">{paragraph}</p>
+				))
+			}
+		</section>
+	</div>
 </Layout>

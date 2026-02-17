@@ -1,44 +1,77 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
+import { getSiteContent } from "../data/site-content";
+
+const content = await getSiteContent();
+const page = content.pages.belong;
+
+const toneClasses: Record<string, string> = {
+	eden: "hover:bg-(--eden-soft)",
+	teal: "hover:bg-(--teal-soft)",
+	gold: "hover:bg-(--gold-soft)",
+};
 ---
 
-<Layout title="Belong">
-  <div class="theme-belong max-w-5xl mx-auto px-4 py-20 space-y-10">
-    <h1 class="heading-eden-gold theme-display-font text-5xl md:text-6xl font-bold">Belong</h1>
+<Layout title={page.title}>
+	<div class="theme-belong max-w-5xl mx-auto px-4 py-20 space-y-10">
+		<h1 class="heading-eden-gold theme-display-font text-5xl md:text-6xl font-bold">
+			{page.title}
+		</h1>
 
-    <section class="grid md:grid-cols-3 gap-4">
-      <a href="/park-kids" class="bg-white border-2 border-[var(--ink)] p-6 hover:bg-[var(--eden-soft)] transition-colors">
-        <h2 class="text-2xl font-bold text-[var(--ink)] mb-2">Park Kids</h2>
-        <p class="text-[var(--ink)]/80">Groups for children aged 1-11 during Sunday gatherings.</p>
-      </a>
-      <a href="/park-youth" class="bg-white border-2 border-[var(--ink)] p-6 hover:bg-[var(--teal-soft)] transition-colors">
-        <h2 class="text-2xl font-bold text-[var(--ink)] mb-2">Park Youth</h2>
-        <p class="text-[var(--ink)]/80">Youth discipleship through Cornerstone and Sunday Bible study.</p>
-      </a>
-      <a href="/park-communities" class="bg-white border-2 border-[var(--ink)] p-6 hover:bg-[var(--gold-soft)] transition-colors">
-        <h2 class="text-2xl font-bold text-[var(--ink)] mb-2">Park Communities</h2>
-        <p class="text-[var(--ink)]/80">Midweek groups for prayer, Scripture, and community life.</p>
-      </a>
-    </section>
+		<section class="grid md:grid-cols-3 gap-4">
+			{
+				page.highlights.map((item) => (
+					<a
+						href={item.href}
+						class={`bg-white border-2 border-(--ink) p-6 transition-colors ${toneClasses[item.tone] ?? ""}`}
+					>
+						<h2 class="text-2xl font-bold text-(--ink) mb-2">{item.title}</h2>
+						<p class="text-(--ink)/80">{item.description}</p>
+					</a>
+				))
+			}
+		</section>
 
-    <section class="bg-white border-2 border-[var(--ink)] p-8">
-      <h2 class="text-3xl font-bold text-[var(--ink)] mb-3">Midweek Groups</h2>
-      <p class="mb-3 text-[var(--ink)]/90">We encourage anyone part of our church family to find transformation, discipleship, and growth in a small community.</p>
-      <p class="mb-3 text-[var(--ink)]/90">Most of our communities meet weekly to study God's Word, pray, and encourage one another in faith.</p>
-      <p class="text-[var(--ink)]/90">To join a community, visit <a href="/park-communities" class="underline decoration-[var(--eden)] underline-offset-4">Park Communities</a> or <a href="/contact" class="underline decoration-[var(--eden)] underline-offset-4">contact us</a>.</p>
-    </section>
+		<section class="bg-white border-2 border-(--ink) p-8">
+			<h2 class="text-3xl font-bold text-(--ink) mb-3">
+				{page.sections.midweek.heading}
+			</h2>
+			{
+				page.sections.midweek.paragraphs.map((paragraph, index) => (
+					<p
+						class={`text-(--ink)/90 ${index < page.sections.midweek.paragraphs.length - 1 ? "mb-3" : ""}`}
+						set:html={paragraph}
+					></p>
+				))
+			}
+		</section>
 
-    <section class="bg-white border-2 border-[var(--ink)] p-8">
-      <h2 class="text-3xl font-bold text-[var(--ink)] mb-3">Kids</h2>
-      <p class="text-[var(--ink)]/90">We have kids groups (ages 1-11) that meet during our Sunday gathering. Speak to our welcome team to find out more.</p>
-      <p class="text-[var(--ink)]/90 mt-2"><a href="/park-kids" class="underline decoration-[var(--eden)] underline-offset-4">Find out more about Park Kids</a>.</p>
-    </section>
+		<section class="bg-white border-2 border-(--ink) p-8">
+			<h2 class="text-3xl font-bold text-(--ink) mb-3">
+				{page.sections.kids.heading}
+			</h2>
+			{
+				page.sections.kids.paragraphs.map((paragraph, index) => (
+					<p
+						class={`text-(--ink)/90 ${index < page.sections.kids.paragraphs.length - 1 ? "" : "mt-2"}`}
+						set:html={paragraph}
+					></p>
+				))
+			}
+		</section>
 
-    <section class="bg-white border-2 border-[var(--ink)] p-8">
-      <h2 class="text-3xl font-bold text-[var(--ink)] mb-3">Youth (Cornerstone)</h2>
-      <p class="mb-3 text-[var(--ink)]/90">Our youth group Cornerstone meets every Wednesday at church from 6:00-7:00pm. If you are at secondary school, we would love to see you there.</p>
-      <p class="text-[var(--ink)]/90">We also run a youth Bible study during selected Sunday gatherings for Years 7-10.</p>
-      <p class="text-[var(--ink)]/90 mt-2"><a href="/park-youth" class="underline decoration-[var(--teal)] underline-offset-4">Find out more about Park Youth</a>.</p>
-    </section>
-  </div>
+		<section class="bg-white border-2 border-(--ink) p-8">
+			<h2 class="text-3xl font-bold text-(--ink) mb-3">
+				{page.sections.youth.heading}
+			</h2>
+			{
+				page.sections.youth.paragraphs.map((paragraph, index) => (
+					<p
+						class={`text-(--ink)/90 ${index === 0 ? "mb-3" : index === page.sections.youth.paragraphs.length - 1 ? "mt-2" : ""}`}
+						set:html={paragraph}
+					></p>
+				))
+			}
+		</section>
+	</div>
 </Layout>

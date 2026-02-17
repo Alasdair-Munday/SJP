@@ -1,107 +1,86 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import content from "../data/content.json";
+import { getSiteContent } from "../data/site-content";
 import { Clock, MapPin } from "lucide-react";
 
-const { sundays } = content.pages;
+const content = await getSiteContent();
+const page = content.pages.sundays;
 ---
 
-<Layout title="Sundays">
-    <div class="max-w-4xl mx-auto px-4 py-20">
-        <!-- Header -->
-        <h1
-            class="theme-display-font text-6xl md:text-8xl font-bold tracking-tight mb-8 text-[var(--ink)]"
-        >
-            SUNDAY <br />
-            <span class="text-[var(--eden)]">GATHERING</span>
-        </h1>
+<Layout title={page.meta_title ?? page.title_line_one}>
+	<div class="max-w-4xl mx-auto px-4 py-20">
+		<!-- Header -->
+		<h1 class="theme-display-font text-6xl md:text-8xl font-bold tracking-tight mb-8 text-(--ink)">
+			{page.title_line_one} <br />
+			<span class="text-(--eden)">{page.title_line_two}</span>
+		</h1>
 
-        <!-- Info Card -->
-        <div
-            class="bg-white border-2 border-[var(--ink)] p-8 shadow-[4px_4px_0px_0px_var(--gold)] mb-12"
-        >
-            <div
-                class="flex flex-col md:flex-row gap-8 mb-8 border-b-2 border-[var(--ink)] pb-8"
-            >
-                <div class="flex items-center gap-4">
-                    <div class="bg-[var(--ink)] text-white p-3">
-                        <Clock size={32} />
-                    </div>
-                    <div>
-                        <div class="font-bold text-sm uppercase text-gray-500">
-                            Time
-                        </div>
-                        <div class="text-2xl font-bold text-[var(--ink)]">
-                            {sundays.time}
-                        </div>
-                    </div>
-                </div>
-                <div class="flex items-center gap-4">
-                    <div class="bg-[var(--ink)] text-white p-3">
-                        <MapPin size={32} />
-                    </div>
-                    <div>
-                        <div class="font-bold text-sm uppercase text-gray-500">
-                            Location
-                        </div>
-                        <div class="text-2xl font-bold text-[var(--ink)]">
-                            {sundays.location}
-                        </div>
-                    </div>
-                </div>
-            </div>
+		<!-- Info Card -->
+		<div class="bg-white border-2 border-(--ink) p-8 shadow-[4px_4px_0px_0px_var(--gold)] mb-12">
+			<div class="flex flex-col md:flex-row gap-8 mb-8 border-b-2 border-(--ink) pb-8">
+				<div class="flex items-center gap-4">
+					<div class="bg-(--ink) text-white p-3">
+						<Clock size={32} />
+					</div>
+					<div>
+						<div class="font-bold text-sm uppercase text-gray-500">{page.time_label}</div>
+						<div class="text-2xl font-bold text-(--ink)">{page.time}</div>
+					</div>
+				</div>
+				<div class="flex items-center gap-4">
+					<div class="bg-(--ink) text-white p-3">
+						<MapPin size={32} />
+					</div>
+					<div>
+						<div class="font-bold text-sm uppercase text-gray-500">
+							{page.location_label}
+						</div>
+						<div class="text-2xl font-bold text-(--ink)">{page.location}</div>
+					</div>
+				</div>
+			</div>
 
-            <div
-                class="prose prose-xl prose-p:font-bold prose-p:text-[var(--ink)] max-w-none mb-8"
-            >
-                <p>{sundays.description}</p>
-                <p>{sundays.service_style}</p>
-                <p>{sundays.after_service}</p>
-            </div>
+			<div class="prose prose-xl prose-p:font-bold prose-p:text-(--ink) max-w-none mb-8">
+				<p>{page.description}</p>
+				<p>{page.service_style}</p>
+				<p>{page.after_service}</p>
+			</div>
 
-            <!-- Community Photo -->
-            <div class="relative group">
-                <div
-                    class="absolute inset-0 bg-[var(--eden)] translate-x-2 translate-y-2 group-hover:translate-x-0 group-hover:translate-y-0 transition-transform"
-                >
-                </div>
-                <img
-                    src="/images/worship-flags.jpg"
-                    alt="Worship team singing during a Sunday gathering"
-                    class="relative w-full h-64 object-cover border-[3px] border-[var(--ink)] transition-all duration-500"
-                />
-            </div>
-        </div>
+			<!-- Community Photo -->
+			<div class="relative group">
+				<div
+					class="absolute inset-0 bg-(--eden) translate-x-2 translate-y-2 group-hover:translate-x-0 group-hover:translate-y-0 transition-transform"
+				></div>
+				<img
+					src={page.image.src}
+					alt={page.image.alt}
+					class="relative w-full h-64 object-cover border-[3px] border-(--ink) transition-all duration-500"
+				/>
+			</div>
+		</div>
 
-        <!-- Kids Section -->
-        <div class="bg-[var(--eden)] border-2 border-[var(--ink)] p-8">
-            <h2 class="text-3xl font-bold mb-4 text-[var(--ink)]">
-                Bringing Kids?
-            </h2>
-            <p class="font-bold text-xl text-[var(--ink)]">{sundays.kids_blurb}</p>
-        </div>
+		<!-- Kids Section -->
+		<div class="bg-(--eden) border-2 border-(--ink) p-8">
+			<h2 class="text-3xl font-bold mb-4 text-(--ink)">{page.kids_heading}</h2>
+			<p class="font-bold text-xl text-(--ink)">{page.kids_blurb}</p>
+		</div>
 
-        <div class="mt-8 bg-white border-2 border-[var(--ink)] p-6">
-            <h2 class="text-2xl font-bold text-[var(--ink)] mb-3">
-                What to Expect
-            </h2>
-            <ul class="list-disc pl-6 space-y-2 text-[var(--ink)]/90">
-                <li>Services are usually a little over one hour.</li>
-                <li>
-                    We sing together, read Scripture, hear Bible teaching, and
-                    pray.
-                </li>
-                <li>On the first Sunday of each month, we share Communion.</li>
-            </ul>
-        </div>
+		<div class="mt-8 bg-white border-2 border-(--ink) p-6">
+			<h2 class="text-2xl font-bold text-(--ink) mb-3">{page.what_to_expect_heading}</h2>
+			<ul class="list-disc pl-6 space-y-2 text-(--ink)/90">
+				{
+					page.what_to_expect_items.map((item) => (
+						<li>{item}</li>
+					))
+				}
+			</ul>
+		</div>
 
-        <p class="mt-8 text-lg font-medium text-[var(--ink)]">
-            Catch up on talks from previous Sundays on our
-            <a
-                href="/sermons"
-                class="underline decoration-[var(--eden)] underline-offset-4"
-                >Talks page</a
-            >.
-        </p>
-    </div>
+		<p class="mt-8 text-lg font-medium text-(--ink)">
+			{page.talks_link_intro}
+			<a href={page.talks_link_href} class="underline decoration-(--eden) underline-offset-4">
+				{page.talks_link_label}
+			</a>.
+		</p>
+	</div>
 </Layout>

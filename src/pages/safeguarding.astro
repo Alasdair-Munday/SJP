@@ -1,16 +1,26 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
+import { getSiteContent } from "../data/site-content";
+
+const content = await getSiteContent();
+const page = content.pages.safeguarding;
 ---
 
-<Layout title="Safeguarding">
-  <div class="max-w-5xl mx-auto px-4 py-20 space-y-8">
-    <h1 class="theme-display-font text-5xl md:text-6xl font-bold text-[var(--ink)]">Safeguarding</h1>
+<Layout title={page.title}>
+	<div class="max-w-5xl mx-auto px-4 py-20 space-y-8">
+		<h1 class="theme-display-font text-5xl md:text-6xl font-bold text-(--ink)">
+			{page.title}
+		</h1>
 
-    <section class="bg-white border-2 border-[var(--ink)] p-8 space-y-4">
-      <p class="text-lg text-[var(--ink)]/90">St John's is committed to high standards in the safeguarding and care of children and vulnerable adults.</p>
-      <p class="text-[var(--ink)]/90">To request our safeguarding policy, please <a href="/contact" class="underline decoration-[var(--eden)] underline-offset-4">contact us</a>.</p>
-      <p class="text-[var(--ink)]/90">The Diocese of Sheffield's Safeguarding Adviser is Siân Checkley. Contact: 01709 309100 or 07741 013775, or email <a href="mailto:sian.checkley@sheffield.anglican.org" class="underline decoration-[var(--eden)] underline-offset-4">sian.checkley@sheffield.anglican.org</a>.</p>
-      <p class="text-[var(--ink)]/90">Diocese safeguarding information: <a href="https://www.sheffield.anglican.org/support/safeguarding" class="underline decoration-[var(--eden)] underline-offset-4">sheffield.anglican.org/support/safeguarding</a></p>
-    </section>
-  </div>
+		<section class="bg-white border-2 border-(--ink) p-8 space-y-4">
+			{
+				page.paragraphs.map((paragraph, index) => (
+					<p
+						class={index === 0 ? "text-lg text-(--ink)/90" : "text-(--ink)/90"}
+						set:html={paragraph}
+					></p>
+				))
+			}
+		</section>
+	</div>
 </Layout>

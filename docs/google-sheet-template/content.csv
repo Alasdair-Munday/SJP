@@ -1,0 +1,408 @@
+path,type,value
+components.calendar_events.empty_message,string,Check out What's On for current activities.
+components.calendar_events.view_whats_on_label,string,View What's On ->
+footer.quick_links[0].href,path,/im-new
+footer.quick_links[0].label,string,I'm New
+footer.quick_links[1].href,path,/whats-on
+footer.quick_links[1].label,string,What's On
+footer.quick_links[2].href,path,/sermons
+footer.quick_links[2].label,string,Talks
+footer.quick_links[3].href,path,/safeguarding
+footer.quick_links[3].label,string,Safeguarding
+footer.quick_links[4].href,path,/contact
+footer.quick_links[4].label,string,Contact
+footer.title,string,St John's Park
+navigation[0].href,path,/sundays
+navigation[0].label,string,Sundays
+navigation[1].href,path,/sermons
+navigation[1].label,string,Talks
+navigation[2].href,path,/whats-on
+navigation[2].label,string,What's On
+navigation[3].href,path,/belong
+navigation[3].label,string,Belong
+navigation[4].href,path,/serve
+navigation[4].label,string,Serve
+navigation[5].href,path,/give
+navigation[5].label,string,Give
+navigation[6].href,path,/team
+navigation[6].label,string,Team
+navigation[7].href,path,/contact
+navigation[7].label,string,Contact
+pages.belong.highlights[0].description,string,Groups for children aged 1-11 during Sunday gatherings.
+pages.belong.highlights[0].href,path,/park-kids
+pages.belong.highlights[0].title,string,Park Kids
+pages.belong.highlights[0].tone,string,eden
+pages.belong.highlights[1].description,string,Youth discipleship through Cornerstone and Sunday Bible study.
+pages.belong.highlights[1].href,path,/park-youth
+pages.belong.highlights[1].title,string,Park Youth
+pages.belong.highlights[1].tone,string,teal
+pages.belong.highlights[2].description,string,"Midweek groups for prayer, Scripture, and community life."
+pages.belong.highlights[2].href,path,/park-communities
+pages.belong.highlights[2].title,string,Park Communities
+pages.belong.highlights[2].tone,string,gold
+pages.belong.sections.kids.heading,string,Kids
+pages.belong.sections.kids.paragraphs[0],string,We have kids groups (ages 1-11) that meet during our Sunday gathering. Speak to our welcome team to find out more.
+pages.belong.sections.kids.paragraphs[1],html,<a href='/park-kids' class='underline decoration-[var(--eden)] underline-offset-4'>Find out more about Park Kids</a>.
+pages.belong.sections.midweek.heading,string,Midweek Groups
+pages.belong.sections.midweek.paragraphs[0],string,"We encourage anyone part of our church family to find transformation, discipleship, and growth in a small community."
+pages.belong.sections.midweek.paragraphs[1],string,"Most of our communities meet weekly to study God's Word, pray, and encourage one another in faith."
+pages.belong.sections.midweek.paragraphs[2],html,"To join a community, visit <a href='/park-communities' class='underline decoration-[var(--eden)] underline-offset-4'>Park Communities</a> or <a href='/contact' class='underline decoration-[var(--eden)] underline-offset-4'>contact us</a>."
+pages.belong.sections.youth.heading,string,Youth (Cornerstone)
+pages.belong.sections.youth.paragraphs[0],string,"Our youth group Cornerstone meets every Wednesday at church from 6:00-7:00pm. If you are at secondary school, we would love to see you there."
+pages.belong.sections.youth.paragraphs[1],string,We also run a youth Bible study during selected Sunday gatherings for Years 7-10.
+pages.belong.sections.youth.paragraphs[2],html,<a href='/park-youth' class='underline decoration-[var(--teal)] underline-offset-4'>Find out more about Park Youth</a>.
+pages.belong.title,string,Belong
+pages.contact.find_us.image.alt,string,St John's Park church building and grounds
+pages.contact.find_us.image.src,path,/images/community-park-gathering-2.jpg
+pages.contact.find_us.maps_link.href,url,"https://maps.google.com/?q=Bernard+Street,+Sheffield,+S2+5PU"
+pages.contact.find_us.maps_link.label,string,Open in Google Maps
+pages.contact.find_us.paragraphs[0],string,"The address of the church is Bernard Street, Sheffield, S2 5PU."
+pages.contact.find_us.paragraphs[1],html,General enquiries: <a href='mailto:StJohnsPark@outlook.com' class='underline decoration-[var(--eden)] underline-offset-4'>StJohnsPark@outlook.com</a>
+pages.contact.parking.heading,string,Parking
+pages.contact.parking.paragraphs[0],string,We have a steep driveway to a car park just off Bernard Street with limited parking.
+pages.contact.parking.paragraphs[1],string,"Overflow parking is available in the car park behind the flats at the top of the church grounds. From Bernard Street, turn onto Cricket Inn Road, then the first major right onto Maltravers Road, then right again onto St John's Street. Follow the road to the end of the car park and use the public footpath through the old churchyard to reach church."
+pages.contact.public_transport.heading,string,Public Transport
+pages.contact.public_transport.paragraphs[0],string,We have good public transport links. Hyde Park tram stop is right next to the church.
+pages.contact.title,string,How to Find Us
+pages.events.about_title,string,About This Event
+pages.events.back_link_label,string,← Back to What's On
+pages.events.fallback_description_html,html,<p>More details for this event will be added soon.</p>
+pages.events.fallback_location,string,St John's Park Church
+pages.events.image_alt_prefix,string,Event image
+pages.events.images_title,string,Event Images
+pages.events.labels.date,string,Date
+pages.events.labels.location,string,Location
+pages.events.labels.time,string,Time
+pages.give.bank_details.heading,string,Bank Details
+pages.give.bank_details.lines[0],string,Account Name: ST JOHNS PARK P C C
+pages.give.bank_details.lines[1],string,Sort Code: 20-76-89
+pages.give.bank_details.lines[2],string,Account Number: 60362786
+pages.give.contact_html,html,"For more information, contact Catherine at <a class='underline decoration-[var(--eden)] underline-offset-4' href='mailto:StJohnsPark@outlook.com'>StJohnsPark@outlook.com</a>."
+pages.give.generosity_paragraph,string,"Your generosity allows us to build and sustain our Sunday gatherings, midweek ministries, and serve our city. Thank you for giving to St John's."
+pages.give.methods_heading,string,Here are the best ways for you to give:
+pages.give.methods[0],string,Via the Online Parish Giving Scheme.
+pages.give.methods[1],string,Bring your collection to church on Sunday.
+pages.give.methods[2],string,Use the card machine at church.
+pages.give.methods[3],string,Bank transfer (BACS).
+pages.give.online_giving.button_label,string,Give Online (Parish Giving Scheme)
+pages.give.online_giving.link,url,https://www.parishgiving.org.uk/donors/find-your-parish/park-st-john-the-evangelist-sheffield/
+pages.give.title,string,Give
+pages.home.coming_up.title,string,Coming Up
+pages.home.hero.badge,string,Eden in Park
+pages.home.hero.image.alt,string,St John's Park Community Gathering
+pages.home.hero.image.src,path,/images/community-park-gathering-2.jpg
+pages.home.hero.primary_cta.href,path,/sundays
+pages.home.hero.primary_cta.label,string,Visit Sunday
+pages.home.hero.secondary_cta.href,path,/contact
+pages.home.hero.secondary_cta.label,string,Find Us
+pages.home.hero.subtitle,html,"A community of Jesus-followers in Park, Sheffield. <br/>We belong to the family of God, <br/>love and serve our city, <br/>and give Jesus praise in everything we do."
+pages.home.hero.title,string,WELCOME HOME
+pages.home.latest_message.audio.mime_type,string,audio/mpeg
+pages.home.latest_message.audio.src,path,/audio/latest-message.mp3
+pages.home.latest_message.cta.href,path,/sermons
+pages.home.latest_message.cta.label,string,Listen Now
+pages.home.latest_message.eyebrow,string,Latest Message
+pages.home.mission_grid[0].color,string,teal
+pages.home.mission_grid[0].desc,string,"Find transformation, discipleship, and growth through midweek groups, Kids, and Youth communities."
+pages.home.mission_grid[0].link_href,path,/belong
+pages.home.mission_grid[0].link_text,string,FIND OUT MORE
+pages.home.mission_grid[0].title,string,Belong
+pages.home.mission_grid[1].color,string,green
+pages.home.mission_grid[1].desc,string,"Join one of our teams and help our church family thrive in worship, welcome, and community service."
+pages.home.mission_grid[1].link_href,path,/serve
+pages.home.mission_grid[1].link_text,string,JOIN A TEAM
+pages.home.mission_grid[1].title,string,Serve
+pages.home.mission_grid[2].color,string,gold
+pages.home.mission_grid[2].desc,string,"Your generosity helps sustain Sunday gatherings, midweek ministries, and practical support across our city."
+pages.home.mission_grid[2].link_href,path,/give
+pages.home.mission_grid[2].link_text,string,SUPPORT THE VISION
+pages.home.mission_grid[2].title,string,Give
+pages.home.mission.heading,string,Our Vision
+pages.home.mission.tag,string,"// Belong, Serve, Give"
+pages.im_new.home_preview.heading,string,First Time Visiting?
+pages.im_new.home_preview.intro,string,Here is what makes a Sunday morning at St John's Park easy to step into.
+pages.im_new.sections[0].heading,string,When does church happen?
+pages.im_new.sections[0].paragraphs[0],string,"We gather to worship every Sunday morning at 10:45am. We also run activities during the week for children, local community support, and smaller groups."
+pages.im_new.sections[1].heading,string,What happens in a church service?
+pages.im_new.sections[1].paragraphs[0],string,"The service is usually a little over an hour. We sing together, read the Bible, hear teaching that connects Scripture to everyday life, and spend time in prayer."
+pages.im_new.sections[1].paragraphs[1],string,"On the first Sunday of each month, we also share Communion together."
+pages.im_new.sections[2].heading,string,What about children and young people?
+pages.im_new.sections[2].paragraphs[0],string,"Children are very welcome. Most Sundays there is a children’s activity or children’s club during the service, and we work to help families feel at home."
+pages.im_new.sections[2].paragraphs[1],html,"For more details, visit <a href='/park-kids' class='underline decoration-[var(--eden)] underline-offset-4'>Park Kids</a> and <a href='/park-youth' class='underline decoration-[var(--teal)] underline-offset-4'>Park Youth</a>."
+pages.im_new.title,string,I'm New
+pages.life_events.intro,string,"For information about baptisms, weddings, and funerals:"
+pages.life_events.links[0].href,url,https://www.melksham.church/life-events
+pages.life_events.links[0].label,string,melksham.church/life-events
+pages.life_events.links[1].href,url,https://www.stjohnschap.co.uk/what-we-do/celebrating-new-birth/
+pages.life_events.links[1].label,string,stjohnschap.co.uk/what-we-do/celebrating-new-birth
+pages.life_events.title,string,Life Events
+pages.park_communities.cta_html,html,Ready to join a community? <a href='/contact' class='underline decoration-[var(--eden)] underline-offset-4'>Contact us</a> and we will help find the right group.
+pages.park_communities.midweek.heading,string,Midweek Communities
+pages.park_communities.midweek.images[0].alt,string,Community gathering in the park
+pages.park_communities.midweek.images[0].src,path,/images/community-park-gathering-1.jpg
+pages.park_communities.midweek.images[1].alt,string,Church and community gathering in the grounds
+pages.park_communities.midweek.images[1].src,path,/images/community-park-gathering-2.jpg
+pages.park_communities.midweek.paragraphs[0],string,Park Communities are smaller groups that meet during the week to help us grow as disciples of Jesus in everyday life.
+pages.park_communities.midweek.paragraphs[1],string,"Most groups meet weekly to read God's Word, pray, and encourage one another in faith."
+pages.park_communities.rhythm.heading,string,Our Rhythm
+pages.park_communities.rhythm.image.alt,string,Community singing together outside church at Christmas
+pages.park_communities.rhythm.image.src,path,/images/carols-doorstep.jpg
+pages.park_communities.rhythm.items[0],html,<strong>Up:</strong> Seeking God in prayer and Scripture.
+pages.park_communities.rhythm.items[1],html,<strong>In:</strong> Supporting and encouraging one another.
+pages.park_communities.rhythm.items[2],html,<strong>Out:</strong> Serving our local community.
+pages.park_communities.title,string,Park Communities
+pages.park_kids.cta_html,html,Questions before visiting? <a href='/contact' class='underline decoration-[var(--eden)] underline-offset-4'>Contact us</a>.
+pages.park_kids.social_story.heading,string,Social Story for Visiting Church
+pages.park_kids.social_story.images[0].alt,string,Children and families at churchyard games
+pages.park_kids.social_story.images[0].src,path,/images/kids-churchyard.jpg
+pages.park_kids.social_story.images[1].alt,string,Children taking part in a Christingle service
+pages.park_kids.social_story.images[1].src,path,/images/christingle.jpg
+pages.park_kids.social_story.intro,string,Here is a step-by-step guide for what happens when visiting St John's Park Church on a Sunday.
+pages.park_kids.social_story.step_label_prefix,string,Step
+pages.park_kids.social_story.steps[0],string,When I arrive at St John's Park Church I will see a big blue open door with a ramp for wheelchair access.
+pages.park_kids.social_story.steps[1],string,I will go inside two sets of doors and then there will be someone at the back of church to say hello to me.
+pages.park_kids.social_story.steps[2],string,There will be ear defenders and activity bags for me to use if I want to. I am allowed to borrow them without asking.
+pages.park_kids.social_story.steps[3],string,The toilets are in the side hallway. There is also an accessible toilet and I am allowed to use it even if I don't have a disability.
+pages.park_kids.social_story.steps[4],string,In church I can sit on any of the available seats. If I have a wheelchair I am welcome to sit wherever I feel most comfortable.
+pages.park_kids.social_story.steps[5],string,"When the service is ready to start, the person leading will say hello and tell us what is happening."
+pages.park_kids.social_story.steps[6],string,"During the service we will sing songs. I can stand up or sit down to sing. It is OK to move around, dance or wave a flag."
+pages.park_kids.social_story.steps[7],string,"After the Family Song, I will be invited to go into the side hall for kids activities. There is circle time, games, stories and a craft. It is OK to stay in the main service."
+pages.park_kids.social_story.steps[8],string,"After the service I can stay for a drink and a biscuit and talk to people. If I don't want to do this, that is OK and I can go home with my family when we are ready."
+pages.park_kids.sunday_groups.heading,string,Sunday Kids Groups
+pages.park_kids.sunday_groups.image.alt,string,Children playing in the church park
+pages.park_kids.sunday_groups.image.src,path,/images/kids-frisbee.jpg
+pages.park_kids.sunday_groups.paragraphs[0],string,Our Park Kids groups are for children aged 1-11 and run during our Sunday gathering at 10:45am.
+pages.park_kids.sunday_groups.paragraphs[1],string,"Children start in the service with the church family and then move into age-appropriate groups for Bible teaching, prayer, and activities."
+pages.park_kids.title,string,Park Kids
+pages.park_youth.cornerstone.heading,string,Wednesday Night: Cornerstone
+pages.park_youth.cornerstone.image.alt,string,Park Youth gathered together in the garden
+pages.park_youth.cornerstone.image.src,path,/images/park-youth-group.jpg
+pages.park_youth.cornerstone.paragraphs[0],string,"Cornerstone is our youth group for secondary school age, meeting every Wednesday at church from 6:00pm-7:00pm."
+pages.park_youth.cornerstone.paragraphs[1],string,"We spend time together in Scripture, discussion, prayer, and friendship."
+pages.park_youth.cta_html,html,"If you are a parent/carer or young person and would like more details, <a href='/contact' class='underline decoration-[var(--teal)] underline-offset-4'>get in touch</a>."
+pages.park_youth.sunday_study.heading,string,Sunday: Faith Explorers
+pages.park_youth.sunday_study.images[0].alt,string,Young person leading from the front during a Sunday gathering
+pages.park_youth.sunday_study.images[0].src,path,/images/youth-leading-worship.png
+pages.park_youth.sunday_study.images[1].alt,string,Park Youth enjoying games in the park
+pages.park_youth.sunday_study.images[1].src,path,/images/youth-games-1.jpg
+pages.park_youth.sunday_study.images[2].alt,string,Park Youth taking part in outdoor activities
+pages.park_youth.sunday_study.images[2].src,path,/images/youth-games-2.jpg
+pages.park_youth.sunday_study.paragraphs[0],string,We also run a youth Bible study during selected Sunday gatherings for Years 7-10.
+pages.park_youth.sunday_study.paragraphs[1],string,"Our heart is to help young people know Jesus, grow in faith, and play a full part in church life."
+pages.park_youth.title,string,Park Youth
+pages.safeguarding.paragraphs[0],string,St John's is committed to high standards in the safeguarding and care of children and vulnerable adults.
+pages.safeguarding.paragraphs[1],html,"To request our safeguarding policy, please <a href='/contact' class='underline decoration-[var(--eden)] underline-offset-4'>contact us</a>."
+pages.safeguarding.paragraphs[2],html,"The Diocese of Sheffield's Safeguarding Adviser is Siân Checkley. Contact: 01709 309100 or 07741 013775, or email <a href='mailto:sian.checkley@sheffield.anglican.org' class='underline decoration-[var(--eden)] underline-offset-4'>sian.checkley@sheffield.anglican.org</a>."
+pages.safeguarding.paragraphs[3],html,Diocese safeguarding information: <a href='https://www.sheffield.anglican.org/support/safeguarding' class='underline decoration-[var(--eden)] underline-offset-4'>sheffield.anglican.org/support/safeguarding</a>
+pages.safeguarding.title,string,Safeguarding
+pages.sermons.audio_coming_soon,string,Audio coming soon.
+pages.sermons.intro_primary,string,Catch up on our latest Sunday talks.
+pages.sermons.intro_secondary,string,"Hear the Bible read, explained, and applied to everyday life through talks from members of our church family."
+pages.sermons.rss_button_label,string,Subscribe via RSS
+pages.sermons.title,string,Talks
+pages.serve.intro,string,"We are a church family, and we need different people to help our family thrive. If you are part of St John's, we encourage you to join and serve one of our teams."
+pages.serve.outro_html,html,Interested in joining a team? Please <a href='/contact' class='underline decoration-[var(--eden)] underline-offset-4'>get in touch</a>.
+pages.serve.teams[0].description,string,"Our welcome and hospitality team create the family environment we love at St John's Park. They welcome people at the door, serve refreshments, and make sure everyone receives a warm welcome."
+pages.serve.teams[0].name,string,Welcome and Hospitality
+pages.serve.teams[1].description,string,"Our Kids team disciples the youngest generation in our church, from under-5s through primary-aged children."
+pages.serve.teams[1].name,string,Kids
+pages.serve.teams[2].description,string,"We disciple young people through Sunday Bible study and our midweek youth group Cornerstone, helping them meet and grow in relationship with Jesus."
+pages.serve.teams[2].name,string,Youth
+pages.serve.teams[3].description,string,Our worship team helps us encounter God's presence and give him praise.
+pages.serve.teams[3].name,string,Worship
+pages.serve.teams[4].description,string,"Our Foodbank team serves local people in crisis, providing food parcels and a listening, friendly ear."
+pages.serve.teams[4].name,string,Foodbank
+pages.serve.teams[5].description,string,"Our lunch club team helps serve lunch and build relationships in this richly diverse, lively community."
+pages.serve.teams[5].name,string,Lunch Club
+pages.serve.teams[6].description,string,Our cleaning team enables us to welcome people into the building during the week and gather together on Sundays.
+pages.serve.teams[6].name,string,Cleaning
+pages.serve.teams[7].description,string,Our car park team helps fit everyone in so we can gather together on a Sunday.
+pages.serve.teams[7].name,string,Car Park
+pages.serve.teams[8].description,string,"Our creative team uses photography, social media, and video to show what God is doing locally and help people connect with church family."
+pages.serve.teams[8].name,string,Creative
+pages.serve.teams[9].description,string,Our production team makes sure everyone can see and hear clearly during Sunday gatherings.
+pages.serve.teams[9].name,string,Production Team
+pages.serve.title,string,Serve
+pages.sundays.after_service,string,Please join us for refreshments afterwards to hang out as church family.
+pages.sundays.description,string,"Join us for our Sunday gathering every week at 10:45am. We gather to worship Jesus, hear the Bible read and explained, and to pray."
+pages.sundays.image.alt,string,Worship team singing during a Sunday gathering
+pages.sundays.image.src,path,/images/worship-flags.jpg
+pages.sundays.kids_blurb,string,We have Kids and Youth groups (0-14) that meet during our service.
+pages.sundays.kids_heading,string,Bringing Kids?
+pages.sundays.location,string,"St John's Park, Bernard Street, Sheffield, S2 5PU"
+pages.sundays.location_label,string,Location
+pages.sundays.service_style,string,"Our Sunday gathering is informal and interactive, with contemporary worship songs."
+pages.sundays.talks_link_href,path,/sermons
+pages.sundays.talks_link_intro,string,Catch up on talks from previous Sundays on our
+pages.sundays.talks_link_label,string,Talks page
+pages.sundays.time,string,10:45 AM
+pages.sundays.time_label,string,Time
+pages.sundays.title_line_one,string,SUNDAY
+pages.sundays.title_line_two,string,GATHERING
+pages.sundays.what_to_expect_heading,string,What to Expect
+pages.sundays.what_to_expect_items[0],string,Services are usually a little over one hour.
+pages.sundays.what_to_expect_items[1],string,"We sing together, read Scripture, hear Bible teaching, and pray."
+pages.sundays.what_to_expect_items[2],string,"On the first Sunday of each month, we share Communion."
+pages.team.staff_team.heading,string,St John's Staff Team
+pages.team.staff_team.members[0].email,string,luke@saintjohnspark.org
+pages.team.staff_team.members[0].name,string,Revd Luke Graham
+pages.team.staff_team.members[0].phone,string,07538 172907
+pages.team.staff_team.members[0].phone_href,url,tel:+447538172907
+pages.team.staff_team.members[0].role,string,is the Priest in Charge.
+pages.team.staff_team.members[1].email,string,kirsty.dronfield@centenaryproject.org.uk
+pages.team.staff_team.members[1].name,string,Kirsty Dronfield
+pages.team.staff_team.members[1].role,string,is our Centenary Project Children and Families' Leader.
+pages.team.title,string,Meet the Team
+pages.team.wardens.heading,string,Churchwardens and PCC
+pages.team.wardens.paragraphs[0],html,<strong>Faustina Nyame</strong> is one of our churchwardens.
+pages.team.wardens.paragraphs[1],html,<strong>Elizabeth (Bess) Cooper</strong> is also a churchwarden and a Lay Reader.
+pages.team.wardens.paragraphs[2],string,Our PCC serves and supports the life and leadership of the church.
+pages.the_park.featured_photo.alt,string,Baptism Celebration
+pages.the_park.featured_photo.label,string,New Life
+pages.the_park.featured_photo.src,path,/images/baptism.jpg
+pages.the_park.photos[0].alt,string,Community gathering in the park with bunting and seated groups
+pages.the_park.photos[0].label,string,Community Gathering
+pages.the_park.photos[0].src,path,/images/community-park-gathering-1.jpg
+pages.the_park.photos[1].alt,string,Church building and community enjoying outdoor activities
+pages.the_park.photos[1].label,string,Churchyard Event
+pages.the_park.photos[1].src,path,/images/community-park-gathering-2.jpg
+pages.the_park.photos[2].alt,string,People taking part in races on the grass outside church
+pages.the_park.photos[2].label,string,Park Fun Day
+pages.the_park.photos[2].src,path,/images/community-fun-day.jpg
+pages.the_park.photos[3].alt,string,Children playing games in the park
+pages.the_park.photos[3].label,string,Park Kids
+pages.the_park.photos[3].src,path,/images/kids-frisbee.jpg
+pages.the_park.photos[4].alt,string,Children and families around the churchyard games area
+pages.the_park.photos[4].label,string,Churchyard Games
+pages.the_park.photos[4].src,path,/images/kids-churchyard.jpg
+pages.the_park.photos[5].alt,string,Community singing carols at the church entrance in December
+pages.the_park.photos[5].label,string,Seasonal Events
+pages.the_park.photos[5].src,path,/images/carols-doorstep.jpg
+pages.the_park.title,string,The Park
+pages.what_we_believe.paragraphs[0],string,"St John's is part of the Church of England in the Diocese of Sheffield. We are committed to being followers of Jesus who love and learn from God, support each other, and serve our community and beyond."
+pages.what_we_believe.paragraphs[1],string,"Our faith is well summarized in the Apostles' Creed, shared by Christians around the world through the centuries."
+pages.what_we_believe.paragraphs[2],string,"We believe in God the Father, in Jesus Christ his Son, and in the Holy Spirit; in forgiveness, resurrection, and eternal life in Christ."
+pages.what_we_believe.title,string,What We Believe
+pages.whats_on.foodbank.description,string,"If you are in crisis, we can provide an emergency food parcel and practical support. Citizens Advice and Debt Support workers are available during sessions for those with referrals."
+pages.whats_on.foodbank.heading,string,Foodbank
+pages.whats_on.foodbank.referrals_heading,string,Referral numbers:
+pages.whats_on.foodbank.referrals[0],string,"Help Through Hardship: 0808 208 2138 (Mon-Fri, 9:00am-5:00pm)"
+pages.whats_on.foodbank.referrals[1],string,"Citizens Advice Sheffield: 0808 278 7820 (Mon-Fri, 10:00am-4:00pm, option 4)"
+pages.whats_on.foodbank.referrals[2],string,"Sheffield S6 helpline: 0114 321 0733 (Mon-Fri, 10:00am-1:00pm)"
+pages.whats_on.foodbank.time,string,Monday 10:00am-12:00pm
+pages.whats_on.foodbank.volunteer_html,html,Interested in volunteering? Contact Hannah at <a href='mailto:hannah@saintjohnspark.org' class='underline decoration-[var(--eden)] underline-offset-4'>hannah@saintjohnspark.org</a>.
+pages.whats_on.import_calendar_label,string,Import Calendar
+pages.whats_on.lunch_club.description,string,"Join us every Monday for soup, bread, a hot drink, and a chat. All are welcome, and it is free."
+pages.whats_on.lunch_club.heading,string,Lunch Club
+pages.whats_on.lunch_club.time,string,Monday 11:40am-12:40pm
+pages.whats_on.midweek_online_prayers.button_label,string,Join Zoom Meeting
+pages.whats_on.midweek_online_prayers.description,string,Monday to Friday at 8:00am for 30 minutes on Zoom.
+pages.whats_on.midweek_online_prayers.extra,string,We also meet in church on the first Sunday of each month from 10:00-10:30am before the service.
+pages.whats_on.midweek_online_prayers.heading,string,Midweek Online Prayers
+pages.whats_on.midweek_online_prayers.meeting_id,string,323 564 9987
+pages.whats_on.midweek_online_prayers.passcode,string,483559
+pages.whats_on.midweek_online_prayers.zoom_link,url,https://zoom.us/j/3235649987?pwd=483559
+pages.whats_on.seasonal_events.description,string,"Throughout the year we host seasonal gatherings for all ages, including Christmas events and community celebrations."
+pages.whats_on.seasonal_events.heading,string,Seasonal Events
+pages.whats_on.seasonal_events.images[0].alt,string,Children and families taking part in a Christingle service
+pages.whats_on.seasonal_events.images[0].src,path,/images/christingle.jpg
+pages.whats_on.seasonal_events.images[1].alt,string,Community carol singing at the church entrance
+pages.whats_on.seasonal_events.images[1].src,path,/images/carols-doorstep.jpg
+pages.whats_on.subtitle,string,Weekly church life and upcoming events in one place.
+pages.whats_on.sunday_gathering.description,string,"Our Sunday gathering happens every Sunday at 10:45am and is for all ages. We gather to worship Jesus, hear from God's Word, and pray together."
+pages.whats_on.sunday_gathering.heading,string,Sunday Gathering
+pages.whats_on.sunday_gathering.image.alt,string,Community activities in the church grounds
+pages.whats_on.sunday_gathering.image.src,path,/images/community-fun-day.jpg
+pages.whats_on.title,string,What's On
+pages.whats_on.upcoming_events.description,string,Pulled from our live church calendar.
+pages.whats_on.upcoming_events.empty_message,string,No upcoming events found right now. Please check back soon.
+pages.whats_on.upcoming_events.heading,string,Upcoming Events
+pages.whats_on.upcoming_events.jump_label,string,See regular weekly activities
+sermons[0].audioUrl,string,
+sermons[0].date,string,2026-01-25
+sermons[0].description,string,Continuing The Family of God series through the life of Abraham.
+sermons[0].duration,number,1800
+sermons[0].passage,string,Genesis 16
+sermons[0].series,string,The Family of God
+sermons[0].speaker,string,Emma Fern
+sermons[0].title,string,The Life of Abraham
+sermons[1].audioUrl,url,https://www.saintjohnspark.org.uk/wp-content/uploads/2026/01/18-01-2026-Revd-Luke-Graham-Genesis-12v10-20-The-Family-of-God.mp3
+sermons[1].date,string,2026-01-18
+sermons[1].description,string,The Family of God series in Genesis.
+sermons[1].duration,number,1800
+sermons[1].passage,string,Genesis 12:10-20
+sermons[1].series,string,The Family of God
+sermons[1].speaker,string,Revd Luke Graham
+sermons[1].title,string,Marriage
+sermons[2].audioUrl,url,https://www.saintjohnspark.org.uk/wp-content/uploads/2026/01/11-01-2026-Revd-Luke-Graham-Genesis-12v1-9-The-Family-of-God.mp3
+sermons[2].date,string,2026-01-11
+sermons[2].description,string,Walking through Genesis and God's covenant family.
+sermons[2].duration,number,1800
+sermons[2].passage,string,Genesis 12:1-9
+sermons[2].series,string,The Family of God
+sermons[2].speaker,string,Revd Luke Graham
+sermons[2].title,string,The Family of God
+sermons[3].audioUrl,url,https://www.saintjohnspark.org.uk/wp-content/uploads/2026/01/04-01-2026-Lucy-Wren.mp3
+sermons[3].date,string,2026-01-04
+sermons[3].description,string,Sunday teaching from our church family.
+sermons[3].duration,number,1800
+sermons[3].passage,string,
+sermons[3].series,string,Sunday Talks
+sermons[3].speaker,string,Lucy Wren
+sermons[3].title,string,Sunday Talk
+sermons[4].audioUrl,url,https://www.saintjohnspark.org.uk/wp-content/uploads/2026/01/28-12-2025-Bess-cooper-Luke-2v8–16-Humble-King.mp3
+sermons[4].date,string,2025-12-28
+sermons[4].description,string,Advent reflections on Jesus as the humble King.
+sermons[4].duration,number,1800
+sermons[4].passage,string,Luke 2:8-16
+sermons[4].series,string,Advent
+sermons[4].speaker,string,Revd Luke Graham
+sermons[4].title,string,Jesus the Humble King
+sermons[5].audioUrl,url,https://www.saintjohnspark.org.uk/wp-content/uploads/2026/01/25-12-2025-Revd-Dominic-Wachira-Maina-Christmas-Day.mp3
+sermons[5].date,string,2025-12-25
+sermons[5].description,string,Christmas Day celebration.
+sermons[5].duration,number,1800
+sermons[5].passage,string,
+sermons[5].series,string,Christmas
+sermons[5].speaker,string,Revd Dominic Wachira Maina
+sermons[5].title,string,Christmas Day
+sermons[6].audioUrl,url,https://www.saintjohnspark.org.uk/wp-content/uploads/2026/01/21-12-2025-Revd-Luke-Graham-Luke-1v26–38-Eternal-King.mp3
+sermons[6].date,string,2025-12-21
+sermons[6].description,string,Advent reflections on Jesus as the eternal King.
+sermons[6].duration,number,1800
+sermons[6].passage,string,Luke 1:26-38
+sermons[6].series,string,Advent
+sermons[6].speaker,string,Revd Luke Graham
+sermons[6].title,string,Jesus the Eternal King
+sermons[7].audioUrl,url,https://www.saintjohnspark.org.uk/wp-content/uploads/2025/12/07-12-2025-Lucy-Uren-Genesis-3v8-19-Isaiah-9v2-7-Jesus-as-the-Light-Bringer.mp3
+sermons[7].date,string,2025-12-07
+sermons[7].description,string,Advent teaching on Jesus bringing light into darkness.
+sermons[7].duration,number,1800
+sermons[7].passage,string,Genesis 3:8-19; Isaiah 9:2-7
+sermons[7].series,string,Advent
+sermons[7].speaker,string,Lucy Uren
+sermons[7].title,string,Jesus the Light Bringer
+sermons[8].audioUrl,url,https://www.saintjohnspark.org.uk/wp-content/uploads/2025/12/30-11-2025-Revd-Al-Munday-Genesis-3v8-19-What-child-is-this.mp3
+sermons[8].date,string,2025-11-30
+sermons[8].description,string,Advent series opening message.
+sermons[8].duration,number,1800
+sermons[8].passage,string,Genesis 3:8-19
+sermons[8].series,string,Advent
+sermons[8].speaker,string,Revd Al Munday
+sermons[8].title,string,What Child Is This?
+site.address,string,"Bernard Street, Sheffield, S2 5PU"
+site.default_site_url,url,https://stjohnspark.church
+site.meta_description,string,St John's Park Church
+site.mission,string,"Belong, Serve, Give"
+site.subtitle,string,"A community of Jesus-followers in Park, Sheffield."
+site.title,string,St John's Park Church
+site.vision,string,Eden in Park
+utility_navigation[0].href,path,/belong
+utility_navigation[0].label,string,Belong
+utility_navigation[0].tone,string,belong
+utility_navigation[1].href,path,/serve
+utility_navigation[1].label,string,Serve
+utility_navigation[1].tone,string,serve
+utility_navigation[2].href,path,/give
+utility_navigation[2].label,string,Give
+utility_navigation[2].tone,string,give

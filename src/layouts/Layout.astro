@@ -1,8 +1,7 @@
 ---
 import Logo from "../components/Logo.astro";
-import SketchChurch from "../components/SketchChurch.astro";
 import { Menu, X } from "lucide-react";
-import content from "../data/content.json";
+import { getSiteContent } from "../data/site-content";
 import "../styles/global.css";
 
 interface Props {
@@ -10,10 +9,15 @@ interface Props {
 }
 
 const { title } = Astro.props;
+const content = await getSiteContent();
 const primaryNav = content.navigation.filter(
 	(item) => !["Belong", "Serve", "Give"].includes(item.label),
 );
-const rawTheme = (import.meta.env.PUBLIC_SITE_THEME ?? "current").toLowerCase();
+const utilityNav = content.utility_navigation;
+const footerLinks = content.footer.quick_links;
+const rawTheme = (
+	import.meta.env.PUBLIC_SITE_THEME ?? "line-drawing"
+).toLowerCase();
 const themeAliases: Record<string, "current" | "garden-city" | "line-drawing"> =
 	{
 		current: "current",
@@ -32,7 +36,7 @@ const siteTheme = themeAliases[rawTheme] ?? "current";
 <html lang="en" data-theme={siteTheme}>
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="description" content="St John's Park Church" />
+		<meta name="description" content={content.site.meta_description} />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -48,11 +52,16 @@ const siteTheme = themeAliases[rawTheme] ?? "current";
 		<div
 			class="teal-field text-xs font-semibold py-3 px-4 tracking-wide text-center flex justify-center gap-3"
 		>
-			<a href="/belong" class="mission-chip mission-chip--belong"
-				>Belong</a
-			>
-			<a href="/serve" class="mission-chip mission-chip--serve">Serve</a>
-			<a href="/give" class="mission-chip mission-chip--give">Give</a>
+			{
+				utilityNav.map((item) => (
+					<a
+						href={item.href}
+						class={`mission-chip mission-chip--${item.tone}`}
+					>
+						{item.label}
+					</a>
+				))
+			}
 		</div>
 
 		<!-- NAVIGATION -->
@@ -64,17 +73,17 @@ const siteTheme = themeAliases[rawTheme] ?? "current";
 					<!-- LOGO -->
 					<a href="/" class="shrink-0 flex items-center gap-4 group">
 						<div
-							class="w-12 h-12 text-[var(--ink)] group-hover:text-[var(--eden)] transition-colors"
+							class="w-12 h-12 text-(--ink) group-hover:text-(--eden) transition-colors"
 						>
 							<Logo class="w-full h-full" />
 						</div>
 						<div class="leading-none">
 							<span
-								class="block font-extrabold text-xl tracking-tight text-[var(--ink)]"
+								class="block font-extrabold text-xl tracking-tight text-(--ink)"
 								>St John's Church</span
 							>
 							<span
-								class="block font-semibold text-xl tracking-wide text-[var(--eden)] -mt-1"
+								class="block font-semibold text-xl tracking-wide text-(--eden) -mt-1"
 								>Park</span
 							>
 						</div>
@@ -86,7 +95,7 @@ const siteTheme = themeAliases[rawTheme] ?? "current";
 							primaryNav.map((item) => (
 								<a
 									href={item.href}
-									class="text-[var(--ink)] font-semibold text-sm tracking-wide hover:bg-[var(--paper-line)] px-4 py-2 transition-colors"
+									class="text-(--ink) font-semibold text-sm tracking-wide hover:bg-(--paper-line) px-4 py-2 transition-colors"
 								>
 									{item.label}
 								</a>
@@ -105,7 +114,7 @@ const siteTheme = themeAliases[rawTheme] ?? "current";
 					<button
 						id="mobile-menu-toggle"
 						type="button"
-						class="md:hidden inline-flex items-center justify-center w-12 h-12 border-2 border-[var(--ink)] text-[var(--ink)] hover:bg-[var(--ink)] hover:text-white transition-colors"
+						class="md:hidden inline-flex items-center justify-center w-12 h-12 border-2 border-(--ink) text-(--ink) hover:bg-(--ink) hover:text-white transition-colors"
 						aria-expanded="false"
 						aria-controls="mobile-menu-panel"
 						aria-label="Toggle navigation menu"
@@ -126,7 +135,7 @@ const siteTheme = themeAliases[rawTheme] ?? "current";
 							<a
 								data-mobile-link
 								href={item.href}
-								class="text-[var(--ink)] font-semibold text-base tracking-wide border-2 border-transparent hover:border-[var(--ink)] px-3 py-2 transition-colors"
+								class="text-(--ink) font-semibold text-base tracking-wide border-2 border-transparent hover:border-(--ink) px-3 py-2 transition-colors"
 							>
 								{item.label}
 							</a>
@@ -191,16 +200,21 @@ const siteTheme = themeAliases[rawTheme] ?? "current";
 		<footer
 			class="themed-footer py-16 mt-auto border-t-2 border-(--ink) relative overflow-hidden text-white"
 		>
-			<SketchChurch
-				class="absolute -bottom-12 left-0 w-full text-white/12"
+			<img
+				src="/images/line-drawing.png"
+				alt=""
+				aria-hidden="true"
+				class="absolute -top-3 left-0 w-full opacity-[0.15] pointer-events-none"
 			/>
-			<div class="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-12">
+			<div
+				class="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-12 relative z-10"
+			>
 				<div>
 					<div class="w-16 h-16 text-(--gold) mb-6">
 						<Logo class="w-full h-full" />
 					</div>
 					<h3 class="text-2xl font-bold tracking-wide mb-2">
-						St John's Park
+						{content.footer.title}
 					</h3>
 					<p class="text-white/80 max-w-sm">{content.site.address}</p>
 				</div>
@@ -209,31 +223,16 @@ const siteTheme = themeAliases[rawTheme] ?? "current";
 						Quick Links
 					</p>
 					<div class="flex flex-col md:items-end gap-2 text-white/85">
-						<a
-							href="/im-new"
-							class="hover:text-white hover:underline decoration-(--gold) underline-offset-4"
-							>I'm New</a
-						>
-						<a
-							href="/whats-on"
-							class="hover:text-white hover:underline decoration-(--gold) underline-offset-4"
-							>What's On</a
-						>
-						<a
-							href="/sermons"
-							class="hover:text-white hover:underline decoration-(--gold) underline-offset-4"
-							>Talks</a
-						>
-						<a
-							href="/safeguarding"
-							class="hover:text-white hover:underline decoration-(--gold) underline-offset-4"
-							>Safeguarding</a
-						>
-						<a
-							href="/contact"
-							class="hover:text-white hover:underline decoration-(--gold) underline-offset-4"
-							>Contact</a
-						>
+						{
+							footerLinks.map((item) => (
+								<a
+									href={item.href}
+									class="hover:text-white hover:underline decoration-(--gold) underline-offset-4"
+								>
+									{item.label}
+								</a>
+							))
+						}
 					</div>
 				</div>
 			</div>

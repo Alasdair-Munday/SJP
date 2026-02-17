@@ -19,8 +19,8 @@
   --gold-soft: #f8f0dc;
 
   --hero-overlay-start: var(--ink);
-  --hero-overlay-mid: color-mix(in oklab, var(--ink) 84%, black);
-  --hero-overlay-end: color-mix(in oklab, var(--teal) 60%, black);
+  --hero-overlay-mid: color-mix(in oklab, var(--ink) 60%, black);
+  --hero-overlay-end: none;
   --hero-shadow-start: color-mix(in oklab, var(--ink) 78%, black);
 
   --utility-start: #2f9aa4;
@@ -66,13 +66,11 @@ html[data-theme="garden-city"] {
   --utility-end: #70974f;
 
   --footer-layer-1: linear-gradient(148deg, #1b4238 0%, #2d6b53 38%, #5d8347 100%);
-  --footer-layer-2: repeating-linear-gradient(
-    90deg,
-    rgba(255, 255, 255, 0.12) 0px,
-    rgba(255, 255, 255, 0.12) 1px,
-    rgba(255, 255, 255, 0) 1px,
-    rgba(255, 255, 255, 0) 48px
-  );
+  --footer-layer-2: repeating-linear-gradient(90deg,
+      rgba(255, 255, 255, 0.12) 0px,
+      rgba(255, 255, 255, 0.12) 1px,
+      rgba(255, 255, 255, 0) 1px,
+      rgba(255, 255, 255, 0) 48px);
   --footer-layer-2-size: 48px 100%;
   --footer-layer-2-position: center;
   --footer-text: #f6fced;
@@ -80,13 +78,11 @@ html[data-theme="garden-city"] {
   --site-background-image:
     radial-gradient(circle at 12% 8%, rgba(97, 187, 107, 0.15) 0%, rgba(97, 187, 107, 0) 35%),
     radial-gradient(circle at 90% 18%, rgba(46, 127, 129, 0.11) 0%, rgba(46, 127, 129, 0) 40%),
-    repeating-linear-gradient(
-      90deg,
+    repeating-linear-gradient(90deg,
       rgba(19, 41, 37, 0.032) 0px,
       rgba(19, 41, 37, 0.032) 1px,
       rgba(19, 41, 37, 0) 1px,
-      rgba(19, 41, 37, 0) 68px
-    );
+      rgba(19, 41, 37, 0) 68px);
   --site-background-size: auto, auto, 68px 100%;
   --site-background-position: center, center, center;
 }
@@ -184,12 +180,10 @@ html[data-theme="line-drawing"] .sketch-panel {
 
 @supports ((-webkit-background-clip: text) or (background-clip: text)) {
   .heading-eden-gold {
-    background-image: linear-gradient(
-      108deg,
-      color-mix(in oklab, var(--eden) 90%, var(--gold) 10%) 0%,
-      color-mix(in oklab, var(--eden) 55%, var(--gold) 45%) 54%,
-      color-mix(in oklab, var(--eden) 18%, var(--gold) 82%) 100%
-    );
+    background-image: linear-gradient(108deg,
+        color-mix(in oklab, var(--eden) 90%, var(--gold) 10%) 0%,
+        color-mix(in oklab, var(--eden) 55%, var(--gold) 45%) 54%,
+        color-mix(in oklab, var(--eden) 18%, var(--gold) 82%) 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -275,12 +269,10 @@ html[data-theme="line-drawing"] .mission-chip {
 }
 
 .hero-overlay {
-  background: linear-gradient(
-    124deg,
-    var(--hero-overlay-start) 0%,
-    var(--hero-overlay-mid) 52%,
-    var(--hero-overlay-end) 100%
-  );
+  background: linear-gradient(124deg,
+      var(--hero-overlay-start) 0%,
+      var(--hero-overlay-mid) 52%,
+      var(--hero-overlay-end) 100%);
   mix-blend-mode: multiply;
 }
 
