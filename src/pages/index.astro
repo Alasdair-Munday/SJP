@@ -3,7 +3,17 @@ import Layout from "../layouts/Layout.astro";
 import SketchChurch from "../components/SketchChurch.astro";
 import CalendarEvents from "../components/CalendarEvents.astro";
 import content from "../data/content.json";
-import { ArrowRight, Users, Zap, Heart, MapPin, Calendar } from "lucide-react";
+import {
+	ArrowRight,
+	Users,
+	Zap,
+	Heart,
+	MapPin,
+	Calendar,
+	Coffee,
+	Smile,
+	PlayCircle,
+} from "lucide-react";
 
 const { hero, mission_grid } = content.pages.home;
 ---
@@ -93,6 +103,123 @@ const { hero, mission_grid } = content.pages.home;
 		</div>
 	</div>
 
+	<!-- I'M NEW: VISITOR BRIDGE -->
+	<section
+		class="py-16 border-b-2 border-(--ink)"
+		style="background-color: color-mix(in oklab, var(--teal) 3%, white);"
+	>
+		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+			<div class="mb-8">
+				<h2 class="heading-eden-gold font-['Newsreader'] text-4xl font-bold">
+					First Time Visiting?
+				</h2>
+				<p class="text-(--ink)/85 font-medium mt-2">
+					Here is what makes a Sunday morning at St John's Park easy to
+					step into.
+				</p>
+			</div>
+			<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+				<article class="sketch-panel p-7">
+					<div
+						class="w-12 h-12 rounded-full bg-(--gold)/25 text-(--ink) flex items-center justify-center mb-4"
+					>
+						<Coffee size={22} />
+					</div>
+					<h3 class="text-2xl font-bold text-(--ink) mb-2">
+						Relaxed Atmosphere
+					</h3>
+					<p class="text-(--ink)/90">
+						No dress code, no pressure. Come as you are.
+					</p>
+				</article>
+				<article class="sketch-panel p-7">
+					<div
+						class="w-12 h-12 rounded-full bg-[#45B074]/25 text-(--ink) flex items-center justify-center mb-4"
+					>
+						<Smile size={22} />
+					</div>
+					<h3 class="text-2xl font-bold text-(--ink) mb-2">Kids & Youth</h3>
+					<p class="text-(--ink)/90">
+						Fun, safe groups for ages 0-14.
+						<a
+							href="/park-kids"
+							class="font-semibold underline decoration-[#45B074] underline-offset-4 ml-1"
+							>Park Kids</a
+						>
+						and
+						<a
+							href="/park-youth"
+							class="font-semibold underline decoration-[#45B074] underline-offset-4 ml-1"
+							>Park Youth</a
+						>.
+					</p>
+				</article>
+				<article class="sketch-panel p-7">
+					<div
+						class="w-12 h-12 rounded-full bg-(--teal)/20 text-(--ink) flex items-center justify-center mb-4"
+					>
+						<MapPin size={22} />
+					</div>
+					<h3 class="text-2xl font-bold text-(--ink) mb-2">
+						Central Location
+					</h3>
+					<p class="text-(--ink)/90">
+						Easy to find on Bernard St with free parking.
+						<a
+							href="/contact"
+							class="font-semibold underline decoration-(--gold) underline-offset-4 ml-1"
+							>Find us</a
+						>.
+					</p>
+				</article>
+			</div>
+		</div>
+	</section>
+
+	<!-- LATEST MESSAGE -->
+	<section class="py-16 border-b-2 border-(--ink) bg-white">
+		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+			<div class="sketch-panel overflow-hidden">
+				<div class="grid lg:grid-cols-2">
+					<div class="min-h-72 lg:min-h-full">
+						<img
+							src="/images/worship-singers.jpg"
+							alt="Church worship team leading a Sunday message"
+							class="w-full h-full object-cover"
+							loading="lazy"
+						/>
+					</div>
+					<div class="p-8 lg:p-10 flex flex-col justify-between gap-6">
+						<div>
+							<p class="text-sm uppercase tracking-[0.14em] font-bold text-(--teal) mb-3">
+								Latest Message
+							</p>
+							<h2 class="heading-eden-gold font-['Newsreader'] text-4xl font-bold mb-4">
+								This Week: The Power of Community.
+							</h2>
+							<p class="text-(--ink)/85 text-lg font-medium">
+								Listen to this week's teaching and hear how shared faith
+								shapes everyday life.
+							</p>
+						</div>
+						<div class="space-y-4">
+							<audio controls class="w-full">
+								<source src="/audio/latest-message.mp3" type="audio/mpeg" />
+								Your browser does not support the audio player.
+							</audio>
+							<a
+								href="/sermons"
+								class="inline-flex items-center gap-2 px-5 py-2.5 border-2 border-(--ink) text-(--ink) font-semibold hover:bg-(--ink) hover:text-white transition-colors"
+							>
+								Listen Now <PlayCircle size={18} />
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
 	<!-- BANNER: Upcoming -->
 	<div class="bg-(--gold) border-b-2 border-(--ink) p-8">
 		<div class="max-w-7xl mx-auto">
@@ -112,9 +239,7 @@ const { hero, mission_grid } = content.pages.home;
 		<div
 			class="flex items-end gap-4 mb-12 border-b-2 border-[#0F2830] pb-4"
 		>
-			<h2
-				class="font-['Newsreader'] text-4xl font-bold tracking-tight text-[#0F2830]"
-			>
+			<h2 class="heading-eden-gold font-['Newsreader'] text-4xl font-bold tracking-tight">
 				Our Mission
 			</h2>
 			<span
@@ -126,7 +251,7 @@ const { hero, mission_grid } = content.pages.home;
 		<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
 			{/* CARD 1: BELONG (Eden Green Accent) */}
 			<div
-				class="sketch-panel p-8 hover:-translate-y-1 transition-transform duration-300 group"
+				class="sketch-panel theme-belong p-8 hover:-translate-y-1 transition-transform duration-300 group"
 			>
 				<div
 					class="w-12 h-12 bg-[#eaf7ef] text-(--ink) flex items-center justify-center mb-6 group-hover:bg-[#45B074] group-hover:text-white transition-colors rounded-full"
@@ -148,7 +273,7 @@ const { hero, mission_grid } = content.pages.home;
 
 			{/* CARD 2: SERVE (Teal Accent) */}
 			<div
-				class="sketch-panel p-8 hover:-translate-y-1 transition-transform duration-300 group"
+				class="sketch-panel theme-serve p-8 hover:-translate-y-1 transition-transform duration-300 group"
 			>
 				<div
 					class="w-12 h-12 bg-[#e9f3f4] text-(--ink) flex items-center justify-center mb-6 group-hover:bg-(--teal) group-hover:text-white transition-colors rounded-full"
@@ -170,7 +295,7 @@ const { hero, mission_grid } = content.pages.home;
 
 			{/* CARD 3: GIVE (KINGDOM GOLD) */}
 			<div
-				class="sketch-panel p-8 hover:-translate-y-1 transition-transform duration-300 group bg-(--gold)/15"
+				class="sketch-panel theme-give p-8 hover:-translate-y-1 transition-transform duration-300 group bg-(--gold)/15"
 			>
 				<div
 					class="w-12 h-12 bg-(--ink) text-(--gold) flex items-center justify-center mb-6 rounded-full"

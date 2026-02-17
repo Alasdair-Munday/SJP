@@ -3,26 +3,93 @@
 :root {
   --ink: #17343b;
   --teal: #2f9aa4;
-  --paper: #f4f4f0;
-  --paper-soft: #fcfcf9;
+  --eden: #45B074;
+  --paper: color-mix(in oklab, white 99.3%, var(--gold) 0.7%);
+  --paper-soft: color-mix(in oklab, white 99.88%, var(--gold) 0.12%);
   --gold: #d9ad3f;
 }
 
 body {
-  background: radial-gradient(circle at top right, #f9f9f5 0%, var(--paper) 55%, #ecece5 100%);
+  background-color: var(--paper-soft);
   color: var(--ink);
 }
 
 .sketch-panel {
-  background: color-mix(in oklab, var(--paper-soft) 92%, white);
+  background: color-mix(in oklab, var(--paper-soft) 98.5%, white);
   border: 2px solid color-mix(in oklab, var(--ink) 88%, white);
-  border-radius: 18px;
-  box-shadow: 0 8px 20px rgba(23, 52, 59, 0.08);
+  border-radius: 18px 22px 16px 20px;
+  box-shadow:
+    0 9px 18px rgba(23, 52, 59, 0.08),
+    1px 1px 0 rgba(23, 52, 59, 0.12);
+}
+
+.heading-eden-gold {
+  color: var(--ink);
+}
+
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  .heading-eden-gold {
+    background-image: linear-gradient(
+      108deg,
+      color-mix(in oklab, var(--eden) 90%, var(--gold) 10%) 0%,
+      color-mix(in oklab, var(--eden) 55%, var(--gold) 45%) 54%,
+      color-mix(in oklab, var(--eden) 18%, var(--gold) 82%) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+.mission-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.28rem 0.8rem;
+  border-radius: 999px 999px 920px 999px;
+  border: 2px solid color-mix(in oklab, var(--ink) 25%, transparent);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.mission-chip:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(23, 52, 59, 0.22);
+}
+
+.mission-chip--belong {
+  background: color-mix(in oklab, var(--eden) 38%, white);
+  color: color-mix(in oklab, var(--ink) 62%, var(--eden) 38%);
+}
+
+.mission-chip--serve {
+  background: color-mix(in oklab, var(--teal) 38%, white);
+  color: color-mix(in oklab, var(--ink) 60%, var(--teal) 40%);
+}
+
+.mission-chip--give {
+  background: color-mix(in oklab, var(--gold) 40%, white);
+  color: color-mix(in oklab, var(--ink) 62%, var(--gold) 38%);
+}
+
+.theme-belong {
+  border-top: 5px solid var(--eden);
+}
+
+.theme-serve {
+  border-top: 5px solid var(--teal);
+}
+
+.theme-give {
+  border-top: 5px solid var(--gold);
 }
 
 .teal-field {
   background: linear-gradient(140deg, #2f9aa4 0%, #2a8c95 45%, #347f86 100%);
-  color: #effbfc;
+  color: #17343b;
 }
 
 .ground-line {
