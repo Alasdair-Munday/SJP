@@ -1,0 +1,73 @@
+group,section,label,path,type,value,notes
+sermons,sermons.audioUrl,Audio Url,sermons[0].audioUrl,string,,Plain text.
+sermons,sermons.date,Date,sermons[0].date,string,2026-01-25,Plain text.
+sermons,sermons.description,Description,sermons[0].description,string,Continuing The Family of God series through the life of Abraham.,Plain text.
+sermons,sermons.duration,Duration,sermons[0].duration,number,1800,Numeric value only.
+sermons,sermons.passage,Passage,sermons[0].passage,string,Genesis 16,Plain text.
+sermons,sermons.series,Series,sermons[0].series,string,The Family of God,Plain text.
+sermons,sermons.speaker,Speaker,sermons[0].speaker,string,Emma Fern,Plain text.
+sermons,sermons.title,Title,sermons[0].title,string,The Life of Abraham,Plain text.
+sermons,sermons.audioUrl,Audio Url,sermons[1].audioUrl,url,https://www.saintjohnspark.org.uk/wp-content/uploads/2026/01/18-01-2026-Revd-Luke-Graham-Genesis-12v10-20-The-Family-of-God.mp3,"Use full URL (https://...), mailto:, or tel:."
+sermons,sermons.date,Date,sermons[1].date,string,2026-01-18,Plain text.
+sermons,sermons.description,Description,sermons[1].description,string,The Family of God series in Genesis.,Plain text.
+sermons,sermons.duration,Duration,sermons[1].duration,number,1800,Numeric value only.
+sermons,sermons.passage,Passage,sermons[1].passage,string,Genesis 12:10-20,Plain text.
+sermons,sermons.series,Series,sermons[1].series,string,The Family of God,Plain text.
+sermons,sermons.speaker,Speaker,sermons[1].speaker,string,Revd Luke Graham,Plain text.
+sermons,sermons.title,Title,sermons[1].title,string,Marriage,Plain text.
+sermons,sermons.audioUrl,Audio Url,sermons[2].audioUrl,url,https://www.saintjohnspark.org.uk/wp-content/uploads/2026/01/11-01-2026-Revd-Luke-Graham-Genesis-12v1-9-The-Family-of-God.mp3,"Use full URL (https://...), mailto:, or tel:."
+sermons,sermons.date,Date,sermons[2].date,string,2026-01-11,Plain text.
+sermons,sermons.description,Description,sermons[2].description,string,Walking through Genesis and God's covenant family.,Plain text.
+sermons,sermons.duration,Duration,sermons[2].duration,number,1800,Numeric value only.
+sermons,sermons.passage,Passage,sermons[2].passage,string,Genesis 12:1-9,Plain text.
+sermons,sermons.series,Series,sermons[2].series,string,The Family of God,Plain text.
+sermons,sermons.speaker,Speaker,sermons[2].speaker,string,Revd Luke Graham,Plain text.
+sermons,sermons.title,Title,sermons[2].title,string,The Family of God,Plain text.
+sermons,sermons.audioUrl,Audio Url,sermons[3].audioUrl,url,https://www.saintjohnspark.org.uk/wp-content/uploads/2026/01/04-01-2026-Lucy-Wren.mp3,"Use full URL (https://...), mailto:, or tel:."
+sermons,sermons.date,Date,sermons[3].date,string,2026-01-04,Plain text.
+sermons,sermons.description,Description,sermons[3].description,string,Sunday teaching from our church family.,Plain text.
+sermons,sermons.duration,Duration,sermons[3].duration,number,1800,Numeric value only.
+sermons,sermons.passage,Passage,sermons[3].passage,string,,Plain text.
+sermons,sermons.series,Series,sermons[3].series,string,Sunday Talks,Plain text.
+sermons,sermons.speaker,Speaker,sermons[3].speaker,string,Lucy Wren,Plain text.
+sermons,sermons.title,Title,sermons[3].title,string,Sunday Talk,Plain text.
+sermons,sermons.audioUrl,Audio Url,sermons[4].audioUrl,url,https://www.saintjohnspark.org.uk/wp-content/uploads/2026/01/28-12-2025-Bess-cooper-Luke-2v8–16-Humble-King.mp3,"Use full URL (https://...), mailto:, or tel:."
+sermons,sermons.date,Date,sermons[4].date,string,2025-12-28,Plain text.
+sermons,sermons.description,Description,sermons[4].description,string,Advent reflections on Jesus as the humble King.,Plain text.
+sermons,sermons.duration,Duration,sermons[4].duration,number,1800,Numeric value only.
+sermons,sermons.passage,Passage,sermons[4].passage,string,Luke 2:8-16,Plain text.
+sermons,sermons.series,Series,sermons[4].series,string,Advent,Plain text.
+sermons,sermons.speaker,Speaker,sermons[4].speaker,string,Revd Luke Graham,Plain text.
+sermons,sermons.title,Title,sermons[4].title,string,Jesus the Humble King,Plain text.
+sermons,sermons.audioUrl,Audio Url,sermons[5].audioUrl,url,https://www.saintjohnspark.org.uk/wp-content/uploads/2026/01/25-12-2025-Revd-Dominic-Wachira-Maina-Christmas-Day.mp3,"Use full URL (https://...), mailto:, or tel:."
+sermons,sermons.date,Date,sermons[5].date,string,2025-12-25,Plain text.
+sermons,sermons.description,Description,sermons[5].description,string,Christmas Day celebration.,Plain text.
+sermons,sermons.duration,Duration,sermons[5].duration,number,1800,Numeric value only.
+sermons,sermons.passage,Passage,sermons[5].passage,string,,Plain text.
+sermons,sermons.series,Series,sermons[5].series,string,Christmas,Plain text.
+sermons,sermons.speaker,Speaker,sermons[5].speaker,string,Revd Dominic Wachira Maina,Plain text.
+sermons,sermons.title,Title,sermons[5].title,string,Christmas Day,Plain text.
+sermons,sermons.audioUrl,Audio Url,sermons[6].audioUrl,url,https://www.saintjohnspark.org.uk/wp-content/uploads/2026/01/21-12-2025-Revd-Luke-Graham-Luke-1v26–38-Eternal-King.mp3,"Use full URL (https://...), mailto:, or tel:."
+sermons,sermons.date,Date,sermons[6].date,string,2025-12-21,Plain text.
+sermons,sermons.description,Description,sermons[6].description,string,Advent reflections on Jesus as the eternal King.,Plain text.
+sermons,sermons.duration,Duration,sermons[6].duration,number,1800,Numeric value only.
+sermons,sermons.passage,Passage,sermons[6].passage,string,Luke 1:26-38,Plain text.
+sermons,sermons.series,Series,sermons[6].series,string,Advent,Plain text.
+sermons,sermons.speaker,Speaker,sermons[6].speaker,string,Revd Luke Graham,Plain text.
+sermons,sermons.title,Title,sermons[6].title,string,Jesus the Eternal King,Plain text.
+sermons,sermons.audioUrl,Audio Url,sermons[7].audioUrl,url,https://www.saintjohnspark.org.uk/wp-content/uploads/2025/12/07-12-2025-Lucy-Uren-Genesis-3v8-19-Isaiah-9v2-7-Jesus-as-the-Light-Bringer.mp3,"Use full URL (https://...), mailto:, or tel:."
+sermons,sermons.date,Date,sermons[7].date,string,2025-12-07,Plain text.
+sermons,sermons.description,Description,sermons[7].description,string,Advent teaching on Jesus bringing light into darkness.,Plain text.
+sermons,sermons.duration,Duration,sermons[7].duration,number,1800,Numeric value only.
+sermons,sermons.passage,Passage,sermons[7].passage,string,Genesis 3:8-19; Isaiah 9:2-7,Plain text.
+sermons,sermons.series,Series,sermons[7].series,string,Advent,Plain text.
+sermons,sermons.speaker,Speaker,sermons[7].speaker,string,Lucy Uren,Plain text.
+sermons,sermons.title,Title,sermons[7].title,string,Jesus the Light Bringer,Plain text.
+sermons,sermons.audioUrl,Audio Url,sermons[8].audioUrl,url,https://www.saintjohnspark.org.uk/wp-content/uploads/2025/12/30-11-2025-Revd-Al-Munday-Genesis-3v8-19-What-child-is-this.mp3,"Use full URL (https://...), mailto:, or tel:."
+sermons,sermons.date,Date,sermons[8].date,string,2025-11-30,Plain text.
+sermons,sermons.description,Description,sermons[8].description,string,Advent series opening message.,Plain text.
+sermons,sermons.duration,Duration,sermons[8].duration,number,1800,Numeric value only.
+sermons,sermons.passage,Passage,sermons[8].passage,string,Genesis 3:8-19,Plain text.
+sermons,sermons.series,Series,sermons[8].series,string,Advent,Plain text.
+sermons,sermons.speaker,Speaker,sermons[8].speaker,string,Revd Al Munday,Plain text.
+sermons,sermons.title,Title,sermons[8].title,string,What Child Is This?,Plain text.

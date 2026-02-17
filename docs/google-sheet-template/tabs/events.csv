@@ -1,0 +1,10 @@
+group,section,label,path,type,value,notes
+pages,pages.events,About title,pages.events.about_title,string,About This Event,Plain text.
+pages,pages.events,Back link label,pages.events.back_link_label,string,← Back to What's On,Plain text.
+pages,pages.events,Fallback description html,pages.events.fallback_description_html,html,<p>More details for this event will be added soon.</p>,HTML allowed. Keep links as <a href='...'>text</a>.
+pages,pages.events,Fallback location,pages.events.fallback_location,string,St John's Park Church,Plain text.
+pages,pages.events,Image alt prefix,pages.events.image_alt_prefix,string,Event image,Plain text.
+pages,pages.events,Images title,pages.events.images_title,string,Event Images,Plain text.
+pages,pages.events,Date,pages.events.labels.date,string,Date,Plain text.
+pages,pages.events,Location,pages.events.labels.location,string,Location,Plain text.
+pages,pages.events,Time,pages.events.labels.time,string,Time,Plain text.

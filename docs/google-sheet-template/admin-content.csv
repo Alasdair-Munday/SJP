@@ -7,10 +7,12 @@ footer,footer.quick_links,Href,footer.quick_links[1].href,path,/whats-on,Use sit
 footer,footer.quick_links,Label,footer.quick_links[1].label,string,What's On,Plain text.
 footer,footer.quick_links,Href,footer.quick_links[2].href,path,/sermons,Use site-relative path starting with /.
 footer,footer.quick_links,Label,footer.quick_links[2].label,string,Talks,Plain text.
-footer,footer.quick_links,Href,footer.quick_links[3].href,path,/safeguarding,Use site-relative path starting with /.
-footer,footer.quick_links,Label,footer.quick_links[3].label,string,Safeguarding,Plain text.
-footer,footer.quick_links,Href,footer.quick_links[4].href,path,/contact,Use site-relative path starting with /.
-footer,footer.quick_links,Label,footer.quick_links[4].label,string,Contact,Plain text.
+footer,footer.quick_links,Href,footer.quick_links[3].href,path,/ministries,Use site-relative path starting with /.
+footer,footer.quick_links,Label,footer.quick_links[3].label,string,Ministries,Plain text.
+footer,footer.quick_links,Href,footer.quick_links[4].href,path,/safeguarding,Use site-relative path starting with /.
+footer,footer.quick_links,Label,footer.quick_links[4].label,string,Safeguarding,Plain text.
+footer,footer.quick_links,Href,footer.quick_links[5].href,path,/contact,Use site-relative path starting with /.
+footer,footer.quick_links,Label,footer.quick_links[5].label,string,Contact,Plain text.
 footer,footer.title,Title,footer.title,string,St John's Park,Plain text.
 navigation,navigation.href,Href,navigation[0].href,path,/sundays,Use site-relative path starting with /.
 navigation,navigation.label,Label,navigation[0].label,string,Sundays,Plain text.
@@ -18,16 +20,18 @@ navigation,navigation.href,Href,navigation[1].href,path,/sermons,Use site-relati
 navigation,navigation.label,Label,navigation[1].label,string,Talks,Plain text.
 navigation,navigation.href,Href,navigation[2].href,path,/whats-on,Use site-relative path starting with /.
 navigation,navigation.label,Label,navigation[2].label,string,What's On,Plain text.
-navigation,navigation.href,Href,navigation[3].href,path,/belong,Use site-relative path starting with /.
-navigation,navigation.label,Label,navigation[3].label,string,Belong,Plain text.
-navigation,navigation.href,Href,navigation[4].href,path,/serve,Use site-relative path starting with /.
-navigation,navigation.label,Label,navigation[4].label,string,Serve,Plain text.
-navigation,navigation.href,Href,navigation[5].href,path,/give,Use site-relative path starting with /.
-navigation,navigation.label,Label,navigation[5].label,string,Give,Plain text.
-navigation,navigation.href,Href,navigation[6].href,path,/team,Use site-relative path starting with /.
-navigation,navigation.label,Label,navigation[6].label,string,Team,Plain text.
-navigation,navigation.href,Href,navigation[7].href,path,/contact,Use site-relative path starting with /.
-navigation,navigation.label,Label,navigation[7].label,string,Contact,Plain text.
+navigation,navigation.href,Href,navigation[3].href,path,/ministries,Use site-relative path starting with /.
+navigation,navigation.label,Label,navigation[3].label,string,Ministries,Plain text.
+navigation,navigation.href,Href,navigation[4].href,path,/belong,Use site-relative path starting with /.
+navigation,navigation.label,Label,navigation[4].label,string,Belong,Plain text.
+navigation,navigation.href,Href,navigation[5].href,path,/serve,Use site-relative path starting with /.
+navigation,navigation.label,Label,navigation[5].label,string,Serve,Plain text.
+navigation,navigation.href,Href,navigation[6].href,path,/give,Use site-relative path starting with /.
+navigation,navigation.label,Label,navigation[6].label,string,Give,Plain text.
+navigation,navigation.href,Href,navigation[7].href,path,/team,Use site-relative path starting with /.
+navigation,navigation.label,Label,navigation[7].label,string,Team,Plain text.
+navigation,navigation.href,Href,navigation[8].href,path,/contact,Use site-relative path starting with /.
+navigation,navigation.label,Label,navigation[8].label,string,Contact,Plain text.
 pages,pages.belong,Description,pages.belong.highlights[0].description,string,Groups for children aged 1-11 during Sunday gatherings.,Plain text.
 pages,pages.belong,Href,pages.belong.highlights[0].href,path,/park-kids,Use site-relative path starting with /.
 pages,pages.belong,Title,pages.belong.highlights[0].title,string,Park Kids,Plain text.
@@ -57,7 +61,7 @@ pages,pages.contact,Src,pages.contact.find_us.image.src,path,/images/community-p
 pages,pages.contact,Href,pages.contact.find_us.maps_link.href,url,"https://maps.google.com/?q=Bernard+Street,+Sheffield,+S2+5PU","Use full URL (https://...), mailto:, or tel:."
 pages,pages.contact,Label,pages.contact.find_us.maps_link.label,string,Open in Google Maps,Plain text.
 pages,pages.contact,Paragraphs 1,pages.contact.find_us.paragraphs[0],string,"The address of the church is Bernard Street, Sheffield, S2 5PU.",Plain text.
-pages,pages.contact,Paragraphs 2,pages.contact.find_us.paragraphs[1],html,General enquiries: <a href='mailto:StJohnsPark@outlook.com' class='underline decoration-[var(--eden)] underline-offset-4'>StJohnsPark@outlook.com</a>,HTML allowed. Keep links as <a href='...'>text</a>.
+pages,pages.contact,Paragraphs 2,pages.contact.find_us.paragraphs[1],html,General enquiries: <a href='mailto:hello@saintjohnspark.org' class='underline decoration-[var(--eden)] underline-offset-4'>hello@saintjohnspark.org</a>,HTML allowed. Keep links as <a href='...'>text</a>.
 pages,pages.contact,Heading,pages.contact.parking.heading,string,Parking,Plain text.
 pages,pages.contact,Paragraphs 1,pages.contact.parking.paragraphs[0],string,We have a steep driveway to a car park just off Bernard Street with limited parking.,Plain text.
 pages,pages.contact,Paragraphs 2,pages.contact.parking.paragraphs[1],string,"Overflow parking is available in the car park behind the flats at the top of the church grounds. From Bernard Street, turn onto Cricket Inn Road, then the first major right onto Maltravers Road, then right again onto St John's Street. Follow the road to the end of the car park and use the public footpath through the old churchyard to reach church.",Plain text.
@@ -77,7 +81,7 @@ pages,pages.give,Heading,pages.give.bank_details.heading,string,Bank Details,Pla
 pages,pages.give,Lines 1,pages.give.bank_details.lines[0],string,Account Name: ST JOHNS PARK P C C,Plain text.
 pages,pages.give,Lines 2,pages.give.bank_details.lines[1],string,Sort Code: 20-76-89,Plain text.
 pages,pages.give,Lines 3,pages.give.bank_details.lines[2],string,Account Number: 60362786,Plain text.
-pages,pages.give,Contact html,pages.give.contact_html,html,"For more information, contact Catherine at <a class='underline decoration-[var(--eden)] underline-offset-4' href='mailto:StJohnsPark@outlook.com'>StJohnsPark@outlook.com</a>.",HTML allowed. Keep links as <a href='...'>text</a>.
+pages,pages.give,Contact html,pages.give.contact_html,html,"For more information, contact us at <a class='underline decoration-[var(--eden)] underline-offset-4' href='mailto:hello@saintjohnspark.org'>hello@saintjohnspark.org</a>.",HTML allowed. Keep links as <a href='...'>text</a>.
 pages,pages.give,Generosity paragraph,pages.give.generosity_paragraph,string,"Your generosity allows us to build and sustain our Sunday gatherings, midweek ministries, and serve our city. Thank you for giving to St John's.",Plain text.
 pages,pages.give,Methods heading,pages.give.methods_heading,string,Here are the best ways for you to give:,Plain text.
 pages,pages.give,Methods 1,pages.give.methods[0],string,Via the Online Parish Giving Scheme.,Plain text.
@@ -136,6 +140,43 @@ pages,pages.life_events,Label,pages.life_events.links[0].label,string,melksham.c
 pages,pages.life_events,Href,pages.life_events.links[1].href,url,https://www.stjohnschap.co.uk/what-we-do/celebrating-new-birth/,"Use full URL (https://...), mailto:, or tel:."
 pages,pages.life_events,Label,pages.life_events.links[1].label,string,stjohnschap.co.uk/what-we-do/celebrating-new-birth,Plain text.
 pages,pages.life_events,Title,pages.life_events.title,string,Life Events,Plain text.
+pages,pages.ministries,Heading,pages.ministries.groups[0].heading,string,Children and Young People,Plain text.
+pages,pages.ministries,Description,pages.ministries.groups[0].items[0].description,string,"Sunday groups for children aged 1-11 with Bible teaching, prayer, and activities.",Plain text.
+pages,pages.ministries,Href,pages.ministries.groups[0].items[0].href,path,/park-kids,Use site-relative path starting with /.
+pages,pages.ministries,Link label,pages.ministries.groups[0].items[0].link_label,string,Visit Park Kids,Plain text.
+pages,pages.ministries,Title,pages.ministries.groups[0].items[0].title,string,Park Kids,Plain text.
+pages,pages.ministries,Description,pages.ministries.groups[0].items[1].description,string,Cornerstone midweek and Sunday youth discipleship for secondary school age.,Plain text.
+pages,pages.ministries,Href,pages.ministries.groups[0].items[1].href,path,/park-youth,Use site-relative path starting with /.
+pages,pages.ministries,Link label,pages.ministries.groups[0].items[1].link_label,string,Visit Park Youth,Plain text.
+pages,pages.ministries,Title,pages.ministries.groups[0].items[1].title,string,Park Youth,Plain text.
+pages,pages.ministries,Heading,pages.ministries.groups[1].heading,string,Community and Discipleship,Plain text.
+pages,pages.ministries,Description,pages.ministries.groups[1].items[0].description,string,"Midweek communities for Scripture, prayer, friendship, and local mission.",Plain text.
+pages,pages.ministries,Href,pages.ministries.groups[1].items[0].href,path,/park-communities,Use site-relative path starting with /.
+pages,pages.ministries,Link label,pages.ministries.groups[1].items[0].link_label,string,Visit Park Communities,Plain text.
+pages,pages.ministries,Title,pages.ministries.groups[1].items[0].title,string,Park Communities,Plain text.
+pages,pages.ministries,Description,pages.ministries.groups[1].items[1].description,string,Weekly emergency food support in partnership with local agencies.,Plain text.
+pages,pages.ministries,Href,pages.ministries.groups[1].items[1].href,path,/whats-on#foodbank,Use site-relative path starting with /.
+pages,pages.ministries,Link label,pages.ministries.groups[1].items[1].link_label,string,Food Bank details,Plain text.
+pages,pages.ministries,Title,pages.ministries.groups[1].items[1].title,string,Food Bank,Plain text.
+pages,pages.ministries,Description,pages.ministries.groups[1].items[2].description,string,"Weekly free lunch, conversation, and welcome for local residents.",Plain text.
+pages,pages.ministries,Href,pages.ministries.groups[1].items[2].href,path,/whats-on#lunch-club,Use site-relative path starting with /.
+pages,pages.ministries,Link label,pages.ministries.groups[1].items[2].link_label,string,Lunch Club details,Plain text.
+pages,pages.ministries,Title,pages.ministries.groups[1].items[2].title,string,Lunch Club,Plain text.
+pages,pages.ministries,Heading,pages.ministries.groups[2].heading,string,Serving Teams,Plain text.
+pages,pages.ministries,Description,pages.ministries.groups[2].items[0].description,string,Help people feel at home from the moment they arrive.,Plain text.
+pages,pages.ministries,Href,pages.ministries.groups[2].items[0].href,path,/serve#welcome-and-hospitality,Use site-relative path starting with /.
+pages,pages.ministries,Link label,pages.ministries.groups[2].items[0].link_label,string,Join this team,Plain text.
+pages,pages.ministries,Title,pages.ministries.groups[2].items[0].title,string,Welcome and Hospitality,Plain text.
+pages,pages.ministries,Description,pages.ministries.groups[2].items[1].description,string,Lead the church family in sung worship and prayer.,Plain text.
+pages,pages.ministries,Href,pages.ministries.groups[2].items[1].href,path,/serve#worship,Use site-relative path starting with /.
+pages,pages.ministries,Link label,pages.ministries.groups[2].items[1].link_label,string,Join this team,Plain text.
+pages,pages.ministries,Title,pages.ministries.groups[2].items[1].title,string,Worship,Plain text.
+pages,pages.ministries,Description,pages.ministries.groups[2].items[2].description,string,"Use media, visuals, and sound to support church life and communication.",Plain text.
+pages,pages.ministries,Href,pages.ministries.groups[2].items[2].href,path,/serve#creative,Use site-relative path starting with /.
+pages,pages.ministries,Link label,pages.ministries.groups[2].items[2].link_label,string,Join this team,Plain text.
+pages,pages.ministries,Title,pages.ministries.groups[2].items[2].title,string,Creative and Production,Plain text.
+pages,pages.ministries,Intro,pages.ministries.intro,string,"Find the right place to connect, grow, and serve. Each ministry below has a dedicated landing page with full details.",Plain text.
+pages,pages.ministries,Title,pages.ministries.title,string,Ministries,Plain text.
 pages,pages.park_communities,Cta html,pages.park_communities.cta_html,html,Ready to join a community? <a href='/contact' class='underline decoration-[var(--eden)] underline-offset-4'>Contact us</a> and we will help find the right group.,HTML allowed. Keep links as <a href='...'>text</a>.
 pages,pages.park_communities,Heading,pages.park_communities.midweek.heading,string,Midweek Communities,Plain text.
 pages,pages.park_communities,Alt,pages.park_communities.midweek.images[0].alt,string,Community gathering in the park,Plain text.
@@ -191,7 +232,7 @@ pages,pages.park_youth,Paragraphs 1,pages.park_youth.sunday_study.paragraphs[0],
 pages,pages.park_youth,Paragraphs 2,pages.park_youth.sunday_study.paragraphs[1],string,"Our heart is to help young people know Jesus, grow in faith, and play a full part in church life.",Plain text.
 pages,pages.park_youth,Title,pages.park_youth.title,string,Park Youth,Plain text.
 pages,pages.safeguarding,Paragraphs 1,pages.safeguarding.paragraphs[0],string,St John's is committed to high standards in the safeguarding and care of children and vulnerable adults.,Plain text.
-pages,pages.safeguarding,Paragraphs 2,pages.safeguarding.paragraphs[1],html,"To request our safeguarding policy, please <a href='/contact' class='underline decoration-[var(--eden)] underline-offset-4'>contact us</a>.",HTML allowed. Keep links as <a href='...'>text</a>.
+pages,pages.safeguarding,Paragraphs 2,pages.safeguarding.paragraphs[1],html,Download our safeguarding policy: <a href='https://www.saintjohnspark.org.uk/wp-content/uploads/2025/08/St-Johns-Safeguarding-Policy-2025-2.docx' class='underline decoration-[var(--eden)] underline-offset-4'>St John's Safeguarding Policy 2025 (DOCX)</a>.,HTML allowed. Keep links as <a href='...'>text</a>.
 pages,pages.safeguarding,Paragraphs 3,pages.safeguarding.paragraphs[2],html,"The Diocese of Sheffield's Safeguarding Adviser is Siân Checkley. Contact: 01709 309100 or 07741 013775, or email <a href='mailto:sian.checkley@sheffield.anglican.org' class='underline decoration-[var(--eden)] underline-offset-4'>sian.checkley@sheffield.anglican.org</a>.",HTML allowed. Keep links as <a href='...'>text</a>.
 pages,pages.safeguarding,Paragraphs 4,pages.safeguarding.paragraphs[3],html,Diocese safeguarding information: <a href='https://www.sheffield.anglican.org/support/safeguarding' class='underline decoration-[var(--eden)] underline-offset-4'>sheffield.anglican.org/support/safeguarding</a>,HTML allowed. Keep links as <a href='...'>text</a>.
 pages,pages.safeguarding,Title,pages.safeguarding.title,string,Safeguarding,Plain text.
@@ -204,14 +245,14 @@ pages,pages.serve,Intro,pages.serve.intro,string,"We are a church family, and we
 pages,pages.serve,Outro html,pages.serve.outro_html,html,Interested in joining a team? Please <a href='/contact' class='underline decoration-[var(--eden)] underline-offset-4'>get in touch</a>.,HTML allowed. Keep links as <a href='...'>text</a>.
 pages,pages.serve,Description,pages.serve.teams[0].description,string,"Our welcome and hospitality team create the family environment we love at St John's Park. They welcome people at the door, serve refreshments, and make sure everyone receives a warm welcome.",Plain text.
 pages,pages.serve,Name,pages.serve.teams[0].name,string,Welcome and Hospitality,Plain text.
-pages,pages.serve,Description,pages.serve.teams[1].description,string,"Our Kids team disciples the youngest generation in our church, from under-5s through primary-aged children.",Plain text.
-pages,pages.serve,Name,pages.serve.teams[1].name,string,Kids,Plain text.
+pages,pages.serve,Description,pages.serve.teams[1].description,string,"Our Park Kids team disciples the youngest generation in our church, from under-5s through primary-aged children.",Plain text.
+pages,pages.serve,Name,pages.serve.teams[1].name,string,Park Kids Team,Plain text.
 pages,pages.serve,Description,pages.serve.teams[2].description,string,"We disciple young people through Sunday Bible study and our midweek youth group Cornerstone, helping them meet and grow in relationship with Jesus.",Plain text.
-pages,pages.serve,Name,pages.serve.teams[2].name,string,Youth,Plain text.
+pages,pages.serve,Name,pages.serve.teams[2].name,string,Park Youth Team,Plain text.
 pages,pages.serve,Description,pages.serve.teams[3].description,string,Our worship team helps us encounter God's presence and give him praise.,Plain text.
 pages,pages.serve,Name,pages.serve.teams[3].name,string,Worship,Plain text.
-pages,pages.serve,Description,pages.serve.teams[4].description,string,"Our Foodbank team serves local people in crisis, providing food parcels and a listening, friendly ear.",Plain text.
-pages,pages.serve,Name,pages.serve.teams[4].name,string,Foodbank,Plain text.
+pages,pages.serve,Description,pages.serve.teams[4].description,string,"Our Food Bank team serves local people in crisis, providing food parcels and a listening, friendly ear.",Plain text.
+pages,pages.serve,Name,pages.serve.teams[4].name,string,Food Bank,Plain text.
 pages,pages.serve,Description,pages.serve.teams[5].description,string,"Our lunch club team helps serve lunch and build relationships in this richly diverse, lively community.",Plain text.
 pages,pages.serve,Name,pages.serve.teams[5].name,string,Lunch Club,Plain text.
 pages,pages.serve,Description,pages.serve.teams[6].description,string,Our cleaning team enables us to welcome people into the building during the week and gather together on Sundays.,Plain text.
@@ -227,7 +268,7 @@ pages,pages.sundays,After service,pages.sundays.after_service,string,Please join
 pages,pages.sundays,Description,pages.sundays.description,string,"Join us for our Sunday gathering every week at 10:45am. We gather to worship Jesus, hear the Bible read and explained, and to pray.",Plain text.
 pages,pages.sundays,Alt,pages.sundays.image.alt,string,Worship team singing during a Sunday gathering,Plain text.
 pages,pages.sundays,Src,pages.sundays.image.src,path,/images/worship-flags.jpg,Use site-relative path starting with /.
-pages,pages.sundays,Kids blurb,pages.sundays.kids_blurb,string,We have Kids and Youth groups (0-14) that meet during our service.,Plain text.
+pages,pages.sundays,Kids blurb,pages.sundays.kids_blurb,string,We have Park Kids and Park Youth groups (0-14) that meet during our service.,Plain text.
 pages,pages.sundays,Kids heading,pages.sundays.kids_heading,string,Bringing Kids?,Plain text.
 pages,pages.sundays,Location,pages.sundays.location,string,"St John's Park, Bernard Street, Sheffield, S2 5PU",Plain text.
 pages,pages.sundays,Location label,pages.sundays.location_label,string,Location,Plain text.
@@ -243,20 +284,34 @@ pages,pages.sundays,What to expect heading,pages.sundays.what_to_expect_heading,
 pages,pages.sundays,What to expect items 1,pages.sundays.what_to_expect_items[0],string,Services are usually a little over one hour.,Plain text.
 pages,pages.sundays,What to expect items 2,pages.sundays.what_to_expect_items[1],string,"We sing together, read Scripture, hear Bible teaching, and pray.",Plain text.
 pages,pages.sundays,What to expect items 3,pages.sundays.what_to_expect_items[2],string,"On the first Sunday of each month, we share Communion.",Plain text.
-pages,pages.team,Heading,pages.team.staff_team.heading,string,St John's Staff Team,Plain text.
-pages,pages.team,Email,pages.team.staff_team.members[0].email,string,luke@saintjohnspark.org,Plain text.
-pages,pages.team,Name,pages.team.staff_team.members[0].name,string,Revd Luke Graham,Plain text.
-pages,pages.team,Phone,pages.team.staff_team.members[0].phone,string,07538 172907,Plain text.
-pages,pages.team,Phone href,pages.team.staff_team.members[0].phone_href,url,tel:+447538172907,"Use full URL (https://...), mailto:, or tel:."
-pages,pages.team,Role,pages.team.staff_team.members[0].role,string,is the Priest in Charge.,Plain text.
-pages,pages.team,Email,pages.team.staff_team.members[1].email,string,kirsty.dronfield@centenaryproject.org.uk,Plain text.
-pages,pages.team,Name,pages.team.staff_team.members[1].name,string,Kirsty Dronfield,Plain text.
-pages,pages.team,Role,pages.team.staff_team.members[1].role,string,is our Centenary Project Children and Families' Leader.,Plain text.
+pages,pages.team,Intro,pages.team.intro,string,"Our leadership and ministry team serve the church family in worship, discipleship, and community mission.",Plain text.
+pages,pages.team,Bio,pages.team.members[0].bio,string,"Luke leads the vision and teaching life of St John's Park and helps shape our mission in Park, Sheffield.",Plain text.
+pages,pages.team,Email,pages.team.members[0].email,string,luke@saintjohnspark.org,Plain text.
+pages,pages.team,Alt,pages.team.members[0].image.alt,string,Revd Luke Graham standing outside St John's Park,Plain text.
+pages,pages.team,Src,pages.team.members[0].image.src,path,/images/PXL_20250814_104140063.PORTRAIT.jpg,Use site-relative path starting with /.
+pages,pages.team,Name,pages.team.members[0].name,string,Revd Luke Graham,Plain text.
+pages,pages.team,Phone,pages.team.members[0].phone,string,07538 172907,Plain text.
+pages,pages.team,Phone href,pages.team.members[0].phone_href,url,tel:+447538172907,"Use full URL (https://...), mailto:, or tel:."
+pages,pages.team,Role,pages.team.members[0].role,string,Priest in Charge,Plain text.
+pages,pages.team,Bio,pages.team.members[1].bio,string,Kirsty helps children and families grow in faith through Park Kids and wider family support across church life.,Plain text.
+pages,pages.team,Email,pages.team.members[1].email,string,kirsty.dronfield@centenaryproject.org.uk,Plain text.
+pages,pages.team,Alt,pages.team.members[1].image.alt,string,Kirsty Dronfield smiling in the church grounds,Plain text.
+pages,pages.team,Src,pages.team.members[1].image.src,path,/images/PXL_20250814_104214012.PORTRAIT.jpg,Use site-relative path starting with /.
+pages,pages.team,Name,pages.team.members[1].name,string,Kirsty Dronfield,Plain text.
+pages,pages.team,Role,pages.team.members[1].role,string,Children and Families' Leader,Plain text.
+pages,pages.team,Bio,pages.team.members[2].bio,string,"Faustina serves as churchwarden, supporting pastoral care and practical leadership across the congregation.",Plain text.
+pages,pages.team,Email,pages.team.members[2].email,string,hello@saintjohnspark.org,Plain text.
+pages,pages.team,Alt,pages.team.members[2].image.alt,string,Faustina Nyame in the church hall,Plain text.
+pages,pages.team,Src,pages.team.members[2].image.src,path,/images/PXL_20250814_104234358.PORTRAIT.jpg,Use site-relative path starting with /.
+pages,pages.team,Name,pages.team.members[2].name,string,Faustina Nyame,Plain text.
+pages,pages.team,Role,pages.team.members[2].role,string,Churchwarden,Plain text.
+pages,pages.team,Bio,pages.team.members[3].bio,string,"Bess serves the church as a churchwarden and lay reader, helping lead worship and nurture discipleship.",Plain text.
+pages,pages.team,Email,pages.team.members[3].email,string,hello@saintjohnspark.org,Plain text.
+pages,pages.team,Alt,pages.team.members[3].image.alt,string,Elizabeth Cooper in the churchyard,Plain text.
+pages,pages.team,Src,pages.team.members[3].image.src,path,/images/PXL_20250814_104143091.PORTRAIT.jpg,Use site-relative path starting with /.
+pages,pages.team,Name,pages.team.members[3].name,string,Elizabeth (Bess) Cooper,Plain text.
+pages,pages.team,Role,pages.team.members[3].role,string,Churchwarden and Lay Reader,Plain text.
 pages,pages.team,Title,pages.team.title,string,Meet the Team,Plain text.
-pages,pages.team,Heading,pages.team.wardens.heading,string,Churchwardens and PCC,Plain text.
-pages,pages.team,Paragraphs 1,pages.team.wardens.paragraphs[0],html,<strong>Faustina Nyame</strong> is one of our churchwardens.,HTML allowed. Keep links as <a href='...'>text</a>.
-pages,pages.team,Paragraphs 2,pages.team.wardens.paragraphs[1],html,<strong>Elizabeth (Bess) Cooper</strong> is also a churchwarden and a Lay Reader.,HTML allowed. Keep links as <a href='...'>text</a>.
-pages,pages.team,Paragraphs 3,pages.team.wardens.paragraphs[2],string,Our PCC serves and supports the life and leadership of the church.,Plain text.
 pages,pages.the_park,Alt,pages.the_park.featured_photo.alt,string,Baptism Celebration,Plain text.
 pages,pages.the_park,Label,pages.the_park.featured_photo.label,string,New Life,Plain text.
 pages,pages.the_park,Src,pages.the_park.featured_photo.src,path,/images/baptism.jpg,Use site-relative path starting with /.
@@ -283,14 +338,18 @@ pages,pages.what_we_believe,Paragraphs 1,pages.what_we_believe.paragraphs[0],str
 pages,pages.what_we_believe,Paragraphs 2,pages.what_we_believe.paragraphs[1],string,"Our faith is well summarized in the Apostles' Creed, shared by Christians around the world through the centuries.",Plain text.
 pages,pages.what_we_believe,Paragraphs 3,pages.what_we_believe.paragraphs[2],string,"We believe in God the Father, in Jesus Christ his Son, and in the Holy Spirit; in forgiveness, resurrection, and eternal life in Christ.",Plain text.
 pages,pages.what_we_believe,Title,pages.what_we_believe.title,string,What We Believe,Plain text.
-pages,pages.whats_on,Description,pages.whats_on.foodbank.description,string,"If you are in crisis, we can provide an emergency food parcel and practical support. Citizens Advice and Debt Support workers are available during sessions for those with referrals.",Plain text.
-pages,pages.whats_on,Heading,pages.whats_on.foodbank.heading,string,Foodbank,Plain text.
-pages,pages.whats_on,Referrals heading,pages.whats_on.foodbank.referrals_heading,string,Referral numbers:,Plain text.
-pages,pages.whats_on,Referrals 1,pages.whats_on.foodbank.referrals[0],string,"Help Through Hardship: 0808 208 2138 (Mon-Fri, 9:00am-5:00pm)",Plain text.
-pages,pages.whats_on,Referrals 2,pages.whats_on.foodbank.referrals[1],string,"Citizens Advice Sheffield: 0808 278 7820 (Mon-Fri, 10:00am-4:00pm, option 4)",Plain text.
-pages,pages.whats_on,Referrals 3,pages.whats_on.foodbank.referrals[2],string,"Sheffield S6 helpline: 0114 321 0733 (Mon-Fri, 10:00am-1:00pm)",Plain text.
-pages,pages.whats_on,Time,pages.whats_on.foodbank.time,string,Monday 10:00am-12:00pm,Plain text.
-pages,pages.whats_on,Volunteer html,pages.whats_on.foodbank.volunteer_html,html,Interested in volunteering? Contact Hannah at <a href='mailto:hannah@saintjohnspark.org' class='underline decoration-[var(--eden)] underline-offset-4'>hannah@saintjohnspark.org</a>.,HTML allowed. Keep links as <a href='...'>text</a>.
+pages,pages.whats_on,Description,pages.whats_on.foodbank.description,string,The St John's Park food bank is provided in collaboration with Sheffield Food and Community Trust and Trussell.,Plain text.
+pages,pages.whats_on,Heading,pages.whats_on.foodbank.heading,string,Food Bank,Plain text.
+pages,pages.whats_on,Referral policy,pages.whats_on.foodbank.referral_policy,string,"The food bank is accessible by referral only, and provides an emergency parcel for those in food crisis.",Plain text.
+pages,pages.whats_on,Referrals heading,pages.whats_on.foodbank.referrals_heading,string,To request a referral for a food parcel call either:,Plain text.
+pages,pages.whats_on,Referrals 1,pages.whats_on.foodbank.referrals[0],string,Help Through Hardship: 08082082138 Monday to Friday 9am - 5pm. Translators available.,Plain text.
+pages,pages.whats_on,Referrals 2,pages.whats_on.foodbank.referrals[1],string,Citizens Advice Sheffield: 08082787820 Monday to Friday 10am - 4pm. Select option 4 for Advice Line.,Plain text.
+pages,pages.whats_on,Referrals 3,pages.whats_on.foodbank.referrals[2],string,Sheffield S6 helpline: 0114 321 0733 Monday to Friday 10am-1pm.,Plain text.
+pages,pages.whats_on,Support description,pages.whats_on.foodbank.support_description,string,"At the food bank, we offer support with more than just food; Citizens Advice and Debt Support workers are available during the food bank session for those with referrals.",Plain text.
+pages,pages.whats_on,Time,pages.whats_on.foodbank.time,string,Every Monday 10am - 12pm,Plain text.
+pages,pages.whats_on,Volunteer html,pages.whats_on.foodbank.volunteer_html,html,"If you are interested in volunteering at our food bank, please contact Hannah Graham for more information: <a href='mailto:hannah@saintjohnspark.org' class='underline decoration-[var(--eden)] underline-offset-4'>hannah@saintjohnspark.org</a>.",HTML allowed. Keep links as <a href='...'>text</a>.
+pages,pages.whats_on,Where,pages.whats_on.foodbank.where,string,"St John's Park, Bernard Street, S2 5PU",Plain text.
+pages,pages.whats_on,Who,pages.whats_on.foodbank.who,string,Anyone with a referral from a support worker or agency,Plain text.
 pages,pages.whats_on,Import calendar label,pages.whats_on.import_calendar_label,string,Import Calendar,Plain text.
 pages,pages.whats_on,Description,pages.whats_on.lunch_club.description,string,"Join us every Monday for soup, bread, a hot drink, and a chat. All are welcome, and it is free.",Plain text.
 pages,pages.whats_on,Heading,pages.whats_on.lunch_club.heading,string,Lunch Club,Plain text.

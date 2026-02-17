@@ -1,0 +1,16 @@
+group,section,label,path,type,value,notes
+pages,pages.park_communities,Cta html,pages.park_communities.cta_html,html,Ready to join a community? <a href='/contact' class='underline decoration-[var(--eden)] underline-offset-4'>Contact us</a> and we will help find the right group.,HTML allowed. Keep links as <a href='...'>text</a>.
+pages,pages.park_communities,Heading,pages.park_communities.midweek.heading,string,Midweek Communities,Plain text.
+pages,pages.park_communities,Alt,pages.park_communities.midweek.images[0].alt,string,Community gathering in the park,Plain text.
+pages,pages.park_communities,Src,pages.park_communities.midweek.images[0].src,path,/images/community-park-gathering-1.jpg,Use site-relative path starting with /.
+pages,pages.park_communities,Alt,pages.park_communities.midweek.images[1].alt,string,Church and community gathering in the grounds,Plain text.
+pages,pages.park_communities,Src,pages.park_communities.midweek.images[1].src,path,/images/community-park-gathering-2.jpg,Use site-relative path starting with /.
+pages,pages.park_communities,Paragraphs 1,pages.park_communities.midweek.paragraphs[0],string,Park Communities are smaller groups that meet during the week to help us grow as disciples of Jesus in everyday life.,Plain text.
+pages,pages.park_communities,Paragraphs 2,pages.park_communities.midweek.paragraphs[1],string,"Most groups meet weekly to read God's Word, pray, and encourage one another in faith.",Plain text.
+pages,pages.park_communities,Heading,pages.park_communities.rhythm.heading,string,Our Rhythm,Plain text.
+pages,pages.park_communities,Alt,pages.park_communities.rhythm.image.alt,string,Community singing together outside church at Christmas,Plain text.
+pages,pages.park_communities,Src,pages.park_communities.rhythm.image.src,path,/images/carols-doorstep.jpg,Use site-relative path starting with /.
+pages,pages.park_communities,Items 1,pages.park_communities.rhythm.items[0],html,<strong>Up:</strong> Seeking God in prayer and Scripture.,HTML allowed. Keep links as <a href='...'>text</a>.
+pages,pages.park_communities,Items 2,pages.park_communities.rhythm.items[1],html,<strong>In:</strong> Supporting and encouraging one another.,HTML allowed. Keep links as <a href='...'>text</a>.
+pages,pages.park_communities,Items 3,pages.park_communities.rhythm.items[2],html,<strong>Out:</strong> Serving our local community.,HTML allowed. Keep links as <a href='...'>text</a>.
+pages,pages.park_communities,Title,pages.park_communities.title,string,Park Communities,Plain text.

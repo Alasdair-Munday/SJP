@@ -1,0 +1,21 @@
+group,section,label,path,type,value,notes
+pages,pages.sundays,After service,pages.sundays.after_service,string,Please join us for refreshments afterwards to hang out as church family.,Plain text.
+pages,pages.sundays,Description,pages.sundays.description,string,"Join us for our Sunday gathering every week at 10:45am. We gather to worship Jesus, hear the Bible read and explained, and to pray.",Plain text.
+pages,pages.sundays,Alt,pages.sundays.image.alt,string,Worship team singing during a Sunday gathering,Plain text.
+pages,pages.sundays,Src,pages.sundays.image.src,path,/images/worship-flags.jpg,Use site-relative path starting with /.
+pages,pages.sundays,Kids blurb,pages.sundays.kids_blurb,string,We have Park Kids and Park Youth groups (0-14) that meet during our service.,Plain text.
+pages,pages.sundays,Kids heading,pages.sundays.kids_heading,string,Bringing Kids?,Plain text.
+pages,pages.sundays,Location,pages.sundays.location,string,"St John's Park, Bernard Street, Sheffield, S2 5PU",Plain text.
+pages,pages.sundays,Location label,pages.sundays.location_label,string,Location,Plain text.
+pages,pages.sundays,Service style,pages.sundays.service_style,string,"Our Sunday gathering is informal and interactive, with contemporary worship songs.",Plain text.
+pages,pages.sundays,Talks link href,pages.sundays.talks_link_href,path,/sermons,Use site-relative path starting with /.
+pages,pages.sundays,Talks link intro,pages.sundays.talks_link_intro,string,Catch up on talks from previous Sundays on our,Plain text.
+pages,pages.sundays,Talks link label,pages.sundays.talks_link_label,string,Talks page,Plain text.
+pages,pages.sundays,Time,pages.sundays.time,string,10:45 AM,Plain text.
+pages,pages.sundays,Time label,pages.sundays.time_label,string,Time,Plain text.
+pages,pages.sundays,Title line one,pages.sundays.title_line_one,string,SUNDAY,Plain text.
+pages,pages.sundays,Title line two,pages.sundays.title_line_two,string,GATHERING,Plain text.
+pages,pages.sundays,What to expect heading,pages.sundays.what_to_expect_heading,string,What to Expect,Plain text.
+pages,pages.sundays,What to expect items 1,pages.sundays.what_to_expect_items[0],string,Services are usually a little over one hour.,Plain text.
+pages,pages.sundays,What to expect items 2,pages.sundays.what_to_expect_items[1],string,"We sing together, read Scripture, hear Bible teaching, and pray.",Plain text.
+pages,pages.sundays,What to expect items 3,pages.sundays.what_to_expect_items[2],string,"On the first Sunday of each month, we share Communion.",Plain text.

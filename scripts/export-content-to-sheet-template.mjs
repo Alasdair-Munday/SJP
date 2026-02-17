@@ -4,8 +4,16 @@ import path from "node:path";
 const root = process.cwd();
 const contentPath = path.join(root, "src/data/content.json");
 const outDir = path.join(root, "docs/google-sheet-template");
+const tabsOutDir = path.join(outDir, "tabs");
 
 const content = JSON.parse(fs.readFileSync(contentPath, "utf8"));
+
+const adminHeader = ["group", "section", "label", "path", "type", "value", "notes"];
+const minimalHeader = ["path", "type", "value"];
+const sharedTabName = "shared";
+const sermonsTabName = "sermons_data";
+const pageTabOrder = Object.keys(content.pages ?? {});
+const adminTabOrder = [sharedTabName, ...pageTabOrder, sermonsTabName];
 
 const csvEscape = (value) => {
   const stringValue = String(value ?? "");
@@ -79,6 +87,46 @@ const sectionFromPath = (pathValue) => {
   return pieces.slice(0, 2).join(".") || pieces[0] || "content";
 };
 
+const resolveAdminTab = (pathValue) => {
+  if (pathValue.startsWith("pages.")) {
+    const [, pageKey] = pathValue.split(".");
+    if (pageTabOrder.includes(pageKey)) {
+      return pageKey;
+    }
+  }
+
+  if (/^sermons(\[|\.)/.test(pathValue)) {
+    return sermonsTabName;
+  }
+
+  return sharedTabName;
+};
+
+const rowsToCsvLines = (header, rows, mapRow) => {
+  const lines = [header.join(",")];
+  for (const row of rows) {
+    lines.push(mapRow(row).map(csvEscape).join(","));
+  }
+  return lines;
+};
+
+const contentSheetFormula = (() => {
+  const filterLines = adminTabOrder.map((tabName, index) => {
+    const separator = index < adminTabOrder.length - 1 ? ";" : "";
+    return `FILTER(${tabName}!A2:G, LEN(${tabName}!D2:D))${separator}`;
+  });
+
+  return [
+    '={"group","section","label","path","type","value","notes";',
+    "SORT(",
+    "{",
+    ...filterLines,
+    "},",
+    "4, TRUE",
+    ")}",
+  ].join("\n");
+})();
+
 const rows = [];
 
 const walk = (value, pathPrefix) => {
@@ -109,32 +157,28 @@ const walk = (value, pathPrefix) => {
 
 walk(content, "");
 rows.sort((a, b) => a.path.localeCompare(b.path));
-
-const adminHeader = ["group", "section", "label", "path", "type", "value", "notes"];
-const adminLines = [adminHeader.join(",")];
+const adminLines = rowsToCsvLines(adminHeader, rows, (row) => [
+  row.group,
+  row.section,
+  row.label,
+  row.path,
+  row.type,
+  row.value,
+  row.notes,
+]);
+const minimalLines = rowsToCsvLines(minimalHeader, rows, (row) => [
+  row.path,
+  row.type,
+  row.value,
+]);
+const tabRows = Object.fromEntries(adminTabOrder.map((tabName) => [tabName, []]));
 for (const row of rows) {
-  adminLines.push(
-    [
-      row.group,
-      row.section,
-      row.label,
-      row.path,
-      row.type,
-      row.value,
-      row.notes,
-    ]
-      .map(csvEscape)
-      .join(","),
-  );
-}
-
-const minimalHeader = ["path", "type", "value"];
-const minimalLines = [minimalHeader.join(",")];
-for (const row of rows) {
-  minimalLines.push([row.path, row.type, row.value].map(csvEscape).join(","));
+  tabRows[resolveAdminTab(row.path)].push(row);
 }
 
 fs.mkdirSync(outDir, { recursive: true });
+fs.rmSync(tabsOutDir, { recursive: true, force: true });
+fs.mkdirSync(tabsOutDir, { recursive: true });
 fs.writeFileSync(
   path.join(outDir, "admin-content.csv"),
   `${adminLines.join("\n")}\n`,
@@ -143,6 +187,26 @@ fs.writeFileSync(
   path.join(outDir, "content.csv"),
   `${minimalLines.join("\n")}\n`,
 );
+for (const tabName of adminTabOrder) {
+  const lines = rowsToCsvLines(adminHeader, tabRows[tabName], (row) => [
+    row.group,
+    row.section,
+    row.label,
+    row.path,
+    row.type,
+    row.value,
+    row.notes,
+  ]);
+
+  fs.writeFileSync(path.join(tabsOutDir, `${tabName}.csv`), `${lines.join("\n")}\n`);
+}
+fs.writeFileSync(path.join(outDir, "content-formula.txt"), `${contentSheetFormula}\n`);
 
 console.log(`Wrote ${rows.length} rows to docs/google-sheet-template/admin-content.csv`);
 console.log(`Wrote ${rows.length} rows to docs/google-sheet-template/content.csv`);
+for (const tabName of adminTabOrder) {
+  console.log(
+    `Wrote ${tabRows[tabName].length} rows to docs/google-sheet-template/tabs/${tabName}.csv`,
+  );
+}
+console.log("Wrote formula to docs/google-sheet-template/content-formula.txt");

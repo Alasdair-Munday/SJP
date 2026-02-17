@@ -1,24 +1,67 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
+import { Mail, Phone } from "lucide-react";
+import { getSiteContent } from "../data/site-content";
+
+const content = await getSiteContent();
+const page = content.pages.team;
 ---
 
-<Layout title="Team">
-  <div class="max-w-5xl mx-auto px-4 py-20 space-y-8">
-    <h1 class="theme-display-font text-5xl md:text-6xl font-bold text-(--ink)">Meet the Team</h1>
+<Layout title={page.title}>
+	<div class="max-w-7xl mx-auto px-4 py-20 space-y-10">
+		<div class="space-y-3">
+			<h1 class="heading-eden-gold theme-display-font text-5xl md:text-6xl font-bold">
+				{page.title}
+			</h1>
+			<p class="text-xl text-(--ink)/85 max-w-4xl">{page.intro}</p>
+		</div>
 
-    <section class="bg-white border-2 border-(--ink) p-8 space-y-4">
-      <h2 class="text-3xl font-bold text-(--ink)">St John's Staff Team</h2>
-      <div class="space-y-4 text-(--ink)/90">
-        <p><strong>Revd Luke Graham</strong> is the Priest in Charge.<br/>Email: <a href="mailto:luke@saintjohnspark.org" class="underline decoration-(--eden) underline-offset-4">luke@saintjohnspark.org</a><br/>Telephone: <a href="tel:+447538172907" class="underline decoration-(--eden) underline-offset-4">07538 172907</a></p>
-        <p><strong>Kirsty Dronfield</strong> is our Centenary Project Children and Families' Leader.<br/>Email: <a href="mailto:kirsty.dronfield@centenaryproject.org.uk" class="underline decoration-(--eden) underline-offset-4">kirsty.dronfield@centenaryproject.org.uk</a></p>
-      </div>
-    </section>
-
-    <section class="bg-white border-2 border-(--ink) p-8 space-y-3">
-      <h2 class="text-3xl font-bold text-(--ink)">Churchwardens and PCC</h2>
-      <p class="text-(--ink)/90"><strong>Faustina Nyame</strong> is one of our churchwardens.</p>
-      <p class="text-(--ink)/90"><strong>Elizabeth (Bess) Cooper</strong> is also a churchwarden and a Lay Reader.</p>
-      <p class="text-(--ink)/90">Our PCC serves and supports the life and leadership of the church.</p>
-    </section>
-  </div>
+		<div class="grid sm:grid-cols-2 xl:grid-cols-4 gap-6">
+			{
+				page.members.map((member) => (
+					<article class="sketch-panel overflow-hidden flex flex-col">
+						<img
+							src={member.image.src}
+							alt={member.image.alt}
+							class="w-full h-64 object-cover border-b-2 border-(--ink)"
+							loading="lazy"
+						/>
+						<div class="p-5 space-y-4 grow">
+							<div>
+								<h2 class="text-2xl font-bold text-(--ink) leading-tight">
+									{member.name}
+								</h2>
+								<p class="text-(--teal) font-semibold">{member.role}</p>
+							</div>
+							<p class="text-(--ink)/85">{member.bio}</p>
+							<div class="space-y-2 text-sm">
+								<p>
+									<a
+										href={`mailto:${member.email}`}
+										class="inline-flex items-center gap-2 font-semibold text-(--ink) underline decoration-(--eden) underline-offset-4"
+									>
+										<Mail size={15} />
+										{member.email}
+									</a>
+								</p>
+								{
+									member.phone && member.phone_href && (
+										<p>
+											<a
+												href={member.phone_href}
+												class="inline-flex items-center gap-2 font-semibold text-(--ink) underline decoration-(--eden) underline-offset-4"
+											>
+												<Phone size={15} />
+												{member.phone}
+											</a>
+										</p>
+									)
+								}
+							</div>
+						</div>
+					</article>
+				))
+			}
+		</div>
+	</div>
 </Layout>

@@ -1,0 +1,24 @@
+group,section,label,path,type,value,notes
+pages,pages.serve,Intro,pages.serve.intro,string,"We are a church family, and we need different people to help our family thrive. If you are part of St John's, we encourage you to join and serve one of our teams.",Plain text.
+pages,pages.serve,Outro html,pages.serve.outro_html,html,Interested in joining a team? Please <a href='/contact' class='underline decoration-[var(--eden)] underline-offset-4'>get in touch</a>.,HTML allowed. Keep links as <a href='...'>text</a>.
+pages,pages.serve,Description,pages.serve.teams[0].description,string,"Our welcome and hospitality team create the family environment we love at St John's Park. They welcome people at the door, serve refreshments, and make sure everyone receives a warm welcome.",Plain text.
+pages,pages.serve,Name,pages.serve.teams[0].name,string,Welcome and Hospitality,Plain text.
+pages,pages.serve,Description,pages.serve.teams[1].description,string,"Our Park Kids team disciples the youngest generation in our church, from under-5s through primary-aged children.",Plain text.
+pages,pages.serve,Name,pages.serve.teams[1].name,string,Park Kids Team,Plain text.
+pages,pages.serve,Description,pages.serve.teams[2].description,string,"We disciple young people through Sunday Bible study and our midweek youth group Cornerstone, helping them meet and grow in relationship with Jesus.",Plain text.
+pages,pages.serve,Name,pages.serve.teams[2].name,string,Park Youth Team,Plain text.
+pages,pages.serve,Description,pages.serve.teams[3].description,string,Our worship team helps us encounter God's presence and give him praise.,Plain text.
+pages,pages.serve,Name,pages.serve.teams[3].name,string,Worship,Plain text.
+pages,pages.serve,Description,pages.serve.teams[4].description,string,"Our Food Bank team serves local people in crisis, providing food parcels and a listening, friendly ear.",Plain text.
+pages,pages.serve,Name,pages.serve.teams[4].name,string,Food Bank,Plain text.
+pages,pages.serve,Description,pages.serve.teams[5].description,string,"Our lunch club team helps serve lunch and build relationships in this richly diverse, lively community.",Plain text.
+pages,pages.serve,Name,pages.serve.teams[5].name,string,Lunch Club,Plain text.
+pages,pages.serve,Description,pages.serve.teams[6].description,string,Our cleaning team enables us to welcome people into the building during the week and gather together on Sundays.,Plain text.
+pages,pages.serve,Name,pages.serve.teams[6].name,string,Cleaning,Plain text.
+pages,pages.serve,Description,pages.serve.teams[7].description,string,Our car park team helps fit everyone in so we can gather together on a Sunday.,Plain text.
+pages,pages.serve,Name,pages.serve.teams[7].name,string,Car Park,Plain text.
+pages,pages.serve,Description,pages.serve.teams[8].description,string,"Our creative team uses photography, social media, and video to show what God is doing locally and help people connect with church family.",Plain text.
+pages,pages.serve,Name,pages.serve.teams[8].name,string,Creative,Plain text.
+pages,pages.serve,Description,pages.serve.teams[9].description,string,Our production team makes sure everyone can see and hear clearly during Sunday gatherings.,Plain text.
+pages,pages.serve,Name,pages.serve.teams[9].name,string,Production Team,Plain text.
+pages,pages.serve,Title,pages.serve.title,string,Serve,Plain text.

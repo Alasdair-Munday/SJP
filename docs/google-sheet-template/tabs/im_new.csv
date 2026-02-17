@@ -1,0 +1,12 @@
+group,section,label,path,type,value,notes
+pages,pages.im_new,Heading,pages.im_new.home_preview.heading,string,First Time Visiting?,Plain text.
+pages,pages.im_new,Intro,pages.im_new.home_preview.intro,string,Here is what makes a Sunday morning at St John's Park easy to step into.,Plain text.
+pages,pages.im_new,Heading,pages.im_new.sections[0].heading,string,When does church happen?,Plain text.
+pages,pages.im_new,Paragraphs 1,pages.im_new.sections[0].paragraphs[0],string,"We gather to worship every Sunday morning at 10:45am. We also run activities during the week for children, local community support, and smaller groups.",Plain text.
+pages,pages.im_new,Heading,pages.im_new.sections[1].heading,string,What happens in a church service?,Plain text.
+pages,pages.im_new,Paragraphs 1,pages.im_new.sections[1].paragraphs[0],string,"The service is usually a little over an hour. We sing together, read the Bible, hear teaching that connects Scripture to everyday life, and spend time in prayer.",Plain text.
+pages,pages.im_new,Paragraphs 2,pages.im_new.sections[1].paragraphs[1],string,"On the first Sunday of each month, we also share Communion together.",Plain text.
+pages,pages.im_new,Heading,pages.im_new.sections[2].heading,string,What about children and young people?,Plain text.
+pages,pages.im_new,Paragraphs 1,pages.im_new.sections[2].paragraphs[0],string,"Children are very welcome. Most Sundays there is a children’s activity or children’s club during the service, and we work to help families feel at home.",Plain text.
+pages,pages.im_new,Paragraphs 2,pages.im_new.sections[2].paragraphs[1],html,"For more details, visit <a href='/park-kids' class='underline decoration-[var(--eden)] underline-offset-4'>Park Kids</a> and <a href='/park-youth' class='underline decoration-[var(--teal)] underline-offset-4'>Park Youth</a>.",HTML allowed. Keep links as <a href='...'>text</a>.
+pages,pages.im_new,Title,pages.im_new.title,string,I'm New,Plain text.

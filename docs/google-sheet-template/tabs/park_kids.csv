@@ -1,0 +1,24 @@
+group,section,label,path,type,value,notes
+pages,pages.park_kids,Cta html,pages.park_kids.cta_html,html,Questions before visiting? <a href='/contact' class='underline decoration-[var(--eden)] underline-offset-4'>Contact us</a>.,HTML allowed. Keep links as <a href='...'>text</a>.
+pages,pages.park_kids,Heading,pages.park_kids.social_story.heading,string,Social Story for Visiting Church,Plain text.
+pages,pages.park_kids,Alt,pages.park_kids.social_story.images[0].alt,string,Children and families at churchyard games,Plain text.
+pages,pages.park_kids,Src,pages.park_kids.social_story.images[0].src,path,/images/kids-churchyard.jpg,Use site-relative path starting with /.
+pages,pages.park_kids,Alt,pages.park_kids.social_story.images[1].alt,string,Children taking part in a Christingle service,Plain text.
+pages,pages.park_kids,Src,pages.park_kids.social_story.images[1].src,path,/images/christingle.jpg,Use site-relative path starting with /.
+pages,pages.park_kids,Intro,pages.park_kids.social_story.intro,string,Here is a step-by-step guide for what happens when visiting St John's Park Church on a Sunday.,Plain text.
+pages,pages.park_kids,Step label prefix,pages.park_kids.social_story.step_label_prefix,string,Step,Plain text.
+pages,pages.park_kids,Steps 1,pages.park_kids.social_story.steps[0],string,When I arrive at St John's Park Church I will see a big blue open door with a ramp for wheelchair access.,Plain text.
+pages,pages.park_kids,Steps 2,pages.park_kids.social_story.steps[1],string,I will go inside two sets of doors and then there will be someone at the back of church to say hello to me.,Plain text.
+pages,pages.park_kids,Steps 3,pages.park_kids.social_story.steps[2],string,There will be ear defenders and activity bags for me to use if I want to. I am allowed to borrow them without asking.,Plain text.
+pages,pages.park_kids,Steps 4,pages.park_kids.social_story.steps[3],string,The toilets are in the side hallway. There is also an accessible toilet and I am allowed to use it even if I don't have a disability.,Plain text.
+pages,pages.park_kids,Steps 5,pages.park_kids.social_story.steps[4],string,In church I can sit on any of the available seats. If I have a wheelchair I am welcome to sit wherever I feel most comfortable.,Plain text.
+pages,pages.park_kids,Steps 6,pages.park_kids.social_story.steps[5],string,"When the service is ready to start, the person leading will say hello and tell us what is happening.",Plain text.
+pages,pages.park_kids,Steps 7,pages.park_kids.social_story.steps[6],string,"During the service we will sing songs. I can stand up or sit down to sing. It is OK to move around, dance or wave a flag.",Plain text.
+pages,pages.park_kids,Steps 8,pages.park_kids.social_story.steps[7],string,"After the Family Song, I will be invited to go into the side hall for kids activities. There is circle time, games, stories and a craft. It is OK to stay in the main service.",Plain text.
+pages,pages.park_kids,Steps 9,pages.park_kids.social_story.steps[8],string,"After the service I can stay for a drink and a biscuit and talk to people. If I don't want to do this, that is OK and I can go home with my family when we are ready.",Plain text.
+pages,pages.park_kids,Heading,pages.park_kids.sunday_groups.heading,string,Sunday Kids Groups,Plain text.
+pages,pages.park_kids,Alt,pages.park_kids.sunday_groups.image.alt,string,Children playing in the church park,Plain text.
+pages,pages.park_kids,Src,pages.park_kids.sunday_groups.image.src,path,/images/kids-frisbee.jpg,Use site-relative path starting with /.
+pages,pages.park_kids,Paragraphs 1,pages.park_kids.sunday_groups.paragraphs[0],string,Our Park Kids groups are for children aged 1-11 and run during our Sunday gathering at 10:45am.,Plain text.
+pages,pages.park_kids,Paragraphs 2,pages.park_kids.sunday_groups.paragraphs[1],string,"Children start in the service with the church family and then move into age-appropriate groups for Bible teaching, prayer, and activities.",Plain text.
+pages,pages.park_kids,Title,pages.park_kids.title,string,Park Kids,Plain text.

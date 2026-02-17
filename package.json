@@ -7,7 +7,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "content:sheet-template": "node scripts/export-content-to-sheet-template.mjs"
+    "content:sheet-template": "node scripts/export-content-to-sheet-template.mjs",
+    "content:sheet-validate": "node scripts/validate-sheet-csv.mjs"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.6",

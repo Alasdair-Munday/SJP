@@ -1,40 +1,19 @@
-# Google Sheets Datasource Design
+# Google Sheets Multi-Tab Workflow
 
-This template is designed for non-technical admins to edit site content safely in Google Sheets.
+This template lets admins edit content in many tabs while runtime still reads one
+`content` tab.
 
-## Recommended Workbook Setup
+## Runtime Contract
 
-Use a sheet tab called `content` and import:
-
-- `/Users/almunday/SJP/docs/google-sheet-template/admin-content.csv`
-
-The CSV loader reads these required columns:
+The loader in `/Users/almunday/SJP/src/data/site-content.ts` reads one CSV tab and requires:
 
 - `path`
 - `type`
 - `value`
 
-It ignores extra helper columns (`group`, `section`, `label`, `notes`), which are there to make editing easier.
+Extra columns are allowed and ignored (`group`, `section`, `label`, `notes`).
 
-## Column Guide
-
-- `group`: top-level content group (`site`, `navigation`, `pages`, `sermons`, etc.)
-- `section`: quick grouping key for filters
-- `label`: human-friendly label
-- `path`: canonical JSON path (example: `pages.home.hero.title`, `sermons[0].speaker`)
-- `type`: value type (`string`, `html`, `url`, `path`, `number`, `boolean`, `null`)
-- `value`: editable content value
-- `notes`: editing guidance
-
-## Admin Editing Rules
-
-- Do not change `path` unless you are intentionally remapping content.
-- Keep array indexes contiguous (`[0]`, `[1]`, `[2]`, ...).
-- For `html` values, keep valid HTML (e.g. links).
-- For `number`, only numeric values.
-- For `boolean`, use `TRUE` or `FALSE`.
-
-## Regenerate CSV from JSON
+## Generate Templates
 
 ```bash
 npm run content:sheet-template
@@ -42,19 +21,59 @@ npm run content:sheet-template
 
 This writes:
 
-- `/Users/almunday/SJP/docs/google-sheet-template/admin-content.csv` (admin-friendly)
-- `/Users/almunday/SJP/docs/google-sheet-template/content.csv` (minimal machine format)
+- `/Users/almunday/SJP/docs/google-sheet-template/admin-content.csv`
+- `/Users/almunday/SJP/docs/google-sheet-template/content.csv`
+- `/Users/almunday/SJP/docs/google-sheet-template/content-formula.txt`
+- `/Users/almunday/SJP/docs/google-sheet-template/tabs/*.csv`
 
-Both include all current values from `/Users/almunday/SJP/src/data/content.json`.
+Generated tab routing:
 
-## Runtime/Build Integration
+- one tab per page key: `pages.<page_key>.*` -> `<page_key>`
+- shared non-page content (`site`, `navigation`, `utility_navigation`, `footer`, `components`) -> `shared`
+- sermon list entries (`sermons.*`) -> `sermons_data`
 
-The site can load content from Google Sheets CSV via `/Users/almunday/SJP/src/data/site-content.ts` when `CONTENT_SOURCE=sheets`.
+## Workbook Setup (No Runtime Code Changes)
 
-By default it reads spreadsheet `1Ay1kS_--qmW9x0gSi5zSUQvkdQoeiGVQvu30PY6XUxM`, tab `content`, via CSV export.
+1. Open spreadsheet `1Ay1kS_--qmW9x0gSi5zSUQvkdQoeiGVQvu30PY6XUxM`.
+2. Create a tab for each generated CSV in `tabs/` (same names as files).
+3. Keep (or create) one runtime tab named `content`.
+4. Import each generated CSV into its matching tab.
+5. In `content!A1`, paste the formula from `content-formula.txt`.
+6. Protect `content` as read-only.
+7. Allow admins to edit split tabs.
+8. Set `GOOGLE_SHEETS_GID` to the `content` tab gid in deploy settings.
 
-Optional overrides:
+## How To Find `GOOGLE_SHEETS_GID`
 
-- `GOOGLE_SHEETS_CSV_URL` (or `CONTENT_CSV_URL`) for a full CSV URL
-- `GOOGLE_SHEETS_SPREADSHEET_ID` (or `GOOGLE_SHEETS_ID`) for spreadsheet ID
-- `GOOGLE_SHEETS_GID` for a specific tab gid when not using `GOOGLE_SHEETS_CSV_URL`
+1. Open the `content` tab in Google Sheets.
+2. In the URL, copy the number after `#gid=`.
+3. Set that value as `GOOGLE_SHEETS_GID`.
+
+## Validation
+
+Validate the live runtime CSV (default behavior):
+
+```bash
+npm run content:sheet-validate
+```
+
+Validate generated split tab CSV files (cross-tab duplicate checks):
+
+```bash
+npm run content:sheet-validate -- --tabs
+```
+
+Validate a specific source:
+
+```bash
+npm run content:sheet-validate -- --file docs/google-sheet-template/content.csv
+npm run content:sheet-validate -- --url "https://docs.google.com/spreadsheets/d/<id>/export?format=csv&gid=<gid>"
+```
+
+## Admin Editing Rules
+
+- Do not change `path` unless intentionally remapping content.
+- Keep array indexes contiguous (`[0]`, `[1]`, `[2]`, ...).
+- For `number`, use numeric values only.
+- For `boolean`, use `TRUE`/`FALSE`.
+- For `html`, keep valid HTML.

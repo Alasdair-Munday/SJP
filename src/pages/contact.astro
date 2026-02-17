@@ -8,13 +8,24 @@ const page = content.pages.contact;
 
 <Layout title={page.title}>
 	<div class="max-w-5xl mx-auto px-4 py-20 space-y-8">
-		<h1 class="theme-display-font text-5xl md:text-6xl font-bold text-(--ink)">
+		<h1
+			class="theme-display-font text-5xl md:text-6xl font-bold text-(--ink)"
+		>
 			{page.title}
 		</h1>
 
 		<section class="bg-white border-2 border-(--ink) p-8 space-y-4">
 			<p class="text-lg text-(--ink)/90">{page.find_us.paragraphs[0]}</p>
-			<p>
+			<iframe
+				src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1932.9794407157501!2d-1.4558134244165126!3d53.38304895495231!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4879787508b14b63%3A0x3ad4b2dcc392b6b9!2sSt.%20John%E2%80%99s%20Church%2C%20Park!5e0!3m2!1sen!2suk!4v1771371845139!5m2!1sen!2suk"
+				width="600"
+				height="450"
+				style="border:0;"
+				allowfullscreen=""
+				loading="lazy"
+				referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+			<p class="text-(--ink)/90">
 				<a
 					href={page.find_us.maps_link.href}
 					class="underline decoration-(--eden) underline-offset-4"
@@ -22,7 +33,7 @@ const page = content.pages.contact;
 					{page.find_us.maps_link.label}
 				</a>
 			</p>
-			<p class="text-(--ink)/90" set:html={page.find_us.paragraphs[1]}></p>
+			<p class="text-(--ink)/90" set:html={page.find_us.paragraphs[1]} />
 			<img
 				src={page.find_us.image.src}
 				alt={page.find_us.image.alt}
@@ -31,8 +42,100 @@ const page = content.pages.contact;
 			/>
 		</section>
 
+		<section
+			id="send-message"
+			class="bg-white border-2 border-(--ink) p-8 space-y-5 scroll-mt-28"
+		>
+			<h2 class="text-3xl font-bold text-(--ink)">Send Us a Message</h2>
+			<p class="text-(--ink)/90">
+				You can email us directly at{" "}
+				<a
+					href="mailto:hello@saintjohnspark.org"
+					class="underline decoration-(--eden) underline-offset-4"
+				>
+					hello@saintjohnspark.org
+				</a>{" "}
+				or use the form below.
+			</p>
+
+			<form
+				name="contact"
+				method="POST"
+				data-netlify="true"
+				netlify-honeypot="bot-field"
+				action="/contact-thank-you"
+				class="space-y-5"
+			>
+				<input type="hidden" name="form-name" value="contact" />
+				<p class="hidden">
+					<label>
+						Don't fill this out if you're human:
+						<input name="bot-field" />
+					</label>
+				</p>
+
+				<label class="block space-y-2">
+					<span class="font-semibold text-(--ink)">Name</span>
+					<input
+						type="text"
+						name="name"
+						required
+						class="w-full border-2 border-(--ink) px-3 py-2"
+					/>
+				</label>
+
+				<label class="block space-y-2">
+					<span class="font-semibold text-(--ink)">Email</span>
+					<input
+						type="email"
+						name="email"
+						required
+						class="w-full border-2 border-(--ink) px-3 py-2"
+					/>
+				</label>
+
+				<label class="block space-y-2">
+					<span class="font-semibold text-(--ink)">Subject</span>
+					<select
+						name="subject"
+						required
+						class="w-full border-2 border-(--ink) px-3 py-2"
+					>
+						<option value="">Select a topic</option>
+						<option value="general">General enquiry</option>
+						<option value="park-kids">Park Kids</option>
+						<option value="park-youth">Park Youth</option>
+						<option value="park-communities"
+							>Park Communities</option
+						>
+						<option value="sundays">Sunday gathering</option>
+						<option value="safeguarding">Safeguarding</option>
+					</select>
+				</label>
+
+				<label class="block space-y-2">
+					<span class="font-semibold text-(--ink)">Message</span>
+					<textarea
+						name="message"
+						required
+						rows={6}
+						class="w-full border-2 border-(--ink) px-3 py-2"
+					></textarea>
+				</label>
+
+				<button
+					type="submit"
+					class="inline-flex items-center gap-2 px-6 py-3 bg-(--ink) text-white border-2 border-(--ink) font-semibold hover:bg-white hover:text-(--ink) transition-colors"
+				>
+					Send Message
+				</button>
+			</form>
+		</section>
+
 		<section class="bg-white border-2 border-(--ink) p-8 space-y-4">
-			<h2 class="text-3xl font-bold text-(--ink)">{page.parking.heading}</h2>
+			<h2 class="text-3xl font-bold text-(--ink)">
+				{page.parking.heading}
+			</h2>
 			{
 				page.parking.paragraphs.map((paragraph) => (
 					<p class="text-(--ink)/90">{paragraph}</p>

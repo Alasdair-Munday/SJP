@@ -1,0 +1,227 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { ArrowRight } from "lucide-react";
+import { getSiteContent } from "../data/site-content";
+
+const content = await getSiteContent();
+const page = content.pages.serve;
+---
+
+<Layout title="Join a Team">
+	<div class="max-w-6xl mx-auto px-4 py-20 space-y-8">
+		<div class="space-y-3">
+			<h1 class="heading-eden-gold theme-display-font text-5xl md:text-6xl font-bold">
+				Join a Team
+			</h1>
+			<p class="text-xl text-(--ink)/85 max-w-4xl">
+				Select the teams you are interested in, then share your contact details.
+				We will follow up with next steps.
+			</p>
+		</div>
+
+		<form
+			name="join-team-interest"
+			method="POST"
+			data-netlify="true"
+			netlify-honeypot="bot-field"
+			action="/contact-thank-you"
+			class="sketch-panel p-6 md:p-8 space-y-6"
+		>
+			<input type="hidden" name="form-name" value="join-team-interest" />
+			<p class="hidden">
+				<label>
+					Don't fill this out if you're human:
+					<input name="bot-field" />
+				</label>
+			</p>
+			<input type="hidden" name="selected_teams" id="selected-teams-field" />
+
+			<div class="space-y-3">
+				<h2 class="text-3xl font-bold text-(--ink)">1. Select Teams</h2>
+				<p class="text-(--ink)/85">
+					Choose as many teams as you like.
+				</p>
+				<div class="grid md:grid-cols-2 gap-4">
+					{
+						page.teams.map((team) => (
+							<button
+								type="button"
+								data-team-card
+								data-team-name={team.name}
+								aria-pressed="false"
+								class="text-left bg-white border-2 border-(--ink) p-5 transition-colors"
+							>
+								<p class="text-2xl font-bold text-(--ink) mb-2">{team.name}</p>
+								<p class="text-(--ink)/85">{team.description}</p>
+							</button>
+						))
+					}
+				</div>
+				<p id="selected-team-list" class="text-(--ink)/85 font-semibold">
+					No teams selected yet.
+				</p>
+			</div>
+
+			<div class="space-y-4">
+				<h2 class="text-3xl font-bold text-(--ink)">2. Your Contact Details</h2>
+				<div class="grid md:grid-cols-2 gap-4">
+					<label class="block space-y-2">
+						<span class="font-semibold text-(--ink)">Name</span>
+						<input
+							id="join-team-name"
+							type="text"
+							name="name"
+							required
+							class="w-full border-2 border-(--ink) px-3 py-2"
+						/>
+					</label>
+					<label class="block space-y-2">
+						<span class="font-semibold text-(--ink)">Email</span>
+						<input
+							id="join-team-email"
+							type="email"
+							name="email"
+							required
+							class="w-full border-2 border-(--ink) px-3 py-2"
+						/>
+					</label>
+					<label class="block space-y-2 md:col-span-2">
+						<span class="font-semibold text-(--ink)">Phone (optional)</span>
+						<input
+							id="join-team-phone"
+							type="tel"
+							name="phone"
+							class="w-full border-2 border-(--ink) px-3 py-2"
+						/>
+					</label>
+				</div>
+			</div>
+
+			<div class="space-y-3">
+				<h2 class="text-3xl font-bold text-(--ink)">3. Message Preview</h2>
+				<p class="text-(--ink)/85">
+					This message is auto-filled from your selections and details.
+				</p>
+				<textarea
+					id="join-team-message"
+					name="message"
+					required
+					rows={8}
+					readonly
+					class="w-full border-2 border-(--ink) px-3 py-2 bg-white"
+				></textarea>
+				<label class="block space-y-2">
+					<span class="font-semibold text-(--ink)"
+						>Anything else we should know? (optional)</span
+					>
+					<textarea
+						name="additional_notes"
+						rows={4}
+						class="w-full border-2 border-(--ink) px-3 py-2 bg-white"
+					></textarea>
+				</label>
+			</div>
+
+			<button
+				type="submit"
+				class="inline-flex items-center gap-2 px-6 py-3 bg-(--ink) text-white border-2 border-(--ink) font-semibold hover:bg-white hover:text-(--ink) transition-colors"
+			>
+				Send Team Interest
+				<ArrowRight size={16} />
+			</button>
+		</form>
+	</div>
+
+	<script is:inline>
+		(() => {
+			const cards = Array.from(
+				document.querySelectorAll("[data-team-card]"),
+			);
+			const selectedTeamsField = document.getElementById(
+				"selected-teams-field",
+			);
+			const selectedTeamList = document.getElementById("selected-team-list");
+			const form = document.querySelector("form[name='join-team-interest']");
+			const nameInput = document.getElementById("join-team-name");
+			const emailInput = document.getElementById("join-team-email");
+			const phoneInput = document.getElementById("join-team-phone");
+			const messageField = document.getElementById("join-team-message");
+
+			if (
+				!selectedTeamsField ||
+				!selectedTeamList ||
+				!form ||
+				!nameInput ||
+				!emailInput ||
+				!phoneInput ||
+				!messageField
+			) {
+				return;
+			}
+
+			const selectedTeams = new Set();
+
+			const renderMessage = () => {
+				const teams = Array.from(selectedTeams);
+				selectedTeamsField.value = teams.join(", ");
+
+				selectedTeamList.textContent =
+					teams.length > 0
+						? `Selected teams: ${teams.join(", ")}`
+						: "No teams selected yet.";
+
+				messageField.value = [
+					"Join a Team Enquiry",
+					"",
+					`Teams interested in: ${
+						teams.length > 0 ? teams.join(", ") : "None selected"
+					}`,
+					`Name: ${nameInput.value.trim() || "[not provided]"}`,
+					`Email: ${emailInput.value.trim() || "[not provided]"}`,
+					`Phone: ${phoneInput.value.trim() || "[not provided]"}`,
+				].join("\n");
+			};
+
+			const updateCardStyle = (card, isSelected) => {
+				card.setAttribute("aria-pressed", isSelected ? "true" : "false");
+				card.style.backgroundColor = isSelected ? "var(--teal-soft)" : "";
+				card.style.borderColor = isSelected ? "var(--teal)" : "";
+			};
+
+			cards.forEach((card) => {
+				card.addEventListener("click", () => {
+					const teamName = card.getAttribute("data-team-name") || "";
+					if (!teamName) return;
+
+					if (selectedTeams.has(teamName)) {
+						selectedTeams.delete(teamName);
+						updateCardStyle(card, false);
+					} else {
+						selectedTeams.add(teamName);
+						updateCardStyle(card, true);
+					}
+
+					renderMessage();
+				});
+			});
+
+			[nameInput, emailInput, phoneInput].forEach((input) => {
+				input.addEventListener("input", renderMessage);
+			});
+
+			form.addEventListener("submit", (event) => {
+				if (selectedTeams.size === 0) {
+					event.preventDefault();
+					selectedTeamList.textContent =
+						"Select at least one team before submitting.";
+					selectedTeamList.scrollIntoView({
+						behavior: "smooth",
+						block: "center",
+					});
+				}
+			});
+
+			renderMessage();
+		})();
+	</script>
+</Layout>

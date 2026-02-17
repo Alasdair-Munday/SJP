@@ -1,0 +1,38 @@
+group,section,label,path,type,value,notes
+pages,pages.ministries,Heading,pages.ministries.groups[0].heading,string,Children and Young People,Plain text.
+pages,pages.ministries,Description,pages.ministries.groups[0].items[0].description,string,"Sunday groups for children aged 1-11 with Bible teaching, prayer, and activities.",Plain text.
+pages,pages.ministries,Href,pages.ministries.groups[0].items[0].href,path,/park-kids,Use site-relative path starting with /.
+pages,pages.ministries,Link label,pages.ministries.groups[0].items[0].link_label,string,Visit Park Kids,Plain text.
+pages,pages.ministries,Title,pages.ministries.groups[0].items[0].title,string,Park Kids,Plain text.
+pages,pages.ministries,Description,pages.ministries.groups[0].items[1].description,string,Cornerstone midweek and Sunday youth discipleship for secondary school age.,Plain text.
+pages,pages.ministries,Href,pages.ministries.groups[0].items[1].href,path,/park-youth,Use site-relative path starting with /.
+pages,pages.ministries,Link label,pages.ministries.groups[0].items[1].link_label,string,Visit Park Youth,Plain text.
+pages,pages.ministries,Title,pages.ministries.groups[0].items[1].title,string,Park Youth,Plain text.
+pages,pages.ministries,Heading,pages.ministries.groups[1].heading,string,Community and Discipleship,Plain text.
+pages,pages.ministries,Description,pages.ministries.groups[1].items[0].description,string,"Midweek communities for Scripture, prayer, friendship, and local mission.",Plain text.
+pages,pages.ministries,Href,pages.ministries.groups[1].items[0].href,path,/park-communities,Use site-relative path starting with /.
+pages,pages.ministries,Link label,pages.ministries.groups[1].items[0].link_label,string,Visit Park Communities,Plain text.
+pages,pages.ministries,Title,pages.ministries.groups[1].items[0].title,string,Park Communities,Plain text.
+pages,pages.ministries,Description,pages.ministries.groups[1].items[1].description,string,Weekly emergency food support in partnership with local agencies.,Plain text.
+pages,pages.ministries,Href,pages.ministries.groups[1].items[1].href,path,/whats-on#foodbank,Use site-relative path starting with /.
+pages,pages.ministries,Link label,pages.ministries.groups[1].items[1].link_label,string,Food Bank details,Plain text.
+pages,pages.ministries,Title,pages.ministries.groups[1].items[1].title,string,Food Bank,Plain text.
+pages,pages.ministries,Description,pages.ministries.groups[1].items[2].description,string,"Weekly free lunch, conversation, and welcome for local residents.",Plain text.
+pages,pages.ministries,Href,pages.ministries.groups[1].items[2].href,path,/whats-on#lunch-club,Use site-relative path starting with /.
+pages,pages.ministries,Link label,pages.ministries.groups[1].items[2].link_label,string,Lunch Club details,Plain text.
+pages,pages.ministries,Title,pages.ministries.groups[1].items[2].title,string,Lunch Club,Plain text.
+pages,pages.ministries,Heading,pages.ministries.groups[2].heading,string,Serving Teams,Plain text.
+pages,pages.ministries,Description,pages.ministries.groups[2].items[0].description,string,Help people feel at home from the moment they arrive.,Plain text.
+pages,pages.ministries,Href,pages.ministries.groups[2].items[0].href,path,/serve#welcome-and-hospitality,Use site-relative path starting with /.
+pages,pages.ministries,Link label,pages.ministries.groups[2].items[0].link_label,string,Join this team,Plain text.
+pages,pages.ministries,Title,pages.ministries.groups[2].items[0].title,string,Welcome and Hospitality,Plain text.
+pages,pages.ministries,Description,pages.ministries.groups[2].items[1].description,string,Lead the church family in sung worship and prayer.,Plain text.
+pages,pages.ministries,Href,pages.ministries.groups[2].items[1].href,path,/serve#worship,Use site-relative path starting with /.
+pages,pages.ministries,Link label,pages.ministries.groups[2].items[1].link_label,string,Join this team,Plain text.
+pages,pages.ministries,Title,pages.ministries.groups[2].items[1].title,string,Worship,Plain text.
+pages,pages.ministries,Description,pages.ministries.groups[2].items[2].description,string,"Use media, visuals, and sound to support church life and communication.",Plain text.
+pages,pages.ministries,Href,pages.ministries.groups[2].items[2].href,path,/serve#creative,Use site-relative path starting with /.
+pages,pages.ministries,Link label,pages.ministries.groups[2].items[2].link_label,string,Join this team,Plain text.
+pages,pages.ministries,Title,pages.ministries.groups[2].items[2].title,string,Creative and Production,Plain text.
+pages,pages.ministries,Intro,pages.ministries.intro,string,"Find the right place to connect, grow, and serve. Each ministry below has a dedicated landing page with full details.",Plain text.
+pages,pages.ministries,Title,pages.ministries.title,string,Ministries,Plain text.

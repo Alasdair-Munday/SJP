@@ -1,0 +1,27 @@
+={"group","section","label","path","type","value","notes";
+SORT(
+{
+FILTER(shared!A2:G, LEN(shared!D2:D));
+FILTER(home!A2:G, LEN(home!D2:D));
+FILTER(sundays!A2:G, LEN(sundays!D2:D));
+FILTER(belong!A2:G, LEN(belong!D2:D));
+FILTER(serve!A2:G, LEN(serve!D2:D));
+FILTER(give!A2:G, LEN(give!D2:D));
+FILTER(im_new!A2:G, LEN(im_new!D2:D));
+FILTER(life_events!A2:G, LEN(life_events!D2:D));
+FILTER(ministries!A2:G, LEN(ministries!D2:D));
+FILTER(park_communities!A2:G, LEN(park_communities!D2:D));
+FILTER(park_kids!A2:G, LEN(park_kids!D2:D));
+FILTER(park_youth!A2:G, LEN(park_youth!D2:D));
+FILTER(contact!A2:G, LEN(contact!D2:D));
+FILTER(safeguarding!A2:G, LEN(safeguarding!D2:D));
+FILTER(team!A2:G, LEN(team!D2:D));
+FILTER(what_we_believe!A2:G, LEN(what_we_believe!D2:D));
+FILTER(sermons!A2:G, LEN(sermons!D2:D));
+FILTER(whats_on!A2:G, LEN(whats_on!D2:D));
+FILTER(the_park!A2:G, LEN(the_park!D2:D));
+FILTER(events!A2:G, LEN(events!D2:D));
+FILTER(sermons_data!A2:G, LEN(sermons_data!D2:D))
+},
+4, TRUE
+)}

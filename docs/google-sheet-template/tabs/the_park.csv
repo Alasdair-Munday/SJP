@@ -1,0 +1,23 @@
+group,section,label,path,type,value,notes
+pages,pages.the_park,Alt,pages.the_park.featured_photo.alt,string,Baptism Celebration,Plain text.
+pages,pages.the_park,Label,pages.the_park.featured_photo.label,string,New Life,Plain text.
+pages,pages.the_park,Src,pages.the_park.featured_photo.src,path,/images/baptism.jpg,Use site-relative path starting with /.
+pages,pages.the_park,Alt,pages.the_park.photos[0].alt,string,Community gathering in the park with bunting and seated groups,Plain text.
+pages,pages.the_park,Label,pages.the_park.photos[0].label,string,Community Gathering,Plain text.
+pages,pages.the_park,Src,pages.the_park.photos[0].src,path,/images/community-park-gathering-1.jpg,Use site-relative path starting with /.
+pages,pages.the_park,Alt,pages.the_park.photos[1].alt,string,Church building and community enjoying outdoor activities,Plain text.
+pages,pages.the_park,Label,pages.the_park.photos[1].label,string,Churchyard Event,Plain text.
+pages,pages.the_park,Src,pages.the_park.photos[1].src,path,/images/community-park-gathering-2.jpg,Use site-relative path starting with /.
+pages,pages.the_park,Alt,pages.the_park.photos[2].alt,string,People taking part in races on the grass outside church,Plain text.
+pages,pages.the_park,Label,pages.the_park.photos[2].label,string,Park Fun Day,Plain text.
+pages,pages.the_park,Src,pages.the_park.photos[2].src,path,/images/community-fun-day.jpg,Use site-relative path starting with /.
+pages,pages.the_park,Alt,pages.the_park.photos[3].alt,string,Children playing games in the park,Plain text.
+pages,pages.the_park,Label,pages.the_park.photos[3].label,string,Park Kids,Plain text.
+pages,pages.the_park,Src,pages.the_park.photos[3].src,path,/images/kids-frisbee.jpg,Use site-relative path starting with /.
+pages,pages.the_park,Alt,pages.the_park.photos[4].alt,string,Children and families around the churchyard games area,Plain text.
+pages,pages.the_park,Label,pages.the_park.photos[4].label,string,Churchyard Games,Plain text.
+pages,pages.the_park,Src,pages.the_park.photos[4].src,path,/images/kids-churchyard.jpg,Use site-relative path starting with /.
+pages,pages.the_park,Alt,pages.the_park.photos[5].alt,string,Community singing carols at the church entrance in December,Plain text.
+pages,pages.the_park,Label,pages.the_park.photos[5].label,string,Seasonal Events,Plain text.
+pages,pages.the_park,Src,pages.the_park.photos[5].src,path,/images/carols-doorstep.jpg,Use site-relative path starting with /.
+pages,pages.the_park,Title,pages.the_park.title,string,The Park,Plain text.

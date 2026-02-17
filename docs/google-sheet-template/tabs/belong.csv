@@ -1,0 +1,25 @@
+group,section,label,path,type,value,notes
+pages,pages.belong,Description,pages.belong.highlights[0].description,string,Groups for children aged 1-11 during Sunday gatherings.,Plain text.
+pages,pages.belong,Href,pages.belong.highlights[0].href,path,/park-kids,Use site-relative path starting with /.
+pages,pages.belong,Title,pages.belong.highlights[0].title,string,Park Kids,Plain text.
+pages,pages.belong,Tone,pages.belong.highlights[0].tone,string,eden,Plain text.
+pages,pages.belong,Description,pages.belong.highlights[1].description,string,Youth discipleship through Cornerstone and Sunday Bible study.,Plain text.
+pages,pages.belong,Href,pages.belong.highlights[1].href,path,/park-youth,Use site-relative path starting with /.
+pages,pages.belong,Title,pages.belong.highlights[1].title,string,Park Youth,Plain text.
+pages,pages.belong,Tone,pages.belong.highlights[1].tone,string,teal,Plain text.
+pages,pages.belong,Description,pages.belong.highlights[2].description,string,"Midweek groups for prayer, Scripture, and community life.",Plain text.
+pages,pages.belong,Href,pages.belong.highlights[2].href,path,/park-communities,Use site-relative path starting with /.
+pages,pages.belong,Title,pages.belong.highlights[2].title,string,Park Communities,Plain text.
+pages,pages.belong,Tone,pages.belong.highlights[2].tone,string,gold,Plain text.
+pages,pages.belong,Heading,pages.belong.sections.kids.heading,string,Kids,Plain text.
+pages,pages.belong,Paragraphs 1,pages.belong.sections.kids.paragraphs[0],string,We have kids groups (ages 1-11) that meet during our Sunday gathering. Speak to our welcome team to find out more.,Plain text.
+pages,pages.belong,Paragraphs 2,pages.belong.sections.kids.paragraphs[1],html,<a href='/park-kids' class='underline decoration-[var(--eden)] underline-offset-4'>Find out more about Park Kids</a>.,HTML allowed. Keep links as <a href='...'>text</a>.
+pages,pages.belong,Heading,pages.belong.sections.midweek.heading,string,Midweek Groups,Plain text.
+pages,pages.belong,Paragraphs 1,pages.belong.sections.midweek.paragraphs[0],string,"We encourage anyone part of our church family to find transformation, discipleship, and growth in a small community.",Plain text.
+pages,pages.belong,Paragraphs 2,pages.belong.sections.midweek.paragraphs[1],string,"Most of our communities meet weekly to study God's Word, pray, and encourage one another in faith.",Plain text.
+pages,pages.belong,Paragraphs 3,pages.belong.sections.midweek.paragraphs[2],html,"To join a community, visit <a href='/park-communities' class='underline decoration-[var(--eden)] underline-offset-4'>Park Communities</a> or <a href='/contact' class='underline decoration-[var(--eden)] underline-offset-4'>contact us</a>.",HTML allowed. Keep links as <a href='...'>text</a>.
+pages,pages.belong,Heading,pages.belong.sections.youth.heading,string,Youth (Cornerstone),Plain text.
+pages,pages.belong,Paragraphs 1,pages.belong.sections.youth.paragraphs[0],string,"Our youth group Cornerstone meets every Wednesday at church from 6:00-7:00pm. If you are at secondary school, we would love to see you there.",Plain text.
+pages,pages.belong,Paragraphs 2,pages.belong.sections.youth.paragraphs[1],string,We also run a youth Bible study during selected Sunday gatherings for Years 7-10.,Plain text.
+pages,pages.belong,Paragraphs 3,pages.belong.sections.youth.paragraphs[2],html,<a href='/park-youth' class='underline decoration-[var(--teal)] underline-offset-4'>Find out more about Park Youth</a>.,HTML allowed. Keep links as <a href='...'>text</a>.
+pages,pages.belong,Title,pages.belong.title,string,Belong,Plain text.

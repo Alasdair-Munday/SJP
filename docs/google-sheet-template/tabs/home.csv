@@ -1,0 +1,33 @@
+group,section,label,path,type,value,notes
+pages,pages.home,Title,pages.home.coming_up.title,string,Coming Up,Plain text.
+pages,pages.home,Badge,pages.home.hero.badge,string,Eden in Park,Plain text.
+pages,pages.home,Alt,pages.home.hero.image.alt,string,St John's Park Community Gathering,Plain text.
+pages,pages.home,Src,pages.home.hero.image.src,path,/images/community-park-gathering-2.jpg,Use site-relative path starting with /.
+pages,pages.home,Href,pages.home.hero.primary_cta.href,path,/sundays,Use site-relative path starting with /.
+pages,pages.home,Label,pages.home.hero.primary_cta.label,string,Visit Sunday,Plain text.
+pages,pages.home,Href,pages.home.hero.secondary_cta.href,path,/contact,Use site-relative path starting with /.
+pages,pages.home,Label,pages.home.hero.secondary_cta.label,string,Find Us,Plain text.
+pages,pages.home,Subtitle,pages.home.hero.subtitle,html,"A community of Jesus-followers in Park, Sheffield. <br/>We belong to the family of God, <br/>love and serve our city, <br/>and give Jesus praise in everything we do.",HTML allowed. Keep links as <a href='...'>text</a>.
+pages,pages.home,Title,pages.home.hero.title,string,WELCOME HOME,Plain text.
+pages,pages.home,Mime type,pages.home.latest_message.audio.mime_type,string,audio/mpeg,Plain text.
+pages,pages.home,Src,pages.home.latest_message.audio.src,path,/audio/latest-message.mp3,Use site-relative path starting with /.
+pages,pages.home,Href,pages.home.latest_message.cta.href,path,/sermons,Use site-relative path starting with /.
+pages,pages.home,Label,pages.home.latest_message.cta.label,string,Listen Now,Plain text.
+pages,pages.home,Eyebrow,pages.home.latest_message.eyebrow,string,Latest Message,Plain text.
+pages,pages.home,Color,pages.home.mission_grid[0].color,string,teal,Plain text.
+pages,pages.home,Desc,pages.home.mission_grid[0].desc,string,"Find transformation, discipleship, and growth through midweek groups, Kids, and Youth communities.",Plain text.
+pages,pages.home,Link href,pages.home.mission_grid[0].link_href,path,/belong,Use site-relative path starting with /.
+pages,pages.home,Link text,pages.home.mission_grid[0].link_text,string,FIND OUT MORE,Plain text.
+pages,pages.home,Title,pages.home.mission_grid[0].title,string,Belong,Plain text.
+pages,pages.home,Color,pages.home.mission_grid[1].color,string,green,Plain text.
+pages,pages.home,Desc,pages.home.mission_grid[1].desc,string,"Join one of our teams and help our church family thrive in worship, welcome, and community service.",Plain text.
+pages,pages.home,Link href,pages.home.mission_grid[1].link_href,path,/serve,Use site-relative path starting with /.
+pages,pages.home,Link text,pages.home.mission_grid[1].link_text,string,JOIN A TEAM,Plain text.
+pages,pages.home,Title,pages.home.mission_grid[1].title,string,Serve,Plain text.
+pages,pages.home,Color,pages.home.mission_grid[2].color,string,gold,Plain text.
+pages,pages.home,Desc,pages.home.mission_grid[2].desc,string,"Your generosity helps sustain Sunday gatherings, midweek ministries, and practical support across our city.",Plain text.
+pages,pages.home,Link href,pages.home.mission_grid[2].link_href,path,/give,Use site-relative path starting with /.
+pages,pages.home,Link text,pages.home.mission_grid[2].link_text,string,SUPPORT THE VISION,Plain text.
+pages,pages.home,Title,pages.home.mission_grid[2].title,string,Give,Plain text.
+pages,pages.home,Heading,pages.home.mission.heading,string,Our Vision,Plain text.
+pages,pages.home,Tag,pages.home.mission.tag,string,"// Belong, Serve, Give",Plain text.

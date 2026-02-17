@@ -6,6 +6,8 @@
 - `npm run dev`
 - `npm run build`
 - `npm run preview`
+- `npm run content:sheet-template`
+- `npm run content:sheet-validate`
 
 ## Theme Switching
 
@@ -54,7 +56,7 @@ Optional:
 
 ### CSV Template for Admins
 
-Generate the Google Sheets import CSV from the current JSON:
+Generate Google Sheets CSV templates from the current JSON:
 
 - `npm run content:sheet-template`
 
@@ -62,3 +64,10 @@ Output files:
 
 - `/Users/almunday/SJP/docs/google-sheet-template/admin-content.csv`
 - `/Users/almunday/SJP/docs/google-sheet-template/content.csv`
+- `/Users/almunday/SJP/docs/google-sheet-template/tabs/*.csv` (one tab file per page key, plus shared tabs)
+- `/Users/almunday/SJP/docs/google-sheet-template/content-formula.txt`
+
+Validate CSV content before publishing:
+
+- `npm run content:sheet-validate` (validates runtime sheet CSV)
+- `npm run content:sheet-validate -- --tabs` (validates split tab CSV files)

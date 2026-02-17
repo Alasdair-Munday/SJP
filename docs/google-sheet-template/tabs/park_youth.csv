@@ -1,0 +1,17 @@
+group,section,label,path,type,value,notes
+pages,pages.park_youth,Heading,pages.park_youth.cornerstone.heading,string,Wednesday Night: Cornerstone,Plain text.
+pages,pages.park_youth,Alt,pages.park_youth.cornerstone.image.alt,string,Park Youth gathered together in the garden,Plain text.
+pages,pages.park_youth,Src,pages.park_youth.cornerstone.image.src,path,/images/park-youth-group.jpg,Use site-relative path starting with /.
+pages,pages.park_youth,Paragraphs 1,pages.park_youth.cornerstone.paragraphs[0],string,"Cornerstone is our youth group for secondary school age, meeting every Wednesday at church from 6:00pm-7:00pm.",Plain text.
+pages,pages.park_youth,Paragraphs 2,pages.park_youth.cornerstone.paragraphs[1],string,"We spend time together in Scripture, discussion, prayer, and friendship.",Plain text.
+pages,pages.park_youth,Cta html,pages.park_youth.cta_html,html,"If you are a parent/carer or young person and would like more details, <a href='/contact' class='underline decoration-[var(--teal)] underline-offset-4'>get in touch</a>.",HTML allowed. Keep links as <a href='...'>text</a>.
+pages,pages.park_youth,Heading,pages.park_youth.sunday_study.heading,string,Sunday: Faith Explorers,Plain text.
+pages,pages.park_youth,Alt,pages.park_youth.sunday_study.images[0].alt,string,Young person leading from the front during a Sunday gathering,Plain text.
+pages,pages.park_youth,Src,pages.park_youth.sunday_study.images[0].src,path,/images/youth-leading-worship.png,Use site-relative path starting with /.
+pages,pages.park_youth,Alt,pages.park_youth.sunday_study.images[1].alt,string,Park Youth enjoying games in the park,Plain text.
+pages,pages.park_youth,Src,pages.park_youth.sunday_study.images[1].src,path,/images/youth-games-1.jpg,Use site-relative path starting with /.
+pages,pages.park_youth,Alt,pages.park_youth.sunday_study.images[2].alt,string,Park Youth taking part in outdoor activities,Plain text.
+pages,pages.park_youth,Src,pages.park_youth.sunday_study.images[2].src,path,/images/youth-games-2.jpg,Use site-relative path starting with /.
+pages,pages.park_youth,Paragraphs 1,pages.park_youth.sunday_study.paragraphs[0],string,We also run a youth Bible study during selected Sunday gatherings for Years 7-10.,Plain text.
+pages,pages.park_youth,Paragraphs 2,pages.park_youth.sunday_study.paragraphs[1],string,"Our heart is to help young people know Jesus, grow in faith, and play a full part in church life.",Plain text.
+pages,pages.park_youth,Title,pages.park_youth.title,string,Park Youth,Plain text.

@@ -1,0 +1,162 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { ArrowRight } from "lucide-react";
+import { getSiteContent } from "../data/site-content";
+
+const content = await getSiteContent();
+const page = content.pages.ministries;
+const give = content.pages.give;
+const belong =
+	page.groups.find((group) => group.id === "belong") ?? page.groups[0];
+const serve =
+	page.groups.find((group) => group.id === "serve") ?? page.groups[0];
+
+const highlightToneStyles: Record<string, string> = {
+	eden: "bg-(--eden-soft)/45",
+	teal: "bg-(--teal-soft)/45",
+	gold: "bg-(--gold-soft)/55",
+};
+---
+
+<Layout title={page.title}>
+	<div class="max-w-7xl mx-auto px-4 py-20 space-y-10">
+		<div class="space-y-4">
+			<h1
+				class="heading-eden-gold theme-display-font text-5xl md:text-6xl font-bold"
+			>
+				{page.title}
+			</h1>
+			<p class="text-xl text-(--ink)/85 max-w-4xl">{page.intro}</p>
+			<div class="flex flex-wrap gap-3">
+				<a href="#belong" class="mission-chip mission-chip--belong"
+					>Belong</a
+				>
+				<a href="#serve" class="mission-chip mission-chip--serve"
+					>Serve</a
+				>
+				<a href="#give" class="mission-chip mission-chip--give">Give</a>
+			</div>
+		</div>
+
+		<section
+			id="belong"
+			class="sketch-panel theme-belong bg-(--eden-soft)/35 p-6 md:p-8 space-y-6 scroll-mt-28"
+		>
+			<div>
+				<h2 class="theme-display-font text-4xl font-bold text-(--ink)">
+					Belong
+				</h2>
+				<p class="text-(--ink)/85 mt-2 max-w-3xl">
+					Belong by coming on Sundays and joining a midweek group.
+				</p>
+			</div>
+
+			<div class="grid md:grid-cols-3 gap-4">
+				{
+					belong.items.map((item) => (
+						<article class="bg-white border-2 border-(--ink) p-5 flex flex-col gap-4">
+							<h3 class="text-2xl font-bold text-(--ink)">
+								{item.title}
+							</h3>
+							<p class="text-(--ink)/85 grow">
+								{item.description}
+							</p>
+							<a
+								href={item.href}
+								class="inline-flex items-center gap-2 font-semibold text-(--ink) hover:text-(--teal) transition-colors"
+							>
+								{item.link_label}
+								<ArrowRight size={16} />
+							</a>
+						</article>
+					))
+				}
+			</div>
+		</section>
+
+		<section
+			id="serve"
+			class="sketch-panel theme-serve bg-(--teal-soft)/35 p-6 md:p-8 space-y-6 scroll-mt-28"
+		>
+			<div>
+				<h2 class="theme-display-font text-4xl font-bold text-(--ink)">
+					Serve
+				</h2>
+				<p class="text-(--ink)/85 mt-2 max-w-3xl">
+					Serve by joining a team or connecting with our local
+					outreach ministries.
+				</p>
+			</div>
+
+			<div class="grid md:grid-cols-3 gap-4">
+				{
+					serve.items.map((item) => (
+						<article class="bg-white border-2 border-(--ink) p-5 flex flex-col gap-4">
+							<h3 class="text-2xl font-bold text-(--ink)">
+								{item.title}
+							</h3>
+							<p class="text-(--ink)/85 grow">
+								{item.description}
+							</p>
+							<a
+								href={item.href}
+								class="inline-flex items-center gap-2 font-semibold text-(--ink) hover:text-(--teal) transition-colors"
+							>
+								{item.link_label}
+								<ArrowRight size={16} />
+							</a>
+						</article>
+					))
+				}
+			</div>
+		</section>
+
+		<section
+			id="give"
+			class="sketch-panel theme-give bg-(--gold-soft)/45 p-6 md:p-8 space-y-6 scroll-mt-28"
+		>
+			<div class="space-y-3">
+				<h2 class="theme-display-font text-4xl font-bold text-(--ink)">
+					Give
+				</h2>
+				<p class="text-(--ink)/90 text-lg">
+					{give.generosity_paragraph}
+				</p>
+			</div>
+
+			<a
+				href={give.online_giving.link}
+				target="_blank"
+				rel="noopener noreferrer"
+				class="inline-flex items-center gap-2 px-6 py-3 bg-(--ink) text-white border-2 border-(--ink) hover:bg-white hover:text-(--ink) transition-colors font-semibold"
+			>
+				{give.online_giving.button_label}
+			</a>
+
+			<div class="grid lg:grid-cols-2 gap-4">
+				<article class="bg-white border-2 border-(--ink) p-6">
+					<p class="font-semibold text-(--ink) mb-3">
+						{give.methods_heading}
+					</p>
+					<ol class="list-decimal pl-6 space-y-2 text-(--ink)/90">
+						{give.methods.map((method) => <li>{method}</li>)}
+					</ol>
+				</article>
+				<article class="bg-white border-2 border-(--ink) p-6 space-y-2">
+					<h3 class="text-2xl font-bold text-(--ink)">
+						{give.bank_details.heading}
+					</h3>
+					{
+						give.bank_details.lines.map((line) => (
+							<p class="text-(--ink)/90">{line}</p>
+						))
+					}
+					<p
+						class="pt-2 text-(--ink)/90"
+						set:html={give.contact_html}
+					/>
+				</article>
+			</div>
+		</section>
+	</div>
+</Layout>

@@ -1,0 +1,15 @@
+group,section,label,path,type,value,notes
+pages,pages.give,Heading,pages.give.bank_details.heading,string,Bank Details,Plain text.
+pages,pages.give,Lines 1,pages.give.bank_details.lines[0],string,Account Name: ST JOHNS PARK P C C,Plain text.
+pages,pages.give,Lines 2,pages.give.bank_details.lines[1],string,Sort Code: 20-76-89,Plain text.
+pages,pages.give,Lines 3,pages.give.bank_details.lines[2],string,Account Number: 60362786,Plain text.
+pages,pages.give,Contact html,pages.give.contact_html,html,"For more information, contact us at <a class='underline decoration-[var(--eden)] underline-offset-4' href='mailto:hello@saintjohnspark.org'>hello@saintjohnspark.org</a>.",HTML allowed. Keep links as <a href='...'>text</a>.
+pages,pages.give,Generosity paragraph,pages.give.generosity_paragraph,string,"Your generosity allows us to build and sustain our Sunday gatherings, midweek ministries, and serve our city. Thank you for giving to St John's.",Plain text.
+pages,pages.give,Methods heading,pages.give.methods_heading,string,Here are the best ways for you to give:,Plain text.
+pages,pages.give,Methods 1,pages.give.methods[0],string,Via the Online Parish Giving Scheme.,Plain text.
+pages,pages.give,Methods 2,pages.give.methods[1],string,Bring your collection to church on Sunday.,Plain text.
+pages,pages.give,Methods 3,pages.give.methods[2],string,Use the card machine at church.,Plain text.
+pages,pages.give,Methods 4,pages.give.methods[3],string,Bank transfer (BACS).,Plain text.
+pages,pages.give,Button label,pages.give.online_giving.button_label,string,Give Online (Parish Giving Scheme),Plain text.
+pages,pages.give,Link,pages.give.online_giving.link,url,https://www.parishgiving.org.uk/donors/find-your-parish/park-st-john-the-evangelist-sheffield/,"Use full URL (https://...), mailto:, or tel:."
+pages,pages.give,Title,pages.give.title,string,Give,Plain text.

@@ -1,0 +1,5 @@
+group,section,label,path,type,value,notes
+pages,pages.what_we_believe,Paragraphs 1,pages.what_we_believe.paragraphs[0],string,"St John's is part of the Church of England in the Diocese of Sheffield. We are committed to being followers of Jesus who love and learn from God, support each other, and serve our community and beyond.",Plain text.
+pages,pages.what_we_believe,Paragraphs 2,pages.what_we_believe.paragraphs[1],string,"Our faith is well summarized in the Apostles' Creed, shared by Christians around the world through the centuries.",Plain text.
+pages,pages.what_we_believe,Paragraphs 3,pages.what_we_believe.paragraphs[2],string,"We believe in God the Father, in Jesus Christ his Son, and in the Holy Spirit; in forgiveness, resurrection, and eternal life in Christ.",Plain text.
+pages,pages.what_we_believe,Title,pages.what_we_believe.title,string,What We Believe,Plain text.

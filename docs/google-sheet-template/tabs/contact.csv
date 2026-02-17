@@ -1,0 +1,13 @@
+group,section,label,path,type,value,notes
+pages,pages.contact,Alt,pages.contact.find_us.image.alt,string,St John's Park church building and grounds,Plain text.
+pages,pages.contact,Src,pages.contact.find_us.image.src,path,/images/community-park-gathering-2.jpg,Use site-relative path starting with /.
+pages,pages.contact,Href,pages.contact.find_us.maps_link.href,url,"https://maps.google.com/?q=Bernard+Street,+Sheffield,+S2+5PU","Use full URL (https://...), mailto:, or tel:."
+pages,pages.contact,Label,pages.contact.find_us.maps_link.label,string,Open in Google Maps,Plain text.
+pages,pages.contact,Paragraphs 1,pages.contact.find_us.paragraphs[0],string,"The address of the church is Bernard Street, Sheffield, S2 5PU.",Plain text.
+pages,pages.contact,Paragraphs 2,pages.contact.find_us.paragraphs[1],html,General enquiries: <a href='mailto:hello@saintjohnspark.org' class='underline decoration-[var(--eden)] underline-offset-4'>hello@saintjohnspark.org</a>,HTML allowed. Keep links as <a href='...'>text</a>.
+pages,pages.contact,Heading,pages.contact.parking.heading,string,Parking,Plain text.
+pages,pages.contact,Paragraphs 1,pages.contact.parking.paragraphs[0],string,We have a steep driveway to a car park just off Bernard Street with limited parking.,Plain text.
+pages,pages.contact,Paragraphs 2,pages.contact.parking.paragraphs[1],string,"Overflow parking is available in the car park behind the flats at the top of the church grounds. From Bernard Street, turn onto Cricket Inn Road, then the first major right onto Maltravers Road, then right again onto St John's Street. Follow the road to the end of the car park and use the public footpath through the old churchyard to reach church.",Plain text.
+pages,pages.contact,Heading,pages.contact.public_transport.heading,string,Public Transport,Plain text.
+pages,pages.contact,Paragraphs 1,pages.contact.public_transport.paragraphs[0],string,We have good public transport links. Hyde Park tram stop is right next to the church.,Plain text.
+pages,pages.contact,Title,pages.contact.title,string,How to Find Us,Plain text.

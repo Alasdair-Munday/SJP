@@ -4,6 +4,8 @@ import { getSiteContent } from "../data/site-content";
 
 const content = await getSiteContent();
 const page = content.pages.safeguarding;
+const safeguardingPolicyDownloadUrl =
+	"https://www.saintjohnspark.org.uk/wp-content/uploads/2025/08/St-Johns-Safeguarding-Policy-2025-2.docx";
 ---
 
 <Layout title={page.title}>
@@ -13,6 +15,14 @@ const page = content.pages.safeguarding;
 		</h1>
 
 		<section class="bg-white border-2 border-(--ink) p-8 space-y-4">
+			<p>
+				<a
+					href={safeguardingPolicyDownloadUrl}
+					class="inline-flex items-center gap-2 px-5 py-2.5 border-2 border-(--ink) text-(--ink) font-semibold hover:bg-(--ink) hover:text-white transition-colors"
+				>
+					Download Safeguarding Policy (DOCX)
+				</a>
+			</p>
 			{
 				page.paragraphs.map((paragraph, index) => (
 					<p

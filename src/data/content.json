@@ -22,16 +22,20 @@
       "href": "/whats-on"
     },
     {
+      "label": "What We Do",
+      "href": "/what-we-do"
+    },
+    {
       "label": "Belong",
-      "href": "/belong"
+      "href": "/what-we-do#belong"
     },
     {
       "label": "Serve",
-      "href": "/serve"
+      "href": "/what-we-do#serve"
     },
     {
       "label": "Give",
-      "href": "/give"
+      "href": "/what-we-do#give"
     },
     {
       "label": "Team",
@@ -45,17 +49,17 @@
   "utility_navigation": [
     {
       "label": "Belong",
-      "href": "/belong",
+      "href": "/what-we-do#belong",
       "tone": "belong"
     },
     {
       "label": "Serve",
-      "href": "/serve",
+      "href": "/what-we-do#serve",
       "tone": "serve"
     },
     {
       "label": "Give",
-      "href": "/give",
+      "href": "/what-we-do#give",
       "tone": "give"
     }
   ],
@@ -73,6 +77,10 @@
       {
         "label": "Talks",
         "href": "/sermons"
+      },
+      {
+        "label": "What We Do",
+        "href": "/what-we-do"
       },
       {
         "label": "Safeguarding",
@@ -132,21 +140,21 @@
           "title": "Belong",
           "desc": "Find transformation, discipleship, and growth through midweek groups, Kids, and Youth communities.",
           "link_text": "FIND OUT MORE",
-          "link_href": "/belong",
+          "link_href": "/what-we-do#belong",
           "color": "teal"
         },
         {
           "title": "Serve",
           "desc": "Join one of our teams and help our church family thrive in worship, welcome, and community service.",
           "link_text": "JOIN A TEAM",
-          "link_href": "/serve",
+          "link_href": "/what-we-do#serve",
           "color": "green"
         },
         {
           "title": "Give",
           "desc": "Your generosity helps sustain Sunday gatherings, midweek ministries, and practical support across our city.",
           "link_text": "SUPPORT THE VISION",
-          "link_href": "/give",
+          "link_href": "/what-we-do#give",
           "color": "gold"
         }
       ]
@@ -161,7 +169,7 @@
       "description": "Join us for our Sunday gathering every week at 10:45am. We gather to worship Jesus, hear the Bible read and explained, and to pray.",
       "service_style": "Our Sunday gathering is informal and interactive, with contemporary worship songs.",
       "kids_heading": "Bringing Kids?",
-      "kids_blurb": "We have Kids and Youth groups (0-14) that meet during our service.",
+      "kids_blurb": "We have Park Kids and Park Youth groups (0-14) that meet during our service.",
       "after_service": "Please join us for refreshments afterwards to hang out as church family.",
       "image": {
         "src": "/images/worship-flags.jpg",
@@ -234,11 +242,11 @@
           "description": "Our welcome and hospitality team create the family environment we love at St John's Park. They welcome people at the door, serve refreshments, and make sure everyone receives a warm welcome."
         },
         {
-          "name": "Kids",
-          "description": "Our Kids team disciples the youngest generation in our church, from under-5s through primary-aged children."
+          "name": "Park Kids Team",
+          "description": "Our Park Kids team disciples the youngest generation in our church, from under-5s through primary-aged children."
         },
         {
-          "name": "Youth",
+          "name": "Park Youth Team",
           "description": "We disciple young people through Sunday Bible study and our midweek youth group Cornerstone, helping them meet and grow in relationship with Jesus."
         },
         {
@@ -246,8 +254,8 @@
           "description": "Our worship team helps us encounter God's presence and give him praise."
         },
         {
-          "name": "Foodbank",
-          "description": "Our Foodbank team serves local people in crisis, providing food parcels and a listening, friendly ear."
+          "name": "Food Bank",
+          "description": "Our Food Bank team serves local people in crisis, providing food parcels and a listening, friendly ear."
         },
         {
           "name": "Lunch Club",
@@ -258,16 +266,16 @@
           "description": "Our cleaning team enables us to welcome people into the building during the week and gather together on Sundays."
         },
         {
-          "name": "Car Park",
-          "description": "Our car park team helps fit everyone in so we can gather together on a Sunday."
+          "name": "Admin",
+          "description": "Our admin team helps with the day-to-day running of the church. This involves helping with buildings, applying for grants, and staying on top of paperwork."
         },
         {
           "name": "Creative",
           "description": "Our creative team uses photography, social media, and video to show what God is doing locally and help people connect with church family."
         },
         {
-          "name": "Production Team",
-          "description": "Our production team makes sure everyone can see and hear clearly during Sunday gatherings."
+          "name": "Audio-Visual Team",
+          "description": "Our audio-visual team helps make sure everyone can see and hear clearly during Sunday gatherings."
         }
       ],
       "outro_html": "Interested in joining a team? Please <a href='/contact' class='underline decoration-[var(--eden)] underline-offset-4'>get in touch</a>."
@@ -294,7 +302,7 @@
           "Account Number: 60362786"
         ]
       },
-      "contact_html": "For more information, contact Catherine at <a class='underline decoration-[var(--eden)] underline-offset-4' href='mailto:StJohnsPark@outlook.com'>StJohnsPark@outlook.com</a>."
+      "contact_html": "For more information, contact us at <a class='underline decoration-[var(--eden)] underline-offset-4' href='mailto:hello@saintjohnspark.org'>hello@saintjohnspark.org</a>."
     },
     "im_new": {
       "title": "I'm New",
@@ -336,6 +344,87 @@
         {
           "label": "stjohnschap.co.uk/what-we-do/celebrating-new-birth",
           "href": "https://www.stjohnschap.co.uk/what-we-do/celebrating-new-birth/"
+        }
+      ]
+    },
+    "ministries": {
+      "title": "What We Do",
+      "intro": "Our church life is shaped by Belonging to God's Family, Serving God's mission, and Giving God everything. These are some ways that we do that.",
+      "groups": [
+        {
+          "id": "belong",
+          "tone": "belong",
+          "heading": "Belong",
+          "items": [
+            {
+              "title": "Park Kids",
+              "description": "We have kids groups (ages 1-11) that meet during our Sunday gathering. Click here to find out more.",
+              "href": "/park-kids",
+              "link_label": "Visit Park Kids"
+            },
+            {
+              "title": "Park Youth",
+              "description": "Park Youth is our collection of groups for secondary school age. Cornerstone youth club on Wednesday evenings and Faith Explorers during our Sunday services.",
+              "href": "/park-youth",
+              "link_label": "Visit Park Youth"
+            },
+            {
+              "title": "Park Communities",
+              "description": "Midweek communities for Scripture, prayer, friendship, and local mission.",
+              "href": "/park-communities",
+              "link_label": "Visit Park Communities"
+            }
+          ]
+        },
+        {
+          "id": "serve",
+          "tone": "serve",
+          "heading": "Serve",
+          "items": [
+            {
+              "title": "Join a Team",
+              "description": "Join a team and help our church family thrive in worship, welcome, practical care, and mission.",
+              "href": "/join-a-team",
+              "link_label": "Join a Team"
+            },
+            {
+              "title": "Food Bank",
+              "description": "Weekly emergency food support in partnership with local agencies and support workers.",
+              "href": "/whats-on#foodbank",
+              "link_label": "Food Bank"
+            },
+            {
+              "title": "Lunch Club",
+              "description": "Weekly free lunch, conversation, and welcome for local residents and neighbours.",
+              "href": "/whats-on#lunch-club",
+              "link_label": "Lunch Club"
+            }
+          ]
+        },
+        {
+          "id": "give",
+          "tone": "give",
+          "heading": "Give",
+          "items": [
+            {
+              "title": "Give Online",
+              "description": "Support the church's mission through secure online giving via the Parish Giving Scheme.",
+              "href": "/give",
+              "link_label": "Give Online"
+            },
+            {
+              "title": "Ways to Give",
+              "description": "Find practical options including Sunday giving, card payments at church, and bank transfer.",
+              "href": "/give",
+              "link_label": "See Giving Options"
+            },
+            {
+              "title": "Generosity in Mission",
+              "description": "Your giving helps sustain Sunday gatherings, midweek ministries, and practical community support.",
+              "href": "/give",
+              "link_label": "Why We Give"
+            }
+          ]
         }
       ]
     },
@@ -454,7 +543,7 @@
       "find_us": {
         "paragraphs": [
           "The address of the church is Bernard Street, Sheffield, S2 5PU.",
-          "General enquiries: <a href='mailto:StJohnsPark@outlook.com' class='underline decoration-[var(--eden)] underline-offset-4'>StJohnsPark@outlook.com</a>"
+          "General enquiries: <a href='mailto:hello@saintjohnspark.org' class='underline decoration-[var(--eden)] underline-offset-4'>hello@saintjohnspark.org</a>"
         ],
         "maps_link": {
           "label": "Open in Google Maps",
@@ -483,38 +572,58 @@
       "title": "Safeguarding",
       "paragraphs": [
         "St John's is committed to high standards in the safeguarding and care of children and vulnerable adults.",
-        "To request our safeguarding policy, please <a href='/contact' class='underline decoration-[var(--eden)] underline-offset-4'>contact us</a>.",
+        "Download our safeguarding policy: <a href='https://www.saintjohnspark.org.uk/wp-content/uploads/2025/08/St-Johns-Safeguarding-Policy-2025-2.docx' class='underline decoration-[var(--eden)] underline-offset-4'>St John's Safeguarding Policy 2025 (DOCX)</a>.",
         "The Diocese of Sheffield's Safeguarding Adviser is Siân Checkley. Contact: 01709 309100 or 07741 013775, or email <a href='mailto:sian.checkley@sheffield.anglican.org' class='underline decoration-[var(--eden)] underline-offset-4'>sian.checkley@sheffield.anglican.org</a>.",
         "Diocese safeguarding information: <a href='https://www.sheffield.anglican.org/support/safeguarding' class='underline decoration-[var(--eden)] underline-offset-4'>sheffield.anglican.org/support/safeguarding</a>"
       ]
     },
     "team": {
       "title": "Meet the Team",
-      "staff_team": {
-        "heading": "St John's Staff Team",
-        "members": [
-          {
-            "name": "Revd Luke Graham",
-            "role": "is the Priest in Charge.",
-            "email": "luke@saintjohnspark.org",
-            "phone": "07538 172907",
-            "phone_href": "tel:+447538172907"
-          },
-          {
-            "name": "Kirsty Dronfield",
-            "role": "is our Centenary Project Children and Families' Leader.",
-            "email": "kirsty.dronfield@centenaryproject.org.uk"
+      "intro": "Our leadership and ministry team serve the church family in worship, discipleship, and community mission.",
+      "members": [
+        {
+          "name": "Revd Luke Graham",
+          "role": "Priest in Charge",
+          "email": "luke@saintjohnspark.org",
+          "bio": "Luke leads the vision and teaching life of St John's Park and helps shape our mission in Park, Sheffield.",
+          "phone": "07538 172907",
+          "phone_href": "tel:+447538172907",
+          "image": {
+            "src": "/images/PXL_20250814_104140063.PORTRAIT.jpg",
+            "alt": "Revd Luke Graham standing outside St John's Park"
           }
-        ]
-      },
-      "wardens": {
-        "heading": "Churchwardens and PCC",
-        "paragraphs": [
-          "<strong>Faustina Nyame</strong> is one of our churchwardens.",
-          "<strong>Elizabeth (Bess) Cooper</strong> is also a churchwarden and a Lay Reader.",
-          "Our PCC serves and supports the life and leadership of the church."
-        ]
-      }
+        },
+        {
+          "name": "Kirsty Dronfield",
+          "role": "Children and Families' Leader",
+          "email": "kirsty@saintjohnspark.org",
+          "bio": "Kirsty helps children and families grow in faith through Park Kids and wider family support across church life.",
+          "image": {
+            "src": "/images/PXL_20250814_104214012.PORTRAIT.jpg",
+            "alt": "Kirsty Dronfield smiling in the church grounds"
+          }
+        },
+        {
+          "name": "Faustina Nyame",
+          "role": "Churchwarden",
+          "email": "hello@saintjohnspark.org",
+          "bio": "Faustina serves as churchwarden, supporting pastoral care and practical leadership across the congregation.",
+          "image": {
+            "src": "/images/PXL_20250814_104234358.PORTRAIT.jpg",
+            "alt": "Faustina Nyame in the church hall"
+          }
+        },
+        {
+          "name": "Elizabeth (Bess) Cooper",
+          "role": "Churchwarden and Lay Reader",
+          "email": "hello@saintjohnspark.org",
+          "bio": "Bess serves the church as a churchwarden and lay reader, helping lead worship and nurture discipleship.",
+          "image": {
+            "src": "/images/PXL_20250814_104143091.PORTRAIT.jpg",
+            "alt": "Elizabeth Cooper in the churchyard"
+          }
+        }
+      ]
     },
     "what_we_believe": {
       "title": "What We Believe",
@@ -559,16 +668,20 @@
         "extra": "We also meet in church on the first Sunday of each month from 10:00-10:30am before the service."
       },
       "foodbank": {
-        "heading": "Foodbank",
-        "time": "Monday 10:00am-12:00pm",
-        "description": "If you are in crisis, we can provide an emergency food parcel and practical support. Citizens Advice and Debt Support workers are available during sessions for those with referrals.",
-        "referrals_heading": "Referral numbers:",
+        "heading": "Food Bank",
+        "time": "Every Monday 10am - 12pm",
+        "where": "St John's Park, Bernard Street, S2 5PU",
+        "who": "Anyone with a referral from a support worker or agency",
+        "description": "The St John's Park food bank is provided in collaboration with Sheffield Food and Community Trust and Trussell.",
+        "referral_policy": "The food bank is accessible by referral only, and provides an emergency parcel for those in food crisis.",
+        "support_description": "At the food bank, we offer support with more than just food; Citizens Advice and Debt Support workers are available during the food bank session for those with referrals.",
+        "referrals_heading": "To request a referral for a food parcel call either:",
         "referrals": [
-          "Help Through Hardship: 0808 208 2138 (Mon-Fri, 9:00am-5:00pm)",
-          "Citizens Advice Sheffield: 0808 278 7820 (Mon-Fri, 10:00am-4:00pm, option 4)",
-          "Sheffield S6 helpline: 0114 321 0733 (Mon-Fri, 10:00am-1:00pm)"
+          "Help Through Hardship: 08082082138 Monday to Friday 9am - 5pm. Translators available.",
+          "Citizens Advice Sheffield: 08082787820 Monday to Friday 10am - 4pm. Select option 4 for Advice Line.",
+          "Sheffield S6 helpline: 0114 321 0733 Monday to Friday 10am-1pm."
         ],
-        "volunteer_html": "Interested in volunteering? Contact Hannah at <a href='mailto:hannah@saintjohnspark.org' class='underline decoration-[var(--eden)] underline-offset-4'>hannah@saintjohnspark.org</a>."
+        "volunteer_html": "If you are interested in volunteering at our food bank, please contact Hannah Graham for more information: <a href='mailto:hannah@saintjohnspark.org' class='underline decoration-[var(--eden)] underline-offset-4'>hannah@saintjohnspark.org</a>."
       },
       "lunch_club": {
         "heading": "Lunch Club",

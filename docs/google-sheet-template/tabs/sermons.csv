@@ -1,0 +1,6 @@
+group,section,label,path,type,value,notes
+pages,pages.sermons,Audio coming soon,pages.sermons.audio_coming_soon,string,Audio coming soon.,Plain text.
+pages,pages.sermons,Intro primary,pages.sermons.intro_primary,string,Catch up on our latest Sunday talks.,Plain text.
+pages,pages.sermons,Intro secondary,pages.sermons.intro_secondary,string,"Hear the Bible read, explained, and applied to everyday life through talks from members of our church family.",Plain text.
+pages,pages.sermons,Rss button label,pages.sermons.rss_button_label,string,Subscribe via RSS,Plain text.
+pages,pages.sermons,Title,pages.sermons.title,string,Talks,Plain text.

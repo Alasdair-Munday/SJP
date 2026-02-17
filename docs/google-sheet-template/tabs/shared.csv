@@ -1,0 +1,50 @@
+group,section,label,path,type,value,notes
+components,components.calendar_events,Empty message,components.calendar_events.empty_message,string,Check out What's On for current activities.,Plain text.
+components,components.calendar_events,View whats on label,components.calendar_events.view_whats_on_label,string,View What's On ->,Plain text.
+footer,footer.quick_links,Href,footer.quick_links[0].href,path,/im-new,Use site-relative path starting with /.
+footer,footer.quick_links,Label,footer.quick_links[0].label,string,I'm New,Plain text.
+footer,footer.quick_links,Href,footer.quick_links[1].href,path,/whats-on,Use site-relative path starting with /.
+footer,footer.quick_links,Label,footer.quick_links[1].label,string,What's On,Plain text.
+footer,footer.quick_links,Href,footer.quick_links[2].href,path,/sermons,Use site-relative path starting with /.
+footer,footer.quick_links,Label,footer.quick_links[2].label,string,Talks,Plain text.
+footer,footer.quick_links,Href,footer.quick_links[3].href,path,/ministries,Use site-relative path starting with /.
+footer,footer.quick_links,Label,footer.quick_links[3].label,string,Ministries,Plain text.
+footer,footer.quick_links,Href,footer.quick_links[4].href,path,/safeguarding,Use site-relative path starting with /.
+footer,footer.quick_links,Label,footer.quick_links[4].label,string,Safeguarding,Plain text.
+footer,footer.quick_links,Href,footer.quick_links[5].href,path,/contact,Use site-relative path starting with /.
+footer,footer.quick_links,Label,footer.quick_links[5].label,string,Contact,Plain text.
+footer,footer.title,Title,footer.title,string,St John's Park,Plain text.
+navigation,navigation.href,Href,navigation[0].href,path,/sundays,Use site-relative path starting with /.
+navigation,navigation.label,Label,navigation[0].label,string,Sundays,Plain text.
+navigation,navigation.href,Href,navigation[1].href,path,/sermons,Use site-relative path starting with /.
+navigation,navigation.label,Label,navigation[1].label,string,Talks,Plain text.
+navigation,navigation.href,Href,navigation[2].href,path,/whats-on,Use site-relative path starting with /.
+navigation,navigation.label,Label,navigation[2].label,string,What's On,Plain text.
+navigation,navigation.href,Href,navigation[3].href,path,/ministries,Use site-relative path starting with /.
+navigation,navigation.label,Label,navigation[3].label,string,Ministries,Plain text.
+navigation,navigation.href,Href,navigation[4].href,path,/belong,Use site-relative path starting with /.
+navigation,navigation.label,Label,navigation[4].label,string,Belong,Plain text.
+navigation,navigation.href,Href,navigation[5].href,path,/serve,Use site-relative path starting with /.
+navigation,navigation.label,Label,navigation[5].label,string,Serve,Plain text.
+navigation,navigation.href,Href,navigation[6].href,path,/give,Use site-relative path starting with /.
+navigation,navigation.label,Label,navigation[6].label,string,Give,Plain text.
+navigation,navigation.href,Href,navigation[7].href,path,/team,Use site-relative path starting with /.
+navigation,navigation.label,Label,navigation[7].label,string,Team,Plain text.
+navigation,navigation.href,Href,navigation[8].href,path,/contact,Use site-relative path starting with /.
+navigation,navigation.label,Label,navigation[8].label,string,Contact,Plain text.
+site,site.address,Address,site.address,string,"Bernard Street, Sheffield, S2 5PU",Plain text.
+site,site.default_site_url,Default site url,site.default_site_url,url,https://stjohnspark.church,"Use full URL (https://...), mailto:, or tel:."
+site,site.meta_description,Meta description,site.meta_description,string,St John's Park Church,Plain text.
+site,site.mission,Mission,site.mission,string,"Belong, Serve, Give",Plain text.
+site,site.subtitle,Subtitle,site.subtitle,string,"A community of Jesus-followers in Park, Sheffield.",Plain text.
+site,site.title,Title,site.title,string,St John's Park Church,Plain text.
+site,site.vision,Vision,site.vision,string,Eden in Park,Plain text.
+utility_navigation,utility_navigation.href,Href,utility_navigation[0].href,path,/belong,Use site-relative path starting with /.
+utility_navigation,utility_navigation.label,Label,utility_navigation[0].label,string,Belong,Plain text.
+utility_navigation,utility_navigation.tone,Tone,utility_navigation[0].tone,string,belong,Plain text.
+utility_navigation,utility_navigation.href,Href,utility_navigation[1].href,path,/serve,Use site-relative path starting with /.
+utility_navigation,utility_navigation.label,Label,utility_navigation[1].label,string,Serve,Plain text.
+utility_navigation,utility_navigation.tone,Tone,utility_navigation[1].tone,string,serve,Plain text.
+utility_navigation,utility_navigation.href,Href,utility_navigation[2].href,path,/give,Use site-relative path starting with /.
+utility_navigation,utility_navigation.label,Label,utility_navigation[2].label,string,Give,Plain text.
+utility_navigation,utility_navigation.tone,Tone,utility_navigation[2].tone,string,give,Plain text.

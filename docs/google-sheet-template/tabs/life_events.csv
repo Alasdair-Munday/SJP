@@ -1,0 +1,7 @@
+group,section,label,path,type,value,notes
+pages,pages.life_events,Intro,pages.life_events.intro,string,"For information about baptisms, weddings, and funerals:",Plain text.
+pages,pages.life_events,Href,pages.life_events.links[0].href,url,https://www.melksham.church/life-events,"Use full URL (https://...), mailto:, or tel:."
+pages,pages.life_events,Label,pages.life_events.links[0].label,string,melksham.church/life-events,Plain text.
+pages,pages.life_events,Href,pages.life_events.links[1].href,url,https://www.stjohnschap.co.uk/what-we-do/celebrating-new-birth/,"Use full URL (https://...), mailto:, or tel:."
+pages,pages.life_events,Label,pages.life_events.links[1].label,string,stjohnschap.co.uk/what-we-do/celebrating-new-birth,Plain text.
+pages,pages.life_events,Title,pages.life_events.title,string,Life Events,Plain text.

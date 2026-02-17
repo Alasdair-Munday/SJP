@@ -1,0 +1,29 @@
+group,section,label,path,type,value,notes
+pages,pages.team,Intro,pages.team.intro,string,"Our leadership and ministry team serve the church family in worship, discipleship, and community mission.",Plain text.
+pages,pages.team,Bio,pages.team.members[0].bio,string,"Luke leads the vision and teaching life of St John's Park and helps shape our mission in Park, Sheffield.",Plain text.
+pages,pages.team,Email,pages.team.members[0].email,string,luke@saintjohnspark.org,Plain text.
+pages,pages.team,Alt,pages.team.members[0].image.alt,string,Revd Luke Graham standing outside St John's Park,Plain text.
+pages,pages.team,Src,pages.team.members[0].image.src,path,/images/PXL_20250814_104140063.PORTRAIT.jpg,Use site-relative path starting with /.
+pages,pages.team,Name,pages.team.members[0].name,string,Revd Luke Graham,Plain text.
+pages,pages.team,Phone,pages.team.members[0].phone,string,07538 172907,Plain text.
+pages,pages.team,Phone href,pages.team.members[0].phone_href,url,tel:+447538172907,"Use full URL (https://...), mailto:, or tel:."
+pages,pages.team,Role,pages.team.members[0].role,string,Priest in Charge,Plain text.
+pages,pages.team,Bio,pages.team.members[1].bio,string,Kirsty helps children and families grow in faith through Park Kids and wider family support across church life.,Plain text.
+pages,pages.team,Email,pages.team.members[1].email,string,kirsty.dronfield@centenaryproject.org.uk,Plain text.
+pages,pages.team,Alt,pages.team.members[1].image.alt,string,Kirsty Dronfield smiling in the church grounds,Plain text.
+pages,pages.team,Src,pages.team.members[1].image.src,path,/images/PXL_20250814_104214012.PORTRAIT.jpg,Use site-relative path starting with /.
+pages,pages.team,Name,pages.team.members[1].name,string,Kirsty Dronfield,Plain text.
+pages,pages.team,Role,pages.team.members[1].role,string,Children and Families' Leader,Plain text.
+pages,pages.team,Bio,pages.team.members[2].bio,string,"Faustina serves as churchwarden, supporting pastoral care and practical leadership across the congregation.",Plain text.
+pages,pages.team,Email,pages.team.members[2].email,string,hello@saintjohnspark.org,Plain text.
+pages,pages.team,Alt,pages.team.members[2].image.alt,string,Faustina Nyame in the church hall,Plain text.
+pages,pages.team,Src,pages.team.members[2].image.src,path,/images/PXL_20250814_104234358.PORTRAIT.jpg,Use site-relative path starting with /.
+pages,pages.team,Name,pages.team.members[2].name,string,Faustina Nyame,Plain text.
+pages,pages.team,Role,pages.team.members[2].role,string,Churchwarden,Plain text.
+pages,pages.team,Bio,pages.team.members[3].bio,string,"Bess serves the church as a churchwarden and lay reader, helping lead worship and nurture discipleship.",Plain text.
+pages,pages.team,Email,pages.team.members[3].email,string,hello@saintjohnspark.org,Plain text.
+pages,pages.team,Alt,pages.team.members[3].image.alt,string,Elizabeth Cooper in the churchyard,Plain text.
+pages,pages.team,Src,pages.team.members[3].image.src,path,/images/PXL_20250814_104143091.PORTRAIT.jpg,Use site-relative path starting with /.
+pages,pages.team,Name,pages.team.members[3].name,string,Elizabeth (Bess) Cooper,Plain text.
+pages,pages.team,Role,pages.team.members[3].role,string,Churchwarden and Lay Reader,Plain text.
+pages,pages.team,Title,pages.team.title,string,Meet the Team,Plain text.

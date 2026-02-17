@@ -1,0 +1,40 @@
+group,section,label,path,type,value,notes
+pages,pages.whats_on,Description,pages.whats_on.foodbank.description,string,The St John's Park food bank is provided in collaboration with Sheffield Food and Community Trust and Trussell.,Plain text.
+pages,pages.whats_on,Heading,pages.whats_on.foodbank.heading,string,Food Bank,Plain text.
+pages,pages.whats_on,Referral policy,pages.whats_on.foodbank.referral_policy,string,"The food bank is accessible by referral only, and provides an emergency parcel for those in food crisis.",Plain text.
+pages,pages.whats_on,Referrals heading,pages.whats_on.foodbank.referrals_heading,string,To request a referral for a food parcel call either:,Plain text.
+pages,pages.whats_on,Referrals 1,pages.whats_on.foodbank.referrals[0],string,Help Through Hardship: 08082082138 Monday to Friday 9am - 5pm. Translators available.,Plain text.
+pages,pages.whats_on,Referrals 2,pages.whats_on.foodbank.referrals[1],string,Citizens Advice Sheffield: 08082787820 Monday to Friday 10am - 4pm. Select option 4 for Advice Line.,Plain text.
+pages,pages.whats_on,Referrals 3,pages.whats_on.foodbank.referrals[2],string,Sheffield S6 helpline: 0114 321 0733 Monday to Friday 10am-1pm.,Plain text.
+pages,pages.whats_on,Support description,pages.whats_on.foodbank.support_description,string,"At the food bank, we offer support with more than just food; Citizens Advice and Debt Support workers are available during the food bank session for those with referrals.",Plain text.
+pages,pages.whats_on,Time,pages.whats_on.foodbank.time,string,Every Monday 10am - 12pm,Plain text.
+pages,pages.whats_on,Volunteer html,pages.whats_on.foodbank.volunteer_html,html,"If you are interested in volunteering at our food bank, please contact Hannah Graham for more information: <a href='mailto:hannah@saintjohnspark.org' class='underline decoration-[var(--eden)] underline-offset-4'>hannah@saintjohnspark.org</a>.",HTML allowed. Keep links as <a href='...'>text</a>.
+pages,pages.whats_on,Where,pages.whats_on.foodbank.where,string,"St John's Park, Bernard Street, S2 5PU",Plain text.
+pages,pages.whats_on,Who,pages.whats_on.foodbank.who,string,Anyone with a referral from a support worker or agency,Plain text.
+pages,pages.whats_on,Import calendar label,pages.whats_on.import_calendar_label,string,Import Calendar,Plain text.
+pages,pages.whats_on,Description,pages.whats_on.lunch_club.description,string,"Join us every Monday for soup, bread, a hot drink, and a chat. All are welcome, and it is free.",Plain text.
+pages,pages.whats_on,Heading,pages.whats_on.lunch_club.heading,string,Lunch Club,Plain text.
+pages,pages.whats_on,Time,pages.whats_on.lunch_club.time,string,Monday 11:40am-12:40pm,Plain text.
+pages,pages.whats_on,Button label,pages.whats_on.midweek_online_prayers.button_label,string,Join Zoom Meeting,Plain text.
+pages,pages.whats_on,Description,pages.whats_on.midweek_online_prayers.description,string,Monday to Friday at 8:00am for 30 minutes on Zoom.,Plain text.
+pages,pages.whats_on,Extra,pages.whats_on.midweek_online_prayers.extra,string,We also meet in church on the first Sunday of each month from 10:00-10:30am before the service.,Plain text.
+pages,pages.whats_on,Heading,pages.whats_on.midweek_online_prayers.heading,string,Midweek Online Prayers,Plain text.
+pages,pages.whats_on,Meeting id,pages.whats_on.midweek_online_prayers.meeting_id,string,323 564 9987,Plain text.
+pages,pages.whats_on,Passcode,pages.whats_on.midweek_online_prayers.passcode,string,483559,Plain text.
+pages,pages.whats_on,Zoom link,pages.whats_on.midweek_online_prayers.zoom_link,url,https://zoom.us/j/3235649987?pwd=483559,"Use full URL (https://...), mailto:, or tel:."
+pages,pages.whats_on,Description,pages.whats_on.seasonal_events.description,string,"Throughout the year we host seasonal gatherings for all ages, including Christmas events and community celebrations.",Plain text.
+pages,pages.whats_on,Heading,pages.whats_on.seasonal_events.heading,string,Seasonal Events,Plain text.
+pages,pages.whats_on,Alt,pages.whats_on.seasonal_events.images[0].alt,string,Children and families taking part in a Christingle service,Plain text.
+pages,pages.whats_on,Src,pages.whats_on.seasonal_events.images[0].src,path,/images/christingle.jpg,Use site-relative path starting with /.
+pages,pages.whats_on,Alt,pages.whats_on.seasonal_events.images[1].alt,string,Community carol singing at the church entrance,Plain text.
+pages,pages.whats_on,Src,pages.whats_on.seasonal_events.images[1].src,path,/images/carols-doorstep.jpg,Use site-relative path starting with /.
+pages,pages.whats_on,Subtitle,pages.whats_on.subtitle,string,Weekly church life and upcoming events in one place.,Plain text.
+pages,pages.whats_on,Description,pages.whats_on.sunday_gathering.description,string,"Our Sunday gathering happens every Sunday at 10:45am and is for all ages. We gather to worship Jesus, hear from God's Word, and pray together.",Plain text.
+pages,pages.whats_on,Heading,pages.whats_on.sunday_gathering.heading,string,Sunday Gathering,Plain text.
+pages,pages.whats_on,Alt,pages.whats_on.sunday_gathering.image.alt,string,Community activities in the church grounds,Plain text.
+pages,pages.whats_on,Src,pages.whats_on.sunday_gathering.image.src,path,/images/community-fun-day.jpg,Use site-relative path starting with /.
+pages,pages.whats_on,Title,pages.whats_on.title,string,What's On,Plain text.
+pages,pages.whats_on,Description,pages.whats_on.upcoming_events.description,string,Pulled from our live church calendar.,Plain text.
+pages,pages.whats_on,Empty message,pages.whats_on.upcoming_events.empty_message,string,No upcoming events found right now. Please check back soon.,Plain text.
+pages,pages.whats_on,Heading,pages.whats_on.upcoming_events.heading,string,Upcoming Events,Plain text.
+pages,pages.whats_on,Jump label,pages.whats_on.upcoming_events.jump_label,string,See regular weekly activities,Plain text.
