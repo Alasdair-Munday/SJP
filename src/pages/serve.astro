@@ -57,19 +57,19 @@ const teams = [
 
 <Layout title="Serve">
   <div class="theme-serve max-w-5xl mx-auto px-4 py-20 space-y-10">
-    <h1 class="heading-eden-gold font-['Newsreader'] text-5xl md:text-6xl font-bold">Serve</h1>
+    <h1 class="heading-eden-gold theme-display-font text-5xl md:text-6xl font-bold">Serve</h1>
 
-    <p class="text-xl text-[#0F2830]/90">We are a church family, and we need different people to help our family thrive. If you are part of St John's, we encourage you to join and serve one of our teams.</p>
+    <p class="text-xl text-[var(--ink)]/90">We are a church family, and we need different people to help our family thrive. If you are part of St John's, we encourage you to join and serve one of our teams.</p>
 
     <div class="grid md:grid-cols-2 gap-6">
       {teams.map((team) => (
-        <div class="bg-white border-2 border-[#0F2830] p-6 space-y-3">
-          <h2 class="text-2xl font-bold text-[#0F2830]">{team.name}</h2>
-          <p class="text-[#0F2830]/90">{team.description}</p>
+        <div class="bg-white border-2 border-[var(--ink)] p-6 space-y-3">
+          <h2 class="text-2xl font-bold text-[var(--ink)]">{team.name}</h2>
+          <p class="text-[var(--ink)]/90">{team.description}</p>
         </div>
       ))}
     </div>
 
-    <p class="text-[#0F2830]/90">Interested in joining a team? Please <a href="/contact" class="underline decoration-[#45B074] underline-offset-4">get in touch</a>.</p>
+    <p class="text-[var(--ink)]/90">Interested in joining a team? Please <a href="/contact" class="underline decoration-[var(--eden)] underline-offset-4">get in touch</a>.</p>
   </div>
 </Layout>

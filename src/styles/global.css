@@ -1,17 +1,156 @@
 @import "tailwindcss";
 
 :root {
+  --font-body: "Inter", "Segoe UI", sans-serif;
+  --font-display: "Newsreader", Georgia, serif;
+  --font-hand: "Caveat", "Comic Sans MS", cursive;
+
   --ink: #17343b;
   --teal: #2f9aa4;
-  --eden: #45B074;
+  --eden: #45b074;
+  --gold: #d9ad3f;
+
   --paper: color-mix(in oklab, white 99.3%, var(--gold) 0.7%);
   --paper-soft: color-mix(in oklab, white 99.88%, var(--gold) 0.12%);
-  --gold: #d9ad3f;
+  --paper-line: #e8e8e0;
+  --panel-soft: #f9faf8;
+  --eden-soft: #eaf7ef;
+  --teal-soft: #e9f3f4;
+  --gold-soft: #f8f0dc;
+
+  --hero-overlay-start: var(--ink);
+  --hero-overlay-mid: color-mix(in oklab, var(--ink) 84%, black);
+  --hero-overlay-end: color-mix(in oklab, var(--teal) 60%, black);
+  --hero-shadow-start: color-mix(in oklab, var(--ink) 78%, black);
+
+  --utility-start: #2f9aa4;
+  --utility-mid: #2a8c95;
+  --utility-end: #347f86;
+
+  --footer-layer-1: linear-gradient(140deg, #2f9aa4 0%, #2a8c95 45%, #347f86 100%);
+  --footer-layer-2: url("/images/line-drawing.png");
+  --footer-layer-2-size: min(900px, 90%);
+  --footer-layer-2-position: left -2rem bottom -3rem;
+  --footer-text: #ffffff;
+
+  --site-background-image: none;
+  --site-background-size: auto;
+  --site-background-position: center;
 }
 
+html[data-theme="garden-city"] {
+  --font-body: "Manrope", "Segoe UI", sans-serif;
+  --font-display: "Fraunces", "Newsreader", serif;
+  --font-hand: "Caveat", cursive;
+
+  --ink: #132925;
+  --teal: #2e7f81;
+  --eden: #61bb6b;
+  --gold: #e7bc60;
+
+  --paper: #f3f2e7;
+  --paper-soft: #ecebe0;
+  --paper-line: #cfd4c8;
+  --panel-soft: #e8eee6;
+  --eden-soft: #ddefd7;
+  --teal-soft: #d8e8ea;
+  --gold-soft: #efe2c7;
+
+  --hero-overlay-start: #112520;
+  --hero-overlay-mid: #1f4039;
+  --hero-overlay-end: #4f8253;
+  --hero-shadow-start: #0d1d19;
+
+  --utility-start: #1f6d63;
+  --utility-mid: #2f8b72;
+  --utility-end: #70974f;
+
+  --footer-layer-1: linear-gradient(148deg, #1b4238 0%, #2d6b53 38%, #5d8347 100%);
+  --footer-layer-2: repeating-linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.12) 0px,
+    rgba(255, 255, 255, 0.12) 1px,
+    rgba(255, 255, 255, 0) 1px,
+    rgba(255, 255, 255, 0) 48px
+  );
+  --footer-layer-2-size: 48px 100%;
+  --footer-layer-2-position: center;
+  --footer-text: #f6fced;
+
+  --site-background-image:
+    radial-gradient(circle at 12% 8%, rgba(97, 187, 107, 0.15) 0%, rgba(97, 187, 107, 0) 35%),
+    radial-gradient(circle at 90% 18%, rgba(46, 127, 129, 0.11) 0%, rgba(46, 127, 129, 0) 40%),
+    repeating-linear-gradient(
+      90deg,
+      rgba(19, 41, 37, 0.032) 0px,
+      rgba(19, 41, 37, 0.032) 1px,
+      rgba(19, 41, 37, 0) 1px,
+      rgba(19, 41, 37, 0) 68px
+    );
+  --site-background-size: auto, auto, 68px 100%;
+  --site-background-position: center, center, center;
+}
+
+html[data-theme="line-drawing"] {
+  --font-body: "Nunito Sans", "Segoe UI", sans-serif;
+  --font-display: "Amatic SC", "Caveat", cursive;
+  --font-hand: "Caveat", cursive;
+
+  --ink: #0d424d;
+  --teal: #2ba3b0;
+  --eden: #79cda2;
+  --gold: #efd78f;
+
+  --paper: #eaf5f7;
+  --paper-soft: #e1f0f2;
+  --paper-line: #a8ced4;
+  --panel-soft: #d8ecef;
+  --eden-soft: #d9efdf;
+  --teal-soft: #cce7eb;
+  --gold-soft: #efe5c9;
+
+  --hero-overlay-start: #136272;
+  --hero-overlay-mid: #1a7f8f;
+  --hero-overlay-end: #26a4b2;
+  --hero-shadow-start: #0b3640;
+
+  --utility-start: #1f9baa;
+  --utility-mid: #1f94a3;
+  --utility-end: #188b98;
+
+  --footer-layer-1: linear-gradient(145deg, #2098a9 0%, #1d8f9d 50%, #19808e 100%);
+  --footer-layer-2: url("/images/line-drawing.png");
+  --footer-layer-2-size: min(980px, 92%);
+  --footer-layer-2-position: center bottom -2.8rem;
+  --footer-text: #f8fdff;
+
+  --site-background-image:
+    radial-gradient(circle at 15% 12%, rgba(255, 255, 255, 0.38) 0%, rgba(255, 255, 255, 0) 42%),
+    radial-gradient(circle at 84% 26%, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 48%);
+  --site-background-size: auto, auto;
+  --site-background-position: center, center;
+}
+
+html,
 body {
+  min-height: 100%;
+}
+
+.site-shell {
   background-color: var(--paper-soft);
+  background-image: var(--site-background-image);
+  background-size: var(--site-background-size);
+  background-position: var(--site-background-position);
   color: var(--ink);
+  font-family: var(--font-body);
+}
+
+.theme-display-font {
+  font-family: var(--font-display);
+}
+
+html[data-theme="line-drawing"] .theme-display-font {
+  letter-spacing: 0.02em;
 }
 
 .sketch-panel {
@@ -21,6 +160,22 @@ body {
   box-shadow:
     0 9px 18px rgba(23, 52, 59, 0.08),
     1px 1px 0 rgba(23, 52, 59, 0.12);
+}
+
+html[data-theme="garden-city"] .sketch-panel {
+  border-color: color-mix(in oklab, var(--ink) 74%, white);
+  border-radius: 20px 14px 18px 14px;
+  box-shadow:
+    0 16px 28px rgba(19, 41, 37, 0.1),
+    0 0 0 1px rgba(255, 255, 255, 0.4) inset;
+}
+
+html[data-theme="line-drawing"] .sketch-panel {
+  border-width: 3px;
+  border-radius: 20px 16px 24px 14px;
+  box-shadow:
+    5px 6px 0 color-mix(in oklab, var(--ink) 76%, white 24%),
+    0 8px 24px rgba(13, 66, 77, 0.12);
 }
 
 .heading-eden-gold {
@@ -60,6 +215,10 @@ body {
   box-shadow: 0 4px 10px rgba(23, 52, 59, 0.22);
 }
 
+html[data-theme="line-drawing"] .mission-chip {
+  border-radius: 26px 30px 20px 32px;
+}
+
 .mission-chip--belong {
   background: color-mix(in oklab, var(--eden) 38%, white);
   color: color-mix(in oklab, var(--ink) 62%, var(--eden) 38%);
@@ -88,8 +247,8 @@ body {
 }
 
 .teal-field {
-  background: linear-gradient(140deg, #2f9aa4 0%, #2a8c95 45%, #347f86 100%);
-  color: #17343b;
+  background: linear-gradient(140deg, var(--utility-start) 0%, var(--utility-mid) 45%, var(--utility-end) 100%);
+  color: color-mix(in oklab, var(--ink) 82%, white);
 }
 
 .ground-line {
@@ -107,20 +266,63 @@ body {
 }
 
 .hand-note {
-  font-family: "Caveat", "Comic Sans MS", cursive;
+  font-family: var(--font-hand);
   letter-spacing: 0.02em;
 }
 
-.line-drawing-hero {
-  background-image: linear-gradient(140deg, #2f9aa4 0%, #2a8c95 45%, #347f86 100%), url("/images/line-drawing.png");
-  background-size: cover, min(1200px, 95%);
-  background-position: center, right 2rem bottom -1.2rem;
+.themed-hero {
+  isolation: isolate;
+}
+
+.hero-overlay {
+  background: linear-gradient(
+    124deg,
+    var(--hero-overlay-start) 0%,
+    var(--hero-overlay-mid) 52%,
+    var(--hero-overlay-end) 100%
+  );
+  mix-blend-mode: multiply;
+}
+
+.hero-shadow-fade {
+  background: linear-gradient(180deg, var(--hero-shadow-start) 0%, transparent 62%);
+  opacity: 0.88;
+}
+
+.hero-primary-cta {
+  box-shadow: 0 0 20px color-mix(in oklab, var(--gold) 34%, transparent);
+}
+
+.hero-primary-cta:hover {
+  box-shadow: 0 0 30px color-mix(in oklab, var(--gold) 22%, white);
+}
+
+html[data-theme="garden-city"] .hero-primary-cta {
+  border-radius: 999px;
+}
+
+html[data-theme="line-drawing"] .hero-primary-cta {
+  border: 2px solid color-mix(in oklab, var(--ink) 60%, white);
+}
+
+.themed-footer,
+.line-drawing-footer {
+  color: var(--footer-text);
+  background-image: var(--footer-layer-1), var(--footer-layer-2);
+  background-size: cover, var(--footer-layer-2-size);
+  background-position: center, var(--footer-layer-2-position);
   background-repeat: no-repeat, no-repeat;
 }
 
-.line-drawing-footer {
-  background-image: linear-gradient(140deg, #2f9aa4 0%, #2a8c95 45%, #347f86 100%), url("/images/line-drawing.png");
-  background-size: cover, min(900px, 90%);
-  background-position: center, left -2rem bottom -3rem;
-  background-repeat: no-repeat, no-repeat;
+html[data-theme="line-drawing"] .themed-footer,
+html[data-theme="line-drawing"] .line-drawing-footer {
+  border-top-style: dashed;
+}
+
+html[data-theme="garden-city"] nav {
+  box-shadow: 0 10px 30px rgba(19, 41, 37, 0.08);
+}
+
+html[data-theme="line-drawing"] nav {
+  border-bottom-style: dashed;
 }

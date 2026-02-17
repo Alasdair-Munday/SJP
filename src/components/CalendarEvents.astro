@@ -13,17 +13,17 @@ const events = await getUpcomingEvents(3, true);
 <div class="space-y-4">
   {
     events.length === 0 ? (
-      <div class="p-4 bg-white/50 border-[3px] border-[#0F2830] text-[#0F2830]">
+      <div class="p-4 bg-white/50 border-[3px] border-[var(--ink)] text-[var(--ink)]">
         <p class="font-bold">Check out What's On for current activities.</p>
       </div>
     ) : (
       events.map((event) => (
         <a
           href={`/events/${event.slug}`}
-          class="block bg-white border-[3px] border-[#0F2830] p-6 shadow-[4px_4px_0px_0px_#45B074] hover:shadow-none hover:translate-y-1 transition-all"
+          class="block bg-white border-[3px] border-[var(--ink)] p-6 shadow-[4px_4px_0px_0px_var(--eden)] hover:shadow-none hover:translate-y-1 transition-all"
         >
           <div class="flex items-start gap-4">
-            <div class="bg-[#0F2830] text-white p-3 flex flex-col items-center justify-center min-w-16">
+            <div class="bg-[var(--ink)] text-white p-3 flex flex-col items-center justify-center min-w-16">
               <span class="text-xs font-bold uppercase tracking-wider">
                 {formatEventMonthShort(event.start, event.timeZone)}
               </span>
@@ -32,10 +32,10 @@ const events = await getUpcomingEvents(3, true);
               </span>
             </div>
             <div class="flex-1">
-              <h3 class="text-xl font-bold uppercase text-[#0F2830] leading-tight mb-2">
+              <h3 class="text-xl font-bold uppercase text-[var(--ink)] leading-tight mb-2">
                 {event.title}
               </h3>
-              <div class="flex flex-col gap-1 text-sm font-medium text-[#0F2830]/80">
+              <div class="flex flex-col gap-1 text-sm font-medium text-[var(--ink)]/80">
                 <div class="flex items-center gap-2">
                   <Clock size={16} />
                   <span>{formatEventTime(event.start, event.timeZone)}</span>
@@ -52,7 +52,7 @@ const events = await getUpcomingEvents(3, true);
               <img
                 src={event.thumbnailUrl}
                 alt={`Thumbnail for ${event.title}`}
-                class="hidden sm:block w-28 h-20 object-cover border-2 border-[#0F2830]"
+                class="hidden sm:block w-28 h-20 object-cover border-2 border-[var(--ink)]"
                 loading="lazy"
               />
             )}
@@ -64,7 +64,7 @@ const events = await getUpcomingEvents(3, true);
   <div class="pt-4 text-center">
     <a
       href="/whats-on#upcoming-events"
-      class="inline-flex items-center gap-2 font-bold uppercase tracking-wider text-[#0F2830] hover:text-[#45B074] transition-colors border-b-2 border-transparent hover:border-[#45B074]"
+      class="inline-flex items-center gap-2 font-bold uppercase tracking-wider text-[var(--ink)] hover:text-[var(--eden)] transition-colors border-b-2 border-transparent hover:border-[var(--eden)]"
     >
       View What's On ->
     </a>

@@ -32,57 +32,57 @@ const location = event.location || "St John's Park Church";
   <div class="max-w-4xl mx-auto px-4 py-20 space-y-8">
     <a
       href="/whats-on#upcoming-events"
-      class="inline-flex items-center gap-2 text-[#0F2830] font-semibold hover:text-[#45B074] transition-colors"
+      class="inline-flex items-center gap-2 text-[var(--ink)] font-semibold hover:text-[var(--eden)] transition-colors"
     >
       &larr; Back to What's On
     </a>
 
-    <section class="bg-white border-2 border-[#0F2830] p-8 space-y-8">
-      <h1 class="font-['Newsreader'] text-4xl md:text-5xl font-bold text-[#0F2830]">
+    <section class="bg-white border-2 border-[var(--ink)] p-8 space-y-8">
+      <h1 class="theme-display-font text-4xl md:text-5xl font-bold text-[var(--ink)]">
         {event.title}
       </h1>
 
       <div class="grid sm:grid-cols-3 gap-4">
-        <div class="border-2 border-[#0F2830] p-4 bg-[#F9FAF8]">
-          <p class="text-xs uppercase tracking-wide font-bold text-[#0F2830]/70 mb-1">Date</p>
-          <p class="text-[#0F2830] font-semibold inline-flex items-center gap-2">
+        <div class="border-2 border-[var(--ink)] p-4 bg-[var(--panel-soft)]">
+          <p class="text-xs uppercase tracking-wide font-bold text-[var(--ink)]/70 mb-1">Date</p>
+          <p class="text-[var(--ink)] font-semibold inline-flex items-center gap-2">
             <Calendar size={16} /> {formatEventDateLong(event.start, event.timeZone)}
           </p>
         </div>
-        <div class="border-2 border-[#0F2830] p-4 bg-[#F9FAF8]">
-          <p class="text-xs uppercase tracking-wide font-bold text-[#0F2830]/70 mb-1">Time</p>
-          <p class="text-[#0F2830] font-semibold inline-flex items-center gap-2">
+        <div class="border-2 border-[var(--ink)] p-4 bg-[var(--panel-soft)]">
+          <p class="text-xs uppercase tracking-wide font-bold text-[var(--ink)]/70 mb-1">Time</p>
+          <p class="text-[var(--ink)] font-semibold inline-flex items-center gap-2">
             <Clock size={16} />
             {formatEventTime(event.start, event.timeZone)} - {formatEventTime(event.end, event.timeZone)}
           </p>
         </div>
-        <div class="border-2 border-[#0F2830] p-4 bg-[#F9FAF8]">
-          <p class="text-xs uppercase tracking-wide font-bold text-[#0F2830]/70 mb-1">Location</p>
-          <p class="text-[#0F2830] font-semibold inline-flex items-center gap-2">
+        <div class="border-2 border-[var(--ink)] p-4 bg-[var(--panel-soft)]">
+          <p class="text-xs uppercase tracking-wide font-bold text-[var(--ink)]/70 mb-1">Location</p>
+          <p class="text-[var(--ink)] font-semibold inline-flex items-center gap-2">
             <MapPin size={16} /> {location}
           </p>
         </div>
       </div>
 
-      <div class="border-t-2 border-[#0F2830] pt-6">
-        <h2 class="text-2xl font-bold text-[#0F2830] mb-4">About This Event</h2>
+      <div class="border-t-2 border-[var(--ink)] pt-6">
+        <h2 class="text-2xl font-bold text-[var(--ink)] mb-4">About This Event</h2>
         <div
-          class="text-[#0F2830]/90 leading-relaxed [&_h1]:text-3xl [&_h1]:font-bold [&_h1]:text-[#0F2830] [&_h1]:mb-3 [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:text-[#0F2830] [&_h2]:mb-3 [&_h3]:text-xl [&_h3]:font-bold [&_h3]:text-[#0F2830] [&_h3]:mb-2 [&_p]:mb-4 [&_ul]:list-disc [&_ul]:pl-6 [&_ol]:list-decimal [&_ol]:pl-6 [&_li]:mb-1 [&_a]:underline [&_a]:decoration-[#45B074] [&_a]:underline-offset-4"
+          class="text-[var(--ink)]/90 leading-relaxed [&_h1]:text-3xl [&_h1]:font-bold [&_h1]:text-[var(--ink)] [&_h1]:mb-3 [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:text-[var(--ink)] [&_h2]:mb-3 [&_h3]:text-xl [&_h3]:font-bold [&_h3]:text-[var(--ink)] [&_h3]:mb-2 [&_p]:mb-4 [&_ul]:list-disc [&_ul]:pl-6 [&_ol]:list-decimal [&_ol]:pl-6 [&_li]:mb-1 [&_a]:underline [&_a]:decoration-[var(--eden)] [&_a]:underline-offset-4"
           set:html={descriptionHtml}
         ></div>
       </div>
 
       {
         event.imageAttachments.length > 0 && (
-          <div class="border-t-2 border-[#0F2830] pt-6">
-            <h2 class="text-2xl font-bold text-[#0F2830] mb-4">Event Images</h2>
+          <div class="border-t-2 border-[var(--ink)] pt-6">
+            <h2 class="text-2xl font-bold text-[var(--ink)] mb-4">Event Images</h2>
             <div class="grid sm:grid-cols-2 gap-4">
               {event.imageAttachments.map((image, index) => (
                 <a href={image.url} target="_blank" rel="noreferrer" class="block">
                   <img
                     src={image.url}
                     alt={image.fileName || `Event image ${index + 1}`}
-                    class="w-full h-72 object-cover border-2 border-[#0F2830]"
+                    class="w-full h-72 object-cover border-2 border-[var(--ink)]"
                     loading="lazy"
                   />
                 </a>

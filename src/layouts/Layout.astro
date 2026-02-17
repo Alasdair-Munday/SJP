@@ -13,10 +13,23 @@ const { title } = Astro.props;
 const primaryNav = content.navigation.filter(
 	(item) => !["Belong", "Serve", "Give"].includes(item.label),
 );
+const rawTheme = (import.meta.env.PUBLIC_SITE_THEME ?? "current").toLowerCase();
+const themeAliases: Record<string, "current" | "garden-city" | "line-drawing"> =
+	{
+		current: "current",
+		default: "current",
+		"garden-city": "garden-city",
+		gardencity: "garden-city",
+		garden: "garden-city",
+		"line-drawing": "line-drawing",
+		linedrawing: "line-drawing",
+		art: "line-drawing",
+	};
+const siteTheme = themeAliases[rawTheme] ?? "current";
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme={siteTheme}>
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="description" content="St John's Park Church" />
@@ -25,41 +38,43 @@ const primaryNav = content.navigation.filter(
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
-			href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Inter:wght@400;500;600;700;800&family=Newsreader:opsz,wght@6..72,500;6..72,700&display=swap"
+			href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Caveat:wght@500;600&family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&family=Newsreader:opsz,wght@6..72,500;6..72,700&family=Nunito+Sans:wght@400;600;700;800&display=swap"
 			rel="stylesheet"
 		/>
 		<title>{title} | {content.site.title}</title>
 	</head>
-	<body class="font-sans text-[var(--ink)]">
+	<body class="site-shell text-(--ink)">
 		<!-- UTILITY BAR -->
 		<div
 			class="teal-field text-xs font-semibold py-3 px-4 tracking-wide text-center flex justify-center gap-3"
 		>
-			<a href="/belong" class="mission-chip mission-chip--belong">Belong</a>
+			<a href="/belong" class="mission-chip mission-chip--belong"
+				>Belong</a
+			>
 			<a href="/serve" class="mission-chip mission-chip--serve">Serve</a>
 			<a href="/give" class="mission-chip mission-chip--give">Give</a>
 		</div>
 
 		<!-- NAVIGATION -->
 		<nav
-			class="bg-white/95 backdrop-blur border-b-2 border-[var(--ink)] sticky top-0 z-50"
+			class="bg-white/95 backdrop-blur border-b-2 border-(--ink) sticky top-0 z-50"
 		>
 			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 				<div class="flex justify-between h-20 items-center">
 					<!-- LOGO -->
 					<a href="/" class="shrink-0 flex items-center gap-4 group">
 						<div
-							class="w-12 h-12 text-[#0F2830] group-hover:text-[#45B074] transition-colors"
+							class="w-12 h-12 text-[var(--ink)] group-hover:text-[var(--eden)] transition-colors"
 						>
 							<Logo class="w-full h-full" />
 						</div>
 						<div class="leading-none">
 							<span
-								class="block font-extrabold text-xl tracking-tight text-[#0F2830]"
+								class="block font-extrabold text-xl tracking-tight text-[var(--ink)]"
 								>St John's Church</span
 							>
 							<span
-								class="block font-semibold text-xl tracking-wide text-[#45B074] -mt-1"
+								class="block font-semibold text-xl tracking-wide text-[var(--eden)] -mt-1"
 								>Park</span
 							>
 						</div>
@@ -71,7 +86,7 @@ const primaryNav = content.navigation.filter(
 							primaryNav.map((item) => (
 								<a
 									href={item.href}
-									class="text-[#0F2830] font-semibold text-sm tracking-wide hover:bg-[#E8E8E0] px-4 py-2 transition-colors"
+									class="text-[var(--ink)] font-semibold text-sm tracking-wide hover:bg-[var(--paper-line)] px-4 py-2 transition-colors"
 								>
 									{item.label}
 								</a>
@@ -80,7 +95,7 @@ const primaryNav = content.navigation.filter(
 						<!-- THE GOLDEN TICKET BUTTON -->
 						<a
 							href="/im-new"
-							class="ml-4 bg-[var(--gold)] text-[var(--ink)] px-6 py-2.5 font-semibold text-sm tracking-wide border-2 border-[var(--ink)] hover:bg-white transition-all"
+							class="ml-4 bg-(--gold) text-(--ink) px-6 py-2.5 font-semibold text-sm tracking-wide border-2 border-(--ink) hover:bg-white transition-all"
 						>
 							I'm New
 						</a>
@@ -90,7 +105,7 @@ const primaryNav = content.navigation.filter(
 					<button
 						id="mobile-menu-toggle"
 						type="button"
-						class="md:hidden inline-flex items-center justify-center w-12 h-12 border-2 border-[#0F2830] text-[#0F2830] hover:bg-[#0F2830] hover:text-white transition-colors"
+						class="md:hidden inline-flex items-center justify-center w-12 h-12 border-2 border-[var(--ink)] text-[var(--ink)] hover:bg-[var(--ink)] hover:text-white transition-colors"
 						aria-expanded="false"
 						aria-controls="mobile-menu-panel"
 						aria-label="Toggle navigation menu"
@@ -103,7 +118,7 @@ const primaryNav = content.navigation.filter(
 
 			<div
 				id="mobile-menu-panel"
-				class="hidden md:hidden border-t-2 border-[var(--ink)] bg-white"
+				class="hidden md:hidden border-t-2 border-(--ink) bg-white"
 			>
 				<div class="px-4 py-4 flex flex-col gap-2">
 					{
@@ -111,7 +126,7 @@ const primaryNav = content.navigation.filter(
 							<a
 								data-mobile-link
 								href={item.href}
-								class="text-[#0F2830] font-semibold text-base tracking-wide border-2 border-transparent hover:border-[#0F2830] px-3 py-2 transition-colors"
+								class="text-[var(--ink)] font-semibold text-base tracking-wide border-2 border-transparent hover:border-[var(--ink)] px-3 py-2 transition-colors"
 							>
 								{item.label}
 							</a>
@@ -120,7 +135,7 @@ const primaryNav = content.navigation.filter(
 					<a
 						data-mobile-link
 						href="/im-new"
-						class="mt-2 bg-[var(--gold)] text-[var(--ink)] px-4 py-2.5 font-semibold text-sm tracking-wide border-2 border-[var(--ink)] hover:bg-white transition-all inline-flex w-fit"
+						class="mt-2 bg-(--gold) text-(--ink) px-4 py-2.5 font-semibold text-sm tracking-wide border-2 border-(--ink) hover:bg-white transition-all inline-flex w-fit"
 					>
 						I'm New
 					</a>
@@ -135,11 +150,16 @@ const primaryNav = content.navigation.filter(
 				if (!toggle || !panel) return;
 
 				const openIcon = toggle.querySelector("[data-menu-icon-open]");
-				const closeIcon = toggle.querySelector("[data-menu-icon-close]");
+				const closeIcon = toggle.querySelector(
+					"[data-menu-icon-close]",
+				);
 				const links = panel.querySelectorAll("a[data-mobile-link]");
 
 				const setOpen = (isOpen) => {
-					toggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+					toggle.setAttribute(
+						"aria-expanded",
+						isOpen ? "true" : "false",
+					);
 					panel.classList.toggle("hidden", !isOpen);
 					openIcon?.classList.toggle("hidden", isOpen);
 					closeIcon?.classList.toggle("hidden", !isOpen);
@@ -148,7 +168,8 @@ const primaryNav = content.navigation.filter(
 				setOpen(false);
 
 				toggle.addEventListener("click", () => {
-					const expanded = toggle.getAttribute("aria-expanded") === "true";
+					const expanded =
+						toggle.getAttribute("aria-expanded") === "true";
 					setOpen(!expanded);
 				});
 
@@ -168,14 +189,14 @@ const primaryNav = content.navigation.filter(
 
 		<!-- FOOTER -->
 		<footer
-			class="line-drawing-footer py-16 mt-auto border-t-2 border-[var(--ink)] relative overflow-hidden text-white"
+			class="themed-footer py-16 mt-auto border-t-2 border-(--ink) relative overflow-hidden text-white"
 		>
 			<SketchChurch
 				class="absolute -bottom-12 left-0 w-full text-white/12"
 			/>
 			<div class="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-12">
 				<div>
-					<div class="w-16 h-16 text-[var(--gold)] mb-6">
+					<div class="w-16 h-16 text-(--gold) mb-6">
 						<Logo class="w-full h-full" />
 					</div>
 					<h3 class="text-2xl font-bold tracking-wide mb-2">
@@ -184,33 +205,33 @@ const primaryNav = content.navigation.filter(
 					<p class="text-white/80 max-w-sm">{content.site.address}</p>
 				</div>
 				<div class="md:text-right">
-					<p class="font-semibold text-[var(--gold)] tracking-wide mb-4">
+					<p class="font-semibold text-(--gold) tracking-wide mb-4">
 						Quick Links
 					</p>
 					<div class="flex flex-col md:items-end gap-2 text-white/85">
 						<a
 							href="/im-new"
-							class="hover:text-white hover:underline decoration-[var(--gold)] underline-offset-4"
+							class="hover:text-white hover:underline decoration-(--gold) underline-offset-4"
 							>I'm New</a
 						>
 						<a
 							href="/whats-on"
-							class="hover:text-white hover:underline decoration-[var(--gold)] underline-offset-4"
+							class="hover:text-white hover:underline decoration-(--gold) underline-offset-4"
 							>What's On</a
 						>
 						<a
 							href="/sermons"
-							class="hover:text-white hover:underline decoration-[var(--gold)] underline-offset-4"
+							class="hover:text-white hover:underline decoration-(--gold) underline-offset-4"
 							>Talks</a
 						>
 						<a
 							href="/safeguarding"
-							class="hover:text-white hover:underline decoration-[var(--gold)] underline-offset-4"
+							class="hover:text-white hover:underline decoration-(--gold) underline-offset-4"
 							>Safeguarding</a
 						>
 						<a
 							href="/contact"
-							class="hover:text-white hover:underline decoration-[var(--gold)] underline-offset-4"
+							class="hover:text-white hover:underline decoration-(--gold) underline-offset-4"
 							>Contact</a
 						>
 					</div>

@@ -21,7 +21,7 @@ const { hero, mission_grid } = content.pages.home;
 <Layout title="Home">
 	<!-- HERO SECTION -->
 	<div
-		class="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-[#0F2830]"
+		class="themed-hero relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-[var(--ink)]"
 	>
 		<!-- Background Image -->
 		<img
@@ -31,14 +31,8 @@ const { hero, mission_grid } = content.pages.home;
 		/>
 
 		<!-- Gradient Overlays -->
-		<div
-			class="absolute inset-0 bg-linear-to-r from-[#0F2830] via-[#0F2830]/80 to-[#2f9aa4]/40 mix-blend-multiply"
-		>
-		</div>
-		<div
-			class="absolute inset-0 bg-linear-to-t from-[#0F2830] via-transparent to-transparent opacity-90"
-		>
-		</div>
+		<div class="hero-overlay absolute inset-0"></div>
+		<div class="hero-shadow-fade absolute inset-0"></div>
 
 		<!-- SVG Texture -->
 		<div
@@ -66,7 +60,7 @@ const { hero, mission_grid } = content.pages.home;
 
 				<!-- Headline -->
 				<h1
-					class="font-['Newsreader'] text-6xl md:text-8xl font-bold tracking-tight leading-[0.95] mb-8 text-white drop-shadow-xl"
+					class="theme-display-font text-6xl md:text-8xl font-bold tracking-tight leading-[0.95] mb-8 text-white drop-shadow-xl"
 				>
 					{hero.title}
 				</h1>
@@ -82,7 +76,7 @@ const { hero, mission_grid } = content.pages.home;
 				<div class="flex flex-wrap gap-4">
 					<a
 						href="/sundays"
-						class="group px-8 py-4 bg-(--gold) text-(--ink) font-bold tracking-wide rounded-lg hover:bg-white transition-all duration-300 shadow-[0_0_20px_rgba(217,173,63,0.3)] hover:shadow-[0_0_30px_rgba(255,255,255,0.4)] flex items-center gap-3 transform hover:-translate-y-1"
+						class="hero-primary-cta group px-8 py-4 bg-(--gold) text-(--ink) font-bold tracking-wide rounded-lg hover:bg-white transition-all duration-300 flex items-center gap-3 transform hover:-translate-y-1"
 					>
 						Visit Sunday <ArrowRight
 							size={20}
@@ -110,7 +104,7 @@ const { hero, mission_grid } = content.pages.home;
 	>
 		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 			<div class="mb-8">
-				<h2 class="heading-eden-gold font-['Newsreader'] text-4xl font-bold">
+				<h2 class="heading-eden-gold theme-display-font text-4xl font-bold">
 					First Time Visiting?
 				</h2>
 				<p class="text-(--ink)/85 font-medium mt-2">
@@ -134,7 +128,7 @@ const { hero, mission_grid } = content.pages.home;
 				</article>
 				<article class="sketch-panel p-7">
 					<div
-						class="w-12 h-12 rounded-full bg-[#45B074]/25 text-(--ink) flex items-center justify-center mb-4"
+						class="w-12 h-12 rounded-full bg-[var(--eden)]/25 text-(--ink) flex items-center justify-center mb-4"
 					>
 						<Smile size={22} />
 					</div>
@@ -143,13 +137,13 @@ const { hero, mission_grid } = content.pages.home;
 						Fun, safe groups for ages 0-14.
 						<a
 							href="/park-kids"
-							class="font-semibold underline decoration-[#45B074] underline-offset-4 ml-1"
+							class="font-semibold underline decoration-[var(--eden)] underline-offset-4 ml-1"
 							>Park Kids</a
 						>
 						and
 						<a
 							href="/park-youth"
-							class="font-semibold underline decoration-[#45B074] underline-offset-4 ml-1"
+							class="font-semibold underline decoration-[var(--eden)] underline-offset-4 ml-1"
 							>Park Youth</a
 						>.
 					</p>
@@ -194,7 +188,7 @@ const { hero, mission_grid } = content.pages.home;
 							<p class="text-sm uppercase tracking-[0.14em] font-bold text-(--teal) mb-3">
 								Latest Message
 							</p>
-							<h2 class="heading-eden-gold font-['Newsreader'] text-4xl font-bold mb-4">
+							<h2 class="heading-eden-gold theme-display-font text-4xl font-bold mb-4">
 								This Week: The Power of Community.
 							</h2>
 							<p class="text-(--ink)/85 text-lg font-medium">
@@ -224,8 +218,8 @@ const { hero, mission_grid } = content.pages.home;
 	<div class="bg-(--gold) border-b-2 border-(--ink) p-8">
 		<div class="max-w-7xl mx-auto">
 			<div class="flex items-center gap-3 mb-6">
-				<Calendar className="w-8 h-8 text-[#0F2830]" />
-				<h2 class="text-2xl font-bold tracking-tight text-[#0F2830]">
+				<Calendar className="w-8 h-8 text-[var(--ink)]" />
+				<h2 class="text-2xl font-bold tracking-tight text-[var(--ink)]">
 					Coming Up
 				</h2>
 			</div>
@@ -237,13 +231,13 @@ const { hero, mission_grid } = content.pages.home;
 	<!-- MISSION GRID -->
 	<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
 		<div
-			class="flex items-end gap-4 mb-12 border-b-2 border-[#0F2830] pb-4"
+			class="flex items-end gap-4 mb-12 border-b-2 border-[var(--ink)] pb-4"
 		>
-			<h2 class="heading-eden-gold font-['Newsreader'] text-4xl font-bold tracking-tight">
+			<h2 class="heading-eden-gold theme-display-font text-4xl font-bold tracking-tight">
 				Our Mission
 			</h2>
 			<span
-				class="mb-2 font-mono text-sm text-[#0F2830]/60 hidden md:inline-block"
+				class="mb-2 font-mono text-sm text-[var(--ink)]/60 hidden md:inline-block"
 				>// Belong, Serve, Give</span
 			>
 		</div>
@@ -254,17 +248,17 @@ const { hero, mission_grid } = content.pages.home;
 				class="sketch-panel theme-belong p-8 hover:-translate-y-1 transition-transform duration-300 group"
 			>
 				<div
-					class="w-12 h-12 bg-[#eaf7ef] text-(--ink) flex items-center justify-center mb-6 group-hover:bg-[#45B074] group-hover:text-white transition-colors rounded-full"
+					class="w-12 h-12 bg-[var(--eden-soft)] text-(--ink) flex items-center justify-center mb-6 group-hover:bg-[var(--eden)] group-hover:text-white transition-colors rounded-full"
 				>
 					<Users size={24} />
 				</div>
-				<h3 class="text-2xl font-bold mb-3 text-[#0F2830]">Belong</h3>
-				<p class="text-[#0F2830]/80 font-medium mb-8 leading-relaxed">
+				<h3 class="text-2xl font-bold mb-3 text-[var(--ink)]">Belong</h3>
+				<p class="text-[var(--ink)]/80 font-medium mb-8 leading-relaxed">
 					{mission_grid[0].desc}
 				</p>
 				<a
 					href={mission_grid[0].link_href}
-					class="inline-flex items-center gap-2 font-semibold text-sm tracking-wide border-b-2 border-[#0F2830] pb-1 hover:text-[#45B074] hover:border-[#45B074] transition-colors"
+					class="inline-flex items-center gap-2 font-semibold text-sm tracking-wide border-b-2 border-[var(--ink)] pb-1 hover:text-[var(--eden)] hover:border-[var(--eden)] transition-colors"
 				>
 					{mission_grid[0].link_text}
 					<ArrowRight size={16} />
@@ -276,17 +270,17 @@ const { hero, mission_grid } = content.pages.home;
 				class="sketch-panel theme-serve p-8 hover:-translate-y-1 transition-transform duration-300 group"
 			>
 				<div
-					class="w-12 h-12 bg-[#e9f3f4] text-(--ink) flex items-center justify-center mb-6 group-hover:bg-(--teal) group-hover:text-white transition-colors rounded-full"
+					class="w-12 h-12 bg-[var(--teal-soft)] text-(--ink) flex items-center justify-center mb-6 group-hover:bg-(--teal) group-hover:text-white transition-colors rounded-full"
 				>
 					<Zap size={24} />
 				</div>
-				<h3 class="text-2xl font-bold mb-3 text-[#0F2830]">Serve</h3>
-				<p class="text-[#0F2830]/80 font-medium mb-8 leading-relaxed">
+				<h3 class="text-2xl font-bold mb-3 text-[var(--ink)]">Serve</h3>
+				<p class="text-[var(--ink)]/80 font-medium mb-8 leading-relaxed">
 					{mission_grid[1].desc}
 				</p>
 				<a
 					href={mission_grid[1].link_href}
-					class="inline-flex items-center gap-2 font-semibold text-sm tracking-wide border-b-2 border-[#0F2830] pb-1 hover:text-(--teal) hover:border-(--teal) transition-colors"
+					class="inline-flex items-center gap-2 font-semibold text-sm tracking-wide border-b-2 border-[var(--ink)] pb-1 hover:text-(--teal) hover:border-(--teal) transition-colors"
 				>
 					{mission_grid[1].link_text}
 					<ArrowRight size={16} />
@@ -302,13 +296,13 @@ const { hero, mission_grid } = content.pages.home;
 				>
 					<Heart size={24} />
 				</div>
-				<h3 class="text-2xl font-bold mb-3 text-[#0F2830]">Give</h3>
-				<p class="text-[#0F2830] font-bold mb-8 leading-relaxed">
+				<h3 class="text-2xl font-bold mb-3 text-[var(--ink)]">Give</h3>
+				<p class="text-[var(--ink)] font-bold mb-8 leading-relaxed">
 					{mission_grid[2].desc}
 				</p>
 				<a
 					href={mission_grid[2].link_href}
-					class="inline-flex items-center gap-2 font-semibold text-sm tracking-wide border-b-2 border-[#0F2830] pb-1 text-[#0F2830] hover:text-(--gold) hover:border-(--gold) transition-colors"
+					class="inline-flex items-center gap-2 font-semibold text-sm tracking-wide border-b-2 border-[var(--ink)] pb-1 text-[var(--ink)] hover:text-(--gold) hover:border-(--gold) transition-colors"
 				>
 					{mission_grid[2].link_text}
 					<ArrowRight size={16} />

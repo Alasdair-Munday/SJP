@@ -1,0 +1,15 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[context.production.environment]
+  PUBLIC_SITE_THEME = "current"
+
+[context.deploy-preview.environment]
+  PUBLIC_SITE_THEME = "current"
+
+[context."codex/theme-garden-city".environment]
+  PUBLIC_SITE_THEME = "garden-city"
+
+[context."codex/theme-line-drawing".environment]
+  PUBLIC_SITE_THEME = "line-drawing"

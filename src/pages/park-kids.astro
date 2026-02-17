@@ -16,29 +16,29 @@ const socialStorySteps = [
 
 <Layout title="Park Kids">
   <div class="max-w-5xl mx-auto px-4 py-20 space-y-8">
-    <h1 class="font-['Newsreader'] text-5xl md:text-6xl font-bold text-[#0F2830]">Park Kids</h1>
+    <h1 class="theme-display-font text-5xl md:text-6xl font-bold text-[var(--ink)]">Park Kids</h1>
 
-    <section class="bg-white border-2 border-[#0F2830] p-8 space-y-4">
-      <h2 class="text-3xl font-bold text-[#0F2830]">Sunday Kids Groups</h2>
-      <p class="text-[#0F2830]/90">Our Park Kids groups are for children aged 1-11 and run during our Sunday gathering at 10:45am.</p>
-      <p class="text-[#0F2830]/90">Children start in the service with the church family and then move into age-appropriate groups for Bible teaching, prayer, and activities.</p>
+    <section class="bg-white border-2 border-[var(--ink)] p-8 space-y-4">
+      <h2 class="text-3xl font-bold text-[var(--ink)]">Sunday Kids Groups</h2>
+      <p class="text-[var(--ink)]/90">Our Park Kids groups are for children aged 1-11 and run during our Sunday gathering at 10:45am.</p>
+      <p class="text-[var(--ink)]/90">Children start in the service with the church family and then move into age-appropriate groups for Bible teaching, prayer, and activities.</p>
       <img
         src="/images/kids-frisbee.jpg"
         alt="Children playing in the church park"
-        class="w-full h-72 object-cover border-2 border-[#0F2830] mt-4"
+        class="w-full h-72 object-cover border-2 border-[var(--ink)] mt-4"
       />
     </section>
 
-    <section class="bg-white border-2 border-[#0F2830] p-8 space-y-6">
-      <h2 class="text-3xl font-bold text-[#0F2830]">Social Story for Visiting Church</h2>
-      <p class="text-[#0F2830]/90">
+    <section class="bg-white border-2 border-[var(--ink)] p-8 space-y-6">
+      <h2 class="text-3xl font-bold text-[var(--ink)]">Social Story for Visiting Church</h2>
+      <p class="text-[var(--ink)]/90">
         Here is a step-by-step guide for what happens when visiting St John's Park Church on a Sunday.
       </p>
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
         {socialStorySteps.map((step, index) => (
-          <article class="border-2 border-[#0F2830] bg-[#F9FAF8] p-4">
-            <p class="font-bold text-[#45B074] text-sm tracking-wide mb-2">Step {index + 1}</p>
-            <p class="text-[#0F2830]/90 leading-relaxed">{step}</p>
+          <article class="border-2 border-[var(--ink)] bg-[var(--panel-soft)] p-4">
+            <p class="font-bold text-[var(--eden)] text-sm tracking-wide mb-2">Step {index + 1}</p>
+            <p class="text-[var(--ink)]/90 leading-relaxed">{step}</p>
           </article>
         ))}
       </div>
@@ -46,20 +46,20 @@ const socialStorySteps = [
         <img
           src="/images/kids-churchyard.jpg"
           alt="Children and families at churchyard games"
-          class="w-full h-64 object-cover border-2 border-[#0F2830]"
+          class="w-full h-64 object-cover border-2 border-[var(--ink)]"
           loading="lazy"
         />
         <img
           src="/images/christingle.jpg"
           alt="Children taking part in a Christingle service"
-          class="w-full h-64 object-cover border-2 border-[#0F2830]"
+          class="w-full h-64 object-cover border-2 border-[var(--ink)]"
           loading="lazy"
         />
       </div>
     </section>
 
-    <section class="bg-white border-2 border-[#0F2830] p-8">
-      <p class="text-[#0F2830]/90">Questions before visiting? <a href="/contact" class="underline decoration-[#45B074] underline-offset-4">Contact us</a>.</p>
+    <section class="bg-white border-2 border-[var(--ink)] p-8">
+      <p class="text-[var(--ink)]/90">Questions before visiting? <a href="/contact" class="underline decoration-[var(--eden)] underline-offset-4">Contact us</a>.</p>
     </section>
   </div>
 </Layout>
