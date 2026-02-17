@@ -8,7 +8,7 @@ Use a sheet tab called `content` and import:
 
 - `/Users/almunday/SJP/docs/google-sheet-template/admin-content.csv`
 
-The API loader reads these required columns:
+The CSV loader reads these required columns:
 
 - `path`
 - `type`
@@ -49,4 +49,12 @@ Both include all current values from `/Users/almunday/SJP/src/data/content.json`
 
 ## Runtime/Build Integration
 
-The site can load content from Google Sheets via `/Users/almunday/SJP/src/data/site-content.ts` when `CONTENT_SOURCE=sheets`.
+The site can load content from Google Sheets CSV via `/Users/almunday/SJP/src/data/site-content.ts` when `CONTENT_SOURCE=sheets`.
+
+By default it reads spreadsheet `1Ay1kS_--qmW9x0gSi5zSUQvkdQoeiGVQvu30PY6XUxM`, tab `content`, via CSV export.
+
+Optional overrides:
+
+- `GOOGLE_SHEETS_CSV_URL` (or `CONTENT_CSV_URL`) for a full CSV URL
+- `GOOGLE_SHEETS_SPREADSHEET_ID` (or `GOOGLE_SHEETS_ID`) for spreadsheet ID
+- `GOOGLE_SHEETS_GID` for a specific tab gid when not using `GOOGLE_SHEETS_CSV_URL`

@@ -36,18 +36,21 @@ Content loading is controlled by `CONTENT_SOURCE`:
 
 - `local` (default): reads `/Users/almunday/SJP/src/data/content.json`
 - `api`: reads JSON from `CONTENT_API_URL`
-- `sheets`: reads rows from Google Sheets API and reconstructs JSON by `path/type/value`
+- `sheets`: reads rows from a Google Sheets CSV export and reconstructs JSON by `path/type/value`
 
 ### Google Sheets Mode
 
-Required env vars for `CONTENT_SOURCE=sheets`:
+Default behavior for `CONTENT_SOURCE=sheets`:
 
-- `GOOGLE_SHEETS_SPREADSHEET_ID` (or `GOOGLE_SHEETS_ID`)
-- `GOOGLE_SHEETS_API_KEY` (for public sheet) or `GOOGLE_SHEETS_ACCESS_TOKEN` (for private sheet)
+- Reads from spreadsheet `1Ay1kS_--qmW9x0gSi5zSUQvkdQoeiGVQvu30PY6XUxM`, tab `content`
+- Uses CSV export URL format (`/export?format=csv`)
+- No Google Cloud API key or access token is required
 
 Optional:
 
-- `GOOGLE_SHEETS_RANGE` (default: `content!A:G`)
+- `GOOGLE_SHEETS_CSV_URL` (or `CONTENT_CSV_URL`) to provide a full CSV URL directly
+- `GOOGLE_SHEETS_SPREADSHEET_ID` (or `GOOGLE_SHEETS_ID`) to override the default spreadsheet ID
+- `GOOGLE_SHEETS_GID` to target a specific sheet tab by gid when not using `GOOGLE_SHEETS_CSV_URL`
 
 ### CSV Template for Admins
 

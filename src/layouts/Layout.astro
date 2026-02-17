@@ -15,9 +15,7 @@ const primaryNav = content.navigation.filter(
 );
 const utilityNav = content.utility_navigation;
 const footerLinks = content.footer.quick_links;
-const rawTheme = (
-	import.meta.env.PUBLIC_SITE_THEME ?? "line-drawing"
-).toLowerCase();
+const rawTheme = (import.meta.env.PUBLIC_SITE_THEME ?? "current").toLowerCase();
 const themeAliases: Record<string, "current" | "garden-city" | "line-drawing"> =
 	{
 		current: "current",

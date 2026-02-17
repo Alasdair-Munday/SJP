@@ -5,10 +5,6 @@ export type SiteContent = typeof localContent;
 type ContentSource = "local" | "api" | "sheets";
 type PathToken = string | number;
 
-type GoogleSheetValuesResponse = {
-  values?: string[][];
-};
-
 let cachedContent: SiteContent | null = null;
 
 const isObject = (value: unknown): value is Record<string, unknown> =>
@@ -114,9 +110,86 @@ const setValueAtPath = (
   }
 };
 
+const parseCsvRows = (csvText: string): string[][] => {
+  const normalizedCsv = csvText.replace(/^\uFEFF/, "");
+  const rows: string[][] = [];
+  let row: string[] = [];
+  let field = "";
+  let inQuotes = false;
+
+  const pushField = () => {
+    row.push(field);
+    field = "";
+  };
+
+  const pushRow = () => {
+    rows.push(row);
+    row = [];
+  };
+
+  for (let index = 0; index < normalizedCsv.length; index += 1) {
+    const char = normalizedCsv[index];
+
+    if (inQuotes) {
+      if (char === '"') {
+        if (normalizedCsv[index + 1] === '"') {
+          field += '"';
+          index += 1;
+        } else {
+          inQuotes = false;
+        }
+      } else {
+        field += char;
+      }
+      continue;
+    }
+
+    if (char === '"') {
+      inQuotes = true;
+      continue;
+    }
+
+    if (char === ",") {
+      pushField();
+      continue;
+    }
+
+    if (char === "\n") {
+      pushField();
+      pushRow();
+      continue;
+    }
+
+    if (char === "\r") {
+      if (normalizedCsv[index + 1] === "\n") {
+        index += 1;
+      }
+      pushField();
+      pushRow();
+      continue;
+    }
+
+    field += char;
+  }
+
+  if (inQuotes) {
+    throw new Error("Invalid CSV: unterminated quoted field.");
+  }
+
+  if (field.length > 0 || row.length > 0) {
+    pushField();
+    pushRow();
+  }
+
+  return rows.filter((candidateRow, index) => {
+    const firstValue = candidateRow[0] ?? "";
+    return candidateRow.length > 1 || firstValue.trim().length > 0 || index === 0;
+  });
+};
+
 const parseSheetRowsToContent = (rows: string[][]): SiteContent => {
   if (rows.length === 0) {
-    throw new Error("Google Sheet is empty.");
+    throw new Error("Google Sheet CSV is empty.");
   }
 
   const header = rows[0].map((cell) => cell.trim().toLowerCase());
@@ -126,7 +199,7 @@ const parseSheetRowsToContent = (rows: string[][]): SiteContent => {
 
   if (pathIndex === -1 || typeIndex === -1 || valueIndex === -1) {
     throw new Error(
-      'Google Sheet header must include "path", "type", and "value" columns.',
+      'Google Sheet CSV header must include "path", "type", and "value" columns.',
     );
   }
 
@@ -163,50 +236,48 @@ const fetchFromApiUrl = async (contentApiUrl: string): Promise<SiteContent> => {
 };
 
 const fetchFromGoogleSheets = async (): Promise<SiteContent> => {
-  // const spreadsheetId =
-  //   import.meta.env.GOOGLE_SHEETS_SPREADSHEET_ID ??
-  //   import.meta.env.GOOGLE_SHEETS_ID;
-  const spreadsheetId = "1Ay1kS_--qmW9x0gSi5zSUQvkdQoeiGVQvu30PY6XUxM";
+  const csvUrlFromEnv =
+    import.meta.env.GOOGLE_SHEETS_CSV_URL ?? import.meta.env.CONTENT_CSV_URL;
+  const spreadsheetId =
+    import.meta.env.GOOGLE_SHEETS_SPREADSHEET_ID ??
+    import.meta.env.GOOGLE_SHEETS_ID ??
+    "1Ay1kS_--qmW9x0gSi5zSUQvkdQoeiGVQvu30PY6XUxM";
+  const sheetGid = import.meta.env.GOOGLE_SHEETS_GID;
 
-  const range = import.meta.env.GOOGLE_SHEETS_RANGE ?? "content!A:G";
-  const apiKey = import.meta.env.GOOGLE_SHEETS_API_KEY;
-  const accessToken = import.meta.env.GOOGLE_SHEETS_ACCESS_TOKEN;
-
-  if (!spreadsheetId) {
+  if (!csvUrlFromEnv && !spreadsheetId) {
     throw new Error(
-      "GOOGLE_SHEETS_SPREADSHEET_ID (or GOOGLE_SHEETS_ID) is required when CONTENT_SOURCE=sheets.",
+      "Set GOOGLE_SHEETS_CSV_URL (recommended) or GOOGLE_SHEETS_SPREADSHEET_ID/GOOGLE_SHEETS_ID when CONTENT_SOURCE=sheets.",
     );
   }
 
-  if (!apiKey && !accessToken) {
-    throw new Error(
-      "Set GOOGLE_SHEETS_API_KEY (public sheet) or GOOGLE_SHEETS_ACCESS_TOKEN (private sheet) when CONTENT_SOURCE=sheets.",
-    );
-  }
+  const csvUrl = csvUrlFromEnv
+    ? csvUrlFromEnv
+    : (() => {
+        const url = new URL(
+          `https://docs.google.com/spreadsheets/d/${spreadsheetId}/export`,
+        );
+        url.searchParams.set("format", "csv");
 
-  const url = new URL(
-    `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${encodeURIComponent(range)}`,
-  );
+        if (sheetGid) {
+          url.searchParams.set("gid", sheetGid);
+        }
 
-  if (apiKey) {
-    url.searchParams.set("key", apiKey);
-  }
+        return url.toString();
+      })();
 
-  const response = await fetch(url.toString(), {
+  const response = await fetch(csvUrl, {
     headers: {
-      Accept: "application/json",
-      ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}),
+      Accept: "text/csv,text/plain;q=0.9,*/*;q=0.8",
     },
   });
 
   if (!response.ok) {
     throw new Error(
-      `Failed to fetch Google Sheets content: ${response.status} ${response.statusText}`,
+      `Failed to fetch Google Sheets CSV content: ${response.status} ${response.statusText}`,
     );
   }
 
-  const payload = (await response.json()) as GoogleSheetValuesResponse;
-  const rows = payload.values ?? [];
+  const rows = parseCsvRows(await response.text());
 
   return parseSheetRowsToContent(rows);
 };
