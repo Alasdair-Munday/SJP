@@ -1,0 +1,81 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+import { ArrowRight, Calendar } from "lucide-react";
+
+const STALE_FALLBACK_DAYS = 90;
+const now = new Date();
+
+export async function getStaticPaths() {
+	const newsItems = await getCollection("news");
+
+	return newsItems.map((item) => ({
+		params: { slug: item.slug },
+		props: { item },
+	}));
+}
+
+const { item } = Astro.props as { item: CollectionEntry<"news"> };
+const { Content } = await item.render();
+
+const staleAfterDays = item.data.staleAfterDays ?? STALE_FALLBACK_DAYS;
+const staleDate = new Date(item.data.publishDate);
+staleDate.setDate(staleDate.getDate() + staleAfterDays);
+const isStale = staleDate < now;
+
+const formatDate = (date: Date) =>
+	new Intl.DateTimeFormat("en-GB", {
+		day: "numeric",
+		month: "long",
+		year: "numeric",
+	}).format(date);
+---
+
+<Layout title={item.data.title}>
+	<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-8">
+		<a
+			href="/news"
+			class="inline-flex items-center gap-2 text-(--ink) font-semibold hover:text-(--eden) transition-colors"
+		>
+			<ArrowRight size={16} className="rotate-180" /> Back to News
+		</a>
+
+		<article class="theme-card p-8 space-y-6">
+			<p class="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.1em] text-(--ink)/65">
+				<Calendar size={16} /> {formatDate(item.data.publishDate)}
+			</p>
+			<h1 class="page-heading page-heading--accent text-4xl md:text-5xl font-bold">
+				{item.data.title}
+			</h1>
+			<p class="text-lg text-(--ink)/85 font-medium">{item.data.summary}</p>
+
+			<div class="flex flex-wrap gap-4">
+				<a
+					href={item.data.ctaHref}
+					class="inline-flex items-center gap-2 px-5 py-2.5 border-2 border-(--ink) text-(--ink) font-semibold hover:bg-(--ink) hover:text-white transition-colors"
+				>
+					{item.data.ctaLabel} <ArrowRight size={16} />
+				</a>
+				{item.data.secondaryCtaLabel && item.data.secondaryCtaHref && (
+					<a
+						href={item.data.secondaryCtaHref}
+						class="inline-flex items-center gap-2 px-5 py-2.5 border-2 border-(--teal) text-(--teal) font-semibold hover:bg-(--teal) hover:text-white transition-colors"
+					>
+						{item.data.secondaryCtaLabel} <ArrowRight size={16} />
+					</a>
+				)}
+			</div>
+
+			{isStale && (
+				<p class="text-sm font-semibold text-(--ink)/70 border-t border-(--ink)/20 pt-4">
+					This article is archived and may contain out-of-date details.
+				</p>
+			)}
+
+			<div class="border-t-2 border-(--ink) pt-6 prose max-w-none prose-headings:text-(--ink) prose-p:text-(--ink)/90 prose-li:text-(--ink)/90 prose-a:text-(--teal)">
+				<Content />
+			</div>
+		</article>
+	</div>
+</Layout>

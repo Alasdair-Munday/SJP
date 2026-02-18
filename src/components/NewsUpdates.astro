@@ -31,11 +31,20 @@ const formatDate = (date: Date) =>
 	recentNews.length > 0 && (
 		<section class="py-16 border-b-2 border-(--ink) bg-(--teal)/8">
 			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-				<div class="flex items-center gap-3 mb-8">
-					<Megaphone className="w-8 h-8 text-(--ink)" />
-					<h2 class="page-heading page-heading--accent text-4xl font-bold">
-						Latest News
-					</h2>
+				<div class="flex flex-wrap items-center justify-between gap-4 mb-8">
+					<div class="flex items-center gap-3">
+						<Megaphone className="w-8 h-8 text-(--ink)" />
+						<h2 class="page-heading page-heading--accent text-4xl font-bold">
+							Latest News
+						</h2>
+					</div>
+					<a
+						href="/news"
+						class="inline-flex items-center gap-2 font-semibold text-sm tracking-wide border-b-2 border-(--ink) pb-1 hover:text-(--teal) hover:border-(--teal) transition-colors"
+					>
+						View all news
+						<ArrowRight size={16} />
+					</a>
 				</div>
 
 				<div class="grid grid-cols-[repeat(auto-fit,minmax(17rem,1fr))] gap-6 items-stretch">
@@ -44,25 +53,23 @@ const formatDate = (date: Date) =>
 							<p class="text-sm font-semibold uppercase tracking-[0.1em] text-(--ink)/65">
 								{formatDate(item.data.publishDate)}
 							</p>
-							<h3 class="section-heading text-2xl">{item.data.title}</h3>
+							<h3 class="section-heading text-2xl">
+								<a
+									href={`/news/${item.slug}/`}
+									class="hover:text-(--teal) transition-colors"
+								>
+									{item.data.title}
+								</a>
+							</h3>
 							<p class="text-(--ink)/85">{item.data.summary}</p>
 							<div class="mt-auto flex flex-wrap items-center gap-4">
 								<a
-									href={item.data.ctaHref}
+									href={`/news/${item.slug}/`}
 									class="inline-flex items-center gap-2 font-semibold text-sm tracking-wide border-b-2 border-(--ink) pb-1 hover:text-(--teal) hover:border-(--teal) transition-colors w-fit"
 								>
-									{item.data.ctaLabel}
+									Read article
 									<ArrowRight size={16} />
 								</a>
-								{item.data.secondaryCtaLabel && item.data.secondaryCtaHref && (
-									<a
-										href={item.data.secondaryCtaHref}
-										class="inline-flex items-center gap-2 font-semibold text-sm tracking-wide border-b-2 border-(--ink) pb-1 hover:text-(--teal) hover:border-(--teal) transition-colors w-fit"
-									>
-										{item.data.secondaryCtaLabel}
-										<ArrowRight size={16} />
-									</a>
-								)}
 							</div>
 						</article>
 					))}
