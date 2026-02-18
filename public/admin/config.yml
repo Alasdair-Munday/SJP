@@ -1,0 +1,56 @@
+backend:
+  name: git-gateway
+  branch: main
+
+publish_mode: editorial_workflow
+
+media_folder: "public/uploads"
+public_folder: "/uploads"
+
+collections:
+  - name: "site_content"
+    label: "Site Content"
+    files:
+      - file: "public/admin/content.json"
+        label: "Decap Content Overrides"
+        name: "content"
+        format: "json"
+        fields:
+          - label: "Sermons"
+            name: "sermons"
+            widget: "list"
+            summary: "{{fields.date}} — {{fields.title}}"
+            fields:
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Speaker", name: "speaker", widget: "string" }
+              - { label: "Date", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD" }
+              - { label: "Series", name: "series", widget: "string", required: false }
+              - { label: "Passage", name: "passage", widget: "string", required: false }
+              - { label: "Description", name: "description", widget: "text", required: false }
+              - { label: "Duration (seconds)", name: "duration", widget: "number", value_type: "int", min: 1 }
+              - label: "Sermon Audio"
+                name: "audioUrl"
+                widget: "file"
+                required: false
+                media_library:
+                  config:
+                    multiple: false
+              - label: "Sermon Image"
+                name: "image"
+                widget: "image"
+                required: false
+          - label: "The Park Featured Photo"
+            name: "pages"
+            widget: "object"
+            fields:
+              - label: "The Park"
+                name: "the_park"
+                widget: "object"
+                fields:
+                  - label: "Featured Photo"
+                    name: "featured_photo"
+                    widget: "object"
+                    fields:
+                      - { label: "Alt", name: "alt", widget: "string", required: false }
+                      - { label: "Label", name: "label", widget: "string", required: false }
+                      - { label: "Image", name: "src", widget: "image" }

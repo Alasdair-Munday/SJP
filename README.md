@@ -39,6 +39,7 @@ Content loading is controlled by `CONTENT_SOURCE`:
 - `local` (default): reads `/Users/almunday/SJP/src/data/content.json`
 - `api`: reads JSON from `CONTENT_API_URL`
 - `sheets`: reads rows from a Google Sheets CSV export and reconstructs JSON by `path/type/value`
+- `decap`: reads JSON overrides from Decap CMS and merges them onto local content (feature-flagged)
 
 ### Google Sheets Mode
 
@@ -53,6 +54,30 @@ Optional:
 - `GOOGLE_SHEETS_CSV_URL` (or `CONTENT_CSV_URL`) to provide a full CSV URL directly
 - `GOOGLE_SHEETS_SPREADSHEET_ID` (or `GOOGLE_SHEETS_ID`) to override the default spreadsheet ID
 - `GOOGLE_SHEETS_GID` to target a specific sheet tab by gid when not using `GOOGLE_SHEETS_CSV_URL`
+
+
+### Decap CMS Mode (feature-flagged)
+
+Set the following to enable Decap as a runtime source:
+
+- `CONTENT_SOURCE=decap`
+- `ENABLE_DECAP_CONTENT_SOURCE=true`
+
+Optional:
+
+- `DECAP_CONTENT_URL` (default: `/admin/content.json`)
+
+How it works:
+
+- Runtime loads `src/data/content.json` as the base content
+- It then fetches Decap overrides JSON and deep-merges it on top
+- Arrays (such as `sermons`) are replaced by Decap values
+
+Admin UI is served from `/admin` (`public/admin/index.html`, `public/admin/config.yml`).
+It includes upload widgets for:
+
+- images (e.g. "The Park" featured photo)
+- sermon audio files (`audioUrl`)
 
 ### CSV Template for Admins
 
