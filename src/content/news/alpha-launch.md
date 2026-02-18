@@ -1,10 +1,10 @@
 ---
-title: Community Breakfast Relaunch
-summary: We are restarting monthly community breakfasts after the Sunday service. Everyone is welcome and no signup is needed.
-publishDate: 2026-01-12
-staleAfterDays: 120
-ctaLabel: Plan your visit
-ctaHref: /im-new
+title: Christingle Service Highlights
+summary: Families gathered for our Christingle celebration with songs, prayers, and oranges shared across the church.
+publishDate: 2025-12-22
+staleAfterDays: 90
+ctaLabel: Plan your Sunday visit
+ctaHref: /sundays
 ---
 
-Join us in the church hall for tea, coffee, and breakfast snacks on the second Sunday of each month.
+Thank you to everyone who helped host and lead this special service. If you are new to St John’s, we would love to welcome you on a Sunday morning.
