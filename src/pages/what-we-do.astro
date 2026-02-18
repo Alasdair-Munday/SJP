@@ -10,19 +10,13 @@ const belong =
 	page.groups.find((group) => group.id === "belong") ?? page.groups[0];
 const serve =
 	page.groups.find((group) => group.id === "serve") ?? page.groups[0];
-
-const highlightToneStyles: Record<string, string> = {
-	eden: "bg-(--eden-soft)/45",
-	teal: "bg-(--teal-soft)/45",
-	gold: "bg-(--gold-soft)/55",
-};
 ---
 
 <Layout title={page.title}>
 	<div class="max-w-7xl mx-auto px-4 py-20 space-y-10">
 		<div class="space-y-4">
 			<h1
-				class="heading-eden-gold theme-display-font text-5xl md:text-6xl font-bold"
+				class="page-heading page-heading--accent text-5xl md:text-6xl font-bold"
 			>
 				{page.title}
 			</h1>
@@ -43,19 +37,27 @@ const highlightToneStyles: Record<string, string> = {
 			class="sketch-panel theme-belong bg-(--eden-soft)/35 p-6 md:p-8 space-y-6 scroll-mt-28"
 		>
 			<div>
-				<h2 class="theme-display-font text-4xl font-bold text-(--ink)">
+				<h2 class="section-heading text-4xl">
 					Belong
 				</h2>
 				<p class="text-(--ink)/85 mt-2 max-w-3xl">
 					Belong by coming on Sundays and joining a midweek group.
 				</p>
 			</div>
+			<figure class="theme-card overflow-hidden">
+				<img
+					src="/images/community-park-gathering-2.jpg"
+					alt="Church family and neighbours gathering together in the church grounds"
+					class="w-full h-64 object-cover"
+					loading="lazy"
+				/>
+			</figure>
 
 			<div class="grid md:grid-cols-3 gap-4">
 				{
 					belong.items.map((item) => (
-						<article class="bg-white border-2 border-(--ink) p-5 flex flex-col gap-4">
-							<h3 class="text-2xl font-bold text-(--ink)">
+						<article class="theme-card theme-card--interactive p-5 flex flex-col gap-4">
+							<h3 class="section-heading text-2xl">
 								{item.title}
 							</h3>
 							<p class="text-(--ink)/85 grow">
@@ -72,6 +74,28 @@ const highlightToneStyles: Record<string, string> = {
 					))
 				}
 			</div>
+
+			{
+				belong.cta && (
+					<div class="theme-card p-6 md:p-8 flex flex-col md:flex-row md:items-center gap-6 justify-between">
+						<div class="space-y-2">
+							<h3 class="section-heading text-2xl">
+								{belong.cta.text}
+							</h3>
+							<p class="text-(--ink)/85 text-lg max-w-xl">
+								{belong.cta.description}
+							</p>
+						</div>
+						<a
+							href={belong.cta.href}
+							class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-(--ink) text-white border-2 border-(--ink) font-semibold hover:bg-white hover:text-(--ink) transition-colors whitespace-nowrap"
+						>
+							{belong.cta.text}
+							<ArrowRight size={18} />
+						</a>
+					</div>
+				)
+			}
 		</section>
 
 		<section
@@ -79,7 +103,7 @@ const highlightToneStyles: Record<string, string> = {
 			class="sketch-panel theme-serve bg-(--teal-soft)/35 p-6 md:p-8 space-y-6 scroll-mt-28"
 		>
 			<div>
-				<h2 class="theme-display-font text-4xl font-bold text-(--ink)">
+				<h2 class="section-heading text-4xl">
 					Serve
 				</h2>
 				<p class="text-(--ink)/85 mt-2 max-w-3xl">
@@ -87,12 +111,20 @@ const highlightToneStyles: Record<string, string> = {
 					outreach ministries.
 				</p>
 			</div>
+			<figure class="theme-card overflow-hidden">
+				<img
+					src="/images/community-fun-day.jpg"
+					alt="Community fun day games on the church field"
+					class="w-full h-64 object-cover"
+					loading="lazy"
+				/>
+			</figure>
 
 			<div class="grid md:grid-cols-3 gap-4">
 				{
 					serve.items.map((item) => (
-						<article class="bg-white border-2 border-(--ink) p-5 flex flex-col gap-4">
-							<h3 class="text-2xl font-bold text-(--ink)">
+						<article class="theme-card theme-card--interactive p-5 flex flex-col gap-4">
+							<h3 class="section-heading text-2xl">
 								{item.title}
 							</h3>
 							<p class="text-(--ink)/85 grow">
@@ -116,13 +148,21 @@ const highlightToneStyles: Record<string, string> = {
 			class="sketch-panel theme-give bg-(--gold-soft)/45 p-6 md:p-8 space-y-6 scroll-mt-28"
 		>
 			<div class="space-y-3">
-				<h2 class="theme-display-font text-4xl font-bold text-(--ink)">
+				<h2 class="section-heading text-4xl">
 					Give
 				</h2>
 				<p class="text-(--ink)/90 text-lg">
 					{give.generosity_paragraph}
 				</p>
 			</div>
+			<figure class="theme-card overflow-hidden">
+				<img
+					src="/images/worship-singers.jpg"
+					alt="Worship team leading sung praise during a Sunday gathering"
+					class="w-full h-64 object-cover"
+					loading="lazy"
+				/>
+			</figure>
 
 			<a
 				href={give.online_giving.link}
@@ -134,7 +174,7 @@ const highlightToneStyles: Record<string, string> = {
 			</a>
 
 			<div class="grid lg:grid-cols-2 gap-4">
-				<article class="bg-white border-2 border-(--ink) p-6">
+				<article class="theme-card p-6">
 					<p class="font-semibold text-(--ink) mb-3">
 						{give.methods_heading}
 					</p>
@@ -142,8 +182,8 @@ const highlightToneStyles: Record<string, string> = {
 						{give.methods.map((method) => <li>{method}</li>)}
 					</ol>
 				</article>
-				<article class="bg-white border-2 border-(--ink) p-6 space-y-2">
-					<h3 class="text-2xl font-bold text-(--ink)">
+				<article class="theme-card p-6 space-y-2">
+					<h3 class="section-heading text-2xl">
 						{give.bank_details.heading}
 					</h3>
 					{

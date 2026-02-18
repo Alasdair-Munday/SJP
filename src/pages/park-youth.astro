@@ -8,12 +8,12 @@ const page = content.pages.park_youth;
 
 <Layout title={page.title}>
 	<div class="max-w-5xl mx-auto px-4 py-20 space-y-8">
-		<h1 class="theme-display-font text-5xl md:text-6xl font-bold text-(--ink)">
+		<h1 class="page-heading page-heading--accent text-5xl md:text-6xl">
 			{page.title}
 		</h1>
 
-		<section class="bg-white border-2 border-(--ink) p-8 space-y-4">
-			<h2 class="text-3xl font-bold text-(--ink)">{page.cornerstone.heading}</h2>
+		<section class="theme-card p-8 space-y-4">
+			<h2 class="section-heading text-3xl">{page.cornerstone.heading}</h2>
 			{
 				page.cornerstone.paragraphs.map((paragraph) => (
 					<p class="text-(--ink)/90">{paragraph}</p>
@@ -26,8 +26,8 @@ const page = content.pages.park_youth;
 			/>
 		</section>
 
-		<section class="bg-white border-2 border-(--ink) p-8 space-y-4">
-			<h2 class="text-3xl font-bold text-(--ink)">{page.sunday_study.heading}</h2>
+		<section class="theme-card p-8 space-y-4">
+			<h2 class="section-heading text-3xl">{page.sunday_study.heading}</h2>
 			{
 				page.sunday_study.paragraphs.map((paragraph) => (
 					<p class="text-(--ink)/90">{paragraph}</p>
@@ -47,7 +47,7 @@ const page = content.pages.park_youth;
 			</div>
 		</section>
 
-		<section class="bg-white border-2 border-(--ink) p-8">
+		<section class="theme-card p-8">
 			<p class="text-(--ink)/90" set:html={page.cta_html}></p>
 		</section>
 	</div>

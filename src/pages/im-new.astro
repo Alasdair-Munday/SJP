@@ -8,7 +8,7 @@ const page = content.pages.im_new;
 
 <Layout title={page.title}>
 	<div class="max-w-5xl mx-auto px-4 py-20 space-y-8">
-		<h1 class="heading-eden-gold theme-display-font text-5xl md:text-6xl font-bold">
+		<h1 class="page-heading page-heading--accent text-5xl md:text-6xl font-bold">
 			{page.title}
 		</h1>
 		{
@@ -18,11 +18,35 @@ const page = content.pages.im_new;
 				</p>
 			)
 		}
+		<section class="grid gap-4 md:grid-cols-2">
+			<figure class="theme-card theme-card--strong overflow-hidden">
+				<img
+					src="/images/congregation.jpg"
+					alt="Church family gathered together during Sunday worship"
+					class="w-full h-64 object-cover"
+					loading="lazy"
+				/>
+				<figcaption class="px-4 py-3 text-sm font-semibold text-(--ink)/80">
+					Sundays are friendly, relaxed, and easy to step into.
+				</figcaption>
+			</figure>
+			<figure class="theme-card overflow-hidden">
+				<img
+					src="/images/community-park-gathering-1.jpg"
+					alt="People talking together outdoors after church"
+					class="w-full h-64 object-cover"
+					loading="lazy"
+				/>
+				<figcaption class="px-4 py-3 text-sm font-semibold text-(--ink)/80">
+					There is always time and space to connect with people.
+				</figcaption>
+			</figure>
+		</section>
 
 		{
 			page.sections.map((section) => (
-				<section class="bg-white border-2 border-(--ink) p-8 space-y-4">
-					<h2 class="text-3xl font-bold text-(--ink)">{section.heading}</h2>
+				<section class="theme-card p-8 space-y-4">
+					<h2 class="section-heading text-3xl">{section.heading}</h2>
 					{section.paragraphs.map((paragraph) => (
 						<p class="text-(--ink)/90" set:html={paragraph}></p>
 					))}

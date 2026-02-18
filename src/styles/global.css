@@ -36,6 +36,17 @@
   --site-background-image: none;
   --site-background-size: auto;
   --site-background-position: center;
+
+  --card-border: color-mix(in oklab, var(--ink) 90%, white 10%);
+  --card-shadow:
+    0 12px 26px rgba(23, 52, 59, 0.08),
+    0 2px 0 rgba(23, 52, 59, 0.16);
+  --card-shadow-strong:
+    0 18px 34px rgba(23, 52, 59, 0.12),
+    4px 4px 0 color-mix(in oklab, var(--ink) 82%, white 18%);
+  --card-shadow-pressed:
+    0 8px 18px rgba(23, 52, 59, 0.1),
+    1px 1px 0 rgba(23, 52, 59, 0.14);
 }
 
 html[data-theme="garden-city"] {
@@ -85,6 +96,17 @@ html[data-theme="garden-city"] {
       rgba(19, 41, 37, 0) 68px);
   --site-background-size: auto, auto, 68px 100%;
   --site-background-position: center, center, center;
+
+  --card-border: color-mix(in oklab, var(--ink) 80%, white 20%);
+  --card-shadow:
+    0 13px 30px rgba(19, 41, 37, 0.09),
+    0 2px 0 rgba(19, 41, 37, 0.13);
+  --card-shadow-strong:
+    0 18px 38px rgba(19, 41, 37, 0.13),
+    3px 3px 0 color-mix(in oklab, var(--ink) 78%, white 22%);
+  --card-shadow-pressed:
+    0 8px 20px rgba(19, 41, 37, 0.11),
+    1px 1px 0 rgba(19, 41, 37, 0.12);
 }
 
 html[data-theme="line-drawing"] {
@@ -125,6 +147,17 @@ html[data-theme="line-drawing"] {
     radial-gradient(circle at 84% 26%, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 48%);
   --site-background-size: auto, auto;
   --site-background-position: center, center;
+
+  --card-border: color-mix(in oklab, var(--ink) 74%, white 26%);
+  --card-shadow:
+    0 12px 26px rgba(13, 66, 77, 0.09),
+    3px 3px 0 color-mix(in oklab, var(--ink) 68%, white 32%);
+  --card-shadow-strong:
+    0 17px 34px rgba(13, 66, 77, 0.12),
+    5px 5px 0 color-mix(in oklab, var(--ink) 72%, white 28%);
+  --card-shadow-pressed:
+    0 8px 20px rgba(13, 66, 77, 0.11),
+    1px 1px 0 rgba(13, 66, 77, 0.14);
 }
 
 html,
@@ -149,36 +182,82 @@ html[data-theme="line-drawing"] .theme-display-font {
   letter-spacing: 0.02em;
 }
 
+.page-heading {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 0.98;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  text-wrap: balance;
+}
+
+.section-heading {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  text-wrap: balance;
+}
+
+.page-heading--accent,
+.heading-eden-gold {
+  color: var(--ink);
+}
+
 .sketch-panel {
-  background: color-mix(in oklab, var(--paper-soft) 98.5%, white);
-  border: 2px solid color-mix(in oklab, var(--ink) 88%, white);
+  background: color-mix(in oklab, white 98.4%, var(--paper-soft));
+  border: 2px solid var(--card-border);
   border-radius: 18px 22px 16px 20px;
-  box-shadow:
-    0 9px 18px rgba(23, 52, 59, 0.08),
-    1px 1px 0 rgba(23, 52, 59, 0.12);
+  box-shadow: var(--card-shadow);
 }
 
 html[data-theme="garden-city"] .sketch-panel {
-  border-color: color-mix(in oklab, var(--ink) 74%, white);
+  border-color: var(--card-border);
   border-radius: 20px 14px 18px 14px;
-  box-shadow:
-    0 16px 28px rgba(19, 41, 37, 0.1),
-    0 0 0 1px rgba(255, 255, 255, 0.4) inset;
+  box-shadow: var(--card-shadow);
 }
 
 html[data-theme="line-drawing"] .sketch-panel {
   border-width: 3px;
   border-radius: 20px 16px 24px 14px;
-  box-shadow:
-    5px 6px 0 color-mix(in oklab, var(--ink) 76%, white 24%),
-    0 8px 24px rgba(13, 66, 77, 0.12);
+  box-shadow: var(--card-shadow-strong);
 }
 
-.heading-eden-gold {
-  color: var(--ink);
+.theme-card {
+  background: color-mix(in oklab, white 98.8%, var(--paper-soft));
+  border: 2px solid var(--card-border);
+  box-shadow: var(--card-shadow);
+}
+
+.theme-card--interactive {
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.theme-card--interactive:hover {
+  transform: translateY(2px);
+  box-shadow: var(--card-shadow-pressed);
+}
+
+.theme-card--strong {
+  box-shadow: var(--card-shadow-strong);
+}
+
+.theme-shadow {
+  box-shadow: var(--card-shadow);
+}
+
+.theme-shadow-strong {
+  box-shadow: var(--card-shadow-strong);
+}
+
+.theme-photo {
+  border: 2px solid var(--card-border);
+  box-shadow: var(--card-shadow);
 }
 
 @supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  .page-heading--accent,
   .heading-eden-gold {
     background-image: linear-gradient(108deg,
         color-mix(in oklab, var(--eden) 90%, var(--gold) 10%) 0%,

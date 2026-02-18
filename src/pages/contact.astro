@@ -9,12 +9,12 @@ const page = content.pages.contact;
 <Layout title={page.title}>
 	<div class="max-w-5xl mx-auto px-4 py-20 space-y-8">
 		<h1
-			class="theme-display-font text-5xl md:text-6xl font-bold text-(--ink)"
+			class="page-heading page-heading--accent text-5xl md:text-6xl"
 		>
 			{page.title}
 		</h1>
 
-		<section class="bg-white border-2 border-(--ink) p-8 space-y-4">
+		<section class="theme-card theme-card--strong p-8 space-y-4">
 			<p class="text-lg text-(--ink)/90">{page.find_us.paragraphs[0]}</p>
 			<iframe
 				src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1932.9794407157501!2d-1.4558134244165126!3d53.38304895495231!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4879787508b14b63%3A0x3ad4b2dcc392b6b9!2sSt.%20John%E2%80%99s%20Church%2C%20Park!5e0!3m2!1sen!2suk!4v1771371845139!5m2!1sen!2suk"
@@ -37,16 +37,16 @@ const page = content.pages.contact;
 			<img
 				src={page.find_us.image.src}
 				alt={page.find_us.image.alt}
-				class="w-full h-72 object-cover border-2 border-(--ink) mt-2"
+				class="theme-photo w-full h-72 object-cover mt-2"
 				loading="lazy"
 			/>
 		</section>
 
 		<section
 			id="send-message"
-			class="bg-white border-2 border-(--ink) p-8 space-y-5 scroll-mt-28"
+			class="theme-card p-8 space-y-5 scroll-mt-28"
 		>
-			<h2 class="text-3xl font-bold text-(--ink)">Send Us a Message</h2>
+			<h2 class="section-heading text-3xl">Send Us a Message</h2>
 			<p class="text-(--ink)/90">
 				You can email us directly at{" "}
 				<a
@@ -132,8 +132,8 @@ const page = content.pages.contact;
 			</form>
 		</section>
 
-		<section class="bg-white border-2 border-(--ink) p-8 space-y-4">
-			<h2 class="text-3xl font-bold text-(--ink)">
+		<section class="theme-card p-8 space-y-4">
+			<h2 class="section-heading text-3xl">
 				{page.parking.heading}
 			</h2>
 			{
@@ -143,8 +143,8 @@ const page = content.pages.contact;
 			}
 		</section>
 
-		<section class="bg-white border-2 border-(--ink) p-8 space-y-4">
-			<h2 class="text-3xl font-bold text-(--ink)">
+		<section class="theme-card p-8 space-y-4">
+			<h2 class="section-heading text-3xl">
 				{page.public_transport.heading}
 			</h2>
 			{

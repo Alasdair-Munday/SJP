@@ -10,7 +10,7 @@ const page = content.pages.serve;
 <Layout title="Join a Team">
 	<div class="max-w-6xl mx-auto px-4 py-20 space-y-8">
 		<div class="space-y-3">
-			<h1 class="heading-eden-gold theme-display-font text-5xl md:text-6xl font-bold">
+			<h1 class="page-heading page-heading--accent text-5xl md:text-6xl font-bold">
 				Join a Team
 			</h1>
 			<p class="text-xl text-(--ink)/85 max-w-4xl">
@@ -18,6 +18,22 @@ const page = content.pages.serve;
 				We will follow up with next steps.
 			</p>
 		</div>
+		<section class="grid gap-4 md:grid-cols-[1.2fr_0.8fr]">
+			<figure class="theme-card theme-card--strong overflow-hidden">
+				<img
+					src="/images/PXL_20250317_115942231.jpg"
+					alt="Volunteers and church family connecting after a gathering"
+					class="w-full h-full min-h-56 object-cover"
+					loading="lazy"
+				/>
+			</figure>
+			<div class="theme-card p-6 bg-(--teal-soft)/40 flex items-center">
+				<p class="text-lg text-(--ink)/90 font-medium leading-relaxed">
+					Serving is one of the best ways to build friendships and help church
+					family thrive each week.
+				</p>
+			</div>
+		</section>
 
 		<form
 			name="join-team-interest"
@@ -37,7 +53,7 @@ const page = content.pages.serve;
 			<input type="hidden" name="selected_teams" id="selected-teams-field" />
 
 			<div class="space-y-3">
-				<h2 class="text-3xl font-bold text-(--ink)">1. Select Teams</h2>
+				<h2 class="section-heading text-3xl">1. Select Teams</h2>
 				<p class="text-(--ink)/85">
 					Choose as many teams as you like.
 				</p>
@@ -49,9 +65,9 @@ const page = content.pages.serve;
 								data-team-card
 								data-team-name={team.name}
 								aria-pressed="false"
-								class="text-left bg-white border-2 border-(--ink) p-5 transition-colors"
+								class="text-left theme-card theme-card--interactive p-5 transition-colors"
 							>
-								<p class="text-2xl font-bold text-(--ink) mb-2">{team.name}</p>
+								<p class="section-heading text-2xl mb-2">{team.name}</p>
 								<p class="text-(--ink)/85">{team.description}</p>
 							</button>
 						))
@@ -63,7 +79,7 @@ const page = content.pages.serve;
 			</div>
 
 			<div class="space-y-4">
-				<h2 class="text-3xl font-bold text-(--ink)">2. Your Contact Details</h2>
+				<h2 class="section-heading text-3xl">2. Your Contact Details</h2>
 				<div class="grid md:grid-cols-2 gap-4">
 					<label class="block space-y-2">
 						<span class="font-semibold text-(--ink)">Name</span>
@@ -98,7 +114,7 @@ const page = content.pages.serve;
 			</div>
 
 			<div class="space-y-3">
-				<h2 class="text-3xl font-bold text-(--ink)">3. Message Preview</h2>
+				<h2 class="section-heading text-3xl">3. Message Preview</h2>
 				<p class="text-(--ink)/85">
 					This message is auto-filled from your selections and details.
 				</p>

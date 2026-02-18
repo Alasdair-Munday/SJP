@@ -38,8 +38,8 @@ const location = event.location || page.fallback_location;
 			{page.back_link_label}
 		</a>
 
-		<section class="bg-white border-2 border-(--ink) p-8 space-y-8">
-			<h1 class="theme-display-font text-4xl md:text-5xl font-bold text-(--ink)">
+		<section class="theme-card p-8 space-y-8">
+			<h1 class="page-heading page-heading--accent text-4xl md:text-5xl">
 				{event.title}
 			</h1>
 
@@ -72,7 +72,7 @@ const location = event.location || page.fallback_location;
 			</div>
 
 			<div class="border-t-2 border-(--ink) pt-6">
-				<h2 class="text-2xl font-bold text-(--ink) mb-4">{page.about_title}</h2>
+				<h2 class="section-heading text-2xl mb-4">{page.about_title}</h2>
 				<div
 					class="text-(--ink)/90 leading-relaxed [&_h1]:text-3xl [&_h1]:font-bold [&_h1]:text-(--ink) [&_h1]:mb-3 [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:text-(--ink) [&_h2]:mb-3 [&_h3]:text-xl [&_h3]:font-bold [&_h3]:text-(--ink) [&_h3]:mb-2 [&_p]:mb-4 [&_ul]:list-disc [&_ul]:pl-6 [&_ol]:list-decimal [&_ol]:pl-6 [&_li]:mb-1 [&_a]:underline [&_a]:decoration-(--eden) [&_a]:underline-offset-4"
 					set:html={descriptionHtml}
@@ -82,7 +82,7 @@ const location = event.location || page.fallback_location;
 			{
 				event.imageAttachments.length > 0 && (
 					<div class="border-t-2 border-(--ink) pt-6">
-						<h2 class="text-2xl font-bold text-(--ink) mb-4">{page.images_title}</h2>
+						<h2 class="section-heading text-2xl mb-4">{page.images_title}</h2>
 						<div class="grid sm:grid-cols-2 gap-4">
 							{event.imageAttachments.map((image, index) => (
 								<a href={image.url} target="_blank" rel="noreferrer" class="block">

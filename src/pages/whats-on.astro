@@ -16,7 +16,7 @@ const webcalUrl = CALENDAR_URL.replace(/^https:/, "webcal:");
     <div class="flex flex-wrap items-start justify-between gap-4">
       <div>
         <h1
-          class="heading-eden-gold theme-display-font text-5xl md:text-6xl font-bold"
+          class="page-heading page-heading--accent text-5xl md:text-6xl font-bold"
         >
           What's On
         </h1>
@@ -45,9 +45,9 @@ const webcalUrl = CALENDAR_URL.replace(/^https:/, "webcal:");
 
     <section
       id="upcoming-events"
-      class="bg-white border-2 border-(--ink) p-8 space-y-4"
+      class="theme-card p-8 space-y-4"
     >
-      <h2 class="text-3xl font-bold text-(--ink) mb-1">Upcoming Events</h2>
+      <h2 class="section-heading text-3xl mb-1">Upcoming Events</h2>
       <p class="text-(--ink)/90">Pulled from our live church calendar.</p>
       {
         upcomingEvents.length > 0 ? (
@@ -100,8 +100,8 @@ const webcalUrl = CALENDAR_URL.replace(/^https:/, "webcal:");
       </a>
     </section>
 
-    <section id="sunday-gathering" class="bg-white border-2 border-(--ink) p-8">
-      <h2 class="text-3xl font-bold text-(--ink) mb-3">Sunday Gathering</h2>
+    <section id="sunday-gathering" class="theme-card p-8">
+      <h2 class="section-heading text-3xl mb-3">Sunday Gathering</h2>
       <p class="text-(--ink)/90">
         Our Sunday gathering happens every Sunday at 10:45am and is for all
         ages. We gather to worship Jesus, hear from God's Word, and pray
@@ -115,8 +115,8 @@ const webcalUrl = CALENDAR_URL.replace(/^https:/, "webcal:");
       />
     </section>
 
-    <section id="midweek-prayers" class="bg-white border-2 border-(--ink) p-8">
-      <h2 class="text-3xl font-bold text-(--ink) mb-3">
+    <section id="midweek-prayers" class="theme-card p-8">
+      <h2 class="section-heading text-3xl mb-3">
         Midweek Online Prayers
       </h2>
       <p class="text-(--ink)/90">
@@ -139,8 +139,8 @@ const webcalUrl = CALENDAR_URL.replace(/^https:/, "webcal:");
       </p>
     </section>
 
-    <section id="foodbank" class="bg-white border-2 border-(--ink) p-8">
-      <h2 class="text-3xl font-bold text-(--ink) mb-2">Food Bank</h2>
+    <section id="foodbank" class="theme-card p-8">
+      <h2 class="section-heading text-3xl mb-2">Food Bank</h2>
       <p class="text-(--ink)/90">
         <strong>When:</strong> Every Monday 10am - 12pm
       </p>
@@ -187,8 +187,8 @@ const webcalUrl = CALENDAR_URL.replace(/^https:/, "webcal:");
       </p>
     </section>
 
-    <section id="lunch-club" class="bg-white border-2 border-(--ink) p-8">
-      <h2 class="text-3xl font-bold text-(--ink) mb-2">Lunch Club</h2>
+    <section id="lunch-club" class="theme-card p-8">
+      <h2 class="section-heading text-3xl mb-2">Lunch Club</h2>
       <p class="font-semibold text-(--ink) mb-3">Monday 11:40am-12:40pm</p>
       <p class="text-(--ink)/90">
         Join us every Monday for soup, bread, a hot drink, and a chat. All are
@@ -196,8 +196,8 @@ const webcalUrl = CALENDAR_URL.replace(/^https:/, "webcal:");
       </p>
     </section>
 
-    <section id="seasonal-events" class="bg-white border-2 border-(--ink) p-8">
-      <h2 class="text-3xl font-bold text-(--ink) mb-2">Seasonal Events</h2>
+    <section id="seasonal-events" class="theme-card p-8">
+      <h2 class="section-heading text-3xl mb-2">Seasonal Events</h2>
       <p class="text-(--ink)/90 mb-4">
         Throughout the year we host seasonal gatherings for all ages, including
         Christmas events and community celebrations.

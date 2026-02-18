@@ -12,7 +12,7 @@ const sermons = content.sermons;
 <Layout title={page.title}>
 	<div class="max-w-7xl mx-auto px-4 py-20">
 		<div class="flex items-end gap-4 mb-6 border-b-2 border-(--ink) pb-4">
-			<h1 class="theme-display-font text-5xl md:text-6xl font-bold text-(--ink)">
+			<h1 class="page-heading page-heading--accent text-5xl md:text-6xl">
 				{page.title}
 			</h1>
 		</div>
@@ -23,17 +23,33 @@ const sermons = content.sermons;
 		<p class="text-(--ink)/80 mb-12">
 			{page.intro_secondary}
 		</p>
+		<section class="theme-card theme-card--strong overflow-hidden mb-12">
+			<div class="grid md:grid-cols-[1.3fr_1fr] items-stretch">
+				<img
+					src="/images/worship-singers.jpg"
+					alt="People singing together during worship"
+					class="w-full h-full min-h-64 object-cover"
+					loading="lazy"
+				/>
+				<div class="p-6 md:p-8 bg-(--eden-soft)/45 flex items-center">
+					<p class="text-lg text-(--ink)/90 font-medium leading-relaxed">
+						Listen back to recent Bible teaching and share it with family,
+						friends, and neighbours through the week.
+					</p>
+				</div>
+			</div>
+		</section>
 
 		<div class="grid gap-8">
 			{
 				sermons.map((sermon) => (
-					<div class="bg-white border-2 border-(--ink) p-6 shadow-[4px_4px_0px_0px_var(--paper-line)] transition-all group">
+					<div class="theme-card theme-card--interactive p-6 group">
 						<div class="flex flex-col md:flex-row gap-6 items-start">
 							<div class="bg-(--ink) text-(--gold) w-16 h-16 flex items-center justify-center shrink-0">
 								<Play size={32} fill="currentColor" />
 							</div>
 							<div class="grow">
-								<h2 class="text-3xl font-bold text-(--ink) mb-2">
+								<h2 class="section-heading text-3xl mb-2">
 									{sermon.title}
 								</h2>
 								<div class="flex flex-wrap gap-4 text-sm font-semibold text-(--ink)/70 mb-4 tracking-wide">

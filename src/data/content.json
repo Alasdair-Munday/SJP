@@ -374,7 +374,12 @@
               "href": "/park-communities",
               "link_label": "Visit Park Communities"
             }
-          ]
+          ],
+          "cta": {
+            "text": "Join us on Sundays",
+            "href": "/sundays",
+            "description": "The best way to get to know us is to come along. We gather every Sunday at 10:45am."
+          }
         },
         {
           "id": "serve",
