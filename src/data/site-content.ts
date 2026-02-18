@@ -2,7 +2,7 @@ import localContent from "./content.json";
 
 export type SiteContent = typeof localContent;
 
-type ContentSource = "local" | "api" | "sheets";
+type ContentSource = "local" | "api" | "sheets" | "decap";
 type PathToken = string | number;
 
 let cachedContent: SiteContent | null = null;
@@ -235,6 +235,54 @@ const fetchFromApiUrl = async (contentApiUrl: string): Promise<SiteContent> => {
   return (await response.json()) as SiteContent;
 };
 
+const isFeatureEnabled = (rawValue: string | undefined): boolean =>
+  /^(1|true|yes|on)$/i.test((rawValue ?? "").trim());
+
+const mergeContent = (base: unknown, override: unknown): unknown => {
+  if (Array.isArray(base) && Array.isArray(override)) {
+    return override;
+  }
+
+  if (isObject(base) && isObject(override)) {
+    const merged: Record<string, unknown> = { ...base };
+
+    for (const [key, overrideValue] of Object.entries(override)) {
+      const baseValue = merged[key];
+      merged[key] = mergeContent(baseValue, overrideValue);
+    }
+
+    return merged;
+  }
+
+  return override === undefined ? base : override;
+};
+
+const fetchFromDecap = async (): Promise<SiteContent> => {
+  if (!isFeatureEnabled(import.meta.env.ENABLE_DECAP_CONTENT_SOURCE)) {
+    throw new Error(
+      "Decap content source is disabled. Set ENABLE_DECAP_CONTENT_SOURCE=true to enable CONTENT_SOURCE=decap.",
+    );
+  }
+
+  const decapContentUrl = import.meta.env.DECAP_CONTENT_URL ?? "/admin/content.json";
+
+  const response = await fetch(decapContentUrl, {
+    headers: {
+      Accept: "application/json",
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error(
+      `Failed to fetch Decap content from ${decapContentUrl}: ${response.status} ${response.statusText}`,
+    );
+  }
+
+  const decapContent = (await response.json()) as Record<string, unknown>;
+
+  return mergeContent(localContent, decapContent) as SiteContent;
+};
+
 const fetchFromGoogleSheets = async (): Promise<SiteContent> => {
   const csvUrlFromEnv =
     import.meta.env.GOOGLE_SHEETS_CSV_URL ?? import.meta.env.CONTENT_CSV_URL;
@@ -285,7 +333,12 @@ const fetchFromGoogleSheets = async (): Promise<SiteContent> => {
 const resolveContentSource = (): ContentSource => {
   const source = (import.meta.env.CONTENT_SOURCE ?? "").toLowerCase();
 
-  if (source === "local" || source === "api" || source === "sheets") {
+  if (
+    source === "local" ||
+    source === "api" ||
+    source === "sheets" ||
+    source === "decap"
+  ) {
     return source;
   }
 
@@ -317,6 +370,11 @@ export async function getSiteContent(): Promise<SiteContent> {
     }
 
     cachedContent = await fetchFromApiUrl(contentApiUrl);
+    return cachedContent;
+  }
+
+  if (source === "decap") {
+    cachedContent = await fetchFromDecap();
     return cachedContent;
   }
 
