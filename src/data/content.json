@@ -500,8 +500,8 @@
             "alt": "Children and families at churchyard games"
           },
           {
-            "src": "/images/christingle.jpg",
-            "alt": "Children taking part in a Christingle service"
+            "src": "/images/play.jpg",
+            "alt": "Children playing with activities outside church"
           }
         ]
       },
@@ -516,8 +516,8 @@
           "We spend time together in Scripture, discussion, prayer, and friendship."
         ],
         "image": {
-          "src": "/images/park-youth-group.jpg",
-          "alt": "Park Youth gathered together in the garden"
+          "src": "/images/park youth.png",
+          "alt": "Park Youth group together inside church"
         }
       },
       "sunday_study": {
@@ -594,18 +594,18 @@
           "phone": "07538 172907",
           "phone_href": "tel:+447538172907",
           "image": {
-            "src": "/images/PXL_20250814_104140063.PORTRAIT.jpg",
-            "alt": "Revd Luke Graham standing outside St John's Park"
+            "src": "/images/Luke Graham.jpg",
+            "alt": "Revd Luke Graham serving at a church barbecue"
           }
         },
         {
-          "name": "Kirsty Dronfield",
-          "role": "Children and Families' Leader",
-          "email": "kirsty@saintjohnspark.org",
-          "bio": "Kirsty helps children and families grow in faith through Park Kids and wider family support across church life.",
+          "name": "Claire Smith",
+          "role": "Park Tots Leader and Safeguarding Officer",
+          "email": "safeguarding@saintjohnspark.org",
+          "bio": "Claire leads our Park Tots group for under 5s and serves as our safeguarding officer, helping us care for children and vulnerable adults across church life.",
           "image": {
-            "src": "/images/PXL_20250814_104214012.PORTRAIT.jpg",
-            "alt": "Kirsty Dronfield smiling in the church grounds"
+            "src": "/images/claire smith.jpg",
+            "alt": "Claire Smith helping children at an outdoor church activity"
           }
         },
         {
@@ -614,8 +614,8 @@
           "email": "hello@saintjohnspark.org",
           "bio": "Faustina serves as churchwarden, supporting pastoral care and practical leadership across the congregation.",
           "image": {
-            "src": "/images/PXL_20250814_104234358.PORTRAIT.jpg",
-            "alt": "Faustina Nyame in the church hall"
+            "src": "/images/Faustina.jpg",
+            "alt": "Faustina Nyame speaking at the front of church"
           }
         },
         {
@@ -624,8 +624,8 @@
           "email": "hello@saintjohnspark.org",
           "bio": "Bess serves the church as a churchwarden and lay reader, helping lead worship and nurture discipleship.",
           "image": {
-            "src": "/images/PXL_20250814_104143091.PORTRAIT.jpg",
-            "alt": "Elizabeth Cooper in the churchyard"
+            "src": "/images/Bess.jpg",
+            "alt": "Bess Cooper"
           }
         }
       ]
@@ -659,8 +659,8 @@
         "heading": "Sunday Gathering",
         "description": "Our Sunday gathering happens every Sunday at 10:45am and is for all ages. We gather to worship Jesus, hear from God's Word, and pray together.",
         "image": {
-          "src": "/images/community-fun-day.jpg",
-          "alt": "Community activities in the church grounds"
+          "src": "/images/worship team.jpg",
+          "alt": "Worship team leading sung praise during Sunday gathering"
         }
       },
       "midweek_online_prayers": {
@@ -698,12 +698,12 @@
         "description": "Throughout the year we host seasonal gatherings for all ages, including Christmas events and community celebrations.",
         "images": [
           {
-            "src": "/images/christingle.jpg",
-            "alt": "Children and families taking part in a Christingle service"
+            "src": "/images/christmas singing.jpg",
+            "alt": "Christmas singing event in the church hall"
           },
           {
-            "src": "/images/carols-doorstep.jpg",
-            "alt": "Community carol singing at the church entrance"
+            "src": "/images/outdoor carols.jpg",
+            "alt": "Community outdoor carol singing at the church entrance"
           }
         ]
       }
@@ -742,7 +742,7 @@
           "label": "Churchyard Games"
         },
         {
-          "src": "/images/carols-doorstep.jpg",
+          "src": "/images/outdoor carols.jpg",
           "alt": "Community singing carols at the church entrance in December",
           "label": "Seasonal Events"
         }

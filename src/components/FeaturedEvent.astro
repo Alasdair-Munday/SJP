@@ -11,65 +11,55 @@ const [event] = await getUpcomingEvents(1);
 
 {
 	event && (
-		<section class="py-16 border-b-2 border-(--ink) bg-white">
-			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-				<article class="sketch-panel overflow-hidden">
-					<div class="grid lg:grid-cols-[1.3fr_1fr]">
-						<div class="p-8 lg:p-10 space-y-5">
-							<h3 class="section-heading text-4xl">
-								{event.title}
-							</h3>
-							<div class="grid sm:grid-cols-2 gap-3 text-(--ink)/90">
-								<p class="inline-flex items-center gap-2 font-semibold">
-									<Calendar size={16} />
-									{formatEventDateLong(
-										event.start,
-										event.timeZone,
-									)}
-								</p>
-								<p class="inline-flex items-center gap-2 font-semibold">
-									<Clock size={16} />
-									{formatEventTime(
-										event.start,
-										event.timeZone,
-									)}
-								</p>
-								{event.location && (
-									<p class="inline-flex items-center gap-2 font-semibold sm:col-span-2">
-										<MapPin size={16} />
-										{event.location}
-									</p>
-								)}
-							</div>
-							<p
-								class="text-(--ink)/85"
-								set:html={event.description}
-							/>
-							<a
-								href={`/events/${event.slug}`}
-								class="inline-flex items-center gap-2 px-5 py-2.5 border-2 border-(--ink) text-(--ink) font-semibold hover:bg-(--ink) hover:text-white transition-colors"
-							>
-								View Event Details
-								<ArrowRight size={16} />
-							</a>
-						</div>
-						<div class="border-l-2 border-(--ink)">
-							{event.thumbnailUrl ? (
-								<img
-									src={event.thumbnailUrl}
-									alt={`Featured event image for ${event.title}`}
-									class="w-full h-full min-h-72 object-cover"
-									loading="lazy"
-								/>
-							) : (
-								<div class="w-full h-full min-h-72 bg-(--panel-soft) flex items-center justify-center p-6 text-center text-(--ink)/75 font-semibold">
-									Event image coming soon
-								</div>
-							)}
-						</div>
+		<article class="sketch-panel overflow-hidden bg-white">
+			<div class="grid lg:grid-cols-[1.3fr_1fr]">
+				<div class="p-8 lg:p-10 space-y-5">
+					<h3 class="section-heading text-4xl">
+						{event.title}
+					</h3>
+					<div class="grid sm:grid-cols-2 gap-3 text-(--ink)/90">
+						<p class="inline-flex items-center gap-2 font-semibold">
+							<Calendar size={16} />
+							{formatEventDateLong(event.start, event.timeZone)}
+						</p>
+						<p class="inline-flex items-center gap-2 font-semibold">
+							<Clock size={16} />
+							{formatEventTime(event.start, event.timeZone)}
+						</p>
+						{event.location && (
+							<p class="inline-flex items-center gap-2 font-semibold sm:col-span-2">
+								<MapPin size={16} />
+								{event.location}
+							</p>
+						)}
 					</div>
-				</article>
+					<p
+						class="text-(--ink)/85"
+						set:html={event.description}
+					/>
+					<a
+						href={`/events/${event.slug}`}
+						class="inline-flex items-center gap-2 px-5 py-2.5 border-2 border-(--ink) text-(--ink) font-semibold hover:bg-(--ink) hover:text-white transition-colors"
+					>
+						View Event Details
+						<ArrowRight size={16} />
+					</a>
+				</div>
+				<div class="border-l-2 border-(--ink)">
+					{event.thumbnailUrl ? (
+						<img
+							src={event.thumbnailUrl}
+							alt={`Featured event image for ${event.title}`}
+							class="w-full h-full min-h-72 object-cover"
+							loading="lazy"
+						/>
+					) : (
+						<div class="w-full h-full min-h-72 bg-(--panel-soft) flex items-center justify-center p-6 text-center text-(--ink)/75 font-semibold">
+							Event image coming soon
+						</div>
+					)}
+				</div>
 			</div>
-		</section>
+		</article>
 	)
 }

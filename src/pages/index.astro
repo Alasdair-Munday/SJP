@@ -234,11 +234,9 @@ const firstTimeCards = (
 		</div>
 	</section>
 
-	<FeaturedEvent />
-
 	<!-- BANNER: Upcoming -->
-	<div class="bg-(--gold) border-b-2 border-(--ink) p-8">
-		<div class="max-w-7xl mx-auto">
+	<section class="bg-(--gold) border-b-2 border-(--ink) py-10">
+		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
 			<div class="flex items-center gap-3 mb-6">
 				<Calendar className="w-8 h-8 text-(--ink)" />
 				<h2 class="text-2xl font-bold tracking-tight text-(--ink)">
@@ -246,9 +244,10 @@ const firstTimeCards = (
 				</h2>
 			</div>
 
+			<FeaturedEvent />
 			<CalendarEvents />
 		</div>
-	</div>
+	</section>
 
 	<!-- MISSION GRID -->
 	<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">

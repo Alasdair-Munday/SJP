@@ -13,9 +13,11 @@ const page = content.pages.im_new;
 		</h1>
 		{
 			page.home_preview?.intro && (
-				<p class="text-xl text-(--ink)/85 max-w-3xl font-medium">
-					{page.home_preview.intro}
-				</p>
+				<section class="theme-drench theme-drench--eden p-6">
+					<p class="text-xl text-(--ink)/90 max-w-3xl font-medium">
+						{page.home_preview.intro}
+					</p>
+				</section>
 			)
 		}
 		<section class="grid gap-4 md:grid-cols-2">
@@ -32,8 +34,8 @@ const page = content.pages.im_new;
 			</figure>
 			<figure class="theme-card overflow-hidden">
 				<img
-					src="/images/community-park-gathering-1.jpg"
-					alt="People talking together outdoors after church"
+					src="/images/refreshments.jpg"
+					alt="People talking over refreshments after church"
 					class="w-full h-64 object-cover"
 					loading="lazy"
 				/>
