@@ -17,26 +17,22 @@ const sermons = content.sermons;
 			</h1>
 		</div>
 
-		<p class="text-xl text-(--ink)/90 mb-3">
-			{page.intro_primary}
-		</p>
-		<p class="text-(--ink)/80 mb-12">
-			{page.intro_secondary}
-		</p>
-		<section class="theme-card theme-card--strong overflow-hidden mb-12">
-			<div class="grid md:grid-cols-[1.3fr_1fr] items-stretch">
+		<section class="space-y-8 mb-12">
+			<div class="theme-drench theme-drench--gold p-6 md:p-8">
+				<p class="text-xl text-(--ink)/90 mb-3 font-medium">
+					{page.intro_primary}
+				</p>
+				<p class="text-lg text-(--ink)/80">
+					{page.intro_secondary}
+				</p>
+			</div>
+			<div class="theme-card overflow-hidden h-64 md:h-80">
 				<img
-					src="/images/worship-singers.jpg"
-					alt="People singing together during worship"
-					class="w-full h-full min-h-64 object-cover"
+					src="/images/Sermons.jpg"
+					alt="Woman speaking from the front during a Sunday talk"
+					class="w-full h-full object-cover"
 					loading="lazy"
 				/>
-				<div class="p-6 md:p-8 bg-(--eden-soft)/45 flex items-center">
-					<p class="text-lg text-(--ink)/90 font-medium leading-relaxed">
-						Listen back to recent Bible teaching and share it with family,
-						friends, and neighbours through the week.
-					</p>
-				</div>
 			</div>
 		</section>
 
@@ -57,7 +53,10 @@ const sermons = content.sermons;
 										<User size={16} /> {sermon.speaker}
 									</div>
 									<div class="flex items-center gap-2">
-										<Calendar size={16} /> {dayjs(sermon.date).format("MMM D, YYYY")}
+										<Calendar size={16} />{" "}
+										{dayjs(sermon.date).format(
+											"MMM D, YYYY",
+										)}
 									</div>
 									<div class="flex items-center gap-2">
 										<BookOpen size={16} /> {sermon.passage}
@@ -69,8 +68,12 @@ const sermons = content.sermons;
 
 								{sermon.audioUrl ? (
 									<audio controls class="w-full">
-										<source src={sermon.audioUrl} type="audio/mpeg" />
-										Your browser does not support the audio element.
+										<source
+											src={sermon.audioUrl}
+											type="audio/mpeg"
+										/>
+										Your browser does not support the audio
+										element.
 									</audio>
 								) : (
 									<p class="font-semibold text-(--ink)/80">

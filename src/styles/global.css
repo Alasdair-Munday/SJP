@@ -39,14 +39,14 @@
 
   --card-border: color-mix(in oklab, var(--ink) 90%, white 10%);
   --card-shadow:
-    0 12px 26px rgba(23, 52, 59, 0.08),
-    0 2px 0 rgba(23, 52, 59, 0.16);
+    4px 4px 0 color-mix(in oklab, var(--ink) 78%, white 22%),
+    0 12px 24px rgba(23, 52, 59, 0.1);
   --card-shadow-strong:
-    0 18px 34px rgba(23, 52, 59, 0.12),
-    4px 4px 0 color-mix(in oklab, var(--ink) 82%, white 18%);
+    7px 7px 0 color-mix(in oklab, var(--ink) 82%, white 18%),
+    0 18px 34px rgba(23, 52, 59, 0.14);
   --card-shadow-pressed:
-    0 8px 18px rgba(23, 52, 59, 0.1),
-    1px 1px 0 rgba(23, 52, 59, 0.14);
+    2px 2px 0 color-mix(in oklab, var(--ink) 74%, white 26%),
+    0 8px 18px rgba(23, 52, 59, 0.11);
 }
 
 html[data-theme="garden-city"] {
@@ -99,14 +99,14 @@ html[data-theme="garden-city"] {
 
   --card-border: color-mix(in oklab, var(--ink) 80%, white 20%);
   --card-shadow:
-    0 13px 30px rgba(19, 41, 37, 0.09),
-    0 2px 0 rgba(19, 41, 37, 0.13);
+    4px 4px 0 color-mix(in oklab, var(--ink) 72%, white 28%),
+    0 13px 30px rgba(19, 41, 37, 0.11);
   --card-shadow-strong:
-    0 18px 38px rgba(19, 41, 37, 0.13),
-    3px 3px 0 color-mix(in oklab, var(--ink) 78%, white 22%);
+    6px 6px 0 color-mix(in oklab, var(--ink) 76%, white 24%),
+    0 18px 38px rgba(19, 41, 37, 0.15);
   --card-shadow-pressed:
-    0 8px 20px rgba(19, 41, 37, 0.11),
-    1px 1px 0 rgba(19, 41, 37, 0.12);
+    2px 2px 0 color-mix(in oklab, var(--ink) 70%, white 30%),
+    0 8px 20px rgba(19, 41, 37, 0.12);
 }
 
 html[data-theme="line-drawing"] {
@@ -150,14 +150,14 @@ html[data-theme="line-drawing"] {
 
   --card-border: color-mix(in oklab, var(--ink) 74%, white 26%);
   --card-shadow:
-    0 12px 26px rgba(13, 66, 77, 0.09),
-    3px 3px 0 color-mix(in oklab, var(--ink) 68%, white 32%);
+    4px 4px 0 color-mix(in oklab, var(--ink) 68%, white 32%),
+    0 12px 26px rgba(13, 66, 77, 0.11);
   --card-shadow-strong:
-    0 17px 34px rgba(13, 66, 77, 0.12),
-    5px 5px 0 color-mix(in oklab, var(--ink) 72%, white 28%);
+    7px 7px 0 color-mix(in oklab, var(--ink) 72%, white 28%),
+    0 17px 34px rgba(13, 66, 77, 0.14);
   --card-shadow-pressed:
-    0 8px 20px rgba(13, 66, 77, 0.11),
-    1px 1px 0 rgba(13, 66, 77, 0.14);
+    2px 2px 0 color-mix(in oklab, var(--ink) 66%, white 34%),
+    0 8px 20px rgba(13, 66, 77, 0.12);
 }
 
 html,
@@ -243,12 +243,28 @@ html[data-theme="line-drawing"] .sketch-panel {
   box-shadow: var(--card-shadow-strong);
 }
 
-.theme-shadow {
-  box-shadow: var(--card-shadow);
+.theme-drench {
+  border: 2px solid var(--card-border);
+  box-shadow: var(--card-shadow-strong);
+  color: color-mix(in oklab, var(--ink) 92%, black 8%);
 }
 
-.theme-shadow-strong {
-  box-shadow: var(--card-shadow-strong);
+.theme-drench--eden {
+  background: linear-gradient(142deg,
+      color-mix(in oklab, var(--eden) 54%, white 46%) 0%,
+      color-mix(in oklab, var(--eden) 72%, var(--gold) 28%) 100%);
+}
+
+.theme-drench--teal {
+  background: linear-gradient(142deg,
+      color-mix(in oklab, var(--teal) 56%, white 44%) 0%,
+      color-mix(in oklab, var(--teal) 74%, var(--eden) 26%) 100%);
+}
+
+.theme-drench--gold {
+  background: linear-gradient(142deg,
+      color-mix(in oklab, var(--gold) 58%, white 42%) 0%,
+      color-mix(in oklab, var(--gold) 72%, var(--eden) 28%) 100%);
 }
 
 .theme-photo {
