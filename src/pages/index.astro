@@ -3,6 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import SketchChurch from "../components/SketchChurch.astro";
 import CalendarEvents from "../components/CalendarEvents.astro";
 import FeaturedEvent from "../components/FeaturedEvent.astro";
+import NewsUpdates from "../components/NewsUpdates.astro";
 import { getSiteContent } from "../data/site-content";
 import {
 	ArrowRight,
@@ -15,7 +16,6 @@ import {
 	Smile,
 	PlayCircle,
 } from "lucide-react";
-import type { ContentCollectionKey } from "astro:content";
 
 const content = await getSiteContent();
 const { hero, mission_grid, latest_message, coming_up, mission } =
@@ -233,6 +233,10 @@ const firstTimeCards = (
 			</div>
 		</div>
 	</section>
+
+	<FeaturedEvent />
+
+	<NewsUpdates />
 
 	<!-- BANNER: Upcoming -->
 	<section class="bg-(--gold) border-b-2 border-(--ink) py-10">
