@@ -3,9 +3,15 @@ import Layout from "../../layouts/Layout.astro";
 import { getCollection } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 import { ArrowRight, Calendar } from "lucide-react";
+import { getSiteContent } from "../../data/site-content";
 
 const STALE_FALLBACK_DAYS = 90;
 const now = new Date();
+const content = await getSiteContent();
+const copy = content.components.news ?? {
+	back_to_news_label: "Back to News",
+	archived_notice: "This article is archived and may contain out-of-date details.",
+};
 
 export async function getStaticPaths() {
 	const newsItems = await getCollection("news");
@@ -38,7 +44,7 @@ const formatDate = (date: Date) =>
 			href="/news"
 			class="inline-flex items-center gap-2 text-(--ink) font-semibold hover:text-(--eden) transition-colors"
 		>
-			<ArrowRight size={16} className="rotate-180" /> Back to News
+			<ArrowRight size={16} className="rotate-180" /> {copy.back_to_news_label}
 		</a>
 
 		<article class="theme-card p-8 space-y-6">
@@ -69,7 +75,7 @@ const formatDate = (date: Date) =>
 
 			{isStale && (
 				<p class="text-sm font-semibold text-(--ink)/70 border-t border-(--ink)/20 pt-4">
-					This article is archived and may contain out-of-date details.
+					{copy.archived_notice}
 				</p>
 			)}
 

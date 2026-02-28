@@ -1,0 +1,15 @@
+{
+  "title": "St John's Park Church",
+  "subtitle": "A community of Jesus-followers in Park, Sheffield.",
+  "address": "Bernard Street, Sheffield, S2 5PU",
+  "mission": "Belong, Serve, Give",
+  "vision": "Eden in Park",
+  "meta_description": "St John's Park Church",
+  "default_site_url": "https://stjohnspark.church",
+  "brand": {
+    "logo_line_one": "St John's Church",
+    "logo_line_two": "Park",
+    "nav_cta_label": "I'm New",
+    "nav_cta_href": "/im-new"
+  }
+}

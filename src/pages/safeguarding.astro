@@ -4,8 +4,14 @@ import { getSiteContent } from "../data/site-content";
 
 const content = await getSiteContent();
 const page = content.pages.safeguarding;
-const safeguardingPolicyDownloadUrl =
-	"https://www.saintjohnspark.org.uk/wp-content/uploads/2025/08/St-Johns-Safeguarding-Policy-2025-2.docx";
+const policyDownload = page.policy_download ?? {
+	label: "Download Safeguarding Policy (DOCX)",
+	href: "https://www.saintjohnspark.org.uk/wp-content/uploads/2025/08/St-Johns-Safeguarding-Policy-2025-2.docx",
+};
+const image = page.image ?? {
+	src: "/images/kids-churchyard.jpg",
+	alt: "Children and families enjoying activities around the church grounds",
+};
 ---
 
 <Layout title={page.title}>
@@ -15,14 +21,14 @@ const safeguardingPolicyDownloadUrl =
 		</h1>
 
 		<section class="theme-card p-8 space-y-4">
-			<p>
-				<a
-					href={safeguardingPolicyDownloadUrl}
-					class="inline-flex items-center gap-2 px-5 py-2.5 border-2 border-(--ink) text-(--ink) font-semibold hover:bg-(--ink) hover:text-white transition-colors"
-				>
-					Download Safeguarding Policy (DOCX)
-				</a>
-			</p>
+				<p>
+					<a
+						href={policyDownload.href}
+						class="inline-flex items-center gap-2 px-5 py-2.5 border-2 border-(--ink) text-(--ink) font-semibold hover:bg-(--ink) hover:text-white transition-colors"
+					>
+						{policyDownload.label}
+					</a>
+				</p>
 			{
 				page.paragraphs.map((paragraph, index) => (
 					<p
@@ -31,14 +37,14 @@ const safeguardingPolicyDownloadUrl =
 					></p>
 				))
 			}
-		</section>
-		<figure class="theme-card overflow-hidden">
-			<img
-				src="/images/kids-churchyard.jpg"
-				alt="Children and families enjoying activities around the church grounds"
-				class="w-full h-72 object-cover"
-				loading="lazy"
-			/>
+			</section>
+			<figure class="theme-card overflow-hidden">
+				<img
+					src={image.src}
+					alt={image.alt}
+					class="w-full h-72 object-cover"
+					loading="lazy"
+				/>
 		</figure>
 	</div>
 </Layout>

@@ -1,0 +1,48 @@
+{
+  "title": "Belong",
+  "highlights": [
+    {
+      "title": "Park Kids",
+      "description": "Groups for children aged 1-11 during Sunday gatherings.",
+      "href": "/park-kids",
+      "tone": "eden"
+    },
+    {
+      "title": "Park Youth",
+      "description": "Youth discipleship through Cornerstone and Sunday Bible study.",
+      "href": "/park-youth",
+      "tone": "teal"
+    },
+    {
+      "title": "Park Communities",
+      "description": "Midweek groups for prayer, Scripture, and community life.",
+      "href": "/park-communities",
+      "tone": "gold"
+    }
+  ],
+  "sections": {
+    "midweek": {
+      "heading": "Midweek Groups",
+      "paragraphs": [
+        "We encourage anyone part of our church family to find transformation, discipleship, and growth in a small community.",
+        "Most of our communities meet weekly to study God's Word, pray, and encourage one another in faith.",
+        "To join a community, visit <a href='/park-communities' class='underline decoration-[var(--eden)] underline-offset-4'>Park Communities</a> or <a href='/contact' class='underline decoration-[var(--eden)] underline-offset-4'>contact us</a>."
+      ]
+    },
+    "kids": {
+      "heading": "Kids",
+      "paragraphs": [
+        "We have kids groups (ages 1-11) that meet during our Sunday gathering. Speak to our welcome team to find out more.",
+        "<a href='/park-kids' class='underline decoration-[var(--eden)] underline-offset-4'>Find out more about Park Kids</a>."
+      ]
+    },
+    "youth": {
+      "heading": "Youth (Cornerstone)",
+      "paragraphs": [
+        "Our youth group Cornerstone meets every Wednesday at church from 6:00-7:00pm. If you are at secondary school, we would love to see you there.",
+        "We also run a youth Bible study during selected Sunday gatherings for Years 7-10.",
+        "<a href='/park-youth' class='underline decoration-[var(--teal)] underline-offset-4'>Find out more about Park Youth</a>."
+      ]
+    }
+  }
+}

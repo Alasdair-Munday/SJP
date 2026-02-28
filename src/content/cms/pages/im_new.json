@@ -1,0 +1,41 @@
+{
+  "title": "I'm New",
+  "home_preview": {
+    "heading": "First Time Visiting?",
+    "intro": "Here is what makes a Sunday morning at St John's Park easy to step into."
+  },
+  "sections": [
+    {
+      "heading": "When does church happen?",
+      "paragraphs": [
+        "We gather to worship every Sunday morning at 10:45am. We also run activities during the week for children, local community support, and smaller groups."
+      ]
+    },
+    {
+      "heading": "What happens in a church service?",
+      "paragraphs": [
+        "The service is usually a little over an hour. We sing together, read the Bible, hear teaching that connects Scripture to everyday life, and spend time in prayer.",
+        "On the first Sunday of each month, we also share Communion together."
+      ]
+    },
+    {
+      "heading": "What about children and young people?",
+      "paragraphs": [
+        "Children are very welcome. Most Sundays there is a children’s activity or children’s club during the service, and we work to help families feel at home.",
+        "For more details, visit <a href='/park-kids' class='underline decoration-[var(--eden)] underline-offset-4'>Park Kids</a> and <a href='/park-youth' class='underline decoration-[var(--teal)] underline-offset-4'>Park Youth</a>."
+      ]
+    }
+  ],
+  "gallery": [
+    {
+      "src": "/images/congregation.jpg",
+      "alt": "Church family gathered together during Sunday worship",
+      "caption": "Sundays are friendly, relaxed, and easy to step into."
+    },
+    {
+      "src": "/images/refreshments.jpg",
+      "alt": "People talking over refreshments after church",
+      "caption": "There is always time and space to connect with people."
+    }
+  ]
+}

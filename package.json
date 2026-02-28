@@ -7,6 +7,9 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
+    "cms:local-backend": "decap-server",
+    "content:cms:migrate": "node scripts/migrate-content-to-cms.mjs",
+    "content:cms:decap-config": "node scripts/generate-decap-config.mjs",
     "content:sheet-template": "node scripts/export-content-to-sheet-template.mjs",
     "content:sheet-validate": "node scripts/validate-sheet-csv.mjs"
   },
@@ -22,9 +25,15 @@
     "dayjs": "^1.11.19",
     "ical.js": "^2.2.1",
     "lucide-react": "^0.564.0",
+    "netlify-cms-oauth-provider-node": "^2.0.0",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "tailwindcss": "^4.1.18",
     "typescript": "^5.9.3"
+  },
+  "devDependencies": {
+    "decap-server": "^3.5.2",
+    "vite": "^6.3.5",
+    "yaml": "^2.6.0"
   }
 }

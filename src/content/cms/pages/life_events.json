@@ -1,0 +1,24 @@
+{
+  "title": "Life Events",
+  "intro": "For information about baptisms, weddings, and funerals:",
+  "links": [
+    {
+      "label": "melksham.church/life-events",
+      "href": "https://www.melksham.church/life-events"
+    },
+    {
+      "label": "stjohnschap.co.uk/what-we-do/celebrating-new-birth",
+      "href": "https://www.stjohnschap.co.uk/what-we-do/celebrating-new-birth/"
+    }
+  ],
+  "images": [
+    {
+      "src": "/images/baptism.jpg",
+      "alt": "Baptism celebration at church"
+    },
+    {
+      "src": "/images/carols-doorstep.jpg",
+      "alt": "Community gathering together at the church entrance"
+    }
+  ]
+}

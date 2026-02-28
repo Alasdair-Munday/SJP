@@ -1,0 +1,36 @@
+{
+  "title": "Park Youth",
+  "cornerstone": {
+    "heading": "Wednesday Night: Cornerstone",
+    "paragraphs": [
+      "Cornerstone is our youth group for secondary school age, meeting every Wednesday at church from 6:00pm-7:00pm.",
+      "We spend time together in Scripture, discussion, prayer, and friendship."
+    ],
+    "image": {
+      "src": "/images/park youth.png",
+      "alt": "Park Youth group together inside church"
+    }
+  },
+  "sunday_study": {
+    "heading": "Sunday: Faith Explorers",
+    "paragraphs": [
+      "We also run a youth Bible study during selected Sunday gatherings for Years 7-10.",
+      "Our heart is to help young people know Jesus, grow in faith, and play a full part in church life."
+    ],
+    "images": [
+      {
+        "src": "/images/youth-leading-worship.png",
+        "alt": "Young person leading from the front during a Sunday gathering"
+      },
+      {
+        "src": "/images/youth-games-1.jpg",
+        "alt": "Park Youth enjoying games in the park"
+      },
+      {
+        "src": "/images/youth-games-2.jpg",
+        "alt": "Park Youth taking part in outdoor activities"
+      }
+    ]
+  },
+  "cta_html": "If you are a parent/carer or young person and would like more details, <a href='/contact' class='underline decoration-[var(--teal)] underline-offset-4'>get in touch</a>."
+}

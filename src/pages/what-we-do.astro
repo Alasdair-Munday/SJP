@@ -6,10 +6,34 @@ import { getSiteContent } from "../data/site-content";
 const content = await getSiteContent();
 const page = content.pages.ministries;
 const give = content.pages.give;
+type MinistryGroup = (typeof page.groups)[number] & {
+	intro?: string;
+	image?: { src: string; alt: string };
+};
 const belong =
-	page.groups.find((group) => group.id === "belong") ?? page.groups[0];
+	(page.groups.find((group) => group.id === "belong") ??
+		page.groups[0]) as MinistryGroup;
 const serve =
-	page.groups.find((group) => group.id === "serve") ?? page.groups[0];
+	(page.groups.find((group) => group.id === "serve") ??
+		page.groups[0]) as MinistryGroup;
+const belongIntro =
+	belong.intro ??
+	"Belong by coming on Sundays and joining a midweek group.";
+const belongImage = belong.image ?? {
+	src: "/images/congregation.jpg",
+	alt: "Church family and neighbours gathering together in the church grounds",
+};
+const serveIntro =
+	serve.intro ??
+	"Serve by joining a team or connecting with our local outreach ministries.";
+const serveImage = serve.image ?? {
+	src: "/images/lunch club.jpg",
+	alt: "Community fun day games on the church field",
+};
+const giveImage = give.section_image ?? {
+	src: "/images/PXL_20250816_114550760.PORTRAIT.jpg",
+	alt: "Worship team leading sung praise during a Sunday gathering",
+};
 ---
 
 <Layout title={page.title}>
@@ -23,12 +47,12 @@ const serve =
 			<p class="text-xl text-(--ink)/85 max-w-4xl">{page.intro}</p>
 			<div class="flex flex-wrap gap-3">
 				<a href="#belong" class="mission-chip mission-chip--belong"
-					>Belong</a
+					>{belong.heading}</a
 				>
 				<a href="#serve" class="mission-chip mission-chip--serve"
-					>Serve</a
+					>{serve.heading}</a
 				>
-				<a href="#give" class="mission-chip mission-chip--give">Give</a>
+				<a href="#give" class="mission-chip mission-chip--give">{give.title}</a>
 			</div>
 		</div>
 
@@ -37,15 +61,15 @@ const serve =
 			class="sketch-panel theme-belong bg-(--eden-soft)/35 p-6 md:p-8 space-y-6 scroll-mt-28"
 		>
 			<div class="theme-drench theme-drench--eden p-5 space-y-2">
-				<h2 class="section-heading text-4xl">Belong</h2>
+				<h2 class="section-heading text-4xl">{belong.heading}</h2>
 				<p class="text-(--ink)/85 mt-2 max-w-3xl">
-					Belong by coming on Sundays and joining a midweek group.
+					{belongIntro}
 				</p>
 			</div>
 			<figure class="theme-card overflow-hidden">
 				<img
-					src="/images/congregation.jpg"
-					alt="Church family and neighbours gathering together in the church grounds"
+					src={belongImage.src}
+					alt={belongImage.alt}
 					class="w-full h-64 object-cover"
 					loading="lazy"
 				/>
@@ -101,16 +125,15 @@ const serve =
 			class="sketch-panel theme-serve bg-(--teal-soft)/35 p-6 md:p-8 space-y-6 scroll-mt-28"
 		>
 			<div class="theme-drench theme-drench--teal p-5 space-y-2">
-				<h2 class="section-heading text-4xl">Serve</h2>
+				<h2 class="section-heading text-4xl">{serve.heading}</h2>
 				<p class="text-(--ink)/85 mt-2 max-w-3xl">
-					Serve by joining a team or connecting with our local
-					outreach ministries.
+					{serveIntro}
 				</p>
 			</div>
 			<figure class="theme-card overflow-hidden">
 				<img
-					src="/images/lunch club.jpg"
-					alt="Community fun day games on the church field"
+					src={serveImage.src}
+					alt={serveImage.alt}
 					class="w-full h-64 object-cover top-10"
 					loading="lazy"
 				/>
@@ -144,15 +167,15 @@ const serve =
 			class="sketch-panel theme-give bg-(--gold-soft)/45 p-6 md:p-8 space-y-6 scroll-mt-28"
 		>
 			<div class="theme-drench theme-drench--gold p-5 space-y-2">
-				<h2 class="section-heading text-4xl">Give</h2>
+				<h2 class="section-heading text-4xl">{give.title}</h2>
 				<p class="text-(--ink)/90 text-lg">
 					{give.generosity_paragraph}
 				</p>
 			</div>
 			<figure class="theme-card overflow-hidden">
 				<img
-					src="/images/PXL_20250816_114550760.PORTRAIT.jpg"
-					alt="Worship team leading sung praise during a Sunday gathering"
+					src={giveImage.src}
+					alt={giveImage.alt}
 					class="w-full h-64 object-cover"
 					loading="lazy"
 				/>

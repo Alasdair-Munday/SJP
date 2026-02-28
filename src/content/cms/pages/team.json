@@ -1,0 +1,48 @@
+{
+  "title": "Meet the Team",
+  "intro": "Our leadership and ministry team serve the church family in worship, discipleship, and community mission.",
+  "members": [
+    {
+      "name": "Revd Luke Graham",
+      "role": "Priest in Charge",
+      "email": "luke@saintjohnspark.org",
+      "bio": "Luke leads the vision and teaching life of St John's Park and helps shape our mission in Park, Sheffield.",
+      "phone": "07538 172907",
+      "phone_href": "tel:+447538172907",
+      "image": {
+        "src": "/images/Luke Graham.jpg",
+        "alt": "Revd Luke Graham serving at a church barbecue"
+      }
+    },
+    {
+      "name": "Claire Smith",
+      "role": "Park Tots Leader and Safeguarding Officer",
+      "email": "safeguarding@saintjohnspark.org",
+      "bio": "Claire leads our Park Tots group for under 5s and serves as our safeguarding officer, helping us care for children and vulnerable adults across church life.",
+      "image": {
+        "src": "/images/claire smith.jpg",
+        "alt": "Claire Smith helping children at an outdoor church activity"
+      }
+    },
+    {
+      "name": "Faustina Nyame",
+      "role": "Churchwarden",
+      "email": "hello@saintjohnspark.org",
+      "bio": "Faustina serves as churchwarden, supporting pastoral care and practical leadership across the congregation.",
+      "image": {
+        "src": "/images/Faustina.jpg",
+        "alt": "Faustina Nyame speaking at the front of church"
+      }
+    },
+    {
+      "name": "Elizabeth (Bess) Cooper",
+      "role": "Churchwarden and Lay Reader",
+      "email": "hello@saintjohnspark.org",
+      "bio": "Bess serves the church as a churchwarden and lay reader, helping lead worship and nurture discipleship.",
+      "image": {
+        "src": "/images/Bess.jpg",
+        "alt": "Bess Cooper"
+      }
+    }
+  ]
+}

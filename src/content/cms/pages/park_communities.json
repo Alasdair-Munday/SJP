@@ -1,0 +1,33 @@
+{
+  "title": "Park Communities",
+  "midweek": {
+    "heading": "Midweek Communities",
+    "paragraphs": [
+      "Park Communities are smaller groups that meet during the week to help us grow as disciples of Jesus in everyday life.",
+      "Most groups meet weekly to read God's Word, pray, and encourage one another in faith."
+    ],
+    "images": [
+      {
+        "src": "/images/community-park-gathering-1.jpg",
+        "alt": "Community gathering in the park"
+      },
+      {
+        "src": "/images/community-park-gathering-2.jpg",
+        "alt": "Church and community gathering in the grounds"
+      }
+    ]
+  },
+  "rhythm": {
+    "heading": "Our Rhythm",
+    "items": [
+      "<strong>Up:</strong> Seeking God in prayer and Scripture.",
+      "<strong>In:</strong> Supporting and encouraging one another.",
+      "<strong>Out:</strong> Serving our local community."
+    ],
+    "image": {
+      "src": "/images/carols-doorstep.jpg",
+      "alt": "Community singing together outside church at Christmas"
+    }
+  },
+  "cta_html": "Ready to join a community? <a href='/contact' class='underline decoration-[var(--eden)] underline-offset-4'>Contact us</a> and we will help find the right group."
+}

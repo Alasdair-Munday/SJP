@@ -5,32 +5,67 @@ import { getSiteContent } from "../data/site-content";
 
 const content = await getSiteContent();
 const page = content.pages.serve;
+const joinTeam = page.join_team ?? {
+	title: "Join a Team",
+	intro:
+		"Select the teams you are interested in, then share your contact details. We will follow up with next steps.",
+	hero_image: {
+		src: "/images/friends.jpg",
+		alt: "Church volunteers and friends smiling together outdoors",
+	},
+	hero_blurb:
+		"Serving is one of the best ways to build friendships and help church family thrive each week.",
+	steps: {
+		select_heading: "1. Select Teams",
+		select_intro: "Choose as many teams as you like.",
+		details_heading: "2. Your Contact Details",
+		preview_heading: "3. Message Preview",
+		preview_intro:
+			"This message is auto-filled from your selections and details.",
+	},
+	labels: {
+		name: "Name",
+		email: "Email",
+		phone_optional: "Phone (optional)",
+		notes_optional: "Anything else we should know? (optional)",
+		submit: "Send Team Interest",
+	},
+	messages: {
+		none_selected: "No teams selected yet.",
+		selected_prefix: "Selected teams:",
+		message_title: "Join a Team Enquiry",
+		teams_label: "Teams interested in",
+		name_label: "Name",
+		email_label: "Email",
+		phone_label: "Phone",
+		empty_value: "[not provided]",
+		none_selected_short: "None selected",
+	},
+};
 ---
 
-<Layout title="Join a Team">
+<Layout title={joinTeam.title}>
 	<div class="max-w-6xl mx-auto px-4 py-20 space-y-8">
 		<div class="space-y-3">
 			<h1 class="page-heading page-heading--accent text-5xl md:text-6xl font-bold">
-				Join a Team
+				{joinTeam.title}
 			</h1>
 			<p class="text-xl text-(--ink)/85 max-w-4xl">
-				Select the teams you are interested in, then share your contact details.
-				We will follow up with next steps.
+				{joinTeam.intro}
 			</p>
 		</div>
 			<section class="grid gap-4 md:grid-cols-[1.2fr_0.8fr]">
 				<figure class="theme-card theme-card--strong overflow-hidden">
 					<img
-						src="/images/friends.jpg"
-						alt="Church volunteers and friends smiling together outdoors"
+						src={joinTeam.hero_image.src}
+						alt={joinTeam.hero_image.alt}
 						class="w-full h-full min-h-56 object-cover"
 						loading="lazy"
 					/>
 				</figure>
 			<div class="theme-drench theme-drench--teal p-6 flex items-center">
 				<p class="text-lg text-(--ink)/90 font-medium leading-relaxed">
-					Serving is one of the best ways to build friendships and help church
-					family thrive each week.
+					{joinTeam.hero_blurb}
 				</p>
 			</div>
 		</section>
@@ -53,9 +88,9 @@ const page = content.pages.serve;
 			<input type="hidden" name="selected_teams" id="selected-teams-field" />
 
 			<div class="space-y-3">
-				<h2 class="section-heading text-3xl">1. Select Teams</h2>
+				<h2 class="section-heading text-3xl">{joinTeam.steps.select_heading}</h2>
 				<p class="text-(--ink)/85">
-					Choose as many teams as you like.
+					{joinTeam.steps.select_intro}
 				</p>
 				<div class="grid md:grid-cols-2 gap-4">
 					{
@@ -74,15 +109,15 @@ const page = content.pages.serve;
 					}
 				</div>
 				<p id="selected-team-list" class="text-(--ink)/85 font-semibold">
-					No teams selected yet.
+					{joinTeam.messages.none_selected}
 				</p>
 			</div>
 
 			<div class="space-y-4">
-				<h2 class="section-heading text-3xl">2. Your Contact Details</h2>
+				<h2 class="section-heading text-3xl">{joinTeam.steps.details_heading}</h2>
 				<div class="grid md:grid-cols-2 gap-4">
 					<label class="block space-y-2">
-						<span class="font-semibold text-(--ink)">Name</span>
+						<span class="font-semibold text-(--ink)">{joinTeam.labels.name}</span>
 						<input
 							id="join-team-name"
 							type="text"
@@ -92,7 +127,7 @@ const page = content.pages.serve;
 						/>
 					</label>
 					<label class="block space-y-2">
-						<span class="font-semibold text-(--ink)">Email</span>
+						<span class="font-semibold text-(--ink)">{joinTeam.labels.email}</span>
 						<input
 							id="join-team-email"
 							type="email"
@@ -102,7 +137,7 @@ const page = content.pages.serve;
 						/>
 					</label>
 					<label class="block space-y-2 md:col-span-2">
-						<span class="font-semibold text-(--ink)">Phone (optional)</span>
+						<span class="font-semibold text-(--ink)">{joinTeam.labels.phone_optional}</span>
 						<input
 							id="join-team-phone"
 							type="tel"
@@ -114,9 +149,9 @@ const page = content.pages.serve;
 			</div>
 
 			<div class="space-y-3">
-				<h2 class="section-heading text-3xl">3. Message Preview</h2>
+				<h2 class="section-heading text-3xl">{joinTeam.steps.preview_heading}</h2>
 				<p class="text-(--ink)/85">
-					This message is auto-filled from your selections and details.
+					{joinTeam.steps.preview_intro}
 				</p>
 				<textarea
 					id="join-team-message"
@@ -128,7 +163,7 @@ const page = content.pages.serve;
 				></textarea>
 				<label class="block space-y-2">
 					<span class="font-semibold text-(--ink)"
-						>Anything else we should know? (optional)</span
+						>{joinTeam.labels.notes_optional}</span
 					>
 					<textarea
 						name="additional_notes"
@@ -142,17 +177,18 @@ const page = content.pages.serve;
 				type="submit"
 				class="inline-flex items-center gap-2 px-6 py-3 bg-(--ink) text-white border-2 border-(--ink) font-semibold hover:bg-white hover:text-(--ink) transition-colors"
 			>
-				Send Team Interest
+				{joinTeam.labels.submit}
 				<ArrowRight size={16} />
 			</button>
 		</form>
 	</div>
 
-	<script is:inline>
-		(() => {
-			const cards = Array.from(
-				document.querySelectorAll("[data-team-card]"),
-			);
+		<script is:inline define:vars={{ joinTeamMessages: joinTeam.messages }}>
+			(() => {
+				const copy = joinTeamMessages;
+				const cards = Array.from(
+					document.querySelectorAll("[data-team-card]"),
+				);
 			const selectedTeamsField = document.getElementById(
 				"selected-teams-field",
 			);
@@ -177,26 +213,26 @@ const page = content.pages.serve;
 
 			const selectedTeams = new Set();
 
-			const renderMessage = () => {
-				const teams = Array.from(selectedTeams);
-				selectedTeamsField.value = teams.join(", ");
+				const renderMessage = () => {
+					const teams = Array.from(selectedTeams);
+					selectedTeamsField.value = teams.join(", ");
 
-				selectedTeamList.textContent =
-					teams.length > 0
-						? `Selected teams: ${teams.join(", ")}`
-						: "No teams selected yet.";
+					selectedTeamList.textContent =
+						teams.length > 0
+							? `${copy.selected_prefix} ${teams.join(", ")}`
+							: copy.none_selected;
 
-				messageField.value = [
-					"Join a Team Enquiry",
-					"",
-					`Teams interested in: ${
-						teams.length > 0 ? teams.join(", ") : "None selected"
-					}`,
-					`Name: ${nameInput.value.trim() || "[not provided]"}`,
-					`Email: ${emailInput.value.trim() || "[not provided]"}`,
-					`Phone: ${phoneInput.value.trim() || "[not provided]"}`,
-				].join("\n");
-			};
+					messageField.value = [
+						copy.message_title,
+						"",
+						`${copy.teams_label}: ${
+							teams.length > 0 ? teams.join(", ") : copy.none_selected_short
+						}`,
+						`${copy.name_label}: ${nameInput.value.trim() || copy.empty_value}`,
+						`${copy.email_label}: ${emailInput.value.trim() || copy.empty_value}`,
+						`${copy.phone_label}: ${phoneInput.value.trim() || copy.empty_value}`,
+					].join("\n");
+				};
 
 			const updateCardStyle = (card, isSelected) => {
 				card.setAttribute("aria-pressed", isSelected ? "true" : "false");

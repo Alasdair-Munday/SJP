@@ -1,21 +1,25 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { getSiteContent } from "../data/site-content";
+
+const content = await getSiteContent();
+const page = content.pages.contact_thank_you;
 ---
 
-<Layout title="Message Sent">
+<Layout title={page.title}>
 	<div class="max-w-3xl mx-auto px-4 py-20">
 		<section class="sketch-panel p-8 space-y-4">
 			<h1 class="page-heading page-heading--accent text-5xl">
-				Message Sent
+				{page.title}
 			</h1>
 			<p class="text-lg text-(--ink)/90">
-				Thanks for getting in touch. We will reply as soon as we can.
+				{page.message}
 			</p>
 			<a
-				href="/"
+				href={page.button_href}
 				class="inline-flex items-center gap-2 px-5 py-2.5 border-2 border-(--ink) text-(--ink) font-semibold hover:bg-(--ink) hover:text-white transition-colors"
 			>
-				Return Home
+				{page.button_label}
 			</a>
 		</section>
 	</div>

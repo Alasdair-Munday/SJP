@@ -5,8 +5,14 @@ import {
 	formatEventTime,
 	getUpcomingEvents,
 } from "../utils/calendar";
+import { getSiteContent } from "../data/site-content";
 
 const [event] = await getUpcomingEvents(1);
+const content = await getSiteContent();
+const copy = content.components.featured_event ?? {
+	view_event_details_label: "View Event Details",
+	image_coming_soon_label: "Event image coming soon",
+};
 ---
 
 {
@@ -37,14 +43,14 @@ const [event] = await getUpcomingEvents(1);
 						class="text-(--ink)/85"
 						set:html={event.description}
 					/>
-					<a
-						href={`/events/${event.slug}`}
-						class="inline-flex items-center gap-2 px-5 py-2.5 border-2 border-(--ink) text-(--ink) font-semibold hover:bg-(--ink) hover:text-white transition-colors"
-					>
-						View Event Details
-						<ArrowRight size={16} />
-					</a>
-				</div>
+						<a
+							href={`/events/${event.slug}`}
+							class="inline-flex items-center gap-2 px-5 py-2.5 border-2 border-(--ink) text-(--ink) font-semibold hover:bg-(--ink) hover:text-white transition-colors"
+						>
+							{copy.view_event_details_label}
+							<ArrowRight size={16} />
+						</a>
+					</div>
 				<div class="border-l-2 border-(--ink)">
 					{event.thumbnailUrl ? (
 						<img
@@ -53,12 +59,12 @@ const [event] = await getUpcomingEvents(1);
 							class="w-full h-full min-h-72 object-cover"
 							loading="lazy"
 						/>
-					) : (
-						<div class="w-full h-full min-h-72 bg-(--panel-soft) flex items-center justify-center p-6 text-center text-(--ink)/75 font-semibold">
-							Event image coming soon
-						</div>
-					)}
-				</div>
+						) : (
+							<div class="w-full h-full min-h-72 bg-(--panel-soft) flex items-center justify-center p-6 text-center text-(--ink)/75 font-semibold">
+								{copy.image_coming_soon_label}
+							</div>
+						)}
+					</div>
 			</div>
 		</article>
 	)

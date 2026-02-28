@@ -1,0 +1,28 @@
+{
+  "title": "Give",
+  "online_giving": {
+    "link": "https://www.parishgiving.org.uk/donors/find-your-parish/park-st-john-the-evangelist-sheffield/",
+    "button_label": "Give Online (Parish Giving Scheme)"
+  },
+  "generosity_paragraph": "Your generosity allows us to build and sustain our Sunday gatherings, midweek ministries, and serve our city. Thank you for giving to St John's.",
+  "methods_heading": "Here are the best ways for you to give:",
+  "methods": [
+    "Via the Online Parish Giving Scheme.",
+    "Bring your collection to church on Sunday.",
+    "Use the card machine at church.",
+    "Bank transfer (BACS)."
+  ],
+  "bank_details": {
+    "heading": "Bank Details",
+    "lines": [
+      "Account Name: ST JOHNS PARK P C C",
+      "Sort Code: 20-76-89",
+      "Account Number: 60362786"
+    ]
+  },
+  "contact_html": "For more information, contact us at <a class='underline decoration-[var(--eden)] underline-offset-4' href='mailto:hello@saintjohnspark.org'>hello@saintjohnspark.org</a>.",
+  "section_image": {
+    "src": "/images/PXL_20250816_114550760.PORTRAIT.jpg",
+    "alt": "Worship team leading sung praise during a Sunday gathering"
+  }
+}

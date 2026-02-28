@@ -2,9 +2,19 @@
 import Layout from "../../layouts/Layout.astro";
 import { getCollection } from "astro:content";
 import { ArrowRight, Calendar } from "lucide-react";
+import { getSiteContent } from "../../data/site-content";
 
 const STALE_FALLBACK_DAYS = 90;
 const now = new Date();
+const content = await getSiteContent();
+const copy = content.components.news ?? {
+	listing_eyebrow: "News Feed",
+	listing_title: "Latest News",
+	listing_description:
+		"Updates, stories, notices, and opportunities from St John's Park.",
+	read_article_label: "Read article",
+	listing_empty_message: "There are no current news articles at the moment.",
+};
 
 const newsItems = (await getCollection("news"))
 	.filter((item) => {
@@ -30,10 +40,10 @@ const formatDate = (date: Date) =>
 <Layout title="News">
 	<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-8">
 		<header class="space-y-3">
-			<p class="text-sm uppercase tracking-[0.14em] font-bold text-(--teal)">News Feed</p>
-			<h1 class="page-heading page-heading--accent text-5xl font-bold">Latest News</h1>
+			<p class="text-sm uppercase tracking-[0.14em] font-bold text-(--teal)">{copy.listing_eyebrow}</p>
+			<h1 class="page-heading page-heading--accent text-5xl font-bold">{copy.listing_title}</h1>
 			<p class="text-(--ink)/85 max-w-3xl">
-				Updates, stories, notices, and opportunities from St John’s Park.
+				{copy.listing_description}
 			</p>
 		</header>
 
@@ -55,14 +65,14 @@ const formatDate = (date: Date) =>
 								href={`/news/${item.slug}/`}
 								class="mt-auto inline-flex items-center gap-2 font-semibold text-sm tracking-wide border-b-2 border-(--ink) pb-1 hover:text-(--teal) hover:border-(--teal) transition-colors w-fit"
 							>
-								Read article
+								{copy.read_article_label}
 								<ArrowRight size={16} />
 							</a>
 						</article>
 					))}
 				</div>
 			) : (
-				<p class="text-(--ink)/85 font-medium">There are no current news articles at the moment.</p>
+				<p class="text-(--ink)/85 font-medium">{copy.listing_empty_message}</p>
 			)
 		}
 	</div>

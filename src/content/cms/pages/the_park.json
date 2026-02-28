@@ -1,0 +1,41 @@
+{
+  "title": "The Park",
+  "featured_photo": {
+    "src": "/images/baptism.jpg",
+    "alt": "Baptism Celebration",
+    "label": "New Life"
+  },
+  "photos": [
+    {
+      "src": "/images/community-park-gathering-1.jpg",
+      "alt": "Community gathering in the park with bunting and seated groups",
+      "label": "Community Gathering"
+    },
+    {
+      "src": "/images/community-park-gathering-2.jpg",
+      "alt": "Church building and community enjoying outdoor activities",
+      "label": "Churchyard Event"
+    },
+    {
+      "src": "/images/community-fun-day.jpg",
+      "alt": "People taking part in races on the grass outside church",
+      "label": "Park Fun Day"
+    },
+    {
+      "src": "/images/kids-frisbee.jpg",
+      "alt": "Children playing games in the park",
+      "label": "Park Kids"
+    },
+    {
+      "src": "/images/kids-churchyard.jpg",
+      "alt": "Children and families around the churchyard games area",
+      "label": "Churchyard Games"
+    },
+    {
+      "src": "/images/outdoor carols.jpg",
+      "alt": "Community singing carols at the church entrance in December",
+      "label": "Seasonal Events"
+    }
+  ],
+  "subtitle": "A glimpse into church life in Park: worship, friendship, family, and shared moments through the year."
+}

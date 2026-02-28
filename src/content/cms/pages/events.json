@@ -1,0 +1,13 @@
+{
+  "fallback_description_html": "<p>More details for this event will be added soon.</p>",
+  "fallback_location": "St John's Park Church",
+  "back_link_label": "← Back to What's On",
+  "labels": {
+    "date": "Date",
+    "time": "Time",
+    "location": "Location"
+  },
+  "about_title": "About This Event",
+  "images_title": "Event Images",
+  "image_alt_prefix": "Event image"
+}

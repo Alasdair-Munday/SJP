@@ -1,0 +1,21 @@
+{
+  "calendar_events": {
+    "empty_message": "Check out What's On for current activities.",
+    "view_whats_on_label": "View What's On ->"
+  },
+  "featured_event": {
+    "view_event_details_label": "View Event Details",
+    "image_coming_soon_label": "Event image coming soon"
+  },
+  "news": {
+    "listing_eyebrow": "News Feed",
+    "listing_title": "Latest News",
+    "listing_description": "Updates, stories, notices, and opportunities from St John's Park.",
+    "listing_empty_message": "There are no current news articles at the moment.",
+    "home_section_title": "Latest News",
+    "view_all_label": "View all news",
+    "read_article_label": "Read article",
+    "back_to_news_label": "Back to News",
+    "archived_notice": "This article is archived and may contain out-of-date details."
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "title": "Park Kids",
+  "sunday_groups": {
+    "heading": "Sunday Kids Groups",
+    "paragraphs": [
+      "Our Park Kids groups are for children aged 1-11 and run during our Sunday gathering at 10:45am.",
+      "Children start in the service with the church family and then move into age-appropriate groups for Bible teaching, prayer, and activities."
+    ],
+    "image": {
+      "src": "/images/kids-frisbee.jpg",
+      "alt": "Children playing in the church park"
+    }
+  },
+  "social_story": {
+    "heading": "Social Story for Visiting Church",
+    "intro": "Here is a step-by-step guide for what happens when visiting St John's Park Church on a Sunday.",
+    "step_label_prefix": "Step",
+    "steps": [
+      "When I arrive at St John's Park Church I will see a big blue open door with a ramp for wheelchair access.",
+      "I will go inside two sets of doors and then there will be someone at the back of church to say hello to me.",
+      "There will be ear defenders and activity bags for me to use if I want to. I am allowed to borrow them without asking.",
+      "The toilets are in the side hallway. There is also an accessible toilet and I am allowed to use it even if I don't have a disability.",
+      "In church I can sit on any of the available seats. If I have a wheelchair I am welcome to sit wherever I feel most comfortable.",
+      "When the service is ready to start, the person leading will say hello and tell us what is happening.",
+      "During the service we will sing songs. I can stand up or sit down to sing. It is OK to move around, dance or wave a flag.",
+      "After the Family Song, I will be invited to go into the side hall for kids activities. There is circle time, games, stories and a craft. It is OK to stay in the main service.",
+      "After the service I can stay for a drink and a biscuit and talk to people. If I don't want to do this, that is OK and I can go home with my family when we are ready."
+    ],
+    "images": [
+      {
+        "src": "/images/kids-churchyard.jpg",
+        "alt": "Children and families at churchyard games"
+      },
+      {
+        "src": "/images/play.jpg",
+        "alt": "Children playing with activities outside church"
+      }
+    ]
+  },
+  "cta_html": "Questions before visiting? <a href='/contact' class='underline decoration-[var(--eden)] underline-offset-4'>Contact us</a>."
+}

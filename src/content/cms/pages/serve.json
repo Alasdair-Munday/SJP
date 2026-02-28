@@ -1,0 +1,81 @@
+{
+  "title": "Serve",
+  "intro": "We are a church family, and we need different people to help our family thrive. If you are part of St John's, we encourage you to join and serve one of our teams.",
+  "teams": [
+    {
+      "name": "Welcome and Hospitality",
+      "description": "Our welcome and hospitality team create the family environment we love at St John's Park. They welcome people at the door, serve refreshments, and make sure everyone receives a warm welcome."
+    },
+    {
+      "name": "Park Kids Team",
+      "description": "Our Park Kids team disciples the youngest generation in our church, from under-5s through primary-aged children."
+    },
+    {
+      "name": "Park Youth Team",
+      "description": "We disciple young people through Sunday Bible study and our midweek youth group Cornerstone, helping them meet and grow in relationship with Jesus."
+    },
+    {
+      "name": "Worship",
+      "description": "Our worship team helps us encounter God's presence and give him praise."
+    },
+    {
+      "name": "Food Bank",
+      "description": "Our Food Bank team serves local people in crisis, providing food parcels and a listening, friendly ear."
+    },
+    {
+      "name": "Lunch Club",
+      "description": "Our lunch club team helps serve lunch and build relationships in this richly diverse, lively community."
+    },
+    {
+      "name": "Cleaning",
+      "description": "Our cleaning team enables us to welcome people into the building during the week and gather together on Sundays."
+    },
+    {
+      "name": "Admin",
+      "description": "Our admin team helps with the day-to-day running of the church. This involves helping with buildings, applying for grants, and staying on top of paperwork."
+    },
+    {
+      "name": "Creative",
+      "description": "Our creative team uses photography, social media, and video to show what God is doing locally and help people connect with church family."
+    },
+    {
+      "name": "Audio-Visual Team",
+      "description": "Our audio-visual team helps make sure everyone can see and hear clearly during Sunday gatherings."
+    }
+  ],
+  "outro_html": "Interested in joining a team? Please <a href='/contact' class='underline decoration-[var(--eden)] underline-offset-4'>get in touch</a>.",
+  "join_team": {
+    "title": "Join a Team",
+    "intro": "Select the teams you are interested in, then share your contact details. We will follow up with next steps.",
+    "hero_image": {
+      "src": "/images/friends.jpg",
+      "alt": "Church volunteers and friends smiling together outdoors"
+    },
+    "hero_blurb": "Serving is one of the best ways to build friendships and help church family thrive each week.",
+    "steps": {
+      "select_heading": "1. Select Teams",
+      "select_intro": "Choose as many teams as you like.",
+      "details_heading": "2. Your Contact Details",
+      "preview_heading": "3. Message Preview",
+      "preview_intro": "This message is auto-filled from your selections and details."
+    },
+    "labels": {
+      "name": "Name",
+      "email": "Email",
+      "phone_optional": "Phone (optional)",
+      "notes_optional": "Anything else we should know? (optional)",
+      "submit": "Send Team Interest"
+    },
+    "messages": {
+      "none_selected": "No teams selected yet.",
+      "selected_prefix": "Selected teams:",
+      "message_title": "Join a Team Enquiry",
+      "teams_label": "Teams interested in",
+      "name_label": "Name",
+      "email_label": "Email",
+      "phone_label": "Phone",
+      "empty_value": "[not provided]",
+      "none_selected_short": "None selected"
+    }
+  }
+}

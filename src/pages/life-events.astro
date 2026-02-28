@@ -4,6 +4,13 @@ import { getSiteContent } from "../data/site-content";
 
 const content = await getSiteContent();
 const page = content.pages.life_events;
+const images = page.images ?? [
+	{ src: "/images/baptism.jpg", alt: "Baptism celebration at church" },
+	{
+		src: "/images/carols-doorstep.jpg",
+		alt: "Community gathering together at the church entrance",
+	},
+];
 ---
 
 <Layout title={page.title}>
@@ -25,24 +32,20 @@ const page = content.pages.life_events;
 					</p>
 				))
 			}
+			</div>
+			<div class="grid gap-4 md:grid-cols-2">
+				{
+					images.map((image) => (
+						<figure class="theme-card overflow-hidden">
+							<img
+								src={image.src}
+								alt={image.alt}
+								class="w-full h-56 object-cover"
+								loading="lazy"
+							/>
+						</figure>
+					))
+				}
+			</div>
 		</div>
-		<div class="grid gap-4 md:grid-cols-2">
-			<figure class="theme-card overflow-hidden">
-				<img
-					src="/images/baptism.jpg"
-					alt="Baptism celebration at church"
-					class="w-full h-56 object-cover"
-					loading="lazy"
-				/>
-			</figure>
-			<figure class="theme-card overflow-hidden">
-				<img
-					src="/images/carols-doorstep.jpg"
-					alt="Community gathering together at the church entrance"
-					class="w-full h-56 object-cover"
-					loading="lazy"
-				/>
-			</figure>
-		</div>
-	</div>
 </Layout>

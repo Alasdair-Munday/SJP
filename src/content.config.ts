@@ -14,6 +14,12 @@ const news = defineCollection({
 	}),
 });
 
+const cms = defineCollection({
+	type: "data",
+	schema: z.any(),
+});
+
 export const collections = {
 	news,
+	cms,
 };

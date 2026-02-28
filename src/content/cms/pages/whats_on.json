@@ -1,0 +1,74 @@
+{
+  "title": "What's On",
+  "subtitle": "Weekly church life and upcoming events in one place.",
+  "import_calendar_label": "Import Calendar",
+  "upcoming_events": {
+    "heading": "Upcoming Events",
+    "description": "Pulled from our live church calendar.",
+    "empty_message": "No upcoming events found right now. Please check back soon.",
+    "jump_label": "See regular weekly activities"
+  },
+  "sunday_gathering": {
+    "heading": "Sunday Gathering",
+    "description": "Our Sunday gathering happens every Sunday at 10:45am and is for all ages. We gather to worship Jesus, hear from God's Word, and pray together.",
+    "image": {
+      "src": "/images/worship team.jpg",
+      "alt": "Worship team leading sung praise during Sunday gathering"
+    }
+  },
+  "midweek_online_prayers": {
+    "heading": "Midweek Online Prayers",
+    "description": "Monday to Friday at 8:00am for 30 minutes on Zoom.",
+    "button_label": "Join Zoom Meeting",
+    "zoom_link": "https://zoom.us/j/3235649987?pwd=483559",
+    "meeting_id": "323 564 9987",
+    "passcode": "483559",
+    "extra": "We also meet in church on the first Sunday of each month from 10:00-10:30am before the service."
+  },
+  "foodbank": {
+    "heading": "Food Bank",
+    "time": "Every Monday 10am - 12pm",
+    "where": "St John's Park, Bernard Street, S2 5PU",
+    "who": "Anyone with a referral from a support worker or agency",
+    "description": "The St John's Park food bank is provided in collaboration with Sheffield Food and Community Trust and Trussell.",
+    "referral_policy": "The food bank is accessible by referral only, and provides an emergency parcel for those in food crisis.",
+    "support_description": "At the food bank, we offer support with more than just food; Citizens Advice and Debt Support workers are available during the food bank session for those with referrals.",
+    "referrals_heading": "To request a referral for a food parcel call either:",
+    "referrals": [
+      "Help Through Hardship: 08082082138 Monday to Friday 9am - 5pm. Translators available.",
+      "Citizens Advice Sheffield: 08082787820 Monday to Friday 10am - 4pm. Select option 4 for Advice Line.",
+      "Sheffield S6 helpline: 0114 321 0733 Monday to Friday 10am-1pm."
+    ],
+    "volunteer_html": "If you are interested in volunteering at our food bank, please contact Hannah Graham for more information: <a href='mailto:hannah@saintjohnspark.org' class='underline decoration-[var(--eden)] underline-offset-4'>hannah@saintjohnspark.org</a>.",
+    "image": {
+      "src": "/images/foodbank.png",
+      "alt": "Food bank volunteers welcoming people in the church hall"
+    }
+  },
+  "lunch_club": {
+    "heading": "Lunch Club",
+    "time": "Monday 11:40am-12:40pm",
+    "description": "Join us every Monday for soup, bread, a hot drink, and a chat. All are welcome, and it is free.",
+    "image": {
+      "src": "/images/lunch club.jpg",
+      "alt": "Lunch Club guests and volunteers sharing a meal together"
+    }
+  },
+  "seasonal_events": {
+    "heading": "Seasonal Events",
+    "description": "Throughout the year we host seasonal gatherings for all ages, including Christmas events and community celebrations.",
+    "images": [
+      {
+        "src": "/images/christmas singing.jpg",
+        "alt": "Christmas singing event in the church hall"
+      },
+      {
+        "src": "/images/outdoor carols.jpg",
+        "alt": "Community outdoor carol singing at the church entrance"
+      }
+    ]
+  },
+  "what_we_do_link_intro": "Looking for more information? Try",
+  "what_we_do_link_label": "What We Do",
+  "what_we_do_link_href": "/what-we-do"
+}

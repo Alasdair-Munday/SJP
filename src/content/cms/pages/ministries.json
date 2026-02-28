@@ -1,0 +1,96 @@
+{
+  "title": "What We Do",
+  "intro": "Our church life is shaped by Belonging to God's Family, Serving God's mission, and Giving God everything. These are some ways that we do that.",
+  "groups": [
+    {
+      "id": "belong",
+      "tone": "belong",
+      "heading": "Belong",
+      "items": [
+        {
+          "title": "Park Kids",
+          "description": "We have kids groups (ages 1-11) that meet during our Sunday gathering. Click here to find out more.",
+          "href": "/park-kids",
+          "link_label": "Visit Park Kids"
+        },
+        {
+          "title": "Park Youth",
+          "description": "Park Youth is our collection of groups for secondary school age. Cornerstone youth club on Wednesday evenings and Faith Explorers during our Sunday services.",
+          "href": "/park-youth",
+          "link_label": "Visit Park Youth"
+        },
+        {
+          "title": "Park Communities",
+          "description": "Midweek communities for Scripture, prayer, friendship, and local mission.",
+          "href": "/park-communities",
+          "link_label": "Visit Park Communities"
+        }
+      ],
+      "cta": {
+        "text": "Join us on Sundays",
+        "href": "/sundays",
+        "description": "The best way to get to know us is to come along. We gather every Sunday at 10:45am."
+      },
+      "intro": "Belong by coming on Sundays and joining a midweek group.",
+      "image": {
+        "src": "/images/congregation.jpg",
+        "alt": "Church family and neighbours gathering together in the church grounds"
+      }
+    },
+    {
+      "id": "serve",
+      "tone": "serve",
+      "heading": "Serve",
+      "items": [
+        {
+          "title": "Join a Team",
+          "description": "Join a team and help our church family thrive in worship, welcome, practical care, and mission.",
+          "href": "/join-a-team",
+          "link_label": "Join a Team"
+        },
+        {
+          "title": "Food Bank",
+          "description": "Weekly emergency food support in partnership with local agencies and support workers.",
+          "href": "/whats-on#foodbank",
+          "link_label": "Food Bank"
+        },
+        {
+          "title": "Lunch Club",
+          "description": "Weekly free lunch, conversation, and welcome for local residents and neighbours.",
+          "href": "/whats-on#lunch-club",
+          "link_label": "Lunch Club"
+        }
+      ],
+      "intro": "Serve by joining a team or connecting with our local outreach ministries.",
+      "image": {
+        "src": "/images/lunch club.jpg",
+        "alt": "Community fun day games on the church field"
+      }
+    },
+    {
+      "id": "give",
+      "tone": "give",
+      "heading": "Give",
+      "items": [
+        {
+          "title": "Give Online",
+          "description": "Support the church's mission through secure online giving via the Parish Giving Scheme.",
+          "href": "/give",
+          "link_label": "Give Online"
+        },
+        {
+          "title": "Ways to Give",
+          "description": "Find practical options including Sunday giving, card payments at church, and bank transfer.",
+          "href": "/give",
+          "link_label": "See Giving Options"
+        },
+        {
+          "title": "Generosity in Mission",
+          "description": "Your giving helps sustain Sunday gatherings, midweek ministries, and practical community support.",
+          "href": "/give",
+          "link_label": "Why We Give"
+        }
+      ]
+    }
+  ]
+}

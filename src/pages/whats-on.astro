@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { getSiteContent } from "../data/site-content";
 import { ArrowRight, Calendar, Clock, MapPin } from "lucide-react";
 import {
   CALENDAR_URL,
@@ -7,29 +8,31 @@ import {
   getUpcomingEvents,
 } from "../utils/calendar";
 
+const content = await getSiteContent();
+const page = content.pages.whats_on;
 const upcomingEvents = await getUpcomingEvents(6);
 const webcalUrl = CALENDAR_URL.replace(/^https:/, "webcal:");
 ---
 
-<Layout title="What's On">
+<Layout title={page.title}>
   <div class="max-w-5xl mx-auto px-4 py-20 space-y-10">
     <div class="flex flex-wrap items-start justify-between gap-4">
       <div>
         <h1
           class="page-heading page-heading--accent text-5xl md:text-6xl font-bold"
         >
-          What's On
+          {page.title}
         </h1>
         <p class="text-(--ink)/80 mt-2">
-          Weekly church life and upcoming events in one place.
+          {page.subtitle}
         </p>
         <p class="text-(--ink)/80 mt-2">
-          Looking for more information? Try
+          {page.what_we_do_link_intro}
           <a
-            href="/what-we-do"
+            href={page.what_we_do_link_href}
             class="underline decoration-(--eden) underline-offset-4"
           >
-            What We Do
+            {page.what_we_do_link_label}
           </a>.
         </p>
       </div>
@@ -38,14 +41,14 @@ const webcalUrl = CALENDAR_URL.replace(/^https:/, "webcal:");
           href={webcalUrl}
           class="inline-flex items-center gap-2 px-4 py-2 bg-white text-(--ink) border-2 border-(--ink) hover:bg-(--ink) hover:text-white transition-colors font-semibold"
         >
-          <Calendar size={16} /> Import Calendar
+          <Calendar size={16} /> {page.import_calendar_label}
         </a>
       </div>
     </div>
 
     <section id="upcoming-events" class="theme-card p-8 space-y-4">
-      <h2 class="section-heading text-3xl mb-1">Upcoming Events</h2>
-      <p class="text-(--ink)/90">Pulled from our live church calendar.</p>
+      <h2 class="section-heading text-3xl mb-1">{page.upcoming_events.heading}</h2>
+      <p class="text-(--ink)/90">{page.upcoming_events.description}</p>
       {
         upcomingEvents.length > 0 ? (
           <div class="grid gap-3">
@@ -85,7 +88,7 @@ const webcalUrl = CALENDAR_URL.replace(/^https:/, "webcal:");
           </div>
         ) : (
           <p class="text-(--ink)/90">
-            No upcoming events found right now. Please check back soon.
+            {page.upcoming_events.empty_message}
           </p>
         )
       }
@@ -93,135 +96,107 @@ const webcalUrl = CALENDAR_URL.replace(/^https:/, "webcal:");
         href="#sunday-gathering"
         class="inline-flex items-center gap-2 font-semibold text-(--ink) hover:text-(--eden) transition-colors"
       >
-        See regular weekly activities <ArrowRight size={16} />
+        {page.upcoming_events.jump_label} <ArrowRight size={16} />
       </a>
     </section>
 
     <section id="sunday-gathering" class="theme-card p-8">
-      <h2 class="section-heading text-3xl mb-3">Sunday Gathering</h2>
+      <h2 class="section-heading text-3xl mb-3">{page.sunday_gathering.heading}</h2>
       <p class="text-(--ink)/90">
-        Our Sunday gathering happens every Sunday at 10:45am and is for all
-        ages. We gather to worship Jesus, hear from God's Word, and pray
-        together.
+        {page.sunday_gathering.description}
       </p>
       <img
-        src="/images/worship team.jpg"
-        alt="Worship team leading during the Sunday gathering"
+        src={page.sunday_gathering.image.src}
+        alt={page.sunday_gathering.image.alt}
         class="w-full h-72 object-cover border-2 border-(--ink) mt-4"
         loading="lazy"
       />
     </section>
 
     <section id="midweek-prayers" class="theme-card p-8">
-      <h2 class="section-heading text-3xl mb-3">Midweek Online Prayers</h2>
+      <h2 class="section-heading text-3xl mb-3">{page.midweek_online_prayers.heading}</h2>
       <p class="text-(--ink)/90">
-        Monday to Friday at 8:00am for 30 minutes on Zoom.
+        {page.midweek_online_prayers.description}
       </p>
       <a
-        href="https://zoom.us/j/3235649987?pwd=483559"
+        href={page.midweek_online_prayers.zoom_link}
         class="inline-block bg-(--ink) text-white px-4 py-2 font-bold mb-2 hover:bg-(--eden) transition-colors border-2 border-transparent hover:border-(--ink)"
       >
-        Join Zoom Meeting
+        {page.midweek_online_prayers.button_label}
       </a>
       <p class="text-(--ink)/90 text-sm">
-        Meeting ID: <strong>323 564 9987</strong> | Passcode: <strong
-          >483559</strong
+        Meeting ID: <strong>{page.midweek_online_prayers.meeting_id}</strong> | Passcode: <strong
+          >{page.midweek_online_prayers.passcode}</strong
         >
       </p>
       <p class="text-(--ink)/90">
-        We also meet in church on the first Sunday of each month from
-        10:00-10:30am before the service.
+        {page.midweek_online_prayers.extra}
       </p>
     </section>
 
     <section id="foodbank" class="theme-card p-8">
-      <h2 class="section-heading text-3xl mb-2">Food Bank</h2>
+      <h2 class="section-heading text-3xl mb-2">{page.foodbank.heading}</h2>
       <p class="text-(--ink)/90">
-        <strong>When:</strong> Every Monday 10am - 12pm
+        <strong>When:</strong> {page.foodbank.time}
       </p>
       <p class="text-(--ink)/90">
-        <strong>Where:</strong> St John's Park, Bernard Street, S2 5PU
+        <strong>Where:</strong> {page.foodbank.where}
       </p>
       <p class="text-(--ink)/90 mb-3">
-        <strong>Who:</strong> Anyone with a referral from a support worker or agency
+        <strong>Who:</strong> {page.foodbank.who}
       </p>
       <img
-        src="/images/foodbank.png"
-        alt="Food bank volunteers welcoming people in the church hall"
+        src={page.foodbank.image.src}
+        alt={page.foodbank.image.alt}
         class="w-full h-72 object-cover border-2 border-(--ink) mb-4"
         loading="lazy"
       />
       <p class="mb-3 text-(--ink)/90">
-        The St John's Park food bank is provided in collaboration with Sheffield
-        Food and Community Trust and Trussell.
+        {page.foodbank.description}
       </p>
       <p class="mb-3 text-(--ink)/90">
-        The food bank is accessible by referral only, and provides an emergency
-        parcel for those in food crisis.
+        {page.foodbank.referral_policy}
       </p>
       <p class="mb-3 text-(--ink)/90">
-        At the food bank, we offer support with more than just food; Citizens
-        Advice and Debt Support workers are available during the food bank
-        session for those with referrals.
+        {page.foodbank.support_description}
       </p>
       <p class="text-(--ink)/90 mb-2">
-        To request a referral for a food parcel call either:
+        {page.foodbank.referrals_heading}
       </p>
       <ul class="list-disc pl-6 space-y-1 text-(--ink)/90">
-        <li>
-          Help Through Hardship: 08082082138 Monday to Friday 9am - 5pm.
-          Translators available.
-        </li>
-        <li>
-          Citizens Advice Sheffield: 08082787820 Monday to Friday 10am - 4pm.
-          Select option 4 for Advice Line.
-        </li>
-        <li>Sheffield S6 helpline: 0114 321 0733 Monday to Friday 10am-1pm.</li>
+        {page.foodbank.referrals.map((referral) => <li>{referral}</li>)}
       </ul>
-      <p class="mt-3 text-(--ink)/90">
-        If you are interested in volunteering at our food bank, please contact
-        Hannah Graham for more information: <a
-          href="mailto:hannah@saintjohnspark.org"
-          class="underline decoration-(--eden) underline-offset-4"
-          >hannah@saintjohnspark.org</a
-        >
-      </p>
+      <p class="mt-3 text-(--ink)/90" set:html={page.foodbank.volunteer_html} />
     </section>
 
     <section id="lunch-club" class="theme-card p-8">
-      <h2 class="section-heading text-3xl mb-2">Lunch Club</h2>
-      <p class="font-semibold text-(--ink) mb-3">Monday 11:40am-12:40pm</p>
+      <h2 class="section-heading text-3xl mb-2">{page.lunch_club.heading}</h2>
+      <p class="font-semibold text-(--ink) mb-3">{page.lunch_club.time}</p>
       <p class="text-(--ink)/90">
-        Join us every Monday for soup, bread, a hot drink, and a chat. All are
-        welcome, and it is free.
+        {page.lunch_club.description}
       </p>
       <img
-        src="/images/lunch club.jpg"
-        alt="Lunch Club guests and volunteers sharing a meal together"
+        src={page.lunch_club.image.src}
+        alt={page.lunch_club.image.alt}
         class="w-full h-72 object-cover border-2 border-(--ink) mt-4"
         loading="lazy"
       />
     </section>
 
     <section id="seasonal-events" class="theme-card p-8">
-      <h2 class="section-heading text-3xl mb-2">Seasonal Events</h2>
+      <h2 class="section-heading text-3xl mb-2">{page.seasonal_events.heading}</h2>
       <p class="text-(--ink)/90 mb-4">
-        Throughout the year we host seasonal gatherings for all ages, including
-        Christmas events and community celebrations.
+        {page.seasonal_events.description}
       </p>
       <div class="grid md:grid-cols-2 gap-4">
-        <img
-          src="/images/christmas singing.jpg"
-          alt="Christmas singing event in the church hall"
-          class="w-full h-64 object-cover border-2 border-(--ink)"
-          loading="lazy"
-        />
-        <img
-          src="/images/outdoor carols.jpg"
-          alt="Community outdoor carol singing at the church entrance"
-          class="w-full h-64 object-cover border-2 border-(--ink)"
-          loading="lazy"
-        />
+        {page.seasonal_events.images.map((image) => (
+          <img
+            src={image.src}
+            alt={image.alt}
+            class="w-full h-64 object-cover border-2 border-(--ink)"
+            loading="lazy"
+          />
+        ))}
       </div>
     </section>
   </div>

@@ -1,0 +1,34 @@
+{
+  "title": "St John's Park",
+  "quick_links": [
+    {
+      "label": "I'm New",
+      "href": "/im-new"
+    },
+    {
+      "label": "What's On",
+      "href": "/whats-on"
+    },
+    {
+      "label": "Talks",
+      "href": "/sermons"
+    },
+    {
+      "label": "What We Do",
+      "href": "/what-we-do"
+    },
+    {
+      "label": "Safeguarding",
+      "href": "/safeguarding"
+    },
+    {
+      "label": "Contact",
+      "href": "/contact"
+    }
+  ],
+  "quick_links_heading": "Quick Links",
+  "background_image": {
+    "src": "/images/line-drawing.png",
+    "alt": ""
+  }
+}

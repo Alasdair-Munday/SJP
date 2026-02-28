@@ -1,49 +1,19 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { getSiteContent } from "../data/site-content";
 
-const photos = [
-  {
-    src: "/images/community-park-gathering-1.jpg",
-    alt: "Community gathering in the park with bunting and seated groups",
-    label: "Community Gathering"
-  },
-  {
-    src: "/images/community-park-gathering-2.jpg",
-    alt: "Church building and community enjoying outdoor activities",
-    label: "Churchyard Event"
-  },
-  {
-    src: "/images/community-fun-day.jpg",
-    alt: "People taking part in races on the grass outside church",
-    label: "Park Fun Day"
-  },
-  {
-    src: "/images/kids-frisbee.jpg",
-    alt: "Children playing games in the park",
-    label: "Park Kids"
-  },
-  {
-    src: "/images/kids-churchyard.jpg",
-    alt: "Children and families around the churchyard games area",
-    label: "Churchyard Games"
-  },
-  {
-    src: "/images/outdoor carols.jpg",
-    alt: "Community singing carols at the church entrance in December",
-    label: "Seasonal Events"
-  }
-];
+const content = await getSiteContent();
+const page = content.pages.the_park;
 ---
 
-<Layout title="The Park">
+<Layout title={page.title}>
   <div class="max-w-7xl mx-auto px-4 py-20">
     <div class="mb-12 space-y-4">
       <h1 class="page-heading page-heading--accent text-5xl md:text-6xl">
-        The Park
+        {page.title}
       </h1>
       <p class="text-lg text-(--ink)/85 max-w-3xl">
-        A glimpse into church life in Park: worship, friendship, family, and
-        shared moments through the year.
+        {page.subtitle}
       </p>
     </div>
 
@@ -56,20 +26,20 @@ const photos = [
           class="aspect-square overflow-hidden mb-4 theme-photo"
         >
           <img
-            src="/images/baptism.jpg"
-            alt="Baptism Celebration"
+            src={page.featured_photo.src}
+            alt={page.featured_photo.alt}
             class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
           />
         </div>
         <p
           class="section-heading text-sm uppercase tracking-widest text-center"
         >
-          New Life
+          {page.featured_photo.label}
         </p>
       </div>
 
       {
-        photos.map((photo) => (
+        page.photos.map((photo) => (
           <div class="theme-card theme-card--interactive theme-card--strong border-[3px] p-4">
             <div class="aspect-square overflow-hidden mb-4 theme-photo">
               <img

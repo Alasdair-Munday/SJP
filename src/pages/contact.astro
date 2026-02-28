@@ -4,6 +4,31 @@ import { getSiteContent } from "../data/site-content";
 
 const content = await getSiteContent();
 const page = content.pages.contact;
+const sendMessage = page.send_message ?? {
+	heading: "Send Us a Message",
+	intro_prefix: "You can email us directly at",
+	direct_email: "hello@saintjohnspark.org",
+	intro_suffix: "or use the form below.",
+	labels: {
+		name: "Name",
+		email: "Email",
+		subject: "Subject",
+		message: "Message",
+		submit: "Send Message",
+	},
+	subject_placeholder: "Select a topic",
+	subject_options: [
+		{ value: "general", label: "General enquiry" },
+		{ value: "park-kids", label: "Park Kids" },
+		{ value: "park-youth", label: "Park Youth" },
+		{ value: "park-communities", label: "Park Communities" },
+		{ value: "sundays", label: "Sunday gathering" },
+		{ value: "safeguarding", label: "Safeguarding" },
+	],
+};
+const mapEmbedUrl =
+	page.find_us.map_embed_url ??
+	"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1932.9794407157501!2d-1.4558134244165126!3d53.38304895495231!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4879787508b14b63%3A0x3ad4b2dcc392b6b9!2sSt.%20John%E2%80%99s%20Church%2C%20Park!5e1!3m2!1sen!2suk!4v1771371845139!5m2!1sen!2suk";
 ---
 
 <Layout title={page.title}>
@@ -15,12 +40,12 @@ const page = content.pages.contact;
 		</h1>
 
 		<section class="theme-card theme-card--strong p-8 space-y-4">
-			<p class="text-lg text-(--ink)/90">{page.find_us.paragraphs[0]}</p>
-			<iframe
-				src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1932.9794407157501!2d-1.4558134244165126!3d53.38304895495231!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4879787508b14b63%3A0x3ad4b2dcc392b6b9!2sSt.%20John%E2%80%99s%20Church%2C%20Park!5e1!3m2!1sen!2suk!4v1771371845139!5m2!1sen!2suk"
-				width="100%"
-				height="450"
-				style="border:0;"
+				<p class="text-lg text-(--ink)/90">{page.find_us.paragraphs[0]}</p>
+				<iframe
+					src={mapEmbedUrl}
+					width="100%"
+					height="450"
+					style="border:0;"
 				allowfullscreen=""
 				loading="lazy"
 				referrerpolicy="no-referrer-when-downgrade"></iframe>
@@ -43,20 +68,20 @@ const page = content.pages.contact;
 		</section>
 
 		<section
-			id="send-message"
-			class="theme-card p-8 space-y-5 scroll-mt-28"
-		>
-			<h2 class="section-heading text-3xl">Send Us a Message</h2>
-			<p class="text-(--ink)/90">
-				You can email us directly at{" "}
-				<a
-					href="mailto:hello@saintjohnspark.org"
-					class="underline decoration-(--eden) underline-offset-4"
-				>
-					hello@saintjohnspark.org
-				</a>{" "}
-				or use the form below.
-			</p>
+				id="send-message"
+				class="theme-card p-8 space-y-5 scroll-mt-28"
+			>
+				<h2 class="section-heading text-3xl">{sendMessage.heading}</h2>
+				<p class="text-(--ink)/90">
+					{sendMessage.intro_prefix}{" "}
+					<a
+						href={`mailto:${sendMessage.direct_email}`}
+						class="underline decoration-(--eden) underline-offset-4"
+					>
+						{sendMessage.direct_email}
+					</a>{" "}
+					{sendMessage.intro_suffix}
+				</p>
 
 			<form
 				name="contact"
@@ -74,63 +99,60 @@ const page = content.pages.contact;
 					</label>
 				</p>
 
-				<label class="block space-y-2">
-					<span class="font-semibold text-(--ink)">Name</span>
-					<input
-						type="text"
-						name="name"
+					<label class="block space-y-2">
+						<span class="font-semibold text-(--ink)">{sendMessage.labels.name}</span>
+						<input
+							type="text"
+							name="name"
 						required
 						class="w-full border-2 border-(--ink) px-3 py-2"
 					/>
 				</label>
 
-				<label class="block space-y-2">
-					<span class="font-semibold text-(--ink)">Email</span>
-					<input
-						type="email"
-						name="email"
+					<label class="block space-y-2">
+						<span class="font-semibold text-(--ink)">{sendMessage.labels.email}</span>
+						<input
+							type="email"
+							name="email"
 						required
 						class="w-full border-2 border-(--ink) px-3 py-2"
 					/>
 				</label>
 
-				<label class="block space-y-2">
-					<span class="font-semibold text-(--ink)">Subject</span>
-					<select
-						name="subject"
-						required
-						class="w-full border-2 border-(--ink) px-3 py-2"
-					>
-						<option value="">Select a topic</option>
-						<option value="general">General enquiry</option>
-						<option value="park-kids">Park Kids</option>
-						<option value="park-youth">Park Youth</option>
-						<option value="park-communities"
-							>Park Communities</option
+					<label class="block space-y-2">
+						<span class="font-semibold text-(--ink)">{sendMessage.labels.subject}</span>
+						<select
+							name="subject"
+							required
+							class="w-full border-2 border-(--ink) px-3 py-2"
 						>
-						<option value="sundays">Sunday gathering</option>
-						<option value="safeguarding">Safeguarding</option>
-					</select>
-				</label>
+							<option value="">{sendMessage.subject_placeholder}</option>
+							{
+								sendMessage.subject_options.map((option) => (
+									<option value={option.value}>{option.label}</option>
+								))
+							}
+						</select>
+					</label>
 
-				<label class="block space-y-2">
-					<span class="font-semibold text-(--ink)">Message</span>
-					<textarea
-						name="message"
-						required
+					<label class="block space-y-2">
+						<span class="font-semibold text-(--ink)">{sendMessage.labels.message}</span>
+						<textarea
+							name="message"
+							required
 						rows={6}
 						class="w-full border-2 border-(--ink) px-3 py-2"
 					></textarea>
 				</label>
 
-				<button
-					type="submit"
-					class="inline-flex items-center gap-2 px-6 py-3 bg-(--ink) text-white border-2 border-(--ink) font-semibold hover:bg-white hover:text-(--ink) transition-colors"
-				>
-					Send Message
-				</button>
-			</form>
-		</section>
+					<button
+						type="submit"
+						class="inline-flex items-center gap-2 px-6 py-3 bg-(--ink) text-white border-2 border-(--ink) font-semibold hover:bg-white hover:text-(--ink) transition-colors"
+					>
+						{sendMessage.labels.submit}
+					</button>
+				</form>
+			</section>
 
 		<section class="theme-card p-8 space-y-4">
 			<h2 class="section-heading text-3xl">

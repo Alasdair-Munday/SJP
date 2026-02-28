@@ -1,0 +1,19 @@
+{
+  "items": [
+    {
+      "label": "Belong",
+      "href": "/what-we-do#belong",
+      "tone": "belong"
+    },
+    {
+      "label": "Serve",
+      "href": "/what-we-do#serve",
+      "tone": "serve"
+    },
+    {
+      "label": "Give",
+      "href": "/what-we-do#give",
+      "tone": "give"
+    }
+  ]
+}

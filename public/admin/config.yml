@@ -1,0 +1,2150 @@
+backend:
+  name: github
+  repo: Alasdair-Munday/SJP
+  branch: main
+  base_url: https://stjohnspark.church
+  auth_endpoint: /.netlify/functions/auth
+local_backend:
+  url: http://localhost:8081/api/v1
+  allowed_hosts:
+    - localhost
+    - 127.0.0.1
+site_url: https://stjohnspark.church
+display_url: https://stjohnspark.church
+publish_mode: simple
+media_folder: public/images/uploads
+public_folder: /images/uploads
+collections:
+  - name: site_globals
+    label: Site Settings
+    delete: false
+    files:
+      - label: Site Identity
+        name: site
+        file: src/content/cms/site.json
+        format: json
+        editor:
+          preview: false
+        fields:
+          - label: Title
+            name: title
+            widget: string
+            required: true
+          - label: Subtitle
+            name: subtitle
+            widget: string
+            required: true
+          - label: Address
+            name: address
+            widget: string
+            required: true
+          - label: Mission
+            name: mission
+            widget: string
+            required: true
+          - label: Vision
+            name: vision
+            widget: string
+            required: true
+          - label: Meta Description
+            name: meta_description
+            widget: string
+            required: true
+          - label: Default Site Url
+            name: default_site_url
+            widget: string
+            required: true
+            hint: Use a full URL (https://...) or site path (/page).
+          - label: Brand
+            name: brand
+            widget: object
+            collapsed: false
+            fields:
+              - label: Logo Line One
+                name: logo_line_one
+                widget: string
+                required: true
+              - label: Logo Line Two
+                name: logo_line_two
+                widget: string
+                required: true
+              - label: Nav Cta Label
+                name: nav_cta_label
+                widget: string
+                required: true
+              - label: Nav Cta Href
+                name: nav_cta_href
+                widget: string
+                required: true
+                hint: Use a full URL (https://...) or site path (/page).
+      - label: Main Navigation
+        name: navigation
+        file: src/content/cms/navigation.json
+        format: json
+        editor:
+          preview: false
+        fields:
+          - label: Items
+            name: items
+            widget: list
+            collapsed: true
+            summary: "{{fields.label}}"
+            fields:
+              - label: Label
+                name: label
+                widget: string
+                required: true
+              - label: Href
+                name: href
+                widget: string
+                required: true
+                hint: Use a full URL (https://...) or site path (/page).
+      - label: Utility Navigation
+        name: utility_navigation
+        file: src/content/cms/utility_navigation.json
+        format: json
+        editor:
+          preview: false
+        fields:
+          - label: Items
+            name: items
+            widget: list
+            collapsed: true
+            summary: "{{fields.label}}"
+            fields:
+              - label: Label
+                name: label
+                widget: string
+                required: true
+              - label: Href
+                name: href
+                widget: string
+                required: true
+                hint: Use a full URL (https://...) or site path (/page).
+              - label: Tone
+                name: tone
+                widget: string
+                required: true
+      - label: Footer
+        name: footer
+        file: src/content/cms/footer.json
+        format: json
+        editor:
+          preview: false
+        fields:
+          - label: Title
+            name: title
+            widget: string
+            required: true
+          - label: Quick Links
+            name: quick_links
+            widget: list
+            collapsed: true
+            summary: "{{fields.label}}"
+            fields:
+              - label: Label
+                name: label
+                widget: string
+                required: true
+              - label: Href
+                name: href
+                widget: string
+                required: true
+                hint: Use a full URL (https://...) or site path (/page).
+            hint: Use a full URL (https://...) or site path (/page).
+          - label: Quick Links Heading
+            name: quick_links_heading
+            widget: string
+            required: true
+            hint: Use a full URL (https://...) or site path (/page).
+          - label: Background Image
+            name: background_image
+            widget: object
+            collapsed: false
+            fields:
+              - label: Src
+                name: src
+                widget: image
+                required: true
+                hint: Choose/upload an image from the media library.
+              - label: Alt
+                name: alt
+                widget: string
+                required: false
+                hint: Short accessibility description for this image.
+      - label: Shared Components
+        name: components
+        file: src/content/cms/components.json
+        format: json
+        editor:
+          preview: false
+        fields:
+          - label: Calendar Events
+            name: calendar_events
+            widget: object
+            collapsed: false
+            fields:
+              - label: Empty Message
+                name: empty_message
+                widget: string
+                required: true
+              - label: View Whats On Label
+                name: view_whats_on_label
+                widget: string
+                required: true
+          - label: Featured Event
+            name: featured_event
+            widget: object
+            collapsed: false
+            fields:
+              - label: View Event Details Label
+                name: view_event_details_label
+                widget: string
+                required: true
+              - label: Image Coming Soon Label
+                name: image_coming_soon_label
+                widget: string
+                required: true
+          - label: News
+            name: news
+            widget: object
+            collapsed: false
+            fields:
+              - label: Listing Eyebrow
+                name: listing_eyebrow
+                widget: string
+                required: true
+              - label: Listing Title
+                name: listing_title
+                widget: string
+                required: true
+              - label: Listing Description
+                name: listing_description
+                widget: string
+                required: true
+              - label: Listing Empty Message
+                name: listing_empty_message
+                widget: string
+                required: true
+              - label: Home Section Title
+                name: home_section_title
+                widget: string
+                required: true
+              - label: View All Label
+                name: view_all_label
+                widget: string
+                required: true
+              - label: Read Article Label
+                name: read_article_label
+                widget: string
+                required: true
+              - label: Back To News Label
+                name: back_to_news_label
+                widget: string
+                required: true
+              - label: Archived Notice
+                name: archived_notice
+                widget: string
+                required: true
+      - label: Sermon Library
+        name: sermons
+        file: src/content/cms/sermons.json
+        format: json
+        editor:
+          preview: false
+        fields:
+          - label: Items
+            name: items
+            widget: list
+            collapsed: true
+            summary: "{{fields.title}}"
+            fields:
+              - label: Title
+                name: title
+                widget: string
+                required: true
+              - label: Speaker
+                name: speaker
+                widget: string
+                required: true
+              - label: Date
+                name: date
+                widget: datetime
+                format: YYYY-MM-DD
+                date_format: YYYY-MM-DD
+                time_format: false
+                required: true
+              - label: Series
+                name: series
+                widget: string
+                required: true
+              - label: Passage
+                name: passage
+                widget: string
+                required: true
+              - label: Audio Url
+                name: audioUrl
+                widget: string
+                required: false
+                hint: Use a full URL (https://...) or site path (/page).
+              - label: Description
+                name: description
+                widget: string
+                required: true
+              - label: Duration
+                name: duration
+                widget: number
+                value_type: int
+                required: true
+  - name: pages_welcome
+    label: Welcome Pages
+    delete: false
+    files:
+      - label: Home Page
+        name: home
+        file: src/content/cms/pages/home.json
+        format: json
+        editor:
+          preview: false
+        fields:
+          - label: Hero
+            name: hero
+            widget: object
+            collapsed: false
+            summary: "{{title}}"
+            fields:
+              - label: Title
+                name: title
+                widget: string
+                required: true
+              - label: Subtitle
+                name: subtitle
+                widget: text
+                required: true
+              - label: Badge
+                name: badge
+                widget: string
+                required: true
+              - label: Image
+                name: image
+                widget: object
+                collapsed: true
+                fields:
+                  - label: Src
+                    name: src
+                    widget: image
+                    required: true
+                    hint: Choose/upload an image from the media library.
+                  - label: Alt
+                    name: alt
+                    widget: string
+                    required: true
+                    hint: Short accessibility description for this image.
+              - label: Primary Cta
+                name: primary_cta
+                widget: object
+                collapsed: true
+                summary: "{{label}}"
+                fields:
+                  - label: Label
+                    name: label
+                    widget: string
+                    required: true
+                  - label: Href
+                    name: href
+                    widget: string
+                    required: true
+                    hint: Use a full URL (https://...) or site path (/page).
+              - label: Secondary Cta
+                name: secondary_cta
+                widget: object
+                collapsed: true
+                summary: "{{label}}"
+                fields:
+                  - label: Label
+                    name: label
+                    widget: string
+                    required: true
+                  - label: Href
+                    name: href
+                    widget: string
+                    required: true
+                    hint: Use a full URL (https://...) or site path (/page).
+          - label: Latest Message
+            name: latest_message
+            widget: object
+            collapsed: false
+            fields:
+              - label: Eyebrow
+                name: eyebrow
+                widget: string
+                required: true
+              - label: Cta
+                name: cta
+                widget: object
+                collapsed: true
+                summary: "{{label}}"
+                fields:
+                  - label: Label
+                    name: label
+                    widget: string
+                    required: true
+                  - label: Href
+                    name: href
+                    widget: string
+                    required: true
+                    hint: Use a full URL (https://...) or site path (/page).
+              - label: Audio
+                name: audio
+                widget: object
+                collapsed: true
+                fields:
+                  - label: Src
+                    name: src
+                    widget: string
+                    required: true
+                    hint: Use a file URL/path.
+                  - label: Mime Type
+                    name: mime_type
+                    widget: string
+                    required: true
+          - label: Coming Up
+            name: coming_up
+            widget: object
+            collapsed: false
+            summary: "{{title}}"
+            fields:
+              - label: Title
+                name: title
+                widget: string
+                required: true
+          - label: Mission
+            name: mission
+            widget: object
+            collapsed: false
+            summary: "{{heading}}"
+            fields:
+              - label: Heading
+                name: heading
+                widget: string
+                required: true
+              - label: Tag
+                name: tag
+                widget: string
+                required: true
+          - label: Mission Grid
+            name: mission_grid
+            widget: list
+            collapsed: true
+            summary: "{{fields.title}}"
+            fields:
+              - label: Title
+                name: title
+                widget: string
+                required: true
+              - label: Desc
+                name: desc
+                widget: string
+                required: true
+              - label: Link Text
+                name: link_text
+                widget: string
+                required: true
+                hint: Use a full URL (https://...) or site path (/page).
+              - label: Link Href
+                name: link_href
+                widget: string
+                required: true
+                hint: Use a full URL (https://...) or site path (/page).
+              - label: Color
+                name: color
+                widget: string
+                required: true
+      - label: I'm New Page
+        name: im_new
+        file: src/content/cms/pages/im_new.json
+        format: json
+        editor:
+          preview: false
+        fields:
+          - label: Title
+            name: title
+            widget: string
+            required: true
+          - label: Home Preview
+            name: home_preview
+            widget: object
+            collapsed: false
+            summary: "{{heading}}"
+            fields:
+              - label: Heading
+                name: heading
+                widget: string
+                required: true
+              - label: Intro
+                name: intro
+                widget: string
+                required: true
+          - label: Sections
+            name: sections
+            widget: list
+            collapsed: true
+            summary: "{{fields.heading}}"
+            fields:
+              - label: Heading
+                name: heading
+                widget: string
+                required: true
+              - label: Paragraphs
+                name: paragraphs
+                widget: list
+                collapsed: true
+                field:
+                  label: Item
+                  name: item
+                  widget: text
+                  required: true
+          - label: Gallery
+            name: gallery
+            widget: list
+            collapsed: true
+            fields:
+              - label: Src
+                name: src
+                widget: image
+                required: true
+                hint: Choose/upload an image from the media library.
+              - label: Alt
+                name: alt
+                widget: string
+                required: true
+                hint: Short accessibility description for this image.
+              - label: Caption
+                name: caption
+                widget: string
+                required: true
+      - label: Sundays Page
+        name: sundays
+        file: src/content/cms/pages/sundays.json
+        format: json
+        editor:
+          preview: false
+        fields:
+          - label: Title Line One
+            name: title_line_one
+            widget: string
+            required: true
+          - label: Title Line Two
+            name: title_line_two
+            widget: string
+            required: true
+          - label: Time Label
+            name: time_label
+            widget: string
+            required: true
+          - label: Location Label
+            name: location_label
+            widget: string
+            required: true
+          - label: Time
+            name: time
+            widget: string
+            required: true
+          - label: Location
+            name: location
+            widget: string
+            required: true
+          - label: Description
+            name: description
+            widget: string
+            required: true
+          - label: Service Style
+            name: service_style
+            widget: string
+            required: true
+          - label: Kids Heading
+            name: kids_heading
+            widget: string
+            required: true
+          - label: Kids Blurb
+            name: kids_blurb
+            widget: string
+            required: true
+          - label: After Service
+            name: after_service
+            widget: string
+            required: true
+          - label: Image
+            name: image
+            widget: object
+            collapsed: false
+            fields:
+              - label: Src
+                name: src
+                widget: image
+                required: true
+                hint: Choose/upload an image from the media library.
+              - label: Alt
+                name: alt
+                widget: string
+                required: true
+                hint: Short accessibility description for this image.
+          - label: What To Expect Heading
+            name: what_to_expect_heading
+            widget: string
+            required: true
+          - label: What To Expect Items
+            name: what_to_expect_items
+            widget: list
+            collapsed: true
+            field:
+              label: Item
+              name: item
+              widget: string
+              required: true
+          - label: Talks Link Intro
+            name: talks_link_intro
+            widget: string
+            required: true
+            hint: Use a full URL (https://...) or site path (/page).
+          - label: Talks Link Label
+            name: talks_link_label
+            widget: string
+            required: true
+            hint: Use a full URL (https://...) or site path (/page).
+          - label: Talks Link Href
+            name: talks_link_href
+            widget: string
+            required: true
+            hint: Use a full URL (https://...) or site path (/page).
+      - label: What We Believe Page
+        name: what_we_believe
+        file: src/content/cms/pages/what_we_believe.json
+        format: json
+        editor:
+          preview: false
+        fields:
+          - label: Title
+            name: title
+            widget: string
+            required: true
+          - label: Paragraphs
+            name: paragraphs
+            widget: list
+            collapsed: true
+            field:
+              label: Item
+              name: item
+              widget: text
+              required: true
+          - label: Image
+            name: image
+            widget: object
+            collapsed: false
+            fields:
+              - label: Src
+                name: src
+                widget: image
+                required: true
+                hint: Choose/upload an image from the media library.
+              - label: Alt
+                name: alt
+                widget: string
+                required: true
+                hint: Short accessibility description for this image.
+      - label: The Park Page
+        name: the_park
+        file: src/content/cms/pages/the_park.json
+        format: json
+        editor:
+          preview: false
+        fields:
+          - label: Title
+            name: title
+            widget: string
+            required: true
+          - label: Featured Photo
+            name: featured_photo
+            widget: object
+            collapsed: false
+            summary: "{{label}}"
+            fields:
+              - label: Src
+                name: src
+                widget: image
+                required: true
+                hint: Choose/upload an image from the media library.
+              - label: Alt
+                name: alt
+                widget: string
+                required: true
+                hint: Short accessibility description for this image.
+              - label: Label
+                name: label
+                widget: string
+                required: true
+          - label: Photos
+            name: photos
+            widget: list
+            collapsed: true
+            summary: "{{fields.label}}"
+            fields:
+              - label: Src
+                name: src
+                widget: image
+                required: true
+                hint: Choose/upload an image from the media library.
+              - label: Alt
+                name: alt
+                widget: string
+                required: true
+                hint: Short accessibility description for this image.
+              - label: Label
+                name: label
+                widget: string
+                required: true
+          - label: Subtitle
+            name: subtitle
+            widget: string
+            required: true
+  - name: pages_church_life
+    label: Church Life Pages
+    delete: false
+    files:
+      - label: What We Do Page
+        name: ministries
+        file: src/content/cms/pages/ministries.json
+        format: json
+        editor:
+          preview: false
+        fields:
+          - label: Title
+            name: title
+            widget: string
+            required: true
+          - label: Intro
+            name: intro
+            widget: text
+            required: true
+          - label: Groups
+            name: groups
+            widget: list
+            collapsed: true
+            summary: "{{fields.heading}}"
+            fields:
+              - label: Id
+                name: id
+                widget: string
+                required: true
+              - label: Tone
+                name: tone
+                widget: string
+                required: true
+              - label: Heading
+                name: heading
+                widget: string
+                required: true
+              - label: Items
+                name: items
+                widget: list
+                collapsed: true
+                summary: "{{fields.title}}"
+                fields:
+                  - label: Title
+                    name: title
+                    widget: string
+                    required: true
+                  - label: Description
+                    name: description
+                    widget: string
+                    required: true
+                  - label: Href
+                    name: href
+                    widget: string
+                    required: true
+                    hint: Use a full URL (https://...) or site path (/page).
+                  - label: Link Label
+                    name: link_label
+                    widget: string
+                    required: true
+                    hint: Use a full URL (https://...) or site path (/page).
+              - label: Cta
+                name: cta
+                widget: object
+                collapsed: true
+                fields:
+                  - label: Text
+                    name: text
+                    widget: string
+                    required: true
+                  - label: Href
+                    name: href
+                    widget: string
+                    required: true
+                    hint: Use a full URL (https://...) or site path (/page).
+                  - label: Description
+                    name: description
+                    widget: string
+                    required: true
+              - label: Intro
+                name: intro
+                widget: string
+                required: true
+              - label: Image
+                name: image
+                widget: object
+                collapsed: true
+                fields:
+                  - label: Src
+                    name: src
+                    widget: image
+                    required: true
+                    hint: Choose/upload an image from the media library.
+                  - label: Alt
+                    name: alt
+                    widget: string
+                    required: true
+                    hint: Short accessibility description for this image.
+      - label: Belong Page
+        name: belong
+        file: src/content/cms/pages/belong.json
+        format: json
+        editor:
+          preview: false
+        fields:
+          - label: Title
+            name: title
+            widget: string
+            required: true
+          - label: Highlights
+            name: highlights
+            widget: list
+            collapsed: true
+            summary: "{{fields.title}}"
+            fields:
+              - label: Title
+                name: title
+                widget: string
+                required: true
+              - label: Description
+                name: description
+                widget: string
+                required: true
+              - label: Href
+                name: href
+                widget: string
+                required: true
+                hint: Use a full URL (https://...) or site path (/page).
+              - label: Tone
+                name: tone
+                widget: string
+                required: true
+          - label: Sections
+            name: sections
+            widget: object
+            collapsed: false
+            fields:
+              - label: Midweek
+                name: midweek
+                widget: object
+                collapsed: true
+                summary: "{{heading}}"
+                fields:
+                  - label: Heading
+                    name: heading
+                    widget: string
+                    required: true
+                  - label: Paragraphs
+                    name: paragraphs
+                    widget: list
+                    collapsed: true
+                    field:
+                      label: Item
+                      name: item
+                      widget: string
+                      required: true
+              - label: Kids
+                name: kids
+                widget: object
+                collapsed: true
+                summary: "{{heading}}"
+                fields:
+                  - label: Heading
+                    name: heading
+                    widget: string
+                    required: true
+                  - label: Paragraphs
+                    name: paragraphs
+                    widget: list
+                    collapsed: true
+                    field:
+                      label: Item
+                      name: item
+                      widget: string
+                      required: true
+              - label: Youth
+                name: youth
+                widget: object
+                collapsed: true
+                summary: "{{heading}}"
+                fields:
+                  - label: Heading
+                    name: heading
+                    widget: string
+                    required: true
+                  - label: Paragraphs
+                    name: paragraphs
+                    widget: list
+                    collapsed: true
+                    field:
+                      label: Item
+                      name: item
+                      widget: text
+                      required: true
+      - label: Join a Team Page
+        name: serve
+        file: src/content/cms/pages/serve.json
+        format: json
+        editor:
+          preview: false
+        fields:
+          - label: Title
+            name: title
+            widget: string
+            required: true
+          - label: Intro
+            name: intro
+            widget: text
+            required: true
+          - label: Teams
+            name: teams
+            widget: list
+            collapsed: true
+            summary: "{{fields.name}}"
+            fields:
+              - label: Name
+                name: name
+                widget: string
+                required: true
+              - label: Description
+                name: description
+                widget: text
+                required: true
+          - label: Outro Html
+            name: outro_html
+            widget: text
+            required: true
+            hint: HTML is allowed in this field.
+          - label: Join Team
+            name: join_team
+            widget: object
+            collapsed: false
+            summary: "{{title}}"
+            fields:
+              - label: Title
+                name: title
+                widget: string
+                required: true
+              - label: Intro
+                name: intro
+                widget: string
+                required: true
+              - label: Hero Image
+                name: hero_image
+                widget: object
+                collapsed: true
+                fields:
+                  - label: Src
+                    name: src
+                    widget: image
+                    required: true
+                    hint: Choose/upload an image from the media library.
+                  - label: Alt
+                    name: alt
+                    widget: string
+                    required: true
+                    hint: Short accessibility description for this image.
+              - label: Hero Blurb
+                name: hero_blurb
+                widget: string
+                required: true
+              - label: Steps
+                name: steps
+                widget: object
+                collapsed: true
+                fields:
+                  - label: Select Heading
+                    name: select_heading
+                    widget: string
+                    required: true
+                  - label: Select Intro
+                    name: select_intro
+                    widget: string
+                    required: true
+                  - label: Details Heading
+                    name: details_heading
+                    widget: string
+                    required: true
+                  - label: Preview Heading
+                    name: preview_heading
+                    widget: string
+                    required: true
+                  - label: Preview Intro
+                    name: preview_intro
+                    widget: string
+                    required: true
+              - label: Labels
+                name: labels
+                widget: object
+                collapsed: true
+                summary: "{{name}}"
+                fields:
+                  - label: Name
+                    name: name
+                    widget: string
+                    required: true
+                  - label: Email
+                    name: email
+                    widget: string
+                    required: true
+                  - label: Phone Optional
+                    name: phone_optional
+                    widget: string
+                    required: true
+                  - label: Notes Optional
+                    name: notes_optional
+                    widget: string
+                    required: true
+                  - label: Submit
+                    name: submit
+                    widget: string
+                    required: true
+              - label: Messages
+                name: messages
+                widget: object
+                collapsed: true
+                fields:
+                  - label: None Selected
+                    name: none_selected
+                    widget: string
+                    required: true
+                  - label: Selected Prefix
+                    name: selected_prefix
+                    widget: string
+                    required: true
+                  - label: Message Title
+                    name: message_title
+                    widget: string
+                    required: true
+                  - label: Teams Label
+                    name: teams_label
+                    widget: string
+                    required: true
+                  - label: Name Label
+                    name: name_label
+                    widget: string
+                    required: true
+                  - label: Email Label
+                    name: email_label
+                    widget: string
+                    required: true
+                  - label: Phone Label
+                    name: phone_label
+                    widget: string
+                    required: true
+                  - label: Empty Value
+                    name: empty_value
+                    widget: string
+                    required: true
+                  - label: None Selected Short
+                    name: none_selected_short
+                    widget: string
+                    required: true
+      - label: Give Page
+        name: give
+        file: src/content/cms/pages/give.json
+        format: json
+        editor:
+          preview: false
+        fields:
+          - label: Title
+            name: title
+            widget: string
+            required: true
+          - label: Online Giving
+            name: online_giving
+            widget: object
+            collapsed: false
+            fields:
+              - label: Link
+                name: link
+                widget: string
+                required: true
+                hint: Use a full URL (https://...) or site path (/page).
+              - label: Button Label
+                name: button_label
+                widget: string
+                required: true
+          - label: Generosity Paragraph
+            name: generosity_paragraph
+            widget: text
+            required: true
+          - label: Methods Heading
+            name: methods_heading
+            widget: string
+            required: true
+          - label: Methods
+            name: methods
+            widget: list
+            collapsed: true
+            field:
+              label: Item
+              name: item
+              widget: string
+              required: true
+          - label: Bank Details
+            name: bank_details
+            widget: object
+            collapsed: false
+            summary: "{{heading}}"
+            fields:
+              - label: Heading
+                name: heading
+                widget: string
+                required: true
+              - label: Lines
+                name: lines
+                widget: list
+                collapsed: true
+                field:
+                  label: Item
+                  name: item
+                  widget: string
+                  required: true
+          - label: Contact Html
+            name: contact_html
+            widget: text
+            required: true
+            hint: HTML is allowed in this field.
+          - label: Section Image
+            name: section_image
+            widget: object
+            collapsed: false
+            fields:
+              - label: Src
+                name: src
+                widget: image
+                required: true
+                hint: Choose/upload an image from the media library.
+              - label: Alt
+                name: alt
+                widget: string
+                required: true
+                hint: Short accessibility description for this image.
+      - label: Park Kids Page
+        name: park_kids
+        file: src/content/cms/pages/park_kids.json
+        format: json
+        editor:
+          preview: false
+        fields:
+          - label: Title
+            name: title
+            widget: string
+            required: true
+          - label: Sunday Groups
+            name: sunday_groups
+            widget: object
+            collapsed: false
+            summary: "{{heading}}"
+            fields:
+              - label: Heading
+                name: heading
+                widget: string
+                required: true
+              - label: Paragraphs
+                name: paragraphs
+                widget: list
+                collapsed: true
+                field:
+                  label: Item
+                  name: item
+                  widget: string
+                  required: true
+              - label: Image
+                name: image
+                widget: object
+                collapsed: true
+                fields:
+                  - label: Src
+                    name: src
+                    widget: image
+                    required: true
+                    hint: Choose/upload an image from the media library.
+                  - label: Alt
+                    name: alt
+                    widget: string
+                    required: true
+                    hint: Short accessibility description for this image.
+          - label: Social Story
+            name: social_story
+            widget: object
+            collapsed: false
+            summary: "{{heading}}"
+            fields:
+              - label: Heading
+                name: heading
+                widget: string
+                required: true
+              - label: Intro
+                name: intro
+                widget: string
+                required: true
+              - label: Step Label Prefix
+                name: step_label_prefix
+                widget: string
+                required: true
+              - label: Steps
+                name: steps
+                widget: list
+                collapsed: true
+                field:
+                  label: Item
+                  name: item
+                  widget: string
+                  required: true
+              - label: Images
+                name: images
+                widget: list
+                collapsed: true
+                fields:
+                  - label: Src
+                    name: src
+                    widget: image
+                    required: true
+                    hint: Choose/upload an image from the media library.
+                  - label: Alt
+                    name: alt
+                    widget: string
+                    required: true
+                    hint: Short accessibility description for this image.
+          - label: Cta Html
+            name: cta_html
+            widget: text
+            required: true
+            hint: HTML is allowed in this field.
+      - label: Park Youth Page
+        name: park_youth
+        file: src/content/cms/pages/park_youth.json
+        format: json
+        editor:
+          preview: false
+        fields:
+          - label: Title
+            name: title
+            widget: string
+            required: true
+          - label: Cornerstone
+            name: cornerstone
+            widget: object
+            collapsed: false
+            summary: "{{heading}}"
+            fields:
+              - label: Heading
+                name: heading
+                widget: string
+                required: true
+              - label: Paragraphs
+                name: paragraphs
+                widget: list
+                collapsed: true
+                field:
+                  label: Item
+                  name: item
+                  widget: string
+                  required: true
+              - label: Image
+                name: image
+                widget: object
+                collapsed: true
+                fields:
+                  - label: Src
+                    name: src
+                    widget: image
+                    required: true
+                    hint: Choose/upload an image from the media library.
+                  - label: Alt
+                    name: alt
+                    widget: string
+                    required: true
+                    hint: Short accessibility description for this image.
+          - label: Sunday Study
+            name: sunday_study
+            widget: object
+            collapsed: false
+            summary: "{{heading}}"
+            fields:
+              - label: Heading
+                name: heading
+                widget: string
+                required: true
+              - label: Paragraphs
+                name: paragraphs
+                widget: list
+                collapsed: true
+                field:
+                  label: Item
+                  name: item
+                  widget: string
+                  required: true
+              - label: Images
+                name: images
+                widget: list
+                collapsed: true
+                fields:
+                  - label: Src
+                    name: src
+                    widget: image
+                    required: true
+                    hint: Choose/upload an image from the media library.
+                  - label: Alt
+                    name: alt
+                    widget: string
+                    required: true
+                    hint: Short accessibility description for this image.
+          - label: Cta Html
+            name: cta_html
+            widget: text
+            required: true
+            hint: HTML is allowed in this field.
+      - label: Park Communities Page
+        name: park_communities
+        file: src/content/cms/pages/park_communities.json
+        format: json
+        editor:
+          preview: false
+        fields:
+          - label: Title
+            name: title
+            widget: string
+            required: true
+          - label: Midweek
+            name: midweek
+            widget: object
+            collapsed: false
+            summary: "{{heading}}"
+            fields:
+              - label: Heading
+                name: heading
+                widget: string
+                required: true
+              - label: Paragraphs
+                name: paragraphs
+                widget: list
+                collapsed: true
+                field:
+                  label: Item
+                  name: item
+                  widget: string
+                  required: true
+              - label: Images
+                name: images
+                widget: list
+                collapsed: true
+                fields:
+                  - label: Src
+                    name: src
+                    widget: image
+                    required: true
+                    hint: Choose/upload an image from the media library.
+                  - label: Alt
+                    name: alt
+                    widget: string
+                    required: true
+                    hint: Short accessibility description for this image.
+          - label: Rhythm
+            name: rhythm
+            widget: object
+            collapsed: false
+            summary: "{{heading}}"
+            fields:
+              - label: Heading
+                name: heading
+                widget: string
+                required: true
+              - label: Items
+                name: items
+                widget: list
+                collapsed: true
+                field:
+                  label: Item
+                  name: item
+                  widget: text
+                  required: true
+              - label: Image
+                name: image
+                widget: object
+                collapsed: true
+                fields:
+                  - label: Src
+                    name: src
+                    widget: image
+                    required: true
+                    hint: Choose/upload an image from the media library.
+                  - label: Alt
+                    name: alt
+                    widget: string
+                    required: true
+                    hint: Short accessibility description for this image.
+          - label: Cta Html
+            name: cta_html
+            widget: text
+            required: true
+            hint: HTML is allowed in this field.
+      - label: Life Events Page
+        name: life_events
+        file: src/content/cms/pages/life_events.json
+        format: json
+        editor:
+          preview: false
+        fields:
+          - label: Title
+            name: title
+            widget: string
+            required: true
+          - label: Intro
+            name: intro
+            widget: string
+            required: true
+          - label: Links
+            name: links
+            widget: list
+            collapsed: true
+            summary: "{{fields.label}}"
+            fields:
+              - label: Label
+                name: label
+                widget: string
+                required: true
+              - label: Href
+                name: href
+                widget: string
+                required: true
+                hint: Use a full URL (https://...) or site path (/page).
+            hint: Use a full URL (https://...) or site path (/page).
+          - label: Images
+            name: images
+            widget: list
+            collapsed: true
+            fields:
+              - label: Src
+                name: src
+                widget: image
+                required: true
+                hint: Choose/upload an image from the media library.
+              - label: Alt
+                name: alt
+                widget: string
+                required: true
+                hint: Short accessibility description for this image.
+      - label: Team Page
+        name: team
+        file: src/content/cms/pages/team.json
+        format: json
+        editor:
+          preview: false
+        fields:
+          - label: Title
+            name: title
+            widget: string
+            required: true
+          - label: Intro
+            name: intro
+            widget: string
+            required: true
+          - label: Members
+            name: members
+            widget: list
+            collapsed: true
+            summary: "{{fields.name}}"
+            fields:
+              - label: Name
+                name: name
+                widget: string
+                required: true
+              - label: Role
+                name: role
+                widget: string
+                required: true
+              - label: Email
+                name: email
+                widget: string
+                required: true
+              - label: Bio
+                name: bio
+                widget: string
+                required: true
+              - label: Phone
+                name: phone
+                widget: string
+                required: true
+              - label: Phone Href
+                name: phone_href
+                widget: string
+                required: true
+                hint: Use a full URL (https://...) or site path (/page).
+              - label: Image
+                name: image
+                widget: object
+                collapsed: true
+                fields:
+                  - label: Src
+                    name: src
+                    widget: image
+                    required: true
+                    hint: Choose/upload an image from the media library.
+                  - label: Alt
+                    name: alt
+                    widget: string
+                    required: true
+                    hint: Short accessibility description for this image.
+      - label: Safeguarding Page
+        name: safeguarding
+        file: src/content/cms/pages/safeguarding.json
+        format: json
+        editor:
+          preview: false
+        fields:
+          - label: Title
+            name: title
+            widget: string
+            required: true
+          - label: Paragraphs
+            name: paragraphs
+            widget: list
+            collapsed: true
+            field:
+              label: Item
+              name: item
+              widget: string
+              required: true
+          - label: Policy Download
+            name: policy_download
+            widget: object
+            collapsed: false
+            summary: "{{label}}"
+            fields:
+              - label: Label
+                name: label
+                widget: string
+                required: true
+              - label: Href
+                name: href
+                widget: string
+                required: true
+                hint: Use a full URL (https://...) or site path (/page).
+          - label: Image
+            name: image
+            widget: object
+            collapsed: false
+            fields:
+              - label: Src
+                name: src
+                widget: image
+                required: true
+                hint: Choose/upload an image from the media library.
+              - label: Alt
+                name: alt
+                widget: string
+                required: true
+                hint: Short accessibility description for this image.
+  - name: pages_updates_events
+    label: Updates and Events Pages
+    delete: false
+    files:
+      - label: What's On Page
+        name: whats_on
+        file: src/content/cms/pages/whats_on.json
+        format: json
+        editor:
+          preview: false
+        fields:
+          - label: Title
+            name: title
+            widget: string
+            required: true
+          - label: Subtitle
+            name: subtitle
+            widget: string
+            required: true
+          - label: Import Calendar Label
+            name: import_calendar_label
+            widget: string
+            required: true
+          - label: Upcoming Events
+            name: upcoming_events
+            widget: object
+            collapsed: false
+            summary: "{{heading}}"
+            fields:
+              - label: Heading
+                name: heading
+                widget: string
+                required: true
+              - label: Description
+                name: description
+                widget: string
+                required: true
+              - label: Empty Message
+                name: empty_message
+                widget: string
+                required: true
+              - label: Jump Label
+                name: jump_label
+                widget: string
+                required: true
+          - label: Sunday Gathering
+            name: sunday_gathering
+            widget: object
+            collapsed: false
+            summary: "{{heading}}"
+            fields:
+              - label: Heading
+                name: heading
+                widget: string
+                required: true
+              - label: Description
+                name: description
+                widget: text
+                required: true
+              - label: Image
+                name: image
+                widget: object
+                collapsed: true
+                fields:
+                  - label: Src
+                    name: src
+                    widget: image
+                    required: true
+                    hint: Choose/upload an image from the media library.
+                  - label: Alt
+                    name: alt
+                    widget: string
+                    required: true
+                    hint: Short accessibility description for this image.
+          - label: Midweek Online Prayers
+            name: midweek_online_prayers
+            widget: object
+            collapsed: false
+            summary: "{{heading}}"
+            fields:
+              - label: Heading
+                name: heading
+                widget: string
+                required: true
+              - label: Description
+                name: description
+                widget: string
+                required: true
+              - label: Button Label
+                name: button_label
+                widget: string
+                required: true
+              - label: Zoom Link
+                name: zoom_link
+                widget: string
+                required: true
+                hint: Use a full URL (https://...) or site path (/page).
+              - label: Meeting Id
+                name: meeting_id
+                widget: string
+                required: true
+              - label: Passcode
+                name: passcode
+                widget: string
+                required: true
+              - label: Extra
+                name: extra
+                widget: string
+                required: true
+          - label: Foodbank
+            name: foodbank
+            widget: object
+            collapsed: false
+            summary: "{{heading}}"
+            fields:
+              - label: Heading
+                name: heading
+                widget: string
+                required: true
+              - label: Time
+                name: time
+                widget: string
+                required: true
+              - label: Where
+                name: where
+                widget: string
+                required: true
+              - label: Who
+                name: who
+                widget: string
+                required: true
+              - label: Description
+                name: description
+                widget: string
+                required: true
+              - label: Referral Policy
+                name: referral_policy
+                widget: string
+                required: true
+              - label: Support Description
+                name: support_description
+                widget: text
+                required: true
+              - label: Referrals Heading
+                name: referrals_heading
+                widget: string
+                required: true
+              - label: Referrals
+                name: referrals
+                widget: list
+                collapsed: true
+                field:
+                  label: Item
+                  name: item
+                  widget: string
+                  required: true
+              - label: Volunteer Html
+                name: volunteer_html
+                widget: text
+                required: true
+                hint: HTML is allowed in this field.
+              - label: Image
+                name: image
+                widget: object
+                collapsed: true
+                fields:
+                  - label: Src
+                    name: src
+                    widget: image
+                    required: true
+                    hint: Choose/upload an image from the media library.
+                  - label: Alt
+                    name: alt
+                    widget: string
+                    required: true
+                    hint: Short accessibility description for this image.
+          - label: Lunch Club
+            name: lunch_club
+            widget: object
+            collapsed: false
+            summary: "{{heading}}"
+            fields:
+              - label: Heading
+                name: heading
+                widget: string
+                required: true
+              - label: Time
+                name: time
+                widget: string
+                required: true
+              - label: Description
+                name: description
+                widget: string
+                required: true
+              - label: Image
+                name: image
+                widget: object
+                collapsed: true
+                fields:
+                  - label: Src
+                    name: src
+                    widget: image
+                    required: true
+                    hint: Choose/upload an image from the media library.
+                  - label: Alt
+                    name: alt
+                    widget: string
+                    required: true
+                    hint: Short accessibility description for this image.
+          - label: Seasonal Events
+            name: seasonal_events
+            widget: object
+            collapsed: false
+            summary: "{{heading}}"
+            fields:
+              - label: Heading
+                name: heading
+                widget: string
+                required: true
+              - label: Description
+                name: description
+                widget: string
+                required: true
+              - label: Images
+                name: images
+                widget: list
+                collapsed: true
+                fields:
+                  - label: Src
+                    name: src
+                    widget: image
+                    required: true
+                    hint: Choose/upload an image from the media library.
+                  - label: Alt
+                    name: alt
+                    widget: string
+                    required: true
+                    hint: Short accessibility description for this image.
+          - label: What We Do Link Intro
+            name: what_we_do_link_intro
+            widget: string
+            required: true
+            hint: Use a full URL (https://...) or site path (/page).
+          - label: What We Do Link Label
+            name: what_we_do_link_label
+            widget: string
+            required: true
+            hint: Use a full URL (https://...) or site path (/page).
+          - label: What We Do Link Href
+            name: what_we_do_link_href
+            widget: string
+            required: true
+            hint: Use a full URL (https://...) or site path (/page).
+      - label: Events Page
+        name: events
+        file: src/content/cms/pages/events.json
+        format: json
+        editor:
+          preview: false
+        fields:
+          - label: Fallback Description Html
+            name: fallback_description_html
+            widget: text
+            required: true
+            hint: HTML is allowed in this field.
+          - label: Fallback Location
+            name: fallback_location
+            widget: string
+            required: true
+          - label: Back Link Label
+            name: back_link_label
+            widget: string
+            required: true
+            hint: Use a full URL (https://...) or site path (/page).
+          - label: Labels
+            name: labels
+            widget: object
+            collapsed: false
+            summary: "{{time}}"
+            fields:
+              - label: Date
+                name: date
+                widget: string
+                required: true
+              - label: Time
+                name: time
+                widget: string
+                required: true
+              - label: Location
+                name: location
+                widget: string
+                required: true
+          - label: About Title
+            name: about_title
+            widget: string
+            required: true
+          - label: Images Title
+            name: images_title
+            widget: string
+            required: true
+          - label: Image Alt Prefix
+            name: image_alt_prefix
+            widget: string
+            required: true
+      - label: Sermon Library
+        name: sermons
+        file: src/content/cms/pages/sermons.json
+        format: json
+        editor:
+          preview: false
+        fields:
+          - label: Title
+            name: title
+            widget: string
+            required: true
+          - label: Intro Primary
+            name: intro_primary
+            widget: string
+            required: true
+          - label: Intro Secondary
+            name: intro_secondary
+            widget: string
+            required: true
+          - label: Audio Coming Soon
+            name: audio_coming_soon
+            widget: string
+            required: true
+          - label: Rss Button Label
+            name: rss_button_label
+            widget: string
+            required: true
+          - label: Hero Image
+            name: hero_image
+            widget: object
+            collapsed: false
+            fields:
+              - label: Src
+                name: src
+                widget: image
+                required: true
+                hint: Choose/upload an image from the media library.
+              - label: Alt
+                name: alt
+                widget: string
+                required: true
+                hint: Short accessibility description for this image.
+  - name: pages_contact
+    label: Contact Pages
+    delete: false
+    files:
+      - label: Contact Page
+        name: contact
+        file: src/content/cms/pages/contact.json
+        format: json
+        editor:
+          preview: false
+        fields:
+          - label: Title
+            name: title
+            widget: string
+            required: true
+          - label: Find Us
+            name: find_us
+            widget: object
+            collapsed: false
+            fields:
+              - label: Paragraphs
+                name: paragraphs
+                widget: list
+                collapsed: true
+                field:
+                  label: Item
+                  name: item
+                  widget: string
+                  required: true
+              - label: Maps Link
+                name: maps_link
+                widget: object
+                collapsed: true
+                summary: "{{label}}"
+                fields:
+                  - label: Label
+                    name: label
+                    widget: string
+                    required: true
+                  - label: Href
+                    name: href
+                    widget: string
+                    required: true
+                    hint: Use a full URL (https://...) or site path (/page).
+                hint: Use a full URL (https://...) or site path (/page).
+              - label: Image
+                name: image
+                widget: object
+                collapsed: true
+                fields:
+                  - label: Src
+                    name: src
+                    widget: image
+                    required: true
+                    hint: Choose/upload an image from the media library.
+                  - label: Alt
+                    name: alt
+                    widget: string
+                    required: true
+                    hint: Short accessibility description for this image.
+              - label: Map Embed Url
+                name: map_embed_url
+                widget: text
+                required: true
+                hint: Use a full URL (https://...) or site path (/page).
+          - label: Parking
+            name: parking
+            widget: object
+            collapsed: false
+            summary: "{{heading}}"
+            fields:
+              - label: Heading
+                name: heading
+                widget: string
+                required: true
+              - label: Paragraphs
+                name: paragraphs
+                widget: list
+                collapsed: true
+                field:
+                  label: Item
+                  name: item
+                  widget: string
+                  required: true
+          - label: Public Transport
+            name: public_transport
+            widget: object
+            collapsed: false
+            summary: "{{heading}}"
+            fields:
+              - label: Heading
+                name: heading
+                widget: string
+                required: true
+              - label: Paragraphs
+                name: paragraphs
+                widget: list
+                collapsed: true
+                field:
+                  label: Item
+                  name: item
+                  widget: string
+                  required: true
+          - label: Send Message
+            name: send_message
+            widget: object
+            collapsed: false
+            summary: "{{heading}}"
+            fields:
+              - label: Heading
+                name: heading
+                widget: string
+                required: true
+              - label: Intro Prefix
+                name: intro_prefix
+                widget: string
+                required: true
+              - label: Direct Email
+                name: direct_email
+                widget: string
+                required: true
+              - label: Intro Suffix
+                name: intro_suffix
+                widget: string
+                required: true
+              - label: Labels
+                name: labels
+                widget: object
+                collapsed: true
+                summary: "{{name}}"
+                fields:
+                  - label: Name
+                    name: name
+                    widget: string
+                    required: true
+                  - label: Email
+                    name: email
+                    widget: string
+                    required: true
+                  - label: Subject
+                    name: subject
+                    widget: string
+                    required: true
+                  - label: Message
+                    name: message
+                    widget: string
+                    required: true
+                  - label: Submit
+                    name: submit
+                    widget: string
+                    required: true
+              - label: Subject Placeholder
+                name: subject_placeholder
+                widget: string
+                required: true
+              - label: Subject Options
+                name: subject_options
+                widget: list
+                collapsed: true
+                summary: "{{fields.label}}"
+                fields:
+                  - label: Value
+                    name: value
+                    widget: string
+                    required: true
+                  - label: Label
+                    name: label
+                    widget: string
+                    required: true
+      - label: Contact Thank You Page
+        name: contact_thank_you
+        file: src/content/cms/pages/contact_thank_you.json
+        format: json
+        editor:
+          preview: false
+        fields:
+          - label: Title
+            name: title
+            widget: string
+            required: true
+          - label: Message
+            name: message
+            widget: string
+            required: true
+          - label: Button Label
+            name: button_label
+            widget: string
+            required: true
+          - label: Button Href
+            name: button_href
+            widget: string
+            required: true
+            hint: Use a full URL (https://...) or site path (/page).
+  - name: news
+    label: News
+    folder: src/content/news
+    create: true
+    delete: true
+    extension: md
+    format: frontmatter
+    slug: "{{slug}}"
+    summary: "{{title}} - {{publishDate}}"
+    editor:
+      preview: false
+    media_folder: public/images/uploads
+    public_folder: /images/uploads
+    fields:
+      - label: Title
+        name: title
+        widget: string
+      - label: Summary
+        name: summary
+        widget: text
+      - label: Publish Date
+        name: publishDate
+        widget: datetime
+        format: YYYY-MM-DD
+        date_format: YYYY-MM-DD
+        time_format: false
+      - label: Stale After Days
+        name: staleAfterDays
+        widget: number
+        value_type: int
+        min: 1
+        default: 90
+      - label: Primary CTA Label
+        name: ctaLabel
+        widget: string
+        default: Learn more
+      - label: Primary CTA Href
+        name: ctaHref
+        widget: string
+        default: /contact
+      - label: Secondary CTA Label
+        name: secondaryCtaLabel
+        widget: string
+        required: false
+      - label: Secondary CTA Href
+        name: secondaryCtaHref
+        widget: string
+        required: false
+      - label: Body
+        name: body
+        widget: markdown

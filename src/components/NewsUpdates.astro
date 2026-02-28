@@ -1,9 +1,16 @@
 ---
 import { getCollection } from "astro:content";
 import { ArrowRight, Megaphone } from "lucide-react";
+import { getSiteContent } from "../data/site-content";
 
 const STALE_FALLBACK_DAYS = 90;
 const now = new Date();
+const content = await getSiteContent();
+const copy = content.components.news ?? {
+	home_section_title: "Latest News",
+	view_all_label: "View all news",
+	read_article_label: "Read article",
+};
 
 const recentNews = (await getCollection("news"))
 	.filter((item) => {
@@ -35,14 +42,14 @@ const formatDate = (date: Date) =>
 					<div class="flex items-center gap-3">
 						<Megaphone className="w-8 h-8 text-(--ink)" />
 						<h2 class="page-heading page-heading--accent text-4xl font-bold">
-							Latest News
+							{copy.home_section_title}
 						</h2>
 					</div>
 					<a
 						href="/news"
 						class="inline-flex items-center gap-2 font-semibold text-sm tracking-wide border-b-2 border-(--ink) pb-1 hover:text-(--teal) hover:border-(--teal) transition-colors"
 					>
-						View all news
+						{copy.view_all_label}
 						<ArrowRight size={16} />
 					</a>
 				</div>
@@ -67,7 +74,7 @@ const formatDate = (date: Date) =>
 									href={`/news/${item.slug}/`}
 									class="inline-flex items-center gap-2 font-semibold text-sm tracking-wide border-b-2 border-(--ink) pb-1 hover:text-(--teal) hover:border-(--teal) transition-colors w-fit"
 								>
-									Read article
+									{copy.read_article_label}
 									<ArrowRight size={16} />
 								</a>
 							</div>

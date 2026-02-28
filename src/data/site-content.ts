@@ -1,11 +1,99 @@
-import localContent from "./content.json";
-
-export type SiteContent = typeof localContent;
+import site from "../content/cms/site.json";
+import navigation from "../content/cms/navigation.json";
+import utilityNavigation from "../content/cms/utility_navigation.json";
+import footer from "../content/cms/footer.json";
+import components from "../content/cms/components.json";
+import sermons from "../content/cms/sermons.json";
+import pageBelong from "../content/cms/pages/belong.json";
+import pageContact from "../content/cms/pages/contact.json";
+import pageContactThankYou from "../content/cms/pages/contact_thank_you.json";
+import pageEvents from "../content/cms/pages/events.json";
+import pageGive from "../content/cms/pages/give.json";
+import pageHome from "../content/cms/pages/home.json";
+import pageImNew from "../content/cms/pages/im_new.json";
+import pageLifeEvents from "../content/cms/pages/life_events.json";
+import pageMinistries from "../content/cms/pages/ministries.json";
+import pageParkCommunities from "../content/cms/pages/park_communities.json";
+import pageParkKids from "../content/cms/pages/park_kids.json";
+import pageParkYouth from "../content/cms/pages/park_youth.json";
+import pageSafeguarding from "../content/cms/pages/safeguarding.json";
+import pageSermons from "../content/cms/pages/sermons.json";
+import pageServe from "../content/cms/pages/serve.json";
+import pageSundays from "../content/cms/pages/sundays.json";
+import pageTeam from "../content/cms/pages/team.json";
+import pageThePark from "../content/cms/pages/the_park.json";
+import pageWhatWeBelieve from "../content/cms/pages/what_we_believe.json";
+import pageWhatsOn from "../content/cms/pages/whats_on.json";
 
 type ContentSource = "local" | "api" | "sheets";
 type PathToken = string | number;
 
+type SitePages = {
+  belong: typeof pageBelong;
+  contact: typeof pageContact;
+  contact_thank_you: typeof pageContactThankYou;
+  events: typeof pageEvents;
+  give: typeof pageGive;
+  home: typeof pageHome;
+  im_new: typeof pageImNew;
+  life_events: typeof pageLifeEvents;
+  ministries: typeof pageMinistries;
+  park_communities: typeof pageParkCommunities;
+  park_kids: typeof pageParkKids;
+  park_youth: typeof pageParkYouth;
+  safeguarding: typeof pageSafeguarding;
+  sermons: typeof pageSermons;
+  serve: typeof pageServe;
+  sundays: typeof pageSundays;
+  team: typeof pageTeam;
+  the_park: typeof pageThePark;
+  what_we_believe: typeof pageWhatWeBelieve;
+  whats_on: typeof pageWhatsOn;
+};
+
+export interface SiteContent {
+  site: typeof site;
+  navigation: typeof navigation.items;
+  utility_navigation: typeof utilityNavigation.items;
+  footer: typeof footer;
+  components: typeof components;
+  pages: SitePages;
+  sermons: typeof sermons.items;
+}
+
+const localContent: SiteContent = {
+  site,
+  navigation: navigation.items,
+  utility_navigation: utilityNavigation.items,
+  footer,
+  components,
+  pages: {
+    belong: pageBelong,
+    contact: pageContact,
+    contact_thank_you: pageContactThankYou,
+    events: pageEvents,
+    give: pageGive,
+    home: pageHome,
+    im_new: pageImNew,
+    life_events: pageLifeEvents,
+    ministries: pageMinistries,
+    park_communities: pageParkCommunities,
+    park_kids: pageParkKids,
+    park_youth: pageParkYouth,
+    safeguarding: pageSafeguarding,
+    sermons: pageSermons,
+    serve: pageServe,
+    sundays: pageSundays,
+    team: pageTeam,
+    the_park: pageThePark,
+    what_we_believe: pageWhatWeBelieve,
+    whats_on: pageWhatsOn,
+  },
+  sermons: sermons.items,
+};
+
 let cachedContent: SiteContent | null = null;
+const contactThankYouFallback = pageContactThankYou;
 
 const isObject = (value: unknown): value is Record<string, unknown> =>
   typeof value === "object" && value !== null;
@@ -232,7 +320,7 @@ const fetchFromApiUrl = async (contentApiUrl: string): Promise<SiteContent> => {
     );
   }
 
-  return (await response.json()) as SiteContent;
+  return normalizeContent((await response.json()) as SiteContent);
 };
 
 const fetchFromGoogleSheets = async (): Promise<SiteContent> => {
@@ -279,7 +367,7 @@ const fetchFromGoogleSheets = async (): Promise<SiteContent> => {
 
   const rows = parseCsvRows(await response.text());
 
-  return parseSheetRowsToContent(rows);
+  return normalizeContent(parseSheetRowsToContent(rows));
 };
 
 const resolveContentSource = (): ContentSource => {
@@ -322,4 +410,29 @@ export async function getSiteContent(): Promise<SiteContent> {
 
   cachedContent = await fetchFromGoogleSheets();
   return cachedContent;
+}
+
+function normalizeContent(content: SiteContent): SiteContent {
+  const navigationValue = Array.isArray(content.navigation)
+    ? content.navigation
+    : (content.navigation as unknown as { items?: SiteContent["navigation"] })?.items || [];
+  const utilityNavigationValue = Array.isArray(content.utility_navigation)
+    ? content.utility_navigation
+    : (content.utility_navigation as unknown as {
+        items?: SiteContent["utility_navigation"];
+      })?.items || [];
+  const sermonsValue = Array.isArray(content.sermons)
+    ? content.sermons
+    : (content.sermons as unknown as { items?: SiteContent["sermons"] })?.items || [];
+
+  return {
+    ...content,
+    navigation: navigationValue,
+    utility_navigation: utilityNavigationValue,
+    sermons: sermonsValue,
+    pages: {
+      ...content.pages,
+      contact_thank_you: content.pages?.contact_thank_you || contactThankYouFallback,
+    },
+  };
 }

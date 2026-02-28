@@ -1,0 +1,60 @@
+{
+  "hero": {
+    "title": "WELCOME HOME",
+    "subtitle": "A community of Jesus-followers in Park, Sheffield. <br/>We belong to the family of God, <br/>love and serve our city, <br/>and give Jesus praise in everything we do.",
+    "badge": "Eden in Park",
+    "image": {
+      "src": "/images/community-park-gathering-2.jpg",
+      "alt": "St John's Park Community Gathering"
+    },
+    "primary_cta": {
+      "label": "Visit Sunday",
+      "href": "/sundays"
+    },
+    "secondary_cta": {
+      "label": "Find Us",
+      "href": "/contact"
+    }
+  },
+  "latest_message": {
+    "eyebrow": "Latest Message",
+    "cta": {
+      "label": "Listen Now",
+      "href": "/sermons"
+    },
+    "audio": {
+      "src": "/audio/latest-message.mp3",
+      "mime_type": "audio/mpeg"
+    }
+  },
+  "coming_up": {
+    "title": "Coming Up"
+  },
+  "mission": {
+    "heading": "Our Vision",
+    "tag": "// Belong, Serve, Give"
+  },
+  "mission_grid": [
+    {
+      "title": "Belong",
+      "desc": "Find transformation, discipleship, and growth through midweek groups, Kids, and Youth communities.",
+      "link_text": "FIND OUT MORE",
+      "link_href": "/what-we-do#belong",
+      "color": "teal"
+    },
+    {
+      "title": "Serve",
+      "desc": "Join one of our teams and help our church family thrive in worship, welcome, and community service.",
+      "link_text": "JOIN A TEAM",
+      "link_href": "/what-we-do#serve",
+      "color": "green"
+    },
+    {
+      "title": "Give",
+      "desc": "Your generosity helps sustain Sunday gatherings, midweek ministries, and practical support across our city.",
+      "link_text": "SUPPORT THE VISION",
+      "link_href": "/what-we-do#give",
+      "color": "gold"
+    }
+  ]
+}

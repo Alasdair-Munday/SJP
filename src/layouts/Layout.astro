@@ -11,10 +11,24 @@ interface Props {
 const { title } = Astro.props;
 const content = await getSiteContent();
 const primaryNav = content.navigation.filter(
-	(item) => !["Belong", "Serve", "Give"].includes(item.label),
+	(item) =>
+		!["/what-we-do#belong", "/what-we-do#serve", "/what-we-do#give"].includes(
+			item.href,
+		),
 );
 const utilityNav = content.utility_navigation;
 const footerLinks = content.footer.quick_links;
+const brand = content.site.brand ?? {
+	logo_line_one: "St John's Church",
+	logo_line_two: "Park",
+	nav_cta_label: "I'm New",
+	nav_cta_href: "/im-new",
+};
+const footerHeading = content.footer.quick_links_heading ?? "Quick Links";
+const footerBackgroundImage = content.footer.background_image ?? {
+	src: "/images/line-drawing.png",
+	alt: "",
+};
 const rawTheme = (import.meta.env.PUBLIC_SITE_THEME ?? "current").toLowerCase();
 const themeAliases: Record<string, "current" | "garden-city" | "line-drawing"> =
 	{
@@ -76,17 +90,17 @@ const siteTheme = themeAliases[rawTheme] ?? "current";
 						>
 							<Logo class="w-full h-full" />
 						</div>
-						<div class="leading-none">
-							<span
-								class="block font-extrabold text-xl tracking-tight text-(--ink)"
-								>St John's Church</span
-							>
-							<span
-								class="block font-semibold text-xl tracking-wide text-(--eden) -mt-1"
-								>Park</span
-							>
-						</div>
-					</a>
+							<div class="leading-none">
+								<span
+									class="block font-extrabold text-xl tracking-tight text-(--ink)"
+									>{brand.logo_line_one}</span
+								>
+								<span
+									class="block font-semibold text-xl tracking-wide text-(--eden) -mt-1"
+									>{brand.logo_line_two}</span
+								>
+							</div>
+						</a>
 
 					<!-- DESKTOP MENU -->
 					<div class="hidden md:flex items-center gap-1">
@@ -101,12 +115,12 @@ const siteTheme = themeAliases[rawTheme] ?? "current";
 							))
 						}
 						<!-- THE GOLDEN TICKET BUTTON -->
-						<a
-							href="/im-new"
-							class="ml-4 bg-(--gold) text-(--ink) px-6 py-2.5 font-semibold text-sm tracking-wide border-2 border-(--ink) hover:bg-white transition-all"
-						>
-							I'm New
-						</a>
+							<a
+								href={brand.nav_cta_href}
+								class="ml-4 bg-(--gold) text-(--ink) px-6 py-2.5 font-semibold text-sm tracking-wide border-2 border-(--ink) hover:bg-white transition-all"
+							>
+								{brand.nav_cta_label}
+							</a>
 					</div>
 
 					<!-- MOBILE MENU TOGGLE -->
@@ -140,13 +154,13 @@ const siteTheme = themeAliases[rawTheme] ?? "current";
 							</a>
 						))
 					}
-					<a
-						data-mobile-link
-						href="/im-new"
-						class="mt-2 bg-(--gold) text-(--ink) px-4 py-2.5 font-semibold text-sm tracking-wide border-2 border-(--ink) hover:bg-white transition-all inline-flex w-fit"
-					>
-						I'm New
-					</a>
+						<a
+							data-mobile-link
+							href={brand.nav_cta_href}
+							class="mt-2 bg-(--gold) text-(--ink) px-4 py-2.5 font-semibold text-sm tracking-wide border-2 border-(--ink) hover:bg-white transition-all inline-flex w-fit"
+						>
+							{brand.nav_cta_label}
+						</a>
 				</div>
 			</div>
 		</nav>
@@ -196,15 +210,15 @@ const siteTheme = themeAliases[rawTheme] ?? "current";
 		<slot />
 
 		<!-- FOOTER -->
-		<footer
-			class="themed-footer py-16 mt-auto border-t-2 border-(--ink) relative overflow-hidden text-white"
-		>
-			<img
-				src="/images/line-drawing.png"
-				alt=""
-				aria-hidden="true"
-				class="absolute -top-3 left-0 w-full opacity-[0.15] pointer-events-none"
-			/>
+			<footer
+				class="themed-footer py-16 mt-auto border-t-2 border-(--ink) relative overflow-hidden text-white"
+			>
+				<img
+					src={footerBackgroundImage.src}
+					alt={footerBackgroundImage.alt}
+					aria-hidden="true"
+					class="absolute -top-3 left-0 w-full opacity-[0.15] pointer-events-none"
+				/>
 			<div
 				class="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-12 relative z-10"
 			>
@@ -217,10 +231,10 @@ const siteTheme = themeAliases[rawTheme] ?? "current";
 					</h3>
 					<p class="text-white/80 max-w-sm">{content.site.address}</p>
 				</div>
-				<div class="md:text-right">
-					<p class="font-semibold text-(--gold) tracking-wide mb-4">
-						Quick Links
-					</p>
+					<div class="md:text-right">
+						<p class="font-semibold text-(--gold) tracking-wide mb-4">
+							{footerHeading}
+						</p>
 					<div class="flex flex-col md:items-end gap-2 text-white/85">
 						{
 							footerLinks.map((item) => (

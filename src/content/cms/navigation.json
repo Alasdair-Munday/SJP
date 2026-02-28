@@ -1,0 +1,40 @@
+{
+  "items": [
+    {
+      "label": "Sundays",
+      "href": "/sundays"
+    },
+    {
+      "label": "Talks",
+      "href": "/sermons"
+    },
+    {
+      "label": "What's On",
+      "href": "/whats-on"
+    },
+    {
+      "label": "What We Do",
+      "href": "/what-we-do"
+    },
+    {
+      "label": "Belong",
+      "href": "/what-we-do#belong"
+    },
+    {
+      "label": "Serve",
+      "href": "/what-we-do#serve"
+    },
+    {
+      "label": "Give",
+      "href": "/what-we-do#give"
+    },
+    {
+      "label": "Team",
+      "href": "/team"
+    },
+    {
+      "label": "Contact",
+      "href": "/contact"
+    }
+  ]
+}

@@ -1,6 +1,7 @@
 ---
 import { getUpcomingEvents } from "../utils/calendar";
 import { MapPin, Clock } from "lucide-react";
+import { getSiteContent } from "../data/site-content";
 import {
   formatEventDayOfMonth,
   formatEventMonthShort,
@@ -8,13 +9,18 @@ import {
 } from "../utils/calendar";
 
 const events = await getUpcomingEvents(3, true);
+const content = await getSiteContent();
+const copy = content.components.calendar_events ?? {
+  empty_message: "Check out What's On for current activities.",
+  view_whats_on_label: "View What's On ->",
+};
 ---
 
 <div class="space-y-4">
   {
     events.length === 0 ? (
       <div class="theme-card p-4 text-(--ink)">
-        <p class="font-bold">Check out What's On for current activities.</p>
+        <p class="font-bold">{copy.empty_message}</p>
       </div>
     ) : (
       events.map((event) => (
@@ -66,7 +72,7 @@ const events = await getUpcomingEvents(3, true);
       href="/whats-on#upcoming-events"
       class="inline-flex items-center gap-2 font-bold uppercase tracking-wider text-(--ink) hover:text-(--eden) transition-colors border-b-2 border-transparent hover:border-(--eden)"
     >
-      View What's On ->
+      {copy.view_whats_on_label}
     </a>
   </div>
 </div>

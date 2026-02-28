@@ -1,0 +1,26 @@
+{
+  "title_line_one": "SUNDAY",
+  "title_line_two": "GATHERING",
+  "time_label": "Time",
+  "location_label": "Location",
+  "time": "10:45 AM",
+  "location": "St John's Park, Bernard Street, Sheffield, S2 5PU",
+  "description": "Join us for our Sunday gathering every week at 10:45am. We gather to worship Jesus, hear the Bible read and explained, and to pray.",
+  "service_style": "Our Sunday gathering is informal and interactive, with contemporary worship songs.",
+  "kids_heading": "Bringing Kids?",
+  "kids_blurb": "We have Park Kids and Park Youth groups (0-14) that meet during our service.",
+  "after_service": "Please join us for refreshments afterwards to hang out as church family.",
+  "image": {
+    "src": "/images/worship-flags.jpg",
+    "alt": "Worship team singing during a Sunday gathering"
+  },
+  "what_to_expect_heading": "What to Expect",
+  "what_to_expect_items": [
+    "Services are usually a little over one hour.",
+    "We sing together, read Scripture, hear Bible teaching, and pray.",
+    "On the first Sunday of each month, we share Communion."
+  ],
+  "talks_link_intro": "Catch up on talks from previous Sundays on our",
+  "talks_link_label": "Talks page",
+  "talks_link_href": "/sermons"
+}
