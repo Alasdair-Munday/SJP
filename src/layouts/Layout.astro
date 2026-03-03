@@ -55,7 +55,7 @@ const siteTheme = themeAliases[rawTheme] ?? "current";
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
-			href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Caveat:wght@500;600&family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&family=Newsreader:opsz,wght@6..72,500;6..72,700&family=Nunito+Sans:wght@400;600;700;800&display=swap"
+			href="https://fonts.googleapis.com/css2?family=Anton&family=Manrope:wght@400;500;600;700;800&family=Permanent+Marker&display=swap"
 			rel="stylesheet"
 		/>
 		<title>{title} | {content.site.title}</title>
@@ -63,7 +63,7 @@ const siteTheme = themeAliases[rawTheme] ?? "current";
 	<body class="site-shell text-(--ink)">
 		<!-- UTILITY BAR -->
 		<div
-			class="teal-field text-xs font-semibold py-3 px-4 tracking-wide text-center flex justify-center gap-3"
+			class="teal-field hand-note text-xs font-semibold py-3 px-4 tracking-wide text-center flex justify-center gap-3"
 		>
 			{
 				utilityNav.map((item) => (
@@ -92,11 +92,11 @@ const siteTheme = themeAliases[rawTheme] ?? "current";
 						</div>
 							<div class="leading-none">
 								<span
-									class="block font-extrabold text-xl tracking-tight text-(--ink)"
+									class="block font-extrabold text-xl tracking-[0.02em] uppercase text-(--ink) theme-display-font"
 									>{brand.logo_line_one}</span
 								>
 								<span
-									class="block font-semibold text-xl tracking-wide text-(--eden) -mt-1"
+									class="block font-semibold text-lg tracking-[0.08em] uppercase text-(--eden) -mt-1 hand-note"
 									>{brand.logo_line_two}</span
 								>
 							</div>
@@ -108,7 +108,7 @@ const siteTheme = themeAliases[rawTheme] ?? "current";
 							primaryNav.map((item) => (
 								<a
 									href={item.href}
-									class="text-(--ink) font-semibold text-sm tracking-wide hover:bg-(--paper-line) px-4 py-2 transition-colors"
+									class="text-(--ink) hand-note font-semibold text-sm tracking-[0.06em] uppercase hover:bg-(--paper-line) px-4 py-2 transition-colors"
 								>
 									{item.label}
 								</a>
@@ -117,7 +117,7 @@ const siteTheme = themeAliases[rawTheme] ?? "current";
 						<!-- THE GOLDEN TICKET BUTTON -->
 							<a
 								href={brand.nav_cta_href}
-								class="ml-4 bg-(--gold) text-(--ink) px-6 py-2.5 font-semibold text-sm tracking-wide border-2 border-(--ink) hover:bg-white transition-all"
+								class="ml-4 bg-(--gold) text-(--ink) px-6 py-2.5 font-semibold text-sm tracking-[0.08em] uppercase border-2 border-(--ink) hover:bg-white transition-all"
 							>
 								{brand.nav_cta_label}
 							</a>
@@ -148,7 +148,7 @@ const siteTheme = themeAliases[rawTheme] ?? "current";
 							<a
 								data-mobile-link
 								href={item.href}
-								class="text-(--ink) font-semibold text-base tracking-wide border-2 border-transparent hover:border-(--ink) px-3 py-2 transition-colors"
+								class="text-(--ink) hand-note font-semibold text-base tracking-[0.05em] uppercase border-2 border-transparent hover:border-(--ink) px-3 py-2 transition-colors"
 							>
 								{item.label}
 							</a>
@@ -157,7 +157,7 @@ const siteTheme = themeAliases[rawTheme] ?? "current";
 						<a
 							data-mobile-link
 							href={brand.nav_cta_href}
-							class="mt-2 bg-(--gold) text-(--ink) px-4 py-2.5 font-semibold text-sm tracking-wide border-2 border-(--ink) hover:bg-white transition-all inline-flex w-fit"
+							class="mt-2 bg-(--gold) text-(--ink) px-4 py-2.5 font-semibold text-sm tracking-[0.08em] uppercase border-2 border-(--ink) hover:bg-white transition-all inline-flex w-fit"
 						>
 							{brand.nav_cta_label}
 						</a>
@@ -226,13 +226,13 @@ const siteTheme = themeAliases[rawTheme] ?? "current";
 					<div class="w-16 h-16 text-(--gold) mb-6">
 						<Logo class="w-full h-full" />
 					</div>
-					<h3 class="text-2xl font-bold tracking-wide mb-2">
+					<h3 class="text-2xl font-bold tracking-[0.05em] uppercase mb-2 theme-display-font">
 						{content.footer.title}
 					</h3>
 					<p class="text-white/80 max-w-sm">{content.site.address}</p>
 				</div>
 					<div class="md:text-right">
-						<p class="font-semibold text-(--gold) tracking-wide mb-4">
+						<p class="font-semibold text-(--gold) tracking-[0.08em] uppercase mb-4">
 							{footerHeading}
 						</p>
 					<div class="flex flex-col md:items-end gap-2 text-white/85">
