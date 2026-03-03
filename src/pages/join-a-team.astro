@@ -1,10 +1,43 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { ArrowRight } from "lucide-react";
+import {
+	ArrowRight,
+	Baby,
+	Camera,
+	ClipboardList,
+	Coffee,
+	Hammer,
+	HandHeart,
+	Handshake,
+	Leaf,
+	MonitorSpeaker,
+	Music,
+	PackageOpen,
+	Sparkles,
+	Utensils,
+	Users,
+} from "lucide-react";
 import { getSiteContent } from "../data/site-content";
 
 const content = await getSiteContent();
 const page = content.pages.serve;
+const teamIcons = new Map<string, unknown>([
+	["Welcome and Hospitality", Coffee],
+	["Park Kids Team", Baby],
+	["Park Youth Team", Users],
+	["Worship", Music],
+	["Food Bank", PackageOpen],
+	["Lunch Club", Utensils],
+	["Cleaning", Sparkles],
+	["Admin", ClipboardList],
+	["Buildings and Facilities", Hammer],
+	["Eco Church and Sustainability", Leaf],
+	["Community Partnerships and Enterprise", Handshake],
+	["Creative", Camera],
+	["Audio-Visual Team", MonitorSpeaker],
+]);
+const getTeamIcon = (teamName: string) =>
+	(teamIcons.get(teamName) as typeof Users) ?? HandHeart;
 const joinTeam = page.join_team ?? {
 	title: "Join a Team",
 	intro:
@@ -102,7 +135,19 @@ const joinTeam = page.join_team ?? {
 								aria-pressed="false"
 								class="text-left theme-card theme-card--interactive p-5 transition-colors"
 							>
-								<p class="section-heading text-2xl mb-2">{team.name}</p>
+								{
+									(() => {
+										const TeamIcon = getTeamIcon(team.name);
+										return (
+											<div class="flex items-center gap-2 mb-2">
+												<span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-(--teal-soft) border border-(--ink)/15">
+													<TeamIcon size={16} aria-hidden="true" />
+												</span>
+												<p class="section-heading text-2xl">{team.name}</p>
+											</div>
+										);
+									})()
+								}
 								<p class="text-(--ink)/85">{team.description}</p>
 							</button>
 						))

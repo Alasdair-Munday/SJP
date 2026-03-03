@@ -1,6 +1,6 @@
 {
   "title": "Serve",
-  "intro": "We are a church family, and we need different people to help our family thrive. If you are part of St John's, we encourage you to join and serve one of our teams.",
+  "intro": "We are a church family, and we need different people to help our family thrive. If you are part of St John's, we encourage you to join a team serving worship, community outreach, and building renewal.",
   "teams": [
     {
       "name": "Welcome and Hospitality",
@@ -33,6 +33,18 @@
     {
       "name": "Admin",
       "description": "Our admin team helps with the day-to-day running of the church. This involves helping with buildings, applying for grants, and staying on top of paperwork."
+    },
+    {
+      "name": "Buildings and Facilities",
+      "description": "This team supports practical building projects from our masterplan, helping keep church spaces safe, functional, and welcoming for worship and community use."
+    },
+    {
+      "name": "Eco Church and Sustainability",
+      "description": "This team helps us care for creation through energy-conscious upgrades, sustainable habits, and practical actions that improve the building's environmental impact."
+    },
+    {
+      "name": "Community Partnerships and Enterprise",
+      "description": "This team helps explore partnerships and enterprise ideas that can grow local impact and support long-term financial sustainability."
     },
     {
       "name": "Creative",

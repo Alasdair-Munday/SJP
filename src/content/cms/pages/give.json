@@ -4,14 +4,26 @@
     "link": "https://www.parishgiving.org.uk/donors/find-your-parish/park-st-john-the-evangelist-sheffield/",
     "button_label": "Give Online (Parish Giving Scheme)"
   },
-  "generosity_paragraph": "Your generosity allows us to build and sustain our Sunday gatherings, midweek ministries, and serve our city. Thank you for giving to St John's.",
+  "generosity_paragraph": "Your generosity sustains our Sunday gatherings, midweek ministries, and local outreach, and helps renew our building for future mission. Thank you for giving to St John's.",
   "methods_heading": "Here are the best ways for you to give:",
   "methods": [
     "Via the Online Parish Giving Scheme.",
     "Bring your collection to church on Sunday.",
     "Use the card machine at church.",
-    "Bank transfer (BACS)."
+    "Bank transfer (BACS).",
+    "If you are giving specifically towards building development, please include the reference BUILDING where possible."
   ],
+  "development_needs": {
+    "heading": "Current Building Development Needs",
+    "intro": "From Buildings Masterplan Revision 1 (January 2026), these Phase 1 projects are our immediate priorities:",
+    "items": [
+      "Spire repairs, bird clearance, and long-term bird protection.",
+      "Gutter clearance and a high-level roof condition survey to reduce water-damage risk.",
+      "East gable external repairs to address ongoing water ingress.",
+      "Extension roof concrete repairs (funding secured, works expected in the coming months).",
+      "Replacement extension windows to improve safety, warmth, and suitability for Kids' Church and Foodbank."
+    ]
+  },
   "bank_details": {
     "heading": "Bank Details",
     "lines": [
