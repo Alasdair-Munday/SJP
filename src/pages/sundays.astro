@@ -7,13 +7,15 @@ const content = await getSiteContent();
 const page = content.pages.sundays;
 ---
 
-<Layout title={page.meta_title ?? page.title_line_one}>
-	<div class="max-w-4xl mx-auto px-4 py-20">
-		<!-- Header -->
-		<h1 class="page-heading page-heading--accent text-6xl md:text-8xl mb-8">
-			{page.title_line_one} <br />
-			<span class="text-(--eden)">{page.title_line_two}</span>
-		</h1>
+	<Layout title={page.meta_title ?? page.title_line_one}>
+		<div class="site-bands max-w-4xl mx-auto px-4 py-20">
+			<!-- Header -->
+			<section>
+				<h1 class="page-heading page-heading--accent text-6xl md:text-8xl">
+					{page.title_line_one} <br />
+					<span class="text-(--eden)">{page.title_line_two}</span>
+				</h1>
+			</section>
 
 		<!-- Info Card -->
 		<div class="theme-card theme-card--strong p-8 mb-12">

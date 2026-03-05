@@ -1,0 +1,159 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const colourTokens = [
+	{
+		varName: "--section-blue",
+		value: "#244B5E",
+		role: "Primary dark band",
+	},
+	{
+		varName: "--section-green",
+		value: "#55AA85",
+		role: "Secondary green band",
+	},
+	{
+		varName: "--section-mauve",
+		value: "#D298BB",
+		role: "Accent mauve band",
+	},
+	{
+		varName: "--section-plum",
+		value: "#31245F",
+		role: "Deep plum band",
+	},
+	{
+		varName: "--gold",
+		value: "#DBA45E",
+		role: "Give and CTA accent",
+	},
+];
+
+const tokenGroups = [
+	{
+		group: "Foundations",
+		description:
+			"Core brand palette, typography, and gradient tokens are declared once in `:root`.",
+		tokens:
+			"--section-blue, --section-green, --section-mauve, --section-plum, --gold, --font-body, --font-display, --font-hand",
+	},
+	{
+		group: "Surfaces",
+		description:
+			"Neutral paper/system surfaces are semantic tokens derived from the brand palette.",
+		tokens:
+			"--paper, --paper-soft, --paper-line, --panel-soft, --eden-soft, --teal-soft, --gold-soft",
+	},
+	{
+		group: "Band-Level",
+		description:
+			"Each horizontal strip sets contextual tokens for text, links, CTAs, and accent-heading gradients.",
+		tokens:
+			"--band-heading, --band-body, --band-link, --band-cta-bg, --band-cta-text, --heading-accent-from, --heading-accent-via, --heading-accent-to",
+	},
+	{
+		group: "Components",
+		description:
+			"Component primitives read semantic tokens rather than hard-coded colors.",
+		tokens:
+			"--card-border, --card-shadow, --card-shadow-strong, --card-shadow-pressed",
+	},
+];
+---
+
+<Layout title="Style Guide">
+	<div class="site-bands max-w-6xl mx-auto px-4 py-20 space-y-8">
+		<section class="space-y-4">
+			<h1 class="page-heading page-heading--accent text-5xl md:text-6xl">
+				Design System Style Guide
+			</h1>
+			<p class="text-xl text-(--ink)/90 max-w-4xl">
+				This page documents the single-source token system used across the site.
+				The canonical token declarations live in <code>src/styles/global.css</code>.
+			</p>
+		</section>
+
+		<section class="theme-card p-8 space-y-6">
+			<h2 class="section-heading text-3xl">Core Colours</h2>
+			<div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-4">
+				{
+					colourTokens.map((token) => (
+						<article class="theme-card p-4 space-y-3">
+							<div
+								class="h-20 rounded-2xl border-2 border-(--ink)/30"
+								style={`background: var(${token.varName});`}
+							></div>
+							<h3 class="font-bold text-lg">{token.varName}</h3>
+							<p class="text-sm font-semibold text-(--ink)/80">{token.value}</p>
+							<p class="text-sm text-(--ink)/85">{token.role}</p>
+						</article>
+					))
+				}
+			</div>
+		</section>
+
+		<section class="theme-card p-8 space-y-6">
+			<h2 class="section-heading text-3xl">Typography and Heading Accent</h2>
+			<div class="space-y-4">
+				<p class="text-sm uppercase tracking-[0.12em] font-bold text-(--ink)/70">
+					Body Font
+				</p>
+				<p class="text-xl text-(--ink)/90">
+					Nunito Sans is used for readable body copy and UI labels.
+				</p>
+				<p class="text-sm uppercase tracking-[0.12em] font-bold text-(--ink)/70">
+					Display Font
+				</p>
+				<h3 class="section-heading text-4xl">Baloo 2 powers page and section headings.</h3>
+				<p class="text-sm uppercase tracking-[0.12em] font-bold text-(--ink)/70">
+					Accent Heading
+				</p>
+				<h3 class="page-heading page-heading--accent text-5xl">
+					Gradient Headings Stay Consistent
+				</h3>
+			</div>
+		</section>
+
+		<section class="theme-card p-8 space-y-6">
+			<h2 class="section-heading text-3xl">Token Architecture</h2>
+			<div class="grid md:grid-cols-2 gap-5">
+				{
+					tokenGroups.map((group) => (
+						<article class="theme-card p-5 space-y-3">
+							<h3 class="section-heading text-2xl">{group.group}</h3>
+							<p class="text-(--ink)/90">{group.description}</p>
+							<p class="text-sm text-(--ink)/80">
+								<span class="font-bold">Variables:</span> {group.tokens}
+							</p>
+						</article>
+					))
+				}
+			</div>
+		</section>
+
+		<section class="theme-card p-8 space-y-6">
+			<h2 class="section-heading text-3xl">Component Primitives</h2>
+			<div class="flex flex-wrap gap-3 items-center">
+				<span class="mission-chip mission-chip--belong">Belong</span>
+				<span class="mission-chip mission-chip--serve">Serve</span>
+				<span class="mission-chip mission-chip--give">Give</span>
+				<a
+					href="/what-we-do"
+					class="inline-flex items-center gap-2 px-5 py-3 bg-(--ink) text-white border-2 border-(--ink) font-semibold hover:bg-white hover:text-(--ink) transition-colors"
+				>
+					Primary Action
+				</a>
+				<a
+					href="/contact"
+					class="font-semibold underline decoration-(--eden) underline-offset-4"
+				>
+					Standard text link
+				</a>
+			</div>
+			<p class="text-(--ink)/85">
+				Buttons, links, chips, cards, and strip backgrounds all inherit from token
+				variables instead of hard-coded hex values.
+			</p>
+		</section>
+	</div>
+</Layout>

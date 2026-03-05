@@ -10,20 +10,17 @@ const copy = content.components.news ?? {
 	home_section_title: "Latest News",
 	view_all_label: "View all news",
 	read_article_label: "Read article",
+	empty_label: "No current news updates. Check back soon.",
 };
 
 const recentNews = (await getCollection("news"))
 	.filter((item) => {
-		const staleAfterDays =
-			item.data.staleAfterDays ?? STALE_FALLBACK_DAYS;
+		const staleAfterDays = item.data.staleAfterDays ?? STALE_FALLBACK_DAYS;
 		const staleDate = new Date(item.data.publishDate);
 		staleDate.setDate(staleDate.getDate() + staleAfterDays);
 		return staleDate >= now;
 	})
-	.sort(
-		(a, b) =>
-			b.data.publishDate.getTime() - a.data.publishDate.getTime(),
-	)
+	.sort((a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime())
 	.slice(0, 3);
 
 const formatDate = (date: Date) =>
@@ -34,30 +31,30 @@ const formatDate = (date: Date) =>
 	}).format(date);
 ---
 
-{
-	recentNews.length > 0 && (
-		<section class="py-16 border-b-2 border-(--ink) bg-(--teal)/8">
-			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-				<div class="flex flex-wrap items-center justify-between gap-4 mb-8">
-					<div class="flex items-center gap-3">
-						<Megaphone className="w-8 h-8 text-(--ink)" />
-						<h2 class="page-heading page-heading--accent text-4xl font-bold">
-							{copy.home_section_title}
-						</h2>
-					</div>
-					<a
-						href="/news"
-						class="inline-flex items-center gap-2 font-semibold text-sm tracking-wide border-b-2 border-(--ink) pb-1 hover:text-(--teal) hover:border-(--teal) transition-colors"
-					>
-						{copy.view_all_label}
-						<ArrowRight size={16} />
-					</a>
-				</div>
+<section class="section-band section-band--plum">
+	<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+		<div class="flex flex-wrap items-center justify-between gap-4 mb-8">
+			<div class="flex items-center gap-3">
+				<Megaphone className="w-8 h-8 text-(--ink)" />
+				<h2 class="page-heading text-4xl font-bold">
+					{copy.home_section_title}
+				</h2>
+			</div>
+			<a
+				href="/news"
+				class="inline-flex items-center gap-2 font-semibold text-sm tracking-wide border-b-2 border-(--ink) pb-1 hover:text-(--teal) hover:border-(--teal) transition-colors"
+			>
+				{copy.view_all_label}
+				<ArrowRight size={16} />
+			</a>
+		</div>
 
-				<div class="grid grid-cols-[repeat(auto-fit,minmax(17rem,1fr))] gap-6 items-stretch">
+		{
+			recentNews.length > 0 ? (
+				<div class="grid grid-cols-[repeat(auto-fit,minmax(17rem,1fr))] gap-8 items-stretch">
 					{recentNews.map((item) => (
-						<article class="sketch-panel p-6 flex flex-col gap-4 h-full">
-							<p class="text-sm font-semibold uppercase tracking-[0.1em] text-(--ink)/65">
+						<article class="home-strip-item pt-6 flex flex-col gap-4 h-full">
+							<p class="text-sm font-semibold uppercase tracking-[0.1em] text-(--ink)/70">
 								{formatDate(item.data.publishDate)}
 							</p>
 							<h3 class="section-heading text-2xl">
@@ -81,7 +78,16 @@ const formatDate = (date: Date) =>
 						</article>
 					))}
 				</div>
-			</div>
-		</section>
-	)
-}
+			) : (
+				<div class="home-strip-item pt-6">
+					<a
+						href="/news"
+						class="text-(--ink)/85 font-semibold hover:text-(--teal) transition-colors"
+					>
+						{copy.empty_label}
+					</a>
+				</div>
+			)
+		}
+	</div>
+</section>

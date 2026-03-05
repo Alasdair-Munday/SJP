@@ -46,7 +46,7 @@ const giveDevelopmentNeedIcons = [Bird, Droplets, Building, Hammer, House];
 ---
 
 <Layout title={page.title}>
-	<div class="max-w-7xl mx-auto px-4 py-20 space-y-10">
+	<div class="site-bands max-w-7xl mx-auto px-4 py-20 space-y-10">
 		<div class="space-y-4">
 			<h1
 				class="page-heading page-heading--accent text-5xl md:text-6xl font-bold"
@@ -240,7 +240,10 @@ const giveDevelopmentNeedIcons = [Bird, Droplets, Building, Hammer, House];
 										giveDevelopmentNeedIcons[index] ?? Hammer;
 									return (
 										<li class="flex items-start gap-3">
-											<span class="inline-flex shrink-0 items-center justify-center w-8 h-8 rounded-full bg-(--gold-soft) border border-(--ink)/15">
+											<span
+												class="inline-flex shrink-0 items-center justify-center w-8 h-8 rounded-full bg-(--gold-soft) border border-(--ink)/15"
+												style="color: var(--band-on-light);"
+											>
 												<NeedIcon size={16} aria-hidden="true" />
 											</span>
 											<span>{item}</span>

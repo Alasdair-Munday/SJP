@@ -1,6 +1,5 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import SketchChurch from "../components/SketchChurch.astro";
 import CalendarEvents from "../components/CalendarEvents.astro";
 import FeaturedEvent from "../components/FeaturedEvent.astro";
 import NewsUpdates from "../components/NewsUpdates.astro";
@@ -21,6 +20,7 @@ const content = await getSiteContent();
 const { hero, mission_grid, latest_message, coming_up, mission } =
 	content.pages.home;
 const imNew = content.pages.im_new;
+const heroPostcardLabel = hero.badge ?? "Welcome Home";
 
 const latest_message_details = content.sermons[0];
 
@@ -55,108 +55,81 @@ const firstTimeCards = (
 
 <Layout title="Home">
 	<!-- HERO SECTION -->
-	<div
-		class="themed-hero relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-(--ink)"
-	>
-		<!-- Background Image -->
-		<img
-			src={hero.image.src}
-			alt={hero.image.alt}
-			class="absolute inset-0 w-full h-full object-cover opacity-90"
-		/>
-
-		<!-- Gradient Overlays -->
-		<div class="hero-overlay absolute inset-0"></div>
-		<div class="hero-shadow-fade absolute inset-0"></div>
-
-		<!-- SVG Texture -->
-		<div
-			class="absolute inset-0 opacity-10 pointer-events-none mix-blend-overlay"
-		>
-			<SketchChurch
-				class="w-full h-full object-cover text-white transform scale-150 translate-y-20"
-			/>
-		</div>
-
-		<div
-			class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 flex flex-col justify-center h-full w-full"
-		>
-			<div class="max-w-4xl">
-				<!-- Tag -->
-				<div
-					class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white mb-8 shadow-lg"
-				>
-					<span class="hand-note text-xl tracking-wide"
-						>{hero.badge}</span
+	<section class="section-band section-band--blue">
+		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
+			<div class="grid lg:grid-cols-[1.04fr_0.96fr] gap-12 items-center">
+				<div>
+					<h1
+						class="theme-display-font text-5xl md:text-7xl font-bold tracking-tight leading-[0.95] mb-6"
 					>
+						{hero.title}
+					</h1>
+					<p
+						class="text-xl md:text-2xl font-medium max-w-2xl leading-relaxed mb-10 border-l-4 border-(--gold) pl-6"
+						set:html={hero.subtitle}
+					/>
+					<div class="flex flex-wrap gap-4">
+						<a
+							href={hero.primary_cta.href}
+							class="hero-primary-cta group px-8 py-4 bg-(--gold) text-(--ink) font-bold tracking-wide rounded-lg hover:bg-white transition-all duration-300 flex items-center gap-3 transform hover:-translate-y-1"
+						>
+							{hero.primary_cta.label}
+							<ArrowRight
+								size={20}
+								className="group-hover:translate-x-1 transition-transform"
+							/>
+						</a>
+						<a
+							href={hero.secondary_cta.href}
+							class="group px-8 py-4 bg-white/14 text-(--band-on-light) font-semibold tracking-wide border border-white/45 rounded-lg hover:bg-white/85 transition-all duration-300 flex items-center gap-3 shadow-md hover:shadow-lg transform hover:-translate-y-1"
+						>
+							{hero.secondary_cta.label}
+							<MapPin
+								size={20}
+								className="group-hover:scale-110 transition-transform"
+							/>
+						</a>
+					</div>
 				</div>
-
-				<!-- Headline -->
-				<h1
-					class="theme-display-font text-6xl md:text-8xl font-bold tracking-tight leading-[0.95] mb-8 text-white drop-shadow-xl"
+				<div
+					class="relative max-w-[540px] w-full mx-auto lg:mx-0 lg:justify-self-end"
 				>
-					{hero.title}
-				</h1>
-
-				<!-- Subtitle -->
-				<p
-					class="text-xl md:text-2xl font-medium text-white/90 max-w-2xl leading-relaxed mb-12 border-l-4 border-(--gold) pl-6 drop-shadow-lg"
-					set:html={hero.subtitle}
-				/>
-
-				<!-- CTA Buttons -->
-				<div class="flex flex-wrap gap-4">
-					<a
-						href={hero.primary_cta.href}
-						class="hero-primary-cta group px-8 py-4 bg-(--gold) text-(--ink) font-bold tracking-wide rounded-lg hover:bg-white transition-all duration-300 flex items-center gap-3 transform hover:-translate-y-1"
-					>
-						{hero.primary_cta.label}
-						<ArrowRight
-							size={20}
-							className="group-hover:translate-x-1 transition-transform"
+					<div class="hero-postcard">
+						<img
+							src={hero.image.src}
+							alt={hero.image.alt}
+							class="w-full h-[420px] md:h-[500px] object-cover"
 						/>
-					</a>
-					<a
-						href={hero.secondary_cta.href}
-						class="group px-8 py-4 bg-white/10 backdrop-blur-md text-white font-semibold tracking-wide border border-white/30 rounded-lg hover:bg-white/20 transition-all duration-300 flex items-center gap-3 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
-					>
-						{hero.secondary_cta.label}
-						<MapPin
-							size={20}
-							className="group-hover:scale-110 transition-transform"
-						/>
-					</a>
+						<span class="hero-postcard-note"
+							>{heroPostcardLabel}</span
+						>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
+	</section>
 
 	<!-- I'M NEW: VISITOR BRIDGE -->
-	<section
-		class="py-16 border-b-2 border-(--ink)"
-		style="background-color: color-mix(in oklab, var(--teal) 3%, white);"
-	>
+	<section class="section-band section-band--blue">
 		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-			<div class="mb-8">
-				<h2
-					class="page-heading page-heading--accent text-4xl font-bold"
-				>
+			<div class="mb-10">
+				<h2 class="page-heading text-4xl font-bold">
 					{firstTimeHeading}
 				</h2>
-				<p class="text-(--ink)/85 font-medium mt-2">
+				<p class="text-(--ink)/85 font-medium mt-3 max-w-3xl">
 					{firstTimeIntro}
 				</p>
 			</div>
-			<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+			<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
 				{
 					firstTimeCards.map((card, index) => (
-						<article class="sketch-panel p-7">
+						<article class="home-strip-item pt-6">
 							<div
 								class:list={[
 									"w-12 h-12 rounded-full text-(--ink) flex items-center justify-center mb-4",
-									index % 3 === 0 && "bg-(--gold)/25",
-									index % 3 === 1 && "bg-(--eden)/25",
-									index % 3 === 2 && "bg-(--teal)/20",
+									index % 3 === 0 && "bg-white/18",
+									index % 3 === 1 && "bg-white/24",
+									index % 3 === 2 && "bg-white/14",
 								]}
 							>
 								{index % 3 === 0 ? (
@@ -181,67 +154,174 @@ const firstTimeCards = (
 			<div class="mt-8">
 				<a
 					href="/im-new"
-					class="inline-flex items-center gap-2 px-5 py-2.5 border-2 border-(--ink) text-(--ink) font-semibold hover:bg-(--ink) hover:text-white transition-colors"
+					class="inline-flex items-center gap-2 px-5 py-2.5 border-2 border-(--ink) text-(--ink) font-semibold hover:bg-white/90 hover:text-[#10232e] transition-colors"
 				>
 					See Full I'm New Guide <ArrowRight size={18} />
 				</a>
 			</div>
 		</div>
+		<div
+			class="section-wave"
+			aria-hidden="true"
+			style="--wave-next: var(--section-green);"
+		>
+			<svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+				<path
+					d="M0,26 C120,78 280,78 420,42 C560,6 700,6 840,42 C980,78 1120,78 1260,42 C1348,20 1408,18 1440,24 L1440,120 L0,120 Z"
+				></path>
+			</svg>
+		</div>
 	</section>
-
-	<!-- LATEST MESSAGE -->
-	<section class="py-16 border-b-2 border-(--ink) bg-white">
+	<!-- MISSION GRID -->
+	<section class="section-band section-band--green">
 		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-			<div class="sketch-panel overflow-hidden">
-				<div class="grid lg:grid-cols-2">
+			<div
+				class="flex items-end gap-4 mb-12 border-b-2 border-(--ink) pb-4"
+			>
+				<h2 class="page-heading text-4xl font-bold tracking-tight">
+					{mission.heading}
+				</h2>
+				<span
+					class="mb-2 font-mono text-sm text-(--ink)/60 hidden md:inline-block"
+					>{mission.tag}</span
+				>
+			</div>
+
+			<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+				<div class="home-strip-item pt-6 group">
 					<div
-						class="p-8 lg:p-10 flex flex-col justify-between gap-6"
+						class="w-12 h-12 bg-white/16 text-(--ink) flex items-center justify-center mb-6 group-hover:bg-white/24 transition-colors rounded-full"
 					>
-						<div>
-							<p
-								class="text-sm uppercase tracking-[0.14em] font-bold text-(--teal) mb-3"
-							>
-								{latest_message.eyebrow}
-							</p>
-							<h2
-								class="page-heading page-heading--accent text-4xl font-bold mb-4"
-							>
-								{latest_message_details.title}
-							</h2>
-							<p class="text-(--ink)/85 text-lg font-medium">
-								{latest_message_details.description}
-							</p>
-						</div>
-						<div class="space-y-4">
-							<audio controls class="w-full">
-								<source
-									src={latest_message_details.audioUrl}
-									type="audio/mpeg"
-								/>
-								Your browser does not support the audio player.
-							</audio>
-							<a
-								href={latest_message.cta.href}
-								class="inline-flex items-center gap-2 px-5 py-2.5 border-2 border-(--ink) text-(--ink) font-semibold hover:bg-(--ink) hover:text-white transition-colors"
-							>
-								{latest_message.cta.label}
-								<PlayCircle size={18} />
-							</a>
-						</div>
+						<Users size={24} />
 					</div>
+					<h3 class="text-2xl font-bold mb-3 text-(--ink)">
+						{mission_grid[0].title}
+					</h3>
+					<p class="text-(--ink)/80 font-medium mb-8 leading-relaxed">
+						{mission_grid[0].desc}
+					</p>
+					<a
+						href={mission_grid[0].link_href}
+						class="inline-flex items-center gap-2 font-semibold text-sm tracking-wide border-b-2 border-(--ink) pb-1 hover:text-(--eden) hover:border-(--eden) transition-colors"
+					>
+						{mission_grid[0].link_text}
+						<ArrowRight size={16} />
+					</a>
+				</div>
+
+				<div class="home-strip-item pt-6 group">
+					<div
+						class="w-12 h-12 bg-white/16 text-(--ink) flex items-center justify-center mb-6 group-hover:bg-white/24 transition-colors rounded-full"
+					>
+						<Zap size={24} />
+					</div>
+					<h3 class="text-2xl font-bold mb-3 text-(--ink)">
+						{mission_grid[1].title}
+					</h3>
+					<p class="text-(--ink)/80 font-medium mb-8 leading-relaxed">
+						{mission_grid[1].desc}
+					</p>
+					<a
+						href={mission_grid[1].link_href}
+						class="inline-flex items-center gap-2 font-semibold text-sm tracking-wide border-b-2 border-(--ink) pb-1 hover:text-(--teal) hover:border-(--teal) transition-colors"
+					>
+						{mission_grid[1].link_text}
+						<ArrowRight size={16} />
+					</a>
+				</div>
+
+				<div class="home-strip-item pt-6 group">
+					<div
+						class="w-12 h-12 bg-white/16 text-(--ink) flex items-center justify-center mb-6 rounded-full"
+					>
+						<Heart size={24} />
+					</div>
+					<h3 class="text-2xl font-bold mb-3 text-(--ink)">
+						{mission_grid[2].title}
+					</h3>
+					<p class="text-(--ink) font-bold mb-8 leading-relaxed">
+						{mission_grid[2].desc}
+					</p>
+					<a
+						href={mission_grid[2].link_href}
+						class="inline-flex items-center gap-2 font-semibold text-sm tracking-wide border-b-2 border-(--ink) pb-1 text-(--ink) hover:text-(--gold) hover:border-(--gold) transition-colors"
+					>
+						{mission_grid[2].link_text}
+						<ArrowRight size={16} />
+					</a>
 				</div>
 			</div>
+		</div>
+		<div
+			class="section-wave"
+			aria-hidden="true"
+			style="--wave-next: var(--section-mauve);"
+		>
+			<svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+				<path
+					d="M0,26 C120,78 280,78 420,42 C560,6 700,6 840,42 C980,78 1120,78 1260,42 C1348,20 1408,18 1440,24 L1440,120 L0,120 Z"
+				></path>
+			</svg>
+		</div>
+	</section>
+	<!-- LATEST MESSAGE -->
+	<section class="section-band section-band--mauve">
+		<div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+			<div class="band-split-block py-10">
+				<div>
+					<p
+						class="text-sm uppercase tracking-[0.14em] font-bold text-(--teal) mb-3"
+					>
+						{latest_message.eyebrow}
+					</p>
+					<h2 class="page-heading text-4xl font-bold mb-4">
+						{latest_message_details.title}
+					</h2>
+					<p class="text-(--ink)/85 text-lg font-medium">
+						{latest_message_details.description}
+					</p>
+				</div>
+				<div class="space-y-4 mt-8">
+					<audio controls class="w-full">
+						<source
+							src={latest_message_details.audioUrl}
+							type="audio/mpeg"
+						/>
+						Your browser does not support the audio player.
+					</audio>
+					<a
+						href={latest_message.cta.href}
+						class="inline-flex items-center gap-2 px-5 py-2.5 border-2 border-(--ink) text-(--ink) font-semibold hover:bg-white/90 hover:text-[#10232e] transition-colors"
+					>
+						{latest_message.cta.label}
+						<PlayCircle size={18} />
+					</a>
+				</div>
+			</div>
+		</div>
+		<div
+			class="section-wave"
+			aria-hidden="true"
+			style="--wave-next: var(--section-plum);"
+		>
+			<svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+				<path
+					d="M0,26 C120,78 280,78 420,42 C560,6 700,6 840,42 C980,78 1120,78 1260,42 C1348,20 1408,18 1440,24 L1440,120 L0,120 Z"
+				></path>
+			</svg>
 		</div>
 	</section>
 
 	<NewsUpdates />
 
 	<!-- BANNER: Upcoming -->
-	<section class="bg-(--gold) border-b-2 border-(--ink) py-10">
+	<section class="section-band section-band--plum pb-20">
 		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
-			<div class="flex items-center gap-3 mb-6">
+			<div class="flex items-center gap-3 mb-8">
 				<Calendar className="w-8 h-8 text-(--ink)" />
-				<h2 class="text-2xl font-bold tracking-tight text-(--ink)">
+				<h2
+					class="page-heading text-4xl font-bold tracking-tight text-(--ink)"
+				>
 					{coming_up.title}
 				</h2>
 			</div>
@@ -250,93 +330,4 @@ const firstTimeCards = (
 			<CalendarEvents />
 		</div>
 	</section>
-
-	<!-- MISSION GRID -->
-	<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-		<div class="flex items-end gap-4 mb-12 border-b-2 border-(--ink) pb-4">
-			<h2
-				class="page-heading page-heading--accent text-4xl font-bold tracking-tight"
-			>
-				{mission.heading}
-			</h2>
-			<span
-				class="mb-2 font-mono text-sm text-(--ink)/60 hidden md:inline-block"
-				>{mission.tag}</span
-			>
-		</div>
-
-		<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-			{/* CARD 1: BELONG (Eden Green Accent) */}
-			<div
-				class="sketch-panel theme-belong p-8 hover:-translate-y-1 transition-transform duration-300 group"
-			>
-				<div
-					class="w-12 h-12 bg-(--eden-soft) text-(--ink) flex items-center justify-center mb-6 group-hover:bg-(--eden) group-hover:text-white transition-colors rounded-full"
-				>
-					<Users size={24} />
-				</div>
-				<h3 class="text-2xl font-bold mb-3 text-(--ink)">
-					{mission_grid[0].title}
-				</h3>
-				<p class="text-(--ink)/80 font-medium mb-8 leading-relaxed">
-					{mission_grid[0].desc}
-				</p>
-				<a
-					href={mission_grid[0].link_href}
-					class="inline-flex items-center gap-2 font-semibold text-sm tracking-wide border-b-2 border-(--ink) pb-1 hover:text-(--eden) hover:border-(--eden) transition-colors"
-				>
-					{mission_grid[0].link_text}
-					<ArrowRight size={16} />
-				</a>
-			</div>
-
-			{/* CARD 2: SERVE (Teal Accent) */}
-			<div
-				class="sketch-panel theme-serve p-8 hover:-translate-y-1 transition-transform duration-300 group"
-			>
-				<div
-					class="w-12 h-12 bg-(--teal-soft) text-(--ink) flex items-center justify-center mb-6 group-hover:bg-(--teal) group-hover:text-white transition-colors rounded-full"
-				>
-					<Zap size={24} />
-				</div>
-				<h3 class="text-2xl font-bold mb-3 text-(--ink)">
-					{mission_grid[1].title}
-				</h3>
-				<p class="text-(--ink)/80 font-medium mb-8 leading-relaxed">
-					{mission_grid[1].desc}
-				</p>
-				<a
-					href={mission_grid[1].link_href}
-					class="inline-flex items-center gap-2 font-semibold text-sm tracking-wide border-b-2 border-(--ink) pb-1 hover:text-(--teal) hover:border-(--teal) transition-colors"
-				>
-					{mission_grid[1].link_text}
-					<ArrowRight size={16} />
-				</a>
-			</div>
-
-			{/* CARD 3: GIVE (KINGDOM GOLD) */}
-			<div
-				class="sketch-panel theme-give p-8 hover:-translate-y-1 transition-transform duration-300 group bg-(--gold)/15"
-			>
-				<div
-					class="w-12 h-12 bg-(--ink) text-(--gold) flex items-center justify-center mb-6 rounded-full"
-				>
-					<Heart size={24} />
-				</div>
-				<h3 class="text-2xl font-bold mb-3 text-(--ink)">
-					{mission_grid[2].title}
-				</h3>
-				<p class="text-(--ink) font-bold mb-8 leading-relaxed">
-					{mission_grid[2].desc}
-				</p>
-				<a
-					href={mission_grid[2].link_href}
-					class="inline-flex items-center gap-2 font-semibold text-sm tracking-wide border-b-2 border-(--ink) pb-1 text-(--ink) hover:text-(--gold) hover:border-(--gold) transition-colors"
-				>
-					{mission_grid[2].link_text}
-					<ArrowRight size={16} />
-				</a>
-			</div>
-		</div>
-	</div>
 </Layout>

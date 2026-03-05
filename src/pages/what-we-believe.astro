@@ -7,8 +7,10 @@ const page = content.pages.what_we_believe;
 ---
 
 <Layout title={page.title}>
-  <div class="max-w-4xl mx-auto px-4 py-20 space-y-8">
-    <h1 class="page-heading page-heading--accent text-5xl md:text-6xl">{page.title}</h1>
+  <div class="site-bands max-w-4xl mx-auto px-4 py-20 space-y-8">
+    <section>
+      <h1 class="page-heading page-heading--accent text-5xl md:text-6xl">{page.title}</h1>
+    </section>
     <figure class="theme-card theme-card--strong overflow-hidden">
       <img
         src={page.image.src}

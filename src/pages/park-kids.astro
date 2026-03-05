@@ -6,11 +6,13 @@ const content = await getSiteContent();
 const page = content.pages.park_kids;
 ---
 
-<Layout title={page.title}>
-	<div class="max-w-5xl mx-auto px-4 py-20 space-y-8">
-		<h1 class="page-heading page-heading--accent text-5xl md:text-6xl">
-			{page.title}
-		</h1>
+	<Layout title={page.title}>
+		<div class="site-bands max-w-5xl mx-auto px-4 py-20 space-y-8">
+			<section>
+				<h1 class="page-heading page-heading--accent text-5xl md:text-6xl">
+					{page.title}
+				</h1>
+			</section>
 
 		<section class="theme-card p-8 space-y-4">
 			<h2 class="section-heading text-3xl">{page.sunday_groups.heading}</h2>

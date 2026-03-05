@@ -18,11 +18,13 @@ const gallery = page.gallery ?? [
 ];
 ---
 
-<Layout title={page.title}>
-	<div class="max-w-5xl mx-auto px-4 py-20 space-y-8">
-		<h1 class="page-heading page-heading--accent text-5xl md:text-6xl font-bold">
-			{page.title}
-		</h1>
+	<Layout title={page.title}>
+		<div class="site-bands max-w-5xl mx-auto px-4 py-20 space-y-8">
+			<section>
+				<h1 class="page-heading page-heading--accent text-5xl md:text-6xl font-bold">
+					{page.title}
+				</h1>
+			</section>
 		{
 			page.home_preview?.intro && (
 				<section class="theme-drench theme-drench--eden p-6">

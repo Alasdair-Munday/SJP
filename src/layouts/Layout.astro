@@ -1,6 +1,6 @@
 ---
 import Logo from "../components/Logo.astro";
-import { Menu, X } from "lucide-react";
+import { ChevronDown, Menu, X } from "lucide-react";
 import { getSiteContent } from "../data/site-content";
 import "../styles/global.css";
 
@@ -10,19 +10,47 @@ interface Props {
 
 const { title } = Astro.props;
 const content = await getSiteContent();
-const primaryNav = content.navigation.filter(
-	(item) =>
-		!["/what-we-do#belong", "/what-we-do#serve", "/what-we-do#give"].includes(
-			item.href,
-		),
-);
-const utilityNav = content.utility_navigation;
 const footerLinks = content.footer.quick_links;
+type NavItem = { label: string; href: string };
+const navByHref = new Map(
+	content.navigation.map((item) => [item.href, item] as const),
+);
+const navItem = (href: string, label: string): NavItem => ({ href, label });
+const navGroups: { label: string; links: NavItem[] }[] = [
+	{
+		label: "What We Do",
+		links: [
+			navItem("/what-we-do", "Belong"),
+			navItem("/what-we-do", "Serve"),
+			navItem("/what-we-do", "Give"),
+		],
+	},
+	{
+		label: "What's On",
+		links: [
+			navItem("/sundays", "Sundays"),
+			navItem("/whats-on", "Calendar"),
+			navItem("/park-kids", "Park Kids"),
+			navItem("/park-youth", "Park Youth"),
+			navItem("/park-communities", "Park Communities"),
+		],
+	},
+	{
+		label: "Get in Touch",
+		links: [
+			navItem("/im-new", "I'm New"),
+			navItem("/news", "News"),
+			navItem("/team", "Team"),
+			navItem("/what-we-believe", "What We Believe"),
+			navItem("/safeguarding", "Safeguarding"),
+			navItem("/life-events", "Life Events"),
+			navItem("/contact", "Contact"),
+		],
+	},
+];
 const brand = content.site.brand ?? {
 	logo_line_one: "St John's Church",
 	logo_line_two: "Park",
-	nav_cta_label: "I'm New",
-	nav_cta_href: "/im-new",
 };
 const footerHeading = content.footer.quick_links_heading ?? "Quick Links";
 const footerBackgroundImage = content.footer.background_image ?? {
@@ -55,28 +83,12 @@ const siteTheme = themeAliases[rawTheme] ?? "current";
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
-			href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Caveat:wght@500;600&family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&family=Newsreader:opsz,wght@6..72,500;6..72,700&family=Nunito+Sans:wght@400;600;700;800&display=swap"
+			href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Patrick+Hand&family=Nunito+Sans:wght@400;600;700;800&display=swap"
 			rel="stylesheet"
 		/>
 		<title>{title} | {content.site.title}</title>
 	</head>
 	<body class="site-shell text-(--ink)">
-		<!-- UTILITY BAR -->
-		<div
-			class="teal-field text-xs font-semibold py-3 px-4 tracking-wide text-center flex justify-center gap-3"
-		>
-			{
-				utilityNav.map((item) => (
-					<a
-						href={item.href}
-						class={`mission-chip mission-chip--${item.tone}`}
-					>
-						{item.label}
-					</a>
-				))
-			}
-		</div>
-
 		<!-- NAVIGATION -->
 		<nav
 			class="bg-white/95 backdrop-blur border-b-2 border-(--ink) sticky top-0 z-50"
@@ -90,37 +102,47 @@ const siteTheme = themeAliases[rawTheme] ?? "current";
 						>
 							<Logo class="w-full h-full" />
 						</div>
-							<div class="leading-none">
-								<span
-									class="block font-extrabold text-xl tracking-tight text-(--ink)"
-									>{brand.logo_line_one}</span
-								>
-								<span
-									class="block font-semibold text-xl tracking-wide text-(--eden) -mt-1"
-									>{brand.logo_line_two}</span
-								>
-							</div>
-						</a>
+						<div class="leading-none">
+							<span
+								class="block font-extrabold text-xl tracking-tight text-(--ink)"
+								>{brand.logo_line_one}</span
+							>
+							<span
+								class="block font-semibold text-xl tracking-wide text-(--eden) -mt-1"
+								>{brand.logo_line_two}</span
+							>
+						</div>
+					</a>
 
 					<!-- DESKTOP MENU -->
-					<div class="hidden md:flex items-center gap-1">
+					<div class="hidden md:flex items-center gap-2">
 						{
-							primaryNav.map((item) => (
-								<a
-									href={item.href}
-									class="text-(--ink) font-semibold text-sm tracking-wide hover:bg-(--paper-line) px-4 py-2 transition-colors"
+							navGroups.map((group) => (
+								<details
+									data-desktop-group
+									class="nav-group relative"
 								>
-									{item.label}
-								</a>
+									<summary class="inline-flex items-center gap-1 cursor-pointer text-(--ink) font-semibold text-sm tracking-wide hover:bg-(--paper-line) px-3 py-2 transition-colors list-none">
+										{group.label}
+										<ChevronDown
+											className="nav-group-chevron"
+											size={16}
+										/>
+									</summary>
+									<div class="absolute left-0 top-full mt-2 min-w-56 bg-white border-2 border-(--ink) shadow-xl p-2 flex flex-col gap-1 z-50">
+										{group.links.map((item) => (
+											<a
+												data-desktop-link
+												href={item.href}
+												class="text-(--ink) font-semibold text-sm tracking-wide hover:bg-(--paper-line) px-3 py-2 transition-colors"
+											>
+												{item.label}
+											</a>
+										))}
+									</div>
+								</details>
 							))
 						}
-						<!-- THE GOLDEN TICKET BUTTON -->
-							<a
-								href={brand.nav_cta_href}
-								class="ml-4 bg-(--gold) text-(--ink) px-6 py-2.5 font-semibold text-sm tracking-wide border-2 border-(--ink) hover:bg-white transition-all"
-							>
-								{brand.nav_cta_label}
-							</a>
 					</div>
 
 					<!-- MOBILE MENU TOGGLE -->
@@ -142,25 +164,34 @@ const siteTheme = themeAliases[rawTheme] ?? "current";
 				id="mobile-menu-panel"
 				class="hidden md:hidden border-t-2 border-(--ink) bg-white"
 			>
-				<div class="px-4 py-4 flex flex-col gap-2">
+				<div class="px-4 py-4 space-y-6">
 					{
-						primaryNav.map((item) => (
-							<a
-								data-mobile-link
-								href={item.href}
-								class="text-(--ink) font-semibold text-base tracking-wide border-2 border-transparent hover:border-(--ink) px-3 py-2 transition-colors"
-							>
-								{item.label}
-							</a>
+						navGroups.map((group) => (
+							<section class="space-y-2">
+								<h2 class="text-xs uppercase tracking-[0.12em] font-bold text-(--ink)/65">
+									{group.label}
+								</h2>
+								<div class="flex flex-col gap-1">
+									{group.links.map((item) => (
+										<a
+											data-mobile-link
+											href={item.href}
+											class="text-(--ink) font-semibold text-base tracking-wide border-2 border-transparent hover:border-(--ink) px-3 py-2 transition-colors"
+										>
+											{item.label}
+										</a>
+									))}
+								</div>
+							</section>
 						))
 					}
-						<a
-							data-mobile-link
-							href={brand.nav_cta_href}
-							class="mt-2 bg-(--gold) text-(--ink) px-4 py-2.5 font-semibold text-sm tracking-wide border-2 border-(--ink) hover:bg-white transition-all inline-flex w-fit"
-						>
-							{brand.nav_cta_label}
-						</a>
+					<a
+						data-mobile-link
+						href={brand.nav_cta_href}
+						class="mt-2 bg-(--gold) text-(--ink) px-4 py-2.5 font-semibold text-sm tracking-wide border-2 border-(--ink) hover:bg-white transition-all inline-flex w-fit"
+					>
+						{brand.nav_cta_label}
+					</a>
 				</div>
 			</div>
 		</nav>
@@ -176,6 +207,24 @@ const siteTheme = themeAliases[rawTheme] ?? "current";
 					"[data-menu-icon-close]",
 				);
 				const links = panel.querySelectorAll("a[data-mobile-link]");
+				const desktopGroups = document.querySelectorAll(
+					"details[data-desktop-group]",
+				);
+
+				const closeDesktopGroups = () => {
+					desktopGroups.forEach((group) =>
+						group.removeAttribute("open"),
+					);
+				};
+
+				desktopGroups.forEach((group) => {
+					group.addEventListener("toggle", () => {
+						if (!group.hasAttribute("open")) return;
+						desktopGroups.forEach((other) => {
+							if (other !== group) other.removeAttribute("open");
+						});
+					});
+				});
 
 				const setOpen = (isOpen) => {
 					toggle.setAttribute(
@@ -199,9 +248,27 @@ const siteTheme = themeAliases[rawTheme] ?? "current";
 					link.addEventListener("click", () => setOpen(false));
 				});
 
+				document.addEventListener("click", (event) => {
+					const target = event.target;
+					if (!(target instanceof Node)) return;
+
+					desktopGroups.forEach((group) => {
+						if (!group.contains(target)) {
+							group.removeAttribute("open");
+						}
+					});
+				});
+
+				document.addEventListener("keydown", (event) => {
+					if (event.key === "Escape") {
+						closeDesktopGroups();
+					}
+				});
+
 				window.addEventListener("resize", () => {
 					if (window.innerWidth >= 768) {
 						setOpen(false);
+						closeDesktopGroups();
 					}
 				});
 			})();
@@ -210,15 +277,15 @@ const siteTheme = themeAliases[rawTheme] ?? "current";
 		<slot />
 
 		<!-- FOOTER -->
-			<footer
-				class="themed-footer py-16 mt-auto border-t-2 border-(--ink) relative overflow-hidden text-white"
-			>
-				<img
-					src={footerBackgroundImage.src}
-					alt={footerBackgroundImage.alt}
-					aria-hidden="true"
-					class="absolute -top-3 left-0 w-full opacity-[0.15] pointer-events-none"
-				/>
+		<footer
+			class="themed-footer py-16 mt-auto border-t-2 border-(--ink) relative overflow-hidden text-white"
+		>
+			<img
+				src={footerBackgroundImage.src}
+				alt={footerBackgroundImage.alt}
+				aria-hidden="true"
+				class="absolute -top-3 left-0 w-full opacity-[0.15] pointer-events-none"
+			/>
 			<div
 				class="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-12 relative z-10"
 			>
@@ -231,10 +298,10 @@ const siteTheme = themeAliases[rawTheme] ?? "current";
 					</h3>
 					<p class="text-white/80 max-w-sm">{content.site.address}</p>
 				</div>
-					<div class="md:text-right">
-						<p class="font-semibold text-(--gold) tracking-wide mb-4">
-							{footerHeading}
-						</p>
+				<div class="md:text-right">
+					<p class="font-semibold text-(--gold) tracking-wide mb-4">
+						{footerHeading}
+					</p>
 					<div class="flex flex-col md:items-end gap-2 text-white/85">
 						{
 							footerLinks.map((item) => (
