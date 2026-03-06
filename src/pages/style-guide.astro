@@ -30,12 +30,12 @@ const colourTokens = [
 ];
 
 const tokenGroups = [
-	{
-		group: "Foundations",
-		description:
-			"Core brand palette, typography, and gradient tokens are declared once in `:root`.",
-		tokens:
-			"--section-blue, --section-green, --section-mauve, --section-plum, --gold, --font-body, --font-display, --font-hand",
+		{
+			group: "Foundations",
+			description:
+				"Core brand palette, typography, and gradient tokens are declared once in `:root`.",
+			tokens:
+				"--section-blue, --section-green, --section-mauve, --section-plum, --gold, --font-body, --font-display, --font-subheading, --font-label, --font-hand",
 	},
 	{
 		group: "Surfaces",
@@ -95,19 +95,25 @@ const tokenGroups = [
 		<section class="theme-card p-8 space-y-6">
 			<h2 class="section-heading text-3xl">Typography and Heading Accent</h2>
 			<div class="space-y-4">
-				<p class="text-sm uppercase tracking-[0.12em] font-bold text-(--ink)/70">
-					Body Font
-				</p>
-				<p class="text-xl text-(--ink)/90">
-					Nunito Sans is used for readable body copy and UI labels.
-				</p>
-				<p class="text-sm uppercase tracking-[0.12em] font-bold text-(--ink)/70">
-					Display Font
-				</p>
-				<h3 class="section-heading text-4xl">Baloo 2 powers page and section headings.</h3>
-				<p class="text-sm uppercase tracking-[0.12em] font-bold text-(--ink)/70">
-					Accent Heading
-				</p>
+					<p class="text-sm uppercase tracking-[0.12em] font-bold text-(--ink)/70">
+						Body Font
+					</p>
+					<p class="text-xl text-(--ink)/90">
+						Nunito Sans is used for readable body copy and long-form UI text.
+					</p>
+					<p class="text-sm uppercase tracking-[0.12em] font-bold text-(--ink)/70">
+						Display Font
+					</p>
+					<h3 class="page-heading text-4xl">Baloo 2 powers major page headings.</h3>
+					<p class="text-sm uppercase tracking-[0.12em] font-bold text-(--ink)/70">
+						Subheading and Label Font
+					</p>
+					<h3 class="section-heading text-4xl">
+						Fuzzy Bubbles powers section subheadings and labels.
+					</h3>
+					<p class="text-sm uppercase tracking-[0.12em] font-bold text-(--ink)/70">
+						Accent Heading
+					</p>
 				<h3 class="page-heading page-heading--accent text-5xl">
 					Gradient Headings Stay Consistent
 				</h3>

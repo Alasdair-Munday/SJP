@@ -4,6 +4,8 @@
   /* Typography */
   --font-body: "Nunito Sans", "Segoe UI", sans-serif;
   --font-display: "Baloo 2", "Nunito Sans", sans-serif;
+  --font-subheading: "Fuzzy Bubbles", "Baloo 2", "Nunito Sans", sans-serif;
+  --font-label: "Fuzzy Bubbles", "Nunito Sans", sans-serif;
   --font-hand: "Patrick Hand", "Baloo 2", cursive;
 
   /* Core palette */
@@ -99,12 +101,20 @@ html[data-theme="line-drawing"] .theme-display-font {
 }
 
 .section-heading {
-  font-family: var(--font-display);
+  font-family: var(--font-subheading);
   font-weight: 700;
   line-height: 1.08;
   letter-spacing: 0.01em;
   color: var(--ink);
   text-wrap: balance;
+}
+
+label,
+legend,
+.mission-chip,
+[class*="text-xs"][class*="uppercase"],
+[class*="text-sm"][class*="uppercase"] {
+  font-family: var(--font-label);
 }
 
 .page-heading--accent,
@@ -839,6 +849,9 @@ html[data-theme="line-drawing"] .site-appbar {
 
 .site-bands {
   --site-wave-height: clamp(52px, 8vw, 86px);
+  width: 100%;
+  max-width: none !important;
+  margin-inline: 0 !important;
   padding-block: 0 !important;
 }
 
