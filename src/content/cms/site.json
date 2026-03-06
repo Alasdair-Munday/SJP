@@ -9,7 +9,7 @@
   "brand": {
     "logo_line_one": "St John's Church",
     "logo_line_two": "Park",
-    "nav_cta_label": "I'm New",
-    "nav_cta_href": "/im-new"
+    "nav_cta_label": "Join a Team",
+    "nav_cta_href": "/join-a-team"
   }
 }

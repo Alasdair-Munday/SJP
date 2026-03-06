@@ -4,7 +4,7 @@ summary: Families gathered for our Christingle celebration with songs, prayers, 
 publishDate: 2025-12-22
 staleAfterDays: 90
 ctaLabel: Plan your Sunday visit
-ctaHref: /sundays
+ctaHref: /visit#sunday
 ---
 
 Thank you to everyone who helped host and lead this special service. If you are new to St John’s, we would love to welcome you on a Sunday morning.

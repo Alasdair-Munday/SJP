@@ -1,5 +1,5 @@
 {
-  "title": "What's On",
+  "title": "What's Happening",
   "subtitle": "Weekly church life and upcoming events in one place.",
   "import_calendar_label": "Import Calendar",
   "upcoming_events": {
@@ -68,7 +68,7 @@
       }
     ]
   },
-  "what_we_do_link_intro": "Looking for more information? Try",
-  "what_we_do_link_label": "What We Do",
-  "what_we_do_link_href": "/what-we-do"
+  "church_life_link_intro": "Looking for more information? Try",
+  "church_life_link_label": "Who We Are",
+  "church_life_link_href": "/church-life"
 }

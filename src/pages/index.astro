@@ -19,7 +19,7 @@ import {
 const content = await getSiteContent();
 const { hero, mission_grid, latest_message, coming_up, mission } =
 	content.pages.home;
-const imNew = content.pages.im_new;
+const visit = content.pages.visit;
 const heroPostcardLabel = hero.badge ?? "Welcome Home";
 
 const latest_message_details = content.sermons[0];
@@ -35,13 +35,13 @@ const firstTimeLegacy = (content.pages.home as { first_time?: FirstTimeLegacy })
 	.first_time;
 
 const firstTimeHeading =
-	imNew.home_preview?.heading ??
+	visit.home_preview?.heading ??
 	firstTimeLegacy?.heading ??
 	"First Time Visiting?";
 const firstTimeIntro =
-	imNew.home_preview?.intro ?? firstTimeLegacy?.intro ?? "";
+	visit.home_preview?.intro ?? firstTimeLegacy?.intro ?? "";
 const firstTimeCards = (
-	imNew.sections?.map((section) => ({
+	visit.sections?.map((section) => ({
 		title: section.heading,
 		body_html: section.paragraphs.join(" "),
 	})) ??
@@ -55,7 +55,9 @@ const firstTimeCards = (
 
 <Layout title="Home">
 	<!-- HERO SECTION -->
-	<section class="section-band section-band--blue">
+	<section
+		class="section-band section-band--green has-doodly-stars has-doodly-stars--leaf is-doodly-visible"
+	>
 		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
 			<div class="grid lg:grid-cols-[1.04fr_0.96fr] gap-12 items-center">
 				<div>
@@ -107,10 +109,28 @@ const firstTimeCards = (
 				</div>
 			</div>
 		</div>
+		<div class="section-doodlystars" aria-hidden="true">
+			<span class="section-doodlystar section-doodlystar--top-left"
+			></span>
+			<span
+				class="section-doodlystar section-doodlystar--right-edge section-doodlystar--delay"
+			></span>
+		</div>
+		<div
+			class="section-wave"
+			aria-hidden="true"
+			style="--wave-next: var(--section-blue);"
+		>
+			<svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+				<path
+					d="M0,26 C120,78 280,78 420,42 C560,6 700,6 840,42 C980,78 1120,78 1260,42 C1348,20 1408,18 1440,24 L1440,120 L0,120 Z"
+				></path>
+			</svg>
+		</div>
 	</section>
 
 	<!-- I'M NEW: VISITOR BRIDGE -->
-	<section class="section-band section-band--blue">
+	<section class="section-band section-band--blue section-band--blue-bright">
 		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 			<div class="mb-10">
 				<h2 class="page-heading text-4xl font-bold">
@@ -153,7 +173,7 @@ const firstTimeCards = (
 			</div>
 			<div class="mt-8">
 				<a
-					href="/im-new"
+					href="/visit"
 					class="inline-flex items-center gap-2 px-5 py-2.5 border-2 border-(--ink) text-(--ink) font-semibold hover:bg-white/90 hover:text-[#10232e] transition-colors"
 				>
 					See Full I'm New Guide <ArrowRight size={18} />
@@ -163,7 +183,7 @@ const firstTimeCards = (
 		<div
 			class="section-wave"
 			aria-hidden="true"
-			style="--wave-next: var(--section-green);"
+			style="--wave-next: var(--section-mauve);"
 		>
 			<svg viewBox="0 0 1440 120" preserveAspectRatio="none">
 				<path
@@ -173,7 +193,7 @@ const firstTimeCards = (
 		</div>
 	</section>
 	<!-- MISSION GRID -->
-	<section class="section-band section-band--green">
+	<section class="section-band section-band--mauve">
 		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 			<div
 				class="flex items-end gap-4 mb-12 border-b-2 border-(--ink) pb-4"
@@ -255,7 +275,7 @@ const firstTimeCards = (
 		<div
 			class="section-wave"
 			aria-hidden="true"
-			style="--wave-next: var(--section-mauve);"
+			style="--wave-next: var(--section-plum);"
 		>
 			<svg viewBox="0 0 1440 120" preserveAspectRatio="none">
 				<path
@@ -265,7 +285,9 @@ const firstTimeCards = (
 		</div>
 	</section>
 	<!-- LATEST MESSAGE -->
-	<section class="section-band section-band--mauve">
+	<section
+		class="section-band section-band--plum has-doodly-stars has-doodly-stars--sky is-doodly-visible"
+	>
 		<div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
 			<div class="band-split-block py-10">
 				<div>
@@ -299,10 +321,17 @@ const firstTimeCards = (
 				</div>
 			</div>
 		</div>
+		<div class="section-doodlystars" aria-hidden="true">
+			<span class="section-doodlystar section-doodlystar--left-edge"
+			></span>
+			<span
+				class="section-doodlystar section-doodlystar--bottom-right section-doodlystar--delay-2"
+			></span>
+		</div>
 		<div
 			class="section-wave"
 			aria-hidden="true"
-			style="--wave-next: var(--section-plum);"
+			style="--wave-next: var(--section-blue);"
 		>
 			<svg viewBox="0 0 1440 120" preserveAspectRatio="none">
 				<path
@@ -315,7 +344,7 @@ const firstTimeCards = (
 	<NewsUpdates />
 
 	<!-- BANNER: Upcoming -->
-	<section class="section-band section-band--plum pb-20">
+	<section class="section-band section-band--green pb-20">
 		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
 			<div class="flex items-center gap-3 mb-8">
 				<Calendar className="w-8 h-8 text-(--ink)" />

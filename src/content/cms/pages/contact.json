@@ -1,6 +1,7 @@
 {
-  "title": "How to Find Us",
+  "title": "Get in Touch",
   "find_us": {
+    "heading": "Find Us",
     "paragraphs": [
       "The address of the church is Bernard Street, Sheffield, S2 5PU.",
       "General enquiries: <a href='mailto:hello@saintjohnspark.org' class='underline decoration-[var(--eden)] underline-offset-4'>hello@saintjohnspark.org</a>"
@@ -66,6 +67,29 @@
         "value": "safeguarding",
         "label": "Safeguarding"
       }
+    ]
+  },
+  "life_events": {
+    "heading": "Life Events Enquiries",
+    "intro": "For baptisms, weddings, and funerals, please contact us directly or use these links:",
+    "links": [
+      {
+        "label": "melksham.church/life-events",
+        "href": "https://www.melksham.church/life-events"
+      },
+      {
+        "label": "stjohnschap.co.uk/what-we-do/celebrating-new-birth",
+        "href": "https://www.stjohnschap.co.uk/what-we-do/celebrating-new-birth/"
+      }
+    ]
+  },
+  "safeguarding": {
+    "heading": "Safeguarding Contacts",
+    "paragraphs": [
+      "St John's is committed to high standards in the safeguarding and care of children and vulnerable adults.",
+      "Download our safeguarding policy: <a href='https://www.saintjohnspark.org.uk/wp-content/uploads/2025/08/St-Johns-Safeguarding-Policy-2025-2.docx' class='underline decoration-[var(--eden)] underline-offset-4'>St John's Safeguarding Policy 2025 (DOCX)</a>.",
+      "The Diocese of Sheffield's Safeguarding Adviser is Siân Checkley. Contact: 01709 309100 or 07741 013775, or email <a href='mailto:sian.checkley@sheffield.anglican.org' class='underline decoration-[var(--eden)] underline-offset-4'>sian.checkley@sheffield.anglican.org</a>.",
+      "Diocese safeguarding information: <a href='https://www.sheffield.anglican.org/support/safeguarding' class='underline decoration-[var(--eden)] underline-offset-4'>sheffield.anglican.org/support/safeguarding</a>"
     ]
   }
 }

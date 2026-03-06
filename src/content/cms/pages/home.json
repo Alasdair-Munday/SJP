@@ -9,18 +9,18 @@
     },
     "primary_cta": {
       "label": "Join us Sunday, 10:45 AM",
-      "href": "/sundays"
+      "href": "/visit#sunday"
     },
     "secondary_cta": {
       "label": "Find Us",
-      "href": "/contact"
+      "href": "/contact#find-us"
     }
   },
   "latest_message": {
     "eyebrow": "Latest Message",
     "cta": {
       "label": "Listen Now",
-      "href": "/sermons"
+      "href": "/talks"
     },
     "audio": {
       "src": "/audio/latest-message.mp3",
@@ -39,21 +39,21 @@
       "title": "Belong",
       "desc": "Find transformation, discipleship, and growth through midweek groups, Kids, and Youth communities.",
       "link_text": "FIND OUT MORE",
-      "link_href": "/what-we-do#belong",
+      "link_href": "/church-life#belong",
       "color": "teal"
     },
     {
       "title": "Serve",
       "desc": "Join one of our teams and help our church family thrive in worship, welcome, and community service.",
       "link_text": "JOIN A TEAM",
-      "link_href": "/what-we-do#serve",
+      "link_href": "/church-life#serve",
       "color": "green"
     },
     {
       "title": "Give",
       "desc": "Your generosity helps sustain Sunday gatherings, midweek ministries, and practical support across our city.",
       "link_text": "SUPPORT THE VISION",
-      "link_href": "/what-we-do#give",
+      "link_href": "/church-life#give",
       "color": "gold"
     }
   ]

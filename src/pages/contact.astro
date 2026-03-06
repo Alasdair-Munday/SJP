@@ -5,177 +5,215 @@ import { getSiteContent } from "../data/site-content";
 const content = await getSiteContent();
 const page = content.pages.contact;
 const sendMessage = page.send_message ?? {
-	heading: "Send Us a Message",
-	intro_prefix: "You can email us directly at",
-	direct_email: "hello@saintjohnspark.org",
-	intro_suffix: "or use the form below.",
-	labels: {
-		name: "Name",
-		email: "Email",
-		subject: "Subject",
-		message: "Message",
-		submit: "Send Message",
-	},
-	subject_placeholder: "Select a topic",
-	subject_options: [
-		{ value: "general", label: "General enquiry" },
-		{ value: "park-kids", label: "Park Kids" },
-		{ value: "park-youth", label: "Park Youth" },
-		{ value: "park-communities", label: "Park Communities" },
-		{ value: "sundays", label: "Sunday gathering" },
-		{ value: "safeguarding", label: "Safeguarding" },
-	],
+  heading: "Send Us a Message",
+  intro_prefix: "You can email us directly at",
+  direct_email: "hello@saintjohnspark.org",
+  intro_suffix: "or use the form below.",
+  labels: {
+    name: "Name",
+    email: "Email",
+    subject: "Subject",
+    message: "Message",
+    submit: "Send Message",
+  },
+  subject_placeholder: "Select a topic",
+  subject_options: [
+    { value: "general", label: "General enquiry" },
+    { value: "park-kids", label: "Park Kids" },
+    { value: "park-youth", label: "Park Youth" },
+    { value: "park-communities", label: "Park Communities" },
+    { value: "sundays", label: "Sunday gathering" },
+    { value: "safeguarding", label: "Safeguarding" },
+  ],
 };
 const mapEmbedUrl =
-	page.find_us.map_embed_url ??
-	"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1932.9794407157501!2d-1.4558134244165126!3d53.38304895495231!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4879787508b14b63%3A0x3ad4b2dcc392b6b9!2sSt.%20John%E2%80%99s%20Church%2C%20Park!5e1!3m2!1sen!2suk!4v1771371845139!5m2!1sen!2suk";
+  page.find_us.map_embed_url ??
+  "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1932.9794407157501!2d-1.4558134244165126!3d53.38304895495231!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4879787508b14b63%3A0x3ad4b2dcc392b6b9!2sSt.%20John%E2%80%99s%20Church%2C%20Park!5e1!3m2!1sen!2suk!4v1771371845139!5m2!1sen!2suk";
 ---
 
-	<Layout title={page.title}>
-		<div class="site-bands max-w-5xl mx-auto px-4 py-20 space-y-8">
-			<section>
-				<h1
-					class="page-heading page-heading--accent text-5xl md:text-6xl"
-				>
-					{page.title}
-				</h1>
-			</section>
+<Layout title={page.title}>
+  <div class="site-bands max-w-5xl mx-auto px-4 py-20 space-y-8">
+    <section class="relative has-doodly-stars has-doodly-stars--leaf is-doodly-visible overflow-hidden">
+      <h1
+        class="page-heading page-heading--accent text-5xl md:text-6xl"
+      >
+        {page.title}
+      </h1>
+      <div class="section-doodlystars" aria-hidden="true">
+        <span class="section-doodlystar section-doodlystar--top-left"></span>
+        <span class="section-doodlystar section-doodlystar--right-edge section-doodlystar--delay"></span>
+      </div>
+    </section>
 
-		<section class="theme-card theme-card--strong p-8 space-y-4">
-				<p class="text-lg text-(--ink)/90">{page.find_us.paragraphs[0]}</p>
-				<iframe
-					src={mapEmbedUrl}
-					width="100%"
-					height="450"
-					style="border:0;"
-				allowfullscreen=""
-				loading="lazy"
-				referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <section id="find-us" class="theme-card theme-card--strong p-8 space-y-4 scroll-mt-28">
+      <h2 class="section-heading text-3xl">{page.find_us.heading ?? "Find Us"}</h2>
+      <p class="text-lg text-(--ink)/90">{page.find_us.paragraphs[0]}</p>
+      <iframe
+        src={mapEmbedUrl}
+        width="100%"
+        height="450"
+        style="border:0;"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+      ></iframe>
 
-			<p class="text-(--ink)/90">
-				<a
-					href={page.find_us.maps_link.href}
-					class="underline decoration-(--eden) underline-offset-4"
-				>
-					{page.find_us.maps_link.label}
-				</a>
-			</p>
-			<p class="text-(--ink)/90" set:html={page.find_us.paragraphs[1]} />
-			<img
-				src={page.find_us.image.src}
-				alt={page.find_us.image.alt}
-				class="theme-photo w-full h-72 object-cover mt-2"
-				loading="lazy"
-			/>
-		</section>
+      <p class="text-(--ink)/90">
+        <a
+          href={page.find_us.maps_link.href}
+          class="underline decoration-(--eden) underline-offset-4"
+        >
+          {page.find_us.maps_link.label}
+        </a>
+      </p>
+      <p class="text-(--ink)/90" set:html={page.find_us.paragraphs[1]} />
+      <img
+        src={page.find_us.image.src}
+        alt={page.find_us.image.alt}
+        class="theme-photo w-full h-72 object-cover mt-2"
+        loading="lazy"
+      />
+    </section>
 
-		<section
-				id="send-message"
-				class="theme-card p-8 space-y-5 scroll-mt-28"
-			>
-				<h2 class="section-heading text-3xl">{sendMessage.heading}</h2>
-				<p class="text-(--ink)/90">
-					{sendMessage.intro_prefix}{" "}
-					<a
-						href={`mailto:${sendMessage.direct_email}`}
-						class="underline decoration-(--eden) underline-offset-4"
-					>
-						{sendMessage.direct_email}
-					</a>{" "}
-					{sendMessage.intro_suffix}
-				</p>
+    <section
+      id="send-message"
+      class="theme-card p-8 space-y-5 scroll-mt-28 relative has-doodly-stars has-doodly-stars--sky is-doodly-visible overflow-hidden"
+    >
+      <h2 class="section-heading text-3xl">{sendMessage.heading}</h2>
+      <p class="text-(--ink)/90">
+        {sendMessage.intro_prefix}{" "}
+        <a
+          href={`mailto:${sendMessage.direct_email}`}
+          class="underline decoration-(--eden) underline-offset-4"
+        >
+          {sendMessage.direct_email}
+        </a>{" "}
+        {sendMessage.intro_suffix}
+      </p>
 
-			<form
-				name="contact"
-				method="POST"
-				data-netlify="true"
-				netlify-honeypot="bot-field"
-				action="/contact-thank-you"
-				class="space-y-5"
-			>
-				<input type="hidden" name="form-name" value="contact" />
-				<p class="hidden">
-					<label>
-						Don't fill this out if you're human:
-						<input name="bot-field" />
-					</label>
-				</p>
+      <form
+        name="contact"
+        method="POST"
+        data-netlify="true"
+        netlify-honeypot="bot-field"
+        action="/contact-thank-you"
+        class="space-y-5"
+      >
+        <input type="hidden" name="form-name" value="contact" />
+        <p class="hidden">
+          <label>
+            Don't fill this out if you're human:
+            <input name="bot-field" />
+          </label>
+        </p>
 
-					<label class="block space-y-2">
-						<span class="font-semibold text-(--ink)">{sendMessage.labels.name}</span>
-						<input
-							type="text"
-							name="name"
-						required
-						class="w-full border-2 border-(--ink) px-3 py-2"
-					/>
-				</label>
+        <label class="block space-y-2">
+          <span class="font-semibold text-(--ink)">{sendMessage.labels.name}</span>
+          <input
+            type="text"
+            name="name"
+            required
+            class="w-full border-2 border-(--ink) px-3 py-2"
+          />
+        </label>
 
-					<label class="block space-y-2">
-						<span class="font-semibold text-(--ink)">{sendMessage.labels.email}</span>
-						<input
-							type="email"
-							name="email"
-						required
-						class="w-full border-2 border-(--ink) px-3 py-2"
-					/>
-				</label>
+        <label class="block space-y-2">
+          <span class="font-semibold text-(--ink)">{sendMessage.labels.email}</span>
+          <input
+            type="email"
+            name="email"
+            required
+            class="w-full border-2 border-(--ink) px-3 py-2"
+          />
+        </label>
 
-					<label class="block space-y-2">
-						<span class="font-semibold text-(--ink)">{sendMessage.labels.subject}</span>
-						<select
-							name="subject"
-							required
-							class="w-full border-2 border-(--ink) px-3 py-2"
-						>
-							<option value="">{sendMessage.subject_placeholder}</option>
-							{
-								sendMessage.subject_options.map((option) => (
-									<option value={option.value}>{option.label}</option>
-								))
-							}
-						</select>
-					</label>
+        <label class="block space-y-2">
+          <span class="font-semibold text-(--ink)">{sendMessage.labels.subject}</span>
+          <select
+            name="subject"
+            required
+            class="w-full border-2 border-(--ink) px-3 py-2"
+          >
+            <option value="">{sendMessage.subject_placeholder}</option>
+            {
+              sendMessage.subject_options.map((option) => (
+                <option value={option.value}>{option.label}</option>
+              ))
+            }
+          </select>
+        </label>
 
-					<label class="block space-y-2">
-						<span class="font-semibold text-(--ink)">{sendMessage.labels.message}</span>
-						<textarea
-							name="message"
-							required
-						rows={6}
-						class="w-full border-2 border-(--ink) px-3 py-2"
-					></textarea>
-				</label>
+        <label class="block space-y-2">
+          <span class="font-semibold text-(--ink)">{sendMessage.labels.message}</span>
+          <textarea
+            name="message"
+            required
+            rows={6}
+            class="w-full border-2 border-(--ink) px-3 py-2"
+          ></textarea>
+        </label>
 
-					<button
-						type="submit"
-						class="inline-flex items-center gap-2 px-6 py-3 bg-(--ink) text-white border-2 border-(--ink) font-semibold hover:bg-white hover:text-(--ink) transition-colors"
-					>
-						{sendMessage.labels.submit}
-					</button>
-				</form>
-			</section>
+        <button
+          type="submit"
+          class="inline-flex items-center gap-2 px-6 py-3 bg-(--ink) text-white border-2 border-(--ink) font-semibold hover:bg-white hover:text-(--ink) transition-colors"
+        >
+          {sendMessage.labels.submit}
+        </button>
+      </form>
+      <div class="section-doodlystars" aria-hidden="true">
+        <span class="section-doodlystar section-doodlystar--left-edge"></span>
+        <span class="section-doodlystar section-doodlystar--bottom-right section-doodlystar--delay-2"></span>
+      </div>
+    </section>
 
-		<section class="theme-card p-8 space-y-4">
-			<h2 class="section-heading text-3xl">
-				{page.parking.heading}
-			</h2>
-			{
-				page.parking.paragraphs.map((paragraph) => (
-					<p class="text-(--ink)/90">{paragraph}</p>
-				))
-			}
-		</section>
+    <section class="theme-card p-8 space-y-4">
+      <h2 class="section-heading text-3xl">
+        {page.parking.heading}
+      </h2>
+      {
+        page.parking.paragraphs.map((paragraph) => (
+          <p class="text-(--ink)/90">{paragraph}</p>
+        ))
+      }
+    </section>
 
-		<section class="theme-card p-8 space-y-4">
-			<h2 class="section-heading text-3xl">
-				{page.public_transport.heading}
-			</h2>
-			{
-				page.public_transport.paragraphs.map((paragraph) => (
-					<p class="text-(--ink)/90">{paragraph}</p>
-				))
-			}
-		</section>
-	</div>
+    <section class="theme-card p-8 space-y-4">
+      <h2 class="section-heading text-3xl">
+        {page.public_transport.heading}
+      </h2>
+      {
+        page.public_transport.paragraphs.map((paragraph) => (
+          <p class="text-(--ink)/90">{paragraph}</p>
+        ))
+      }
+    </section>
+
+    <section id="life-events" class="theme-card p-8 space-y-4 scroll-mt-28">
+      <h2 class="section-heading text-3xl">{page.life_events.heading}</h2>
+      <p class="text-(--ink)/90">{page.life_events.intro}</p>
+      <div class="space-y-2">
+        {
+          page.life_events.links.map((link) => (
+            <p>
+              <a
+                href={link.href}
+                class="underline decoration-(--eden) underline-offset-4"
+              >
+                {link.label}
+              </a>
+            </p>
+          ))
+        }
+      </div>
+    </section>
+
+    <section id="safeguarding" class="theme-card p-8 space-y-4 scroll-mt-28">
+      <h2 class="section-heading text-3xl">{page.safeguarding.heading}</h2>
+      {
+        page.safeguarding.paragraphs.map((paragraph) => (
+          <p class="text-(--ink)/90" set:html={paragraph}></p>
+        ))
+      }
+    </section>
+  </div>
 </Layout>

@@ -3,26 +3,26 @@
   "quick_links": [
     {
       "label": "I'm New",
-      "href": "/im-new"
+      "href": "/visit"
     },
     {
-      "label": "What's On",
-      "href": "/whats-on"
+      "label": "Who We Are",
+      "href": "/church-life"
+    },
+    {
+      "label": "What's Happening",
+      "href": "/calendar"
     },
     {
       "label": "Talks",
-      "href": "/sermons"
+      "href": "/talks"
     },
     {
-      "label": "What We Do",
-      "href": "/what-we-do"
+      "label": "News",
+      "href": "/news"
     },
     {
-      "label": "Safeguarding",
-      "href": "/safeguarding"
-    },
-    {
-      "label": "Contact",
+      "label": "Get in Touch",
       "href": "/contact"
     }
   ],

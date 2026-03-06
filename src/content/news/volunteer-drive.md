@@ -4,7 +4,7 @@ summary: Our church and local partners are preparing another Community Fun Day i
 publishDate: 2025-08-10
 staleAfterDays: 180
 ctaLabel: See what's on
-ctaHref: /whats-on
+ctaHref: /calendar
 ---
 
-We are currently organising volunteers and activity teams. Keep an eye on our What's On page for confirmed times and details.
+We are currently organising volunteers and activity teams. Keep an eye on our What's Happening page for confirmed times and details.

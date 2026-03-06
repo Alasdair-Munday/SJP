@@ -18,7 +18,7 @@ export async function GET(context: any) {
                 title: sermon.title,
                 pubDate: new Date(sermon.date),
                 description: sermon.description,
-                link: `/sermons/#${sermon.date}`, // Deep link to the sermon on the page (could be its own page)
+                link: `/talks/#${sermon.date}`, // Deep link to the sermon on the page (could be its own page)
                 customData: `
                     <enclosure url="${sermon.audioUrl}" length="${sermon.duration * 10000}" type="audio/mpeg" />
                     <itunes:duration>${sermon.duration}</itunes:duration>

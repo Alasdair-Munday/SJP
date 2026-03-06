@@ -1,7 +1,7 @@
 {
   "calendar_events": {
-    "empty_message": "Check out What's On for current activities.",
-    "view_whats_on_label": "View What's On ->"
+    "empty_message": "Check out What's Happening for current activities.",
+    "view_whats_on_label": "View What's Happening ->"
   },
   "featured_event": {
     "view_event_details_label": "View Event Details",

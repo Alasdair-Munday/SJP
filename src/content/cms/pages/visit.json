@@ -1,0 +1,102 @@
+{
+  "title": "I'm New",
+  "home_preview": {
+    "heading": "First Time Visiting?",
+    "intro": "Here is what makes a Sunday morning at St John's Park easy to step into."
+  },
+  "sections": [
+    {
+      "heading": "When does church happen?",
+      "paragraphs": [
+        "We gather to worship every Sunday morning at 10:45am. We also run activities during the week for children, local community support, and smaller groups."
+      ]
+    },
+    {
+      "heading": "What happens in a church service?",
+      "paragraphs": [
+        "The service is usually a little over an hour. We sing together, read the Bible, hear teaching that connects Scripture to everyday life, and spend time in prayer.",
+        "On the first Sunday of each month, we also share Communion together."
+      ]
+    },
+    {
+      "heading": "What about children and young people?",
+      "paragraphs": [
+        "Children are very welcome. Most Sundays there is a children's activity or children's club during the service, and we work to help families feel at home.",
+        "For more details, visit <a href='/park-kids' class='underline decoration-[var(--eden)] underline-offset-4'>Park Kids</a> and <a href='/park-youth' class='underline decoration-[var(--teal)] underline-offset-4'>Park Youth</a>."
+      ]
+    }
+  ],
+  "gallery": [
+    {
+      "src": "/images/congregation.jpg",
+      "alt": "Church family gathered together during Sunday worship",
+      "caption": "Sundays are friendly, relaxed, and easy to step into."
+    },
+    {
+      "src": "/images/refreshments.jpg",
+      "alt": "People talking over refreshments after church",
+      "caption": "There is always time and space to connect with people."
+    }
+  ],
+  "sunday": {
+    "heading": "Sunday at a Glance",
+    "time_label": "Time",
+    "location_label": "Location",
+    "time": "10:45 AM",
+    "location": "St John's Park, Bernard Street, Sheffield, S2 5PU",
+    "description": "Join us every Sunday at 10:45am to worship Jesus, hear God's Word, and pray together.",
+    "service_style": "Our Sunday gathering is informal and interactive, with contemporary worship songs.",
+    "after_service": "Please stay after the service for refreshments and a chance to get to know people.",
+    "image": {
+      "src": "/images/worship-flags.jpg",
+      "alt": "Worship team singing during a Sunday gathering"
+    }
+  },
+  "what_to_expect": {
+    "heading": "What to Expect",
+    "items": [
+      "Services are usually a little over one hour.",
+      "We sing together, read Scripture, hear Bible teaching, and pray.",
+      "On the first Sunday of each month, we share Communion."
+    ],
+    "talks_link_intro": "Catch up on recent Sunday talks on our",
+    "talks_link_label": "Talks page",
+    "talks_link_href": "/talks"
+  },
+  "children_young_people": {
+    "heading": "Children & Young People",
+    "blurb": "We run Park Kids and Park Youth during Sunday gatherings and through the week.",
+    "links": [
+      {
+        "label": "Park Kids",
+        "href": "/park-kids"
+      },
+      {
+        "label": "Park Youth",
+        "href": "/park-youth"
+      },
+      {
+        "label": "Park Communities",
+        "href": "/park-communities"
+      }
+    ]
+  },
+  "plan_your_visit": {
+    "heading": "Plan Your Visit",
+    "paragraphs": [
+      "You can find us at Bernard Street, Sheffield, S2 5PU. Hyde Park tram stop is right next to the church.",
+      "We have limited on-site parking, with overflow parking nearby.",
+      "If you'd like to ask about baptisms, weddings, or funerals, use the life events links below or contact us directly."
+    ],
+    "life_events_links": [
+      {
+        "label": "melksham.church/life-events",
+        "href": "https://www.melksham.church/life-events"
+      },
+      {
+        "label": "stjohnschap.co.uk/what-we-do/celebrating-new-birth",
+        "href": "https://www.stjohnschap.co.uk/what-we-do/celebrating-new-birth/"
+      }
+    ]
+  }
+}

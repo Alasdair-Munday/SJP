@@ -1,0 +1,370 @@
+---
+import Layout from "../layouts/Layout.astro";
+import {
+  ArrowRight,
+  Bird,
+  Building,
+  Droplets,
+  Hammer,
+  House,
+  Mail,
+  Phone,
+} from "lucide-react";
+import { getSiteContent } from "../data/site-content";
+
+const content = await getSiteContent();
+const page = content.pages.church_life;
+const give = page.give;
+const teamAndBeliefs = page.team_and_beliefs;
+const parkLife = page.park_life;
+
+const belong = page.groups.find((group) => group.id === "belong") ?? page.groups[0];
+const serve = page.groups.find((group) => group.id === "serve") ?? page.groups[0];
+
+const giveDevelopmentNeedIcons = [Bird, Droplets, Building, Hammer, House];
+---
+
+<Layout title={page.title}>
+  <div class="site-bands max-w-7xl mx-auto px-4 py-20 space-y-10">
+    <div class="space-y-4 relative has-doodly-stars has-doodly-stars--leaf is-doodly-visible overflow-hidden">
+      <h1
+        class="page-heading page-heading--accent text-5xl md:text-6xl font-bold"
+      >
+        {page.title}
+      </h1>
+      <p class="text-xl text-(--ink)/85 max-w-4xl">{page.intro}</p>
+      <div class="flex flex-wrap gap-3">
+        <a href="#belong" class="mission-chip mission-chip--belong">Belong</a>
+        <a href="#serve" class="mission-chip mission-chip--serve">Serve</a>
+        <a href="#give" class="mission-chip mission-chip--give">Give</a>
+        <a href="#team-and-beliefs" class="mission-chip">Our Team & Beliefs</a>
+      </div>
+      <div class="section-doodlystars" aria-hidden="true">
+        <span class="section-doodlystar section-doodlystar--top-left"></span>
+        <span class="section-doodlystar section-doodlystar--right-edge section-doodlystar--delay"></span>
+      </div>
+    </div>
+
+    <section
+      id="belong"
+      class="sketch-panel theme-belong bg-(--eden-soft)/35 p-6 md:p-8 space-y-6 scroll-mt-28 relative has-doodly-stars has-doodly-stars--sky is-doodly-visible overflow-hidden"
+    >
+      <div class="theme-drench theme-drench--eden p-5 space-y-2">
+        <h2 class="section-heading text-4xl">{belong.heading}</h2>
+        <p class="text-(--ink)/85 mt-2 max-w-3xl">
+          {belong.intro}
+        </p>
+      </div>
+      <figure class="theme-card overflow-hidden">
+        <img
+          src={belong.image.src}
+          alt={belong.image.alt}
+          class="w-full h-64 object-cover"
+          loading="lazy"
+        />
+      </figure>
+
+      <div class="grid md:grid-cols-3 gap-4">
+        {
+          belong.items.map((item) => (
+            <article class="theme-card theme-card--interactive p-5 flex flex-col gap-4">
+              <h3 class="section-heading text-2xl">
+                {item.title}
+              </h3>
+              <p class="text-(--ink)/85 grow">
+                {item.description}
+              </p>
+              <a
+                href={item.href}
+                class="inline-flex items-center gap-2 font-semibold text-(--ink) hover:text-(--teal) transition-colors"
+              >
+                {item.link_label}
+                <ArrowRight size={16} />
+              </a>
+            </article>
+          ))
+        }
+      </div>
+
+      {
+        belong.cta && (
+          <div class="theme-drench theme-drench--eden p-6 md:p-8 flex flex-col md:flex-row md:items-center gap-6 justify-between">
+            <div class="space-y-2">
+              <h3 class="section-heading text-2xl">
+                {belong.cta.text}
+              </h3>
+              <p class="text-(--ink)/85 text-lg max-w-xl">
+                {belong.cta.description}
+              </p>
+            </div>
+            <a
+              href={belong.cta.href}
+              class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-(--ink) text-white border-2 border-(--ink) font-semibold hover:bg-white hover:text-(--ink) transition-colors whitespace-nowrap"
+            >
+              {belong.cta.text}
+              <ArrowRight size={18} />
+            </a>
+          </div>
+        )
+      }
+      <div class="section-doodlystars" aria-hidden="true">
+        <span class="section-doodlystar section-doodlystar--left-edge"></span>
+        <span class="section-doodlystar section-doodlystar--bottom-right section-doodlystar--delay-2"></span>
+      </div>
+    </section>
+
+    <section
+      id="serve"
+      class="sketch-panel theme-serve bg-(--teal-soft)/35 p-6 md:p-8 space-y-6 scroll-mt-28"
+    >
+      <div class="theme-drench theme-drench--teal p-5 space-y-2">
+        <h2 class="section-heading text-4xl">{serve.heading}</h2>
+        <p class="text-(--ink)/85 mt-2 max-w-3xl">
+          {serve.intro}
+        </p>
+      </div>
+      <figure class="theme-card overflow-hidden">
+        <img
+          src={serve.image.src}
+          alt={serve.image.alt}
+          class="w-full h-64 object-cover top-10"
+          loading="lazy"
+        />
+      </figure>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+        {
+          serve.items.map((item) => (
+            <article class="theme-card theme-card--interactive p-5 flex flex-col gap-4">
+              <h3 class="section-heading text-2xl">
+                {item.title}
+              </h3>
+              <p class="text-(--ink)/85 grow">
+                {item.description}
+              </p>
+              <a
+                href={item.href}
+                class="inline-flex items-center gap-2 font-semibold text-(--ink) hover:text-(--teal) transition-colors"
+              >
+                {item.link_label}
+                <ArrowRight size={16} />
+              </a>
+            </article>
+          ))
+        }
+      </div>
+
+      <article class="theme-card p-6 space-y-3">
+        <h3 class="section-heading text-2xl">Serving Teams</h3>
+        <p class="text-(--ink)/85">
+          You can explore teams in detail and send your interest in one place.
+        </p>
+        <div class="flex flex-wrap gap-2 text-sm text-(--ink)/85">
+          {page.teams.slice(0, 8).map((team) => <span class="px-3 py-1 border border-(--ink)/20 rounded-full">{team.name}</span>)}
+        </div>
+        <a
+          href="/join-a-team"
+          class="inline-flex items-center gap-2 font-semibold text-(--ink) hover:text-(--teal) transition-colors"
+        >
+          Go to Join a Team <ArrowRight size={16} />
+        </a>
+      </article>
+    </section>
+
+    <section
+      id="give"
+      class="sketch-panel theme-give bg-(--gold-soft)/45 p-6 md:p-8 space-y-6 scroll-mt-28"
+    >
+      <div class="theme-drench theme-drench--gold p-5 space-y-2">
+        <h2 class="section-heading text-4xl">{give.title}</h2>
+        <p class="text-(--ink)/90 text-lg">
+          {give.generosity_paragraph}
+        </p>
+      </div>
+      <figure class="theme-card overflow-hidden">
+        <img
+          src={give.section_image.src}
+          alt={give.section_image.alt}
+          class="w-full h-64 object-cover"
+          loading="lazy"
+        />
+      </figure>
+
+      <a
+        href={give.online_giving.link}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-2 px-6 py-3 bg-(--ink) text-white border-2 border-(--ink) hover:bg-white hover:text-(--ink) transition-colors font-semibold"
+      >
+        {give.online_giving.button_label}
+      </a>
+
+      <div class="grid lg:grid-cols-2 gap-4">
+        <article class="theme-card p-6">
+          <p class="font-semibold text-(--ink) mb-3">
+            {give.methods_heading}
+          </p>
+          <ol class="list-decimal pl-6 space-y-2 text-(--ink)/90">
+            {give.methods.map((method) => <li>{method}</li>)}
+          </ol>
+        </article>
+        <article class="theme-card p-6 space-y-2">
+          <h3 class="section-heading text-2xl">
+            {give.bank_details.heading}
+          </h3>
+          {
+            give.bank_details.lines.map((line) => (
+              <p class="text-(--ink)/90">{line}</p>
+            ))
+          }
+          <p
+            class="pt-2 text-(--ink)/90"
+            set:html={give.contact_html}
+          />
+        </article>
+      </div>
+
+      {
+        give.development_needs?.items?.length > 0 && (
+          <article class="theme-card p-6 space-y-3">
+            <h3 class="section-heading text-2xl">
+              {give.development_needs.heading}
+            </h3>
+            <p class="text-(--ink)/90">
+              {give.development_needs.intro}
+            </p>
+            <ul class="space-y-3 text-(--ink)/90">
+              {
+                give.development_needs.items.map((item, index) => {
+                  const NeedIcon =
+                    giveDevelopmentNeedIcons[index] ?? Hammer;
+                  return (
+                    <li class="flex items-start gap-3">
+                      <span
+                        class="inline-flex shrink-0 items-center justify-center w-8 h-8 rounded-full bg-(--gold-soft) border border-(--ink)/15"
+                        style="color: var(--band-on-light);"
+                      >
+                        <NeedIcon size={16} aria-hidden="true" />
+                      </span>
+                      <span>{item}</span>
+                    </li>
+                  );
+                })
+              }
+            </ul>
+          </article>
+        )
+      }
+    </section>
+
+    <section id="team-and-beliefs" class="theme-card p-8 space-y-8 scroll-mt-28">
+      <h2 class="section-heading text-4xl">{teamAndBeliefs.heading}</h2>
+      <p class="text-(--ink)/85 max-w-4xl">{teamAndBeliefs.team_intro}</p>
+
+      <div class="grid sm:grid-cols-2 xl:grid-cols-4 gap-6">
+        {
+          teamAndBeliefs.members.map((member) => (
+            <article class="sketch-panel overflow-hidden flex flex-col">
+              <img
+                src={member.image.src}
+                alt={member.image.alt}
+                class="w-full h-56 object-cover border-b-2 border-(--ink)"
+                loading="lazy"
+              />
+              <div class="p-5 space-y-4 grow">
+                <div>
+                  <h3 class="section-heading text-2xl leading-tight">
+                    {member.name}
+                  </h3>
+                  <p class="text-(--teal) font-semibold">{member.role}</p>
+                </div>
+                <p class="text-(--ink)/85">{member.bio}</p>
+                <div class="space-y-2 text-sm">
+                  <p>
+                    <a
+                      href={`mailto:${member.email}`}
+                      class="inline-flex items-center gap-2 font-semibold text-(--ink) underline decoration-(--eden) underline-offset-4"
+                    >
+                      <Mail size={15} />
+                      {member.email}
+                    </a>
+                  </p>
+                  {
+                    member.phone && member.phone_href && (
+                      <p>
+                        <a
+                          href={member.phone_href}
+                          class="inline-flex items-center gap-2 font-semibold text-(--ink) underline decoration-(--eden) underline-offset-4"
+                        >
+                          <Phone size={15} />
+                          {member.phone}
+                        </a>
+                      </p>
+                    )
+                  }
+                </div>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+
+      <section class="grid lg:grid-cols-2 gap-6 items-start">
+        <article class="theme-card p-6 space-y-3">
+          <h3 class="section-heading text-3xl">{teamAndBeliefs.beliefs.title}</h3>
+          {
+            teamAndBeliefs.beliefs.paragraphs.map((paragraph) => (
+              <p class="text-(--ink)/90">{paragraph}</p>
+            ))
+          }
+        </article>
+        <figure class="theme-card overflow-hidden">
+          <img
+            src={teamAndBeliefs.beliefs.image.src}
+            alt={teamAndBeliefs.beliefs.image.alt}
+            class="w-full h-80 object-cover"
+            loading="lazy"
+          />
+        </figure>
+      </section>
+
+      <article class="theme-card p-6 space-y-3">
+        <h3 class="section-heading text-3xl">{teamAndBeliefs.safeguarding.title}</h3>
+        {
+          teamAndBeliefs.safeguarding.paragraphs.map((paragraph) => (
+            <p class="text-(--ink)/90" set:html={paragraph}></p>
+          ))
+        }
+      </article>
+
+      <section class="space-y-4">
+        <h3 class="section-heading text-3xl">{parkLife.heading}</h3>
+        <p class="text-(--ink)/85">{parkLife.subtitle}</p>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <figure class="theme-card theme-card--strong overflow-hidden">
+            <img
+              src={parkLife.featured_photo.src}
+              alt={parkLife.featured_photo.alt}
+              class="w-full h-56 object-cover"
+              loading="lazy"
+            />
+            <figcaption class="p-3 text-sm font-semibold">{parkLife.featured_photo.label}</figcaption>
+          </figure>
+          {
+            parkLife.photos.map((photo) => (
+              <figure class="theme-card overflow-hidden">
+                <img
+                  src={photo.src}
+                  alt={photo.alt}
+                  class="w-full h-56 object-cover"
+                  loading="lazy"
+                />
+                <figcaption class="p-3 text-sm font-semibold">{photo.label}</figcaption>
+              </figure>
+            ))
+          }
+        </div>
+      </section>
+    </section>
+  </div>
+</Layout>

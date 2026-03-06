@@ -1,0 +1,148 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { getSiteContent } from "../data/site-content";
+import { ArrowRight, Clock, MapPin } from "lucide-react";
+
+const content = await getSiteContent();
+const page = content.pages.visit;
+const gallery = page.gallery ?? [];
+---
+
+<Layout title={page.title}>
+  <div class="site-bands max-w-5xl mx-auto px-4 py-20 space-y-8">
+    <section class="space-y-3 relative has-doodly-stars has-doodly-stars--sky is-doodly-visible overflow-hidden">
+      <h1 class="page-heading page-heading--accent text-5xl md:text-6xl font-bold">
+        {page.title}
+      </h1>
+      <p class="text-xl text-(--ink)/85 max-w-4xl">
+        {page.home_preview?.intro}
+      </p>
+      <div class="section-doodlystars" aria-hidden="true">
+        <span class="section-doodlystar section-doodlystar--top-left"></span>
+        <span class="section-doodlystar section-doodlystar--right-edge section-doodlystar--delay"></span>
+      </div>
+    </section>
+
+    <section class="grid gap-4 md:grid-cols-2">
+      {
+        gallery.map((item, index) => (
+          <figure class:list={[
+            "theme-card overflow-hidden",
+            index === 0 && "theme-card--strong",
+          ]}>
+            <img
+              src={item.src}
+              alt={item.alt}
+              class="w-full h-64 object-cover"
+              loading="lazy"
+            />
+            <figcaption class="px-4 py-3 text-sm font-semibold text-(--ink)/80">
+              {item.caption}
+            </figcaption>
+          </figure>
+        ))
+      }
+    </section>
+
+    <section
+      id="sunday"
+      class="theme-card theme-card--strong p-8 space-y-6 scroll-mt-28 relative has-doodly-stars has-doodly-stars--leaf is-doodly-visible overflow-hidden"
+    >
+      <h2 class="section-heading text-4xl">{page.sunday.heading}</h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="space-y-4">
+          <div class="inline-flex items-center gap-3 text-(--ink)">
+            <Clock size={20} />
+            <div>
+              <p class="text-sm uppercase tracking-wide font-semibold text-(--ink)/70">
+                {page.sunday.time_label}
+              </p>
+              <p class="font-bold text-xl">{page.sunday.time}</p>
+            </div>
+          </div>
+          <div class="inline-flex items-center gap-3 text-(--ink)">
+            <MapPin size={20} />
+            <div>
+              <p class="text-sm uppercase tracking-wide font-semibold text-(--ink)/70">
+                {page.sunday.location_label}
+              </p>
+              <p class="font-bold">{page.sunday.location}</p>
+            </div>
+          </div>
+          <p class="text-(--ink)/90">{page.sunday.description}</p>
+          <p class="text-(--ink)/90">{page.sunday.service_style}</p>
+          <p class="text-(--ink)/90">{page.sunday.after_service}</p>
+        </div>
+        <figure class="theme-card overflow-hidden">
+          <img
+            src={page.sunday.image.src}
+            alt={page.sunday.image.alt}
+            class="w-full h-full min-h-64 object-cover"
+            loading="lazy"
+          />
+        </figure>
+      </div>
+      <div class="section-doodlystars" aria-hidden="true">
+        <span class="section-doodlystar section-doodlystar--left-edge"></span>
+        <span class="section-doodlystar section-doodlystar--bottom-right section-doodlystar--delay-2"></span>
+      </div>
+    </section>
+
+    <section id="what-to-expect" class="theme-card p-8 space-y-4 scroll-mt-28">
+      <h2 class="section-heading text-3xl">{page.what_to_expect.heading}</h2>
+      <ul class="list-disc pl-6 space-y-2 text-(--ink)/90">
+        {page.what_to_expect.items.map((item) => <li>{item}</li>)}
+      </ul>
+      <p class="text-(--ink)/90">
+        {page.what_to_expect.talks_link_intro}{" "}
+        <a
+          href={page.what_to_expect.talks_link_href}
+          class="underline decoration-(--eden) underline-offset-4"
+        >
+          {page.what_to_expect.talks_link_label}
+        </a>
+        .
+      </p>
+    </section>
+
+    <section id="children-young-people" class="theme-card p-8 space-y-4 scroll-mt-28">
+      <h2 class="section-heading text-3xl">{page.children_young_people.heading}</h2>
+      <p class="text-(--ink)/90">{page.children_young_people.blurb}</p>
+      <div class="flex flex-wrap gap-3">
+        {page.children_young_people.links.map((item) => (
+          <a
+            href={item.href}
+            class="inline-flex items-center gap-2 px-4 py-2 border-2 border-(--ink) font-semibold hover:bg-(--ink) hover:text-white transition-colors"
+          >
+            {item.label}
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section id="plan-your-visit" class="theme-card p-8 space-y-4 scroll-mt-28">
+      <h2 class="section-heading text-3xl">{page.plan_your_visit.heading}</h2>
+      {
+        page.plan_your_visit.paragraphs.map((paragraph) => (
+          <p class="text-(--ink)/90">{paragraph}</p>
+        ))
+      }
+      <div class="space-y-2">
+        {page.plan_your_visit.life_events_links.map((link) => (
+          <p>
+            <a
+              href={link.href}
+              class="inline-flex items-center gap-2 underline decoration-(--eden) underline-offset-4"
+            >
+              {link.label}
+              <ArrowRight size={15} />
+            </a>
+          </p>
+        ))}
+      </div>
+      <p class="text-(--ink)/90">
+        Prefer to ask directly? <a href="/contact#send-message" class="underline decoration-(--eden) underline-offset-4">Send us a message</a>.
+      </p>
+    </section>
+  </div>
+</Layout>
