@@ -21,6 +21,7 @@
   --heading-accent-via: #f6dcba;
   --heading-accent-to: #dba45e;
   --heading-accent-fallback: #f4f8ff;
+  --scribble-ink: #f47a20;
 
   /* Semantic surfaces */
   --paper: color-mix(in oklab, white 95%, var(--section-blue) 5%);
@@ -124,6 +125,64 @@ legend,
       var(--heading-accent-from) 0%,
       var(--heading-accent-via) 54%,
       var(--heading-accent-to) 100%);
+}
+
+.page-heading--accent {
+  position: relative;
+  display: inline-block;
+  isolation: isolate;
+  padding-bottom: 0.52em;
+  --scribble-primary: color-mix(in oklab, var(--scribble-ink) 94%, black 6%);
+  --scribble-secondary: color-mix(in oklab, var(--scribble-ink) 86%, white 14%);
+}
+
+.page-heading--accent::before,
+.page-heading--accent::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  z-index: -1;
+  border-radius: 999px;
+}
+
+.page-heading--accent::before {
+  left: -0.16em;
+  right: -0.14em;
+  bottom: 0.24em;
+  height: 0.12em;
+  transform: rotate(-2deg) skewX(-12deg);
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in oklab, var(--scribble-primary) 88%, black 12%) 0%,
+      color-mix(in oklab, var(--scribble-secondary) 92%, white 8%) 100%
+    ),
+    repeating-linear-gradient(
+      95deg,
+      color-mix(in oklab, var(--scribble-primary) 96%, black 4%) 0 10px,
+      color-mix(in oklab, var(--scribble-secondary) 92%, white 8%) 10px 18px
+    );
+  opacity: 0.98;
+}
+
+.page-heading--accent::after {
+  left: 0.01em;
+  right: 0.16em;
+  bottom: 0;
+  height: 0.31em;
+  transform: rotate(0.85deg) skewX(-14deg);
+  border-radius: 78% 92% 76% 84% / 65% 88% 72% 95%;
+  background:
+    linear-gradient(176deg, transparent 0 16%, var(--scribble-secondary) 18% 86%, transparent 88%),
+    repeating-linear-gradient(
+      103deg,
+      color-mix(in oklab, var(--scribble-primary) 95%, black 5%) 0 14px,
+      color-mix(in oklab, var(--scribble-secondary) 91%, white 9%) 14px 26px
+    );
+  box-shadow:
+    -0.04em 0.15em 0 -0.02em color-mix(in oklab, var(--scribble-primary) 84%, white 16%),
+    0.12em -0.06em 0 -0.03em color-mix(in oklab, var(--scribble-secondary) 88%, white 12%);
+  opacity: 0.99;
 }
 
 .section-band {
@@ -1474,32 +1533,32 @@ html[data-theme="line-drawing"] .site-appbar {
 
 .site-bands img,
 .section-band img {
-  border-radius: 22px 28px 20px 26px;
-  border: 5px solid color-mix(in oklab, white 80%, var(--band-bg, var(--paper-soft)) 20%);
+  border-radius: 12px 14px 11px 13px;
+  border: 2px solid color-mix(in oklab, white 90%, var(--band-bg, var(--paper-soft)) 10%);
   box-shadow:
-    0 12px 26px rgba(21, 24, 28, 0.2),
-    10px 10px 0 color-mix(in oklab, var(--ink) 20%, white 80%);
+    0 6px 14px rgba(21, 24, 28, 0.1),
+    2px 2px 0 color-mix(in oklab, var(--ink) 10%, white 90%);
   transition: transform 220ms ease, box-shadow 220ms ease;
 }
 
 .site-bands .grid img:not([class*="hover:scale"]),
 .section-band .grid img:not([class*="hover:scale"]) {
-  transform: rotate(-1.4deg);
+  transform: rotate(-0.4deg);
 }
 
 .site-bands .grid>*:nth-child(even) img:not([class*="hover:scale"]),
 .section-band .grid>*:nth-child(even) img:not([class*="hover:scale"]) {
-  transform: rotate(1.5deg) translateY(4px);
+  transform: rotate(0.45deg) translateY(1px);
 }
 
 .site-bands .grid>*:nth-child(3n) img:not([class*="hover:scale"]),
 .section-band .grid>*:nth-child(3n) img:not([class*="hover:scale"]) {
-  transform: rotate(-0.7deg) translateY(-3px);
+  transform: rotate(-0.3deg) translateY(-1px);
 }
 
 .site-bands .grid>*:hover img:not([class*="hover:scale"]),
 .section-band .grid>*:hover img:not([class*="hover:scale"]) {
-  transform: rotate(0deg) scale(1.02);
+  transform: rotate(0deg) scale(1.01);
 }
 
 .site-appbar {
