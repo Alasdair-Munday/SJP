@@ -51,6 +51,22 @@ const firstTimeCards = (
 	})) ??
 	[]
 ).slice(0, 3);
+const firstTimePhoto = visit.gallery?.[0] ?? {
+	src: "/images/refreshments.jpg",
+	alt: "People chatting over refreshments after a Sunday gathering",
+};
+const missionPhoto = content.pages.church_life.groups?.[0]?.image ?? {
+	src: "/images/congregation.jpg",
+	alt: "Church family gathered together in worship",
+};
+const latestMessagePhoto = content.pages.talks.hero_image ?? {
+	src: "/images/Sermons.jpg",
+	alt: "Bible talk being shared during a Sunday service",
+};
+const comingUpPhoto = content.pages.calendar.sunday_gathering?.image ?? {
+	src: "/images/worship team.jpg",
+	alt: "Worship team leading on a Sunday morning",
+};
 ---
 
 <Layout title="Home">
@@ -140,6 +156,14 @@ const firstTimeCards = (
 					{firstTimeIntro}
 				</p>
 			</div>
+			<figure class="theme-card overflow-hidden mb-8 max-w-4xl">
+				<img
+					src={firstTimePhoto.src}
+					alt={firstTimePhoto.alt}
+					class="w-full h-60 md:h-72 object-cover"
+					loading="lazy"
+				/>
+			</figure>
 			<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
 				{
 					firstTimeCards.map((card, index) => (
@@ -206,6 +230,14 @@ const firstTimeCards = (
 					>{mission.tag}</span
 				>
 			</div>
+			<figure class="theme-card overflow-hidden mb-8 max-w-5xl">
+				<img
+					src={missionPhoto.src}
+					alt={missionPhoto.alt}
+					class="w-full h-60 md:h-72 object-cover"
+					loading="lazy"
+				/>
+			</figure>
 
 			<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
 				<div class="home-strip-item pt-6 group">
@@ -271,6 +303,7 @@ const firstTimeCards = (
 					</a>
 				</div>
 			</div>
+
 		</div>
 		<div
 			class="section-wave"
@@ -290,34 +323,44 @@ const firstTimeCards = (
 	>
 		<div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
 			<div class="band-split-block py-10">
-				<div>
-					<p
-						class="text-sm uppercase tracking-[0.14em] font-bold text-(--teal) mb-3"
-					>
-						{latest_message.eyebrow}
-					</p>
-					<h2 class="page-heading text-4xl font-bold mb-4">
-						{latest_message_details.title}
-					</h2>
-					<p class="text-(--ink)/85 text-lg font-medium">
-						{latest_message_details.description}
-					</p>
-				</div>
-				<div class="space-y-4 mt-8">
-					<audio controls class="w-full">
-						<source
-							src={latest_message_details.audioUrl}
-							type="audio/mpeg"
+				<div class="grid lg:grid-cols-[1.05fr_0.95fr] gap-8 items-start">
+					<div>
+						<p
+							class="text-sm uppercase tracking-[0.14em] font-bold text-(--teal) mb-3"
+						>
+							{latest_message.eyebrow}
+						</p>
+						<h2 class="page-heading text-4xl font-bold mb-4">
+							{latest_message_details.title}
+						</h2>
+						<p class="text-(--ink)/85 text-lg font-medium">
+							{latest_message_details.description}
+						</p>
+						<div class="space-y-4 mt-8">
+							<audio controls class="w-full">
+								<source
+									src={latest_message_details.audioUrl}
+									type="audio/mpeg"
+								/>
+								Your browser does not support the audio player.
+							</audio>
+							<a
+								href={latest_message.cta.href}
+								class="inline-flex items-center gap-2 px-5 py-2.5 border-2 border-(--ink) text-(--ink) font-semibold hover:bg-white/90 hover:text-[#10232e] transition-colors"
+							>
+								{latest_message.cta.label}
+								<PlayCircle size={18} />
+							</a>
+						</div>
+					</div>
+					<figure class="theme-card overflow-hidden">
+						<img
+							src={latestMessagePhoto.src}
+							alt={latestMessagePhoto.alt}
+							class="w-full h-64 md:h-80 object-cover"
+							loading="lazy"
 						/>
-						Your browser does not support the audio player.
-					</audio>
-					<a
-						href={latest_message.cta.href}
-						class="inline-flex items-center gap-2 px-5 py-2.5 border-2 border-(--ink) text-(--ink) font-semibold hover:bg-white/90 hover:text-[#10232e] transition-colors"
-					>
-						{latest_message.cta.label}
-						<PlayCircle size={18} />
-					</a>
+					</figure>
 				</div>
 			</div>
 		</div>
@@ -354,6 +397,14 @@ const firstTimeCards = (
 					{coming_up.title}
 				</h2>
 			</div>
+			<figure class="theme-card overflow-hidden max-w-5xl">
+				<img
+					src={comingUpPhoto.src}
+					alt={comingUpPhoto.alt}
+					class="w-full h-60 md:h-72 object-cover"
+					loading="lazy"
+				/>
+			</figure>
 
 			<FeaturedEvent />
 			<CalendarEvents />

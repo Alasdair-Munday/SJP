@@ -133,17 +133,20 @@ const joinTeam = page.join_team ?? {
 								data-team-card
 								data-team-name={team.name}
 								aria-pressed="false"
-								class="text-left theme-card theme-card--interactive p-5 transition-colors"
+								class="join-team-card text-left theme-card theme-card--interactive p-5 transition-colors"
 							>
 								{
 									(() => {
 										const TeamIcon = getTeamIcon(team.name);
 										return (
-											<div class="flex items-center gap-2 mb-2">
-												<span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-(--teal-soft) border border-(--ink)/15">
+											<div class="flex items-start justify-between gap-3 mb-2">
+												<div class="flex items-center gap-2">
+													<span class="join-team-card__icon inline-flex items-center justify-center w-8 h-8 rounded-full bg-(--teal-soft) border border-(--ink)/15">
 													<TeamIcon size={16} aria-hidden="true" />
-												</span>
-												<p class="section-heading text-2xl">{team.name}</p>
+													</span>
+													<p class="section-heading text-2xl">{team.name}</p>
+												</div>
+												<span class="join-team-card__badge">Selected</span>
 											</div>
 										);
 									})()
@@ -281,8 +284,7 @@ const joinTeam = page.join_team ?? {
 
 			const updateCardStyle = (card, isSelected) => {
 				card.setAttribute("aria-pressed", isSelected ? "true" : "false");
-				card.style.backgroundColor = isSelected ? "var(--teal-soft)" : "";
-				card.style.borderColor = isSelected ? "var(--teal)" : "";
+				card.classList.toggle("is-selected", isSelected);
 			};
 
 			cards.forEach((card) => {
@@ -321,4 +323,64 @@ const joinTeam = page.join_team ?? {
 			renderMessage();
 		})();
 	</script>
+
+	<style>
+		.join-team-card {
+			border: 2px solid color-mix(in oklab, var(--ink) 20%, transparent) !important;
+			background: color-mix(in oklab, white 90%, var(--paper-soft) 10%) !important;
+			transition:
+				background-color 180ms ease,
+				border-color 180ms ease,
+				transform 180ms ease;
+		}
+
+		.join-team-card:hover {
+			background: color-mix(in oklab, white 84%, var(--teal-soft) 16%) !important;
+		}
+
+		.join-team-card.is-selected,
+		.join-team-card[aria-pressed="true"] {
+			border-color: var(--teal) !important;
+			background: color-mix(in oklab, white 70%, var(--teal-soft) 30%) !important;
+			transform: translateY(-1px);
+		}
+
+		.join-team-card__icon {
+			transition:
+				background-color 180ms ease,
+				border-color 180ms ease,
+				color 180ms ease;
+		}
+
+		.join-team-card.is-selected .join-team-card__icon,
+		.join-team-card[aria-pressed="true"] .join-team-card__icon {
+			background: var(--teal) !important;
+			border-color: var(--teal) !important;
+			color: white;
+		}
+
+		.join-team-card__badge {
+			opacity: 0;
+			transform: translateY(-2px);
+			transition:
+				opacity 180ms ease,
+				transform 180ms ease;
+			pointer-events: none;
+			font-size: 0.68rem;
+			font-weight: 800;
+			letter-spacing: 0.08em;
+			text-transform: uppercase;
+			padding: 0.2rem 0.5rem;
+			border: 2px solid var(--teal);
+			color: var(--teal);
+			border-radius: 999px;
+			background: color-mix(in oklab, white 88%, var(--teal-soft) 12%);
+		}
+
+		.join-team-card.is-selected .join-team-card__badge,
+		.join-team-card[aria-pressed="true"] .join-team-card__badge {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	</style>
 </Layout>

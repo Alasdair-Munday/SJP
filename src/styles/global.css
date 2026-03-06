@@ -871,6 +871,24 @@ html[data-theme="line-drawing"] .site-appbar {
   color: var(--band-body);
 }
 
+@media (max-width: 768px) {
+  .site-shell {
+    overflow-x: hidden;
+  }
+
+  .site-bands,
+  .site-bands>* {
+    overflow-x: clip;
+  }
+
+  @supports not (overflow: clip) {
+    .site-bands,
+    .site-bands>* {
+      overflow-x: hidden;
+    }
+  }
+}
+
 .site-bands>* > :not(:first-child) {
   position: relative;
   z-index: 1;

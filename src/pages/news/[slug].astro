@@ -11,6 +11,15 @@ const content = await getSiteContent();
 const copy = content.components.news ?? {
 	back_to_news_label: "Back to News",
 	archived_notice: "This article is archived and may contain out-of-date details.",
+	read_article_label: "Read article",
+	view_all_label: "View all news",
+};
+
+const isCurrentNewsItem = (newsItem: CollectionEntry<"news">) => {
+	const staleAfterDays = newsItem.data.staleAfterDays ?? STALE_FALLBACK_DAYS;
+	const staleDate = new Date(newsItem.data.publishDate);
+	staleDate.setDate(staleDate.getDate() + staleAfterDays);
+	return staleDate >= now;
 };
 
 export async function getStaticPaths() {
@@ -30,6 +39,11 @@ const staleDate = new Date(item.data.publishDate);
 staleDate.setDate(staleDate.getDate() + staleAfterDays);
 const isStale = staleDate < now;
 
+const relatedNews = (await getCollection("news"))
+	.filter((newsItem) => newsItem.slug !== item.slug && isCurrentNewsItem(newsItem))
+	.sort((a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime())
+	.slice(0, 4);
+
 const formatDate = (date: Date) =>
 	new Intl.DateTimeFormat("en-GB", {
 		day: "numeric",
@@ -39,49 +53,114 @@ const formatDate = (date: Date) =>
 ---
 
 <Layout title={item.data.title}>
-	<div class="site-bands max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-8">
-		<a
-			href="/news"
-			class="inline-flex items-center gap-2 text-(--ink) font-semibold hover:text-(--eden) transition-colors"
-		>
-			<ArrowRight size={16} className="rotate-180" /> {copy.back_to_news_label}
-		</a>
-
-		<article class="theme-card p-8 space-y-6">
+	<div class="site-bands site-bands--news-detail max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-8">
+		<section class="space-y-4 relative has-doodly-stars has-doodly-stars--leaf is-doodly-visible overflow-hidden">
+			<a
+				href="/news"
+				class="inline-flex items-center gap-2 text-(--ink) font-semibold hover:text-(--eden) transition-colors"
+			>
+				<ArrowRight size={16} className="rotate-180" /> {copy.back_to_news_label}
+			</a>
 			<p class="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.1em] text-(--ink)/65">
 				<Calendar size={16} /> {formatDate(item.data.publishDate)}
 			</p>
 			<h1 class="page-heading page-heading--accent text-4xl md:text-5xl font-bold">
 				{item.data.title}
 			</h1>
-			<p class="text-lg text-(--ink)/85 font-medium">{item.data.summary}</p>
+			<p class="text-lg text-(--ink)/85 font-medium max-w-4xl">{item.data.summary}</p>
+			<div class="section-doodlystars" aria-hidden="true">
+				<span class="section-doodlystar section-doodlystar--top-left"></span>
+				<span class="section-doodlystar section-doodlystar--right-edge section-doodlystar--delay"></span>
+			</div>
+		</section>
 
-			<div class="flex flex-wrap gap-4">
-				<a
-					href={item.data.ctaHref}
-					class="inline-flex items-center gap-2 px-5 py-2.5 border-2 border-(--ink) text-(--ink) font-semibold hover:bg-(--ink) hover:text-white transition-colors"
-				>
-					{item.data.ctaLabel} <ArrowRight size={16} />
-				</a>
-				{item.data.secondaryCtaLabel && item.data.secondaryCtaHref && (
+		<section class="grid gap-6 lg:grid-cols-[minmax(0,2fr)_minmax(18rem,1fr)] items-start">
+			<article class="theme-card p-6 md:p-8 space-y-6 relative has-doodly-stars has-doodly-stars--sky is-doodly-visible overflow-hidden">
+				<div class="flex flex-wrap gap-3">
 					<a
-						href={item.data.secondaryCtaHref}
-						class="inline-flex items-center gap-2 px-5 py-2.5 border-2 border-(--teal) text-(--teal) font-semibold hover:bg-(--teal) hover:text-white transition-colors"
+						href={item.data.ctaHref}
+						class="inline-flex items-center gap-2 px-5 py-2.5 border-2 border-(--ink) text-(--ink) font-semibold hover:bg-(--ink) hover:text-white transition-colors"
 					>
-						{item.data.secondaryCtaLabel} <ArrowRight size={16} />
+						{item.data.ctaLabel} <ArrowRight size={16} />
 					</a>
+					{item.data.secondaryCtaLabel && item.data.secondaryCtaHref && (
+						<a
+							href={item.data.secondaryCtaHref}
+							class="inline-flex items-center gap-2 px-5 py-2.5 border-2 border-(--teal) text-(--teal) font-semibold hover:bg-(--teal) hover:text-white transition-colors"
+						>
+							{item.data.secondaryCtaLabel} <ArrowRight size={16} />
+						</a>
+					)}
+				</div>
+
+				{isStale && (
+					<p class="text-sm font-semibold text-(--ink)/70 border-t border-(--ink)/20 pt-4">
+						{copy.archived_notice}
+					</p>
 				)}
-			</div>
 
-			{isStale && (
-				<p class="text-sm font-semibold text-(--ink)/70 border-t border-(--ink)/20 pt-4">
-					{copy.archived_notice}
+				<div class="border-t-2 border-(--ink)/25 pt-6 prose max-w-none prose-headings:text-(--ink) prose-p:text-(--ink)/90 prose-li:text-(--ink)/90 prose-a:text-(--teal)">
+					<Content />
+				</div>
+				<div class="section-doodlystars" aria-hidden="true">
+					<span class="section-doodlystar section-doodlystar--left-edge"></span>
+					<span class="section-doodlystar section-doodlystar--bottom-right section-doodlystar--delay-2"></span>
+				</div>
+			</article>
+
+			<aside class="sketch-panel p-5 md:p-6 space-y-4 lg:sticky lg:top-28">
+				<p class="text-sm uppercase tracking-[0.14em] font-bold text-(--teal)">
+					More News
 				</p>
-			)}
 
-			<div class="border-t-2 border-(--ink) pt-6 prose max-w-none prose-headings:text-(--ink) prose-p:text-(--ink)/90 prose-li:text-(--ink)/90 prose-a:text-(--teal)">
-				<Content />
-			</div>
-		</article>
+				{
+					relatedNews.length > 0 ? (
+						<ul class="space-y-3">
+							{relatedNews.map((newsItem) => (
+								<li class="border-t border-(--ink)/20 pt-3 first:border-t-0 first:pt-0 space-y-1.5">
+									<p class="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.08em] text-(--ink)/70">
+										<Calendar size={14} />
+										{formatDate(newsItem.data.publishDate)}
+									</p>
+									<a
+										href={`/news/${newsItem.slug}/`}
+										class="block font-bold text-(--ink) leading-snug hover:text-(--eden) transition-colors"
+									>
+										{newsItem.data.title}
+									</a>
+									<p class="text-sm text-(--ink)/82 leading-relaxed">
+										{newsItem.data.summary}
+									</p>
+									<a
+										href={`/news/${newsItem.slug}/`}
+										class="inline-flex items-center gap-1.5 text-sm font-semibold text-(--ink) hover:text-(--eden) transition-colors"
+									>
+										{copy.read_article_label}
+										<ArrowRight size={14} />
+									</a>
+								</li>
+							))}
+						</ul>
+					) : (
+						<p class="text-sm text-(--ink)/85">
+							No other current news articles right now.{" "}
+							<a
+								href="/news"
+								class="font-semibold underline decoration-2 underline-offset-3 hover:text-(--eden) transition-colors"
+							>
+								{copy.view_all_label}
+							</a>
+						</p>
+					)
+				}
+			</aside>
+		</section>
 	</div>
 </Layout>
+
+<style is:global>
+	.site-bands--news-detail > * > :first-child::before,
+	.site-bands--news-detail > * > :first-child::after {
+		display: none;
+	}
+</style>

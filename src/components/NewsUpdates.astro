@@ -12,6 +12,10 @@ const copy = content.components.news ?? {
 	read_article_label: "Read article",
 	empty_label: "No current news updates. Check back soon.",
 };
+const newsSectionPhoto = content.pages.calendar.seasonal_events?.images?.[0] ?? {
+	src: "/images/christmas singing.jpg",
+	alt: "Church family gathered for a seasonal church event",
+};
 
 const recentNews = (await getCollection("news"))
 	.filter((item) => {
@@ -48,6 +52,14 @@ const formatDate = (date: Date) =>
 				<ArrowRight size={16} />
 			</a>
 		</div>
+		<figure class="theme-card overflow-hidden mb-8 max-w-5xl">
+			<img
+				src={newsSectionPhoto.src}
+				alt={newsSectionPhoto.alt}
+				class="w-full h-60 md:h-72 object-cover"
+				loading="lazy"
+			/>
+		</figure>
 
 		{
 			recentNews.length > 0 ? (
