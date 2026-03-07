@@ -18,15 +18,13 @@ const copy = content.components.news ?? {
 
 const newsItems = (await getCollection("news"))
 	.filter((item) => {
-		const staleAfterDays =
-			item.data.staleAfterDays ?? STALE_FALLBACK_DAYS;
+		const staleAfterDays = item.data.staleAfterDays ?? STALE_FALLBACK_DAYS;
 		const staleDate = new Date(item.data.publishDate);
 		staleDate.setDate(staleDate.getDate() + staleAfterDays);
 		return staleDate >= now;
 	})
 	.sort(
-		(a, b) =>
-			b.data.publishDate.getTime() - a.data.publishDate.getTime(),
+		(a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime(),
 	);
 
 const formatDate = (date: Date) =>
@@ -38,10 +36,18 @@ const formatDate = (date: Date) =>
 ---
 
 <Layout title="News">
-	<div class="site-bands max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-8">
-		<header class="space-y-3">
-			<p class="text-sm uppercase tracking-[0.14em] font-bold text-(--teal)">{copy.listing_eyebrow}</p>
-			<h1 class="page-heading page-heading--accent text-5xl font-bold">{copy.listing_title}</h1>
+	<div
+		class="site-bands max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-8"
+	>
+		<header class="space-y-3 px-8">
+			<p
+				class="text-sm uppercase tracking-[0.14em] font-bold text-(--teal)"
+			>
+				{copy.listing_eyebrow}
+			</p>
+			<h1 class="page-heading page-heading--accent text-5xl font-bold">
+				{copy.listing_title}
+			</h1>
 			<p class="text-(--ink)/85 max-w-3xl">
 				{copy.listing_description}
 			</p>
@@ -53,10 +59,14 @@ const formatDate = (date: Date) =>
 					{newsItems.map((item) => (
 						<article class="sketch-panel p-6 flex flex-col gap-4 h-full">
 							<p class="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.1em] text-(--ink)/65">
-								<Calendar size={16} /> {formatDate(item.data.publishDate)}
+								<Calendar size={16} />{" "}
+								{formatDate(item.data.publishDate)}
 							</p>
 							<h2 class="section-heading text-2xl">
-								<a href={`/news/${item.slug}/`} class="hover:text-(--teal) transition-colors">
+								<a
+									href={`/news/${item.slug}/`}
+									class="hover:text-(--teal) transition-colors"
+								>
 									{item.data.title}
 								</a>
 							</h2>
@@ -72,7 +82,9 @@ const formatDate = (date: Date) =>
 					))}
 				</div>
 			) : (
-				<p class="text-(--ink)/85 font-medium">{copy.listing_empty_message}</p>
+				<p class="text-(--ink)/85 font-medium">
+					{copy.listing_empty_message}
+				</p>
 			)
 		}
 	</div>

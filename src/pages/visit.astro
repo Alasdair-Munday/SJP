@@ -9,12 +9,12 @@ const gallery = page.gallery ?? [];
 ---
 
 <Layout title={page.title}>
-  <div class="site-bands max-w-5xl mx-auto px-4 py-20 space-y-8">
-    <section class="space-y-3 relative has-doodly-stars has-doodly-stars--sky is-doodly-visible overflow-hidden">
+  <div class="site-bands rhythm-page max-w-5xl mx-auto px-4 py-20 space-y-8">
+    <section class="space-y-3 relative has-doodly-stars has-doodly-stars--sky is-doodly-visible overflow-hidden section-band--decor-low">
       <h1 class="page-heading page-heading--accent text-5xl md:text-6xl font-bold">
         {page.title}
       </h1>
-      <p class="text-xl text-(--ink)/85 max-w-4xl">
+      <p class="lede text-xl text-(--ink)/85 max-w-4xl">
         {page.home_preview?.intro}
       </p>
       <div class="section-doodlystars" aria-hidden="true">
@@ -46,7 +46,7 @@ const gallery = page.gallery ?? [];
 
     <section
       id="sunday"
-      class="theme-card theme-card--strong p-8 space-y-6 scroll-mt-28 relative has-doodly-stars has-doodly-stars--leaf is-doodly-visible overflow-hidden"
+      class="theme-card theme-card--strong p-8 space-y-6 scroll-mt-28 relative has-doodly-stars has-doodly-stars--leaf is-doodly-visible overflow-hidden section-band--decor-medium"
     >
       <h2 class="section-heading text-4xl">{page.sunday.heading}</h2>
       <div class="grid md:grid-cols-2 gap-6">

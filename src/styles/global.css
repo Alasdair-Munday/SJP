@@ -8,6 +8,18 @@
   --font-label: "Fuzzy Bubbles", "Nunito Sans", sans-serif;
   --font-hand: "Patrick Hand", "Baloo 2", cursive;
 
+  /* Type + spacing scale */
+  --section-space-y: clamp(3.5rem, 6vw, 5.5rem);
+  --section-space-y-tight: clamp(2.25rem, 4vw, 3.5rem);
+  --section-space-y-loose: clamp(4.25rem, 7vw, 6.5rem);
+  --measure-heading: 22ch;
+  --measure-body: 66ch;
+  --measure-body-tight: 58ch;
+  --leading-heading: 1.08;
+  --leading-body: 1.62;
+  --font-size-body: clamp(1rem, 0.22vw + 0.95rem, 1.08rem);
+  --font-size-body-large: clamp(1.08rem, 0.38vw + 1rem, 1.26rem);
+
   /* Core palette */
   --section-blue: #00B3FF;
   --section-green: #55aa85;
@@ -21,7 +33,6 @@
   --heading-accent-via: #f6dcba;
   --heading-accent-to: #dba45e;
   --heading-accent-fallback: #f4f8ff;
-  --scribble-ink: #f47a20;
 
   /* Semantic surfaces */
   --paper: color-mix(in oklab, white 95%, var(--section-blue) 5%);
@@ -63,11 +74,21 @@
 
   /* Card framing */
   --card-border: color-mix(in oklab, var(--ink) 64%, white 36%);
-  --card-shadow:
-    0 0 0 color-mix(in oklab, var(--ink) 0%, transparent),
-    0 0 0 rgba(0, 0, 0, 0);
-  --card-shadow-strong: var(--card-shadow);
-  --card-shadow-pressed: var(--card-shadow);
+  --elevation-border-1: 2px solid color-mix(in oklab, var(--ink) 55%, white 45%);
+  --elevation-border-2: 2px solid color-mix(in oklab, var(--ink) 68%, white 32%);
+  --elevation-border-3: 3px solid color-mix(in oklab, var(--ink) 72%, white 28%);
+  --elevation-shadow-1:
+    0 6px 14px color-mix(in oklab, var(--ink) 12%, transparent),
+    0 1px 0 color-mix(in oklab, white 75%, transparent);
+  --elevation-shadow-2:
+    0 10px 20px color-mix(in oklab, var(--ink) 16%, transparent),
+    0 2px 0 color-mix(in oklab, white 72%, transparent);
+  --elevation-shadow-3:
+    0 14px 28px color-mix(in oklab, var(--ink) 20%, transparent),
+    0 2px 0 color-mix(in oklab, white 70%, transparent);
+  --card-shadow: var(--elevation-shadow-1);
+  --card-shadow-strong: var(--elevation-shadow-2);
+  --card-shadow-pressed: 0 3px 8px color-mix(in oklab, var(--ink) 16%, transparent);
 }
 
 html,
@@ -95,19 +116,39 @@ html[data-theme="line-drawing"] .theme-display-font {
 .page-heading {
   font-family: var(--font-display);
   font-weight: 700;
-  line-height: 1.03;
+  font-size: clamp(2.1rem, 2vw + 1.55rem, 4.1rem);
+  line-height: var(--leading-heading);
   letter-spacing: 0.012em;
   color: var(--ink);
   text-wrap: balance;
+  max-inline-size: var(--measure-heading);
 }
 
 .section-heading {
   font-family: var(--font-subheading);
   font-weight: 700;
-  line-height: 1.08;
+  line-height: var(--leading-heading);
   letter-spacing: 0.01em;
   color: var(--ink);
   text-wrap: balance;
+  max-inline-size: var(--measure-heading);
+}
+
+.rhythm-page > * + * {
+  margin-top: var(--section-space-y-tight);
+}
+
+.rhythm-page :is(p, li, dt, dd, blockquote, figcaption) {
+  font-size: var(--font-size-body);
+  line-height: var(--leading-body);
+  max-inline-size: var(--measure-body);
+}
+
+.rhythm-page .lede,
+.rhythm-page :is(.text-xl, .text-2xl) {
+  font-size: var(--font-size-body-large);
+  line-height: 1.55;
+  max-inline-size: var(--measure-body-tight);
 }
 
 label,
@@ -121,73 +162,11 @@ legend,
 .page-heading--accent,
 .heading-eden-gold {
   color: var(--heading-accent-fallback);
-  background-image: linear-gradient(108deg,
-      var(--heading-accent-from) 0%,
-      var(--heading-accent-via) 54%,
-      var(--heading-accent-to) 100%);
-}
-
-.page-heading--accent {
-  position: relative;
-  display: inline-block;
-  isolation: isolate;
-  padding-bottom: 0.52em;
-  --scribble-primary: color-mix(in oklab, var(--scribble-ink) 94%, black 6%);
-  --scribble-secondary: color-mix(in oklab, var(--scribble-ink) 86%, white 14%);
-}
-
-.page-heading--accent::before,
-.page-heading--accent::after {
-  content: "";
-  position: absolute;
-  pointer-events: none;
-  z-index: -1;
-  border-radius: 999px;
-}
-
-.page-heading--accent::before {
-  left: -0.16em;
-  right: -0.14em;
-  bottom: 0.24em;
-  height: 0.12em;
-  transform: rotate(-2deg) skewX(-12deg);
-  background:
-    linear-gradient(
-      180deg,
-      color-mix(in oklab, var(--scribble-primary) 88%, black 12%) 0%,
-      color-mix(in oklab, var(--scribble-secondary) 92%, white 8%) 100%
-    ),
-    repeating-linear-gradient(
-      95deg,
-      color-mix(in oklab, var(--scribble-primary) 96%, black 4%) 0 10px,
-      color-mix(in oklab, var(--scribble-secondary) 92%, white 8%) 10px 18px
-    );
-  opacity: 0.98;
-}
-
-.page-heading--accent::after {
-  left: 0.01em;
-  right: 0.16em;
-  bottom: 0;
-  height: 0.31em;
-  transform: rotate(0.85deg) skewX(-14deg);
-  border-radius: 78% 92% 76% 84% / 65% 88% 72% 95%;
-  background:
-    linear-gradient(176deg, transparent 0 16%, var(--scribble-secondary) 18% 86%, transparent 88%),
-    repeating-linear-gradient(
-      103deg,
-      color-mix(in oklab, var(--scribble-primary) 95%, black 5%) 0 14px,
-      color-mix(in oklab, var(--scribble-secondary) 91%, white 9%) 14px 26px
-    );
-  box-shadow:
-    -0.04em 0.15em 0 -0.02em color-mix(in oklab, var(--scribble-primary) 84%, white 16%),
-    0.12em -0.06em 0 -0.03em color-mix(in oklab, var(--scribble-secondary) 88%, white 12%);
-  opacity: 0.99;
 }
 
 .section-band {
   position: relative;
-  padding-top: 4.5rem;
+  padding-top: var(--section-space-y);
   overflow: hidden;
   --band-rule: color-mix(in oklab, var(--ink) 28%, transparent);
   --band-bg: var(--paper-soft);
@@ -205,6 +184,9 @@ legend,
   --shape2-rotate: 2.4deg;
   --shape2-scale: 1.48;
   --shape2-opacity: 0.38;
+  --section-mask-intensity: 1;
+  --section-mask-secondary-intensity: 1;
+  --section-star-intensity: 1;
   --heading-accent-from: #a6e2cc;
   --heading-accent-via: #f6dcba;
   --heading-accent-to: #dba45e;
@@ -235,7 +217,7 @@ legend,
   transform: translateX(-50%) rotate(var(--shape-rotate)) scale(var(--shape-scale));
   transform-origin: 50% 50%;
   background-color: var(--shape-tint);
-  opacity: var(--shape-opacity);
+  opacity: calc(var(--shape-opacity) * var(--section-mask-intensity));
   -webkit-mask-image:
     var(--section-shape-layer-1, var(--arch-step-shape)),
     var(--section-shape-layer-2, var(--arch-cutout-shape)),
@@ -276,7 +258,7 @@ legend,
   transform: translateX(-50%) rotate(var(--shape2-rotate)) scale(var(--shape2-scale));
   transform-origin: 50% 50%;
   background-color: var(--shape-tint);
-  opacity: var(--shape2-opacity);
+  opacity: calc(var(--shape2-opacity) * var(--section-mask-secondary-intensity));
   -webkit-mask-image:
     var(--section-shape2-layer-1, var(--arch-frame-shape)),
     var(--section-shape2-layer-2, var(--arch-shard-shape)),
@@ -314,7 +296,7 @@ legend,
   --eden: #0d886b;
   --gold: #dba45e;
   --band-heading: #04384d;
-  --band-body: #07506d;
+  --band-body: #043f57;
   --band-muted: #22708f;
   --band-link: #31245f;
   --band-cta-bg: #dba45e;
@@ -368,7 +350,7 @@ legend,
   --eden: #0a5134;
   --gold: #dba45e;
   --band-heading: #10271f;
-  --band-body: #173327;
+  --band-body: #112d22;
   --band-muted: #2f5446;
   --band-link: #31245f;
   --band-cta-bg: #244b5e;
@@ -408,7 +390,7 @@ legend,
   --eden: #4f2e66;
   --gold: #dba45e;
   --band-heading: #2f1841;
-  --band-body: #3a2551;
+  --band-body: #2d1b42;
   --band-muted: #5a3f73;
   --band-link: #244b5e;
   --band-cta-bg: #31245f;
@@ -448,7 +430,7 @@ legend,
   --eden: #9edbc8;
   --gold: #dba45e;
   --band-heading: #f3edff;
-  --band-body: #e8dbff;
+  --band-body: #f2eaff;
   --band-muted: #cdbde7;
   --band-link: #ffd8a2;
   --band-cta-bg: #dba45e;
@@ -485,6 +467,24 @@ legend,
   --doodlystar-opacity: 0.42;
   --doodlystar-pop-opacity: 0.56;
   --doodlystar-blend: multiply;
+}
+
+.section-band--decor-low {
+  --section-mask-intensity: 0.6;
+  --section-mask-secondary-intensity: 0;
+  --section-star-intensity: 0;
+}
+
+.section-band--decor-medium {
+  --section-mask-intensity: 0.8;
+  --section-mask-secondary-intensity: 0.42;
+  --section-star-intensity: 0.5;
+}
+
+.section-band--decor-high {
+  --section-mask-intensity: 1;
+  --section-mask-secondary-intensity: 0.7;
+  --section-star-intensity: 0.78;
 }
 
 .has-doodly-stars--sky {
@@ -595,7 +595,7 @@ legend,
   }
 
   62% {
-    opacity: var(--doodlystar-pop-opacity);
+    opacity: calc(var(--doodlystar-pop-opacity) * var(--section-star-intensity, 1));
     transform:
       translate(
         calc(var(--doodlystar-from-x, 0) * -0.08),
@@ -606,7 +606,7 @@ legend,
   }
 
   100% {
-    opacity: var(--doodlystar-opacity);
+    opacity: calc(var(--doodlystar-opacity) * var(--section-star-intensity, 1));
     transform: translate(0, 0) scale(1) rotate(var(--doodlystar-to-r, 0deg));
   }
 }
@@ -647,12 +647,14 @@ legend,
 }
 
 .home-strip-item {
-  border-top: 2px solid var(--band-rule);
+  border-top: var(--elevation-border-1);
+  box-shadow: inset 0 1px 0 color-mix(in oklab, white 70%, transparent);
 }
 
 .band-split-block {
-  border-top: 2px solid var(--band-rule);
-  border-bottom: 2px solid var(--band-rule);
+  border-top: var(--elevation-border-2);
+  border-bottom: var(--elevation-border-2);
+  box-shadow: var(--elevation-shadow-1);
 }
 
 .section-wave {
@@ -693,8 +695,8 @@ html[data-theme="line-drawing"] .sketch-panel {
 
 .theme-card {
   background: color-mix(in oklab, white 98.8%, var(--paper-soft));
-  border: 2px solid var(--card-border);
-  box-shadow: var(--card-shadow);
+  border: var(--elevation-border-1);
+  box-shadow: var(--elevation-shadow-1);
 }
 
 .theme-card--interactive {
@@ -707,7 +709,13 @@ html[data-theme="line-drawing"] .sketch-panel {
 }
 
 .theme-card--strong {
-  box-shadow: var(--card-shadow-strong);
+  border: var(--elevation-border-2);
+  box-shadow: var(--elevation-shadow-2);
+}
+
+.theme-card--elevated {
+  border: var(--elevation-border-3);
+  box-shadow: var(--elevation-shadow-3);
 }
 
 .theme-drench {
@@ -743,6 +751,10 @@ html[data-theme="line-drawing"] .sketch-panel {
 
   .page-heading--accent,
   .heading-eden-gold {
+    background-image: linear-gradient(108deg,
+        var(--heading-accent-from) 0%,
+        var(--heading-accent-via) 54%,
+        var(--heading-accent-to) 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -911,6 +923,7 @@ html[data-theme="line-drawing"] .site-appbar {
   width: 100%;
   max-width: none !important;
   margin-inline: 0 !important;
+  padding-inline: 0 !important;
   padding-block: 0 !important;
 }
 

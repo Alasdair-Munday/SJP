@@ -72,7 +72,7 @@ const comingUpPhoto = content.pages.calendar.sunday_gathering?.image ?? {
 <Layout title="Home">
 	<!-- HERO SECTION -->
 	<section
-		class="section-band section-band--green has-doodly-stars has-doodly-stars--leaf is-doodly-visible"
+		class="section-band section-band--green section-band--decor-medium has-doodly-stars has-doodly-stars--leaf is-doodly-visible rhythm-page"
 	>
 		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
 			<div class="grid lg:grid-cols-[1.04fr_0.96fr] gap-12 items-center">
@@ -83,7 +83,7 @@ const comingUpPhoto = content.pages.calendar.sunday_gathering?.image ?? {
 						{hero.title}
 					</h1>
 					<p
-						class="text-xl md:text-2xl font-medium max-w-2xl leading-relaxed mb-10 border-l-4 border-(--gold) pl-6"
+						class="lede text-xl md:text-2xl font-medium max-w-2xl leading-relaxed mb-10 border-l-4 border-(--gold) pl-6"
 						set:html={hero.subtitle}
 					/>
 					<div class="flex flex-wrap gap-4">
@@ -146,13 +146,13 @@ const comingUpPhoto = content.pages.calendar.sunday_gathering?.image ?? {
 	</section>
 
 	<!-- I'M NEW: VISITOR BRIDGE -->
-	<section class="section-band section-band--blue section-band--blue-bright">
+	<section class="section-band section-band--blue section-band--blue-bright section-band--decor-low rhythm-page">
 		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 			<div class="mb-10">
 				<h2 class="page-heading text-4xl font-bold">
 					{firstTimeHeading}
 				</h2>
-				<p class="text-(--ink)/85 font-medium mt-3 max-w-3xl">
+				<p class="lede text-(--ink)/85 font-medium mt-3 max-w-3xl">
 					{firstTimeIntro}
 				</p>
 			</div>
@@ -217,7 +217,7 @@ const comingUpPhoto = content.pages.calendar.sunday_gathering?.image ?? {
 		</div>
 	</section>
 	<!-- MISSION GRID -->
-	<section class="section-band section-band--mauve">
+	<section class="section-band section-band--mauve section-band--decor-low rhythm-page">
 		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 			<div
 				class="flex items-end gap-4 mb-12 border-b-2 border-(--ink) pb-4"
@@ -319,7 +319,7 @@ const comingUpPhoto = content.pages.calendar.sunday_gathering?.image ?? {
 	</section>
 	<!-- LATEST MESSAGE -->
 	<section
-		class="section-band section-band--plum has-doodly-stars has-doodly-stars--sky is-doodly-visible"
+		class="section-band section-band--plum section-band--decor-medium has-doodly-stars has-doodly-stars--sky is-doodly-visible rhythm-page"
 	>
 		<div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
 			<div class="band-split-block py-10">
@@ -387,7 +387,7 @@ const comingUpPhoto = content.pages.calendar.sunday_gathering?.image ?? {
 	<NewsUpdates />
 
 	<!-- BANNER: Upcoming -->
-	<section class="section-band section-band--green pb-20">
+	<section class="section-band section-band--green section-band--decor-low pb-20 rhythm-page">
 		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
 			<div class="flex items-center gap-3 mb-8">
 				<Calendar className="w-8 h-8 text-(--ink)" />

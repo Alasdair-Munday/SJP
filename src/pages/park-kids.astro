@@ -6,16 +6,20 @@ const content = await getSiteContent();
 const page = content.pages.park_kids;
 ---
 
-	<Layout title={page.title}>
-		<div class="site-bands max-w-5xl mx-auto px-4 py-20 space-y-8">
-			<section>
-				<h1 class="page-heading page-heading--accent text-5xl md:text-6xl">
-					{page.title}
-				</h1>
-			</section>
+<Layout title={page.title}>
+	<div class="site-bands max-w-5xl mx-auto px-4 py-20 space-y-8">
+		<section>
+			<h1
+				class="page-heading page-heading--accent text-5xl px-8 md:text-6xl"
+			>
+				{page.title}
+			</h1>
+		</section>
 
 		<section class="theme-card p-8 space-y-4">
-			<h2 class="section-heading text-3xl">{page.sunday_groups.heading}</h2>
+			<h2 class="section-heading text-3xl">
+				{page.sunday_groups.heading}
+			</h2>
 			{
 				page.sunday_groups.paragraphs.map((paragraph) => (
 					<p class="text-(--ink)/90">{paragraph}</p>
@@ -29,7 +33,9 @@ const page = content.pages.park_kids;
 		</section>
 
 		<section class="theme-card p-8 space-y-6">
-			<h2 class="section-heading text-3xl">{page.social_story.heading}</h2>
+			<h2 class="section-heading text-3xl">
+				{page.social_story.heading}
+			</h2>
 			<p class="text-(--ink)/90">
 				{page.social_story.intro}
 			</p>
@@ -38,9 +44,12 @@ const page = content.pages.park_kids;
 					page.social_story.steps.map((step, index) => (
 						<article class="border-2 border-(--ink) bg-(--panel-soft) p-4">
 							<p class="font-bold text-(--eden) text-sm tracking-wide mb-2">
-								{page.social_story.step_label_prefix} {index + 1}
+								{page.social_story.step_label_prefix}{" "}
+								{index + 1}
 							</p>
-							<p class="text-(--ink)/90 leading-relaxed">{step}</p>
+							<p class="text-(--ink)/90 leading-relaxed">
+								{step}
+							</p>
 						</article>
 					))
 				}
@@ -60,7 +69,7 @@ const page = content.pages.park_kids;
 		</section>
 
 		<section class="theme-card p-8">
-			<p class="text-(--ink)/90" set:html={page.cta_html}></p>
+			<p class="text-(--ink)/90" set:html={page.cta_html} />
 		</section>
 	</div>
 </Layout>
