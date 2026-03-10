@@ -17,17 +17,12 @@ type NavigationItem = {
 
 const { title } = Astro.props;
 const content = await getSiteContent();
+const chrome = content.components.chrome;
 const footerLinks = content.footer.quick_links;
-const navigationItems = (content.navigation ?? []) as NavigationItem[];
-const brand = content.site.brand ?? {
-  logo_line_one: "St John's Church",
-  logo_line_two: "Park",
-};
-const footerHeading = content.footer.quick_links_heading ?? "Quick Links";
-const footerBackgroundImage = content.footer.background_image ?? {
-  src: "/images/line-drawing.png",
-  alt: "",
-};
+const navigationItems = content.navigation as NavigationItem[];
+const brand = content.site.brand;
+const footerHeading = content.footer.quick_links_heading;
+const footerBackgroundImage = content.footer.background_image;
 const rawTheme = (import.meta.env.PUBLIC_SITE_THEME ?? "current").toLowerCase();
 const themeAliases: Record<string, "current" | "garden-city" | "line-drawing"> =
   {
@@ -41,6 +36,8 @@ const themeAliases: Record<string, "current" | "garden-city" | "line-drawing"> =
     art: "line-drawing",
   };
 const siteTheme = themeAliases[rawTheme] ?? "current";
+const interpolateChromeLabel = (template: string, label: string) =>
+  template.replace("{label}", label);
 ---
 
 <!doctype html>
@@ -107,7 +104,12 @@ const siteTheme = themeAliases[rawTheme] ?? "current";
                             aria-controls={panelId}
                             class="site-nav-toggle inline-flex items-center justify-center h-9 w-9 text-(--ink)"
                           >
-                            <span class="sr-only">Toggle {item.label} menu</span>
+                            <span class="sr-only">
+                              {interpolateChromeLabel(
+                                chrome.desktop_submenu_toggle_label_template,
+                                item.label,
+                              )}
+                            </span>
                             <ChevronDown className="nav-parent-chevron" size={16} />
                           </button>
                         )
@@ -146,7 +148,7 @@ const siteTheme = themeAliases[rawTheme] ?? "current";
             class="site-mobile-toggle md:hidden inline-flex items-center justify-center w-12 h-12 text-(--ink) transition-colors"
             aria-expanded="false"
             aria-controls="mobile-menu-panel"
-            aria-label="Toggle navigation menu"
+            aria-label={chrome.mobile_menu_toggle_label}
           >
             <Menu data-menu-icon-open size={22} />
             <X data-menu-icon-close size={22} className="hidden" />
@@ -182,7 +184,12 @@ const siteTheme = themeAliases[rawTheme] ?? "current";
                           aria-controls={panelId}
                           class="site-mobile-submenu-toggle inline-flex items-center justify-center w-10 h-10 text-(--ink)"
                         >
-                          <span class="sr-only">Toggle {item.label} links</span>
+                          <span class="sr-only">
+                            {interpolateChromeLabel(
+                              chrome.mobile_submenu_toggle_label_template,
+                              item.label,
+                            )}
+                          </span>
                           <ChevronDown className="mobile-submenu-chevron" size={16} />
                         </button>
                       )

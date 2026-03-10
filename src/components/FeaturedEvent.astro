@@ -3,16 +3,13 @@ import { ArrowRight, Calendar, Clock, MapPin } from "lucide-react";
 import {
 	formatEventDateLong,
 	formatEventTime,
-	getUpcomingEvents,
 } from "../utils/calendar";
 import { getSiteContent } from "../data/site-content";
+import { getResolvedUpcomingEvents } from "../data/resolved-events";
 
-const [event] = await getUpcomingEvents(1);
+const [event] = await getResolvedUpcomingEvents(1);
 const content = await getSiteContent();
-const copy = content.components.featured_event ?? {
-	view_event_details_label: "View Event Details",
-	image_coming_soon_label: "Event image coming soon",
-};
+const copy = content.components.featured_event;
 ---
 
 {
@@ -39,10 +36,7 @@ const copy = content.components.featured_event ?? {
 							</p>
 						)}
 					</div>
-					<p
-						class="text-(--ink)/85"
-						set:html={event.description}
-					/>
+					<p class="text-(--ink)/85">{event.summary}</p>
 					<a
 						href={`/events/${event.slug}`}
 						class="inline-flex items-center gap-2 px-5 py-2.5 border-2 border-(--ink) text-(--ink) font-semibold hover:bg-white/90 hover:text-[#10232e] transition-colors"
@@ -55,7 +49,7 @@ const copy = content.components.featured_event ?? {
 					{event.thumbnailUrl ? (
 						<img
 							src={event.thumbnailUrl}
-							alt={`Featured event image for ${event.title}`}
+							alt={`${copy.image_alt_prefix} ${event.title}`}
 							class="w-full h-full min-h-72 object-cover"
 							loading="lazy"
 						/>

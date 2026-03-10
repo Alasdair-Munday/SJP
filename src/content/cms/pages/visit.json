@@ -28,12 +28,12 @@
   ],
   "gallery": [
     {
-      "src": "/images/congregation.jpg",
+      "src": "/images/uploads/congregation.jpg",
       "alt": "Church family gathered together during Sunday worship",
       "caption": "Sundays are friendly, relaxed, and easy to step into."
     },
     {
-      "src": "/images/refreshments.jpg",
+      "src": "/images/uploads/refreshments.jpg",
       "alt": "People talking over refreshments after church",
       "caption": "There is always time and space to connect with people."
     }
@@ -48,7 +48,7 @@
     "service_style": "Our Sunday gathering is informal and interactive, with contemporary worship songs.",
     "after_service": "Please stay after the service for refreshments and a chance to get to know people.",
     "image": {
-      "src": "/images/worship-flags.jpg",
+      "src": "/images/uploads/worship-flags.jpg",
       "alt": "Worship team singing during a Sunday gathering"
     }
   },
@@ -88,6 +88,7 @@
       "We have limited on-site parking, with overflow parking nearby.",
       "If you'd like to ask about baptisms, weddings, or funerals, use the life events links below or contact us directly."
     ],
+    "contact_prompt_html": "Prefer to ask directly? <a href='/contact#send-message' class='underline decoration-[var(--eden)] underline-offset-4'>Send us a message</a>.",
     "life_events_links": [
       {
         "label": "melksham.church/life-events",

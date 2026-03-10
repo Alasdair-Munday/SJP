@@ -2,6 +2,7 @@ import site from "../content/cms/site.json";
 import navigation from "../content/cms/navigation.json";
 import footer from "../content/cms/footer.json";
 import components from "../content/cms/components.json";
+import rawEventOverrides from "../content/cms/event_overrides.json";
 import sermons from "../content/cms/sermons.json";
 import pageCalendar from "../content/cms/pages/calendar.json";
 import pageChurchLife from "../content/cms/pages/church_life.json";
@@ -17,6 +18,35 @@ import pageVisit from "../content/cms/pages/visit.json";
 
 type ContentSource = "local" | "api" | "sheets";
 type PathToken = string | number;
+
+export interface SiteEventOverrideImage {
+  src: string;
+  alt: string;
+}
+
+export interface SiteEventSeriesOverride {
+  uid: string;
+  title: string;
+  summary: string;
+  description_html: string;
+  images: SiteEventOverrideImage[];
+}
+
+export interface SiteEventOccurrenceOverride {
+  uid: string;
+  date: string;
+  title?: string;
+  summary?: string;
+  description_html?: string;
+  images?: SiteEventOverrideImage[];
+}
+
+export interface SiteEventOverrides {
+  series: SiteEventSeriesOverride[];
+  occurrences: SiteEventOccurrenceOverride[];
+}
+
+const eventOverrides = rawEventOverrides as SiteEventOverrides;
 
 type SitePages = {
   calendar: typeof pageCalendar;
@@ -37,6 +67,7 @@ export interface SiteContent {
   navigation: typeof navigation.items;
   footer: typeof footer;
   components: typeof components;
+  event_overrides: SiteEventOverrides;
   pages: SitePages;
   sermons: typeof sermons.items;
 }
@@ -46,6 +77,7 @@ const localContent: SiteContent = {
   navigation: navigation.items,
   footer,
   components,
+  event_overrides: eventOverrides,
   pages: {
     calendar: pageCalendar,
     church_life: pageChurchLife,
@@ -274,7 +306,7 @@ const parseSheetRowsToContent = (rows: string[][]): SiteContent => {
     setValueAtPath(builtContent, path, value);
   }
 
-  return builtContent as SiteContent;
+  return normalizeContent(builtContent as unknown as SiteContent);
 };
 
 const fetchFromApiUrl = async (contentApiUrl: string): Promise<SiteContent> => {
@@ -389,11 +421,23 @@ function normalizeContent(content: SiteContent): SiteContent {
   const sermonsValue = Array.isArray(content.sermons)
     ? content.sermons
     : (content.sermons as unknown as { items?: SiteContent["sermons"] })?.items || [];
+  const eventOverridesValue = content.event_overrides || {
+    series: [],
+    occurrences: [],
+  };
 
   return {
     ...content,
     navigation: navigationValue,
     sermons: sermonsValue,
+    event_overrides: {
+      series: Array.isArray(eventOverridesValue.series)
+        ? eventOverridesValue.series
+        : [],
+      occurrences: Array.isArray(eventOverridesValue.occurrences)
+        ? eventOverridesValue.occurrences
+        : [],
+    },
     pages: {
       ...content.pages,
       contact_thank_you: content.pages?.contact_thank_you || contactThankYouFallback,

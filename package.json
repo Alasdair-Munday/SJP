@@ -10,6 +10,9 @@
     "cms:local-backend": "decap-server",
     "content:cms:migrate": "node scripts/migrate-content-to-cms.mjs",
     "content:cms:decap-config": "node scripts/generate-decap-config.mjs",
+    "content:cms:migrate-media": "node scripts/migrate-cms-media.mjs",
+    "content:cms:seed-event-overrides": "node scripts/seed-event-overrides.mjs",
+    "content:cms:audit": "node scripts/content-cms-audit.mjs",
     "content:sheet-template": "node scripts/export-content-to-sheet-template.mjs",
     "content:sheet-validate": "node scripts/validate-sheet-csv.mjs"
   },

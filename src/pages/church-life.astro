@@ -18,10 +18,11 @@ const give = page.give;
 const teamAndBeliefs = page.team_and_beliefs;
 const parkLife = page.park_life;
 
-const belong =
-  page.groups.find((group) => group.id === "belong") ?? page.groups[0];
-const serve =
-  page.groups.find((group) => group.id === "serve") ?? page.groups[0];
+const belong = page.groups.find((group) => group.id === "belong");
+const serve = page.groups.find((group) => group.id === "serve");
+if (!belong || !serve) {
+  throw new Error("Church life content requires both belong and serve groups.");
+}
 
 const giveDevelopmentNeedIcons = [Bird, Droplets, Building, Hammer, House];
 ---
@@ -38,10 +39,10 @@ const giveDevelopmentNeedIcons = [Bird, Droplets, Building, Hammer, House];
       </h1>
       <p class="text-xl text-(--ink)/85 max-w-4xl">{page.intro}</p>
       <div class="flex flex-wrap gap-3">
-        <a href="#belong" class="mission-chip mission-chip--belong">Belong</a>
-        <a href="#serve" class="mission-chip mission-chip--serve">Serve</a>
-        <a href="#give" class="mission-chip mission-chip--give">Give</a>
-        <a href="#team-and-beliefs" class="mission-chip">Our Team & Beliefs</a>
+        <a href="#belong" class="mission-chip mission-chip--belong">{page.mission_chip_labels.belong}</a>
+        <a href="#serve" class="mission-chip mission-chip--serve">{page.mission_chip_labels.serve}</a>
+        <a href="#give" class="mission-chip mission-chip--give">{page.mission_chip_labels.give}</a>
+        <a href="#team-and-beliefs" class="mission-chip">{page.mission_chip_labels.team_and_beliefs}</a>
       </div>
       <div class="section-doodlystars" aria-hidden="true">
         <span class="section-doodlystar section-doodlystar--top-left"></span>
@@ -153,10 +154,8 @@ const giveDevelopmentNeedIcons = [Bird, Droplets, Building, Hammer, House];
       </div>
 
       <article class="theme-card p-6 space-y-3">
-        <h3 class="section-heading text-2xl">Serving Teams</h3>
-        <p class="text-(--ink)/85">
-          You can explore teams in detail and send your interest in one place.
-        </p>
+        <h3 class="section-heading text-2xl">{page.serve_teams_teaser.heading}</h3>
+        <p class="text-(--ink)/85">{page.serve_teams_teaser.intro}</p>
         <div class="flex flex-wrap gap-2 text-sm text-(--ink)/85">
           {
             page.teams
@@ -172,7 +171,7 @@ const giveDevelopmentNeedIcons = [Bird, Droplets, Building, Hammer, House];
           href="/join-a-team"
           class="inline-flex items-center gap-2 font-semibold text-(--ink) hover:text-(--teal) transition-colors"
         >
-          Go to Join a Team <ArrowRight size={16} />
+          {page.serve_teams_teaser.cta_label} <ArrowRight size={16} />
         </a>
       </article>
     </section>

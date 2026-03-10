@@ -8,12 +8,7 @@ import { getSiteContent } from "../../data/site-content";
 const STALE_FALLBACK_DAYS = 90;
 const now = new Date();
 const content = await getSiteContent();
-const copy = content.components.news ?? {
-	back_to_news_label: "Back to News",
-	archived_notice: "This article is archived and may contain out-of-date details.",
-	read_article_label: "Read article",
-	view_all_label: "View all news",
-};
+const copy = content.components.news;
 
 const isCurrentNewsItem = (newsItem: CollectionEntry<"news">) => {
 	const staleAfterDays = newsItem.data.staleAfterDays ?? STALE_FALLBACK_DAYS;
@@ -110,7 +105,7 @@ const formatDate = (date: Date) =>
 
 			<aside class="sketch-panel p-5 md:p-6 space-y-4 lg:sticky lg:top-28">
 				<p class="text-sm uppercase tracking-[0.14em] font-bold text-(--teal)">
-					More News
+					{copy.related_heading}
 				</p>
 
 				{
@@ -143,7 +138,7 @@ const formatDate = (date: Date) =>
 						</ul>
 					) : (
 						<p class="text-sm text-(--ink)/85">
-							No other current news articles right now.{" "}
+							{copy.related_empty_message}{" "}
 							<a
 								href="/news"
 								class="font-semibold underline decoration-2 underline-offset-3 hover:text-(--eden) transition-colors"

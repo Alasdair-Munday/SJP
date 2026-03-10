@@ -8,11 +8,12 @@
     "empty_message": "No upcoming events found right now. Please check back soon.",
     "jump_label": "See regular weekly activities"
   },
+  "weekly_rhythm_heading": "Weekly Rhythm",
   "sunday_gathering": {
     "heading": "Sunday Gathering",
     "description": "Our Sunday gathering happens every Sunday at 10:45am and is for all ages. We gather to worship Jesus, hear from God's Word, and pray together.",
     "image": {
-      "src": "/images/worship team.jpg",
+      "src": "/images/uploads/worship team.jpg",
       "alt": "Worship team leading sung praise during Sunday gathering"
     }
   },
@@ -20,6 +21,8 @@
     "heading": "Midweek Online Prayers",
     "description": "Monday to Friday at 8:00am for 30 minutes on Zoom.",
     "button_label": "Join Zoom Meeting",
+    "meeting_id_label": "Meeting ID",
+    "passcode_label": "Passcode",
     "zoom_link": "https://zoom.us/j/3235649987?pwd=483559",
     "meeting_id": "323 564 9987",
     "passcode": "483559",
@@ -27,6 +30,11 @@
   },
   "foodbank": {
     "heading": "Food Bank",
+    "labels": {
+      "when": "When",
+      "where": "Where",
+      "who": "Who"
+    },
     "time": "Every Monday 10am - 12pm",
     "where": "St John's Park, Bernard Street, S2 5PU",
     "who": "Anyone with a referral from a support worker or agency",
@@ -41,7 +49,7 @@
     ],
     "volunteer_html": "If you are interested in volunteering at our food bank, please contact Hannah Graham for more information: <a href='mailto:hannah@saintjohnspark.org' class='underline decoration-[var(--eden)] underline-offset-4'>hannah@saintjohnspark.org</a>.",
     "image": {
-      "src": "/images/foodbank.png",
+      "src": "/images/uploads/foodbank.png",
       "alt": "Food bank volunteers welcoming people in the church hall"
     }
   },
@@ -50,7 +58,7 @@
     "time": "Monday 11:40am-12:40pm",
     "description": "Join us every Monday for soup, bread, a hot drink, and a chat. All are welcome, and it is free.",
     "image": {
-      "src": "/images/lunch club.jpg",
+      "src": "/images/uploads/lunch club.jpg",
       "alt": "Lunch Club guests and volunteers sharing a meal together"
     }
   },
@@ -59,11 +67,11 @@
     "description": "Throughout the year we host seasonal gatherings for all ages, including Christmas events and community celebrations.",
     "images": [
       {
-        "src": "/images/christmas singing.jpg",
+        "src": "/images/uploads/christmas singing.jpg",
         "alt": "Christmas singing event in the church hall"
       },
       {
-        "src": "/images/outdoor carols.jpg",
+        "src": "/images/uploads/outdoor carols.jpg",
         "alt": "Community outdoor carol singing at the church entrance"
       }
     ]

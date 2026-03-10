@@ -8,11 +8,11 @@
     ],
     "images": [
       {
-        "src": "/images/community-park-gathering-1.jpg",
+        "src": "/images/uploads/community-park-gathering-1.jpg",
         "alt": "Community gathering in the park"
       },
       {
-        "src": "/images/community-park-gathering-2.jpg",
+        "src": "/images/uploads/community-park-gathering-2.jpg",
         "alt": "Church and community gathering in the grounds"
       }
     ]
@@ -25,7 +25,7 @@
       "<strong>Out:</strong> Serving our local community."
     ],
     "image": {
-      "src": "/images/carols-doorstep.jpg",
+      "src": "/images/uploads/carols-doorstep.jpg",
       "alt": "Community singing together outside church at Christmas"
     }
   },

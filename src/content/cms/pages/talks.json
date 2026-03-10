@@ -3,9 +3,10 @@
   "intro_primary": "Catch up on our latest Sunday talks.",
   "intro_secondary": "Hear the Bible read, explained, and applied to everyday life through talks from members of our church family.",
   "audio_coming_soon": "Audio coming soon.",
+  "audio_unsupported_label": "Your browser does not support the audio player.",
   "rss_button_label": "Subscribe via RSS",
   "hero_image": {
-    "src": "/images/Sermons.jpg",
+    "src": "/images/uploads/Sermons.jpg",
     "alt": "Woman speaking from the front during a Sunday talk"
   }
 }

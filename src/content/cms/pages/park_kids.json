@@ -7,7 +7,7 @@
       "Children start in the service with the church family and then move into age-appropriate groups for Bible teaching, prayer, and activities."
     ],
     "image": {
-      "src": "/images/kids-frisbee.jpg",
+      "src": "/images/uploads/kids-frisbee.jpg",
       "alt": "Children playing in the church park"
     }
   },
@@ -28,11 +28,11 @@
     ],
     "images": [
       {
-        "src": "/images/kids-churchyard.jpg",
+        "src": "/images/uploads/kids-churchyard.jpg",
         "alt": "Children and families at churchyard games"
       },
       {
-        "src": "/images/play.jpg",
+        "src": "/images/uploads/play.jpg",
         "alt": "Children playing with activities outside church"
       }
     ]

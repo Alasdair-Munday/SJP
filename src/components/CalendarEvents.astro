@@ -1,19 +1,16 @@
 ---
-import { getUpcomingEvents } from "../utils/calendar";
 import { MapPin, Clock } from "lucide-react";
 import { getSiteContent } from "../data/site-content";
+import { getResolvedUpcomingEvents } from "../data/resolved-events";
 import {
   formatEventDayOfMonth,
   formatEventMonthShort,
   formatEventTime,
 } from "../utils/calendar";
 
-const events = await getUpcomingEvents(3, true);
+const events = await getResolvedUpcomingEvents(3, true);
 const content = await getSiteContent();
-const copy = content.components.calendar_events ?? {
-  empty_message: "Check out What's On for current activities.",
-  view_whats_on_label: "View What's On ->",
-};
+const copy = content.components.calendar_events;
 ---
 
 <div class="space-y-0 pt-2">
@@ -57,7 +54,7 @@ const copy = content.components.calendar_events ?? {
             {event.thumbnailUrl && (
               <img
                 src={event.thumbnailUrl}
-                alt={`Thumbnail for ${event.title}`}
+                alt={`${copy.thumbnail_alt_prefix} ${event.title}`}
                 class="hidden sm:block w-28 h-20 object-cover"
                 loading="lazy"
               />

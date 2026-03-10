@@ -1,20 +1,22 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import { Calendar, Clock, MapPin } from "lucide-react";
-import type { CalendarEvent } from "../../utils/calendar";
 import { getSiteContent } from "../../data/site-content";
+import {
+	type ResolvedCalendarEvent,
+	getResolvedUpcomingEvents,
+} from "../../data/resolved-events";
 import {
 	formatEventDateLong,
 	formatEventTime,
-	getUpcomingEvents,
 } from "../../utils/calendar";
 
 interface Props {
-	event: CalendarEvent;
+	event: ResolvedCalendarEvent;
 }
 
 export async function getStaticPaths() {
-	const events = await getUpcomingEvents(180);
+	const events = await getResolvedUpcomingEvents(180);
 
 	return events.map((event) => ({
 		params: { slug: event.slug },
@@ -80,15 +82,15 @@ const location = event.location || page.fallback_location;
 			</div>
 
 			{
-				event.imageAttachments.length > 0 && (
+				event.images.length > 0 && (
 					<div class="border-t-2 border-(--ink) pt-6">
 						<h2 class="section-heading text-2xl mb-4">{page.images_title}</h2>
 						<div class="grid sm:grid-cols-2 gap-4">
-							{event.imageAttachments.map((image, index) => (
-								<a href={image.url} target="_blank" rel="noreferrer" class="block">
+							{event.images.map((image, index) => (
+								<a href={image.src} target="_blank" rel="noreferrer" class="block">
 									<img
-										src={image.url}
-										alt={image.fileName || `${page.image_alt_prefix} ${index + 1}`}
+										src={image.src}
+										alt={image.alt || `${page.image_alt_prefix} ${index + 1}`}
 										class="w-full h-72 object-cover border-2 border-(--ink)"
 										loading="lazy"
 									/>

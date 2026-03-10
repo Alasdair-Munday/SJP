@@ -17,59 +17,14 @@ import {
 } from "lucide-react";
 
 const content = await getSiteContent();
-const { hero, mission_grid, latest_message, coming_up, mission } =
+const chrome = content.components.chrome;
+const { hero, first_time, mission_grid, latest_message, coming_up, mission, page_title } =
 	content.pages.home;
-const visit = content.pages.visit;
-const heroPostcardLabel = hero.badge ?? "Welcome Home";
-
+const heroPostcardLabel = hero.badge;
 const latest_message_details = content.sermons[0];
-
-type FirstTimeLegacyCard = { title: string; body?: string; body_html?: string };
-type FirstTimeLegacy = {
-	heading?: string;
-	intro?: string;
-	cards?: FirstTimeLegacyCard[];
-};
-
-const firstTimeLegacy = (content.pages.home as { first_time?: FirstTimeLegacy })
-	.first_time;
-
-const firstTimeHeading =
-	visit.home_preview?.heading ??
-	firstTimeLegacy?.heading ??
-	"First Time Visiting?";
-const firstTimeIntro =
-	visit.home_preview?.intro ?? firstTimeLegacy?.intro ?? "";
-const firstTimeCards = (
-	visit.sections?.map((section) => ({
-		title: section.heading,
-		body_html: section.paragraphs.join(" "),
-	})) ??
-	firstTimeLegacy?.cards?.map((card) => ({
-		title: card.title,
-		body_html: card.body_html ?? card.body ?? "",
-	})) ??
-	[]
-).slice(0, 3);
-const firstTimePhoto = visit.gallery?.[0] ?? {
-	src: "/images/refreshments.jpg",
-	alt: "People chatting over refreshments after a Sunday gathering",
-};
-const missionPhoto = content.pages.church_life.groups?.[0]?.image ?? {
-	src: "/images/congregation.jpg",
-	alt: "Church family gathered together in worship",
-};
-const latestMessagePhoto = content.pages.talks.hero_image ?? {
-	src: "/images/Sermons.jpg",
-	alt: "Bible talk being shared during a Sunday service",
-};
-const comingUpPhoto = content.pages.calendar.sunday_gathering?.image ?? {
-	src: "/images/worship team.jpg",
-	alt: "Worship team leading on a Sunday morning",
-};
 ---
 
-<Layout title="Home">
+<Layout title={page_title}>
 	<!-- HERO SECTION -->
 	<section
 		class="section-band section-band--green section-band--decor-medium has-doodly-stars has-doodly-stars--leaf is-doodly-visible rhythm-page"
@@ -150,23 +105,23 @@ const comingUpPhoto = content.pages.calendar.sunday_gathering?.image ?? {
 		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 			<div class="mb-10">
 				<h2 class="page-heading text-4xl font-bold">
-					{firstTimeHeading}
+					{first_time.heading}
 				</h2>
 				<p class="lede text-(--ink)/85 font-medium mt-3 max-w-3xl">
-					{firstTimeIntro}
+					{first_time.intro}
 				</p>
 			</div>
 			<figure class="theme-card overflow-hidden mb-8 max-w-4xl">
 				<img
-					src={firstTimePhoto.src}
-					alt={firstTimePhoto.alt}
+					src={first_time.image.src}
+					alt={first_time.image.alt}
 					class="w-full h-60 md:h-72 object-cover"
 					loading="lazy"
 				/>
 			</figure>
 			<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
 				{
-					firstTimeCards.map((card, index) => (
+					first_time.cards.map((card, index) => (
 						<article class="home-strip-item pt-6">
 							<div
 								class:list={[
@@ -197,10 +152,10 @@ const comingUpPhoto = content.pages.calendar.sunday_gathering?.image ?? {
 			</div>
 			<div class="mt-8">
 				<a
-					href="/visit"
+					href={first_time.cta.href}
 					class="inline-flex items-center gap-2 px-5 py-2.5 border-2 border-(--ink) text-(--ink) font-semibold hover:bg-white/90 hover:text-[#10232e] transition-colors"
 				>
-					See Full I'm New Guide <ArrowRight size={18} />
+					{first_time.cta.label} <ArrowRight size={18} />
 				</a>
 			</div>
 		</div>
@@ -232,8 +187,8 @@ const comingUpPhoto = content.pages.calendar.sunday_gathering?.image ?? {
 			</div>
 			<figure class="theme-card overflow-hidden mb-8 max-w-5xl">
 				<img
-					src={missionPhoto.src}
-					alt={missionPhoto.alt}
+					src={mission.image.src}
+					alt={mission.image.alt}
 					class="w-full h-60 md:h-72 object-cover"
 					loading="lazy"
 				/>
@@ -342,7 +297,7 @@ const comingUpPhoto = content.pages.calendar.sunday_gathering?.image ?? {
 									src={latest_message_details.audioUrl}
 									type="audio/mpeg"
 								/>
-								Your browser does not support the audio player.
+								{chrome.audio_unsupported_label}
 							</audio>
 							<a
 								href={latest_message.cta.href}
@@ -355,8 +310,8 @@ const comingUpPhoto = content.pages.calendar.sunday_gathering?.image ?? {
 					</div>
 					<figure class="theme-card overflow-hidden">
 						<img
-							src={latestMessagePhoto.src}
-							alt={latestMessagePhoto.alt}
+							src={latest_message.image.src}
+							alt={latest_message.image.alt}
 							class="w-full h-64 md:h-80 object-cover"
 							loading="lazy"
 						/>
@@ -399,8 +354,8 @@ const comingUpPhoto = content.pages.calendar.sunday_gathering?.image ?? {
 			</div>
 			<figure class="theme-card overflow-hidden max-w-5xl">
 				<img
-					src={comingUpPhoto.src}
-					alt={comingUpPhoto.alt}
+					src={coming_up.image.src}
+					alt={coming_up.image.alt}
 					class="w-full h-60 md:h-72 object-cover"
 					loading="lazy"
 				/>

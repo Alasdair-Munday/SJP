@@ -6,16 +6,8 @@ import { getSiteContent } from "../data/site-content";
 const STALE_FALLBACK_DAYS = 90;
 const now = new Date();
 const content = await getSiteContent();
-const copy = content.components.news ?? {
-	home_section_title: "Latest News",
-	view_all_label: "View all news",
-	read_article_label: "Read article",
-	empty_label: "No current news updates. Check back soon.",
-};
-const newsSectionPhoto = content.pages.calendar.seasonal_events?.images?.[0] ?? {
-	src: "/images/christmas singing.jpg",
-	alt: "Church family gathered for a seasonal church event",
-};
+const copy = content.components.news;
+const newsSectionPhoto = copy.section_image;
 
 const recentNews = (await getCollection("news"))
 	.filter((item) => {
@@ -96,7 +88,7 @@ const formatDate = (date: Date) =>
 						href="/news"
 						class="text-(--ink)/85 font-semibold hover:text-(--teal) transition-colors"
 					>
-						{copy.empty_label}
+						{copy.home_empty_message}
 					</a>
 				</div>
 			)

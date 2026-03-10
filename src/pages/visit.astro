@@ -5,7 +5,7 @@ import { ArrowRight, Clock, MapPin } from "lucide-react";
 
 const content = await getSiteContent();
 const page = content.pages.visit;
-const gallery = page.gallery ?? [];
+const gallery = page.gallery;
 ---
 
 <Layout title={page.title}>
@@ -15,7 +15,7 @@ const gallery = page.gallery ?? [];
         {page.title}
       </h1>
       <p class="lede text-xl text-(--ink)/85 max-w-4xl">
-        {page.home_preview?.intro}
+        {page.home_preview.intro}
       </p>
       <div class="section-doodlystars" aria-hidden="true">
         <span class="section-doodlystar section-doodlystar--top-left"></span>
@@ -140,9 +140,7 @@ const gallery = page.gallery ?? [];
           </p>
         ))}
       </div>
-      <p class="text-(--ink)/90">
-        Prefer to ask directly? <a href="/contact#send-message" class="underline decoration-(--eden) underline-offset-4">Send us a message</a>.
-      </p>
+      <p class="text-(--ink)/90" set:html={page.plan_your_visit.contact_prompt_html} />
     </section>
   </div>
 </Layout>

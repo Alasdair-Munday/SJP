@@ -17,6 +17,7 @@ const friendlyLabels = {
   utility_navigation: "Utility Navigation",
   footer: "Footer",
   components: "Shared Components",
+  event_overrides: "Event Overrides",
   sermons: "Sermon Library",
   home: "Home Page",
   sundays: "Sundays Page",
@@ -247,9 +248,9 @@ const run = async () => {
   const globals = [
     "site",
     "navigation",
-    "utility_navigation",
     "footer",
     "components",
+    "event_overrides",
     "sermons",
   ];
 

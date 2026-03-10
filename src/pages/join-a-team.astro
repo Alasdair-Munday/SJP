@@ -20,6 +20,7 @@ import {
 import { getSiteContent } from "../data/site-content";
 
 const content = await getSiteContent();
+const chrome = content.components.chrome;
 const page = content.pages.church_life;
 const teamIcons = new Map<string, unknown>([
 	["Welcome and Hospitality", Coffee],
@@ -38,42 +39,7 @@ const teamIcons = new Map<string, unknown>([
 ]);
 const getTeamIcon = (teamName: string) =>
 	(teamIcons.get(teamName) as typeof Users) ?? HandHeart;
-const joinTeam = page.join_team ?? {
-	title: "Join a Team",
-	intro: "Select the teams you are interested in, then share your contact details. We will follow up with next steps.",
-	hero_image: {
-		src: "/images/friends.jpg",
-		alt: "Church volunteers and friends smiling together outdoors",
-	},
-	hero_blurb:
-		"Serving is one of the best ways to build friendships and help church family thrive each week.",
-	steps: {
-		select_heading: "1. Select Teams",
-		select_intro: "Choose as many teams as you like.",
-		details_heading: "2. Your Contact Details",
-		preview_heading: "3. Message Preview",
-		preview_intro:
-			"This message is auto-filled from your selections and details.",
-	},
-	labels: {
-		name: "Name",
-		email: "Email",
-		phone_optional: "Phone (optional)",
-		notes_optional: "Anything else we should know? (optional)",
-		submit: "Send Team Interest",
-	},
-	messages: {
-		none_selected: "No teams selected yet.",
-		selected_prefix: "Selected teams:",
-		message_title: "Join a Team Enquiry",
-		teams_label: "Teams interested in",
-		name_label: "Name",
-		email_label: "Email",
-		phone_label: "Phone",
-		empty_value: "[not provided]",
-		none_selected_short: "None selected",
-	},
-};
+const joinTeam = page.join_team;
 ---
 
 <Layout title={joinTeam.title}>
@@ -115,7 +81,7 @@ const joinTeam = page.join_team ?? {
 			<input type="hidden" name="form-name" value="join-team-interest" />
 			<p class="hidden">
 				<label>
-					Don't fill this out if you're human:
+					{chrome.honeypot_label}
 					<input name="bot-field" />
 				</label>
 			</p>
@@ -158,7 +124,7 @@ const joinTeam = page.join_team ?? {
 												</p>
 											</div>
 											<span class="join-team-card__badge">
-												Selected
+												{joinTeam.messages.selected_badge_label}
 											</span>
 										</div>
 									);

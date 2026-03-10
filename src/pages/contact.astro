@@ -3,32 +3,9 @@ import Layout from "../layouts/Layout.astro";
 import { getSiteContent } from "../data/site-content";
 
 const content = await getSiteContent();
+const chrome = content.components.chrome;
 const page = content.pages.contact;
-const sendMessage = page.send_message ?? {
-  heading: "Send Us a Message",
-  intro_prefix: "You can email us directly at",
-  direct_email: "hello@saintjohnspark.org",
-  intro_suffix: "or use the form below.",
-  labels: {
-    name: "Name",
-    email: "Email",
-    subject: "Subject",
-    message: "Message",
-    submit: "Send Message",
-  },
-  subject_placeholder: "Select a topic",
-  subject_options: [
-    { value: "general", label: "General enquiry" },
-    { value: "park-kids", label: "Park Kids" },
-    { value: "park-youth", label: "Park Youth" },
-    { value: "park-communities", label: "Park Communities" },
-    { value: "sundays", label: "Sunday gathering" },
-    { value: "safeguarding", label: "Safeguarding" },
-  ],
-};
-const mapEmbedUrl =
-  page.find_us.map_embed_url ??
-  "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1932.9794407157501!2d-1.4558134244165126!3d53.38304895495231!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4879787508b14b63%3A0x3ad4b2dcc392b6b9!2sSt.%20John%E2%80%99s%20Church%2C%20Park!5e1!3m2!1sen!2suk!4v1771371845139!5m2!1sen!2suk";
+const sendMessage = page.send_message;
 ---
 
 <Layout title={page.title}>
@@ -46,10 +23,10 @@ const mapEmbedUrl =
     </section>
 
     <section id="find-us" class="theme-card theme-card--strong p-8 space-y-4 scroll-mt-28">
-      <h2 class="section-heading text-3xl">{page.find_us.heading ?? "Find Us"}</h2>
+      <h2 class="section-heading text-3xl">{page.find_us.heading}</h2>
       <p class="text-lg text-(--ink)/90">{page.find_us.paragraphs[0]}</p>
       <iframe
-        src={mapEmbedUrl}
+        src={page.find_us.map_embed_url}
         width="100%"
         height="450"
         style="border:0;"
@@ -102,7 +79,7 @@ const mapEmbedUrl =
         <input type="hidden" name="form-name" value="contact" />
         <p class="hidden">
           <label>
-            Don't fill this out if you're human:
+            {chrome.honeypot_label}
             <input name="bot-field" />
           </label>
         </p>

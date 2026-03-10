@@ -1,13 +1,19 @@
 {
   "title": "Who We Are",
   "intro": "Our church life is shaped by Belonging to God's Family, Serving God's mission, and Giving God everything.",
+  "mission_chip_labels": {
+    "belong": "Belong",
+    "serve": "Serve",
+    "give": "Give",
+    "team_and_beliefs": "Our Team & Beliefs"
+  },
   "groups": [
     {
       "id": "belong",
       "heading": "Belong",
       "intro": "Belong by gathering on Sundays, joining a midweek community, and growing together in faith.",
       "image": {
-        "src": "/images/congregation.jpg",
+        "src": "/images/uploads/congregation.jpg",
         "alt": "Church family and neighbours gathering together in the church grounds"
       },
       "items": [
@@ -41,7 +47,7 @@
       "heading": "Serve",
       "intro": "Serve by joining ministry teams, supporting local outreach, and helping us care for creation.",
       "image": {
-        "src": "/images/lunch club.jpg",
+        "src": "/images/uploads/lunch club.jpg",
         "alt": "Community fun day games on the church field"
       },
       "items": [
@@ -72,6 +78,11 @@
       ]
     }
   ],
+  "serve_teams_teaser": {
+    "heading": "Serving Teams",
+    "intro": "You can explore teams in detail and send your interest in one place.",
+    "cta_label": "Go to Join a Team"
+  },
   "give": {
     "title": "Give",
     "online_giving": {
@@ -97,7 +108,7 @@
     },
     "contact_html": "For more information, contact us at <a class='underline decoration-[var(--eden)] underline-offset-4' href='mailto:hello@saintjohnspark.org'>hello@saintjohnspark.org</a>.",
     "section_image": {
-      "src": "/images/PXL_20250816_114550760.PORTRAIT.jpg",
+      "src": "/images/uploads/PXL_20250816_114550760.PORTRAIT.jpg",
       "alt": "Worship team leading sung praise during a Sunday gathering"
     },
     "development_needs": {
@@ -170,7 +181,7 @@
     "title": "Join a Team",
     "intro": "Select the teams you are interested in, then share your contact details. We will follow up with next steps.",
     "hero_image": {
-      "src": "/images/friends.jpg",
+      "src": "/images/uploads/friends.jpg",
       "alt": "Church volunteers and friends smiling together outdoors"
     },
     "hero_blurb": "Serving is one of the best ways to build friendships and help church family thrive each week.",
@@ -190,6 +201,7 @@
     },
     "messages": {
       "none_selected": "No teams selected yet.",
+      "selected_badge_label": "Selected",
       "selected_prefix": "Selected teams:",
       "message_title": "Join a Team Enquiry",
       "teams_label": "Teams interested in",
@@ -212,7 +224,7 @@
         "phone": "07538 172907",
         "phone_href": "tel:+447538172907",
         "image": {
-          "src": "/images/Luke Graham.jpg",
+          "src": "/images/uploads/Luke Graham.jpg",
           "alt": "Revd Luke Graham serving at a church barbecue"
         }
       },
@@ -222,7 +234,7 @@
         "email": "safeguarding@saintjohnspark.org",
         "bio": "Claire leads our Park Tots group for under 5s and serves as our safeguarding officer, helping us care for children and vulnerable adults across church life.",
         "image": {
-          "src": "/images/claire smith.jpg",
+          "src": "/images/uploads/claire smith.jpg",
           "alt": "Claire Smith helping children at an outdoor church activity"
         }
       },
@@ -232,7 +244,7 @@
         "email": "hello@saintjohnspark.org",
         "bio": "Faustina serves as churchwarden, supporting pastoral care and practical leadership across the congregation.",
         "image": {
-          "src": "/images/Faustina.jpg",
+          "src": "/images/uploads/Faustina.jpg",
           "alt": "Faustina Nyame speaking at the front of church"
         }
       },
@@ -242,7 +254,7 @@
         "email": "hello@saintjohnspark.org",
         "bio": "Bess serves the church as a churchwarden and lay reader, helping lead worship and nurture discipleship.",
         "image": {
-          "src": "/images/Bess.jpg",
+          "src": "/images/uploads/Bess.jpg",
           "alt": "Bess Cooper"
         }
       }
@@ -255,7 +267,7 @@
         "We believe in God the Father, in Jesus Christ his Son, and in the Holy Spirit; in forgiveness, resurrection, and eternal life in Christ."
       ],
       "image": {
-        "src": "/images/stained-glass-cross.jpg",
+        "src": "/images/uploads/stained-glass-cross.jpg",
         "alt": "Stained glass cross inside St John's Church"
       }
     },
@@ -272,7 +284,7 @@
         "href": "https://www.saintjohnspark.org.uk/wp-content/uploads/2025/08/St-Johns-Safeguarding-Policy-2025-2.docx"
       },
       "image": {
-        "src": "/images/kids-churchyard.jpg",
+        "src": "/images/uploads/kids-churchyard.jpg",
         "alt": "Children and families enjoying activities around the church grounds"
       }
     }
@@ -281,38 +293,38 @@
     "heading": "Life in Park",
     "subtitle": "A glimpse into church life in Park: worship, friendship, family, and shared moments through the year.",
     "featured_photo": {
-      "src": "/images/baptism.jpg",
+      "src": "/images/uploads/baptism.jpg",
       "alt": "Baptism Celebration",
       "label": "New Life"
     },
     "photos": [
       {
-        "src": "/images/community-park-gathering-1.jpg",
+        "src": "/images/uploads/community-park-gathering-1.jpg",
         "alt": "Community gathering in the park with bunting and seated groups",
         "label": "Community Gathering"
       },
       {
-        "src": "/images/community-park-gathering-2.jpg",
+        "src": "/images/uploads/community-park-gathering-2.jpg",
         "alt": "Church building and community enjoying outdoor activities",
         "label": "Churchyard Event"
       },
       {
-        "src": "/images/community-fun-day.jpg",
+        "src": "/images/uploads/community-fun-day.jpg",
         "alt": "People taking part in races on the grass outside church",
         "label": "Park Fun Day"
       },
       {
-        "src": "/images/kids-frisbee.jpg",
+        "src": "/images/uploads/kids-frisbee.jpg",
         "alt": "Children playing games in the park",
         "label": "Park Kids"
       },
       {
-        "src": "/images/kids-churchyard.jpg",
+        "src": "/images/uploads/kids-churchyard.jpg",
         "alt": "Children and families around the churchyard games area",
         "label": "Churchyard Games"
       },
       {
-        "src": "/images/outdoor carols.jpg",
+        "src": "/images/uploads/outdoor carols.jpg",
         "alt": "Community singing carols at the church entrance in December",
         "label": "Seasonal Events"
       }
