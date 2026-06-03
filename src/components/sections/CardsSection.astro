@@ -1,0 +1,37 @@
+---
+import type { CollectionEntry } from "astro:content";
+import MaskedImage from "./MaskedImage.astro";
+
+type PageSection = CollectionEntry<"pages">["data"]["sections"][number];
+
+interface Props {
+  section: Extract<PageSection, { type: "cards" }>;
+}
+
+const { section } = Astro.props;
+---
+
+<section class="content-band" data-tone={section.backgroundTone}>
+  {section.eyebrow && <p class="eyebrow">{section.eyebrow}</p>}
+  <h2 class="section-title">{section.title}</h2>
+  {section.intro && <p class="lede">{section.intro}</p>}
+  <div class="cards-grid" data-columns={section.columns}>
+    {
+      section.cards.map((card) => (
+        <article class="info-card">
+          {card.image && <MaskedImage image={card.image} class="news-card__media" />}
+          {card.tag && <span class="info-card__tag">{card.tag}</span>}
+          <h3 class="card-title">{card.title}</h3>
+          <p class="info-card__body">{card.body}</p>
+          {
+            card.href && card.linkLabel && (
+              <a class="inline-link" href={card.href}>
+                {card.linkLabel}
+              </a>
+            )
+          }
+        </article>
+      ))
+    }
+  </div>
+</section>

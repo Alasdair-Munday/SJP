@@ -1,0 +1,90 @@
+---
+import type { CollectionEntry } from "astro:content";
+import SectionRenderer from "../sections/SectionRenderer.astro";
+import MaskedImage from "../sections/MaskedImage.astro";
+import { formatDate, formatShortDate } from "../../lib/format";
+import { getAllPosts } from "../../lib/content";
+
+type PageData = CollectionEntry<"pages">["data"];
+
+interface Props {
+  page: PageData;
+}
+
+const { page } = Astro.props;
+const posts = await getAllPosts();
+
+const categoryLabels = {
+  event: "Events",
+  update: "Updates",
+  blog: "Blog",
+};
+---
+
+<div class="page-stack">
+  <SectionRenderer sections={page.sections} />
+
+  <section class="content-band" data-tone="stone">
+    <div class="news-filter" aria-label="Filter news posts">
+      <button class="filter-pill filter-button" type="button" data-filter="all" data-active="true">All</button>
+      {
+        Object.entries(categoryLabels).map(([category, label]) => (
+          <button class="filter-pill filter-button" type="button" data-filter={category}>
+            {label}
+          </button>
+        ))
+      }
+    </div>
+
+    <div class="news-grid" data-news-grid>
+      {
+        posts.map((post) => (
+          <article class="news-card" data-news-card data-category={post.data.category}>
+            <MaskedImage image={post.data.featuredImage} class="news-card__media" />
+            <div class="news-card__meta">
+              <span class="meta-chip">{categoryLabels[post.data.category]}</span>
+              <span>{formatShortDate(post.data.publishDate)}</span>
+              {post.data.eventDate && <span>{formatDate(post.data.eventDate)}</span>}
+            </div>
+            <h2 class="post-title">
+              <a class="news-card__link" href={`/news/${post.slug}`}>{post.data.title}</a>
+            </h2>
+            <p class="news-card__summary">{post.data.summary}</p>
+            {
+              post.data.category === "event" && (
+                <div class="news-card__meta">
+                  {post.data.timeText && <span>{post.data.timeText}</span>}
+                  {post.data.location && <span>{post.data.location}</span>}
+                </div>
+              )
+            }
+            <a class="inline-link" href={`/news/${post.slug}`}>Read more</a>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+</div>
+
+<script is:inline>
+  (() => {
+    const buttons = Array.from(document.querySelectorAll("[data-filter]"));
+    const cards = Array.from(document.querySelectorAll("[data-news-card]"));
+    if (!buttons.length || !cards.length) return;
+
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const filter = button.getAttribute("data-filter");
+
+        buttons.forEach((candidate) => {
+          candidate.setAttribute("data-active", candidate === button ? "true" : "false");
+        });
+
+        cards.forEach((card) => {
+          const category = card.getAttribute("data-category");
+          card.hidden = filter !== "all" && category !== filter;
+        });
+      });
+    });
+  })();
+</script>

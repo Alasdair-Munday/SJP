@@ -1,0 +1,36 @@
+{
+  "title": "Talks",
+  "metaDescription": "Listen again to recent Sunday talks from St John's Park and subscribe through your podcast app.",
+  "template": "talks",
+  "sections": [
+    {
+      "type": "hero",
+      "eyebrow": "Sunday teaching",
+      "title": "Talks",
+      "body": "Catch up on recent Sunday talks, revisit a series, or subscribe to take the teaching with you through the week.",
+      "backgroundTone": "door",
+      "primaryCta": {
+        "label": "See the latest talk",
+        "href": "#latest-talk"
+      },
+      "secondaryCta": {
+        "label": "Open the news feed",
+        "href": "/news"
+      },
+      "image": {
+        "src": "/images/uploads/Sermons.jpg",
+        "alt": "A talk being shared during a Sunday service",
+        "maskShape": "/images/shapes/church-hall-roof.png",
+        "accentShape": "/images/shapes/long-thin-line-2.png",
+        "frameTone": "sky"
+      }
+    },
+    {
+      "type": "intro",
+      "eyebrow": "Archive",
+      "title": "Archive",
+      "body": "Talks are pulled in at build time from our RSS feed, with a local fallback snapshot so the page keeps working reliably if the feed is unavailable.",
+      "backgroundTone": "stone"
+    }
+  ]
+}

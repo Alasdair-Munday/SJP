@@ -1,0 +1,14 @@
+{
+  "title": "Safeguarding",
+  "metaDescription": "Safeguarding information, policy access, and key contacts for St John's Park Church.",
+  "template": "utility",
+  "sections": [
+    {
+      "type": "richText",
+      "eyebrow": "Safeguarding",
+      "title": "Safeguarding",
+      "backgroundTone": "stone",
+      "contentHtml": "<p>St John's Park is committed to high standards in the safeguarding and care of children and vulnerable adults across all areas of church life.</p><p>If you need to speak to someone locally, please contact Claire Smith, our safeguarding officer, at <a href='mailto:safeguarding@saintjohnspark.org'>safeguarding@saintjohnspark.org</a>.</p><p>You can download our current safeguarding policy here: <a href='https://www.saintjohnspark.org.uk/wp-content/uploads/2025/08/St-Johns-Safeguarding-Policy-2025-2.docx'>St John's Safeguarding Policy 2025 (DOCX)</a>.</p><p>The Diocese of Sheffield's Safeguarding Adviser is Siân Checkley. Contact 01709 309100 or 07741 013775, or email <a href='mailto:sian.checkley@sheffield.anglican.org'>sian.checkley@sheffield.anglican.org</a>. More diocesan safeguarding information is available at <a href='https://www.sheffield.anglican.org/support/safeguarding' target='_blank' rel='noreferrer'>sheffield.anglican.org/support/safeguarding</a>.</p>"
+    }
+  ]
+}

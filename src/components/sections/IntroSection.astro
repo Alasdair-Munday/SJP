@@ -1,0 +1,30 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+type PageSection = CollectionEntry<"pages">["data"]["sections"][number];
+
+interface Props {
+  section: Extract<PageSection, { type: "intro" }>;
+}
+
+const { section } = Astro.props;
+---
+
+<section class="content-band" data-tone={section.backgroundTone}>
+  {section.eyebrow && <p class="eyebrow">{section.eyebrow}</p>}
+  <h2 class="section-title">{section.title}</h2>
+  <div class="section-copy">
+    <p>{section.body}</p>
+  </div>
+  {
+    section.ctas.length > 0 && (
+      <div class="inline-links">
+        {section.ctas.map((link) => (
+          <a class="button-link--ghost" href={link.href} target={link.newTab ? "_blank" : undefined} rel={link.newTab ? "noreferrer" : undefined}>
+            {link.label}
+          </a>
+        ))}
+      </div>
+    )
+  }
+</section>

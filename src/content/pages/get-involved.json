@@ -1,0 +1,133 @@
+{
+  "title": "Get involved",
+  "metaDescription": "Explore ministries, serving teams, generosity, and practical ways to belong to the life and mission of St John's Park.",
+  "template": "standard",
+  "sections": [
+    {
+      "type": "hero",
+      "eyebrow": "Belong, serve, give",
+      "title": "Get Involved",
+      "body": "Getting involved can begin with a first Sunday, but it grows through friendship, serving, generosity, and a shared commitment to the people around us.",
+      "backgroundTone": "park",
+      "primaryCta": {
+        "label": "Contact us about getting involved",
+        "href": "/contact#contact-form"
+      },
+      "secondaryCta": {
+        "label": "Plan a first visit",
+        "href": "/visit"
+      },
+      "image": {
+        "src": "/images/uploads/community-fun-day.jpg",
+        "alt": "People taking part in community activities outdoors",
+        "maskShape": "/images/shapes/arch-shape-filled.png",
+        "accentShape": "/images/shapes/flower-outline.png",
+        "frameTone": "grass"
+      }
+    },
+    {
+      "type": "cards",
+      "eyebrow": "Church life",
+      "title": "Church Life",
+      "intro": "Most people begin by turning up on a Sunday, then gradually finding the rhythms and teams that help them belong more deeply.",
+      "backgroundTone": "stone",
+      "columns": 2,
+      "cards": [
+        {
+          "title": "Sundays and worship",
+          "body": "Come on a Sunday, stay for refreshments, and let relationships grow naturally as you get to know the church family.",
+          "href": "/visit",
+          "linkLabel": "Start with Sunday",
+          "tone": "park"
+        },
+        {
+          "title": "Children and youth",
+          "body": "Park Kids, Park Youth, and wider family life matter deeply here. We want younger generations to know they belong and can grow in faith.",
+          "href": "/visit",
+          "linkLabel": "See newcomer details",
+          "tone": "pink"
+        },
+        {
+          "title": "Midweek community",
+          "body": "Friendship, prayer, Scripture, and local care continue beyond Sunday through midweek rhythms and shared life together.",
+          "href": "/contact",
+          "linkLabel": "Ask about midweek life",
+          "tone": "sky"
+        },
+        {
+          "title": "Local care and welcome",
+          "body": "From food support to hospitality and community events, practical acts of love are part of how we serve Park.",
+          "href": "/news",
+          "linkLabel": "Read recent updates",
+          "tone": "door"
+        }
+      ]
+    },
+    {
+      "type": "split",
+      "eyebrow": "Serving teams",
+      "title": "Serving",
+      "body": "There are many ways to help church life flourish each week, from welcoming and hospitality to worship, children and youth, admin, cleaning, food support, creative work, and audio-visual help.",
+      "points": [
+        "Welcome and hospitality",
+        "Park Kids and Park Youth",
+        "Worship, creative, and audio-visual teams",
+        "Food Bank, Lunch Club, and practical community care",
+        "Admin, buildings, sustainability, and behind-the-scenes support"
+      ],
+      "backgroundTone": "sky",
+      "image": {
+        "src": "/images/uploads/friends.jpg",
+        "alt": "Church friends and volunteers smiling together",
+        "maskShape": "/images/shapes/rectangle-2.png",
+        "accentShape": "/images/shapes/long-brushstroke-medium.png",
+        "frameTone": "pink"
+      },
+      "reverse": true,
+      "ctas": [
+        {
+          "label": "Ask about serving",
+          "href": "/contact#contact-form"
+        }
+      ]
+    },
+    {
+      "type": "split",
+      "eyebrow": "Generosity",
+      "title": "Giving",
+      "body": "Your generosity helps sustain Sunday gatherings, midweek ministry, practical support in the neighbourhood, and the long-term renewal of our building for future mission.",
+      "points": [
+        "Give online through the Parish Giving Scheme.",
+        "Bring a gift on a Sunday or use the card machine at church.",
+        "Bank transfer: ST JOHNS PARK P C C · 20-76-89 · 60362786",
+        "Building gifts can use the reference BUILDING where helpful."
+      ],
+      "backgroundTone": "pink",
+      "image": {
+        "src": "/images/uploads/PXL_20250816_114550760.PORTRAIT.jpg",
+        "alt": "Worship team leading sung praise during a Sunday gathering",
+        "maskShape": "/images/shapes/church-hall-shape-2.png",
+        "accentShape": "/images/shapes/circle-brushstroke.png",
+        "frameTone": "door"
+      },
+      "ctas": [
+        {
+          "label": "Give online",
+          "href": "https://www.parishgiving.org.uk/donors/find-your-parish/park-st-john-the-evangelist-sheffield/",
+          "newTab": true
+        }
+      ]
+    },
+    {
+      "type": "cta",
+      "eyebrow": "Take a next step",
+      "title": "Next Steps",
+      "body": "Whether you want to ask about serving, giving, children and youth, or simply becoming part of the church family, we would love to help you find the right next step.",
+      "backgroundTone": "park-dark",
+      "primaryCta": {
+        "label": "Send us a message",
+        "href": "/contact#contact-form"
+      }
+    }
+  ]
+}

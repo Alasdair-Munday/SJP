@@ -1,0 +1,67 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { getLatestPosts } from "../../lib/content";
+import { formatDate, formatShortDate, formatTalkDuration } from "../../lib/format";
+import { getTalks } from "../../lib/talks";
+
+type PageSection = CollectionEntry<"pages">["data"]["sections"][number];
+
+interface Props {
+  section: Extract<PageSection, { type: "latest" }>;
+}
+
+const { section } = Astro.props;
+
+const posts = section.source === "posts" ? await getLatestPosts(section.limit) : [];
+const talks = section.source === "talks" ? (await getTalks()).slice(0, section.limit) : [];
+---
+
+<section class="content-band" data-tone={section.backgroundTone}>
+  {section.eyebrow && <p class="eyebrow">{section.eyebrow}</p>}
+  <h2 class="section-title">{section.title}</h2>
+  {section.intro && <p class="lede">{section.intro}</p>}
+
+  {
+    section.source === "posts" ? (
+      <div class="latest-list">
+        {posts.map((post) => (
+          <article class="news-card">
+            <div class="news-card__meta">
+              <span class="meta-chip">{post.data.category}</span>
+              <span>{formatShortDate(post.data.publishDate)}</span>
+              {post.data.eventDate && <span>{formatDate(post.data.eventDate)}</span>}
+            </div>
+            <h3 class="post-title">{post.data.title}</h3>
+            <p class="news-card__summary">{post.data.summary}</p>
+            <a class="inline-link" href={`/news/${post.slug}`}>Read more</a>
+          </article>
+        ))}
+      </div>
+    ) : (
+      <div class="latest-list">
+        {talks.map((talk, index) => (
+          <article class="talk-card" id={index === 0 ? "latest-talk" : undefined}>
+            <div class="talk-card__meta">
+              <span class="meta-chip">{talk.series}</span>
+              <span>{formatDate(talk.date)}</span>
+              {talk.duration > 0 && <span>{formatTalkDuration(talk.duration)}</span>}
+            </div>
+            <h3 class="post-title">{talk.title}</h3>
+            <p class="talk-card__summary">{talk.description}</p>
+            {talk.audioUrl && (
+              <div class="talk-player-wrapper">
+                <audio controls src={talk.audioUrl} class="talk-player"></audio>
+              </div>
+            )}
+          </article>
+        ))}
+      </div>
+    )
+  }
+
+  <div class="button-row">
+    <a class="button-link--ghost" href={section.cta.href} target={section.cta.newTab ? "_blank" : undefined} rel={section.cta.newTab ? "noreferrer" : undefined}>
+      {section.cta.label}
+    </a>
+  </div>
+</section>

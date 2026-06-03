@@ -1,0 +1,99 @@
+---
+import type { CollectionEntry } from "astro:content";
+import SectionRenderer from "../sections/SectionRenderer.astro";
+import { getSiteConfig } from "../../lib/content";
+
+type PageData = CollectionEntry<"pages">["data"];
+
+interface Props {
+  page: PageData;
+}
+
+const { page } = Astro.props;
+const site = await getSiteConfig();
+---
+
+<div class="page-stack">
+  <SectionRenderer sections={page.sections} />
+
+  <section class="content-band" data-tone="stone">
+    <p class="eyebrow">Find us</p>
+    <h2 class="section-title">St John's Park</h2>
+    <div class="contact-layout">
+      <div class="contact-grid">
+        <div class="contact-panel">
+          <h3 class="card-title">Address</h3>
+          <p>{site.contact.addressLines.join(", ")}</p>
+          <p>
+            <a class="inline-link" href={site.contact.mapUrl} target="_blank" rel="noreferrer">
+              Open in Google Maps
+            </a>
+          </p>
+          <h3 class="card-title">Email</h3>
+          <p><a href={`mailto:${site.contact.email}`}>{site.contact.email}</a></p>
+        </div>
+        <div class="map-frame">
+          <iframe
+            src={site.contact.mapEmbedUrl}
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Map showing St John's Park"
+          ></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact-form" class="content-band" data-tone="park">
+    <p class="eyebrow">Send a message</p>
+    <h2 class="section-title">We would love to hear from you</h2>
+    <p class="lede">
+      You can email us directly at <a href={`mailto:${site.contact.email}`}>{site.contact.email}</a>, or use this form.
+    </p>
+
+    <form
+      class="contact-form"
+      name="contact"
+      method="POST"
+      data-netlify="true"
+      netlify-honeypot="bot-field"
+      action="/contact-thank-you"
+    >
+      <input type="hidden" name="form-name" value="contact" />
+      <p class="visually-hidden">
+        <label>
+          Leave this field empty
+          <input name="bot-field" />
+        </label>
+      </p>
+
+      <label class="form-field">
+        <span>Name</span>
+        <input name="name" type="text" required autocomplete="name" />
+      </label>
+
+      <label class="form-field">
+        <span>Email</span>
+        <input name="email" type="email" required autocomplete="email" />
+      </label>
+
+      <label class="form-field">
+        <span>Subject</span>
+        <select name="subject" required>
+          <option value="">Select a topic</option>
+          {site.contact.formSubjects.map((subject) => <option value={subject.value}>{subject.label}</option>)}
+        </select>
+      </label>
+
+      <label class="form-field">
+        <span>Message</span>
+        <textarea name="message" rows={6} required></textarea>
+      </label>
+
+      <div class="form-actions">
+        <button class="button-link" type="submit">Send message</button>
+        <p class="contact-form__note">We aim to reply as soon as we can.</p>
+      </div>
+    </form>
+  </section>
+</div>

@@ -1,0 +1,154 @@
+{
+  "title": "Visit",
+  "metaDescription": "Plan a first visit to St John's Park in Sheffield, with Sunday times, what to expect, children and youth information, and practical travel details.",
+  "template": "standard",
+  "sections": [
+    {
+      "type": "hero",
+      "eyebrow": "First time at St John's Park",
+      "title": "First Visit",
+      "body": "Whether you are returning to church, exploring faith, or just looking for somewhere to begin, we want your first visit to feel straightforward and welcoming.",
+      "backgroundTone": "stone",
+      "primaryCta": {
+        "label": "Find us",
+        "href": "/contact"
+      },
+      "secondaryCta": {
+        "label": "Ask a question",
+        "href": "/contact#contact-form"
+      },
+      "image": {
+        "src": "/images/uploads/refreshments.jpg",
+        "alt": "People chatting and eating together after church",
+        "maskShape": "/images/shapes/arch-shape-filled.png",
+        "accentShape": "/images/shapes/star-brushstroke.png",
+        "frameTone": "park"
+      }
+    },
+    {
+      "type": "split",
+      "eyebrow": "Sunday at a glance",
+      "title": "Sundays at 10:45am",
+      "body": "We gather to worship Jesus, hear the Bible taught, pray, and share life together. Services are usually a little over an hour, and there is always time afterwards to meet people over refreshments.",
+      "points": [
+        "St John's Park, Bernard Street, Sheffield, S2 5PU",
+        "Contemporary worship, prayer, and Bible teaching",
+        "Refreshments and conversation after the service"
+      ],
+      "backgroundTone": "park",
+      "image": {
+        "src": "/images/uploads/worship-flags.jpg",
+        "alt": "People worshipping together on a Sunday morning",
+        "maskShape": "/images/shapes/church-hall-shape-2.png",
+        "accentShape": "/images/shapes/circle-brushstroke-medium.png",
+        "objectPosition": "center center",
+        "frameTone": "park-dark"
+      },
+      "ctas": [
+        {
+          "label": "Get directions",
+          "href": "/contact"
+        }
+      ]
+    },
+    {
+      "type": "cards",
+      "eyebrow": "What to expect",
+      "title": "What to Expect",
+      "intro": "You do not need to know the words, the format, or anyone in the room before you arrive.",
+      "backgroundTone": "sky",
+      "columns": 3,
+      "cards": [
+        {
+          "title": "The service",
+          "body": "We sing together, read Scripture, hear Bible teaching that connects to everyday life, and spend time in prayer. On the first Sunday of the month we share Communion.",
+          "tone": "door"
+        },
+        {
+          "title": "Children and young people",
+          "body": "Children are very welcome. We regularly run age-appropriate activities during the service and through the week, and we work hard to help families feel relaxed and at home.",
+          "tone": "park"
+        },
+        {
+          "title": "Afterwards",
+          "body": "Please stay for refreshments and conversation. It is one of the easiest ways to get to know people and ask any questions you still have after the service.",
+          "tone": "pink"
+        }
+      ]
+    },
+    {
+      "type": "split",
+      "eyebrow": "Children and youth",
+      "title": "Children & Youth",
+      "body": "From younger children to teenagers, we want the next generation to know they are loved, known, and included in the life of the church.",
+      "points": [
+        "Park Kids and Park Youth are part of the wider life of our church.",
+        "Midweek rhythms and Sunday gatherings both matter here.",
+        "If you want to ask about children or youth before visiting, we would be happy to help."
+      ],
+      "backgroundTone": "pink",
+      "image": {
+        "src": "/images/uploads/kids-churchyard.jpg",
+        "alt": "Children and families enjoying activities around the churchyard",
+        "maskShape": "/images/shapes/flower-shape.png",
+        "accentShape": "/images/shapes/three-sticks-shape.png",
+        "frameTone": "stone"
+      },
+      "reverse": true,
+      "ctas": [
+        {
+          "label": "Get in touch about children and youth",
+          "href": "/contact#contact-form"
+        }
+      ]
+    },
+    {
+      "type": "latest",
+      "eyebrow": "Latest talk",
+      "title": "Latest Talk",
+      "backgroundTone": "door",
+      "source": "talks",
+      "limit": 1,
+      "cta": {
+        "label": "See all talks",
+        "href": "/talks"
+      }
+    },
+    {
+      "type": "split",
+      "eyebrow": "Planning the journey",
+      "title": "Location & Travel",
+      "body": "Hyde Park tram stop is right next to the church. We have limited on-site parking, with overflow parking nearby, and we are always happy to help if you need a little extra guidance before your first visit.",
+      "points": [
+        "Address: Bernard Street, Sheffield, S2 5PU",
+        "Hyde Park tram stop is beside the church",
+        "Use the contact page for maps, parking detail, and life-event enquiries"
+      ],
+      "backgroundTone": "stone",
+      "image": {
+        "src": "/images/uploads/community-park-gathering-2.jpg",
+        "alt": "The church building and grounds at St John's Park",
+        "maskShape": "/images/shapes/rectangle.png",
+        "accentShape": "/images/shapes/long-thin-line-3.png",
+        "frameTone": "grass"
+      },
+      "ctas": [
+        {
+          "label": "Open contact and directions",
+          "href": "/contact"
+        }
+      ]
+    },
+    {
+      "type": "cta",
+      "eyebrow": "Still unsure?",
+      "title": "Contact Us",
+      "body": "If there is anything you want to ask before your first Sunday, from accessibility and children to what to wear, we would love to help.",
+      "backgroundTone": "park-dark",
+      "primaryCta": {
+        "label": "Contact us",
+        "href": "/contact#contact-form"
+      }
+    }
+  ]
+}

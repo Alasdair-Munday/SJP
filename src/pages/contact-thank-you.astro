@@ -1,26 +1,22 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import { getSiteContent } from "../data/site-content";
-
-const content = await getSiteContent();
-const page = content.pages.contact_thank_you;
+import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<Layout title={page.title}>
-	<div class="site-bands max-w-3xl mx-auto px-4 py-20">
-		<section class="sketch-panel p-8 space-y-4">
-			<h1 class="page-heading page-heading--accent text-5xl">
-				{page.title}
-			</h1>
-			<p class="text-lg text-(--ink)/90">
-				{page.message}
-			</p>
-			<a
-				href={page.button_href}
-				class="inline-flex items-center gap-2 px-5 py-2.5 border-2 border-(--ink) text-(--ink) font-semibold hover:bg-(--ink) hover:text-white transition-colors"
-			>
-				{page.button_label}
-			</a>
-		</section>
-	</div>
-</Layout>
+<BaseLayout
+  title="Message sent"
+  description="Thanks for contacting St John's Park. We will get back to you soon."
+>
+  <div class="utility-shell page-stack">
+    <section class="content-band" data-tone="stone">
+      <p class="eyebrow">Thank you</p>
+      <h1 class="display-title">Message sent</h1>
+      <p class="lede">
+        Thanks for getting in touch. We will get back to you as soon as we can.
+      </p>
+      <div class="button-row">
+        <a class="button-link" href="/">Return home</a>
+        <a class="button-link--secondary" href="/visit">Plan a visit</a>
+      </div>
+    </section>
+  </div>
+</BaseLayout>

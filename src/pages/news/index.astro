@@ -1,84 +1,11 @@
 ---
-import Layout from "../../layouts/Layout.astro";
-import { getCollection } from "astro:content";
-import { ArrowRight, Calendar } from "lucide-react";
-import { getSiteContent } from "../../data/site-content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import NewsListingTemplate from "../../components/templates/NewsListingTemplate.astro";
+import { getPageContent } from "../../lib/content";
 
-const STALE_FALLBACK_DAYS = 90;
-const now = new Date();
-const content = await getSiteContent();
-const copy = content.components.news;
-
-const newsItems = (await getCollection("news"))
-	.filter((item) => {
-		const staleAfterDays = item.data.staleAfterDays ?? STALE_FALLBACK_DAYS;
-		const staleDate = new Date(item.data.publishDate);
-		staleDate.setDate(staleDate.getDate() + staleAfterDays);
-		return staleDate >= now;
-	})
-	.sort(
-		(a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime(),
-	);
-
-const formatDate = (date: Date) =>
-	new Intl.DateTimeFormat("en-GB", {
-		day: "numeric",
-		month: "long",
-		year: "numeric",
-	}).format(date);
+const page = await getPageContent("news");
 ---
 
-<Layout title={copy.listing_title}>
-	<div
-		class="site-bands max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-8"
-	>
-		<header class="space-y-3 px-8">
-			<p
-				class="text-sm uppercase tracking-[0.14em] font-bold text-(--teal)"
-			>
-				{copy.listing_eyebrow}
-			</p>
-			<h1 class="page-heading page-heading--accent text-5xl font-bold">
-				{copy.listing_title}
-			</h1>
-			<p class="text-(--ink)/85 max-w-3xl">
-				{copy.listing_description}
-			</p>
-		</header>
-
-		{
-			newsItems.length > 0 ? (
-				<div class="grid grid-cols-[repeat(auto-fit,minmax(18rem,1fr))] gap-6">
-					{newsItems.map((item) => (
-						<article class="sketch-panel p-6 flex flex-col gap-4 h-full">
-							<p class="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.1em] text-(--ink)/65">
-								<Calendar size={16} />{" "}
-								{formatDate(item.data.publishDate)}
-							</p>
-							<h2 class="section-heading text-2xl">
-								<a
-									href={`/news/${item.slug}/`}
-									class="hover:text-(--teal) transition-colors"
-								>
-									{item.data.title}
-								</a>
-							</h2>
-							<p class="text-(--ink)/85">{item.data.summary}</p>
-							<a
-								href={`/news/${item.slug}/`}
-								class="mt-auto inline-flex items-center gap-2 font-semibold text-sm tracking-wide border-b-2 border-(--ink) pb-1 hover:text-(--teal) hover:border-(--teal) transition-colors w-fit"
-							>
-								{copy.read_article_label}
-								<ArrowRight size={16} />
-							</a>
-						</article>
-					))}
-				</div>
-			) : (
-				<p class="text-(--ink)/85 font-medium">
-					{copy.listing_empty_message}
-				</p>
-			)
-		}
-	</div>
-</Layout>
+<BaseLayout title={page.title} description={page.metaDescription}>
+  <NewsListingTemplate page={page} />
+</BaseLayout>

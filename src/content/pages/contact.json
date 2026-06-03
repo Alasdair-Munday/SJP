@@ -1,0 +1,67 @@
+{
+  "title": "Contact",
+  "metaDescription": "Find St John's Park, send a message, ask about life events, and access practical travel and safeguarding information.",
+  "template": "standard",
+  "sections": [
+    {
+      "type": "hero",
+      "eyebrow": "Get in touch",
+      "title": "Contact Us",
+      "body": "Whether you are planning a first visit, asking about church life, or getting in touch about a specific need, we would love to hear from you.",
+      "backgroundTone": "stone",
+      "primaryCta": {
+        "label": "Jump to the contact form",
+        "href": "#contact-form"
+      },
+      "secondaryCta": {
+        "label": "Open Google Maps",
+        "href": "https://maps.google.com/?q=Bernard+Street,+Sheffield,+S2+5PU",
+        "newTab": true
+      },
+      "image": {
+        "src": "/images/uploads/community-park-gathering-2.jpg",
+        "alt": "The church building and grounds at St John's Park",
+        "maskShape": "/images/shapes/church-hall-shape-2.png",
+        "accentShape": "/images/shapes/thick-brushstroke.png",
+        "frameTone": "park"
+      }
+    },
+    {
+      "type": "split",
+      "eyebrow": "Find us",
+      "title": "Location",
+      "body": "Hyde Park tram stop is right next to the church, and we have limited on-site parking with nearby overflow parking available when needed.",
+      "points": [
+        "General enquiries: hello@saintjohnspark.org",
+        "Limited on-site parking from Bernard Street",
+        "Overflow parking nearby via Maltravers Road and St John's Street"
+      ],
+      "backgroundTone": "sky",
+      "image": {
+        "src": "/images/uploads/community-park-gathering-1.jpg",
+        "alt": "People gathered around the church grounds",
+        "maskShape": "/images/shapes/rectangle-cut-corner.png",
+        "accentShape": "/images/shapes/flower-outline.png",
+        "frameTone": "pink"
+      }
+    },
+    {
+      "type": "richText",
+      "eyebrow": "Life events",
+      "title": "Life Events",
+      "backgroundTone": "pink",
+      "contentHtml": "<p>If you want to ask about baptisms, weddings, or funerals, please use the contact form below or email us directly.</p><p>You can also begin with these links: <a href='https://www.melksham.church/life-events' target='_blank' rel='noreferrer'>Life events information</a> and <a href='https://www.stjohnschap.co.uk/what-we-do/celebrating-new-birth/' target='_blank' rel='noreferrer'>Celebrating new birth</a>.</p>"
+    },
+    {
+      "type": "cta",
+      "eyebrow": "Safeguarding",
+      "title": "Safeguarding",
+      "body": "Safeguarding has its own dedicated page so you can find policy details, key contacts, and diocesan support quickly.",
+      "backgroundTone": "door",
+      "primaryCta": {
+        "label": "Open safeguarding",
+        "href": "/safeguarding"
+      }
+    }
+  ]
+}

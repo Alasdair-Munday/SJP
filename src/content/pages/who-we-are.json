@@ -1,0 +1,124 @@
+{
+  "title": "Who we are",
+  "metaDescription": "Meet St John's Park, learn what we believe, and get to know the leadership and church family serving Park, Sheffield.",
+  "template": "standard",
+  "sections": [
+    {
+      "type": "hero",
+      "eyebrow": "Church identity",
+      "title": "Who We Are",
+      "body": "St John's Park is part of the Church of England in the Diocese of Sheffield. We want to be a church that worships Jesus deeply, serves our neighbours faithfully, and makes room for people of every age and background to belong.",
+      "backgroundTone": "park-dark",
+      "primaryCta": {
+        "label": "Visit on Sunday",
+        "href": "/visit"
+      },
+      "secondaryCta": {
+        "label": "See ways to get involved",
+        "href": "/get-involved"
+      },
+      "image": {
+        "src": "/images/uploads/congregation.jpg",
+        "alt": "Church family worshipping together at St John's Park",
+        "maskShape": "/images/shapes/arch-shape-filled.png",
+        "accentShape": "/images/shapes/concentric-circles.png",
+        "frameTone": "roof"
+      }
+    },
+    {
+      "type": "split",
+      "eyebrow": "Our story",
+      "title": "Our Story",
+      "body": "Our life together is shaped by belonging to God's family, learning from his Word, supporting each other well, and loving our local community with practical care and open-handed welcome.",
+      "points": [
+        "We are part of the Church of England in the Diocese of Sheffield.",
+        "We want the church to be spiritually grounded and genuinely local.",
+        "We care about worship, discipleship, generosity, and long-term presence in Park."
+      ],
+      "backgroundTone": "stone",
+      "image": {
+        "src": "/images/uploads/stained-glass-cross.jpg",
+        "alt": "A stained glass cross inside the church building",
+        "maskShape": "/images/shapes/tall-church-window.png",
+        "accentShape": "/images/shapes/dots.png",
+        "frameTone": "door"
+      }
+    },
+    {
+      "type": "cards",
+      "eyebrow": "Leadership",
+      "title": "Leadership Team",
+      "intro": "Our leadership and ministry team help shape worship, pastoral care, children and youth ministry, and the wider mission of the church.",
+      "backgroundTone": "sky",
+      "columns": 2,
+      "cards": [
+        {
+          "title": "Revd Luke Graham",
+          "tag": "Priest in Charge",
+          "body": "Luke leads the vision and teaching life of St John's Park and helps shape our mission in Park, Sheffield. Email: luke@saintjohnspark.org",
+          "image": {
+            "src": "/images/uploads/Luke Graham.jpg",
+            "alt": "Revd Luke Graham outdoors at church",
+            "maskShape": "/images/shapes/curved-square-shape.png",
+            "frameTone": "park"
+          },
+          "tone": "stone"
+        },
+        {
+          "title": "Claire Smith",
+          "tag": "Park Tots Leader and Safeguarding Officer",
+          "body": "Claire leads our Park Tots group for under 5s and serves as safeguarding officer, helping us care well for children and vulnerable adults. Email: safeguarding@saintjohnspark.org",
+          "image": {
+            "src": "/images/uploads/claire smith.jpg",
+            "alt": "Claire Smith helping children at an outdoor activity",
+            "maskShape": "/images/shapes/rectangle-cut-corner.png",
+            "frameTone": "pink"
+          },
+          "tone": "stone"
+        },
+        {
+          "title": "Faustina Nyame",
+          "tag": "Churchwarden",
+          "body": "Faustina serves as churchwarden, supporting pastoral care and practical leadership across the congregation. Email: hello@saintjohnspark.org",
+          "image": {
+            "src": "/images/uploads/Faustina.jpg",
+            "alt": "Faustina Nyame speaking at the front of church",
+            "maskShape": "/images/shapes/circle-shape-4.png",
+            "frameTone": "sky"
+          },
+          "tone": "stone"
+        },
+        {
+          "title": "Elizabeth (Bess) Cooper",
+          "tag": "Churchwarden and Lay Reader",
+          "body": "Bess serves the church as a churchwarden and lay reader, helping lead worship and nurture discipleship. Email: hello@saintjohnspark.org",
+          "image": {
+            "src": "/images/uploads/Bess.jpg",
+            "alt": "Elizabeth Cooper",
+            "maskShape": "/images/shapes/flower-shape.png",
+            "frameTone": "grass"
+          },
+          "tone": "stone"
+        }
+      ]
+    },
+    {
+      "type": "richText",
+      "eyebrow": "What we believe",
+      "title": "What We Believe",
+      "backgroundTone": "pink",
+      "contentHtml": "<p>St John's is part of the Church of England in the Diocese of Sheffield. We are committed to being followers of Jesus who love and learn from God, support each other, and serve our community and beyond.</p><p>Our faith is well summarised in the Apostles' Creed and the historic Christian conviction that God is Father, Son, and Holy Spirit; that Jesus died and rose again; and that forgiveness, resurrection, and new life are found in him.</p><p>We want our belief to become visible in everyday life: worship that is sincere, friendship that is generous, service that is practical, and mission that stays rooted in hope.</p>"
+    },
+    {
+      "type": "cta",
+      "eyebrow": "Safeguarding",
+      "title": "Safeguarding",
+      "body": "We are committed to high standards in the safeguarding and care of children and vulnerable adults across all areas of church life.",
+      "backgroundTone": "door",
+      "primaryCta": {
+        "label": "Go to safeguarding",
+        "href": "/safeguarding"
+      }
+    }
+  ]
+}

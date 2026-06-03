@@ -1,0 +1,35 @@
+---
+import type { CollectionEntry } from "astro:content";
+import MaskedImage from "./MaskedImage.astro";
+
+type PageSection = CollectionEntry<"pages">["data"]["sections"][number];
+
+interface Props {
+  section: Extract<PageSection, { type: "cta" }>;
+}
+
+const { section } = Astro.props;
+---
+
+<section class="content-band" data-tone={section.backgroundTone}>
+  <div class="cta-grid">
+    <div class="cta-copy">
+      {section.eyebrow && <p class="eyebrow">{section.eyebrow}</p>}
+      <h2 class="section-title">{section.title}</h2>
+      <p class="lede">{section.body}</p>
+      <div class="button-row">
+        <a class="button-link" href={section.primaryCta.href} target={section.primaryCta.newTab ? "_blank" : undefined} rel={section.primaryCta.newTab ? "noreferrer" : undefined}>
+          {section.primaryCta.label}
+        </a>
+        {
+          section.secondaryCta && (
+            <a class="button-link--secondary" href={section.secondaryCta.href} target={section.secondaryCta.newTab ? "_blank" : undefined} rel={section.secondaryCta.newTab ? "noreferrer" : undefined}>
+              {section.secondaryCta.label}
+            </a>
+          )
+        }
+      </div>
+    </div>
+    {section.image && <MaskedImage image={section.image} />}
+  </div>
+</section>

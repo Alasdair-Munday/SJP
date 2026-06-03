@@ -1,0 +1,18 @@
+---
+import type { CollectionEntry } from "astro:content";
+import SectionRenderer from "../sections/SectionRenderer.astro";
+
+type PageData = CollectionEntry<"pages">["data"];
+
+interface Props {
+  page: PageData;
+}
+
+const { page } = Astro.props;
+---
+
+<div class="utility-shell">
+  <div class="page-stack">
+    <SectionRenderer sections={page.sections} />
+  </div>
+</div>

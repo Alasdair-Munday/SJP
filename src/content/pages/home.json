@@ -1,0 +1,150 @@
+{
+  "title": "Home",
+  "metaDescription": "Discover a welcoming church family in Park, Sheffield, with Sundays, community life, talks, and practical next steps for newcomers.",
+  "template": "home",
+  "sections": [
+    {
+      "type": "hero",
+      "eyebrow": "Church family in Park, Sheffield",
+      "title": "Welcome Home",
+      "body": "A community of Jesus-followers in Park, Sheffield. We belong to the family of God, love and serve our city, and give Jesus praise in everything we do.",
+      "backgroundTone": "park",
+      "primaryCta": {
+        "label": "Join us Sunday 10:45 AM",
+        "href": "/visit"
+      },
+      "secondaryCta": {
+        "label": "Find us",
+        "href": "/contact"
+      },
+      "image": {
+        "src": "/images/uploads/community-park-gathering-2.jpg",
+        "alt": "People gathering together inside St John's Park",
+        "maskShape": "/images/shapes/arch-shape-filled.png",
+        "accentShape": "/images/shapes/circle-shape-4.png",
+        "wordArtShape": "/images/shapes/welcome-home.png",
+        "objectPosition": "center center",
+        "frameTone": "park-dark"
+      },
+      "highlightLabel": "Sundays at 10:45am"
+    },
+    {
+      "type": "intro",
+      "eyebrow": "New here?",
+      "title": "Plan a visit",
+      "body": "We want St John's Park to feel clear, warm, and welcoming from your first Sunday. Whether you are exploring church for the first time or looking for a church family to belong to, we would love to help you feel at home.",
+      "backgroundTone": "stone",
+      "ctas": [
+        {
+          "label": "Plan a first visit",
+          "href": "/visit"
+        }
+      ]
+    },
+    {
+      "type": "split",
+      "eyebrow": "Sunday mornings",
+      "title": "Join on Sunday",
+      "body": "Our Sunday gathering is friendly, informal, and rooted in worship, Scripture, prayer, and time together afterwards. Stay for refreshments, bring your questions, and come as you are.",
+      "points": [
+        "We meet every Sunday at 10:45am.",
+        "Services are usually a little over an hour.",
+        "Children and young people are welcome and included."
+      ],
+      "backgroundTone": "stone",
+      "image": {
+        "src": "/images/uploads/refreshments.jpg",
+        "alt": "People chatting over refreshments after church",
+        "maskShape": "/images/shapes/curved-square-shape.png",
+        "accentShape": "/images/shapes/firework.png",
+        "objectPosition": "center center",
+        "frameTone": "sky"
+      },
+      "ctas": [
+        {
+          "label": "See what to expect",
+          "href": "/visit"
+        }
+      ]
+    },
+    {
+      "type": "cards",
+      "eyebrow": "Life together",
+      "title": "Belong, serve, give",
+      "intro": "The life of our church is shaped by worship, discipleship, service, generosity, and a real commitment to our neighbourhood.",
+      "backgroundTone": "park-dark",
+      "columns": 3,
+      "cards": [
+        {
+          "title": "Belong",
+          "body": "Find friendship, prayer, and steady growth in faith through Sundays, children and youth ministry, and midweek community life.",
+          "href": "/visit",
+          "linkLabel": "Start with a visit",
+          "tone": "park"
+        },
+        {
+          "title": "Serve",
+          "body": "Join teams that help us welcome people well, care for our building, support local families, and serve our city.",
+          "href": "/get-involved",
+          "linkLabel": "Explore ways to join in",
+          "tone": "door"
+        },
+        {
+          "title": "Give",
+          "body": "Support the ministry and future of St John's Park through prayer, practical help, and financial generosity.",
+          "href": "/get-involved",
+          "linkLabel": "See giving details",
+          "tone": "pink"
+        }
+      ]
+    },
+    {
+      "type": "latest",
+      "eyebrow": "Latest talk",
+      "title": "Talks",
+      "intro": "The latest Sunday talk is always close at hand, with a simple archive when you want to keep listening.",
+      "backgroundTone": "sky",
+      "source": "talks",
+      "limit": 1,
+      "cta": {
+        "label": "Browse talks",
+        "href": "/talks"
+      }
+    },
+    {
+      "type": "latest",
+      "eyebrow": "From church life",
+      "title": "News",
+      "intro": "Keep up with community life, event announcements, and stories from St John's Park.",
+      "backgroundTone": "pink",
+      "source": "posts",
+      "limit": 3,
+      "cta": {
+        "label": "Read the news feed",
+        "href": "/news"
+      }
+    },
+    {
+      "type": "cta",
+      "eyebrow": "Next step",
+      "title": "Get in touch",
+      "body": "If you would like to ask a question before visiting, or you just want to know where to start, we would love to hear from you.",
+      "backgroundTone": "roof",
+      "primaryCta": {
+        "label": "Get in touch",
+        "href": "/contact"
+      },
+      "secondaryCta": {
+        "label": "Plan a visit",
+        "href": "/visit"
+      },
+      "image": {
+        "src": "/images/uploads/community-park-gathering-1.jpg",
+        "alt": "People gathered outdoors at St John's Park",
+        "maskShape": "/images/shapes/rectangle-cut-corner.png",
+        "accentShape": "/images/shapes/flower-outline.png",
+        "frameTone": "sky"
+      }
+    }
+  ]
+}

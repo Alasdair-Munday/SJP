@@ -1,0 +1,17 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+type PageSection = CollectionEntry<"pages">["data"]["sections"][number];
+
+interface Props {
+  section: Extract<PageSection, { type: "richText" }>;
+}
+
+const { section } = Astro.props;
+---
+
+<section class="content-band" data-tone={section.backgroundTone}>
+  {section.eyebrow && <p class="eyebrow">{section.eyebrow}</p>}
+  {section.title && <h2 class="section-title">{section.title}</h2>}
+  <div class="rich-text" set:html={section.contentHtml}></div>
+</section>

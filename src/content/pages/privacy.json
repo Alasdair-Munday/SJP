@@ -1,0 +1,14 @@
+{
+  "title": "Privacy",
+  "metaDescription": "Privacy information for St John's Park Church and how contact details submitted through the site are handled.",
+  "template": "utility",
+  "sections": [
+    {
+      "type": "richText",
+      "eyebrow": "Privacy",
+      "title": "How we handle the information you share with us",
+      "backgroundTone": "stone",
+      "contentHtml": "<p>If you contact St John's Park through this website, we will only use the information you provide to respond to your enquiry and, where appropriate, continue the conversation you have asked us to have with you.</p><p>We do not sell personal data or use it for unrelated marketing. Information shared through the contact form is handled by church staff or authorised volunteers for the purpose of replying to your message.</p><p>If you would like us to update or remove contact information you have shared with us, please email <a href='mailto:hello@saintjohnspark.org'>hello@saintjohnspark.org</a>.</p>"
+    }
+  ]
+}

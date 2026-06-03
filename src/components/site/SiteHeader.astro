@@ -1,0 +1,79 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+type SiteData = CollectionEntry<"site">["data"];
+
+interface Props {
+  site: SiteData;
+  currentPath: string;
+}
+
+const { site, currentPath } = Astro.props;
+
+const isCurrent = (href: string) => {
+  if (href === "/") return currentPath === "/";
+  if (href === "/visit") {
+    return currentPath === "/visit" || currentPath.startsWith("/talks");
+  }
+  if (href === "/news") {
+    return currentPath === "/news" || currentPath.startsWith("/news/");
+  }
+
+  return currentPath === href || currentPath.startsWith(`${href}/`);
+};
+---
+
+<header class="site-header">
+  <div class="site-header__inner">
+    <div class="site-header__bar" data-site-header-bar>
+      <a class="site-brand" href="/" aria-label={site.brand.iconLabel}>
+        <img
+          class="site-brand__lockup"
+          src={site.brand.lockupSrc}
+          alt={site.brand.lockupAlt}
+        />
+      </a>
+
+      <button
+        class="site-nav__toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="site-nav"
+        data-nav-toggle
+      >
+        <span class="visually-hidden">Toggle navigation</span>
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+          <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+        </svg>
+      </button>
+
+      <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
+        {
+          site.navigation.map((item) => (
+            <a
+              class="site-nav__link"
+              href={item.href}
+              aria-current={isCurrent(item.href) ? "page" : undefined}
+            >
+              {item.label}
+            </a>
+          ))
+        }
+      </nav>
+    </div>
+  </div>
+</header>
+
+<script is:inline>
+  (() => {
+    const toggle = document.querySelector("[data-nav-toggle]");
+    const bar = document.querySelector("[data-site-header-bar]");
+    if (!toggle || !bar) return;
+
+    toggle.addEventListener("click", () => {
+      const nextOpen = bar.getAttribute("data-open") !== "true";
+      bar.setAttribute("data-open", nextOpen ? "true" : "false");
+      toggle.setAttribute("aria-expanded", nextOpen ? "true" : "false");
+    });
+  })();
+</script>

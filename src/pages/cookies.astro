@@ -1,0 +1,11 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import UtilityPageTemplate from "../components/templates/UtilityPageTemplate.astro";
+import { getPageContent } from "../lib/content";
+
+const page = await getPageContent("cookies");
+---
+
+<BaseLayout title={page.title} description={page.metaDescription}>
+  <UtilityPageTemplate page={page} />
+</BaseLayout>

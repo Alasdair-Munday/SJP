@@ -1,0 +1,45 @@
+:root {
+  --color-park-green: #47a174;
+  --color-park-green-dark: #1b8257;
+  --color-text: #04321b;
+  --color-pink: #d38ab1;
+  --color-pastel: #e8dce8;
+  --color-stone: #eae1cf;
+  --color-hyde-red: #ed6139;
+  --color-hyde-grey: #d7ccc0;
+  --color-parking-line: #f9d800;
+  --color-daffodil: #f9af00;
+  --color-roof-panel: #805239;
+  --color-door: #19508e;
+  --color-sky: #a8d7fd;
+  --color-night: #15375e;
+  --color-grass: #8aac3a;
+  --color-bushes: #465520;
+  --color-tarmac: #8f8c80;
+  --color-white: #fffdf8;
+
+  --font-display: "Dela Gothic One", sans-serif;
+  --font-body: "Karla", sans-serif;
+
+  --site-max-width: 76rem;
+  --content-max-width: 58rem;
+  --space-page: clamp(1rem, 2vw, 1.5rem);
+  --space-section: clamp(2rem, 4vw, 4rem);
+  --radius-card: 2rem;
+  --radius-band: 2.5rem;
+  --shadow-soft: 0 1.5rem 3rem rgba(4, 50, 27, 0.08);
+  --shadow-card: 0 1rem 2rem rgba(4, 50, 27, 0.12);
+
+  --shape-arch-cutout: url("/images/shapes/arch-cutout.png");
+  --shape-arch-cutout-large: url("/images/shapes/arch-cutout-2.png");
+  --shape-arch-fill: url("/images/shapes/arch-shape-filled.png");
+  --shape-curved-square: url("/images/shapes/curved-square-shape.png");
+  --shape-flower: url("/images/shapes/flower-cutout.png");
+  --shape-rectangle-cut: url("/images/shapes/rectangle-cut-corner.png");
+  --shape-rectangle: url("/images/shapes/rectangle.png");
+  --shape-window: url("/images/shapes/tall-church-window.png");
+  --shape-circle: url("/images/shapes/circle-shape-4.png");
+  --shape-firework: url("/images/shapes/firework.png");
+  --shape-loop: url("/images/shapes/loop-thick.png");
+  --shape-thick-brush: url("/images/shapes/thick-brushstroke.png");
+}

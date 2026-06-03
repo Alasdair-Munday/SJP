@@ -1,0 +1,30 @@
+---
+import type { CollectionEntry } from "astro:content";
+import HeroSection from "./HeroSection.astro";
+import IntroSection from "./IntroSection.astro";
+import SplitSection from "./SplitSection.astro";
+import CardsSection from "./CardsSection.astro";
+import CallToActionSection from "./CallToActionSection.astro";
+import LatestSection from "./LatestSection.astro";
+import RichTextSection from "./RichTextSection.astro";
+
+type PageSection = CollectionEntry<"pages">["data"]["sections"][number];
+
+interface Props {
+  sections: PageSection[];
+}
+
+const { sections } = Astro.props;
+---
+
+{
+  sections.map((section) => {
+    if (section.type === "hero") return <HeroSection section={section} />;
+    if (section.type === "intro") return <IntroSection section={section} />;
+    if (section.type === "split") return <SplitSection section={section} />;
+    if (section.type === "cards") return <CardsSection section={section} />;
+    if (section.type === "cta") return <CallToActionSection section={section} />;
+    if (section.type === "latest") return <LatestSection section={section} />;
+    return <RichTextSection section={section} />;
+  })
+}

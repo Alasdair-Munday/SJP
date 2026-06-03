@@ -1,0 +1,53 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+type PageSection = CollectionEntry<"pages">["data"]["sections"][number];
+type SectionImage = Extract<PageSection, { image?: unknown }>["image"];
+
+interface Props {
+  image: NonNullable<SectionImage>;
+  class?: string;
+}
+
+const { image, class: className } = Astro.props;
+const accentCorners = ["top-right", "bottom-left", "top-left", "bottom-right"] as const;
+const accentCorner =
+  accentCorners[
+    [...image.src].reduce((total, character) => total + character.charCodeAt(0), 0) %
+      accentCorners.length
+  ];
+---
+
+<div
+  class:list={["masked-media", className]}
+  data-frame-tone={image.frameTone ?? "stone"}
+  data-accent-corner={accentCorner}
+>
+  <div
+    class="masked-media__shape"
+    style={`--mask-shape: url('${image.maskShape ?? "/images/shapes/curved-square-shape.png"}');`}
+  >
+    <img
+      src={image.src}
+      alt={image.alt}
+      style={image.objectPosition ? `object-position: ${image.objectPosition};` : undefined}
+      loading="lazy"
+    />
+  </div>
+  {
+    image.accentShape && (
+      <span
+        class="masked-media__accent"
+        style={`--accent-shape: url('${image.accentShape}');`}
+      ></span>
+    )
+  }
+  {
+    image.wordArtShape && (
+      <span
+        class="masked-media__word"
+        style={`--word-shape: url('${image.wordArtShape}');`}
+      ></span>
+    )
+  }
+</div>

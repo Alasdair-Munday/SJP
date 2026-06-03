@@ -1,0 +1,61 @@
+---
+import { getNewsletterPostsForWeek } from "../../lib/content";
+import { formatDate } from "../../lib/format";
+import "../../styles/print.css";
+
+const posts = await getNewsletterPostsForWeek();
+const today = new Date();
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weekly Newsletter - {formatDate(today)}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Karla:wght@400;500;700;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="newsletter-body">
+    <div class="newsletter-container">
+      <header class="newsletter-header">
+        <h1>Weekly News & Updates</h1>
+        <p class="newsletter-date">{formatDate(today)}</p>
+        <button onclick="window.print()" class="print-button"
+          >Print Newsletter</button
+        >
+      </header>
+
+      <main class="newsletter-content">
+        {
+          posts.length > 0 ? (
+            posts.map((post) => (
+              <article class="newsletter-post">
+                <h2>{post.data.title}</h2>
+                {post.data.category === "event" && post.data.eventDate && (
+                  <p class="newsletter-meta">
+                    <strong>Event Date:</strong>{" "}
+                    {formatDate(post.data.eventDate)}
+                    {post.data.timeText && <span>at {post.data.timeText}</span>}
+                    {post.data.location && <span>({post.data.location})</span>}
+                  </p>
+                )}
+                <p>{post.data.summary}</p>
+              </article>
+            ))
+          ) : (
+            <p>No news for this week.</p>
+          )
+        }
+      </main>
+
+      <footer class="newsletter-footer">
+        <p>St John's Park Church - {new Date().getFullYear()}</p>
+      </footer>
+    </div>
+  </body>
+</html>

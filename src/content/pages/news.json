@@ -1,0 +1,32 @@
+{
+  "title": "News",
+  "metaDescription": "Read event announcements, updates, and blog posts from St John's Park, with a shared feed and category filters.",
+  "template": "news",
+  "sections": [
+    {
+      "type": "hero",
+      "eyebrow": "News feed",
+      "title": "News",
+      "body": "Our shared feed brings together event announcements, practical updates, and longer reflections from the life of St John's Park.",
+      "backgroundTone": "stone",
+      "primaryCta": {
+        "label": "Browse talks as well",
+        "href": "/talks"
+      },
+      "image": {
+        "src": "/images/uploads/community-park-gathering-1.jpg",
+        "alt": "Church family and neighbours at an outdoor gathering",
+        "maskShape": "/images/shapes/rectangle.png",
+        "accentShape": "/images/shapes/firework.png",
+        "frameTone": "sky"
+      }
+    },
+    {
+      "type": "intro",
+      "eyebrow": "Filter the feed",
+      "title": "Categories",
+      "body": "Use the category buttons to focus on event announcements, everyday updates, or longer blog-style posts. Upcoming events rise to the top when they include an event date.",
+      "backgroundTone": "pink"
+    }
+  ]
+}

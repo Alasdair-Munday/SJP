@@ -1,0 +1,141 @@
+{
+  "title": "St John's Park Church",
+  "shortTitle": "St John's Park",
+  "siteUrl": "https://stjohnspark.church",
+  "metaDescription": "A welcoming Church of England church in Park, Sheffield. Find Sundays, community life, talks, news, and ways to get in touch.",
+  "sundaySummary": "Sundays at 10:45am · Bernard Street, Sheffield S2 5PU",
+  "brand": {
+    "lockupSrc": "/logo-text.svg",
+    "lockupAlt": "St John's Church Park",
+    "iconLabel": "St John's Park",
+    "iconColor": "#47A174"
+  },
+  "navigation": [
+    {
+      "label": "Home",
+      "href": "/"
+    },
+    {
+      "label": "Visit",
+      "href": "/visit"
+    },
+    {
+      "label": "Who we are",
+      "href": "/who-we-are"
+    },
+    {
+      "label": "Get involved",
+      "href": "/get-involved"
+    },
+    {
+      "label": "News",
+      "href": "/news"
+    },
+    {
+      "label": "Contact",
+      "href": "/contact"
+    }
+  ],
+  "footer": {
+    "blurb": "A welcoming Church of England church in Park, Sheffield.",
+    "quickLinks": [
+      {
+        "label": "Plan a first visit",
+        "href": "/visit"
+      },
+      {
+        "label": "Meet the church",
+        "href": "/who-we-are"
+      },
+      {
+        "label": "Join in",
+        "href": "/get-involved"
+      },
+      {
+        "label": "Talks",
+        "href": "/talks"
+      },
+      {
+        "label": "News",
+        "href": "/news"
+      },
+      {
+        "label": "Contact us",
+        "href": "/contact"
+      }
+    ],
+    "policyLinks": [
+      {
+        "label": "Safeguarding",
+        "href": "/safeguarding"
+      },
+      {
+        "label": "Privacy",
+        "href": "/privacy"
+      },
+      {
+        "label": "Cookies",
+        "href": "/cookies"
+      }
+    ],
+    "serviceLabel": "Sunday gathering · 10:45am",
+    "contactLabel": "hello@saintjohnspark.org"
+  },
+  "contact": {
+    "email": "hello@saintjohnspark.org",
+    "addressLines": [
+      "St John's Park",
+      "Bernard Street",
+      "Sheffield",
+      "S2 5PU"
+    ],
+    "mapUrl": "https://maps.google.com/?q=Bernard+Street,+Sheffield,+S2+5PU",
+    "mapEmbedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1932.9794407157501!2d-1.4558134244165126!3d53.38304895495231!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4879787508b14b63%3A0x3ad4b2dcc392b6b9!2sSt.%20John%E2%80%99s%20Church%2C%20Park!5e1!3m2!1sen!2suk!4v1771371845139!5m2!1sen!2suk",
+    "lifeEventsIntro": "For baptisms, weddings, and funerals, please get in touch directly or use the links below.",
+    "lifeEventLinks": [
+      {
+        "label": "Life events information",
+        "href": "https://www.melksham.church/life-events",
+        "newTab": true
+      },
+      {
+        "label": "Celebrating new birth",
+        "href": "https://www.stjohnschap.co.uk/what-we-do/celebrating-new-birth/",
+        "newTab": true
+      }
+    ],
+    "formSubjects": [
+      {
+        "value": "general",
+        "label": "General enquiry"
+      },
+      {
+        "value": "visit",
+        "label": "Planning a visit"
+      },
+      {
+        "value": "children-and-youth",
+        "label": "Children and youth"
+      },
+      {
+        "value": "serving-and-giving",
+        "label": "Serving or giving"
+      },
+      {
+        "value": "safeguarding",
+        "label": "Safeguarding"
+      }
+    ],
+    "safeguardingEmail": "safeguarding@saintjohnspark.org"
+  },
+  "policyDownload": {
+    "label": "Download St John's safeguarding policy (DOCX)",
+    "href": "https://www.saintjohnspark.org.uk/wp-content/uploads/2025/08/St-Johns-Safeguarding-Policy-2025-2.docx"
+  },
+  "talks": {
+    "spotifyLabel": "Listen on Spotify",
+    "spotifyHref": "https://open.spotify.com/show/033qLwMctNUTmgjsVBUNAL?si=e9e072baa9bb4769",
+    "rssLabel": "Subscribe in your podcast app",
+    "rssHref": "https://audio.com/rss/author/1864352901200967"
+  }
+}

@@ -1,0 +1,51 @@
+---
+import { getSiteConfig } from "../lib/content";
+import SiteFooter from "../components/site/SiteFooter.astro";
+import SiteHeader from "../components/site/SiteHeader.astro";
+import "../styles/tokens.css";
+import "../styles/base.css";
+import "../styles/components.css";
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
+const site = await getSiteConfig();
+const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
+const pageTitle = title === "Home" ? site.shortTitle : `${title} | ${site.shortTitle}`;
+const pageDescription = description ?? site.metaDescription;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={pageDescription} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDescription} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={`${site.siteUrl}${currentPath === "/" ? "" : currentPath}`} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Karla:wght@400;500;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <title>{pageTitle}</title>
+  </head>
+  <body>
+    <div class="site-frame">
+      <SiteHeader site={site} currentPath={currentPath} />
+      <main class="site-main">
+        <div class="site-container">
+          <slot />
+        </div>
+      </main>
+      <SiteFooter site={site} />
+    </div>
+  </body>
+</html>

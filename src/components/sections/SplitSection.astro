@@ -1,0 +1,45 @@
+---
+import type { CollectionEntry } from "astro:content";
+import MaskedImage from "./MaskedImage.astro";
+
+type PageSection = CollectionEntry<"pages">["data"]["sections"][number];
+
+interface Props {
+  section: Extract<PageSection, { type: "split" }>;
+}
+
+const { section } = Astro.props;
+---
+
+<section class="content-band" data-tone={section.backgroundTone}>
+  <div class="split-grid" style={section.reverse ? "direction: rtl;" : undefined}>
+    <div class="split-copy" style={section.reverse ? "direction: ltr;" : undefined}>
+      {section.eyebrow && <p class="eyebrow">{section.eyebrow}</p>}
+      <h2 class="section-title">{section.title}</h2>
+      <div class="section-copy">
+        <p>{section.body}</p>
+      </div>
+      {
+        section.points.length > 0 && (
+          <ul class="section-list">
+            {section.points.map((point) => <li>{point}</li>)}
+          </ul>
+        )
+      }
+      {
+        section.ctas.length > 0 && (
+          <div class="inline-links">
+            {section.ctas.map((link) => (
+              <a class="button-link--ghost" href={link.href} target={link.newTab ? "_blank" : undefined} rel={link.newTab ? "noreferrer" : undefined}>
+                {link.label}
+              </a>
+            ))}
+          </div>
+        )
+      }
+    </div>
+    <div style={section.reverse ? "direction: ltr;" : undefined}>
+      <MaskedImage image={section.image} />
+    </div>
+  </div>
+</section>

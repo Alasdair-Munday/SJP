@@ -1,0 +1,14 @@
+{
+  "title": "Cookies",
+  "metaDescription": "Cookie information for the St John's Park website.",
+  "template": "utility",
+  "sections": [
+    {
+      "type": "richText",
+      "eyebrow": "Cookies",
+      "title": "How this site uses cookies",
+      "backgroundTone": "stone",
+      "contentHtml": "<p>This site is designed to stay lightweight and mostly static. We aim to use only the minimum technical cookies or browser storage needed for the site to function properly.</p><p>Embedded content from third-party services, such as Google Maps, may set their own cookies when you interact with them. Their cookie behaviour is controlled by those providers rather than by St John's Park.</p><p>If we add additional cookie-based features in the future, this page should be updated to reflect that clearly.</p>"
+    }
+  ]
+}
