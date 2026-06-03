@@ -21,8 +21,8 @@
       "image": {
         "src": "/images/uploads/community-park-gathering-2.jpg",
         "alt": "The church building and grounds at St John's Park",
-        "maskShape": "/images/shapes/church-hall-shape-2.png",
-        "accentShape": "/images/shapes/thick-brushstroke.png",
+        "maskShape": "/images/shapes/arch-shape-filled.png",
+        "accentShape": "/images/shapes/star-shape.png",
         "frameTone": "park"
       }
     },
@@ -40,7 +40,7 @@
       "image": {
         "src": "/images/uploads/community-park-gathering-1.jpg",
         "alt": "People gathered around the church grounds",
-        "maskShape": "/images/shapes/rectangle-cut-corner.png",
+        "maskShape": "/images/shapes/rectangle.png",
         "accentShape": "/images/shapes/flower-outline.png",
         "frameTone": "pink"
       }

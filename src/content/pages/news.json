@@ -16,7 +16,7 @@
       "image": {
         "src": "/images/uploads/community-park-gathering-1.jpg",
         "alt": "Church family and neighbours at an outdoor gathering",
-        "maskShape": "/images/shapes/rectangle.png",
+        "maskShape": "/images/shapes/arch-shape-filled.png",
         "accentShape": "/images/shapes/firework.png",
         "frameTone": "sky"
       }

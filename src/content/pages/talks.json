@@ -10,27 +10,21 @@
       "body": "Catch up on recent Sunday talks, revisit a series, or subscribe to take the teaching with you through the week.",
       "backgroundTone": "door",
       "primaryCta": {
-        "label": "See the latest talk",
-        "href": "#latest-talk"
+        "label": "Browse recent talks",
+        "href": "#talks-list"
       },
       "secondaryCta": {
-        "label": "Open the news feed",
-        "href": "/news"
+        "label": "Listen on Spotify",
+        "href": "https://open.spotify.com/show/033qLwMctNUTmgjsVBUNAL?si=e9e072baa9bb4769",
+        "newTab": true
       },
       "image": {
         "src": "/images/uploads/Sermons.jpg",
         "alt": "A talk being shared during a Sunday service",
-        "maskShape": "/images/shapes/church-hall-roof.png",
-        "accentShape": "/images/shapes/long-thin-line-2.png",
+        "maskShape": "/images/shapes/arch-shape-filled.png",
+        "accentShape": "/images/shapes/star-brush-thin.png",
         "frameTone": "sky"
       }
-    },
-    {
-      "type": "intro",
-      "eyebrow": "Archive",
-      "title": "Archive",
-      "body": "Talks are pulled in at build time from our RSS feed, with a local fallback snapshot so the page keeps working reliably if the feed is unavailable.",
-      "backgroundTone": "stone"
     }
   ]
 }

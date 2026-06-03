@@ -39,65 +39,189 @@
       "image": {
         "src": "/images/uploads/stained-glass-cross.jpg",
         "alt": "A stained glass cross inside the church building",
-        "maskShape": "/images/shapes/tall-church-window.png",
-        "accentShape": "/images/shapes/dots.png",
+        "maskShape": "/images/shapes/rectangle.png",
+        "accentShape": "/images/shapes/squiggle-ball.png",
         "frameTone": "door"
       }
     },
     {
       "type": "cards",
-      "eyebrow": "Leadership",
-      "title": "Leadership Team",
-      "intro": "Our leadership and ministry team help shape worship, pastoral care, children and youth ministry, and the wider mission of the church.",
+      "eyebrow": "Staff",
+      "title": "Staff Team",
+      "intro": "Our staff team support worship, pastoral care, children and families, administration, and the everyday life of St John's Park.",
       "backgroundTone": "sky",
-      "columns": 2,
+      "columns": 3,
       "cards": [
         {
-          "title": "Revd Luke Graham",
-          "tag": "Priest in Charge",
-          "body": "Luke leads the vision and teaching life of St John's Park and helps shape our mission in Park, Sheffield. Email: luke@saintjohnspark.org",
+          "title": "Luke Graham",
+          "tag": "Vicar",
+          "body": "Luke leads the vision, teaching, pastoral care, and worshipping life of St John's Park.",
           "image": {
-            "src": "/images/uploads/Luke Graham.jpg",
-            "alt": "Revd Luke Graham outdoors at church",
-            "maskShape": "/images/shapes/curved-square-shape.png",
+            "src": "/images/uploads/headshot-placeholder.svg",
+            "alt": "Placeholder headshot for Luke Graham",
+            "maskShape": "/images/shapes/circle-shape.png",
             "frameTone": "park"
           },
           "tone": "stone"
         },
         {
-          "title": "Claire Smith",
-          "tag": "Park Tots Leader and Safeguarding Officer",
-          "body": "Claire leads our Park Tots group for under 5s and serves as safeguarding officer, helping us care well for children and vulnerable adults. Email: safeguarding@saintjohnspark.org",
+          "title": "Al",
+          "tag": "Curate",
+          "body": "Al serves as curate, sharing in worship, teaching, pastoral care, and mission.",
           "image": {
-            "src": "/images/uploads/claire smith.jpg",
-            "alt": "Claire Smith helping children at an outdoor activity",
-            "maskShape": "/images/shapes/rectangle-cut-corner.png",
-            "frameTone": "pink"
-          },
-          "tone": "stone"
-        },
-        {
-          "title": "Faustina Nyame",
-          "tag": "Churchwarden",
-          "body": "Faustina serves as churchwarden, supporting pastoral care and practical leadership across the congregation. Email: hello@saintjohnspark.org",
-          "image": {
-            "src": "/images/uploads/Faustina.jpg",
-            "alt": "Faustina Nyame speaking at the front of church",
-            "maskShape": "/images/shapes/circle-shape-4.png",
+            "src": "/images/uploads/headshot-placeholder.svg",
+            "alt": "Placeholder headshot for Al",
+            "maskShape": "/images/shapes/circle-shape-2.png",
             "frameTone": "sky"
           },
           "tone": "stone"
         },
         {
-          "title": "Elizabeth (Bess) Cooper",
-          "tag": "Churchwarden and Lay Reader",
-          "body": "Bess serves the church as a churchwarden and lay reader, helping lead worship and nurture discipleship. Email: hello@saintjohnspark.org",
+          "title": "Wachira",
+          "tag": "Curate",
+          "body": "Wachira serves as curate, supporting worship, discipleship, pastoral care, and mission.",
           "image": {
-            "src": "/images/uploads/Bess.jpg",
-            "alt": "Elizabeth Cooper",
-            "maskShape": "/images/shapes/flower-shape.png",
+            "src": "/images/uploads/headshot-placeholder.svg",
+            "alt": "Placeholder headshot for Wachira",
+            "maskShape": "/images/shapes/circle-shape-3.png",
+            "frameTone": "door"
+          },
+          "tone": "stone"
+        },
+        {
+          "title": "Kirsty",
+          "tag": "Children and Families Lead",
+          "body": "Kirsty helps children and families belong, grow in faith, and take part in church life.",
+          "image": {
+            "src": "/images/uploads/headshot-placeholder.svg",
+            "alt": "Placeholder headshot for Kirsty",
+            "maskShape": "/images/shapes/circle-shape-4.png",
             "frameTone": "grass"
           },
+          "tone": "stone"
+        },
+        {
+          "title": "Olusola",
+          "tag": "Administrator",
+          "body": "Olusola supports the practical administration that helps church life run smoothly.",
+          "image": {
+            "src": "/images/uploads/headshot-placeholder.svg",
+            "alt": "Placeholder headshot for Olusola",
+            "maskShape": "/images/shapes/circle-shape.png",
+            "frameTone": "pink"
+          },
+          "tone": "stone"
+        }
+      ]
+    },
+    {
+      "type": "cards",
+      "eyebrow": "PCC",
+      "title": "PCC",
+      "backgroundTone": "stone",
+      "columns": 7,
+      "cards": [
+        {
+          "title": "Bess",
+          "image": { "src": "/images/uploads/headshot-placeholder.svg", "alt": "Placeholder headshot for Bess", "maskShape": "/images/shapes/circle-shape.png", "frameTone": "grass" },
+          "tone": "stone"
+        },
+        {
+          "title": "Jack",
+          "image": { "src": "/images/uploads/headshot-placeholder.svg", "alt": "Placeholder headshot for Jack", "maskShape": "/images/shapes/circle-shape-2.png", "frameTone": "sky" },
+          "tone": "stone"
+        },
+        {
+          "title": "Comfort",
+          "image": { "src": "/images/uploads/headshot-placeholder.svg", "alt": "Placeholder headshot for Comfort", "maskShape": "/images/shapes/circle-shape-3.png", "frameTone": "pink" },
+          "tone": "stone"
+        },
+        {
+          "title": "Mo",
+          "image": { "src": "/images/uploads/headshot-placeholder.svg", "alt": "Placeholder headshot for Mo", "maskShape": "/images/shapes/circle-shape-4.png", "frameTone": "park" },
+          "tone": "stone"
+        },
+        {
+          "title": "Stephen",
+          "image": { "src": "/images/uploads/headshot-placeholder.svg", "alt": "Placeholder headshot for Stephen", "maskShape": "/images/shapes/circle-shape.png", "frameTone": "door" },
+          "tone": "stone"
+        },
+        {
+          "title": "Sally",
+          "image": { "src": "/images/uploads/headshot-placeholder.svg", "alt": "Placeholder headshot for Sally", "maskShape": "/images/shapes/circle-shape-2.png", "frameTone": "grass" },
+          "tone": "stone"
+        },
+        {
+          "title": "Margie",
+          "image": { "src": "/images/uploads/headshot-placeholder.svg", "alt": "Placeholder headshot for Margie", "maskShape": "/images/shapes/circle-shape-3.png", "frameTone": "sky" },
+          "tone": "stone"
+        },
+        {
+          "title": "Marge",
+          "image": { "src": "/images/uploads/headshot-placeholder.svg", "alt": "Placeholder headshot for Marge", "maskShape": "/images/shapes/circle-shape-4.png", "frameTone": "pink" },
+          "tone": "stone"
+        },
+        {
+          "title": "Tim",
+          "image": { "src": "/images/uploads/headshot-placeholder.svg", "alt": "Placeholder headshot for Tim", "maskShape": "/images/shapes/circle-shape.png", "frameTone": "park" },
+          "tone": "stone"
+        },
+        {
+          "title": "Lucy",
+          "image": { "src": "/images/uploads/headshot-placeholder.svg", "alt": "Placeholder headshot for Lucy", "maskShape": "/images/shapes/circle-shape-2.png", "frameTone": "door" },
+          "tone": "stone"
+        },
+        {
+          "title": "Esther",
+          "image": { "src": "/images/uploads/headshot-placeholder.svg", "alt": "Placeholder headshot for Esther", "maskShape": "/images/shapes/circle-shape-3.png", "frameTone": "grass" },
+          "tone": "stone"
+        },
+        {
+          "title": "Scott",
+          "image": { "src": "/images/uploads/headshot-placeholder.svg", "alt": "Placeholder headshot for Scott", "maskShape": "/images/shapes/circle-shape-4.png", "frameTone": "sky" },
+          "tone": "stone"
+        },
+        {
+          "title": "Rebecca",
+          "image": { "src": "/images/uploads/headshot-placeholder.svg", "alt": "Placeholder headshot for Rebecca", "maskShape": "/images/shapes/circle-shape.png", "frameTone": "pink" },
+          "tone": "stone"
+        }
+      ]
+    },
+    {
+      "type": "cards",
+      "eyebrow": "Other roles",
+      "title": "Ministry and Support Leads",
+      "intro": "These leaders help with key areas of church life, including safeguarding, welcome, social action, finance, and practical care.",
+      "backgroundTone": "sky",
+      "columns": 4,
+      "cards": [
+        {
+          "title": "Sophie",
+          "tag": "Welcome Lead",
+          "body": "Sophie helps shape a warm welcome for people arriving and settling into church life.",
+          "image": { "src": "/images/uploads/headshot-placeholder.svg", "alt": "Placeholder headshot for Sophie", "maskShape": "/images/shapes/circle-shape.png", "frameTone": "park" },
+          "tone": "stone"
+        },
+        {
+          "title": "Claire",
+          "tag": "Safeguarding Lead",
+          "body": "Claire helps us care well for children, young people, and vulnerable adults.",
+          "image": { "src": "/images/uploads/headshot-placeholder.svg", "alt": "Placeholder headshot for Claire", "maskShape": "/images/shapes/circle-shape-2.png", "frameTone": "pink" },
+          "tone": "stone"
+        },
+        {
+          "title": "Hannah",
+          "tag": "Social Action Lead",
+          "body": "Hannah helps coordinate practical care and social action in our local community.",
+          "image": { "src": "/images/uploads/headshot-placeholder.svg", "alt": "Placeholder headshot for Hannah", "maskShape": "/images/shapes/circle-shape-3.png", "frameTone": "sky" },
+          "tone": "stone"
+        },
+        {
+          "title": "Comfort M",
+          "tag": "Treasurer",
+          "body": "Comfort M helps steward church finances with care, clarity, and accountability.",
+          "image": { "src": "/images/uploads/headshot-placeholder.svg", "alt": "Placeholder headshot for Comfort M", "maskShape": "/images/shapes/circle-shape-4.png", "frameTone": "grass" },
           "tone": "stone"
         }
       ]

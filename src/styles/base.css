@@ -219,6 +219,57 @@ main {
   z-index: 1;
 }
 
+.content-band::before {
+  content: "";
+  display: none;
+  position: absolute;
+  z-index: 0;
+  width: var(--section-shape-size, clamp(26rem, 72vw, 68rem));
+  aspect-ratio: 1;
+  top: var(--section-shape-top, clamp(-16rem, -18vw, -7rem));
+  right: var(--section-shape-right, calc(var(--band-inline) * -3));
+  bottom: var(--section-shape-bottom, auto);
+  left: var(--section-shape-left, auto);
+  pointer-events: none;
+  background: var(--section-shape-color, color-mix(in srgb, var(--surface) 82%, white));
+  mask: var(--section-shape, var(--shape-rectangle-cut)) center / contain no-repeat;
+  -webkit-mask: var(--section-shape, var(--shape-rectangle-cut)) center / contain no-repeat;
+  opacity: 0.95;
+}
+
+.page-stack > .content-band:nth-child(5n + 1)::before {
+  display: block;
+}
+
+.page-stack > .content-band:nth-child(5n + 2)::before {
+  --section-shape: var(--shape-church-roof);
+  --section-shape-size: clamp(30rem, 82vw, 76rem);
+  --section-shape-top: auto;
+  --section-shape-right: auto;
+  --section-shape-bottom: clamp(-18rem, -20vw, -8rem);
+  --section-shape-left: calc(var(--band-inline) * -3.25);
+}
+
+.page-stack > .content-band:nth-child(5n + 3)::before {
+  display: block;
+  --section-shape: var(--shape-square-slope);
+  --section-shape-size: clamp(26rem, 68vw, 62rem);
+  --section-shape-top: clamp(-14rem, -16vw, -6rem);
+  --section-shape-right: clamp(-8rem, -10vw, -2rem);
+  --section-shape-bottom: auto;
+  --section-shape-left: auto;
+}
+
+.page-stack > .content-band:nth-child(5n)::before {
+  display: block;
+  --section-shape: var(--shape-three-columns);
+  --section-shape-size: clamp(30rem, 78vw, 72rem);
+  --section-shape-top: clamp(-16rem, -18vw, -7rem);
+  --section-shape-right: calc(var(--band-inline) * -3.1);
+  --section-shape-bottom: auto;
+  --section-shape-left: auto;
+}
+
 .content-band::after {
   content: "";
   position: absolute;
@@ -253,6 +304,7 @@ main {
   --surface-card: rgba(255, 253, 248, 0.14);
   --surface-card-border: rgba(255, 253, 248, 0.24);
   --surface-accent: var(--color-daffodil);
+  --section-shape-color: color-mix(in srgb, var(--surface) 86%, black);
 }
 
 [data-tone="park-dark"] {
@@ -261,6 +313,7 @@ main {
   --surface-card: rgba(255, 253, 248, 0.08);
   --surface-card-border: rgba(255, 253, 248, 0.16);
   --surface-accent: var(--color-parking-line);
+  --section-shape-color: color-mix(in srgb, var(--surface) 82%, white);
 }
 
 [data-tone="stone"] {
@@ -269,6 +322,7 @@ main {
   --surface-card: rgba(255, 253, 248, 0.66);
   --surface-card-border: rgba(4, 50, 27, 0.12);
   --surface-accent: var(--color-hyde-red);
+  --section-shape-color: color-mix(in srgb, var(--surface) 86%, black);
 }
 
 [data-tone="pink"] {
@@ -277,6 +331,7 @@ main {
   --surface-card: rgba(255, 253, 248, 0.7);
   --surface-card-border: rgba(4, 50, 27, 0.12);
   --surface-accent: var(--color-daffodil);
+  --section-shape-color: color-mix(in srgb, var(--surface) 88%, black);
 }
 
 [data-tone="sky"] {
@@ -285,6 +340,7 @@ main {
   --surface-card: rgba(255, 253, 248, 0.74);
   --surface-card-border: rgba(21, 55, 94, 0.16);
   --surface-accent: var(--color-door);
+  --section-shape-color: color-mix(in srgb, var(--surface) 86%, black);
 }
 
 [data-tone="door"] {
@@ -293,6 +349,7 @@ main {
   --surface-card: rgba(255, 253, 248, 0.1);
   --surface-card-border: rgba(255, 253, 248, 0.18);
   --surface-accent: var(--color-parking-line);
+  --section-shape-color: color-mix(in srgb, var(--surface) 82%, white);
 }
 
 [data-tone="roof"] {
@@ -301,6 +358,7 @@ main {
   --surface-card: rgba(255, 253, 248, 0.08);
   --surface-card-border: rgba(255, 253, 248, 0.16);
   --surface-accent: var(--color-daffodil);
+  --section-shape-color: color-mix(in srgb, var(--surface) 82%, white);
 }
 
 [data-tone="grass"] {
@@ -309,6 +367,7 @@ main {
   --surface-card: rgba(255, 253, 248, 0.7);
   --surface-card-border: rgba(4, 50, 27, 0.12);
   --surface-accent: var(--color-door);
+  --section-shape-color: color-mix(in srgb, var(--surface) 86%, black);
 }
 
 .button-row,

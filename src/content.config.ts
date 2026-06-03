@@ -31,7 +31,7 @@ const imageSchema = z.object({
 const cardSchema = z.object({
   eyebrow: z.string().optional(),
   title: z.string(),
-  body: z.string(),
+  body: z.string().optional(),
   href: z.string().optional(),
   linkLabel: z.string().optional(),
   tag: z.string().optional(),
@@ -79,7 +79,7 @@ const cardsSectionSchema = z.object({
   title: z.string(),
   intro: z.string().optional(),
   backgroundTone: toneSchema.default("stone"),
-  columns: z.number().int().min(1).max(4).default(3),
+  columns: z.number().int().min(1).max(8).default(3),
   cards: z.array(cardSchema).min(1),
 });
 
@@ -184,6 +184,8 @@ const site = defineCollection({
       href: z.string(),
     }),
     talks: z.object({
+      spotifyLabel: z.string(),
+      spotifyHref: z.string().url(),
       rssLabel: z.string(),
       rssHref: z.string(),
     }),

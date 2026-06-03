@@ -18,7 +18,7 @@
         "href": "/contact"
       },
       "image": {
-        "src": "/images/uploads/community-park-gathering-2.jpg",
+        "src": "/images/uploads/home.jpeg",
         "alt": "People gathering together inside St John's Park",
         "maskShape": "/images/shapes/arch-shape-filled.png",
         "accentShape": "/images/shapes/circle-shape-4.png",
@@ -27,19 +27,6 @@
         "frameTone": "park-dark"
       },
       "highlightLabel": "Sundays at 10:45am"
-    },
-    {
-      "type": "intro",
-      "eyebrow": "New here?",
-      "title": "Plan a visit",
-      "body": "We want St John's Park to feel clear, warm, and welcoming from your first Sunday. Whether you are exploring church for the first time or looking for a church family to belong to, we would love to help you feel at home.",
-      "backgroundTone": "stone",
-      "ctas": [
-        {
-          "label": "Plan a first visit",
-          "href": "/visit"
-        }
-      ]
     },
     {
       "type": "split",
@@ -55,7 +42,7 @@
       "image": {
         "src": "/images/uploads/refreshments.jpg",
         "alt": "People chatting over refreshments after church",
-        "maskShape": "/images/shapes/curved-square-shape.png",
+        "maskShape": "/images/shapes/rectangle.png",
         "accentShape": "/images/shapes/firework.png",
         "objectPosition": "center center",
         "frameTone": "sky"
@@ -141,7 +128,7 @@
       "image": {
         "src": "/images/uploads/community-park-gathering-1.jpg",
         "alt": "People gathered outdoors at St John's Park",
-        "maskShape": "/images/shapes/rectangle-cut-corner.png",
+        "maskShape": "/images/shapes/rectangle.png",
         "accentShape": "/images/shapes/flower-outline.png",
         "frameTone": "sky"
       }

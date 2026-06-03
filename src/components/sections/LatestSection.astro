@@ -1,6 +1,6 @@
 ---
 import type { CollectionEntry } from "astro:content";
-import { getLatestPosts } from "../../lib/content";
+import { getLatestPosts, getSiteConfig } from "../../lib/content";
 import { formatDate, formatShortDate, formatTalkDuration } from "../../lib/format";
 import { getTalks } from "../../lib/talks";
 
@@ -11,6 +11,7 @@ interface Props {
 }
 
 const { section } = Astro.props;
+const site = await getSiteConfig();
 
 const posts = section.source === "posts" ? await getLatestPosts(section.limit) : [];
 const talks = section.source === "talks" ? (await getTalks()).slice(0, section.limit) : [];
@@ -63,5 +64,12 @@ const talks = section.source === "talks" ? (await getTalks()).slice(0, section.l
     <a class="button-link--ghost" href={section.cta.href} target={section.cta.newTab ? "_blank" : undefined} rel={section.cta.newTab ? "noreferrer" : undefined}>
       {section.cta.label}
     </a>
+    {
+      section.source === "talks" && (
+        <a class="button-link--secondary" href={site.talks.spotifyHref} target="_blank" rel="noopener noreferrer">
+          {site.talks.spotifyLabel}
+        </a>
+      )
+    }
   </div>
 </section>

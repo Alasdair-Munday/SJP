@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" role="img" aria-labelledby="title desc">
+  <title id="title">Headshot placeholder</title>
+  <desc id="desc">A simple placeholder portrait for a church team member.</desc>
+  <rect width="600" height="600" fill="#eae1cf"/>
+  <circle cx="300" cy="232" r="104" fill="#fffdf8"/>
+  <path d="M126 520c22-118 90-178 174-178s152 60 174 178H126Z" fill="#fffdf8"/>
+  <path d="M106 96c68-46 142-68 222-66 76 2 136 25 180 69" fill="none" stroke="#47a174" stroke-width="34" stroke-linecap="round"/>
+  <path d="M78 444c54 50 122 78 204 82 90 4 167-21 231-75" fill="none" stroke="#d38ab1" stroke-width="28" stroke-linecap="round"/>
+  <circle cx="492" cy="164" r="28" fill="#f9af00"/>
+</svg>

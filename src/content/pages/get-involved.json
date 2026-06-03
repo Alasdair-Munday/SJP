@@ -79,8 +79,8 @@
       "image": {
         "src": "/images/uploads/friends.jpg",
         "alt": "Church friends and volunteers smiling together",
-        "maskShape": "/images/shapes/rectangle-2.png",
-        "accentShape": "/images/shapes/long-brushstroke-medium.png",
+        "maskShape": "/images/shapes/rectangle.png",
+        "accentShape": "/images/shapes/loop-thick.png",
         "frameTone": "pink"
       },
       "reverse": true,
@@ -106,7 +106,7 @@
       "image": {
         "src": "/images/uploads/PXL_20250816_114550760.PORTRAIT.jpg",
         "alt": "Worship team leading sung praise during a Sunday gathering",
-        "maskShape": "/images/shapes/church-hall-shape-2.png",
+        "maskShape": "/images/shapes/rectangle.png",
         "accentShape": "/images/shapes/circle-brushstroke.png",
         "frameTone": "door"
       },

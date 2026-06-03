@@ -39,7 +39,7 @@
       "image": {
         "src": "/images/uploads/worship-flags.jpg",
         "alt": "People worshipping together on a Sunday morning",
-        "maskShape": "/images/shapes/church-hall-shape-2.png",
+        "maskShape": "/images/shapes/rectangle.png",
         "accentShape": "/images/shapes/circle-brushstroke-medium.png",
         "objectPosition": "center center",
         "frameTone": "park-dark"
@@ -90,8 +90,8 @@
       "image": {
         "src": "/images/uploads/kids-churchyard.jpg",
         "alt": "Children and families enjoying activities around the churchyard",
-        "maskShape": "/images/shapes/flower-shape.png",
-        "accentShape": "/images/shapes/three-sticks-shape.png",
+        "maskShape": "/images/shapes/rectangle.png",
+        "accentShape": "/images/shapes/flower-outline.png",
         "frameTone": "stone"
       },
       "reverse": true,
@@ -129,7 +129,7 @@
         "src": "/images/uploads/community-park-gathering-2.jpg",
         "alt": "The church building and grounds at St John's Park",
         "maskShape": "/images/shapes/rectangle.png",
-        "accentShape": "/images/shapes/long-thin-line-3.png",
+        "accentShape": "/images/shapes/loop-thick.png",
         "frameTone": "grass"
       },
       "ctas": [

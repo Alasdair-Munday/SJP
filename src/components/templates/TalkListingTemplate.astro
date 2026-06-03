@@ -14,51 +14,17 @@ interface Props {
 const { page } = Astro.props;
 const talks = await getTalks();
 const site = await getSiteConfig();
-const [latestTalk, ...archiveTalks] = talks;
 ---
 
 <div class="page-stack">
   <SectionRenderer sections={page.sections} />
 
-  {
-    latestTalk && (
-      <section id="latest-talk" class="content-band" data-tone="park-dark">
-        <p class="eyebrow">Latest talk</p>
-        <h2 class="section-title">{latestTalk.title}</h2>
-        <div class="talk-card__meta">
-          <span class="meta-chip">{latestTalk.series}</span>
-          <span>{latestTalk.speaker}</span>
-          <span>{formatDate(latestTalk.date)}</span>
-          {latestTalk.duration > 0 && <span>{formatTalkDuration(latestTalk.duration)}</span>}
-        </div>
-        <p class="lede">{latestTalk.description}</p>
-        {
-          latestTalk.audioUrl && (
-            <>
-              <div class="talk-player-wrapper">
-                <audio controls src={latestTalk.audioUrl} class="talk-player"></audio>
-              </div>
-              <div class="button-row">
-                <a class="button-link--secondary" href={site.talks.spotifyHref} target="_blank" rel="noopener noreferrer">
-                  {site.talks.spotifyLabel}
-                </a>
-                <a class="icon-link" href={site.talks.rssHref} aria-label={site.talks.rssLabel} title={site.talks.rssLabel} target="_blank" rel="noopener noreferrer">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-rss"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1"/></svg>
-                </a>
-              </div>
-            </>
-          )
-        }
-      </section>
-    )
-  }
-
-  <section class="content-band" data-tone="stone">
-    <p class="eyebrow">Talk archive</p>
-    <h2 class="section-title">Recent Sunday talks</h2>
+  <section id="talks-list" class="content-band" data-tone="stone">
+    <p class="eyebrow">Sunday talks</p>
+    <h2 class="section-title">Recent Talks</h2>
     <div class="talk-archive">
       {
-        archiveTalks.map((talk) => (
+        talks.map((talk) => (
           <article class="talk-row">
             <div class="talk-row__meta">
               <span class="meta-chip">{talk.series}</span>
