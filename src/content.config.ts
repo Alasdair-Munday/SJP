@@ -26,6 +26,15 @@ const imageSchema = z.object({
   wordArtShape: z.string().optional(),
   objectPosition: z.string().optional(),
   frameTone: toneSchema.optional(),
+  gallery: z
+    .array(
+      z.object({
+        src: z.string(),
+        alt: z.string().optional(),
+        objectPosition: z.string().optional(),
+      }),
+    )
+    .optional(),
 });
 
 const cardSchema = z.object({

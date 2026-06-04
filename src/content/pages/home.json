@@ -18,13 +18,39 @@
         "href": "/contact"
       },
       "image": {
-        "src": "/images/uploads/home.jpeg",
+        "src": "/images/uploads/whole-church-family-wave.jpg",
         "alt": "People gathering together inside St John's Park",
         "maskShape": "/images/shapes/arch-shape-filled.png",
         "accentShape": "/images/shapes/circle-shape-4.png",
         "wordArtShape": "/images/shapes/welcome-home.png",
         "objectPosition": "center center",
-        "frameTone": "park-dark"
+        "frameTone": "park-dark",
+        "gallery": [
+          {
+            "src": "/images/uploads/welcome-2.jpeg",
+            "objectPosition": "center center"
+          },
+          {
+            "src": "/images/uploads/welcome-3.jpeg",
+            "objectPosition": "center center"
+          },
+          {
+            "src": "/images/uploads/welcome-4.jpeg",
+            "objectPosition": "center center"
+          },
+          {
+            "src": "/images/uploads/welcome-5.jpeg",
+            "objectPosition": "center center"
+          },
+          {
+            "src": "/images/uploads/welcome-6.jpeg",
+            "objectPosition": "center center"
+          },
+          {
+            "src": "/images/uploads/welcome-7.jpg",
+            "objectPosition": "center center"
+          }
+        ]
       },
       "highlightLabel": "Sundays at 10:45am"
     },
@@ -40,7 +66,7 @@
       ],
       "backgroundTone": "stone",
       "image": {
-        "src": "/images/uploads/refreshments.jpg",
+        "src": "/images/uploads/whole-church-family-wave.jpg",
         "alt": "People chatting over refreshments after church",
         "maskShape": "/images/shapes/rectangle.png",
         "accentShape": "/images/shapes/firework.png",

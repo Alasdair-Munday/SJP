@@ -10,6 +10,19 @@ interface Props {
 }
 
 const { image, class: className } = Astro.props;
+const galleryImages = [
+  {
+    src: image.src,
+    alt: image.alt,
+    objectPosition: image.objectPosition,
+  },
+  ...(image.gallery ?? []).map((galleryImage) => ({
+    src: galleryImage.src,
+    alt: galleryImage.alt ?? "",
+    objectPosition: galleryImage.objectPosition ?? image.objectPosition,
+  })),
+];
+const hasGallery = galleryImages.length > 1;
 const accentCorners = ["top-right", "bottom-left", "top-left", "bottom-right"] as const;
 const accentCorner =
   accentCorners[
@@ -25,14 +38,21 @@ const accentCorner =
 >
   <div
     class="masked-media__shape"
+    data-gallery={hasGallery ? "true" : undefined}
     style={`--mask-shape: url('${image.maskShape ?? "/images/shapes/curved-square-shape.png"}');`}
   >
-    <img
-      src={image.src}
-      alt={image.alt}
-      style={image.objectPosition ? `object-position: ${image.objectPosition};` : undefined}
-      loading="lazy"
-    />
+    {
+      galleryImages.map((galleryImage, index) => (
+        <img
+          src={galleryImage.src}
+          alt={index === 0 ? galleryImage.alt : ""}
+          aria-hidden={index === 0 ? undefined : "true"}
+          data-active={index === 0 ? "true" : undefined}
+          style={galleryImage.objectPosition ? `object-position: ${galleryImage.objectPosition};` : undefined}
+          loading={index === 0 ? "lazy" : "eager"}
+        />
+      ))
+    }
   </div>
   {
     image.accentShape && (
@@ -51,3 +71,27 @@ const accentCorner =
     )
   }
 </div>
+
+{
+  hasGallery && (
+    <script>
+      const galleryShapes = document.querySelectorAll<HTMLElement>(".masked-media__shape[data-gallery='true']");
+
+      galleryShapes.forEach((shape) => {
+        if (shape.dataset.galleryReady === "true") return;
+        shape.dataset.galleryReady = "true";
+
+        const slides = Array.from(shape.querySelectorAll<HTMLImageElement>("img"));
+        if (slides.length < 2) return;
+
+        let activeIndex = 0;
+
+        window.setInterval(() => {
+          slides[activeIndex].removeAttribute("data-active");
+          activeIndex = (activeIndex + 1) % slides.length;
+          slides[activeIndex].dataset.active = "true";
+        }, 1200);
+      });
+    </script>
+  )
+}

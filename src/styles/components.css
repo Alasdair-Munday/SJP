@@ -171,6 +171,16 @@
   object-fit: cover;
 }
 
+.masked-media__shape[data-gallery="true"] img {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+}
+
+.masked-media__shape[data-gallery="true"] img[data-active="true"] {
+  opacity: 1;
+}
+
 .masked-media__accent,
 .masked-media__word {
   position: absolute;
