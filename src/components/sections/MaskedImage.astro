@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
 
 type PageSection = CollectionEntry<"pages">["data"]["sections"][number];
@@ -10,6 +11,16 @@ interface Props {
 }
 
 const { image, class: className } = Astro.props;
+const imageWidths = [320, 480, 640, 960, 1280, 1600] as const;
+const imageQuality = 76;
+const isOptimizableImage = (src: string) =>
+  src.startsWith("/") && /\.(jpe?g|png|webp|gif)$/i.test(src);
+const imageSizes = className?.includes("news-card__media")
+  ? "(max-width: 780px) 90vw, 24rem"
+  : "(max-width: 980px) 90vw, 45vw";
+const intrinsicDimensions = className?.includes("news-card__media")
+  ? { width: 1200, height: 1200 }
+  : { width: 1600, height: 1720 };
 const galleryImages = [
   {
     src: image.src,
@@ -76,14 +87,30 @@ const backdropShape =
   >
     {
       galleryImages.map((galleryImage, index) => (
-        <img
-          src={galleryImage.src}
-          alt={index === 0 ? galleryImage.alt : ""}
-          aria-hidden={index === 0 ? undefined : "true"}
-          data-active={index === 0 ? "true" : undefined}
-          style={galleryImage.objectPosition ? `object-position: ${galleryImage.objectPosition};` : undefined}
-          loading={index === 0 ? "lazy" : "eager"}
-        />
+        isOptimizableImage(galleryImage.src) ? (
+          <Image
+            src={galleryImage.src}
+            width={intrinsicDimensions.width}
+            height={intrinsicDimensions.height}
+            widths={[...imageWidths]}
+            sizes={imageSizes}
+            quality={imageQuality}
+            alt={index === 0 ? galleryImage.alt : ""}
+            aria-hidden={index === 0 ? undefined : "true"}
+            data-active={index === 0 ? "true" : undefined}
+            style={galleryImage.objectPosition ? `object-position: ${galleryImage.objectPosition};` : undefined}
+            loading={index === 0 ? "lazy" : "eager"}
+          />
+        ) : (
+          <img
+            src={galleryImage.src}
+            alt={index === 0 ? galleryImage.alt : ""}
+            aria-hidden={index === 0 ? undefined : "true"}
+            data-active={index === 0 ? "true" : undefined}
+            style={galleryImage.objectPosition ? `object-position: ${galleryImage.objectPosition};` : undefined}
+            loading={index === 0 ? "lazy" : "eager"}
+          />
+        )
       ))
     }
   </div>
