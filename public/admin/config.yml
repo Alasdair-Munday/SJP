@@ -29,102 +29,126 @@ auth:
 logo_url: https://decapbridge.com/decapcms-with-bridge.svg
 
 # Add site links in Decap CMS (optional)
-site_url: https://stjohnspark.netlify.com
+site_url: https://stjohnspark.netlify.app
 
 media_folder: "public/images/uploads"
 public_folder: "/images/uploads"
 
 collections:
   - name: "posts"
-    label: "Posts"
+    label: "News & Events"
+    label_singular: "Post"
     folder: "src/content/posts"
     create: true
     slug: "{{slug}}"
+    summary: "{{title}} ({{category}})"
     fields:
-      - {label: "Title", name: "title", widget: "string"}
-      - {label: "Summary", name: "summary", widget: "text"}
-      - {label: "Publish Date", name: "publishDate", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false}
-      - {label: "Category", name: "category", widget: "string", required: false}
-      - {label: "Event Date", name: "eventDate", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false, required: false}
-      - {label: "Time Text", name: "timeText", widget: "string", required: false}
-      - {label: "Location", name: "location", widget: "string", required: false}
-      - {label: "Featured Shape", name: "featuredShape", widget: "string", required: false}
-      - {label: "CTA Label", name: "ctaLabel", widget: "string", required: false}
-      - {label: "CTA Href", name: "ctaHref", widget: "string", required: false}
-      - label: "Featured Image"
+      - {label: "Title", name: "title", widget: "string", hint: "The main headline for the post or event."}
+      - {label: "Summary", name: "summary", widget: "text", hint: "A short sentence describing the post."}
+      - {label: "Category", name: "category", widget: "select", options: ["event", "news", "story"], default: "news", required: false, hint: "Tag to organize the post."}
+      - {label: "Publish Date", name: "publishDate", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false, hint: "When this post should appear."}
+      - {label: "Body", name: "body", widget: "markdown", hint: "The main content."}
+      
+      # Event specifics
+      - {label: "Event Date", name: "eventDate", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false, required: false, hint: "(Event only) The date the event happens."}
+      - {label: "Time Text", name: "timeText", widget: "string", required: false, hint: "(Event only) E.g., 'Saturday afternoon'"}
+      - {label: "Location", name: "location", widget: "string", required: false, hint: "(Event only) Where the event takes place."}
+      
+      # CTA
+      - {label: "CTA Label", name: "ctaLabel", widget: "string", required: false, hint: "Button text, e.g. 'Contact us'"}
+      - {label: "CTA Link", name: "ctaHref", widget: "string", required: false, hint: "Where the button goes, e.g. '/contact'"}
+      
+      # Visuals
+      - {label: "Featured Shape", name: "featuredShape", widget: "hidden", required: false}
+      - label: "Featured Image Settings"
         name: "featuredImage"
         widget: "object"
         required: false
+        collapsed: false
+        hint: "The main image for this post."
         fields:
           - {label: "Image", name: "src", widget: "image"}
-          - {label: "Alt Text", name: "alt", widget: "string", required: false}
-          - {label: "Mask Shape", name: "maskShape", widget: "string", required: false}
-          - {label: "Frame Tone", name: "frameTone", widget: "string", required: false}
-      - {label: "Body", name: "body", widget: "markdown"}
+          - {label: "Alt Text", name: "alt", widget: "string", required: false, hint: "Describe the image for screen readers."}
+          - {label: "Mask Shape", name: "maskShape", widget: "hidden", required: false}
+          - {label: "Frame Tone", name: "frameTone", widget: "hidden", required: false}
 
   - name: "site"
-    label: "Site Settings"
+    label: "Global Settings"
     files:
-      - label: "Global Settings"
+      - label: "Global Navigation & Footer"
         name: "global"
         file: "src/content/site/global.json"
         fields:
-          - {label: "Title", name: "title", widget: "string"}
-          - {label: "Short Title", name: "shortTitle", widget: "string"}
+          - {label: "Title", name: "title", widget: "string", hint: "The main site title (used in browser tabs)."}
+          - {label: "Short Title", name: "shortTitle", widget: "string", hint: "Used where space is tight."}
+          - {label: "Sunday Summary", name: "sundaySummary", widget: "string", hint: "Appears in the header/footer."}
           - {label: "Site URL", name: "siteUrl", widget: "string"}
-          - {label: "Meta Description", name: "metaDescription", widget: "text"}
-          - {label: "Sunday Summary", name: "sundaySummary", widget: "string"}
-          - label: "Brand"
+          - {label: "Meta Description", name: "metaDescription", widget: "text", hint: "SEO description for search engines."}
+          
+          - label: "Brand Settings"
             name: "brand"
             widget: "object"
+            collapsed: true
             fields:
               - {label: "Lockup Image", name: "lockupSrc", widget: "image"}
               - {label: "Lockup Alt", name: "lockupAlt", widget: "string"}
               - {label: "Icon Label", name: "iconLabel", widget: "string"}
               - {label: "Icon Color", name: "iconColor", widget: "color"}
-          - label: "Navigation"
+              
+          - label: "Navigation Menu"
             name: "navigation"
             widget: "list"
+            summary: "{{label}}"
+            hint: "The main links at the top of the site."
             fields:
-              - {label: "Label", name: "label", widget: "string"}
-              - {label: "Href", name: "href", widget: "string"}
-          - label: "Nav CTA"
+              - {label: "Link Label", name: "label", widget: "string"}
+              - {label: "Link Target", name: "href", widget: "string"}
+          
+          - label: "Navigation Button (CTA)"
             name: "navCta"
             widget: "object"
+            collapsed: true
             fields:
               - {label: "Label", name: "label", widget: "string"}
-              - {label: "Href", name: "href", widget: "string"}
-          - label: "Footer"
+              - {label: "Target", name: "href", widget: "string"}
+          
+          - label: "Footer Links"
             name: "footer"
             widget: "object"
+            collapsed: true
             fields:
-              - {label: "Blurb", name: "blurb", widget: "text"}
+              - {label: "Blurb", name: "blurb", widget: "text", hint: "Short description in the footer."}
               - label: "Quick Links"
                 name: "quickLinks"
                 widget: "list"
+                summary: "{{label}}"
                 fields:
                   - {label: "Label", name: "label", widget: "string"}
                   - {label: "Href", name: "href", widget: "string"}
               - label: "Policy Links"
                 name: "policyLinks"
                 widget: "list"
+                summary: "{{label}}"
                 fields:
                   - {label: "Label", name: "label", widget: "string"}
                   - {label: "Href", name: "href", widget: "string"}
               - {label: "Service Label", name: "serviceLabel", widget: "string"}
               - {label: "Contact Label", name: "contactLabel", widget: "string"}
-          - label: "Contact"
+          
+          - label: "Contact Details"
             name: "contact"
             widget: "object"
+            collapsed: true
             fields:
               - {label: "Email", name: "email", widget: "string"}
               - {label: "Address Lines", name: "addressLines", widget: "list", field: {label: "Line", name: "line", widget: "string"}}
-              - {label: "Map URL", name: "mapUrl", widget: "string"}
-              - {label: "Map Embed URL", name: "mapEmbedUrl", widget: "string"}
+              - {label: "Map URL", name: "mapUrl", widget: "string", hint: "Link to Google Maps"}
+              - {label: "Map Embed URL", name: "mapEmbedUrl", widget: "string", hint: "Iframe URL for the map"}
               - {label: "Life Events Intro", name: "lifeEventsIntro", widget: "text"}
               - label: "Life Event Links"
                 name: "lifeEventLinks"
                 widget: "list"
+                summary: "{{label}}"
                 fields:
                   - {label: "Label", name: "label", widget: "string"}
                   - {label: "Href", name: "href", widget: "string"}
@@ -132,19 +156,24 @@ collections:
               - label: "Form Subjects"
                 name: "formSubjects"
                 widget: "list"
+                summary: "{{label}}"
                 fields:
                   - {label: "Value", name: "value", widget: "string"}
                   - {label: "Label", name: "label", widget: "string"}
               - {label: "Safeguarding Email", name: "safeguardingEmail", widget: "string"}
+              
           - label: "Policy Download"
             name: "policyDownload"
             widget: "object"
+            collapsed: true
             fields:
               - {label: "Label", name: "label", widget: "string"}
               - {label: "Href", name: "href", widget: "string"}
-          - label: "Talks"
+              
+          - label: "Talks Configuration"
             name: "talks"
             widget: "object"
+            collapsed: true
             fields:
               - {label: "Spotify Label", name: "spotifyLabel", widget: "string"}
               - {label: "Spotify Href", name: "spotifyHref", widget: "string"}
@@ -161,144 +190,308 @@ collections:
           - {label: "Title", name: "title", widget: "string"}
           - {label: "Meta Description", name: "metaDescription", widget: "text"}
           - {label: "Template", name: "template", widget: "hidden", default: "home"}
-          - label: "Sections"
+          
+          - &page_sections
+            label: "Page Sections"
             name: "sections"
             widget: "list"
+            hint: "Add, reorder, or edit the blocks on the page."
             types:
               - label: "Hero Section"
                 name: "hero"
                 widget: "object"
+                summary: 'Hero: {{title}}'
                 fields:
-                  - {label: "Eyebrow", name: "eyebrow", widget: "string", required: false}
+                  - {label: "Eyebrow", name: "eyebrow", widget: "string", required: false, hint: "Small text above the title."}
                   - {label: "Title", name: "title", widget: "string"}
                   - {label: "Body", name: "body", widget: "text"}
-                  - {label: "Background Tone", name: "backgroundTone", widget: "string", required: false}
-                  - label: "Primary CTA"
+                  - {label: "Background Tone", name: "backgroundTone", widget: "select", options: ["park", "park-dark", "stone", "sky", "pink", "door", "give", "grass", "roof"], required: false}
+                  - {label: "Highlight Label", name: "highlightLabel", widget: "string", required: false}
+                  - label: "Primary Button"
                     name: "primaryCta"
                     widget: "object"
+                    collapsed: true
                     required: false
                     fields:
                       - {label: "Label", name: "label", widget: "string"}
-                      - {label: "Href", name: "href", widget: "string"}
-                  - label: "Secondary CTA"
+                      - {label: "Link", name: "href", widget: "string"}
+                      - {label: "New Tab", name: "newTab", widget: "boolean", required: false, default: false}
+                  - label: "Secondary Button"
                     name: "secondaryCta"
                     widget: "object"
+                    collapsed: true
                     required: false
                     fields:
                       - {label: "Label", name: "label", widget: "string"}
-                      - {label: "Href", name: "href", widget: "string"}
-                  - label: "Image"
+                      - {label: "Link", name: "href", widget: "string"}
+                      - {label: "New Tab", name: "newTab", widget: "boolean", required: false, default: false}
+                  - label: "Image Settings"
                     name: "image"
                     widget: "object"
+                    collapsed: false
                     required: false
                     fields:
                       - {label: "Image", name: "src", widget: "image"}
                       - {label: "Alt Text", name: "alt", widget: "string", required: false}
-                      - {label: "Mask Shape", name: "maskShape", widget: "string", required: false}
-                      - {label: "Accent Shape", name: "accentShape", widget: "string", required: false}
-                      - {label: "Word Art Shape", name: "wordArtShape", widget: "string", required: false}
-                      - {label: "Object Position", name: "objectPosition", widget: "string", required: false}
-                      - {label: "Frame Tone", name: "frameTone", widget: "string", required: false}
-                      - label: "Gallery"
+                      - {label: "Accent Tone", name: "accentTone", widget: "hidden", required: false}
+                      - {label: "Mask Shape", name: "maskShape", widget: "hidden", required: false}
+                      - {label: "Accent Shape", name: "accentShape", widget: "hidden", required: false}
+                      - {label: "Word Art Shape", name: "wordArtShape", widget: "hidden", required: false}
+                      - {label: "Frame Color", name: "frameTone", widget: "hidden", required: false}
+                      - {label: "Object Position", name: "objectPosition", widget: "hidden", required: false}
+                      - label: "Gallery Images"
                         name: "gallery"
                         widget: "list"
                         required: false
+                        summary: "Gallery Image"
                         fields:
                           - {label: "Image", name: "src", widget: "image"}
-                          - {label: "Object Position", name: "objectPosition", widget: "string", required: false}
-                  - {label: "Highlight Label", name: "highlightLabel", widget: "string", required: false}
+                          - {label: "Position", name: "objectPosition", widget: "hidden", required: false}
+                  
               - label: "Split Section"
                 name: "split"
                 widget: "object"
+                summary: 'Split: {{title}}'
                 fields:
+                  - {label: "Section ID", name: "id", widget: "hidden", required: false}
+                  - {label: "Reverse Layout", name: "reverse", widget: "hidden", required: false}
                   - {label: "Eyebrow", name: "eyebrow", widget: "string", required: false}
                   - {label: "Title", name: "title", widget: "string"}
                   - {label: "Body", name: "body", widget: "text"}
-                  - {label: "Points", name: "points", widget: "list", required: false, field: {label: "Point", name: "point", widget: "string"}}
-                  - {label: "Background Tone", name: "backgroundTone", widget: "string", required: false}
-                  - label: "Image"
-                    name: "image"
-                    widget: "object"
-                    required: false
-                    fields:
-                      - {label: "Image", name: "src", widget: "image"}
-                      - {label: "Alt Text", name: "alt", widget: "string", required: false}
-                      - {label: "Mask Shape", name: "maskShape", widget: "string", required: false}
-                      - {label: "Accent Shape", name: "accentShape", widget: "string", required: false}
-                      - {label: "Object Position", name: "objectPosition", widget: "string", required: false}
-                      - {label: "Frame Tone", name: "frameTone", widget: "string", required: false}
-                  - label: "CTAs"
+                  - {label: "Background Tone", name: "backgroundTone", widget: "select", options: ["park", "park-dark", "stone", "sky", "pink", "door", "give", "grass", "roof"], required: false}
+                  - {label: "Bullet Points", name: "points", widget: "list", required: false, summary: "{{point}}", field: {label: "Point", name: "point", widget: "string"}}
+                  - label: "Buttons"
                     name: "ctas"
                     widget: "list"
                     required: false
+                    summary: "{{label}}"
                     fields:
                       - {label: "Label", name: "label", widget: "string"}
-                      - {label: "Href", name: "href", widget: "string"}
-              - label: "Cards Section"
-                name: "cards"
-                widget: "object"
-                fields:
-                  - {label: "Eyebrow", name: "eyebrow", widget: "string", required: false}
-                  - {label: "Title", name: "title", widget: "string"}
-                  - {label: "Intro", name: "intro", widget: "text", required: false}
-                  - {label: "Background Tone", name: "backgroundTone", widget: "string", required: false}
-                  - {label: "Columns", name: "columns", widget: "number", required: false}
-                  - label: "Cards"
-                    name: "cards"
-                    widget: "list"
-                    fields:
-                      - {label: "Title", name: "title", widget: "string"}
-                      - {label: "Body", name: "body", widget: "text"}
-                      - {label: "Href", name: "href", widget: "string"}
-                      - {label: "Link Label", name: "linkLabel", widget: "string", required: false}
-                      - {label: "Tone", name: "tone", widget: "string", required: false}
-                      - {label: "Icon Shape", name: "iconShape", widget: "string", required: false}
-              - label: "Latest Section"
-                name: "latest"
-                widget: "object"
-                fields:
-                  - {label: "Eyebrow", name: "eyebrow", widget: "string", required: false}
-                  - {label: "Title", name: "title", widget: "string"}
-                  - {label: "Intro", name: "intro", widget: "text", required: false}
-                  - {label: "Background Tone", name: "backgroundTone", widget: "string", required: false}
-                  - {label: "Source", name: "source", widget: "string"}
-                  - {label: "Limit", name: "limit", widget: "number"}
-                  - label: "CTA"
-                    name: "cta"
-                    widget: "object"
-                    required: false
-                    fields:
-                      - {label: "Label", name: "label", widget: "string"}
-                      - {label: "Href", name: "href", widget: "string"}
-              - label: "CTA Section"
-                name: "cta"
-                widget: "object"
-                fields:
-                  - {label: "Eyebrow", name: "eyebrow", widget: "string", required: false}
-                  - {label: "Title", name: "title", widget: "string"}
-                  - {label: "Body", name: "body", widget: "text"}
-                  - {label: "Background Tone", name: "backgroundTone", widget: "string", required: false}
-                  - label: "Primary CTA"
-                    name: "primaryCta"
-                    widget: "object"
-                    required: false
-                    fields:
-                      - {label: "Label", name: "label", widget: "string"}
-                      - {label: "Href", name: "href", widget: "string"}
-                  - label: "Secondary CTA"
-                    name: "secondaryCta"
-                    widget: "object"
-                    required: false
-                    fields:
-                      - {label: "Label", name: "label", widget: "string"}
-                      - {label: "Href", name: "href", widget: "string"}
-                  - label: "Image"
+                      - {label: "Link", name: "href", widget: "string"}
+                      - {label: "New Tab", name: "newTab", widget: "boolean", required: false, default: false}
+                  - label: "Image Settings"
                     name: "image"
                     widget: "object"
+                    collapsed: false
                     required: false
                     fields:
                       - {label: "Image", name: "src", widget: "image"}
                       - {label: "Alt Text", name: "alt", widget: "string", required: false}
-                      - {label: "Mask Shape", name: "maskShape", widget: "string", required: false}
-                      - {label: "Accent Shape", name: "accentShape", widget: "string", required: false}
-                      - {label: "Frame Tone", name: "frameTone", widget: "string", required: false}
+                      - {label: "Accent Tone", name: "accentTone", widget: "hidden", required: false}
+                      - {label: "Mask Shape", name: "maskShape", widget: "hidden", required: false}
+                      - {label: "Accent Shape", name: "accentShape", widget: "hidden", required: false}
+                      - {label: "Frame Color", name: "frameTone", widget: "hidden", required: false}
+                      - {label: "Object Position", name: "objectPosition", widget: "hidden", required: false}
+                      
+              - label: "Cards Section"
+                name: "cards"
+                widget: "object"
+                summary: 'Cards: {{title}}'
+                fields:
+                  - {label: "Eyebrow", name: "eyebrow", widget: "string", required: false}
+                  - {label: "Title", name: "title", widget: "string"}
+                  - {label: "Intro Text", name: "intro", widget: "text", required: false}
+                  - {label: "Background Color", name: "backgroundTone", widget: "select", options: ["park", "park-dark", "stone", "sky", "pink", "door", "give", "grass", "roof"], required: false}
+                  - {label: "Columns", name: "columns", widget: "hidden", required: false}
+                  - label: "Cards"
+                    name: "cards"
+                    widget: "list"
+                    summary: "{{title}}"
+                    fields:
+                      - {label: "Title", name: "title", widget: "string"}
+                      - {label: "Tag", name: "tag", widget: "string", required: false}
+                      - {label: "Body", name: "body", widget: "text", required: false}
+                      - {label: "Link", name: "href", widget: "string", required: false}
+                      - {label: "Link Label", name: "linkLabel", widget: "string", required: false}
+                      - {label: "Card Color", name: "tone", widget: "select", options: ["park", "park-dark", "stone", "sky", "pink", "door", "give", "grass", "roof"], required: false}
+                      - {label: "Icon Shape", name: "iconShape", widget: "hidden", required: false}
+                      - label: "Card Image Settings"
+                        name: "image"
+                        widget: "object"
+                        collapsed: true
+                        required: false
+                        fields:
+                          - {label: "Image", name: "src", widget: "image"}
+                          - {label: "Alt Text", name: "alt", widget: "string", required: false}
+                          - {label: "Mask Shape", name: "maskShape", widget: "hidden", required: false}
+                          - {label: "Object Position", name: "objectPosition", widget: "hidden", required: false}
+                          - {label: "Frame Color", name: "frameTone", widget: "hidden", required: false}
+                      
+              - label: "Latest Feed Section"
+                name: "latest"
+                widget: "object"
+                summary: 'Feed: {{title}}'
+                fields:
+                  - {label: "Eyebrow", name: "eyebrow", widget: "string", required: false}
+                  - {label: "Title", name: "title", widget: "string"}
+                  - {label: "Intro Text", name: "intro", widget: "text", required: false}
+                  - {label: "Background Color", name: "backgroundTone", widget: "select", options: ["park", "park-dark", "stone", "sky", "pink", "door", "give", "grass", "roof"], required: false}
+                  - {label: "Source", name: "source", widget: "select", options: ["posts", "talks"], hint: "What to show in the feed"}
+                  - {label: "Number of Items", name: "limit", widget: "number"}
+                  - label: "View All Button"
+                    name: "cta"
+                    widget: "object"
+                    collapsed: true
+                    required: false
+                    fields:
+                      - {label: "Label", name: "label", widget: "string"}
+                      - {label: "Link", name: "href", widget: "string"}
+                      
+              - label: "CTA Section"
+                name: "cta"
+                widget: "object"
+                summary: 'CTA: {{title}}'
+                fields:
+                  - {label: "Eyebrow", name: "eyebrow", widget: "string", required: false}
+                  - {label: "Title", name: "title", widget: "string"}
+                  - {label: "Body", name: "body", widget: "text"}
+                  - {label: "Background Color", name: "backgroundTone", widget: "select", options: ["park", "park-dark", "stone", "sky", "pink", "door", "give", "grass", "roof"], required: false}
+                  - label: "Primary Button"
+                    name: "primaryCta"
+                    widget: "object"
+                    collapsed: true
+                    required: false
+                    fields:
+                      - {label: "Label", name: "label", widget: "string"}
+                      - {label: "Link", name: "href", widget: "string"}
+                      - {label: "New Tab", name: "newTab", widget: "boolean", required: false, default: false}
+                  - label: "Secondary Button"
+                    name: "secondaryCta"
+                    widget: "object"
+                    collapsed: true
+                    required: false
+                    fields:
+                      - {label: "Label", name: "label", widget: "string"}
+                      - {label: "Link", name: "href", widget: "string"}
+                      - {label: "New Tab", name: "newTab", widget: "boolean", required: false, default: false}
+                  - label: "Image Settings"
+                    name: "image"
+                    widget: "object"
+                    collapsed: false
+                    required: false
+                    fields:
+                      - {label: "Image", name: "src", widget: "image"}
+                      - {label: "Alt Text", name: "alt", widget: "string", required: false}
+                      - {label: "Accent Tone", name: "accentTone", widget: "hidden", required: false}
+                      - {label: "Mask Shape", name: "maskShape", widget: "hidden", required: false}
+                      - {label: "Accent Shape", name: "accentShape", widget: "hidden", required: false}
+                      - {label: "Frame Color", name: "frameTone", widget: "hidden", required: false}
+
+              - label: "Intro Section"
+                name: "intro"
+                widget: "object"
+                summary: 'Intro: {{title}}'
+                fields:
+                  - {label: "Eyebrow", name: "eyebrow", widget: "string", required: false}
+                  - {label: "Title", name: "title", widget: "string"}
+                  - {label: "Body", name: "body", widget: "text"}
+                  - {label: "Background Tone", name: "backgroundTone", widget: "select", options: ["park", "park-dark", "stone", "sky", "pink", "door", "give", "grass", "roof"], required: false}
+                  - label: "Buttons"
+                    name: "ctas"
+                    widget: "list"
+                    required: false
+                    summary: "{{label}}"
+                    fields:
+                      - {label: "Label", name: "label", widget: "string"}
+                      - {label: "Link", name: "href", widget: "string"}
+                      - {label: "New Tab", name: "newTab", widget: "boolean", required: false, default: false}
+
+              - label: "Rich Text Section"
+                name: "richText"
+                widget: "object"
+                summary: 'Text: {{title}}'
+                fields:
+                  - {label: "Eyebrow", name: "eyebrow", widget: "string", required: false}
+                  - {label: "Title", name: "title", widget: "string"}
+                  - {label: "Background Tone", name: "backgroundTone", widget: "select", options: ["park", "park-dark", "stone", "sky", "pink", "door", "give", "grass", "roof"], required: false}
+                  - {label: "Content", name: "contentHtml", widget: "text", hint: "Accepts basic HTML."}
+
+      - label: "Visit Page"
+        name: "visit"
+        file: "src/content/pages/visit.json"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Meta Description", name: "metaDescription", widget: "text"}
+          - {label: "Template", name: "template", widget: "hidden", default: "standard"}
+          - *page_sections
+
+      - label: "Community Page"
+        name: "community"
+        file: "src/content/pages/community.json"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Meta Description", name: "metaDescription", widget: "text"}
+          - {label: "Template", name: "template", widget: "hidden", default: "standard"}
+          - *page_sections
+
+      - label: "Contact Page"
+        name: "contact"
+        file: "src/content/pages/contact.json"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Meta Description", name: "metaDescription", widget: "text"}
+          - {label: "Template", name: "template", widget: "hidden", default: "standard"}
+          - *page_sections
+
+      - label: "Get Involved Page"
+        name: "get-involved"
+        file: "src/content/pages/get-involved.json"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Meta Description", name: "metaDescription", widget: "text"}
+          - {label: "Template", name: "template", widget: "hidden", default: "standard"}
+          - *page_sections
+
+      - label: "Who We Are Page"
+        name: "who-we-are"
+        file: "src/content/pages/who-we-are.json"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Meta Description", name: "metaDescription", widget: "text"}
+          - {label: "Template", name: "template", widget: "hidden", default: "standard"}
+          - *page_sections
+
+      - label: "News Page"
+        name: "news"
+        file: "src/content/pages/news.json"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Meta Description", name: "metaDescription", widget: "text"}
+          - {label: "Template", name: "template", widget: "hidden", default: "news"}
+          - *page_sections
+
+      - label: "Talks Page"
+        name: "talks"
+        file: "src/content/pages/talks.json"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Meta Description", name: "metaDescription", widget: "text"}
+          - {label: "Template", name: "template", widget: "hidden", default: "talks"}
+          - *page_sections
+
+      - label: "Privacy Policy"
+        name: "privacy"
+        file: "src/content/pages/privacy.json"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Meta Description", name: "metaDescription", widget: "text"}
+          - {label: "Template", name: "template", widget: "hidden", default: "utility"}
+          - *page_sections
+
+      - label: "Safeguarding"
+        name: "safeguarding"
+        file: "src/content/pages/safeguarding.json"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Meta Description", name: "metaDescription", widget: "text"}
+          - {label: "Template", name: "template", widget: "hidden", default: "utility"}
+          - *page_sections
+
+      - label: "Cookies Policy"
+        name: "cookies"
+        file: "src/content/pages/cookies.json"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Meta Description", name: "metaDescription", widget: "text"}
+          - {label: "Template", name: "template", widget: "hidden", default: "utility"}
+          - *page_sections
