@@ -4,6 +4,6 @@ import netlify from "@astrojs/netlify";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://stjohnspark.church",
+  site: "https://stjohnspark.netlify.app",
   adapter: netlify(),
 });
