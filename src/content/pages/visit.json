@@ -1,6 +1,6 @@
 {
   "title": "Visit",
-  "metaDescription": "Plan a first visit to St John's Park in Sheffield, with Sunday times, what to expect, children and youth information, and practical travel details.",
+  "metaDescription": "Plan a first visit to St John's Park in Sheffield, with Sunday times, what to expect, kids and youth information, and practical travel details.",
   "template": "standard",
   "sections": [
     {
@@ -61,12 +61,12 @@
       "cards": [
         {
           "title": "The service",
-          "body": "We sing together, read Scripture, hear Bible teaching that connects to everyday life, and spend time in prayer. On the first Sunday of the month we share Communion.",
+          "body": "We sing together, read Scripture, hear Bible teaching, and spend time in prayer. We share Communion together on the first and third Sundays of the month.",
           "tone": "door"
         },
         {
-          "title": "Children and young people",
-          "body": "Children are very welcome. We regularly run age-appropriate activities during the service and through the week, and we work hard to help families feel relaxed and at home.",
+          "title": "Kids and youth",
+          "body": "We have All In Sundays on the first week of the month where every generation worships together. The rest of the month we run age-specific groups during the second part of the service. Families are always welcome.",
           "tone": "park"
         },
         {
@@ -78,12 +78,12 @@
     },
     {
       "type": "split",
-      "eyebrow": "Children and youth",
-      "title": "Children & Youth",
+      "eyebrow": "Kids and youth",
+      "title": "Kids & Youth",
       "body": "From younger children to teenagers, we want the next generation to know they are loved, known, and included in the life of the church.",
       "points": [
-        "Park Kids and Park Youth are part of the wider life of our church.",
-        "Midweek rhythms and Sunday gatherings both matter here.",
+        "Tiny Tots (0-5), Park Kids (primary), and Park Youth: Faith Explorers (secondary to 16) run during term-time Sundays.",
+        "Park Youth: Cornerstone meets on Wednesdays, 6:00pm–7:15pm for secondary schoolers.",
         "If you want to ask about children or youth before visiting, we would be happy to help."
       ],
       "backgroundTone": "pink",
@@ -97,7 +97,7 @@
       "reverse": true,
       "ctas": [
         {
-          "label": "Get in touch about children and youth",
+          "label": "Get in touch about kids and youth",
           "href": "/contact#contact-form"
         }
       ]

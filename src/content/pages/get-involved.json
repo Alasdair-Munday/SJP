@@ -43,7 +43,7 @@
           "iconShape": "/images/shapes/concentric-circles.png"
         },
         {
-          "title": "Children and youth",
+          "title": "Kids and youth",
           "body": "Park Kids, Park Youth, and wider family life matter deeply here. We want younger generations to know they belong and can grow in faith.",
           "href": "/visit",
           "linkLabel": "See newcomer details",
@@ -51,10 +51,10 @@
           "iconShape": "/images/shapes/concentric-circles.png"
         },
         {
-          "title": "Midweek community",
-          "body": "Friendship, prayer, Scripture, and local care continue beyond Sunday through midweek rhythms and shared life together.",
+          "title": "Park Communities",
+          "body": "Friendship, prayer, Scripture, and local care continue beyond Sunday through Park Communities and shared life together.",
           "href": "/contact",
-          "linkLabel": "Ask about midweek life",
+          "linkLabel": "Ask about Park Communities",
           "tone": "pink",
           "iconShape": "/images/shapes/concentric-circles.png"
         },
@@ -69,10 +69,17 @@
       ]
     },
     {
+      "type": "intro",
+      "eyebrow": "Prayer & Communion",
+      "title": "Midweek Gatherings",
+      "body": "Join us to pray each Monday–Friday at 8.00am for 30 minutes on Zoom (Meeting ID: 323 564 9987, Passcode: 483559). We also meet to pray on the first Sunday of the month from 10.00–10.30am in the church building before the service, and hold a quieter midweek Communion service on Thursdays from 9.30–10.45am.",
+      "backgroundTone": "stone"
+    },
+    {
       "type": "split",
       "eyebrow": "Serving teams",
       "title": "Serving",
-      "body": "There are many ways to help church life flourish each week, from welcoming and hospitality to worship, children and youth, admin, cleaning, food support, creative work, and audio-visual help.",
+      "body": "There are many ways to help church life flourish each week, from welcoming and hospitality to worship, kids and youth, admin, cleaning, food support, creative work, and audio-visual help.",
       "points": [
         "Welcome and hospitality",
         "Park Kids and Park Youth",
@@ -130,7 +137,7 @@
       "type": "cta",
       "eyebrow": "Take a next step",
       "title": "Next Steps",
-      "body": "Whether you want to ask about serving, giving, children and youth, or simply becoming part of the church family, we would love to help you find the right next step.",
+      "body": "Whether you want to ask about serving, giving, kids and youth, or simply becoming part of the church family, we would love to help you find the right next step.",
       "backgroundTone": "park-dark",
       "primaryCta": {
         "label": "Send us a message",
