@@ -12,16 +12,16 @@
   },
   "navigation": [
     {
-      "label": "Home",
-      "href": "/"
-    },
-    {
       "label": "Visit",
       "href": "/visit"
     },
     {
       "label": "Who we are",
       "href": "/who-we-are"
+    },
+    {
+      "label": "Community",
+      "href": "/community"
     },
     {
       "label": "Get involved",
@@ -42,6 +42,10 @@
       {
         "label": "Plan a first visit",
         "href": "/visit"
+      },
+      {
+        "label": "Community Hub",
+        "href": "/community"
       },
       {
         "label": "Meet the church",

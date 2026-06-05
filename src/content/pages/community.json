@@ -1,0 +1,110 @@
+{
+  "title": "Community",
+  "metaDescription": "Find out what happens midweek at St John's Park, including Monday Community Hub, lunch club, local support drop-ins, and regular groups using the church space.",
+  "template": "standard",
+  "sections": [
+    {
+      "type": "hero",
+      "eyebrow": "Community at St John’s Park",
+      "title": "A place to meet, eat, talk, and belong",
+      "body": "Our building is used throughout the week by neighbours, local organisations, and community groups. Some people come for practical support, some come for company, and some come because this is simply a good place to be.",
+      "backgroundTone": "stone",
+      "primaryCta": {
+        "label": "Contact us",
+        "href": "/contact#contact-form"
+      },
+      "secondaryCta": {
+        "label": "Find us",
+        "href": "/contact"
+      },
+      "image": {
+        "src": "/images/uploads/friends.jpg",
+        "alt": "People smiling together at St John's Park",
+        "maskShape": "/images/shapes/arch-shape-filled.png",
+        "accentShape": "/images/shapes/welcome.png",
+        "frameTone": "grass"
+      }
+    },
+    {
+      "type": "intro",
+      "eyebrow": "Mondays from 10am",
+      "title": "Community Hub",
+      "body": "On Mondays from 10am the church is open for the Community Hub. There is tea and coffee, a foodbank, and space to chat or simply sit for a while. Local partners also join us for drop-ins, including Citizens Advice, Help for Heroes, and Guinness Housing. You are welcome to come for the bit that is useful to you, or to stay for the morning.",
+      "backgroundTone": "sky",
+      "ctas": [
+        {
+          "label": "Ask about Mondays",
+          "href": "/contact#contact-form"
+        }
+      ]
+    },
+    {
+      "type": "cards",
+      "eyebrow": "What happens on Mondays",
+      "title": "Support, food, and friendship",
+      "intro": "The morning is relaxed and people come for different reasons. You will not be singled out or put on the spot.",
+      "backgroundTone": "stone",
+      "columns": 2,
+      "cards": [
+        {
+          "title": "Foodbank",
+          "body": "Practical food support is available during the Community Hub.",
+          "tone": "park"
+        },
+        {
+          "title": "Tea and coffee",
+          "body": "A warm drink, a seat, and someone friendly nearby if you would like to talk.",
+          "tone": "sky"
+        },
+        {
+          "title": "Advice drop-ins",
+          "body": "Citizens Advice, Help for Heroes, and Guinness Housing offer drop-in support when available.",
+          "tone": "pink"
+        },
+        {
+          "title": "Lunch Club",
+          "body": "At 11:40am lunch is served, with friendly conversation and a Bible story discussion for anyone who would like to stay.",
+          "tone": "door"
+        }
+      ]
+    },
+    {
+      "type": "intro",
+      "eyebrow": "Mondays at 11:40am",
+      "title": "Lunch Club",
+      "body": "Lunch is served from 11:40am. It is a chance to eat together, enjoy friendly conversation, and take part in a simple Bible story discussion. You do not need to know anything about church or faith to join in.",
+      "backgroundTone": "pink"
+    },
+    {
+      "type": "cards",
+      "eyebrow": "Regular groups",
+      "title": "Groups using the building",
+      "intro": "The church building is also home to groups run by others in the local community. These groups are part of the everyday life of the building and help make it a place where different ages, interests, and neighbours can meet.",
+      "backgroundTone": "sky",
+      "columns": 2,
+      "cards": [
+        {
+          "title": "Pinders dance group",
+          "body": "A dance group for children meeting on Monday evenings.",
+          "tone": "park"
+        },
+        {
+          "title": "Manor Weavers",
+          "body": "A weaving group meeting on Wednesdays from 10:30am to 1:30pm.",
+          "tone": "grass"
+        }
+      ]
+    },
+    {
+      "type": "cta",
+      "eyebrow": "Questions or room use",
+      "title": "Want to know more?",
+      "body": "If you would like to ask about the Community Hub, check which drop-ins are available, or enquire about using the building for a regular group, please get in touch.",
+      "backgroundTone": "park-dark",
+      "primaryCta": {
+        "label": "Contact us",
+        "href": "/contact#contact-form"
+      }
+    }
+  ]
+}
