@@ -1,0 +1,304 @@
+# Use DecapBridge PKCE auth (required)
+backend:
+  name: git-gateway
+  repo: Alasdair-Munday/SJP
+  branch: main
+  auth_type: pkce
+  base_url: https://auth.decapbridge.com
+  auth_endpoint: /sites/841d76ec-38a1-4f24-94de-f54a42275281/pkce
+  auth_token_endpoint: /sites/841d76ec-38a1-4f24-94de-f54a42275281/token
+  gateway_url: https://gateway.decapbridge.com
+
+  # See who did what (optional)
+  commit_messages:
+    create: Create {{collection}} “{{slug}}” - {{author-name}} <{{author-login}}> via DecapBridge
+    update: Update {{collection}} “{{slug}}” - {{author-name}} <{{author-login}}> via DecapBridge
+    delete: Delete {{collection}} “{{slug}}” - {{author-name}} <{{author-login}}> via DecapBridge
+    uploadMedia: Upload “{{path}}” - {{author-name}} <{{author-login}}> via DecapBridge
+    deleteMedia: Delete “{{path}}” - {{author-name}} <{{author-login}}> via DecapBridge
+    openAuthoring: Message {{message}} - {{author-name}} <{{author-login}}> via DecapBridge
+
+# Enable PKCE fields (optional, recommended)
+auth:
+  email_claim: email
+  first_name_claim: first_name
+  last_name_claim: last_name
+  avatar_url_claim: avatar_url
+
+# Better Decap + Bridge logo (optional)
+logo_url: https://decapbridge.com/decapcms-with-bridge.svg
+
+# Add site links in Decap CMS (optional)
+site_url: https://stjohnspark.netlify.com
+
+media_folder: "public/images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  - name: "posts"
+    label: "Posts"
+    folder: "src/content/posts"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Summary", name: "summary", widget: "text"}
+      - {label: "Publish Date", name: "publishDate", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false}
+      - {label: "Category", name: "category", widget: "string", required: false}
+      - {label: "Event Date", name: "eventDate", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false, required: false}
+      - {label: "Time Text", name: "timeText", widget: "string", required: false}
+      - {label: "Location", name: "location", widget: "string", required: false}
+      - {label: "Featured Shape", name: "featuredShape", widget: "string", required: false}
+      - {label: "CTA Label", name: "ctaLabel", widget: "string", required: false}
+      - {label: "CTA Href", name: "ctaHref", widget: "string", required: false}
+      - label: "Featured Image"
+        name: "featuredImage"
+        widget: "object"
+        required: false
+        fields:
+          - {label: "Image", name: "src", widget: "image"}
+          - {label: "Alt Text", name: "alt", widget: "string", required: false}
+          - {label: "Mask Shape", name: "maskShape", widget: "string", required: false}
+          - {label: "Frame Tone", name: "frameTone", widget: "string", required: false}
+      - {label: "Body", name: "body", widget: "markdown"}
+
+  - name: "site"
+    label: "Site Settings"
+    files:
+      - label: "Global Settings"
+        name: "global"
+        file: "src/content/site/global.json"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Short Title", name: "shortTitle", widget: "string"}
+          - {label: "Site URL", name: "siteUrl", widget: "string"}
+          - {label: "Meta Description", name: "metaDescription", widget: "text"}
+          - {label: "Sunday Summary", name: "sundaySummary", widget: "string"}
+          - label: "Brand"
+            name: "brand"
+            widget: "object"
+            fields:
+              - {label: "Lockup Image", name: "lockupSrc", widget: "image"}
+              - {label: "Lockup Alt", name: "lockupAlt", widget: "string"}
+              - {label: "Icon Label", name: "iconLabel", widget: "string"}
+              - {label: "Icon Color", name: "iconColor", widget: "color"}
+          - label: "Navigation"
+            name: "navigation"
+            widget: "list"
+            fields:
+              - {label: "Label", name: "label", widget: "string"}
+              - {label: "Href", name: "href", widget: "string"}
+          - label: "Nav CTA"
+            name: "navCta"
+            widget: "object"
+            fields:
+              - {label: "Label", name: "label", widget: "string"}
+              - {label: "Href", name: "href", widget: "string"}
+          - label: "Footer"
+            name: "footer"
+            widget: "object"
+            fields:
+              - {label: "Blurb", name: "blurb", widget: "text"}
+              - label: "Quick Links"
+                name: "quickLinks"
+                widget: "list"
+                fields:
+                  - {label: "Label", name: "label", widget: "string"}
+                  - {label: "Href", name: "href", widget: "string"}
+              - label: "Policy Links"
+                name: "policyLinks"
+                widget: "list"
+                fields:
+                  - {label: "Label", name: "label", widget: "string"}
+                  - {label: "Href", name: "href", widget: "string"}
+              - {label: "Service Label", name: "serviceLabel", widget: "string"}
+              - {label: "Contact Label", name: "contactLabel", widget: "string"}
+          - label: "Contact"
+            name: "contact"
+            widget: "object"
+            fields:
+              - {label: "Email", name: "email", widget: "string"}
+              - {label: "Address Lines", name: "addressLines", widget: "list", field: {label: "Line", name: "line", widget: "string"}}
+              - {label: "Map URL", name: "mapUrl", widget: "string"}
+              - {label: "Map Embed URL", name: "mapEmbedUrl", widget: "string"}
+              - {label: "Life Events Intro", name: "lifeEventsIntro", widget: "text"}
+              - label: "Life Event Links"
+                name: "lifeEventLinks"
+                widget: "list"
+                fields:
+                  - {label: "Label", name: "label", widget: "string"}
+                  - {label: "Href", name: "href", widget: "string"}
+                  - {label: "New Tab", name: "newTab", widget: "boolean"}
+              - label: "Form Subjects"
+                name: "formSubjects"
+                widget: "list"
+                fields:
+                  - {label: "Value", name: "value", widget: "string"}
+                  - {label: "Label", name: "label", widget: "string"}
+              - {label: "Safeguarding Email", name: "safeguardingEmail", widget: "string"}
+          - label: "Policy Download"
+            name: "policyDownload"
+            widget: "object"
+            fields:
+              - {label: "Label", name: "label", widget: "string"}
+              - {label: "Href", name: "href", widget: "string"}
+          - label: "Talks"
+            name: "talks"
+            widget: "object"
+            fields:
+              - {label: "Spotify Label", name: "spotifyLabel", widget: "string"}
+              - {label: "Spotify Href", name: "spotifyHref", widget: "string"}
+              - {label: "RSS Label", name: "rssLabel", widget: "string"}
+              - {label: "RSS Href", name: "rssHref", widget: "string"}
+
+  - name: "pages"
+    label: "Pages"
+    files:
+      - label: "Home Page"
+        name: "home"
+        file: "src/content/pages/home.json"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Meta Description", name: "metaDescription", widget: "text"}
+          - {label: "Template", name: "template", widget: "hidden", default: "home"}
+          - label: "Sections"
+            name: "sections"
+            widget: "list"
+            types:
+              - label: "Hero Section"
+                name: "hero"
+                widget: "object"
+                fields:
+                  - {label: "Eyebrow", name: "eyebrow", widget: "string", required: false}
+                  - {label: "Title", name: "title", widget: "string"}
+                  - {label: "Body", name: "body", widget: "text"}
+                  - {label: "Background Tone", name: "backgroundTone", widget: "string", required: false}
+                  - label: "Primary CTA"
+                    name: "primaryCta"
+                    widget: "object"
+                    required: false
+                    fields:
+                      - {label: "Label", name: "label", widget: "string"}
+                      - {label: "Href", name: "href", widget: "string"}
+                  - label: "Secondary CTA"
+                    name: "secondaryCta"
+                    widget: "object"
+                    required: false
+                    fields:
+                      - {label: "Label", name: "label", widget: "string"}
+                      - {label: "Href", name: "href", widget: "string"}
+                  - label: "Image"
+                    name: "image"
+                    widget: "object"
+                    required: false
+                    fields:
+                      - {label: "Image", name: "src", widget: "image"}
+                      - {label: "Alt Text", name: "alt", widget: "string", required: false}
+                      - {label: "Mask Shape", name: "maskShape", widget: "string", required: false}
+                      - {label: "Accent Shape", name: "accentShape", widget: "string", required: false}
+                      - {label: "Word Art Shape", name: "wordArtShape", widget: "string", required: false}
+                      - {label: "Object Position", name: "objectPosition", widget: "string", required: false}
+                      - {label: "Frame Tone", name: "frameTone", widget: "string", required: false}
+                      - label: "Gallery"
+                        name: "gallery"
+                        widget: "list"
+                        required: false
+                        fields:
+                          - {label: "Image", name: "src", widget: "image"}
+                          - {label: "Object Position", name: "objectPosition", widget: "string", required: false}
+                  - {label: "Highlight Label", name: "highlightLabel", widget: "string", required: false}
+              - label: "Split Section"
+                name: "split"
+                widget: "object"
+                fields:
+                  - {label: "Eyebrow", name: "eyebrow", widget: "string", required: false}
+                  - {label: "Title", name: "title", widget: "string"}
+                  - {label: "Body", name: "body", widget: "text"}
+                  - {label: "Points", name: "points", widget: "list", required: false, field: {label: "Point", name: "point", widget: "string"}}
+                  - {label: "Background Tone", name: "backgroundTone", widget: "string", required: false}
+                  - label: "Image"
+                    name: "image"
+                    widget: "object"
+                    required: false
+                    fields:
+                      - {label: "Image", name: "src", widget: "image"}
+                      - {label: "Alt Text", name: "alt", widget: "string", required: false}
+                      - {label: "Mask Shape", name: "maskShape", widget: "string", required: false}
+                      - {label: "Accent Shape", name: "accentShape", widget: "string", required: false}
+                      - {label: "Object Position", name: "objectPosition", widget: "string", required: false}
+                      - {label: "Frame Tone", name: "frameTone", widget: "string", required: false}
+                  - label: "CTAs"
+                    name: "ctas"
+                    widget: "list"
+                    required: false
+                    fields:
+                      - {label: "Label", name: "label", widget: "string"}
+                      - {label: "Href", name: "href", widget: "string"}
+              - label: "Cards Section"
+                name: "cards"
+                widget: "object"
+                fields:
+                  - {label: "Eyebrow", name: "eyebrow", widget: "string", required: false}
+                  - {label: "Title", name: "title", widget: "string"}
+                  - {label: "Intro", name: "intro", widget: "text", required: false}
+                  - {label: "Background Tone", name: "backgroundTone", widget: "string", required: false}
+                  - {label: "Columns", name: "columns", widget: "number", required: false}
+                  - label: "Cards"
+                    name: "cards"
+                    widget: "list"
+                    fields:
+                      - {label: "Title", name: "title", widget: "string"}
+                      - {label: "Body", name: "body", widget: "text"}
+                      - {label: "Href", name: "href", widget: "string"}
+                      - {label: "Link Label", name: "linkLabel", widget: "string", required: false}
+                      - {label: "Tone", name: "tone", widget: "string", required: false}
+                      - {label: "Icon Shape", name: "iconShape", widget: "string", required: false}
+              - label: "Latest Section"
+                name: "latest"
+                widget: "object"
+                fields:
+                  - {label: "Eyebrow", name: "eyebrow", widget: "string", required: false}
+                  - {label: "Title", name: "title", widget: "string"}
+                  - {label: "Intro", name: "intro", widget: "text", required: false}
+                  - {label: "Background Tone", name: "backgroundTone", widget: "string", required: false}
+                  - {label: "Source", name: "source", widget: "string"}
+                  - {label: "Limit", name: "limit", widget: "number"}
+                  - label: "CTA"
+                    name: "cta"
+                    widget: "object"
+                    required: false
+                    fields:
+                      - {label: "Label", name: "label", widget: "string"}
+                      - {label: "Href", name: "href", widget: "string"}
+              - label: "CTA Section"
+                name: "cta"
+                widget: "object"
+                fields:
+                  - {label: "Eyebrow", name: "eyebrow", widget: "string", required: false}
+                  - {label: "Title", name: "title", widget: "string"}
+                  - {label: "Body", name: "body", widget: "text"}
+                  - {label: "Background Tone", name: "backgroundTone", widget: "string", required: false}
+                  - label: "Primary CTA"
+                    name: "primaryCta"
+                    widget: "object"
+                    required: false
+                    fields:
+                      - {label: "Label", name: "label", widget: "string"}
+                      - {label: "Href", name: "href", widget: "string"}
+                  - label: "Secondary CTA"
+                    name: "secondaryCta"
+                    widget: "object"
+                    required: false
+                    fields:
+                      - {label: "Label", name: "label", widget: "string"}
+                      - {label: "Href", name: "href", widget: "string"}
+                  - label: "Image"
+                    name: "image"
+                    widget: "object"
+                    required: false
+                    fields:
+                      - {label: "Image", name: "src", widget: "image"}
+                      - {label: "Alt Text", name: "alt", widget: "string", required: false}
+                      - {label: "Mask Shape", name: "maskShape", widget: "string", required: false}
+                      - {label: "Accent Shape", name: "accentShape", widget: "string", required: false}
+                      - {label: "Frame Tone", name: "frameTone", widget: "string", required: false}
