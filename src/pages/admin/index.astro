@@ -1,0 +1,40 @@
+---
+// We import the site styles so Astro bundles them for this page
+import "../../styles/tokens.css";
+import "../../styles/base.css";
+import "../../styles/components.css";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <link href="/favicon.svg" rel="icon" type="image/svg+xml" />
+    <title>Content Manager</title>
+    <!-- Astro will inject the bundled <link rel="stylesheet"> tags here -->
+  </head>
+  <body>
+    <!-- Include the script that builds the page and powers Decap CMS -->
+    <script is:inline src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+    
+    <script is:inline>
+      // Load Google Fonts into the CMS preview pane
+      CMS.registerPreviewStyle("https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Karla:wght@400;500;700;800&display=swap");
+
+      // Once the page loads, grab all the CSS injected by Astro and pass them into the CMS preview pane
+      window.addEventListener("load", () => {
+        // Register external stylesheets (Production builds)
+        document.querySelectorAll('link[rel="stylesheet"]').forEach(link => {
+          CMS.registerPreviewStyle(link.href);
+        });
+
+        // Register inline styles (Vite/Astro Dev Mode)
+        document.querySelectorAll('style').forEach(style => {
+          CMS.registerPreviewStyle(style.innerHTML, { raw: true });
+        });
+      });
+    </script>
+  </body>
+</html>

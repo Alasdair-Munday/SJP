@@ -9,6 +9,9 @@ backend:
   auth_token_endpoint: /sites/841d76ec-38a1-4f24-94de-f54a42275281/token
   gateway_url: https://gateway.decapbridge.com
 
+publish_mode: editorial_workflow
+show_preview_links: true
+
   # See who did what (optional)
   commit_messages:
     create: Create {{collection}} “{{slug}}” - {{author-name}} <{{author-login}}> via DecapBridge
