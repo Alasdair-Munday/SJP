@@ -11,7 +11,7 @@ interface Props {
 const { section } = Astro.props;
 ---
 
-<section class="content-band" data-tone={section.backgroundTone}>
+<section id={section.id} class="content-band" data-tone={section.backgroundTone}>
   <div class="cta-grid">
     <div class="cta-copy">
       {section.eyebrow && <p class="eyebrow">{section.eyebrow}</p>}

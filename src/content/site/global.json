@@ -36,6 +36,10 @@
       "href": "/contact"
     }
   ],
+  "navCta": {
+    "label": "Give",
+    "href": "/get-involved#giving"
+  },
   "footer": {
     "blurb": "A welcoming Church of England church in Park, Sheffield.",
     "quickLinks": [

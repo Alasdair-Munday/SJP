@@ -51,6 +51,7 @@ const cardSchema = z.object({
 
 const heroSectionSchema = z.object({
   type: z.literal("hero"),
+  id: z.string().optional(),
   eyebrow: z.string().optional(),
   title: z.string(),
   body: z.string(),
@@ -63,6 +64,7 @@ const heroSectionSchema = z.object({
 
 const introSectionSchema = z.object({
   type: z.literal("intro"),
+  id: z.string().optional(),
   eyebrow: z.string().optional(),
   title: z.string(),
   body: z.string(),
@@ -72,6 +74,7 @@ const introSectionSchema = z.object({
 
 const splitSectionSchema = z.object({
   type: z.literal("split"),
+  id: z.string().optional(),
   eyebrow: z.string().optional(),
   title: z.string(),
   body: z.string(),
@@ -84,6 +87,7 @@ const splitSectionSchema = z.object({
 
 const cardsSectionSchema = z.object({
   type: z.literal("cards"),
+  id: z.string().optional(),
   eyebrow: z.string().optional(),
   title: z.string(),
   intro: z.string().optional(),
@@ -94,6 +98,7 @@ const cardsSectionSchema = z.object({
 
 const ctaSectionSchema = z.object({
   type: z.literal("cta"),
+  id: z.string().optional(),
   eyebrow: z.string().optional(),
   title: z.string(),
   body: z.string(),
@@ -105,6 +110,7 @@ const ctaSectionSchema = z.object({
 
 const latestSectionSchema = z.object({
   type: z.literal("latest"),
+  id: z.string().optional(),
   eyebrow: z.string().optional(),
   title: z.string(),
   intro: z.string().optional(),
@@ -116,6 +122,7 @@ const latestSectionSchema = z.object({
 
 const richTextSectionSchema = z.object({
   type: z.literal("richText"),
+  id: z.string().optional(),
   eyebrow: z.string().optional(),
   title: z.string().optional(),
   contentHtml: z.string(),
@@ -165,6 +172,7 @@ const site = defineCollection({
       iconColor: z.string(),
     }),
     navigation: z.array(linkSchema),
+    navCta: linkSchema.optional(),
     footer: z.object({
       blurb: z.string(),
       quickLinks: z.array(linkSchema),

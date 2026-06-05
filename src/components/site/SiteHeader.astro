@@ -59,6 +59,18 @@ const isCurrent = (href: string) => {
             </a>
           ))
         }
+        {
+          site.navCta && (
+            <a
+              class="site-nav__cta"
+              href={site.navCta.href}
+              target={site.navCta.newTab ? "_blank" : undefined}
+              rel={site.navCta.newTab ? "noreferrer" : undefined}
+            >
+              {site.navCta.label}
+            </a>
+          )
+        }
       </nav>
     </div>
   </div>
