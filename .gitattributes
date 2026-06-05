@@ -1,0 +1,10 @@
+public/images/uploads/**/*.jpg filter=lfs diff=lfs merge=lfs -text
+public/images/uploads/**/*.jpeg filter=lfs diff=lfs merge=lfs -text
+public/images/uploads/**/*.png filter=lfs diff=lfs merge=lfs -text
+public/images/uploads/**/*.webp filter=lfs diff=lfs merge=lfs -text
+public/images/uploads/**/*.gif filter=lfs diff=lfs merge=lfs -text
+public/images/profile-photos/**/*.jpg filter=lfs diff=lfs merge=lfs -text
+public/images/profile-photos/**/*.jpeg filter=lfs diff=lfs merge=lfs -text
+public/images/profile-photos/**/*.png filter=lfs diff=lfs merge=lfs -text
+public/images/profile-photos/**/*.webp filter=lfs diff=lfs merge=lfs -text
+public/images/profile-photos/**/*.gif filter=lfs diff=lfs merge=lfs -text

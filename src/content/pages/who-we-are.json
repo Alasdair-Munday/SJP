@@ -57,9 +57,10 @@
           "tag": "Vicar",
           "body": "Luke leads the vision, teaching, pastoral care, and worshipping life of St John's Park.",
           "image": {
-            "src": "/images/uploads/headshot-placeholder.svg",
-            "alt": "Placeholder headshot for Luke Graham",
+            "src": "/images/profile-photos/luke.png",
+            "alt": "Luke Graham",
             "maskShape": "/images/shapes/circle-shape.png",
+            "objectPosition": "50% 38%",
             "frameTone": "park"
           },
           "tone": "stone"
@@ -69,9 +70,10 @@
           "tag": "Curate",
           "body": "Al serves as curate, sharing in worship, teaching, pastoral care, and mission.",
           "image": {
-            "src": "/images/uploads/headshot-placeholder.svg",
-            "alt": "Placeholder headshot for Al",
+            "src": "/images/profile-photos/al.jpg",
+            "alt": "Al",
             "maskShape": "/images/shapes/circle-shape-2.png",
+            "objectPosition": "50% 22%",
             "frameTone": "sky"
           },
           "tone": "stone"
@@ -81,9 +83,10 @@
           "tag": "Curate",
           "body": "Wachira serves as curate, supporting worship, discipleship, pastoral care, and mission.",
           "image": {
-            "src": "/images/uploads/headshot-placeholder.svg",
-            "alt": "Placeholder headshot for Wachira",
+            "src": "/images/profile-photos/wachira.jpeg",
+            "alt": "Wachira",
             "maskShape": "/images/shapes/circle-shape-3.png",
+            "objectPosition": "62% 45%",
             "frameTone": "door"
           },
           "tone": "stone"
@@ -93,8 +96,8 @@
           "tag": "Children and Families Lead",
           "body": "Kirsty helps children and families belong, grow in faith, and take part in church life.",
           "image": {
-            "src": "/images/uploads/headshot-placeholder.svg",
-            "alt": "Placeholder headshot for Kirsty",
+            "src": "/images/profile-photos/kirsty.jpeg",
+            "alt": "Kirsty",
             "maskShape": "/images/shapes/circle-shape-4.png",
             "frameTone": "grass"
           },
@@ -105,9 +108,10 @@
           "tag": "Administrator",
           "body": "Olusola supports the practical administration that helps church life run smoothly.",
           "image": {
-            "src": "/images/uploads/headshot-placeholder.svg",
-            "alt": "Placeholder headshot for Olusola",
+            "src": "/images/profile-photos/olusola.jpeg",
+            "alt": "Olusola",
             "maskShape": "/images/shapes/circle-shape.png",
+            "objectPosition": "50% 30%",
             "frameTone": "pink"
           },
           "tone": "stone"
@@ -123,67 +127,67 @@
       "cards": [
         {
           "title": "Bess",
-          "image": { "src": "/images/uploads/headshot-placeholder.svg", "alt": "Placeholder headshot for Bess", "maskShape": "/images/shapes/circle-shape.png", "frameTone": "grass" },
+          "image": { "src": "/images/profile-photos/bess.jpeg", "alt": "Bess", "maskShape": "/images/shapes/circle-shape.png", "objectPosition": "76% 46%", "frameTone": "grass" },
           "tone": "stone"
         },
         {
           "title": "Jack",
-          "image": { "src": "/images/uploads/headshot-placeholder.svg", "alt": "Placeholder headshot for Jack", "maskShape": "/images/shapes/circle-shape-2.png", "frameTone": "sky" },
+          "image": { "src": "/images/profile-photos/jack.jpeg", "alt": "Jack", "maskShape": "/images/shapes/circle-shape-2.png", "objectPosition": "50% 30%", "frameTone": "sky" },
           "tone": "stone"
         },
         {
           "title": "Comfort",
-          "image": { "src": "/images/uploads/headshot-placeholder.svg", "alt": "Placeholder headshot for Comfort", "maskShape": "/images/shapes/circle-shape-3.png", "frameTone": "pink" },
+          "image": { "src": "/images/profile-photos/comfort.jpeg", "alt": "Comfort", "maskShape": "/images/shapes/circle-shape-3.png", "objectPosition": "43% 45%", "frameTone": "pink" },
           "tone": "stone"
         },
         {
           "title": "Mo",
-          "image": { "src": "/images/uploads/headshot-placeholder.svg", "alt": "Placeholder headshot for Mo", "maskShape": "/images/shapes/circle-shape-4.png", "frameTone": "park" },
+          "image": { "src": "/images/profile-photos/mo.jpeg", "alt": "Mo", "maskShape": "/images/shapes/circle-shape-4.png", "objectPosition": "50% 32%", "frameTone": "park" },
           "tone": "stone"
         },
         {
           "title": "Stephen",
-          "image": { "src": "/images/uploads/headshot-placeholder.svg", "alt": "Placeholder headshot for Stephen", "maskShape": "/images/shapes/circle-shape.png", "frameTone": "door" },
+          "image": { "src": "/images/profile-photos/stephen.jpeg", "alt": "Stephen", "maskShape": "/images/shapes/circle-shape.png", "objectPosition": "50% 28%", "frameTone": "door" },
           "tone": "stone"
         },
         {
           "title": "Sally",
-          "image": { "src": "/images/uploads/headshot-placeholder.svg", "alt": "Placeholder headshot for Sally", "maskShape": "/images/shapes/circle-shape-2.png", "frameTone": "grass" },
+          "image": { "src": "/images/profile-photos/sally.jpeg", "alt": "Sally", "maskShape": "/images/shapes/circle-shape-2.png", "objectPosition": "50% 24%", "frameTone": "grass" },
           "tone": "stone"
         },
         {
           "title": "Margie",
-          "image": { "src": "/images/uploads/headshot-placeholder.svg", "alt": "Placeholder headshot for Margie", "maskShape": "/images/shapes/circle-shape-3.png", "frameTone": "sky" },
+          "image": { "src": "/images/profile-photos/margie.jpeg", "alt": "Margie", "maskShape": "/images/shapes/circle-shape-3.png", "frameTone": "sky" },
           "tone": "stone"
         },
         {
           "title": "Marge",
-          "image": { "src": "/images/uploads/headshot-placeholder.svg", "alt": "Placeholder headshot for Marge", "maskShape": "/images/shapes/circle-shape-4.png", "frameTone": "pink" },
+          "image": { "src": "/images/profile-photos/marge.jpeg", "alt": "Marge", "maskShape": "/images/shapes/circle-shape-4.png", "objectPosition": "50% 28%", "frameTone": "pink" },
           "tone": "stone"
         },
         {
           "title": "Tim",
-          "image": { "src": "/images/uploads/headshot-placeholder.svg", "alt": "Placeholder headshot for Tim", "maskShape": "/images/shapes/circle-shape.png", "frameTone": "park" },
+          "image": { "src": "/images/profile-photos/tim.png", "alt": "Tim", "maskShape": "/images/shapes/circle-shape.png", "objectPosition": "43% 24%", "frameTone": "park" },
           "tone": "stone"
         },
         {
           "title": "Lucy",
-          "image": { "src": "/images/uploads/headshot-placeholder.svg", "alt": "Placeholder headshot for Lucy", "maskShape": "/images/shapes/circle-shape-2.png", "frameTone": "door" },
+          "image": { "src": "/images/profile-photos/lucy.jpeg", "alt": "Lucy", "maskShape": "/images/shapes/circle-shape-2.png", "objectPosition": "50% 31%", "frameTone": "door" },
           "tone": "stone"
         },
         {
           "title": "Esther",
-          "image": { "src": "/images/uploads/headshot-placeholder.svg", "alt": "Placeholder headshot for Esther", "maskShape": "/images/shapes/circle-shape-3.png", "frameTone": "grass" },
+          "image": { "src": "/images/profile-photos/esther.png", "alt": "Esther", "maskShape": "/images/shapes/circle-shape-3.png", "frameTone": "grass" },
           "tone": "stone"
         },
         {
           "title": "Scott",
-          "image": { "src": "/images/uploads/headshot-placeholder.svg", "alt": "Placeholder headshot for Scott", "maskShape": "/images/shapes/circle-shape-4.png", "frameTone": "sky" },
+          "image": { "src": "/images/profile-photos/scott.jpeg", "alt": "Scott", "maskShape": "/images/shapes/circle-shape-4.png", "frameTone": "sky" },
           "tone": "stone"
         },
         {
           "title": "Rebecca",
-          "image": { "src": "/images/uploads/headshot-placeholder.svg", "alt": "Placeholder headshot for Rebecca", "maskShape": "/images/shapes/circle-shape.png", "frameTone": "pink" },
+          "image": { "src": "/images/profile-photos/rebecca-dsa.png", "alt": "Rebecca", "maskShape": "/images/shapes/circle-shape.png", "objectPosition": "55% 25%", "frameTone": "pink" },
           "tone": "stone"
         }
       ]
@@ -207,21 +211,21 @@
           "title": "Claire",
           "tag": "Safeguarding Lead",
           "body": "Claire helps us care well for children, young people, and vulnerable adults.",
-          "image": { "src": "/images/uploads/headshot-placeholder.svg", "alt": "Placeholder headshot for Claire", "maskShape": "/images/shapes/circle-shape-2.png", "frameTone": "pink" },
+          "image": { "src": "/images/profile-photos/claire-smith.jpg", "alt": "Claire", "maskShape": "/images/shapes/circle-shape-2.png", "objectPosition": "45% 24%", "frameTone": "pink" },
           "tone": "stone"
         },
         {
           "title": "Hannah",
           "tag": "Social Action Lead",
           "body": "Hannah helps coordinate practical care and social action in our local community.",
-          "image": { "src": "/images/uploads/headshot-placeholder.svg", "alt": "Placeholder headshot for Hannah", "maskShape": "/images/shapes/circle-shape-3.png", "frameTone": "sky" },
+          "image": { "src": "/images/profile-photos/hannah.png", "alt": "Hannah", "maskShape": "/images/shapes/circle-shape-3.png", "frameTone": "sky" },
           "tone": "stone"
         },
         {
           "title": "Comfort M",
           "tag": "Treasurer",
           "body": "Comfort M helps steward church finances with care, clarity, and accountability.",
-          "image": { "src": "/images/uploads/headshot-placeholder.svg", "alt": "Placeholder headshot for Comfort M", "maskShape": "/images/shapes/circle-shape-4.png", "frameTone": "grass" },
+          "image": { "src": "/images/profile-photos/comfort.jpeg", "alt": "Comfort M", "maskShape": "/images/shapes/circle-shape-4.png", "objectPosition": "43% 45%", "frameTone": "grass" },
           "tone": "stone"
         }
       ]
