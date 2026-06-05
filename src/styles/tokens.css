@@ -42,7 +42,10 @@
   --shape-square-slope: url("/images/shapes/square-slope-shape.png");
   --shape-window: url("/images/shapes/tall-church-window.png");
   --shape-circle: url("/images/shapes/circle-shape-4.png");
+  --shape-concentric-circles: url("/images/shapes/concentric-circles.png");
   --shape-firework: url("/images/shapes/firework.png");
+  --shape-heart: url("/images/shapes/heart-shape.png");
   --shape-loop: url("/images/shapes/loop-thick.png");
+  --shape-star: url("/images/shapes/star-brushstroke.png");
   --shape-thick-brush: url("/images/shapes/thick-brushstroke.png");
 }

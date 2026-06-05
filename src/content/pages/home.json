@@ -93,21 +93,24 @@
           "body": "Find friendship, prayer, and steady growth in faith through Sundays, children and youth ministry, and midweek community life.",
           "href": "/visit",
           "linkLabel": "Start with a visit",
-          "tone": "park"
+          "tone": "pink",
+          "iconShape": "/images/shapes/concentric-circles.png"
         },
         {
           "title": "Serve",
           "body": "Join teams that help us welcome people well, care for our building, support local families, and serve our city.",
           "href": "/get-involved",
           "linkLabel": "Explore ways to join in",
-          "tone": "door"
+          "tone": "door",
+          "iconShape": "/images/shapes/heart-shape.png"
         },
         {
           "title": "Give",
           "body": "Support the ministry and future of St John's Park through prayer, practical help, and financial generosity.",
           "href": "/get-involved",
           "linkLabel": "See giving details",
-          "tone": "pink"
+          "tone": "give",
+          "iconShape": "/images/shapes/star-brushstroke.png"
         }
       ]
     },

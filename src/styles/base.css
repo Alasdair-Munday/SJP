@@ -326,12 +326,22 @@ main {
 }
 
 [data-tone="pink"] {
-  --surface: var(--color-pink);
+  --surface: var(--color-pastel);
   --surface-ink: var(--color-text);
   --surface-card: rgba(255, 253, 248, 0.7);
   --surface-card-border: rgba(4, 50, 27, 0.12);
   --surface-accent: var(--color-daffodil);
   --section-shape-color: color-mix(in srgb, var(--surface) 88%, black);
+}
+
+[data-tone="give"] {
+  --surface: var(--color-stone);
+  --surface-ink: var(--color-text);
+  --surface-card: rgba(255, 253, 248, 0.72);
+  --surface-card-border: rgba(4, 50, 27, 0.16);
+  --surface-accent: var(--color-parking-line);
+  --section-shape-color: color-mix(in srgb, var(--color-parking-line) 78%, var(--color-text));
+  --section-shape: var(--shape-star);
 }
 
 [data-tone="sky"] {

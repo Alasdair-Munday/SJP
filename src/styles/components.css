@@ -63,9 +63,9 @@
 }
 
 .site-nav__cta {
-  background: var(--color-door);
-  color: var(--color-white);
-  box-shadow: 0 0.45rem 1rem rgba(150, 59, 42, 0.16);
+  background: var(--color-parking-line);
+  color: var(--color-text);
+  box-shadow: 0 0.45rem 1rem rgba(4, 50, 27, 0.08);
 }
 
 .site-nav__toggle {
@@ -226,7 +226,7 @@
   inset: var(--accent-inset, 6% 5% auto auto);
   width: var(--accent-size, clamp(3.5rem, 30%, 8.5rem));
   aspect-ratio: 1;
-  background: var(--surface-accent, var(--color-daffodil));
+  background: var(--media-accent, var(--surface-accent, var(--color-daffodil)));
   mask-image: var(--accent-shape);
   -webkit-mask-image: var(--accent-shape);
   mask-size: contain;
@@ -303,7 +303,7 @@
 }
 
 [data-frame-tone="pink"] {
-  --frame-background: rgba(211, 138, 177, 0.26);
+  --frame-background: rgba(232, 220, 232, 0.4);
 }
 
 [data-frame-tone="sky"] {
@@ -318,8 +318,48 @@
   --frame-background: rgba(128, 82, 57, 0.26);
 }
 
+[data-frame-tone="give"] {
+  --frame-background: rgba(234, 225, 207, 0.42);
+}
+
 [data-frame-tone="grass"] {
   --frame-background: rgba(138, 172, 58, 0.24);
+}
+
+[data-accent-tone="park"] {
+  --media-accent: var(--color-park-green);
+}
+
+[data-accent-tone="park-dark"] {
+  --media-accent: var(--color-text);
+}
+
+[data-accent-tone="stone"] {
+  --media-accent: var(--color-stone);
+}
+
+[data-accent-tone="pink"] {
+  --media-accent: var(--color-pink);
+}
+
+[data-accent-tone="sky"] {
+  --media-accent: var(--color-sky);
+}
+
+[data-accent-tone="door"] {
+  --media-accent: var(--color-door);
+}
+
+[data-accent-tone="roof"] {
+  --media-accent: var(--color-roof-panel);
+}
+
+[data-accent-tone="grass"] {
+  --media-accent: var(--color-grass);
+}
+
+[data-accent-tone="give"] {
+  --media-accent: var(--color-parking-line);
 }
 
 .cards-grid,
@@ -349,15 +389,69 @@
 .news-card,
 .talk-card,
 .post-detail {
+  --card-accent: color-mix(in srgb, currentColor 22%, transparent);
+  --card-rule-color: color-mix(in srgb, currentColor 18%, transparent);
   display: grid;
   position: relative;
   gap: 0.8rem;
   align-content: start;
   padding: clamp(0.9rem, 1.8vw, 1.4rem) 0 0;
-  border-top: 2px solid color-mix(in srgb, currentColor 18%, transparent);
+  border-top: 2px solid var(--card-rule-color);
   background: transparent;
   color: inherit;
 }
+
+.info-card[data-card-tone] {
+  --card-rule-color: color-mix(in srgb, var(--card-accent) 64%, transparent);
+}
+
+.info-card[data-card-tone="park"] {
+  --card-accent: var(--color-park-green);
+}
+
+.info-card[data-card-tone="park-dark"] {
+  --card-accent: var(--color-text);
+}
+
+.info-card[data-card-tone="stone"] {
+  --card-accent: var(--color-stone);
+}
+
+.info-card[data-card-tone="pink"] {
+  --card-accent: var(--color-pink);
+}
+
+.info-card[data-card-tone="sky"] {
+  --card-accent: var(--color-sky);
+}
+
+.info-card[data-card-tone="door"] {
+  --card-accent: var(--color-door);
+}
+
+.info-card[data-card-tone="roof"] {
+  --card-accent: var(--color-roof-panel);
+}
+
+.info-card[data-card-tone="grass"] {
+  --card-accent: var(--color-grass);
+}
+
+.info-card[data-card-tone="give"] {
+  --card-accent: var(--color-parking-line);
+}
+
+[data-tone="park-dark"] .info-card[data-card-tone="door"],
+[data-tone="door"] .info-card[data-card-tone="door"],
+[data-tone="roof"] .info-card[data-card-tone="door"] {
+  --card-accent: var(--color-sky);
+}
+
+[data-tone="pink"] .info-card[data-card-tone="pink"] {
+  --card-accent: color-mix(in srgb, var(--color-pink) 62%, var(--color-text));
+}
+
+
 
 .meta-chip,
 .filter-pill {
@@ -380,8 +474,17 @@
   content: "";
   width: clamp(2.4rem, 5vw, 4.2rem);
   aspect-ratio: 1.35;
-  background: color-mix(in srgb, currentColor 16%, transparent);
+  background: var(--card-accent, color-mix(in srgb, currentColor 16%, transparent));
   mask: var(--shape-rectangle-cut) center / contain no-repeat;
+}
+
+.info-card__icon {
+  display: block;
+  width: clamp(3.4rem, 6vw, 5.3rem);
+  aspect-ratio: 1;
+  background: var(--card-accent, currentColor);
+  mask: var(--card-icon-shape) center / contain no-repeat;
+  -webkit-mask: var(--card-icon-shape) center / contain no-repeat;
 }
 
 .info-card[data-has-image="true"] {
@@ -390,6 +493,7 @@
 }
 
 .info-card[data-has-image="true"]::before,
+.info-card[data-has-icon="true"]::before,
 .news-card:has(.news-card__media)::before {
   display: none;
 }

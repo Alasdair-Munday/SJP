@@ -10,6 +10,7 @@ const toneSchema = z.enum([
   "grass",
   "door",
   "roof",
+  "give",
 ]);
 
 const linkSchema = z.object({
@@ -23,6 +24,7 @@ const imageSchema = z.object({
   alt: z.string(),
   maskShape: z.string().optional(),
   accentShape: z.string().optional(),
+  accentTone: toneSchema.optional(),
   wordArtShape: z.string().optional(),
   objectPosition: z.string().optional(),
   frameTone: toneSchema.optional(),
@@ -45,6 +47,7 @@ const cardSchema = z.object({
   linkLabel: z.string().optional(),
   tag: z.string().optional(),
   tone: toneSchema.optional(),
+  iconShape: z.string().optional(),
   image: imageSchema.optional(),
   featured: z.boolean().optional(),
 });
