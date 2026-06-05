@@ -127,11 +127,13 @@
       "cards": [
         {
           "title": "Bess",
+          "tag": "Churchwarden",
           "image": { "src": "/images/profile-photos/bess.jpeg", "alt": "Bess", "maskShape": "/images/shapes/circle-shape.png", "objectPosition": "76% 46%", "frameTone": "grass" },
           "tone": "stone"
         },
         {
           "title": "Jack",
+          "tag": "Churchwarden",
           "image": { "src": "/images/profile-photos/jack.jpeg", "alt": "Jack", "maskShape": "/images/shapes/circle-shape-2.png", "objectPosition": "50% 30%", "frameTone": "sky" },
           "tone": "stone"
         },
@@ -161,8 +163,8 @@
           "tone": "stone"
         },
         {
-          "title": "Marge",
-          "image": { "src": "/images/profile-photos/marge.jpeg", "alt": "Marge", "maskShape": "/images/shapes/circle-shape-4.png", "objectPosition": "50% 28%", "frameTone": "pink" },
+          "title": "Mags",
+          "image": { "src": "/images/profile-photos/marge.jpeg", "alt": "Mags", "maskShape": "/images/shapes/circle-shape-4.png", "objectPosition": "50% 28%", "frameTone": "pink" },
           "tone": "stone"
         },
         {
@@ -204,7 +206,7 @@
           "title": "Sophie",
           "tag": "Welcome Lead",
           "body": "Sophie helps shape a warm welcome for people arriving and settling into church life.",
-          "image": { "src": "/images/uploads/headshot-placeholder.svg", "alt": "Placeholder headshot for Sophie", "maskShape": "/images/shapes/circle-shape.png", "frameTone": "park" },
+          "image": { "src": "/images/profile-photos/sophie.jpeg", "alt": "Sophie", "maskShape": "/images/shapes/circle-shape.png", "objectPosition": "54% 38%", "frameTone": "park" },
           "tone": "stone"
         },
         {

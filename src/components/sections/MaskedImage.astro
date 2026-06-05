@@ -23,11 +23,38 @@ const galleryImages = [
   })),
 ];
 const hasGallery = galleryImages.length > 1;
+const maskShape = image.maskShape ?? "/images/shapes/curved-square-shape.png";
+const maskName = maskShape.split("/").pop()?.replace(/\.[^.]+$/, "");
 const accentCorners = ["top-right", "bottom-left", "top-left", "bottom-right"] as const;
 const accentCorner =
   accentCorners[
     [...image.src].reduce((total, character) => total + character.charCodeAt(0), 0) %
       accentCorners.length
+  ];
+const oppositeCorners = {
+  "top-right": "bottom-left",
+  "bottom-left": "top-right",
+  "top-left": "bottom-right",
+  "bottom-right": "top-left",
+} as const;
+const backdropShapes = [
+  "/images/shapes/rectangle-cut-corner.png",
+  "/images/shapes/church-hall-roof.png",
+  "/images/shapes/square-slope-shape.png",
+  "/images/shapes/three-columns-shape.png",
+  "/images/shapes/church-hall-shape-2.png",
+  "/images/shapes/church-windows-shape.png",
+  "/images/shapes/curved-square-shape.png",
+  "/images/shapes/rectangle-2.png",
+  "/images/shapes/tall-church-window.png",
+  "/images/shapes/triangle-shape.png",
+  "/images/shapes/long-square-line.png",
+  "/images/shapes/three-sticks-shape.png",
+] as const;
+const backdropShape =
+  backdropShapes[
+    [...image.src].reduce((total, character) => total + character.charCodeAt(0), 0) %
+      backdropShapes.length
   ];
 ---
 
@@ -35,11 +62,17 @@ const accentCorner =
   class:list={["masked-media", className]}
   data-frame-tone={image.frameTone ?? "stone"}
   data-accent-corner={accentCorner}
+  data-backdrop-corner={oppositeCorners[accentCorner]}
 >
+  <span
+    class="masked-media__backdrop"
+    style={`--backdrop-shape: url('${backdropShape}');`}
+  ></span>
   <div
     class="masked-media__shape"
     data-gallery={hasGallery ? "true" : undefined}
-    style={`--mask-shape: url('${image.maskShape ?? "/images/shapes/curved-square-shape.png"}');`}
+    data-mask={maskName}
+    style={`--mask-shape: url('${maskShape}');`}
   >
     {
       galleryImages.map((galleryImage, index) => (

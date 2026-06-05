@@ -20,8 +20,8 @@ const { section } = Astro.props;
       section.cards.map((card) => (
         <article class="info-card" data-card-tone={card.tone} data-has-image={Boolean(card.image)}>
           {card.image && <MaskedImage image={card.image} class="news-card__media" />}
-          {card.tag && <span class="info-card__tag">{card.tag}</span>}
           <h3 class="card-title">{card.title}</h3>
+          {card.tag && <span class="info-card__tag">{card.tag}</span>}
           {card.body && <p class="info-card__body">{card.body}</p>}
           {
             card.href && card.linkLabel && (
