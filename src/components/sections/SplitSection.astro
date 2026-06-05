@@ -11,7 +11,7 @@ interface Props {
 const { section } = Astro.props;
 ---
 
-<section class="content-band" data-tone={section.backgroundTone}>
+<section id={section.id} class="content-band" data-tone={section.backgroundTone}>
   <div class="split-grid" style={section.reverse ? "direction: rtl;" : undefined}>
     <div class="split-copy" style={section.reverse ? "direction: ltr;" : undefined}>
       {section.eyebrow && <p class="eyebrow">{section.eyebrow}</p>}

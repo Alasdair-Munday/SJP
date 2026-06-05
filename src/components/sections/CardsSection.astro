@@ -11,7 +11,7 @@ interface Props {
 const { section } = Astro.props;
 ---
 
-<section class="content-band" data-tone={section.backgroundTone}>
+<section id={section.id} class="content-band" data-tone={section.backgroundTone}>
   {section.eyebrow && <p class="eyebrow">{section.eyebrow}</p>}
   <h2 class="section-title">{section.title}</h2>
   {section.intro && <p class="lede">{section.intro}</p>}

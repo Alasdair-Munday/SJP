@@ -48,7 +48,8 @@
   gap: 0.2rem;
 }
 
-.site-nav__link {
+.site-nav__link,
+.site-nav__cta {
   padding: 0.7rem 0.9rem;
   border-radius: 999px;
   text-decoration: none;
@@ -59,6 +60,12 @@
 .site-nav__link[aria-current="page"] {
   background: var(--color-text);
   color: var(--color-white);
+}
+
+.site-nav__cta {
+  background: var(--color-door);
+  color: var(--color-white);
+  box-shadow: 0 0.45rem 1rem rgba(150, 59, 42, 0.16);
 }
 
 .site-nav__toggle {
