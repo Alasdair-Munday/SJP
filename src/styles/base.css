@@ -214,6 +214,61 @@ main {
   );
 }
 
+.page-stack > .content-band:first-child {
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% calc(100% - var(--torn-depth) * 0.52),
+    91% calc(100% - var(--torn-depth) * 0.18),
+    82% calc(100% - var(--torn-depth) * 0.72),
+    70% calc(100% - var(--torn-depth) * 0.28),
+    58% calc(100% - var(--torn-depth) * 0.64),
+    46% calc(100% - var(--torn-depth) * 0.22),
+    34% calc(100% - var(--torn-depth) * 0.8),
+    22% calc(100% - var(--torn-depth) * 0.34),
+    10% calc(100% - var(--torn-depth) * 0.68),
+    0 calc(100% - var(--torn-depth) * 0.24)
+  );
+}
+
+.page-stack > .content-band:last-child {
+  clip-path: polygon(
+    0 var(--torn-depth),
+    7% calc(var(--torn-depth) * 0.28),
+    16% calc(var(--torn-depth) * 0.7),
+    27% calc(var(--torn-depth) * 0.18),
+    39% calc(var(--torn-depth) * 0.62),
+    52% calc(var(--torn-depth) * 0.25),
+    64% calc(var(--torn-depth) * 0.78),
+    77% calc(var(--torn-depth) * 0.32),
+    89% calc(var(--torn-depth) * 0.68),
+    100% calc(var(--torn-depth) * 0.25),
+    100% 100%,
+    0 100%
+  );
+}
+
+.page-stack > .content-band:nth-child(even):last-child {
+  clip-path: polygon(
+    0 calc(var(--torn-depth) * 0.28),
+    9% calc(var(--torn-depth) * 0.7),
+    19% calc(var(--torn-depth) * 0.24),
+    31% calc(var(--torn-depth) * 0.78),
+    44% calc(var(--torn-depth) * 0.3),
+    55% calc(var(--torn-depth) * 0.68),
+    67% calc(var(--torn-depth) * 0.22),
+    80% calc(var(--torn-depth) * 0.74),
+    92% calc(var(--torn-depth) * 0.28),
+    100% calc(var(--torn-depth) * 0.64),
+    100% 100%,
+    0 100%
+  );
+}
+
+.page-stack > .content-band:only-child {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+
 .content-band > * {
   position: relative;
   z-index: 1;
