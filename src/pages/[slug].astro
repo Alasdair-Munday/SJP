@@ -1,0 +1,27 @@
+---
+import PageRoute from "../components/PageRoute.astro";
+import StandardPageTemplate from "../components/templates/StandardPageTemplate.astro";
+import UtilityPageTemplate from "../components/templates/UtilityPageTemplate.astro";
+import { getMappedPageRoute, mappedPageRoutes, type PageTemplateKey } from "../lib/pageRoutes";
+
+export function getStaticPaths() {
+  return mappedPageRoutes.map((route) => ({
+    params: { slug: route.slug },
+  }));
+}
+
+const templateByKey: Record<PageTemplateKey, any> = {
+  standard: StandardPageTemplate,
+  utility: UtilityPageTemplate,
+};
+
+const route = getMappedPageRoute(Astro.params.slug ?? "");
+
+if (!route) {
+  throw new Error(`Missing mapped page route for slug: ${Astro.params.slug}.`);
+}
+
+const Template = templateByKey[route.template];
+---
+
+<PageRoute pageId={route.pageId} Template={Template} />

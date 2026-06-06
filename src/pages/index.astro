@@ -1,11 +1,5 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
-import HomeTemplate from "../components/templates/HomeTemplate.astro";
-import { getPageContent } from "../lib/content";
-
-const page = await getPageContent("home");
+import PageRoute from "../components/PageRoute.astro";
 ---
 
-<BaseLayout title={page.title} description={page.metaDescription}>
-  <HomeTemplate page={page} />
-</BaseLayout>
+<PageRoute pageId="home" />
