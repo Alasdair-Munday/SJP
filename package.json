@@ -19,5 +19,10 @@
   },
   "devDependencies": {
     "vite": "^6.3.5"
+  },
+  "dependenciesMeta": {
+    "@netlify/edge-functions-dev@1.0.20": {
+      "unplugged": true
+    }
   }
 }

@@ -1,0 +1,17 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import StandardPageTemplate from "./templates/StandardPageTemplate.astro";
+import { getPageContent } from "../lib/content";
+
+interface Props {
+  pageId: string;
+  Template?: any;
+}
+
+const { pageId, Template = StandardPageTemplate } = Astro.props;
+const page = await getPageContent(pageId);
+---
+
+<BaseLayout title={page.title} description={page.metaDescription}>
+  <Template page={page} />
+</BaseLayout>

@@ -3,7 +3,7 @@ import type { CollectionEntry } from "astro:content";
 import SectionRenderer from "../sections/SectionRenderer.astro";
 import MaskedImage from "../sections/MaskedImage.astro";
 import { formatDate, formatShortDate } from "../../lib/format";
-import { getAllPosts } from "../../lib/content";
+import { getAllPosts, withRectangleImageMask } from "../../lib/content";
 
 type PageData = CollectionEntry<"pages">["data"];
 
@@ -40,7 +40,10 @@ const categoryLabels = {
       {
         posts.map((post) => (
           <article class="news-card" data-news-card data-category={post.data.category}>
-            <MaskedImage image={post.data.featuredImage} class="news-card__media" />
+            <MaskedImage
+              image={withRectangleImageMask(post.data.featuredImage)}
+              class="news-card__media news-card__media--article"
+            />
             <div class="news-card__meta">
               <span class="meta-chip">{categoryLabels[post.data.category]}</span>
               <span>{formatShortDate(post.data.publishDate)}</span>

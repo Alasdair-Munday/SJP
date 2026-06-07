@@ -8448,6 +8448,9 @@ __metadata:
     ical.js: "npm:^2.2.1"
     typescript: "npm:^5.9.3"
     vite: "npm:^6.3.5"
+  dependenciesMeta:
+    "@netlify/edge-functions-dev@1.0.20":
+      unplugged: true
   languageName: unknown
   linkType: soft
 

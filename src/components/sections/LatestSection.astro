@@ -1,8 +1,13 @@
 ---
 import type { CollectionEntry } from "astro:content";
-import { getLatestPosts, getSiteConfig } from "../../lib/content";
+import {
+  getLatestPosts,
+  getSiteConfig,
+  withRectangleImageMask,
+} from "../../lib/content";
 import { formatDate, formatShortDate, formatTalkDuration } from "../../lib/format";
 import { getTalks } from "../../lib/talks";
+import MaskedImage from "./MaskedImage.astro";
 
 type PageSection = CollectionEntry<"pages">["data"]["sections"][number];
 
@@ -15,6 +20,12 @@ const site = await getSiteConfig();
 
 const posts = section.source === "posts" ? await getLatestPosts(section.limit) : [];
 const talks = section.source === "talks" ? (await getTalks()).slice(0, section.limit) : [];
+
+const categoryLabels = {
+  event: "Events",
+  update: "Updates",
+  blog: "Blog",
+};
 ---
 
 <section id={section.id} class="content-band" data-tone={section.backgroundTone}>
@@ -24,19 +35,56 @@ const talks = section.source === "talks" ? (await getTalks()).slice(0, section.l
 
   {
     section.source === "posts" ? (
-      <div class="latest-list">
-        {posts.map((post) => (
-          <article class="news-card">
-            <div class="news-card__meta">
-              <span class="meta-chip">{post.data.category}</span>
-              <span>{formatShortDate(post.data.publishDate)}</span>
-              {post.data.eventDate && <span>{formatDate(post.data.eventDate)}</span>}
+      <div class="latest-carousel" data-news-carousel aria-roledescription="carousel" aria-label={section.title}>
+        <div class="latest-carousel__viewport" data-news-carousel-viewport tabindex="0">
+          <div class="latest-carousel__track">
+            {posts.map((post, index) => (
+              <article
+                class="news-card latest-news-card"
+                data-news-carousel-slide
+                aria-label={`News story ${index + 1} of ${posts.length}`}
+              >
+                <MaskedImage
+                  image={withRectangleImageMask(post.data.featuredImage)}
+                  class="news-card__media news-card__media--article latest-news-card__media"
+                />
+                <div class="latest-news-card__content">
+                  <div class="news-card__meta">
+                    <span class="meta-chip">{categoryLabels[post.data.category]}</span>
+                    <span>{formatShortDate(post.data.publishDate)}</span>
+                    {post.data.eventDate && <span>{formatDate(post.data.eventDate)}</span>}
+                  </div>
+                  <h3 class="post-title">
+                    <a class="news-card__link" href={`/news/${post.slug}`}>{post.data.title}</a>
+                  </h3>
+                  <p class="news-card__summary">{post.data.summary}</p>
+                  {
+                    post.data.category === "event" && (
+                      <div class="news-card__meta">
+                        {post.data.timeText && <span>{post.data.timeText}</span>}
+                        {post.data.location && <span>{post.data.location}</span>}
+                      </div>
+                    )
+                  }
+                  <a class="inline-link" href={`/news/${post.slug}`}>Read more</a>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+        {
+          posts.length > 1 && (
+            <div class="latest-carousel__controls" aria-label="News carousel controls">
+              <button class="carousel-button" type="button" data-news-carousel-prev aria-label="Previous news story">
+                &larr;
+              </button>
+              <span class="latest-carousel__count">{posts.length} stories</span>
+              <button class="carousel-button" type="button" data-news-carousel-next aria-label="Next news story">
+                &rarr;
+              </button>
             </div>
-            <h3 class="post-title">{post.data.title}</h3>
-            <p class="news-card__summary">{post.data.summary}</p>
-            <a class="inline-link" href={`/news/${post.slug}`}>Read more</a>
-          </article>
-        ))}
+          )
+        }
       </div>
     ) : (
       <div class="latest-list">
@@ -73,3 +121,73 @@ const talks = section.source === "talks" ? (await getTalks()).slice(0, section.l
     }
   </div>
 </section>
+
+{
+  section.source === "posts" && posts.length > 1 && (
+    <script is:inline>
+      (() => {
+        const carousels = Array.from(document.querySelectorAll("[data-news-carousel]"));
+
+        carousels.forEach((carousel) => {
+          if (carousel.dataset.carouselReady === "true") return;
+          carousel.dataset.carouselReady = "true";
+
+          const viewport = carousel.querySelector("[data-news-carousel-viewport]");
+          const slides = Array.from(carousel.querySelectorAll("[data-news-carousel-slide]"));
+          const previousButton = carousel.querySelector("[data-news-carousel-prev]");
+          const nextButton = carousel.querySelector("[data-news-carousel-next]");
+
+          if (!viewport || slides.length < 2 || !previousButton || !nextButton) return;
+
+          const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+          const getActiveIndex = () => {
+            const scrollLeft = viewport.scrollLeft;
+
+            return slides.reduce(
+              (closest, slide, index) => {
+                const distance = Math.abs(slide.offsetLeft - scrollLeft);
+                return distance < closest.distance ? { index, distance } : closest;
+              },
+              { index: 0, distance: Number.POSITIVE_INFINITY },
+            ).index;
+          };
+
+          const scrollToSlide = (index) => {
+            slides[index]?.scrollIntoView({
+              behavior: prefersReducedMotion.matches ? "auto" : "smooth",
+              block: "nearest",
+              inline: "start",
+            });
+          };
+
+          const syncControls = () => {
+            const atStart = viewport.scrollLeft <= 2;
+            const atEnd = viewport.scrollLeft + viewport.clientWidth >= viewport.scrollWidth - 2;
+
+            previousButton.disabled = atStart;
+            nextButton.disabled = atEnd;
+          };
+
+          let animationFrame = 0;
+          const requestSync = () => {
+            window.cancelAnimationFrame(animationFrame);
+            animationFrame = window.requestAnimationFrame(syncControls);
+          };
+
+          previousButton.addEventListener("click", () => {
+            scrollToSlide(Math.max(0, getActiveIndex() - 1));
+          });
+
+          nextButton.addEventListener("click", () => {
+            scrollToSlide(Math.min(slides.length - 1, getActiveIndex() + 1));
+          });
+
+          viewport.addEventListener("scroll", requestSync, { passive: true });
+          window.addEventListener("resize", requestSync);
+          syncControls();
+        });
+      })();
+    </script>
+  )
+}

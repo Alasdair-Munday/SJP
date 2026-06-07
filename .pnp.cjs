@@ -1571,7 +1571,7 @@ const RAW_RUNTIME_STATE =
     ]],\
     ["@netlify/edge-functions-dev", [\
       ["npm:1.0.20", {\
-        "packageLocation": "../.yarn/berry/cache/@netlify-edge-functions-dev-npm-1.0.20-d1aab7a9f3-10c0.zip/node_modules/@netlify/edge-functions-dev/",\
+        "packageLocation": "./.yarn/unplugged/@netlify-edge-functions-dev-npm-1.0.20-d1aab7a9f3/node_modules/@netlify/edge-functions-dev/",\
         "packageDependencies": [\
           ["@netlify/dev-utils", "npm:4.4.6"],\
           ["@netlify/edge-bundler", "npm:14.10.3"],\
