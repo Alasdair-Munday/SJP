@@ -23,7 +23,6 @@ const isPostDetailMedia = className?.includes("post-detail__media");
 
 const getOptimizedImageUrl = (src: string, width: number, height: number) =>
   `/.netlify/images?url=${encodeURIComponent(src)}&w=${width}&h=${height}&q=${imageQuality}`;
-
 const getOptimizedSrcset = (src: string, heightRatio: number) =>
   imageWidths
     .map((width) => `${getOptimizedImageUrl(src, width, Math.round(width * heightRatio))} ${width}w`)
@@ -42,7 +41,6 @@ const intrinsicDimensions = isNewsCardMedia
   : priority
     ? { width: 1600, height: 1720 }
     : { width: 1440, height: 1548 };
-
 const heightRatio = intrinsicDimensions.height / intrinsicDimensions.width;
 const galleryImages = [
   {
@@ -201,7 +199,6 @@ const backdropShape =
           slide.srcset = slide.dataset.srcset;
           slide.removeAttribute("data-srcset");
         }
-
         if (slide.dataset.src && !slide.currentSrc) {
           slide.src = slide.dataset.src;
           slide.removeAttribute("data-src");
