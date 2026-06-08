@@ -9,22 +9,28 @@ import LatestSection from "./LatestSection.astro";
 import RichTextSection from "./RichTextSection.astro";
 
 type PageSection = CollectionEntry<"pages">["data"]["sections"][number];
+type SectionComponent = (_props: { section: PageSection }) => unknown;
 
 interface Props {
   sections: PageSection[];
 }
 
-const { sections } = Astro.props;
+const { sections } = Astro.props as Props;
+
+const sectionComponents = {
+  hero: HeroSection as SectionComponent,
+  intro: IntroSection as SectionComponent,
+  split: SplitSection as SectionComponent,
+  cards: CardsSection as SectionComponent,
+  cta: CallToActionSection as SectionComponent,
+  latest: LatestSection as SectionComponent,
+  richText: RichTextSection as SectionComponent,
+} satisfies Record<PageSection["type"], SectionComponent>;
 ---
 
 {
   sections.map((section) => {
-    if (section.type === "hero") return <HeroSection section={section} />;
-    if (section.type === "intro") return <IntroSection section={section} />;
-    if (section.type === "split") return <SplitSection section={section} />;
-    if (section.type === "cards") return <CardsSection section={section} />;
-    if (section.type === "cta") return <CallToActionSection section={section} />;
-    if (section.type === "latest") return <LatestSection section={section} />;
-    return <RichTextSection section={section} />;
+    const SectionComponent = sectionComponents[section.type];
+    return <SectionComponent section={section} />;
   })
 }

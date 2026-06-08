@@ -34,7 +34,15 @@ const pageDescription = description ?? site.metaDescription;
     <link
       href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Karla:wght@400;500;700;800&display=swap"
       rel="stylesheet"
+      media="print"
+      onload="this.setAttribute('media', 'all')"
     />
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Karla:wght@400;500;700;800&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
     <title>{pageTitle}</title>
   </head>
   <body>

@@ -1,7 +1,11 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import MaskedImage from "../../components/sections/MaskedImage.astro";
-import { getAllPosts, type PostEntry } from "../../lib/content";
+import {
+  getAllPosts,
+  withRectangleImageMask,
+  type PostEntry,
+} from "../../lib/content";
 import { formatDate, formatShortDate } from "../../lib/format";
 
 export async function getStaticPaths() {
@@ -39,7 +43,7 @@ const categoryLabels = {
         {post.data.location && <span>{post.data.location}</span>}
       </div>
       <p class="lede">{post.data.summary}</p>
-      <MaskedImage image={post.data.featuredImage} />
+      <MaskedImage image={withRectangleImageMask(post.data.featuredImage)} class="post-detail__media" />
       <div class="post-detail__content">
         <Content />
       </div>

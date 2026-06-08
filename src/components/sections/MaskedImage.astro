@@ -8,19 +8,42 @@ type SectionImage = Extract<PageSection, { image?: unknown }>["image"];
 interface Props {
   image: NonNullable<SectionImage>;
   class?: string;
+  priority?: boolean;
 }
 
-const { image, class: className } = Astro.props;
-const imageWidths = [320, 480, 640, 960, 1280, 1600] as const;
+const { image, class: className, priority = false } = Astro.props;
+const standardImageWidths = [320, 480, 640, 960, 1280, 1440] as const;
+const priorityImageWidths = [320, 480, 640, 960, 1280, 1600] as const;
+const imageWidths = priority ? priorityImageWidths : standardImageWidths;
 const imageQuality = 76;
 const isOptimizableImage = (src: string) =>
   src.startsWith("/") && /\.(jpe?g|png|webp|gif)$/i.test(src);
-const imageSizes = className?.includes("news-card__media")
+const isNewsCardMedia = className?.includes("news-card__media");
+const isPostDetailMedia = className?.includes("post-detail__media");
+
+const getOptimizedImageUrl = (src: string, width: number, height: number) =>
+  `/.netlify/images?url=${encodeURIComponent(src)}&w=${width}&h=${height}&q=${imageQuality}`;
+
+const getOptimizedSrcset = (src: string, heightRatio: number) =>
+  imageWidths
+    .map((width) => `${getOptimizedImageUrl(src, width, Math.round(width * heightRatio))} ${width}w`)
+    .join(", ");
+
+const imageSizes = isNewsCardMedia
   ? "(max-width: 780px) 90vw, 24rem"
+  : isPostDetailMedia
+    ? "(max-width: 980px) 90vw, 54rem"
   : "(max-width: 980px) 90vw, 45vw";
-const intrinsicDimensions = className?.includes("news-card__media")
+
+const intrinsicDimensions = isNewsCardMedia
   ? { width: 1200, height: 1200 }
-  : { width: 1600, height: 1720 };
+  : isPostDetailMedia
+    ? { width: 1600, height: 1200 }
+  : priority
+    ? { width: 1600, height: 1720 }
+    : { width: 1440, height: 1548 };
+
+const heightRatio = intrinsicDimensions.height / intrinsicDimensions.width;
 const galleryImages = [
   {
     src: image.src,
@@ -87,32 +110,59 @@ const backdropShape =
     style={`--mask-shape: url('${maskShape}');`}
   >
     {
-      galleryImages.map((galleryImage, index) => (
-        isOptimizableImage(galleryImage.src) ? (
-          <Image
-            src={galleryImage.src}
+      galleryImages.map((galleryImage, index) => {
+        const isActiveSlide = index === 0;
+        const sharedAttributes = {
+          alt: isActiveSlide ? galleryImage.alt : "",
+          "aria-hidden": isActiveSlide ? undefined : "true",
+          "data-active": isActiveSlide ? "true" : undefined,
+          style: galleryImage.objectPosition ? `object-position: ${galleryImage.objectPosition};` : undefined,
+          loading: priority && isActiveSlide ? "eager" : "lazy",
+          decoding: "async",
+          fetchpriority: priority && isActiveSlide ? "high" : "low",
+        } as const;
+
+        if (isOptimizableImage(galleryImage.src)) {
+          if (!isActiveSlide && hasGallery) {
+            return (
+              <img
+                {...sharedAttributes}
+                data-src={getOptimizedImageUrl(
+                  galleryImage.src,
+                  intrinsicDimensions.width,
+                  intrinsicDimensions.height,
+                )}
+                data-srcset={getOptimizedSrcset(galleryImage.src, heightRatio)}
+                sizes={imageSizes}
+                width={intrinsicDimensions.width}
+                height={intrinsicDimensions.height}
+              />
+            );
+          }
+
+          return (
+            <Image
+              src={galleryImage.src}
+              width={intrinsicDimensions.width}
+              height={intrinsicDimensions.height}
+              widths={[...imageWidths]}
+              sizes={imageSizes}
+              quality={imageQuality}
+              {...sharedAttributes}
+            />
+          );
+        }
+
+        return (
+          <img
+            src={isActiveSlide ? galleryImage.src : undefined}
+            data-src={!isActiveSlide ? galleryImage.src : undefined}
             width={intrinsicDimensions.width}
             height={intrinsicDimensions.height}
-            widths={[...imageWidths]}
-            sizes={imageSizes}
-            quality={imageQuality}
-            alt={index === 0 ? galleryImage.alt : ""}
-            aria-hidden={index === 0 ? undefined : "true"}
-            data-active={index === 0 ? "true" : undefined}
-            style={galleryImage.objectPosition ? `object-position: ${galleryImage.objectPosition};` : undefined}
-            loading={index === 0 ? "lazy" : "eager"}
+            {...sharedAttributes}
           />
-        ) : (
-          <img
-            src={galleryImage.src}
-            alt={index === 0 ? galleryImage.alt : ""}
-            aria-hidden={index === 0 ? undefined : "true"}
-            data-active={index === 0 ? "true" : undefined}
-            style={galleryImage.objectPosition ? `object-position: ${galleryImage.objectPosition};` : undefined}
-            loading={index === 0 ? "lazy" : "eager"}
-          />
-        )
-      ))
+        );
+      })
     }
   </div>
   {
@@ -137,13 +187,35 @@ const backdropShape =
   hasGallery && (
     <script>
       const galleryShapes = document.querySelectorAll<HTMLElement>(".masked-media__shape[data-gallery='true']");
+      const connection = (navigator as Navigator & {
+        connection?: { saveData?: boolean; effectiveType?: string };
+      }).connection;
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const shouldKeepStatic =
+        prefersReducedMotion ||
+        connection?.saveData === true ||
+        /(^|-)2g$/.test(connection?.effectiveType ?? "");
 
-      galleryShapes.forEach((shape) => {
+      const hydrateSlide = (slide: HTMLImageElement) => {
+        if (slide.dataset.srcset && !slide.srcset) {
+          slide.srcset = slide.dataset.srcset;
+          slide.removeAttribute("data-srcset");
+        }
+
+        if (slide.dataset.src && !slide.currentSrc) {
+          slide.src = slide.dataset.src;
+          slide.removeAttribute("data-src");
+        }
+      };
+
+      const prepareGallery = (shape: HTMLElement) => {
         if (shape.dataset.galleryReady === "true") return;
         shape.dataset.galleryReady = "true";
 
         const slides = Array.from(shape.querySelectorAll<HTMLImageElement>("img"));
         if (slides.length < 2) return;
+
+        slides.slice(1).forEach(hydrateSlide);
 
         let activeIndex = 0;
 
@@ -151,8 +223,27 @@ const backdropShape =
           slides[activeIndex].removeAttribute("data-active");
           activeIndex = (activeIndex + 1) % slides.length;
           slides[activeIndex].dataset.active = "true";
-        }, 1200);
-      });
+        }, 1800);
+      };
+
+      if (!shouldKeepStatic) {
+        if ("IntersectionObserver" in window) {
+          const galleryObserver = new IntersectionObserver(
+            (entries, observer) => {
+              entries.forEach((entry) => {
+                if (!entry.isIntersecting) return;
+                prepareGallery(entry.target as HTMLElement);
+                observer.unobserve(entry.target);
+              });
+            },
+            { rootMargin: "360px" },
+          );
+
+          galleryShapes.forEach((shape) => galleryObserver.observe(shape));
+        } else {
+          galleryShapes.forEach(prepareGallery);
+        }
+      }
     </script>
   )
 }

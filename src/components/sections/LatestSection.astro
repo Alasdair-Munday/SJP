@@ -42,6 +42,7 @@ const categoryLabels = {
               <article
                 class="news-card latest-news-card"
                 data-news-carousel-slide
+                data-news-tone={post.data.category}
                 aria-label={`News story ${index + 1} of ${posts.length}`}
               >
                 <MaskedImage
@@ -154,19 +155,23 @@ const categoryLabels = {
           };
 
           const scrollToSlide = (index) => {
-            slides[index]?.scrollIntoView({
+            const slide = slides[index];
+            if (!slide) return;
+
+            viewport.scrollTo({
+              left: slide.offsetLeft,
               behavior: prefersReducedMotion.matches ? "auto" : "smooth",
-              block: "nearest",
-              inline: "start",
             });
           };
 
           const syncControls = () => {
+            const canScroll = viewport.scrollWidth > viewport.clientWidth + 2;
             const atStart = viewport.scrollLeft <= 2;
             const atEnd = viewport.scrollLeft + viewport.clientWidth >= viewport.scrollWidth - 2;
 
-            previousButton.disabled = atStart;
-            nextButton.disabled = atEnd;
+            carousel.dataset.canScroll = canScroll ? "true" : "false";
+            previousButton.disabled = !canScroll || atStart;
+            nextButton.disabled = !canScroll || atEnd;
           };
 
           let animationFrame = 0;
