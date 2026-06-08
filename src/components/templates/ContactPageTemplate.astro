@@ -69,25 +69,25 @@ const site = await getSiteConfig();
 
       <label class="form-field">
         <span>Name</span>
-        <input name="name" type="text" required autocomplete="name" />
+        <input name="name" type="text" required autocomplete="name" placeholder="Your name" />
       </label>
 
       <label class="form-field">
         <span>Email</span>
-        <input name="email" type="email" required autocomplete="email" />
+        <input name="email" type="email" required autocomplete="email" placeholder="you@example.com" />
       </label>
 
       <label class="form-field">
         <span>Subject</span>
         <select name="subject" required>
-          <option value="">Select a topic</option>
+          <option value="" disabled selected>Select a topic</option>
           {site.contact.formSubjects.map((subject) => <option value={subject.value}>{subject.label}</option>)}
         </select>
       </label>
 
       <label class="form-field">
         <span>Message</span>
-        <textarea name="message" rows={6} required></textarea>
+        <textarea name="message" rows={6} required placeholder="How can we help?"></textarea>
       </label>
 
       <div class="form-actions">
