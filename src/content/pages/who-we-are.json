@@ -66,12 +66,12 @@
           "tone": "stone"
         },
         {
-          "title": "Al",
+          "title": "Al Munday",
           "tag": "Curate",
           "body": "Al serves as curate, sharing in worship, teaching, pastoral care, and mission.",
           "image": {
             "src": "/images/profile-photos/al.jpg",
-            "alt": "Al",
+            "alt": "Al Munday",
             "maskShape": "/images/shapes/circle-shape-2.png",
             "objectPosition": "50% 22%",
             "frameTone": "sky"
@@ -79,12 +79,12 @@
           "tone": "stone"
         },
         {
-          "title": "Wachira",
+          "title": "Wachira Maina",
           "tag": "Curate",
           "body": "Wachira serves as curate, supporting worship, discipleship, pastoral care, and mission.",
           "image": {
             "src": "/images/profile-photos/wachira.jpeg",
-            "alt": "Wachira",
+            "alt": "Wachira Maina",
             "maskShape": "/images/shapes/circle-shape-3.png",
             "objectPosition": "62% 45%",
             "frameTone": "door"
@@ -92,24 +92,24 @@
           "tone": "stone"
         },
         {
-          "title": "Kirsty",
+          "title": "Kirsty Dronfield",
           "tag": "Children and Families Lead",
           "body": "Kirsty helps children and families belong, grow in faith, and take part in church life.",
           "image": {
             "src": "/images/profile-photos/kirsty.jpeg",
-            "alt": "Kirsty",
+            "alt": "Kirsty Dronfield",
             "maskShape": "/images/shapes/circle-shape-4.png",
             "frameTone": "grass"
           },
           "tone": "stone"
         },
         {
-          "title": "Olusola",
+          "title": "Olusola McKenzie",
           "tag": "Administrator",
           "body": "Olusola supports the practical administration that helps church life run smoothly.",
           "image": {
             "src": "/images/profile-photos/olusola.jpeg",
-            "alt": "Olusola",
+            "alt": "Olusola McKenzie",
             "maskShape": "/images/shapes/circle-shape.png",
             "objectPosition": "50% 30%",
             "frameTone": "pink"
@@ -126,11 +126,11 @@
       "columns": 7,
       "cards": [
         {
-          "title": "Bess",
+          "title": "Elizabeth \"Bess\" Cooper",
           "tag": "Churchwarden",
           "image": {
             "src": "/images/profile-photos/bess.jpeg",
-            "alt": "Bess",
+            "alt": "Bess Cooper",
             "maskShape": "/images/shapes/circle-shape.png",
             "objectPosition": "76% 46%",
             "frameTone": "grass"
@@ -138,11 +138,11 @@
           "tone": "stone"
         },
         {
-          "title": "Jack",
+          "title": "Jack Dudgeon",
           "tag": "Churchwarden",
           "image": {
             "src": "/images/profile-photos/jack.jpeg",
-            "alt": "Jack",
+            "alt": "Jack Dudgeon",
             "maskShape": "/images/shapes/circle-shape-2.png",
             "objectPosition": "50% 30%",
             "frameTone": "sky"
@@ -150,10 +150,10 @@
           "tone": "stone"
         },
         {
-          "title": "Comfort",
+          "title": "Comfort F Ariwoola",
           "image": {
             "src": "/images/profile-photos/comfort.jpeg",
-            "alt": "Comfort",
+            "alt": "Comfort F Ariwoola",
             "maskShape": "/images/shapes/circle-shape-3.png",
             "objectPosition": "43% 45%",
             "frameTone": "pink"
@@ -161,10 +161,10 @@
           "tone": "stone"
         },
         {
-          "title": "Mo",
+          "title": "Morayo Aribigbola",
           "image": {
             "src": "/images/profile-photos/mo.jpeg",
-            "alt": "Mo",
+            "alt": "Morayo Aribigbola",
             "maskShape": "/images/shapes/circle-shape-4.png",
             "objectPosition": "50% 32%",
             "frameTone": "park"
@@ -172,10 +172,10 @@
           "tone": "stone"
         },
         {
-          "title": "Stephen",
+          "title": "Stephen Ogbonna",
           "image": {
             "src": "/images/profile-photos/stephen.jpeg",
-            "alt": "Stephen",
+            "alt": "Stephen Ogbonna",
             "maskShape": "/images/shapes/circle-shape.png",
             "objectPosition": "50% 28%",
             "frameTone": "door"
@@ -183,10 +183,10 @@
           "tone": "stone"
         },
         {
-          "title": "Sally",
+          "title": "Sally Fenwick",
           "image": {
             "src": "/images/profile-photos/sally.jpeg",
-            "alt": "Sally",
+            "alt": "Sally Fenwick",
             "maskShape": "/images/shapes/circle-shape-2.png",
             "objectPosition": "50% 24%",
             "frameTone": "grass"
@@ -194,20 +194,20 @@
           "tone": "stone"
         },
         {
-          "title": "Margie",
+          "title": "Margie Whitehorn",
           "image": {
             "src": "/images/profile-photos/margie.jpeg",
-            "alt": "Margie",
+            "alt": "Margie Whitehorn",
             "maskShape": "/images/shapes/circle-shape-3.png",
             "frameTone": "sky"
           },
           "tone": "stone"
         },
         {
-          "title": "Mags",
+          "title": "Marge Allen",
           "image": {
             "src": "/images/profile-photos/marge.jpeg",
-            "alt": "Mags",
+            "alt": "Marge Allen",
             "maskShape": "/images/shapes/circle-shape-4.png",
             "objectPosition": "50% 28%",
             "frameTone": "pink"
@@ -215,10 +215,10 @@
           "tone": "stone"
         },
         {
-          "title": "Tim",
+          "title": "Tim Cooper",
           "image": {
             "src": "/images/profile-photos/tim.png",
-            "alt": "Tim",
+            "alt": "Tim Cooper",
             "maskShape": "/images/shapes/circle-shape.png",
             "objectPosition": "43% 24%",
             "frameTone": "park"
@@ -226,10 +226,10 @@
           "tone": "stone"
         },
         {
-          "title": "Lucy",
+          "title": "Lucy Uren",
           "image": {
             "src": "/images/profile-photos/lucy.jpeg",
-            "alt": "Lucy",
+            "alt": "Lucy Uren",
             "maskShape": "/images/shapes/circle-shape-2.png",
             "objectPosition": "50% 31%",
             "frameTone": "door"
@@ -237,30 +237,30 @@
           "tone": "stone"
         },
         {
-          "title": "Esther",
+          "title": "Esther Adeyemi",
           "image": {
             "src": "/images/profile-photos/esther.png",
-            "alt": "Esther",
+            "alt": "Esther Adeyemi",
             "maskShape": "/images/shapes/circle-shape-3.png",
             "frameTone": "grass"
           },
           "tone": "stone"
         },
         {
-          "title": "Scott",
+          "title": "Scott Kershaw",
           "image": {
             "src": "/images/profile-photos/scott.jpeg",
-            "alt": "Scott",
+            "alt": "Scott Kershaw",
             "maskShape": "/images/shapes/circle-shape-4.png",
             "frameTone": "sky"
           },
           "tone": "stone"
         },
         {
-          "title": "Rebecca",
+          "title": "Rebecca D'Sa",
           "image": {
             "src": "/images/profile-photos/rebecca-dsa.png",
-            "alt": "Rebecca",
+            "alt": "Rebecca D'Sa",
             "maskShape": "/images/shapes/circle-shape.png",
             "objectPosition": "55% 25%",
             "frameTone": "pink"
@@ -278,12 +278,12 @@
       "columns": 4,
       "cards": [
         {
-          "title": "Sophie",
+          "title": "Sophie Dudgeon",
           "tag": "Welcome Lead",
           "body": "Sophie helps shape a warm welcome for people arriving and settling into church life.",
           "image": {
             "src": "/images/profile-photos/sophie.jpeg",
-            "alt": "Sophie",
+            "alt": "Sophie Dudgeon",
             "maskShape": "/images/shapes/circle-shape.png",
             "objectPosition": "54% 38%",
             "frameTone": "park"
@@ -291,12 +291,12 @@
           "tone": "stone"
         },
         {
-          "title": "Claire",
+          "title": "Claire Smith",
           "tag": "Safeguarding Lead",
           "body": "Claire helps us care well for children, young people, and vulnerable adults.",
           "image": {
-            "src": "/images/profile-photos/claire-smith.jpg",
-            "alt": "Claire",
+            "src": "/images/profile-photos/claire.jpg",
+            "alt": "Photo of Claire Smith",
             "maskShape": "/images/shapes/circle-shape-2.png",
             "objectPosition": "45% 24%",
             "frameTone": "pink"
@@ -304,21 +304,21 @@
           "tone": "stone"
         },
         {
-          "title": "Hannah",
+          "title": "Hannah Graham",
           "tag": "Social Action Lead",
           "body": "Hannah helps coordinate practical care and social action in our local community.",
           "image": {
             "src": "/images/profile-photos/hannah.png",
-            "alt": "Hannah",
+            "alt": "Hannah Graham",
             "maskShape": "/images/shapes/circle-shape-3.png",
             "frameTone": "sky"
           },
           "tone": "stone"
         },
         {
-          "title": "Comfort M",
+          "title": "Comfort M Ariwoola",
           "tag": "Treasurer",
-          "body": "Comfort M helps steward church finances with care, clarity, and accountability.",
+          "body": "Comfort M Ariwoola helps steward church finances with care, clarity, and accountability.",
           "image": {
             "src": "/images/uploads/headshot-placeholder.svg",
             "alt": "Placeholder headshot",
