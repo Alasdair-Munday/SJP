@@ -55,15 +55,7 @@
             "objectPosition": "center center"
           },
           {
-            "src": "/images/uploads/SEN-inclusion.jpg",
-            "objectPosition": "center center"
-          },
-          {
             "src": "/images/uploads/Kids-outdoor-games-2.jpg",
-            "objectPosition": "center center"
-          },
-          {
-            "src": "/images/uploads/Kids-outdoor-games-3.jpg",
             "objectPosition": "center center"
           },
           {
@@ -96,6 +88,10 @@
           },
           {
             "src": "/images/uploads/welcome-6.jpeg",
+            "objectPosition": "center center"
+          },
+          {
+            "src": "/images/uploads/welcome.jpeg",
             "objectPosition": "center center"
           }
         ]

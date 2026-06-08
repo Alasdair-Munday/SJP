@@ -266,6 +266,17 @@
             "frameTone": "pink"
           },
           "tone": "stone"
+        },
+        {
+          "title": "Gerald Nnasor",
+          "image": {
+            "src": "/images/uploads/Gerald.png",
+            "alt": "Gerald Nnasor",
+            "maskShape": "/images/shapes/circle-shape-2.png",
+            "objectPosition": "52% 28%",
+            "frameTone": "door"
+          },
+          "tone": "stone"
         }
       ]
     },
