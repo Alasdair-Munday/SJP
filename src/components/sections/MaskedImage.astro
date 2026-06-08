@@ -1,6 +1,6 @@
 ---
-import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
+import { getNetlifyOptimizedImageUrl, isLocalRasterImage } from "../../lib/images";
 
 type PageSection = CollectionEntry<"pages">["data"]["sections"][number];
 type SectionImage = Extract<PageSection, { image?: unknown }>["image"];
@@ -16,13 +16,11 @@ const standardImageWidths = [320, 480, 640, 960, 1280, 1440] as const;
 const priorityImageWidths = [320, 480, 640, 960, 1280, 1600] as const;
 const imageWidths = priority ? priorityImageWidths : standardImageWidths;
 const imageQuality = 76;
-const isOptimizableImage = (src: string) =>
-  src.startsWith("/") && /\.(jpe?g|png|webp|gif)$/i.test(src);
 const isNewsCardMedia = className?.includes("news-card__media");
 const isPostDetailMedia = className?.includes("post-detail__media");
 
 const getOptimizedImageUrl = (src: string, width: number, height: number) =>
-  `/.netlify/images?url=${encodeURIComponent(src)}&w=${width}&h=${height}&q=${imageQuality}`;
+  getNetlifyOptimizedImageUrl({ src, width, height, quality: imageQuality });
 const getOptimizedSrcset = (src: string, heightRatio: number) =>
   imageWidths
     .map((width) => `${getOptimizedImageUrl(src, width, Math.round(width * heightRatio))} ${width}w`)
@@ -120,7 +118,7 @@ const backdropShape =
           fetchpriority: priority && isActiveSlide ? "high" : "low",
         } as const;
 
-        if (isOptimizableImage(galleryImage.src)) {
+        if (isLocalRasterImage(galleryImage.src)) {
           if (!isActiveSlide && hasGallery) {
             return (
               <img
@@ -139,13 +137,16 @@ const backdropShape =
           }
 
           return (
-            <Image
-              src={galleryImage.src}
+            <img
+              src={getOptimizedImageUrl(
+                galleryImage.src,
+                intrinsicDimensions.width,
+                intrinsicDimensions.height,
+              )}
+              srcset={getOptimizedSrcset(galleryImage.src, heightRatio)}
+              sizes={imageSizes}
               width={intrinsicDimensions.width}
               height={intrinsicDimensions.height}
-              widths={[...imageWidths]}
-              sizes={imageSizes}
-              quality={imageQuality}
               {...sharedAttributes}
             />
           );

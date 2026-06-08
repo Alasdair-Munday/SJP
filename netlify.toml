@@ -5,6 +5,17 @@
 [functions]
   directory = "netlify/functions"
 
+
+[[redirects]]
+  from = "/images/uploads/*"
+  to = "/.netlify/functions/cdn-asset?path=images/uploads/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/images/profile-photos/*"
+  to = "/.netlify/functions/cdn-asset?path=images/profile-photos/:splat"
+  status = 200
+
 [[redirects]]
   from = "/admin"
   to = "/admin/"

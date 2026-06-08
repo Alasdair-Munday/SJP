@@ -34,8 +34,11 @@ logo_url: https://decapbridge.com/decapcms-with-bridge.svg
 # Add site links in Decap CMS (optional)
 # site_url: https://stjohnspark.netlify.app
 
-media_folder: "public/images/uploads"
+media_folder: "/images/uploads"
 public_folder: "/images/uploads"
+
+media_library:
+  name: cloudflare_netlify
 
 collections:
   - name: "posts"
