@@ -18,10 +18,11 @@
         "href": "/visit"
       },
       "image": {
-        "src": "/images/uploads/community-fun-day.jpg",
-        "alt": "People taking part in community activities outdoors",
+        "src": "/images/uploads/Happy-family.jpg",
+        "alt": "Church family smiling together outside St John's Park",
         "maskShape": "/images/shapes/arch-shape-filled.png",
         "accentShape": "/images/shapes/concentric-circles.png",
+        "objectPosition": "center center",
         "accentTone": "pink",
         "frameTone": "pink"
       }
@@ -89,10 +90,10 @@
       ],
       "backgroundTone": "sky",
       "image": {
-        "src": "/images/uploads/friends.jpg",
-        "alt": "Church friends and volunteers smiling together",
-        "maskShape": "/images/shapes/rectangle.png",
+        "src": "/images/uploads/Happy-service.jpg",
+        "alt": "People serving and chatting together after church",
         "accentShape": "/images/shapes/heart-outline.png",
+        "objectPosition": "center center",
         "accentTone": "door",
         "frameTone": "door"
       },
@@ -118,10 +119,10 @@
       ],
       "backgroundTone": "give",
       "image": {
-        "src": "/images/uploads/PXL_20250816_114550760.PORTRAIT.jpg",
+        "src": "/images/uploads/Give-praise.jpg",
         "alt": "Worship team leading sung praise during a Sunday gathering",
-        "maskShape": "/images/shapes/rectangle.png",
         "accentShape": "/images/shapes/star-brushstroke.png",
+        "objectPosition": "center center",
         "accentTone": "give",
         "frameTone": "give"
       },

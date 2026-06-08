@@ -5,6 +5,7 @@ const toneSchema = z.enum([
   "park-dark",
   "stone",
   "pink",
+  "pink-dark",
   "sky",
   "night",
   "grass",
@@ -51,6 +52,15 @@ const cardSchema = z.object({
   image: imageSchema.optional(),
   featured: z.boolean().optional(),
 });
+
+const postCategorySchema = z
+  .enum(["event", "update", "blog", "news", "story"])
+  .default("update")
+  .transform((category) => {
+    if (category === "news") return "update";
+    if (category === "story") return "blog";
+    return category;
+  });
 
 const heroSectionSchema = z.object({
   type: z.literal("hero"),
@@ -218,7 +228,7 @@ const posts = defineCollection({
     title: z.string(),
     summary: z.string(),
     publishDate: z.coerce.date(),
-    category: z.enum(["event", "update", "blog"]),
+    category: postCategorySchema,
     featuredImage: imageSchema,
     featuredShape: z.string().optional(),
     eventDate: z.coerce.date().optional(),

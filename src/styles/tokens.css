@@ -36,7 +36,7 @@
   --shape-curved-square: url("/images/shapes/curved-square-shape.png");
   --shape-flower: url("/images/shapes/flower-cutout.png");
   --shape-rectangle-cut: url("/images/shapes/rectangle-cut-corner.png");
-  --shape-rectangle: url("/images/shapes/rectangle.png");
+  --shape-rectangle: url("/images/shapes/rectangle-tight.png");
   --shape-church-roof: url("/images/shapes/church-hall-roof.png");
   --shape-three-columns: url("/images/shapes/three-columns-shape.png");
   --shape-square-slope: url("/images/shapes/square-slope-shape.png");
@@ -48,4 +48,14 @@
   --shape-loop: url("/images/shapes/loop-thick.png");
   --shape-star: url("/images/shapes/star-brushstroke.png");
   --shape-thick-brush: url("/images/shapes/thick-brushstroke.png");
+  --shape-line: url("/images/shapes/line-shape.png");
+  --shape-line-extra-thin: url("/images/shapes/line-extra-thin.png");
+  --shape-line-long: url("/images/shapes/long-thin-line.png");
+  --shape-line-long-2: url("/images/shapes/long-thin-line-2.png");
+  --shape-line-long-3: url("/images/shapes/long-thin-line-3.png");
+  --shape-line-square: url("/images/shapes/long-square-line.png");
+  --shape-line-thick-short: url("/images/shapes/thick-short-line.png");
+  --shape-line-thick-short-2: url("/images/shapes/thick-short-line-2.png");
+  --shape-line-thick-short-3: url("/images/shapes/thick-short-line-3.png");
+  --shape-line-thin: url("/images/shapes/thin-line.png");
 }

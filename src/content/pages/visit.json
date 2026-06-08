@@ -18,8 +18,8 @@
         "href": "/contact#contact-form"
       },
       "image": {
-        "src": "/images/uploads/refreshments.jpg",
-        "alt": "People chatting and eating together after church",
+        "src": "/images/uploads/coming-to-church.jpg",
+        "alt": "People arriving at St John's Park before a service",
         "maskShape": "/images/shapes/arch-shape-filled.png",
         "accentShape": "/images/shapes/star-brushstroke.png",
         "frameTone": "park"
@@ -37,9 +37,8 @@
       ],
       "backgroundTone": "park",
       "image": {
-        "src": "/images/uploads/worship-flags.jpg",
-        "alt": "People worshipping together on a Sunday morning",
-        "maskShape": "/images/shapes/rectangle.png",
+        "src": "/images/uploads/Give-praise.jpg",
+        "alt": "Worship team leading sung praise during a Sunday gathering",
         "accentShape": "/images/shapes/circle-brushstroke-medium.png",
         "objectPosition": "center center",
         "frameTone": "park-dark"
@@ -88,10 +87,10 @@
       ],
       "backgroundTone": "pink",
       "image": {
-        "src": "/images/uploads/kids-churchyard.jpg",
+        "src": "/images/uploads/Kids-outdoor-games-2.jpg",
         "alt": "Children and families enjoying activities around the churchyard",
-        "maskShape": "/images/shapes/rectangle.png",
         "accentShape": "/images/shapes/flower-outline.png",
+        "objectPosition": "center center",
         "frameTone": "stone"
       },
       "reverse": true,
@@ -128,7 +127,6 @@
       "image": {
         "src": "/images/uploads/community-park-gathering-2.jpg",
         "alt": "The church building and grounds at St John's Park",
-        "maskShape": "/images/shapes/rectangle.png",
         "accentShape": "/images/shapes/loop-thick.png",
         "frameTone": "grass"
       },

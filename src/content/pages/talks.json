@@ -19,10 +19,11 @@
         "newTab": true
       },
       "image": {
-        "src": "/images/uploads/Sermons.jpg",
+        "src": "/images/uploads/Faustina-preaching.jpg",
         "alt": "A talk being shared during a Sunday service",
         "maskShape": "/images/shapes/arch-shape-filled.png",
         "accentShape": "/images/shapes/star-brush-thin.png",
+        "objectPosition": "center center",
         "frameTone": "sky"
       }
     }

@@ -125,7 +125,7 @@ export function isRelevantForWeek(post: PostEntry, weekStartDate: Date) {
 
 export async function getNewsletterPostsForWeek(targetDate: Date = new Date()) {
   const posts = await getAllPosts();
-  
+
   // Create a new date to avoid mutating the original targetDate
   const dateObj = new Date(targetDate);
   const day = dateObj.getDay();

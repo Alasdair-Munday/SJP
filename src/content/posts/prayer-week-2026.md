@@ -12,7 +12,7 @@ featuredShape: /images/shapes/arch-cutout.png
 ctaLabel: Ask for the full schedule
 ctaHref: /contact#contact-form
 featuredImage:
-  src: /images/uploads/prayer.jpg
+  src: /images/uploads/Prayer.png
   alt: People gathered together for prayer at church
   maskShape: /images/shapes/curved-square-shape.png
   frameTone: park

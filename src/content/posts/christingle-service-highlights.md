@@ -5,8 +5,8 @@ publishDate: 2025-12-22
 category: blog
 featured: true
 featuredImage:
-  src: /images/uploads/christingle.jpg
-  alt: Christingle oranges and families gathered together during the service
+  src: /images/uploads/Christingle-lighting.jpg
+  alt: Children and adults gathered around Christingle candles
   maskShape: /images/shapes/flower-shape.png
   frameTone: pink
 ctaLabel: Plan your Sunday visit

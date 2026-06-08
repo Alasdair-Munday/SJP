@@ -19,10 +19,11 @@
         "newTab": true
       },
       "image": {
-        "src": "/images/uploads/community-park-gathering-2.jpg",
-        "alt": "The church building and grounds at St John's Park",
+        "src": "/images/uploads/welcome-6.jpeg",
+        "alt": "People greeting one another after church",
         "maskShape": "/images/shapes/arch-shape-filled.png",
         "accentShape": "/images/shapes/star-shape.png",
+        "objectPosition": "center center",
         "frameTone": "park"
       }
     },
@@ -38,10 +39,10 @@
       ],
       "backgroundTone": "sky",
       "image": {
-        "src": "/images/uploads/community-park-gathering-1.jpg",
-        "alt": "People gathered around the church grounds",
-        "maskShape": "/images/shapes/rectangle.png",
+        "src": "/images/uploads/Church-entrance-broll.jpg",
+        "alt": "The entrance to St John's Park Church",
         "accentShape": "/images/shapes/flower-outline.png",
+        "objectPosition": "center center",
         "frameTone": "pink"
       }
     },

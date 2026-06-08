@@ -18,10 +18,11 @@
         "href": "/contact"
       },
       "image": {
-        "src": "/images/uploads/friends.jpg",
-        "alt": "People smiling together at St John's Park",
+        "src": "/images/uploads/Happy-chat-3.jpg",
+        "alt": "People chatting around tables at St John's Park",
         "maskShape": "/images/shapes/arch-shape-filled.png",
         "accentShape": "/images/shapes/welcome.png",
+        "objectPosition": "center center",
         "frameTone": "grass"
       }
     },

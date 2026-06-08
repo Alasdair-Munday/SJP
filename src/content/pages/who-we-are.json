@@ -18,10 +18,11 @@
         "href": "/get-involved"
       },
       "image": {
-        "src": "/images/uploads/congregation.jpg",
-        "alt": "Church family worshipping together at St John's Park",
+        "src": "/images/uploads/Diversity.jpg",
+        "alt": "People smiling and talking together inside St John's Park",
         "maskShape": "/images/shapes/arch-shape-filled.png",
         "accentShape": "/images/shapes/concentric-circles.png",
+        "objectPosition": "center center",
         "frameTone": "roof"
       }
     },
@@ -39,7 +40,6 @@
       "image": {
         "src": "/images/uploads/stained-glass-cross.jpg",
         "alt": "A stained glass cross inside the church building",
-        "maskShape": "/images/shapes/rectangle.png",
         "accentShape": "/images/shapes/squiggle-ball.png",
         "frameTone": "door"
       }
@@ -128,68 +128,143 @@
         {
           "title": "Bess",
           "tag": "Churchwarden",
-          "image": { "src": "/images/profile-photos/bess.jpeg", "alt": "Bess", "maskShape": "/images/shapes/circle-shape.png", "objectPosition": "76% 46%", "frameTone": "grass" },
+          "image": {
+            "src": "/images/profile-photos/bess.jpeg",
+            "alt": "Bess",
+            "maskShape": "/images/shapes/circle-shape.png",
+            "objectPosition": "76% 46%",
+            "frameTone": "grass"
+          },
           "tone": "stone"
         },
         {
           "title": "Jack",
           "tag": "Churchwarden",
-          "image": { "src": "/images/profile-photos/jack.jpeg", "alt": "Jack", "maskShape": "/images/shapes/circle-shape-2.png", "objectPosition": "50% 30%", "frameTone": "sky" },
+          "image": {
+            "src": "/images/profile-photos/jack.jpeg",
+            "alt": "Jack",
+            "maskShape": "/images/shapes/circle-shape-2.png",
+            "objectPosition": "50% 30%",
+            "frameTone": "sky"
+          },
           "tone": "stone"
         },
         {
           "title": "Comfort",
-          "image": { "src": "/images/profile-photos/comfort.jpeg", "alt": "Comfort", "maskShape": "/images/shapes/circle-shape-3.png", "objectPosition": "43% 45%", "frameTone": "pink" },
+          "image": {
+            "src": "/images/profile-photos/comfort.jpeg",
+            "alt": "Comfort",
+            "maskShape": "/images/shapes/circle-shape-3.png",
+            "objectPosition": "43% 45%",
+            "frameTone": "pink"
+          },
           "tone": "stone"
         },
         {
           "title": "Mo",
-          "image": { "src": "/images/profile-photos/mo.jpeg", "alt": "Mo", "maskShape": "/images/shapes/circle-shape-4.png", "objectPosition": "50% 32%", "frameTone": "park" },
+          "image": {
+            "src": "/images/profile-photos/mo.jpeg",
+            "alt": "Mo",
+            "maskShape": "/images/shapes/circle-shape-4.png",
+            "objectPosition": "50% 32%",
+            "frameTone": "park"
+          },
           "tone": "stone"
         },
         {
           "title": "Stephen",
-          "image": { "src": "/images/profile-photos/stephen.jpeg", "alt": "Stephen", "maskShape": "/images/shapes/circle-shape.png", "objectPosition": "50% 28%", "frameTone": "door" },
+          "image": {
+            "src": "/images/profile-photos/stephen.jpeg",
+            "alt": "Stephen",
+            "maskShape": "/images/shapes/circle-shape.png",
+            "objectPosition": "50% 28%",
+            "frameTone": "door"
+          },
           "tone": "stone"
         },
         {
           "title": "Sally",
-          "image": { "src": "/images/profile-photos/sally.jpeg", "alt": "Sally", "maskShape": "/images/shapes/circle-shape-2.png", "objectPosition": "50% 24%", "frameTone": "grass" },
+          "image": {
+            "src": "/images/profile-photos/sally.jpeg",
+            "alt": "Sally",
+            "maskShape": "/images/shapes/circle-shape-2.png",
+            "objectPosition": "50% 24%",
+            "frameTone": "grass"
+          },
           "tone": "stone"
         },
         {
           "title": "Margie",
-          "image": { "src": "/images/profile-photos/margie.jpeg", "alt": "Margie", "maskShape": "/images/shapes/circle-shape-3.png", "frameTone": "sky" },
+          "image": {
+            "src": "/images/profile-photos/margie.jpeg",
+            "alt": "Margie",
+            "maskShape": "/images/shapes/circle-shape-3.png",
+            "frameTone": "sky"
+          },
           "tone": "stone"
         },
         {
           "title": "Mags",
-          "image": { "src": "/images/profile-photos/marge.jpeg", "alt": "Mags", "maskShape": "/images/shapes/circle-shape-4.png", "objectPosition": "50% 28%", "frameTone": "pink" },
+          "image": {
+            "src": "/images/profile-photos/marge.jpeg",
+            "alt": "Mags",
+            "maskShape": "/images/shapes/circle-shape-4.png",
+            "objectPosition": "50% 28%",
+            "frameTone": "pink"
+          },
           "tone": "stone"
         },
         {
           "title": "Tim",
-          "image": { "src": "/images/profile-photos/tim.png", "alt": "Tim", "maskShape": "/images/shapes/circle-shape.png", "objectPosition": "43% 24%", "frameTone": "park" },
+          "image": {
+            "src": "/images/profile-photos/tim.png",
+            "alt": "Tim",
+            "maskShape": "/images/shapes/circle-shape.png",
+            "objectPosition": "43% 24%",
+            "frameTone": "park"
+          },
           "tone": "stone"
         },
         {
           "title": "Lucy",
-          "image": { "src": "/images/profile-photos/lucy.jpeg", "alt": "Lucy", "maskShape": "/images/shapes/circle-shape-2.png", "objectPosition": "50% 31%", "frameTone": "door" },
+          "image": {
+            "src": "/images/profile-photos/lucy.jpeg",
+            "alt": "Lucy",
+            "maskShape": "/images/shapes/circle-shape-2.png",
+            "objectPosition": "50% 31%",
+            "frameTone": "door"
+          },
           "tone": "stone"
         },
         {
           "title": "Esther",
-          "image": { "src": "/images/profile-photos/esther.png", "alt": "Esther", "maskShape": "/images/shapes/circle-shape-3.png", "frameTone": "grass" },
+          "image": {
+            "src": "/images/profile-photos/esther.png",
+            "alt": "Esther",
+            "maskShape": "/images/shapes/circle-shape-3.png",
+            "frameTone": "grass"
+          },
           "tone": "stone"
         },
         {
           "title": "Scott",
-          "image": { "src": "/images/profile-photos/scott.jpeg", "alt": "Scott", "maskShape": "/images/shapes/circle-shape-4.png", "frameTone": "sky" },
+          "image": {
+            "src": "/images/profile-photos/scott.jpeg",
+            "alt": "Scott",
+            "maskShape": "/images/shapes/circle-shape-4.png",
+            "frameTone": "sky"
+          },
           "tone": "stone"
         },
         {
           "title": "Rebecca",
-          "image": { "src": "/images/profile-photos/rebecca-dsa.png", "alt": "Rebecca", "maskShape": "/images/shapes/circle-shape.png", "objectPosition": "55% 25%", "frameTone": "pink" },
+          "image": {
+            "src": "/images/profile-photos/rebecca-dsa.png",
+            "alt": "Rebecca",
+            "maskShape": "/images/shapes/circle-shape.png",
+            "objectPosition": "55% 25%",
+            "frameTone": "pink"
+          },
           "tone": "stone"
         }
       ]
@@ -206,28 +281,51 @@
           "title": "Sophie",
           "tag": "Welcome Lead",
           "body": "Sophie helps shape a warm welcome for people arriving and settling into church life.",
-          "image": { "src": "/images/profile-photos/sophie.jpeg", "alt": "Sophie", "maskShape": "/images/shapes/circle-shape.png", "objectPosition": "54% 38%", "frameTone": "park" },
+          "image": {
+            "src": "/images/profile-photos/sophie.jpeg",
+            "alt": "Sophie",
+            "maskShape": "/images/shapes/circle-shape.png",
+            "objectPosition": "54% 38%",
+            "frameTone": "park"
+          },
           "tone": "stone"
         },
         {
           "title": "Claire",
           "tag": "Safeguarding Lead",
           "body": "Claire helps us care well for children, young people, and vulnerable adults.",
-          "image": { "src": "/images/profile-photos/claire-smith.jpg", "alt": "Claire", "maskShape": "/images/shapes/circle-shape-2.png", "objectPosition": "45% 24%", "frameTone": "pink" },
+          "image": {
+            "src": "/images/profile-photos/claire-smith.jpg",
+            "alt": "Claire",
+            "maskShape": "/images/shapes/circle-shape-2.png",
+            "objectPosition": "45% 24%",
+            "frameTone": "pink"
+          },
           "tone": "stone"
         },
         {
           "title": "Hannah",
           "tag": "Social Action Lead",
           "body": "Hannah helps coordinate practical care and social action in our local community.",
-          "image": { "src": "/images/profile-photos/hannah.png", "alt": "Hannah", "maskShape": "/images/shapes/circle-shape-3.png", "frameTone": "sky" },
+          "image": {
+            "src": "/images/profile-photos/hannah.png",
+            "alt": "Hannah",
+            "maskShape": "/images/shapes/circle-shape-3.png",
+            "frameTone": "sky"
+          },
           "tone": "stone"
         },
         {
           "title": "Comfort M",
           "tag": "Treasurer",
           "body": "Comfort M helps steward church finances with care, clarity, and accountability.",
-          "image": { "src": "/images/profile-photos/comfort.jpeg", "alt": "Comfort M", "maskShape": "/images/shapes/circle-shape-4.png", "objectPosition": "43% 45%", "frameTone": "grass" },
+          "image": {
+            "src": "/images/uploads/headshot-placeholder.svg",
+            "alt": "Placeholder headshot",
+            "maskShape": "/images/shapes/circle-shape-4.png",
+            "objectPosition": "43% 45%",
+            "frameTone": "grass"
+          },
           "tone": "stone"
         }
       ]

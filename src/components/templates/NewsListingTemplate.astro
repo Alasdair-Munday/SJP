@@ -24,8 +24,8 @@ const categoryLabels = {
 <div class="page-stack">
   <SectionRenderer sections={page.sections} />
 
-  <section class="content-band" data-tone="stone">
-    <div class="news-filter" aria-label="Filter news posts">
+  <section class="content-band" data-tone="stone" data-news-section>
+    <div class="news-filter" aria-label="Filter news posts" data-news-filter>
       <button class="filter-pill filter-button" type="button" data-filter="all" data-active="true">All</button>
       {
         Object.entries(categoryLabels).map(([category, label]) => (
@@ -71,23 +71,31 @@ const categoryLabels = {
 
 <script is:inline>
   (() => {
-    const buttons = Array.from(document.querySelectorAll("[data-filter]"));
-    const cards = Array.from(document.querySelectorAll("[data-news-card]"));
-    if (!buttons.length || !cards.length) return;
+    const updateNewsFilter = (button) => {
+      const section = button.closest("[data-news-section]");
+      if (!section) return;
 
-    buttons.forEach((button) => {
-      button.addEventListener("click", () => {
-        const filter = button.getAttribute("data-filter");
+      const buttons = Array.from(section.querySelectorAll("[data-filter]"));
+      const cards = Array.from(section.querySelectorAll("[data-news-card]"));
+      const filter = button.getAttribute("data-filter");
 
-        buttons.forEach((candidate) => {
-          candidate.setAttribute("data-active", candidate === button ? "true" : "false");
-        });
-
-        cards.forEach((card) => {
-          const category = card.getAttribute("data-category");
-          card.hidden = filter !== "all" && category !== filter;
-        });
+      buttons.forEach((candidate) => {
+        candidate.setAttribute("data-active", candidate === button ? "true" : "false");
       });
+
+      cards.forEach((card) => {
+        const category = card.getAttribute("data-category");
+        card.hidden = filter !== "all" && category !== filter;
+      });
+    };
+
+    document.addEventListener("click", (event) => {
+      if (!(event.target instanceof Element)) return;
+
+      const button = event.target.closest("[data-news-filter] [data-filter]");
+      if (!button) return;
+
+      updateNewsFilter(button);
     });
   })();
 </script>

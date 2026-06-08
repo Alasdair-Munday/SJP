@@ -34,8 +34,45 @@ img {
 
 a {
   color: inherit;
-  text-decoration-thickness: 0.14em;
-  text-underline-offset: 0.18em;
+  text-decoration: none;
+}
+
+a:not([class]),
+.inline-link {
+  position: relative;
+  display: inline-block;
+  justify-self: start;
+  width: fit-content;
+  max-width: 100%;
+  padding-bottom: 0.08em;
+  font-weight: 700;
+  vertical-align: baseline;
+}
+
+a:not([class])::after,
+.inline-link::after {
+  content: "";
+  position: absolute;
+  right: -0.08em;
+  bottom: -0.1em;
+  left: -0.08em;
+  height: 0.32em;
+  background: currentColor;
+  mask: var(--link-line-shape, var(--shape-line-long)) center / 100% 100% no-repeat;
+  -webkit-mask: var(--link-line-shape, var(--shape-line-long)) center / 100% 100% no-repeat;
+  opacity: 0.72;
+  pointer-events: none;
+}
+
+a:not([class]):hover::after,
+.inline-link:hover::after {
+  --link-line-shape: var(--shape-line-long-3);
+  opacity: 0.94;
+}
+
+a:focus-visible {
+  outline: 3px solid currentColor;
+  outline-offset: 0.22rem;
 }
 
 button,
@@ -47,6 +84,17 @@ textarea {
 
 main {
   display: block;
+}
+
+hr {
+  width: min(100%, 30rem);
+  height: 0.7rem;
+  margin: 2rem 0;
+  border: 0;
+  background: currentColor;
+  mask: var(--shape-line-long-2) left center / 100% 100% no-repeat;
+  -webkit-mask: var(--shape-line-long-2) left center / 100% 100% no-repeat;
+  opacity: 0.38;
 }
 
 .site-frame {
@@ -395,6 +443,15 @@ main {
   --surface-card-border: rgba(4, 50, 27, 0.12);
   --surface-accent: var(--color-daffodil);
   --section-shape-color: color-mix(in srgb, var(--surface) 88%, black);
+}
+
+[data-tone="pink-dark"] {
+  --surface: color-mix(in srgb, var(--color-pink) 50%, var(--color-text));
+  --surface-ink: var(--color-white);
+  --surface-card: rgba(255, 253, 248, 0.14);
+  --surface-card-border: rgba(255, 253, 248, 0.24);
+  --surface-accent: var(--color-stone);
+  --section-shape-color: color-mix(in srgb, var(--surface) 78%, white);
 }
 
 [data-tone="give"] {
