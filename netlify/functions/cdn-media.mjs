@@ -36,7 +36,8 @@ const assertConfigured = () => {
   }
 };
 
-const isManagedKey = (key) => managedPrefixes.some((prefix) => key.startsWith(`${prefix}/`));
+const isManagedKey = (key) =>
+  managedPrefixes.some((prefix) => key === prefix || key.startsWith(`${prefix}/`));
 
 const toKeyFromPath = (path) => {
   const cleanPath = trimSlashes(path);

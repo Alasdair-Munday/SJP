@@ -2,8 +2,8 @@ const managedPrefixes = ["images/uploads", "images/profile-photos"];
 
 const trimSlashes = (value) => value.replace(/^\/+|\/+$/g, "");
 
-const getAssetPath = (event) => {
-  const url = new URL(event.rawUrl);
+const getAssetPath = (request) => {
+  const url = new URL(request.url);
   const explicitPath = url.searchParams.get("path");
 
   if (explicitPath) {
@@ -40,8 +40,8 @@ const getContentType = (path, upstreamType) => {
   }
 };
 
-export default async (request, context) => {
-  const assetPath = getAssetPath(context);
+export default async (request) => {
+  const assetPath = getAssetPath(request);
   const baseUrl = process.env.ASSET_CDN_BASE_URL;
 
   if (!baseUrl) {
