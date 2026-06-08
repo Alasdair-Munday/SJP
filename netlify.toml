@@ -10,11 +10,13 @@
   from = "/images/uploads/*"
   to = "/.netlify/functions/cdn-asset?path=images/uploads/:splat"
   status = 200
+  force = true
 
 [[redirects]]
   from = "/images/profile-photos/*"
   to = "/.netlify/functions/cdn-asset?path=images/profile-photos/:splat"
   status = 200
+  force = true
 
 [[redirects]]
   from = "/admin"
