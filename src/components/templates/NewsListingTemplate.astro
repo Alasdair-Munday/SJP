@@ -24,44 +24,60 @@ const categoryLabels = {
 <div class="page-stack">
   <SectionRenderer sections={page.sections} />
 
-  <section class="content-band" data-tone="stone" data-news-section>
-    <div class="news-filter" aria-label="Filter news posts" data-news-filter>
-      <button class="filter-pill filter-button" type="button" data-filter="all" data-active="true">All</button>
-      {
-        Object.entries(categoryLabels).map(([category, label]) => (
-          <button class="filter-pill filter-button" type="button" data-filter={category}>
-            {label}
-          </button>
-        ))
-      }
+  <section class="content-band news-feed-band" data-tone="stone" data-news-section>
+    <div class="news-feed__header">
+      <div class="news-feed__intro">
+        <p class="eyebrow">Stories and events</p>
+        <h2 class="section-title">From the life of St John's Park</h2>
+      </div>
+
+      <div class="news-filter" aria-label="Filter news posts" data-news-filter>
+        <button class="filter-pill filter-button" type="button" data-filter="all" data-active="true">All</button>
+        {
+          Object.entries(categoryLabels).map(([category, label]) => (
+            <button class="filter-pill filter-button" type="button" data-filter={category}>
+              {label}
+            </button>
+          ))
+        }
+      </div>
     </div>
 
     <div class="news-grid" data-news-grid>
       {
-        posts.map((post) => (
-          <article class="news-card" data-news-card data-category={post.data.category}>
-            <MaskedImage
-              image={withoutImageMask(post.data.featuredImage)}
-              class="news-card__media news-card__media--article"
-            />
-            <div class="news-card__meta">
-              <span class="meta-chip">{categoryLabels[post.data.category]}</span>
-              <span>{formatShortDate(post.data.publishDate)}</span>
-              {post.data.eventDate && <span>{formatDate(post.data.eventDate)}</span>}
+        posts.map((post, index) => (
+          <article
+            class="news-card news-card--feed"
+            data-news-card
+            data-category={post.data.category}
+            data-featured={index === 0 ? "true" : undefined}
+          >
+            <a class="news-card__image-link" href={`/news/${post.slug}`} aria-label={post.data.title}>
+              <MaskedImage
+                image={withoutImageMask(post.data.featuredImage)}
+                class="news-card__media news-card__media--article"
+              />
+            </a>
+            <div class="news-card__body">
+              <div class="news-card__meta news-card__meta--primary">
+                <span class="meta-chip">{categoryLabels[post.data.category]}</span>
+                <span>{formatShortDate(post.data.publishDate)}</span>
+                {post.data.eventDate && <span>{formatDate(post.data.eventDate)}</span>}
+              </div>
+              <h2 class="post-title">
+                <a class="news-card__link" href={`/news/${post.slug}`}>{post.data.title}</a>
+              </h2>
+              <p class="news-card__summary">{post.data.summary}</p>
+              {
+                post.data.category === "event" && (
+                  <div class="news-card__meta news-card__meta--event">
+                    {post.data.timeText && <span>{post.data.timeText}</span>}
+                    {post.data.location && <span>{post.data.location}</span>}
+                  </div>
+                )
+              }
+              <a class="inline-link news-card__readmore" href={`/news/${post.slug}`}>Read more</a>
             </div>
-            <h2 class="post-title">
-              <a class="news-card__link" href={`/news/${post.slug}`}>{post.data.title}</a>
-            </h2>
-            <p class="news-card__summary">{post.data.summary}</p>
-            {
-              post.data.category === "event" && (
-                <div class="news-card__meta">
-                  {post.data.timeText && <span>{post.data.timeText}</span>}
-                  {post.data.location && <span>{post.data.location}</span>}
-                </div>
-              )
-            }
-            <a class="inline-link" href={`/news/${post.slug}`}>Read more</a>
           </article>
         ))
       }
@@ -83,9 +99,14 @@ const categoryLabels = {
         candidate.setAttribute("data-active", candidate === button ? "true" : "false");
       });
 
-      cards.forEach((card) => {
+      cards.forEach((card, index) => {
         const category = card.getAttribute("data-category");
-        card.hidden = filter !== "all" && category !== filter;
+        const shouldHide = filter !== "all" && category !== filter;
+        card.hidden = shouldHide;
+
+        if (!shouldHide) {
+          card.dataset.featured = index === 0 && filter === "all" ? "true" : "false";
+        }
       });
     };
 

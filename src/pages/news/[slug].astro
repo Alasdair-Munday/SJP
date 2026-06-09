@@ -25,31 +25,64 @@ const categoryLabels = {
   update: "Update",
   blog: "Blog",
 };
+const eventDateText =
+  post.data.eventDate && post.data.eventEndDate
+    ? `${formatDate(post.data.eventDate)} - ${formatDate(post.data.eventEndDate)}`
+    : post.data.eventDate
+      ? formatDate(post.data.eventDate)
+      : undefined;
+const detailItems = [
+  { label: "Posted", value: formatShortDate(post.data.publishDate) },
+  { label: "Date", value: eventDateText },
+  { label: "Time", value: post.data.timeText },
+  { label: "Location", value: post.data.location },
+].filter((item) => item.value);
 ---
 
 <BaseLayout title={post.data.title} description={post.data.summary}>
-  <div class="utility-shell page-stack">
-    <article class="content-band" data-tone="stone">
-      <p class="eyebrow">{categoryLabels[post.data.category]}</p>
-      <h1 class="display-title">{post.data.title}</h1>
-      <div class="post-detail__meta">
-        <span>{formatShortDate(post.data.publishDate)}</span>
-        {post.data.eventDate && <span>{formatDate(post.data.eventDate)}</span>}
-        {post.data.timeText && <span>{post.data.timeText}</span>}
-        {post.data.location && <span>{post.data.location}</span>}
+  <div class="utility-shell page-stack post-detail-shell">
+    <article class="content-band post-detail-article" data-tone="stone">
+      <div class="post-detail__header">
+        <div class="post-detail__intro">
+          <a class="inline-link post-detail__back" href="/news">News</a>
+          <p class="eyebrow">{categoryLabels[post.data.category]}</p>
+          <h1 class="display-title post-detail__title">{post.data.title}</h1>
+          <p class="lede post-detail__lede">{post.data.summary}</p>
+        </div>
+
+        <MaskedImage
+          image={withoutImageMask(post.data.featuredImage)}
+          class="post-detail__media"
+          priority
+        />
       </div>
-      <p class="lede">{post.data.summary}</p>
-      <MaskedImage image={withoutImageMask(post.data.featuredImage)} class="post-detail__media" />
-      <div class="post-detail__content">
-        <Content />
-      </div>
-      <div class="button-row">
-        {
-          post.data.ctaHref && post.data.ctaLabel && (
-            <a class="button-link" href={post.data.ctaHref}>{post.data.ctaLabel}</a>
-          )
-        }
-        <a class="button-link--secondary" href="/news">Back to news</a>
+
+      <div class="post-detail__body-grid">
+        <div class="post-detail__content">
+          <Content />
+        </div>
+
+        <aside class="post-detail__aside" aria-label="News post details">
+          <h2 class="post-detail__aside-title">Details</h2>
+          <dl class="post-detail__details-list">
+            {
+              detailItems.map((item) => (
+                <>
+                  <dt>{item.label}</dt>
+                  <dd>{item.value}</dd>
+                </>
+              ))
+            }
+          </dl>
+          <div class="button-row post-detail__actions">
+            {
+              post.data.ctaHref && post.data.ctaLabel && (
+                <a class="button-link" href={post.data.ctaHref}>{post.data.ctaLabel}</a>
+              )
+            }
+            <a class="button-link--secondary" href="/news">Back to news</a>
+          </div>
+        </aside>
       </div>
     </article>
   </div>

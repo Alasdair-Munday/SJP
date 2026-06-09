@@ -94,6 +94,7 @@ const backdropShape =
   data-accent-tone={image.accentTone}
   data-accent-corner={accentCorner}
   data-backdrop-corner={oppositeCorners[accentCorner]}
+  data-has-mask={maskShape ? "true" : "false"}
 >
   <span
     class="masked-media__backdrop"
@@ -116,6 +117,8 @@ const backdropShape =
           loading: priority && isActiveSlide ? "eager" : "lazy",
           decoding: "async",
           fetchpriority: priority && isActiveSlide ? "high" : "low",
+          onerror: "this.closest('.masked-media__shape')?.setAttribute('data-image-error', 'true')",
+          onload: "this.closest('.masked-media__shape')?.removeAttribute('data-image-error')",
         } as const;
 
         if (isLocalRasterImage(galleryImage.src)) {
