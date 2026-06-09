@@ -1,14 +1,15 @@
 ---
 title: Community Fun Day Returns This Summer
-summary: Our church and local partners are preparing another Community Fun Day in the park with activities, food, and welcome for all ages.
-publishDate: 2026-06-10
+summary: Our church and local partners are preparing another Community Fun Day
+  in the park with activities, food, and welcome for all ages.
 category: event
-eventDate: 2026-08-22
-timeText: Saturday afternoon
+publishDate: 2026-06-10
+eventDate: ""
+timeText: ""
 location: St John's Park grounds
-featuredShape: /images/shapes/firework.png
 ctaLabel: Contact us to get involved
 ctaHref: /contact#contact-form
+featuredShape: /images/shapes/firework.png
 featuredImage:
   src: /images/uploads/community-fun-day.jpg
   alt: Families taking part in races and activities outdoors
