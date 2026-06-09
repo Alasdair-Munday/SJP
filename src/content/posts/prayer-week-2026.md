@@ -1,16 +1,16 @@
 ---
-title: Prayer Week at St John's Park
-summary: Join us for a week of prayer as we gather across church life to ask God to renew our worship, friendships, and witness in Park.
-publishDate: 2026-05-14
+title: Thy Kingdom Come Prayer Week
+summary: In May 2026 we joined Thy Kingdom Come with daily morning prayer, an evening prayer gathering, Seek First Pentecost, and a joint prayer gathering.
+publishDate: 2026-05-12
 category: event
 featured: true
-eventDate: 2026-06-01
-eventEndDate: 2026-06-08
-timeText: Daily gatherings through the week
-location: St John's Park and homes across the church family
+eventDate: 2026-05-18
+eventEndDate: 2026-05-24
+timeText: 18-24 May 2026
+location: Zoom, St John's Park, South Street Amphitheatre, and STC Sheffield
 featuredShape: /images/shapes/arch-cutout.png
-ctaLabel: Ask for the full schedule
-ctaHref: /contact#contact-form
+ctaLabel: Learn about prayer
+ctaHref: /get-involved
 featuredImage:
   src: /images/uploads/Prayer.png
   alt: People gathered together for prayer at church
@@ -18,8 +18,8 @@ featuredImage:
   frameTone: park
 ---
 
-Prayer Week is a chance for us to pause together, pray together, and ask God to deepen the life of our church.
+Thy Kingdom Come gave us a week to pray with Christians around the world in the run-up to Pentecost.
 
-Across the week we will meet in a range of simple settings for worship, Scripture, quiet reflection, and shared prayer for our neighbourhood.
+At St John's Park the week included daily morning prayer on Zoom, a Wednesday evening prayer and worship gathering, and prayer focuses including Spirit-filled mission, salvation, the persecuted church, the vulnerable, and children and youth.
 
-If you would like the latest details, please get in touch and we will point you to the right gathering.
+The weekend included Seek First Pentecost at South Street Amphitheatre and a joint prayer gathering at STC Sheffield. It was part of our growing rhythm of praying and fasting together for our community and city.

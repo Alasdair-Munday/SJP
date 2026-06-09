@@ -53,8 +53,8 @@ const galleryImages = [
   })),
 ];
 const hasGallery = galleryImages.length > 1;
-const maskShape = image.maskShape ?? "/images/shapes/curved-square-shape.png";
-const maskName = maskShape.split("/").pop()?.replace(/\.[^.]+$/, "");
+const maskShape = image.maskShape;
+const maskName = maskShape?.split("/").pop()?.replace(/\.[^.]+$/, "");
 const accentCorners = ["top-right", "bottom-left", "top-left", "bottom-right"] as const;
 const accentCorner =
   accentCorners[
@@ -103,7 +103,7 @@ const backdropShape =
     class="masked-media__shape"
     data-gallery={hasGallery ? "true" : undefined}
     data-mask={maskName}
-    style={`--mask-shape: url('${maskShape}');`}
+    style={maskShape ? `--mask-shape: url('${maskShape}');` : undefined}
   >
     {
       galleryImages.map((galleryImage, index) => {

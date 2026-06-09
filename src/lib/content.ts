@@ -26,9 +26,9 @@ export async function getPageContent(id: string) {
 
 export const isEventPost = (post: PostEntry) => post.data.category === "event";
 
-export const withRectangleImageMask = <Image extends { maskShape?: string }>(image: Image) => ({
+export const withoutImageMask = <Image extends { maskShape?: string }>(image: Image) => ({
   ...image,
-  maskShape: "/images/shapes/rectangle.png",
+  maskShape: undefined,
 });
 
 export const isUpcomingEventPost = (post: PostEntry) => {

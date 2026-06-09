@@ -1,10 +1,6 @@
 ---
 import type { CollectionEntry } from "astro:content";
-import {
-  getLatestPosts,
-  getSiteConfig,
-  withRectangleImageMask,
-} from "../../lib/content";
+import { getLatestPosts, getSiteConfig, withoutImageMask } from "../../lib/content";
 import { formatDate, formatShortDate, formatTalkDuration } from "../../lib/format";
 import { getTalks } from "../../lib/talks";
 import MaskedImage from "./MaskedImage.astro";
@@ -46,7 +42,7 @@ const categoryLabels = {
                 aria-label={`News story ${index + 1} of ${posts.length}`}
               >
                 <MaskedImage
-                  image={withRectangleImageMask(post.data.featuredImage)}
+                  image={withoutImageMask(post.data.featuredImage)}
                   class="news-card__media news-card__media--article latest-news-card__media"
                 />
                 <div class="latest-news-card__content">
