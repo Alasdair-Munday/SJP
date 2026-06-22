@@ -2,7 +2,7 @@
 title: Alpha at St John's Park
 summary: Alpha returned in February 2026 as a Tuesday evening course for food, conversation, questions, and exploring Christian faith.
 publishDate: 2026-02-03
-category: event
+category: update
 eventDate: 2026-02-03
 timeText: Tuesdays, 7:30pm
 location: St John's Park

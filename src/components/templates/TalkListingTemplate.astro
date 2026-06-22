@@ -26,19 +26,30 @@ const site = await getSiteConfig();
       {
         talks.map((talk) => (
           <article class="talk-row">
-            <div class="talk-row__meta">
-              <span class="meta-chip">{talk.series}</span>
-              <span>{talk.speaker}</span>
-              <span>{formatDate(talk.date)}</span>
-              {talk.duration > 0 && <span>{formatTalkDuration(talk.duration)}</span>}
-            </div>
-            <h3 class="card-title">{talk.title}</h3>
-            <p>{talk.description}</p>
-            {talk.audioUrl && (
-              <div class="talk-player-wrapper">
-                <audio controls src={talk.audioUrl} class="talk-player"></audio>
-              </div>
+            {talk.imageUrl && (
+              <img
+                src={talk.imageUrl}
+                alt={`Cover art for ${talk.title}`}
+                class="talk-row__media"
+                loading="lazy"
+                decoding="async"
+              />
             )}
+            <div class="talk-row__content">
+              <div class="talk-row__meta">
+                <span class="meta-chip">{talk.series}</span>
+                <span>{talk.speaker}</span>
+                <span>{formatDate(talk.date)}</span>
+                {talk.duration > 0 && <span>{formatTalkDuration(talk.duration)}</span>}
+              </div>
+              <h3 class="card-title">{talk.title}</h3>
+              <p>{talk.description}</p>
+              {talk.audioUrl && (
+                <div class="talk-player-wrapper">
+                  <audio controls src={talk.audioUrl} class="talk-player"></audio>
+                </div>
+              )}
+            </div>
           </article>
         ))
       }

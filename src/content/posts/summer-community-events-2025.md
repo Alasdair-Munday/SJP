@@ -2,7 +2,7 @@
 title: Summer Community Events
 summary: Summer 2025 brought church family and neighbours together through children's activities, outdoor fun, food, and welcome.
 publishDate: 2025-08-31
-category: event
+category: update
 timeText: Summer 2025
 location: St John's Park and the local community
 featuredImage:

@@ -5,7 +5,9 @@ const DEFAULT_SERMONS_RSS_FEED_URL =
 const AUDIO_COM_TITLE_PATTERN =
   /^(?<day>\d{2})\/(?<month>\d{2})\/(?<year>\d{2})\s*\/\/\s*(?<message>.+?)\s*\/\/\s*(?<speaker>.+)$/;
 
-export type Talk = (typeof fallbackTalks.items)[number];
+export type Talk = (typeof fallbackTalks.items)[number] & {
+  imageUrl?: string;
+};
 
 const decodeXmlEntities = (value: string) =>
   value
@@ -85,7 +87,7 @@ const parseFeedTitle = (rawTitle: string, pubDate: string) => {
   };
 };
 
-const parseFeedItem = (itemXml: string): Talk | null => {
+const parseFeedItem = (itemXml: string, fallbackImageUrl = ""): Talk | null => {
   const title = stripHtml(getTagContent(itemXml, "title"));
   const pubDate = stripHtml(getTagContent(itemXml, "pubDate"));
   const summary =
@@ -96,6 +98,12 @@ const parseFeedItem = (itemXml: string): Talk | null => {
     10,
   );
   const audioUrl = getTagAttribute(itemXml, "enclosure", "url");
+  const imageUrl =
+    getTagAttribute(itemXml, "itunes:image", "href") ||
+    getTagContent(itemXml, "itunes:image") ||
+    getTagAttribute(itemXml, "media:thumbnail", "url") ||
+    getTagAttribute(itemXml, "media:content", "url") ||
+    fallbackImageUrl;
 
   if (!title || !audioUrl) {
     return null;
@@ -110,6 +118,7 @@ const parseFeedItem = (itemXml: string): Talk | null => {
     series: parsedTitle.series,
     passage: "",
     audioUrl,
+    imageUrl,
     description: summary || parsedTitle.description,
     duration: Number.isFinite(duration) ? duration : 0,
   };
@@ -118,11 +127,25 @@ const parseFeedItem = (itemXml: string): Talk | null => {
 const sortByDateDescending = (left: Talk, right: Talk) =>
   right.date.localeCompare(left.date) || left.title.localeCompare(right.title);
 
-const parseFeed = (xml: string): Talk[] =>
-  Array.from(xml.matchAll(/<item\b[\s\S]*?<\/item>/gi))
-    .map(([itemXml]) => parseFeedItem(itemXml))
+const getFeedImageUrl = (xml: string) => {
+  const channelXml = getTagContent(xml, "channel") || xml;
+
+  return (
+    getTagAttribute(channelXml, "itunes:image", "href") ||
+    getTagContent(getTagContent(channelXml, "image"), "url") ||
+    getTagAttribute(channelXml, "media:thumbnail", "url") ||
+    getTagAttribute(channelXml, "media:content", "url")
+  );
+};
+
+const parseFeed = (xml: string): Talk[] => {
+  const feedImageUrl = getFeedImageUrl(xml);
+
+  return Array.from(xml.matchAll(/<item\b[\s\S]*?<\/item>/gi))
+    .map(([itemXml]) => parseFeedItem(itemXml, feedImageUrl))
     .filter((item): item is Talk => Boolean(item))
     .sort(sortByDateDescending);
+};
 
 export const getTalksRssFeedUrl = () =>
   import.meta.env.SERMONS_RSS_FEED_URL || DEFAULT_SERMONS_RSS_FEED_URL;

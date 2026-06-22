@@ -1,0 +1,116 @@
+{
+  "title": "Park Youth",
+  "metaDescription": "Find out about Park Youth at St John's Park, including Sunday Faith Explorers, Wednesday Cornerstone, and ways for secondary schoolers to belong.",
+  "template": "standard",
+  "sections": [
+    {
+      "type": "hero",
+      "eyebrow": "Secondary schoolers",
+      "title": "Park Youth",
+      "body": "Park Youth is a place for secondary schoolers to belong, explore faith, ask good questions, build friendships, and grow as followers of Jesus.",
+      "backgroundTone": "door",
+      "primaryCta": {
+        "label": "Ask about Park Youth",
+        "href": "/contact#contact-form"
+      },
+      "secondaryCta": {
+        "label": "Safeguarding",
+        "href": "/safeguarding"
+      },
+      "image": {
+        "src": "/images/uploads/park-youth-group.jpg",
+        "alt": "Young people gathered for Park Youth",
+        "maskShape": "/images/shapes/arch-shape-filled.png",
+        "accentShape": "/images/shapes/firework.png",
+        "objectPosition": "center center",
+        "accentTone": "give",
+        "frameTone": "sky"
+      }
+    },
+    {
+      "type": "cards",
+      "eyebrow": "When we meet",
+      "title": "Sundays and midweek",
+      "intro": "Park Youth has space on Sundays and during the week, with different rhythms for different kinds of connection.",
+      "backgroundTone": "stone",
+      "columns": 2,
+      "cards": [
+        {
+          "title": "Faith Explorers",
+          "tag": "Term-time Sundays",
+          "body": "Faith Explorers runs during the second part of the Sunday service for secondary schoolers up to 16.",
+          "tone": "door",
+          "iconShape": "/images/shapes/concentric-circles.png"
+        },
+        {
+          "title": "Cornerstone",
+          "tag": "Wednesdays, 6:00pm-7:15pm",
+          "body": "Cornerstone is our midweek Park Youth group for secondary schoolers, with friendship, faith, and space to talk honestly.",
+          "tone": "pink",
+          "iconShape": "/images/shapes/star-brushstroke.png"
+        }
+      ]
+    },
+    {
+      "type": "cards",
+      "eyebrow": "Youth lead",
+      "title": "Meet Revd Wachira",
+      "intro": "Wachira heads up Park Youth and helps young people find friendship, ask honest questions, and grow in faith.",
+      "backgroundTone": "pink",
+      "columns": 1,
+      "cards": [
+        {
+          "title": "Revd Wachira Maina",
+          "tag": "Youth Lead",
+          "body": "Wachira serves as curate at St John's Park and leads Park Youth alongside the wider team.",
+          "href": "/contact#contact-form",
+          "linkLabel": "Ask about Park Youth",
+          "image": {
+            "src": "/images/profile-photos/wachira.jpeg",
+            "alt": "Wachira Maina",
+            "maskShape": "/images/shapes/circle-shape-3.png",
+            "objectPosition": "62% 45%",
+            "frameTone": "door"
+          },
+          "tone": "stone"
+        }
+      ]
+    },
+    {
+      "type": "split",
+      "eyebrow": "Growing together",
+      "title": "Questions are welcome",
+      "body": "Teenagers are not expected to have faith all neatly worked out. Park Youth is a place to bring real questions, read the Bible together, pray, laugh, and discover what following Jesus can look like in everyday life.",
+      "points": [
+        "A safe place to ask questions and explore faith.",
+        "Friendships with other young people in the church family.",
+        "Leaders who care about young people being known, listened to, and encouraged."
+      ],
+      "backgroundTone": "sky",
+      "image": {
+        "src": "/images/uploads/park-youth-group.jpg",
+        "alt": "Young people spending time together at Park Youth",
+        "accentShape": "/images/shapes/heart-outline.png",
+        "objectPosition": "center center",
+        "frameTone": "door"
+      },
+      "ctas": [
+        {
+          "label": "Contact us about Park Youth",
+          "href": "/contact#contact-form"
+        }
+      ]
+    },
+    {
+      "type": "cta",
+      "eyebrow": "Coming along",
+      "title": "Want to know where to start?",
+      "body": "If you are a parent, carer, or young person with questions about Park Youth, we would be very happy to help you find the right first step.",
+      "backgroundTone": "park-dark",
+      "primaryCta": {
+        "label": "Send us a message",
+        "href": "/contact#contact-form"
+      }
+    }
+  ]
+}

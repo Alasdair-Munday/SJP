@@ -2,7 +2,7 @@
 title: Thy Kingdom Come Prayer Week
 summary: In May 2026 we joined Thy Kingdom Come with daily morning prayer, an evening prayer gathering, Seek First Pentecost, and a joint prayer gathering.
 publishDate: 2026-05-12
-category: event
+category: update
 featured: true
 eventDate: 2026-05-18
 eventEndDate: 2026-05-24

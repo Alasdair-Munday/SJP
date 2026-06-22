@@ -2,7 +2,7 @@
 title: New Wine Worship Night
 summary: In March 2026 St John's Park hosted the New Wine Worship team for a city-wide evening of worship and prayer.
 publishDate: 2026-03-18
-category: event
+category: update
 eventDate: 2026-03-18
 timeText: Wednesday evening
 location: St John's Park

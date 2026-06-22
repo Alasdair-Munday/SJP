@@ -211,7 +211,7 @@ collections:
                   - {label: "Eyebrow", name: "eyebrow", widget: "string", required: false, hint: "Small text above the title."}
                   - {label: "Title", name: "title", widget: "string"}
                   - {label: "Body", name: "body", widget: "text"}
-                  - {label: "Background Tone", name: "backgroundTone", widget: "select", options: ["park", "park-dark", "stone", "sky", "pink", "pink-dark", "door", "give", "grass", "roof"], required: false}
+                  - {label: "Background Tone", name: "backgroundTone", widget: "select", options: ["park", "park-dark", "stone", "sky", "pink", "pink-dark", "orange", "door", "give", "grass", "roof"], required: false}
                   - {label: "Highlight Label", name: "highlightLabel", widget: "string", required: false}
                   - label: "Primary Button"
                     name: "primaryCta"
@@ -264,7 +264,7 @@ collections:
                   - {label: "Eyebrow", name: "eyebrow", widget: "string", required: false}
                   - {label: "Title", name: "title", widget: "string"}
                   - {label: "Body", name: "body", widget: "text"}
-                  - {label: "Background Tone", name: "backgroundTone", widget: "select", options: ["park", "park-dark", "stone", "sky", "pink", "pink-dark", "door", "give", "grass", "roof"], required: false}
+                  - {label: "Background Tone", name: "backgroundTone", widget: "select", options: ["park", "park-dark", "stone", "sky", "pink", "pink-dark", "orange", "door", "give", "grass", "roof"], required: false}
                   - {label: "Bullet Points", name: "points", widget: "list", required: false, summary: "{{point}}", field: {label: "Point", name: "point", widget: "string"}}
                   - label: "Buttons"
                     name: "ctas"
@@ -297,7 +297,7 @@ collections:
                   - {label: "Eyebrow", name: "eyebrow", widget: "string", required: false}
                   - {label: "Title", name: "title", widget: "string"}
                   - {label: "Intro Text", name: "intro", widget: "text", required: false}
-                  - {label: "Background Color", name: "backgroundTone", widget: "select", options: ["park", "park-dark", "stone", "sky", "pink", "pink-dark", "door", "give", "grass", "roof"], required: false}
+                  - {label: "Background Color", name: "backgroundTone", widget: "select", options: ["park", "park-dark", "stone", "sky", "pink", "pink-dark", "orange", "door", "give", "grass", "roof"], required: false}
                   - {label: "Columns", name: "columns", widget: "hidden", required: false}
                   - label: "Cards"
                     name: "cards"
@@ -309,7 +309,7 @@ collections:
                       - {label: "Body", name: "body", widget: "text", required: false}
                       - {label: "Link", name: "href", widget: "string", required: false}
                       - {label: "Link Label", name: "linkLabel", widget: "string", required: false}
-                      - {label: "Card Color", name: "tone", widget: "select", options: ["park", "park-dark", "stone", "sky", "pink", "pink-dark", "door", "give", "grass", "roof"], required: false}
+                      - {label: "Card Color", name: "tone", widget: "select", options: ["park", "park-dark", "stone", "sky", "pink", "pink-dark", "orange", "door", "give", "grass", "roof"], required: false}
                       - {label: "Icon Shape", name: "iconShape", widget: "hidden", required: false}
                       - label: "Card Image Settings"
                         name: "image"
@@ -331,7 +331,7 @@ collections:
                   - {label: "Eyebrow", name: "eyebrow", widget: "string", required: false}
                   - {label: "Title", name: "title", widget: "string"}
                   - {label: "Intro Text", name: "intro", widget: "text", required: false}
-                  - {label: "Background Color", name: "backgroundTone", widget: "select", options: ["park", "park-dark", "stone", "sky", "pink", "pink-dark", "door", "give", "grass", "roof"], required: false}
+                  - {label: "Background Color", name: "backgroundTone", widget: "select", options: ["park", "park-dark", "stone", "sky", "pink", "pink-dark", "orange", "door", "give", "grass", "roof"], required: false}
                   - {label: "Source", name: "source", widget: "select", options: ["posts", "talks"], hint: "What to show in the feed"}
                   - {label: "Number of Items", name: "limit", widget: "number"}
                   - label: "View All Button"
@@ -351,7 +351,7 @@ collections:
                   - {label: "Eyebrow", name: "eyebrow", widget: "string", required: false}
                   - {label: "Title", name: "title", widget: "string"}
                   - {label: "Body", name: "body", widget: "text"}
-                  - {label: "Background Color", name: "backgroundTone", widget: "select", options: ["park", "park-dark", "stone", "sky", "pink", "pink-dark", "door", "give", "grass", "roof"], required: false}
+                  - {label: "Background Color", name: "backgroundTone", widget: "select", options: ["park", "park-dark", "stone", "sky", "pink", "pink-dark", "orange", "door", "give", "grass", "roof"], required: false}
                   - label: "Primary Button"
                     name: "primaryCta"
                     widget: "object"
@@ -391,7 +391,7 @@ collections:
                   - {label: "Eyebrow", name: "eyebrow", widget: "string", required: false}
                   - {label: "Title", name: "title", widget: "string"}
                   - {label: "Body", name: "body", widget: "text"}
-                  - {label: "Background Tone", name: "backgroundTone", widget: "select", options: ["park", "park-dark", "stone", "sky", "pink", "pink-dark", "door", "give", "grass", "roof"], required: false}
+                  - {label: "Background Tone", name: "backgroundTone", widget: "select", options: ["park", "park-dark", "stone", "sky", "pink", "pink-dark", "orange", "door", "give", "grass", "roof"], required: false}
                   - label: "Buttons"
                     name: "ctas"
                     widget: "list"
@@ -409,7 +409,7 @@ collections:
                 fields:
                   - {label: "Eyebrow", name: "eyebrow", widget: "string", required: false}
                   - {label: "Title", name: "title", widget: "string"}
-                  - {label: "Background Tone", name: "backgroundTone", widget: "select", options: ["park", "park-dark", "stone", "sky", "pink", "pink-dark", "door", "give", "grass", "roof"], required: false}
+                  - {label: "Background Tone", name: "backgroundTone", widget: "select", options: ["park", "park-dark", "stone", "sky", "pink", "pink-dark", "orange", "door", "give", "grass", "roof"], required: false}
                   - {label: "Content", name: "contentHtml", widget: "text", hint: "Accepts basic HTML."}
 
       - label: "Visit Page"

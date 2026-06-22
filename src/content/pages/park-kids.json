@@ -1,0 +1,131 @@
+{
+  "title": "Park Kids",
+  "metaDescription": "Find out about Park Kids at St John's Park, including Sunday groups for children, All In Sundays, and how families can ask questions before visiting.",
+  "template": "standard",
+  "sections": [
+    {
+      "type": "hero",
+      "eyebrow": "Children and families",
+      "title": "Park Kids",
+      "body": "Park Kids helps children know they are loved by God, welcomed by the church family, and able to grow in faith in ways that fit their age and stage.",
+      "backgroundTone": "orange",
+      "primaryCta": {
+        "label": "Ask about Park Kids",
+        "href": "/contact#contact-form"
+      },
+      "secondaryCta": {
+        "label": "Safeguarding",
+        "href": "/safeguarding"
+      },
+      "image": {
+        "src": "/images/uploads/Kids-outdoor-games-2.jpg",
+        "alt": "Children and families enjoying activities around the churchyard",
+        "maskShape": "/images/shapes/arch-shape-filled.png",
+        "accentShape": "/images/shapes/flower-outline.png",
+        "objectPosition": "center center",
+        "accentTone": "give",
+        "frameTone": "stone"
+      }
+    },
+    {
+      "type": "intro",
+      "eyebrow": "Sundays",
+      "title": "A place for children to belong",
+      "body": "During term-time Sundays, Park Kids runs during the second part of the service for primary-aged children. The group makes space for Bible stories, prayer, games, creativity, questions, and friendship.",
+      "backgroundTone": "sky",
+      "ctas": [
+        {
+          "label": "Plan a first visit",
+          "href": "/visit"
+        }
+      ]
+    },
+    {
+      "type": "cards",
+      "eyebrow": "Children and families",
+      "title": "Meet Kirsty",
+      "intro": "Kirsty leads our children and families work and helps Park Kids feel welcoming, safe, and rooted in faith.",
+      "backgroundTone": "stone",
+      "columns": 1,
+      "cards": [
+        {
+          "title": "Kirsty Dronfield",
+          "tag": "Children and Families Lead",
+          "body": "Kirsty helps children and families belong, grow in faith, and take part in the life of St John's Park.",
+          "href": "mailto:kirsty@saintjohnspark.org",
+          "linkLabel": "Email Kirsty",
+          "image": {
+            "src": "/images/profile-photos/kirsty.jpeg",
+            "alt": "Kirsty Dronfield",
+            "maskShape": "/images/shapes/circle-shape-4.png",
+            "frameTone": "grass"
+          },
+          "tone": "stone"
+        }
+      ]
+    },
+    {
+      "type": "cards",
+      "eyebrow": "What to expect",
+      "title": "Faith, friendship, and fun",
+      "intro": "We want children to feel safe, known, and included as part of the whole church family.",
+      "backgroundTone": "stone",
+      "columns": 3,
+      "cards": [
+        {
+          "title": "Bible and prayer",
+          "body": "Children explore faith through age-appropriate Bible teaching, simple prayer, and space to ask honest questions.",
+          "tone": "orange",
+          "iconShape": "/images/shapes/star-shape.png"
+        },
+        {
+          "title": "Games and creativity",
+          "body": "Sessions include playful, practical activities that help children take part and remember what they are learning.",
+          "tone": "grass",
+          "iconShape": "/images/shapes/concentric-circles.png"
+        },
+        {
+          "title": "Known by name",
+          "body": "Our leaders work to make Park Kids welcoming, consistent, and caring for children and families.",
+          "tone": "park",
+          "iconShape": "/images/shapes/heart-shape.png"
+        }
+      ]
+    },
+    {
+      "type": "split",
+      "eyebrow": "First Sundays",
+      "title": "All In Sundays",
+      "body": "On the first Sunday of the month, every generation worships together in the main service. Children are not just tolerated in the room; they are part of the church family.",
+      "points": [
+        "Every generation worships together.",
+        "The service is shaped so children can participate.",
+        "Families are welcome even when children make noise or need to move around."
+      ],
+      "backgroundTone": "pink",
+      "image": {
+        "src": "/images/uploads/crafting.jpg",
+        "alt": "Children taking part in a creative activity",
+        "accentShape": "/images/shapes/star-brushstroke.png",
+        "objectPosition": "center center",
+        "frameTone": "orange"
+      },
+      "reverse": true
+    },
+    {
+      "type": "cta",
+      "eyebrow": "Questions",
+      "title": "Want to ask before coming?",
+      "body": "If your child has particular needs, if you are unsure where they would fit, or if you simply want to know what Sunday will feel like, please get in touch.",
+      "backgroundTone": "park-dark",
+      "primaryCta": {
+        "label": "Contact us",
+        "href": "/contact#contact-form"
+      },
+      "secondaryCta": {
+        "label": "Read safeguarding",
+        "href": "/safeguarding"
+      }
+    }
+  ]
+}

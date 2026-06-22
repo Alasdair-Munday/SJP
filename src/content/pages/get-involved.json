@@ -33,7 +33,7 @@
       "title": "Church Life",
       "intro": "Most people begin by turning up on a Sunday, then gradually finding the rhythms and teams that help them belong more deeply.",
       "backgroundTone": "stone",
-      "columns": 2,
+      "columns": 3,
       "cards": [
         {
           "title": "Sundays and worship",
@@ -44,18 +44,26 @@
           "iconShape": "/images/shapes/concentric-circles.png"
         },
         {
-          "title": "Kids and youth",
-          "body": "Park Kids, Park Youth, and wider family life matter deeply here. We want younger generations to know they belong and can grow in faith.",
-          "href": "/visit",
-          "linkLabel": "See newcomer details",
-          "tone": "pink",
+          "title": "Park Kids",
+          "body": "Sunday groups and All In Sundays help children belong, explore faith, and grow as part of the whole church family.",
+          "href": "/park-kids",
+          "linkLabel": "Explore Park Kids",
+          "tone": "orange",
+          "iconShape": "/images/shapes/concentric-circles.png"
+        },
+        {
+          "title": "Park Youth",
+          "body": "Faith Explorers and Cornerstone create space for secondary schoolers to build friendships, ask questions, and follow Jesus.",
+          "href": "/park-youth",
+          "linkLabel": "Explore Park Youth",
+          "tone": "door",
           "iconShape": "/images/shapes/concentric-circles.png"
         },
         {
           "title": "Park Communities",
           "body": "Friendship, prayer, Scripture, and local care continue beyond Sunday through Park Communities and shared life together.",
-          "href": "/contact",
-          "linkLabel": "Ask about Park Communities",
+          "href": "/park-communities",
+          "linkLabel": "Explore Park Communities",
           "tone": "pink",
           "iconShape": "/images/shapes/concentric-circles.png"
         },

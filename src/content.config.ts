@@ -6,6 +6,7 @@ const toneSchema = z.enum([
   "stone",
   "pink",
   "pink-dark",
+  "orange",
   "sky",
   "night",
   "grass",

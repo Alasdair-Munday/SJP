@@ -2,7 +2,7 @@
 title: Week of Prayer and Fasting
 summary: We began 2026 with a week of prayer and fasting, daily morning prayer, a church prayer gathering, and Seek First at Sheffield Cathedral.
 publishDate: 2026-01-26
-category: event
+category: update
 eventDate: 2026-01-26
 eventEndDate: 2026-02-01
 timeText: 26 January - 1 February 2026

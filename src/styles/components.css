@@ -354,6 +354,10 @@
   --frame-background: rgba(211, 138, 177, 0.28);
 }
 
+[data-frame-tone="orange"] {
+  --frame-background: rgba(237, 97, 57, 0.24);
+}
+
 [data-frame-tone="sky"] {
   --frame-background: rgba(168, 215, 253, 0.34);
 }
@@ -392,6 +396,10 @@
 
 [data-accent-tone="pink-dark"] {
   --media-accent: color-mix(in srgb, var(--color-pink) 50%, var(--color-text));
+}
+
+[data-accent-tone="orange"] {
+  --media-accent: var(--color-hyde-red);
 }
 
 [data-accent-tone="sky"] {
@@ -481,6 +489,10 @@
 
 .info-card[data-card-tone="pink-dark"] {
   --card-accent: color-mix(in srgb, var(--color-pink) 50%, var(--color-text));
+}
+
+.info-card[data-card-tone="orange"] {
+  --card-accent: var(--color-hyde-red);
 }
 
 .info-card[data-card-tone="sky"] {
@@ -611,7 +623,9 @@
 .info-card[data-has-image="true"]::before,
 .info-card[data-has-image="true"]::after,
 .info-card[data-has-icon="true"]::before,
-.news-card:has(.news-card__media)::before {
+.news-card:has(.news-card__media)::before,
+.talk-card:has(.talk-card__media)::before,
+.talk-row:has(.talk-row__media)::before {
   display: none;
 }
 
@@ -1000,6 +1014,31 @@
 .talk-row {
   gap: 0.7rem;
   padding: clamp(1rem, 1.8vw, 1.4rem) 0 0;
+}
+
+.talk-card:has(.talk-card__media),
+.talk-row:has(.talk-row__media) {
+  grid-template-columns: minmax(7.5rem, 10rem) minmax(0, 1fr);
+  column-gap: clamp(1rem, 2vw, 1.6rem);
+  align-items: start;
+}
+
+.talk-card__media,
+.talk-row__media {
+  display: block;
+  grid-row: span 5;
+  width: 100%;
+  min-height: 0;
+  aspect-ratio: 1;
+  object-fit: cover;
+  background: var(--surface-card, rgba(255, 253, 248, 0.42));
+  box-shadow: var(--shadow-card);
+}
+
+.talk-row__content {
+  display: grid;
+  gap: 0.7rem;
+  min-width: 0;
 }
 
 .news-filter {
@@ -1488,6 +1527,17 @@
 
   .news-card--feed[data-featured="true"] {
     grid-column: auto;
+  }
+
+  .talk-card:has(.talk-card__media),
+  .talk-row:has(.talk-row__media) {
+    grid-template-columns: 1fr;
+  }
+
+  .talk-card__media,
+  .talk-row__media {
+    grid-row: auto;
+    max-width: 13rem;
   }
 
   .news-card--feed[data-featured="true"] .news-card__media {

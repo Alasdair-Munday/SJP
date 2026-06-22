@@ -2,7 +2,7 @@
 title: Easter at St John's Park
 summary: Easter 2026 included the Easter Extravaganza, Holy Week Bible study, Passover meals, Good Friday prayer, sunrise worship, and Easter celebration.
 publishDate: 2026-04-05
-category: event
+category: update
 eventDate: 2026-03-29
 eventEndDate: 2026-04-05
 timeText: Palm Sunday to Easter Sunday

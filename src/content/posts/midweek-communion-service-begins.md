@@ -2,7 +2,7 @@
 title: Midweek Communion Service Begins
 summary: In January 2026 we began a weekly Thursday communion service followed by tea, coffee, and cake.
 publishDate: 2026-01-08
-category: event
+category: update
 eventDate: 2026-01-08
 timeText: Thursdays, 9:30-10:45am
 location: St John's Park

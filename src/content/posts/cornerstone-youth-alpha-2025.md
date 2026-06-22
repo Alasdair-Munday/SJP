@@ -2,7 +2,7 @@
 title: Cornerstone Youth Alpha
 summary: Our Cornerstone youth group journeyed through Alpha together in autumn 2025, creating space for questions, faith, friendship, and prayer.
 publishDate: 2025-12-17
-category: event
+category: update
 timeText: Autumn term 2025
 location: St John's Park
 featuredImage:

@@ -2,7 +2,7 @@
 title: Arise March Prayer Walking
 summary: During March 2026 we joined Christians across Sheffield in praying for the city through Arise March.
 publishDate: 2026-03-01
-category: event
+category: update
 eventDate: 2026-03-01
 eventEndDate: 2026-03-31
 timeText: Throughout March

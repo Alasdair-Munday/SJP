@@ -2,7 +2,7 @@
 title: Baptism Sunday
 summary: In June 2026 we celebrated three baptisms at the start of our Sunday service.
 publishDate: 2026-06-07
-category: event
+category: update
 eventDate: 2026-06-07
 timeText: Sunday morning service
 location: St John's Park

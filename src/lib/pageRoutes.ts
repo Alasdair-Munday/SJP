@@ -9,6 +9,9 @@ export interface MappedPageRoute {
 export const mappedPageRoutes = [
   { slug: "community", pageId: "community", template: "standard" },
   { slug: "get-involved", pageId: "get-involved", template: "standard" },
+  { slug: "park-kids", pageId: "park-kids", template: "standard" },
+  { slug: "park-youth", pageId: "park-youth", template: "standard" },
+  { slug: "park-communities", pageId: "park-communities", template: "standard" },
   { slug: "visit", pageId: "visit", template: "standard" },
   { slug: "who-we-are", pageId: "who-we-are", template: "standard" },
   { slug: "privacy", pageId: "privacy", template: "utility" },

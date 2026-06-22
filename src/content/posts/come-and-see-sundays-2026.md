@@ -2,7 +2,7 @@
 title: Come and See Sundays
 summary: In May 2026 the church family was invited to step into children's church and see the life, creativity, and discipleship happening there.
 publishDate: 2026-05-04
-category: event
+category: update
 eventDate: 2026-05-10
 eventEndDate: 2026-05-31
 timeText: Sundays in May during the main service

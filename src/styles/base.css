@@ -454,6 +454,16 @@ hr {
   --section-shape-color: color-mix(in srgb, var(--surface) 78%, white);
 }
 
+[data-tone="orange"] {
+  --surface: var(--color-hyde-red);
+  --surface-ink: var(--color-white);
+  --surface-card: rgba(255, 253, 248, 0.14);
+  --surface-card-border: rgba(255, 253, 248, 0.24);
+  --surface-accent: var(--color-parking-line);
+  --section-shape-color: color-mix(in srgb, var(--surface) 78%, white);
+  --section-shape: var(--shape-firework);
+}
+
 [data-tone="give"] {
   --surface: var(--color-stone);
   --surface-ink: var(--color-text);

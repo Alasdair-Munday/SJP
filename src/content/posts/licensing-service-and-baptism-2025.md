@@ -2,7 +2,7 @@
 title: Licensing Service and Baptism Celebration
 summary: In June 2025 we gathered to mark Revd Luke Graham's licensing as Priest-in-charge and to celebrate baptism within the church family.
 publishDate: 2025-06-22
-category: event
+category: update
 eventDate: 2025-06-22
 timeText: Sunday service
 location: St John's Park

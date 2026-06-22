@@ -48,8 +48,7 @@ const categoryLabels = {
                 <div class="latest-news-card__content">
                   <div class="news-card__meta">
                     <span class="meta-chip">{categoryLabels[post.data.category]}</span>
-                    <span>{formatShortDate(post.data.publishDate)}</span>
-                    {post.data.eventDate && <span>{formatDate(post.data.eventDate)}</span>}
+                    <span>{post.data.category === "event" && post.data.eventDate ? formatDate(post.data.eventDate) : formatShortDate(post.data.publishDate)}</span>
                   </div>
                   <h3 class="post-title">
                     <a class="news-card__link" href={`/news/${post.slug}`}>{post.data.title}</a>
@@ -87,6 +86,15 @@ const categoryLabels = {
       <div class="latest-list">
         {talks.map((talk, index) => (
           <article class="talk-card" id={index === 0 ? "latest-talk" : undefined}>
+            {talk.imageUrl && (
+              <img
+                src={talk.imageUrl}
+                alt={`Cover art for ${talk.title}`}
+                class="talk-card__media"
+                loading="lazy"
+                decoding="async"
+              />
+            )}
             <div class="talk-card__meta">
               <span class="meta-chip">{talk.series}</span>
               <span>{formatDate(talk.date)}</span>

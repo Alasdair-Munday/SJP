@@ -2,7 +2,7 @@
 title: Christmas Weekend at St John's Park
 summary: Jingle Bell Jollof, communion, Christingle and Carols, and Christmas Day worship brought the church family and neighbours together.
 publishDate: 2025-12-25
-category: event
+category: update
 eventDate: 2025-12-20
 eventEndDate: 2025-12-25
 timeText: Christmas weekend and Christmas Day

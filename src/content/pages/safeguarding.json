@@ -1,6 +1,6 @@
 {
   "title": "Safeguarding",
-  "metaDescription": "Safeguarding information, policy access, and key contacts for St John's Park Church.",
+  "metaDescription": "Safeguarding information, policy access, volunteer DBS guidance, key contacts, and helplines for St John's Park Church.",
   "template": "utility",
   "sections": [
     {
@@ -8,7 +8,109 @@
       "eyebrow": "Safeguarding",
       "title": "Safeguarding",
       "backgroundTone": "stone",
-      "contentHtml": "<p>St John's Park is committed to high standards in the safeguarding and care of children and vulnerable adults across all areas of church life.</p><p>If you need to speak to someone locally, please contact Claire Smith, our safeguarding officer, at <a href='mailto:safeguarding@saintjohnspark.org'>safeguarding@saintjohnspark.org</a>.</p><p>You can download our current safeguarding policy here: <a href='https://www.saintjohnspark.org.uk/wp-content/uploads/2025/08/St-Johns-Safeguarding-Policy-2025-2.docx'>St John's Safeguarding Policy 2025 (DOCX)</a>.</p><p>The Diocese of Sheffield's Safeguarding Adviser is Siân Checkley. Contact 01709 309100 or 07741 013775, or email <a href='mailto:sian.checkley@sheffield.anglican.org'>sian.checkley@sheffield.anglican.org</a>. More diocesan safeguarding information is available at <a href='https://www.sheffield.anglican.org/support/safeguarding' target='_blank' rel='noreferrer'>sheffield.anglican.org/support/safeguarding</a>.</p>"
+      "contentHtml": "<p>St John's Park is committed to high standards in the safeguarding and care of children, young people, and vulnerable adults across all areas of church life.</p><p>The care and protection of children, young people, and adults involved in Church activities is the responsibility of everyone who participates in the life of the Church. We follow the <a href='https://www.churchofengland.org/safeguarding/policy-and-practice-guidance' target='_blank' rel='noreferrer'>Church of England House of Bishops safeguarding policy</a> for children, young people, and adults.</p><p>You can read our safeguarding policy at <a href='https://safeguarding.stjohnspark.org' target='_blank' rel='noreferrer'>safeguarding.stjohnspark.org</a>, or download the current policy here: <a href='https://www.saintjohnspark.org.uk/wp-content/uploads/2025/08/St-Johns-Safeguarding-Policy-2025-2.docx'>St John's Safeguarding Policy 2025 (DOCX)</a>.</p>"
+    },
+    {
+      "type": "richText",
+      "eyebrow": "Report",
+      "title": "Report a Concern",
+      "backgroundTone": "park-dark",
+      "contentHtml": "<p>If you have any concerns, no matter how small, please report them to <a href='mailto:safeguarding@saintjohnspark.org'>safeguarding@saintjohnspark.org</a>.</p><p>If you are concerned that someone you know is at risk of, or is being abused, or presents a risk to others, please seek advice from a Safeguarding Adviser. If necessary, report the matter to Sheffield Safeguarding Hub, Local Authority Social Care Services, or the Police without delay.</p><p><strong>If there is immediate risk or danger, call the Police on 999.</strong></p><p><a href='https://www.safeguardingsheffieldchildren.org/p/processes/referring-a-safeguarding-concern-to-childrens-social-care' target='_blank' rel='noreferrer'>Sheffield Safeguarding Hub</a>: <a href='tel:01142734855'>0114 273 4855</a> (24 hours).</p>"
+    },
+    {
+      "type": "richText",
+      "eyebrow": "Contacts",
+      "title": "Local Contacts",
+      "backgroundTone": "sky",
+      "contentHtml": "<p>Local contacts are available to speak to if you have any concerns.</p><ul><li><strong>Claire Smith</strong>, Parish Safeguarding Officer: <a href='mailto:safeguarding@saintjohnspark.org'>safeguarding@saintjohnspark.org</a>; <a href='tel:07991909354'>07991 909 354</a>.</li><li><strong>Morayo Aribigbola</strong>, Safeguarding Assistant.</li><li><strong>Revd Luke Graham</strong>, Safeguarding Assistant: <a href='mailto:luke@saintjohnspark.org'>luke@saintjohnspark.org</a>.</li><li><strong>Kirsty Kershaw</strong>, Safeguarding Assistant and Children and Families Lead: <a href='mailto:kirsty@saintjohnspark.org'>kirsty@saintjohnspark.org</a>; <a href='tel:07868879990'>07868 879 990</a>.</li><li><strong>Siân Checkley</strong>, Diocesan Safeguarding Adviser: <a href='tel:01709309100'>01709 309100</a> or <a href='tel:07741013775'>07741 013775</a>; <a href='mailto:sian.checkley@sheffield.anglican.org'>sian.checkley@sheffield.anglican.org</a>.</li></ul><p>More diocesan safeguarding information is available at <a href='https://www.sheffield.anglican.org/support/safeguarding' target='_blank' rel='noreferrer'>sheffield.anglican.org/support/safeguarding</a>.</p>"
+    },
+    {
+      "type": "cards",
+      "eyebrow": "Safeguarding team",
+      "title": "People You Can Speak To",
+      "intro": "These St John's Park safeguarding contacts are available if you need to raise a concern or ask for advice.",
+      "backgroundTone": "stone",
+      "columns": 4,
+      "cards": [
+        {
+          "title": "Claire Smith",
+          "tag": "Parish Safeguarding Officer",
+          "body": "Claire is the first point of contact for safeguarding concerns at St John's Park.",
+          "href": "mailto:safeguarding@saintjohnspark.org",
+          "linkLabel": "Email safeguarding",
+          "image": {
+            "src": "/images/profile-photos/claire.jpg",
+            "alt": "Photo of Claire Smith",
+            "maskShape": "/images/shapes/circle-shape-2.png",
+            "objectPosition": "45% 24%",
+            "frameTone": "pink"
+          },
+          "tone": "stone"
+        },
+        {
+          "title": "Morayo Aribigbola",
+          "tag": "Safeguarding Assistant",
+          "body": "Morayo is part of the safeguarding support team at St John's Park.",
+          "image": {
+            "src": "/images/profile-photos/mo.jpeg",
+            "alt": "Morayo Aribigbola",
+            "maskShape": "/images/shapes/circle-shape-4.png",
+            "objectPosition": "50% 32%",
+            "frameTone": "park"
+          },
+          "tone": "stone"
+        },
+        {
+          "title": "Revd Luke Graham",
+          "tag": "Safeguarding Assistant",
+          "body": "Luke helps support safeguarding practice and pastoral care across church life.",
+          "href": "mailto:luke@saintjohnspark.org",
+          "linkLabel": "Email Luke",
+          "image": {
+            "src": "/images/profile-photos/luke.png",
+            "alt": "Luke Graham",
+            "maskShape": "/images/shapes/circle-shape.png",
+            "objectPosition": "50% 38%",
+            "frameTone": "park"
+          },
+          "tone": "stone"
+        },
+        {
+          "title": "Kirsty Kershaw",
+          "tag": "Safeguarding Assistant",
+          "body": "Kirsty supports safeguarding as Children and Families Lead.",
+          "href": "mailto:kirsty@saintjohnspark.org",
+          "linkLabel": "Email Kirsty",
+          "image": {
+            "src": "/images/profile-photos/kirsty.jpeg",
+            "alt": "Kirsty Kershaw",
+            "maskShape": "/images/shapes/circle-shape-4.png",
+            "frameTone": "grass"
+          },
+          "tone": "stone"
+        }
+      ]
+    },
+    {
+      "type": "richText",
+      "eyebrow": "Commitments",
+      "title": "Our Commitments",
+      "backgroundTone": "pink",
+      "contentHtml": "<p>In line with the Church of England's safeguarding policy, we are committed to:</p><ul><li>Promoting a safer environment and culture.</li><li>Safely recruiting and supporting all those with any responsibility related to children, young people, and vulnerable adults within the Church.</li><li>Responding promptly to every safeguarding concern or allegation.</li><li>Caring pastorally for victims and survivors of abuse, and other affected persons.</li><li>Caring pastorally for those who are the subject of concerns or allegations of abuse, and other affected persons.</li><li>Responding to those who may pose a present risk to others.</li></ul>"
+    },
+    {
+      "type": "richText",
+      "eyebrow": "Volunteering",
+      "title": "DBS Checks and Training",
+      "backgroundTone": "grass",
+      "contentHtml": "<p>Do you volunteer at St John's Park? To keep our Church safe, volunteers must complete the safeguarding steps required for their role, including a DBS check and the <a href='https://safeguardingtraining.cofeportal.org' target='_blank' rel='noreferrer'>Church of England Foundations Course</a> where required.</p><p>You can access the Church of England safeguarding training portal at <a href='https://safeguardingtraining.cofeportal.org' target='_blank' rel='noreferrer'>safeguardingtraining.cofeportal.org</a>.</p><p>For information on how to complete this, contact <a href='mailto:safeguarding@saintjohnspark.org'>safeguarding@saintjohnspark.org</a>.</p>"
+    },
+    {
+      "type": "richText",
+      "eyebrow": "Helplines",
+      "title": "Helpful Helplines",
+      "backgroundTone": "stone",
+      "contentHtml": "<ul><li><a href='https://www.nspcc.org.uk/about-us/our-services/nspcc-helpline/' target='_blank' rel='noreferrer'>NSPCC</a>: <a href='tel:08088005000'>0808 800 5000</a>.</li><li><a href='https://www.childline.org.uk/' target='_blank' rel='noreferrer'>Childline</a>: <a href='tel:08001111'>0800 1111</a>.</li><li><a href='https://www.stopitnow.org.uk/helpline/' target='_blank' rel='noreferrer'>Stop It Now</a>: <a href='tel:08081000900'>0808 1000 900</a>.</li><li><a href='https://napac.org.uk/' target='_blank' rel='noreferrer'>NAPAC</a>: <a href='tel:08088010331'>0808 801 0331</a>.</li><li><a href='https://www.samaritans.org/how-we-can-help/contact-samaritan/talk-us-phone/' target='_blank' rel='noreferrer'>Samaritans</a>: <a href='tel:116123'>116 123</a>.</li><li><a href='https://www.familylives.org.uk/how-we-can-help/confidential-helpline/' target='_blank' rel='noreferrer'>Family Lives</a>: <a href='tel:08088002222'>0808 800 2222</a>.</li><li><a href='https://www.nationaldahelpline.org.uk/' target='_blank' rel='noreferrer'>National Domestic Abuse Helpline</a>: <a href='tel:08082000247'>0808 2000 247</a>.</li><li><a href='https://mensadviceline.org.uk/' target='_blank' rel='noreferrer'>Men's Advice Line</a>: <a href='tel:08088010327'>0808 801 0327</a>.</li><li><a href='https://www.thenationalcareline.org/' target='_blank' rel='noreferrer'>National Careline</a>: <a href='tel:08000699784'>0800 0699 784</a>.</li></ul>"
     }
   ]
 }

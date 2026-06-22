@@ -2,7 +2,7 @@
 title: Ash Wednesday and Lent Prayer Walks
 summary: Lent began with a reflective Ash Wednesday service and continued with Thursday fasting and prayer walks through the parish.
 publishDate: 2026-02-18
-category: event
+category: update
 eventDate: 2026-02-18
 eventEndDate: 2026-04-02
 timeText: Ash Wednesday, then Thursdays through Lent

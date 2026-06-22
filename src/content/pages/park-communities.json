@@ -1,0 +1,101 @@
+{
+  "title": "Park Communities",
+  "metaDescription": "Find out about Park Communities at St John's Park: smaller communities for friendship, prayer, Scripture, local care, and shared life beyond Sunday.",
+  "template": "standard",
+  "sections": [
+    {
+      "type": "hero",
+      "eyebrow": "Shared life",
+      "title": "Park Communities",
+      "body": "Park Communities are smaller spaces for friendship, prayer, Scripture, and local care as we learn to follow Jesus together beyond Sunday.",
+      "backgroundTone": "park",
+      "primaryCta": {
+        "label": "Ask about Park Communities",
+        "href": "/contact#contact-form"
+      },
+      "secondaryCta": {
+        "label": "Visit on Sunday",
+        "href": "/visit"
+      },
+      "image": {
+        "src": "/images/uploads/older-men-Deep-in-conversation.jpg",
+        "alt": "People in conversation around a table at church",
+        "maskShape": "/images/shapes/arch-shape-filled.png",
+        "accentShape": "/images/shapes/concentric-circles.png",
+        "objectPosition": "center center",
+        "frameTone": "sky"
+      }
+    },
+    {
+      "type": "intro",
+      "eyebrow": "Beyond Sunday",
+      "title": "Following Jesus together",
+      "body": "Sundays matter, but church life is also shaped by smaller communities where people can be known, pray for each other, share ordinary life, and look for ways to love the neighbourhood.",
+      "backgroundTone": "stone",
+      "ctas": [
+        {
+          "label": "Get in touch",
+          "href": "/contact#contact-form"
+        }
+      ]
+    },
+    {
+      "type": "cards",
+      "eyebrow": "What happens",
+      "title": "Friendship, prayer, and care",
+      "intro": "Each community has its own rhythm, but these are the habits we want to grow together.",
+      "backgroundTone": "sky",
+      "columns": 4,
+      "cards": [
+        {
+          "title": "Share life",
+          "body": "Make space for friendship, meals, conversation, and the ordinary details of life.",
+          "tone": "park",
+          "iconShape": "/images/shapes/heart-shape.png"
+        },
+        {
+          "title": "Pray together",
+          "body": "Bring needs, hopes, questions, and the life of Park before God in prayer.",
+          "tone": "door",
+          "iconShape": "/images/shapes/star-shape.png"
+        },
+        {
+          "title": "Read Scripture",
+          "body": "Listen to the Bible together and help one another follow Jesus in everyday life.",
+          "tone": "grass",
+          "iconShape": "/images/shapes/concentric-circles.png"
+        },
+        {
+          "title": "Care locally",
+          "body": "Look for simple, practical ways to love neighbours and serve the local community.",
+          "tone": "pink",
+          "iconShape": "/images/shapes/flower-outline.png"
+        }
+      ]
+    },
+    {
+      "type": "intro",
+      "eyebrow": "Community Hub",
+      "title": "Looking for Monday Community Hub?",
+      "body": "Park Communities are part of church family life. If you are looking for Monday Community Hub, food support, lunch club, or community drop-ins, head to the Community page.",
+      "backgroundTone": "pink",
+      "ctas": [
+        {
+          "label": "Open Community page",
+          "href": "/community"
+        }
+      ]
+    },
+    {
+      "type": "cta",
+      "eyebrow": "Join in",
+      "title": "Find a place to belong",
+      "body": "If you would like to ask about Park Communities, tell us a little about yourself and we will help you find the next step.",
+      "backgroundTone": "park-dark",
+      "primaryCta": {
+        "label": "Contact us",
+        "href": "/contact#contact-form"
+      }
+    }
+  ]
+}

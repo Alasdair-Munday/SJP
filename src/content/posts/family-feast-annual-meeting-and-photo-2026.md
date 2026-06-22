@@ -2,7 +2,7 @@
 title: Family Feast, Annual Meeting and Church Photo
 summary: On 26 April 2026 we stayed after the service for food, our annual meeting, and a whole church photo.
 publishDate: 2026-04-26
-category: event
+category: update
 eventDate: 2026-04-26
 timeText: 12:00pm after the service
 location: St John's Park

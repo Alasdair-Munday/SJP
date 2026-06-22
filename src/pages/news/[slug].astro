@@ -25,15 +25,11 @@ const categoryLabels = {
   update: "Update",
   blog: "Blog",
 };
-const eventDateText =
-  post.data.eventDate && post.data.eventEndDate
-    ? `${formatDate(post.data.eventDate)} - ${formatDate(post.data.eventEndDate)}`
-    : post.data.eventDate
-      ? formatDate(post.data.eventDate)
-      : undefined;
+const eventDateText = post.data.eventDate ? formatDate(post.data.eventDate) : undefined;
 const detailItems = [
-  { label: "Posted", value: formatShortDate(post.data.publishDate) },
-  { label: "Date", value: eventDateText },
+  post.data.category === "event"
+    ? { label: "Date", value: eventDateText }
+    : { label: "Posted", value: formatShortDate(post.data.publishDate) },
   { label: "Time", value: post.data.timeText },
   { label: "Location", value: post.data.location },
 ].filter((item) => item.value);

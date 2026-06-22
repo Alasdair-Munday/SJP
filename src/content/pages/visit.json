@@ -66,6 +66,8 @@
         {
           "title": "Kids and youth",
           "body": "We have All In Sundays on the first week of the month where every generation worships together. The rest of the month we run age-specific groups during the second part of the service. Families are always welcome.",
+          "href": "/park-kids",
+          "linkLabel": "Explore Park Kids",
           "tone": "park"
         },
         {
@@ -96,8 +98,12 @@
       "reverse": true,
       "ctas": [
         {
-          "label": "Get in touch about kids and youth",
-          "href": "/contact#contact-form"
+          "label": "Park Kids",
+          "href": "/park-kids"
+        },
+        {
+          "label": "Park Youth",
+          "href": "/park-youth"
         }
       ]
     },
