@@ -94,6 +94,8 @@ export async function getPostCategories() {
 }
 
 export function isRelevantForWeek(post: PostEntry, weekStartDate: Date) {
+  if (!post.data.displayOnNewsletter) return false;
+
   const weekEndDate = new Date(weekStartDate);
   weekEndDate.setDate(weekEndDate.getDate() + 7);
 
@@ -102,8 +104,9 @@ export function isRelevantForWeek(post: PostEntry, weekStartDate: Date) {
     return true;
   }
 
-  // 2. Explicitly relevant until
-  if (post.data.relevantUntil && post.data.relevantUntil >= weekStartDate) {
+  // 2. Explicit newsletter display window, with legacy relevantUntil fallback
+  const displayUntil = post.data.newsletterDisplayUntil ?? post.data.relevantUntil;
+  if (displayUntil && displayUntil >= weekStartDate) {
     return true;
   }
 

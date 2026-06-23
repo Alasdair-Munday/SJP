@@ -53,6 +53,8 @@ collections:
       - {label: "Summary", name: "summary", widget: "text", hint: "A short sentence describing the post."}
       - {label: "Category", name: "category", widget: "select", options: ["event", "update", "blog"], default: "update", required: false, hint: "Tag to organize the post."}
       - {label: "Publish Date", name: "publishDate", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false, hint: "When this post should appear."}
+      - {label: "Display on Newsletter", name: "displayOnNewsletter", widget: "boolean", default: true, required: false, hint: "On by default. Turn off to keep this item out of the weekly newsletter."}
+      - {label: "Display Until", name: "newsletterDisplayUntil", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false, required: false, condition: {field: "category", pattern: "^(update|blog)$"}, hint: "News only. Set to the coming Monday by default; events use the event date instead."}
       - {label: "Body", name: "body", widget: "markdown", hint: "The main content."}
       
       # Event specifics
