@@ -268,8 +268,6 @@ const posts = defineCollection({
     ctaLabel: z.string().optional(),
     ctaHref: z.string().optional(),
     featured: z.boolean().default(false),
-    displayOnNewsletter: z.boolean().default(true),
-    newsletterDisplayUntil: optionalDateSchema,
     relevantUntil: optionalDateSchema,
   }),
 });
