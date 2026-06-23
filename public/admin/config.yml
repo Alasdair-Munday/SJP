@@ -32,7 +32,7 @@ auth:
 logo_url: https://decapbridge.com/decapcms-with-bridge.svg
 
 # Add site links in Decap CMS (optional)
-# site_url: https://stjohnspark.netlify.app
+site_url: https://stjohnspark.org
 
 media_folder: "/images/uploads"
 public_folder: "/images/uploads"

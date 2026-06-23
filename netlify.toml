@@ -6,6 +6,14 @@
   directory = "netlify/functions"
 
 
+
+[[redirects]]
+  from = "/*"
+  to = "https://stjohnspark.org/:splat"
+  status = 301
+  force = true
+  conditions = {Host = ["stjohnspark.netlify.app", "www.stjohnspark.org"]}
+
 [[redirects]]
   from = "/images/uploads/*"
   to = "/.netlify/functions/cdn-asset?path=images/uploads/:splat"
