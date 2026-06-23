@@ -23,7 +23,7 @@ const linkSchema = z.object({
 
 const imageSchema = z.object({
   src: z.string(),
-  alt: z.string(),
+  alt: z.string().default(""),
   maskShape: z.string().optional(),
   accentShape: z.string().optional(),
   accentTone: toneSchema.optional(),
@@ -41,6 +41,28 @@ const imageSchema = z.object({
     .optional(),
 });
 
+const defaultPostFeaturedImage = {
+  src: "/images/line-drawing.png",
+  alt: "Line drawing of St John's Park",
+  maskShape: "/images/shapes/rectangle-cut-corner.png",
+  frameTone: "stone" as const,
+};
+
+const postFeaturedImageSchema = z.preprocess((value) => {
+  if (!value || typeof value !== "object") return defaultPostFeaturedImage;
+
+  const image = value as { src?: unknown; alt?: unknown };
+
+  if (typeof image.src !== "string" || image.src.trim() === "") {
+    return defaultPostFeaturedImage;
+  }
+
+  return {
+    ...image,
+    alt: typeof image.alt === "string" ? image.alt : "",
+  };
+}, imageSchema);
+
 const cardSchema = z.object({
   eyebrow: z.string().optional(),
   title: z.string(),
@@ -53,6 +75,13 @@ const cardSchema = z.object({
   image: imageSchema.optional(),
   featured: z.boolean().optional(),
 });
+
+const optionalDateSchema = z.preprocess((value) => {
+  if (value === null || value === undefined) return undefined;
+  if (typeof value === "string" && value.trim() === "") return undefined;
+
+  return value;
+}, z.coerce.date().optional());
 
 const postCategorySchema = z
   .enum(["event", "update", "blog", "news", "story"])
@@ -230,16 +259,16 @@ const posts = defineCollection({
     summary: z.string(),
     publishDate: z.coerce.date(),
     category: postCategorySchema,
-    featuredImage: imageSchema,
+    featuredImage: postFeaturedImageSchema.default(defaultPostFeaturedImage),
     featuredShape: z.string().optional(),
-    eventDate: z.coerce.date().optional(),
-    eventEndDate: z.coerce.date().optional(),
+    eventDate: optionalDateSchema,
+    eventEndDate: optionalDateSchema,
     timeText: z.string().optional(),
     location: z.string().optional(),
     ctaLabel: z.string().optional(),
     ctaHref: z.string().optional(),
     featured: z.boolean().default(false),
-    relevantUntil: z.coerce.date().optional(),
+    relevantUntil: optionalDateSchema,
   }),
 });
 
