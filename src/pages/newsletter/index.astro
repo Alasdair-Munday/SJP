@@ -1,14 +1,8 @@
 ---
-import { getNewsletterPostsForWeek, getSiteConfig } from "../../lib/content";
-import { formatDate } from "../../lib/format";
+import { getNewsletterData } from "../../lib/newsletter";
 import "../../styles/print.css";
 
-const posts = await getNewsletterPostsForWeek();
-const site = await getSiteConfig();
-const today = new Date();
-const mode = Astro.url.searchParams.get("mode") === "email" ? "email" : "print";
-const newsletterUrl = new URL("/newsletter/", site.siteUrl).toString();
-const absolutize = (href: string) => new URL(href, site.siteUrl).toString();
+const newsletter = await getNewsletterData();
 ---
 
 <!doctype html>
@@ -16,61 +10,52 @@ const absolutize = (href: string) => new URL(href, site.siteUrl).toString();
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Weekly Newsletter - {formatDate(today)}</title>
-    {mode === "print" && <link rel="preconnect" href="https://fonts.googleapis.com" />}
-    {mode === "print" && <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />}
-    {mode === "print" && (
-      <link
-        href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Karla:wght@400;500;700;800&display=swap"
-        rel="stylesheet"
-      />
-    )}
+    <title>Weekly Newsletter - {newsletter.formattedDate}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Karla:wght@400;500;700;800&display=swap"
+      rel="stylesheet"
+    />
   </head>
-  <body class={`newsletter-body newsletter-body--${mode}`}>
+  <body class="newsletter-body newsletter-body--print">
     <div class="newsletter-container">
       <header class="newsletter-header">
         <div class="newsletter-brand">
-          <img src={mode === "email" ? absolutize(site.brand.lockupSrc) : site.brand.lockupSrc} alt={site.brand.lockupAlt} />
+          <img src={newsletter.logoSrc} alt={newsletter.logoAlt} />
           <div>
             <p class="newsletter-kicker">Weekly newsletter</p>
             <h1>News & Updates</h1>
-            <p class="newsletter-date">{formatDate(today)}</p>
+            <p class="newsletter-date">{newsletter.formattedDate}</p>
           </div>
         </div>
-        {mode === "print" && (
-          <nav class="newsletter-actions" aria-label="Newsletter modes">
-            <a href="/newsletter/?mode=email">Email mode</a>
-            <button onclick="window.print()" class="print-button">Print Newsletter</button>
-          </nav>
-        )}
+        <nav class="newsletter-actions" aria-label="Newsletter actions">
+          <a href="/newsletter/email/">Email export</a>
+          <button onclick="window.print()" class="print-button">Print Newsletter</button>
+        </nav>
       </header>
 
       <main class="newsletter-content">
         {
-          posts.length > 0 ? (
-            posts.map((post) => {
-              const postUrl = absolutize(`/news/${post.slug}/`);
-              const ctaHref = post.data.ctaHref ? absolutize(post.data.ctaHref) : postUrl;
-              const ctaLabel = post.data.ctaLabel ?? (post.data.category === "event" ? "View event" : "Read more");
+          newsletter.posts.length > 0 ? (
+            newsletter.posts.map((post) => {
               return (
                 <article class="newsletter-post">
                   <img
                     class="newsletter-post__image"
-                    src={mode === "email" ? absolutize(post.data.featuredImage.src) : post.data.featuredImage.src}
-                    alt={post.data.featuredImage.alt}
+                    src={post.imageSrc}
+                    alt={post.imageAlt}
                   />
                   <div class="newsletter-post__content">
-                    <p class="newsletter-post__category">{post.data.category}</p>
-                    <h2>{post.data.title}</h2>
-                    {post.data.category === "event" && post.data.eventDate && (
+                    <p class="newsletter-post__category">{post.category}</p>
+                    <h2>{post.title}</h2>
+                    {post.eventDetails && (
                       <p class="newsletter-meta">
-                        <strong>Event Date:</strong> {formatDate(post.data.eventDate)}
-                        {post.data.timeText && <span> · {post.data.timeText}</span>}
-                        {post.data.location && <span> · {post.data.location}</span>}
+                        {post.eventDetails}
                       </p>
                     )}
-                    <p>{post.data.summary}</p>
-                    <a class="newsletter-cta" href={ctaHref}>{ctaLabel}</a>
+                    <p>{post.summary}</p>
+                    <a class="newsletter-cta" href={post.ctaHref}>{post.ctaLabel}</a>
                   </div>
                 </article>
               );
@@ -82,8 +67,7 @@ const absolutize = (href: string) => new URL(href, site.siteUrl).toString();
       </main>
 
       <footer class="newsletter-footer">
-        <p>{site.shortTitle} · {site.sundaySummary}</p>
-        {mode === "email" && <p><a href={newsletterUrl}>View this newsletter online</a></p>}
+        <p>{newsletter.shortTitle} · {newsletter.sundaySummary}</p>
       </footer>
     </div>
   </body>

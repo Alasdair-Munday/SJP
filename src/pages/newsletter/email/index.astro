@@ -1,0 +1,213 @@
+---
+import { renderNewsletterEmailHtml } from "../../../lib/newsletter";
+
+const emailHtml = await renderNewsletterEmailHtml();
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Newsletter Email Export</title>
+    <style>
+      :root {
+        color: #222f2a;
+        font-family: Arial, sans-serif;
+        background: #eef5f0;
+      }
+
+      body {
+        margin: 0;
+      }
+
+      .export-shell {
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 32px 20px;
+      }
+
+      .export-header {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 18px;
+        margin-bottom: 22px;
+      }
+
+      .export-header h1 {
+        margin: 0 0 8px;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 32px;
+        line-height: 1.15;
+      }
+
+      .export-header p {
+        margin: 0;
+        color: #5f6f68;
+        line-height: 1.5;
+      }
+
+      .export-actions {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      .export-button {
+        display: inline-block;
+        border: 0;
+        border-radius: 999px;
+        padding: 11px 16px;
+        background: #47a174;
+        color: #ffffff;
+        cursor: pointer;
+        font: inherit;
+        font-weight: 700;
+        text-decoration: none;
+      }
+
+      .export-button--secondary {
+        background: #ffffff;
+        color: #222f2a;
+      }
+
+      .export-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(320px, 420px);
+        gap: 18px;
+        align-items: stretch;
+      }
+
+      .export-panel {
+        background: #ffffff;
+        border: 1px solid #d9e4dd;
+        border-radius: 8px;
+        overflow: hidden;
+      }
+
+      .export-panel__header {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        align-items: center;
+        padding: 14px 16px;
+        border-bottom: 1px solid #d9e4dd;
+        background: #fffaf0;
+      }
+
+      .export-panel__header h2 {
+        margin: 0;
+        font-size: 16px;
+      }
+
+      .export-status {
+        min-height: 20px;
+        color: #5f6f68;
+        font-size: 14px;
+      }
+
+      .export-preview {
+        display: block;
+        width: 100%;
+        height: 760px;
+        border: 0;
+        background: #eef5f0;
+      }
+
+      .export-source {
+        display: block;
+        box-sizing: border-box;
+        width: 100%;
+        height: 760px;
+        margin: 0;
+        border: 0;
+        resize: vertical;
+        padding: 16px;
+        color: #222f2a;
+        background: #ffffff;
+        font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+        font-size: 13px;
+        line-height: 1.5;
+      }
+
+      @media (max-width: 900px) {
+        .export-header {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        .export-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .export-preview,
+        .export-source {
+          height: 560px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="export-shell">
+      <header class="export-header">
+        <div>
+          <h1>Newsletter Email Export</h1>
+          <p>Copy the HTML into your email platform, then send a test before the full list.</p>
+        </div>
+        <nav class="export-actions" aria-label="Newsletter export actions">
+          <button class="export-button" type="button" data-copy-email-html>Copy HTML</button>
+          <a class="export-button export-button--secondary" href="/newsletter/email/raw/">Open raw HTML</a>
+          <a class="export-button export-button--secondary" href="/newsletter/">Print view</a>
+        </nav>
+      </header>
+
+      <section class="export-grid" aria-label="Newsletter email export">
+        <div class="export-panel">
+          <div class="export-panel__header">
+            <h2>Email preview</h2>
+          </div>
+          <iframe
+            class="export-preview"
+            title="Newsletter email preview"
+            srcdoc={emailHtml}
+            sandbox=""
+          ></iframe>
+        </div>
+
+        <div class="export-panel">
+          <div class="export-panel__header">
+            <h2>HTML source</h2>
+            <span class="export-status" aria-live="polite" data-copy-status></span>
+          </div>
+          <textarea class="export-source" id="newsletter-email-html" readonly>{emailHtml}</textarea>
+        </div>
+      </section>
+    </main>
+
+    <script is:inline>
+      const copyButton = document.querySelector("[data-copy-email-html]");
+      const status = document.querySelector("[data-copy-status]");
+      const source = document.querySelector("#newsletter-email-html");
+
+      const setStatus = (message) => {
+        if (!status) return;
+        status.textContent = message;
+      };
+
+      copyButton?.addEventListener("click", async () => {
+        if (!(source instanceof HTMLTextAreaElement)) return;
+
+        try {
+          await navigator.clipboard.writeText(source.value);
+          setStatus("Copied");
+        } catch {
+          source.focus();
+          source.select();
+          document.execCommand("copy");
+          setStatus("Copied");
+        }
+      });
+    </script>
+  </body>
+</html>
