@@ -1,11 +1,11 @@
 ---
-title: Community Fun Day Returns This Summer
+title: Park Paradise Summer Festival
 summary: Our church and local partners are preparing another Community Fun Day
   in the park with activities, food, and welcome for all ages.
 category: event
 publishDate: 2026-06-10
-eventDate: 2026-08-22
-timeText: Saturday afternoon
+eventDate: 2026-08-23
+timeText: 12 - 3PM
 location: St John's Park grounds
 ctaLabel: Contact us to get involved
 ctaHref: /contact#contact-form
