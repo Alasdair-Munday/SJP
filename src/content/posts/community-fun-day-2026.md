@@ -1,7 +1,8 @@
 ---
 title: Park Paradise Summer Festival
-summary: Our church and local partners are preparing another Community Fun Day
-  in the park with activities, food, and welcome for all ages.
+summary: Park Paradise is a free community event at St John’s from 12–3pm,
+  bringing people of all ages together for food, play, creativity, nature and
+  celebration.
 category: event
 publishDate: 2026-06-10
 eventDate: 2026-08-23
