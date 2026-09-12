@@ -13,17 +13,14 @@ featuredImage:
   src: /images/uploads/chalice.jpeg
   alt: The communion chalice and plate
 ---
-Simplicity: A new 9am Communion service
-# Simplicity: A new 9am Communion service
-
-## TL;DR
+## Key info
 
 - **What:** A simple, traditional Holy Communion service with Scripture, prayer, silence, a short reflection and Communion
 - **When:** 9am on the second Sunday of each month, starting **Sunday 13 September**
 - **How long:** Around 30 minutes
 - **What to expect:** No music or screens — a quieter, simpler space to slow down, meet with Jesus and receive from him
 - **Who:** Anyone! You don't need to think of yourself as someone who likes traditional church
-- **10:45:** This isn't replacing our main service — it's something different alongside it
+- **What about the main service:** This isn't a substitute for the 10:45 service — feel free to come to either or both!
 
 > “Come to me, all you who are weary and burdened, and I will give you rest.”
 >
