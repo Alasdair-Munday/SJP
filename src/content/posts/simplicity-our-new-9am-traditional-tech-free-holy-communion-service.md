@@ -1,7 +1,8 @@
 ---
 title: "Simplicity: Our new 9AM Traditional, tech-free Holy Communion service"
 summary: An antidote to the constant grind and distraction of modern life. Come
-  to this simple 30 minute communion to slow down and fix your eyes on Jesus
+  to this simple 30 minute communion every second Sunday of the month to slow
+  down and fix your eyes on Jesus.
 category: update
 publishDate: 2026-09-12
 displayOnNewsletter: true
