@@ -4,19 +4,16 @@
   "template": "home",
   "sections": [
     {
-      "type": "hero",
-      "eyebrow": "Church family in Park, Sheffield",
-      "title": "Welcome Home",
-      "body": "A community of Jesus-followers in Park, Sheffield. We belong to the family of God, love and serve our city, and give Jesus praise in everything we do.",
+      "highlightLabel": "Sundays at 10:45am",
       "backgroundTone": "park",
+      "body": "A community of Jesus-followers in Park, Sheffield. We belong to the family of God, love and serve our city, and give Jesus praise in everything we do.",
+      "eyebrow": "Church family in Park, Sheffield",
       "primaryCta": {
         "label": "Join us Sunday 10:45 AM",
         "href": "/visit"
       },
-      "secondaryCta": {
-        "label": "Find us",
-        "href": "/contact"
-      },
+      "title": "Welcome Home",
+      "type": "hero",
       "image": {
         "src": "/images/uploads/whole-church-family-wave.jpg",
         "alt": "Church family gathered and waving outside St John's Park",
@@ -96,7 +93,10 @@
           }
         ]
       },
-      "highlightLabel": "Sundays at 10:45am"
+      "secondaryCta": {
+        "label": "Find us",
+        "href": "/contact"
+      }
     },
     {
       "type": "split",
@@ -133,7 +133,7 @@
       "cards": [
         {
           "title": "Belong",
-          "body": "Find friendship, prayer, and steady growth in faith through Sundays, kids and youth ministry, and midweek community life.",
+          "body": "We invite everyone to Church to celebrate together on a Sunday and to build deeper community through small groups.",
           "href": "/visit",
           "linkLabel": "Start with a visit",
           "tone": "pink",
@@ -141,7 +141,7 @@
         },
         {
           "title": "Serve",
-          "body": "Join teams that help us welcome people well, care for our building, support local families, and serve our city.",
+          "body": "We encourage every member of our church family to join one of our teams and serve every month.",
           "href": "/get-involved",
           "linkLabel": "Explore ways to join in",
           "tone": "door",
@@ -149,7 +149,7 @@
         },
         {
           "title": "Give",
-          "body": "Support the ministry and future of St John's Park through prayer, practical help, and financial generosity.",
+          "body": "We want to give God a whole life offering. We do this through prioritising prayer and praise. We also encourage every member to prayerfully consider giving to St John’s.",
           "href": "/get-involved",
           "linkLabel": "See giving details",
           "tone": "give",
