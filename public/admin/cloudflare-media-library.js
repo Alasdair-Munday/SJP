@@ -108,7 +108,7 @@
 
     const refresh = async () => {
       setStatus("Loading assets…");
-      const data = await requestJson(`/.netlify/functions/cdn-media?folder=${encodeURIComponent(folder)}`);
+      const data = await requestJson(`/api/media?folder=${encodeURIComponent(folder)}`);
       renderAssets(data.items || []);
     };
 
