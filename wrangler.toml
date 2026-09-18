@@ -1,6 +1,9 @@
 name = "sjp-cloudflare-staging"
 main = "cloudflare/worker.mjs"
 compatibility_date = "2026-09-18"
+routes = [
+  { pattern = "staging.stjohnspark.org", custom_domain = true }
+]
 
 [assets]
 directory = "./dist"
