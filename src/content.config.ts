@@ -41,6 +41,18 @@ const imageSchema = z.object({
     .optional(),
 });
 
+const optionalImageSchema = z.preprocess((value) => {
+  if (!value || typeof value !== "object") return undefined;
+
+  const image = value as { src?: unknown };
+
+  if (typeof image.src !== "string" || image.src.trim() === "") {
+    return undefined;
+  }
+
+  return value;
+}, imageSchema.optional());
+
 const defaultPostFeaturedImage = {
   src: "/images/line-drawing.png",
   alt: "Line drawing of St John's Park",
@@ -72,7 +84,7 @@ const cardSchema = z.object({
   tag: z.string().optional(),
   tone: toneSchema.optional(),
   iconShape: z.string().optional(),
-  image: imageSchema.optional(),
+  image: optionalImageSchema,
   featured: z.boolean().optional(),
 });
 
