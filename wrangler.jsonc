@@ -4,6 +4,15 @@
   "main": "cloudflare/worker.mjs",
   "compatibility_date": "2026-09-18",
   "keep_vars": true,
+  "vars": {
+    "ASSET_CDN_BASE_URL": "https://assets.saintjohnspark.org"
+  },
+  "r2_buckets": [
+    {
+      "binding": "MEDIA_BUCKET",
+      "bucket_name": "sjp-images"
+    }
+  ],
   "assets": {
     "directory": "./dist",
     "binding": "ASSETS",
