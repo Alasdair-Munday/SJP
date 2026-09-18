@@ -312,14 +312,41 @@ collections:
                       - {label: "Link", name: "href", widget: "string", required: false}
                       - {label: "Link Label", name: "linkLabel", widget: "string", required: false}
                       - {label: "Card Color", name: "tone", widget: "select", options: ["park", "park-dark", "stone", "sky", "pink", "pink-dark", "orange", "door", "give", "grass", "roof"], required: false}
-                      - {label: "Icon Shape", name: "iconShape", widget: "hidden", required: false}
+                      - label: "Card Shape"
+                        name: "iconShape"
+                        widget: "select"
+                        required: false
+                        hint: "Optional. Choose a built-in shape instead of a photo. Leave this blank when using a card image."
+                        options:
+                          - {label: "Concentric circles", value: "/images/shapes/concentric-circles.png"}
+                          - {label: "Heart", value: "/images/shapes/heart-shape.png"}
+                          - {label: "Heart outline", value: "/images/shapes/heart-outline.png"}
+                          - {label: "Star brushstroke", value: "/images/shapes/star-brushstroke.png"}
+                          - {label: "Star", value: "/images/shapes/star-shape.png"}
+                          - {label: "Flower", value: "/images/shapes/flower-shape.png"}
+                          - {label: "Flower outline", value: "/images/shapes/flower-outline.png"}
+                          - {label: "Firework", value: "/images/shapes/firework.png"}
+                          - {label: "Cross", value: "/images/shapes/cross-shape.png"}
+                          - {label: "Celtic cross", value: "/images/shapes/celtic-cross-shape.png"}
+                          - {label: "Church windows", value: "/images/shapes/church-windows-shape.png"}
+                          - {label: "Church hall", value: "/images/shapes/church-hall-shape-2.png"}
+                          - {label: "Plant", value: "/images/shapes/plant-shape.png"}
+                          - {label: "Branches", value: "/images/shapes/branches-shape.png"}
+                          - {label: "Circle", value: "/images/shapes/circle-shape-4.png"}
+                          - {label: "Curved square", value: "/images/shapes/curved-square-shape.png"}
+                          - {label: "Arch", value: "/images/shapes/arch-shape-filled.png"}
+                          - {label: "Square slope", value: "/images/shapes/square-slope-shape.png"}
+                          - {label: "Triangle", value: "/images/shapes/triangle-shape.png"}
+                          - {label: "Three sticks", value: "/images/shapes/three-sticks-shape.png"}
+                          - {label: "Squiggle", value: "/images/shapes/squiggle-ball.png"}
                       - label: "Card Image Settings"
                         name: "image"
                         widget: "object"
                         collapsed: true
                         required: false
+                        hint: "Optional. Use this for a photo; leave it empty when the card uses a shape."
                         fields:
-                          - {label: "Image", name: "src", widget: "image"}
+                          - {label: "Image", name: "src", widget: "image", required: false}
                           - {label: "Alt Text", name: "alt", widget: "string", required: false}
                           - {label: "Mask Shape", name: "maskShape", widget: "hidden", required: false}
                           - {label: "Object Position", name: "objectPosition", widget: "hidden", required: false}
