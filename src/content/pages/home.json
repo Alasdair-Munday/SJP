@@ -175,7 +175,7 @@
       "eyebrow": "From church life",
       "title": "News",
       "intro": "Keep up with community life, event announcements, and stories from St John's Park.",
-      "backgroundTone": "pink",
+      "backgroundTone": "park-dark",
       "source": "posts",
       "limit": 3,
       "cta": {
