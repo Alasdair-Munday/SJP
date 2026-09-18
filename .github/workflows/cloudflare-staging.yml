@@ -1,3 +1,4 @@
+# Styling changes are kept on separate branches from migration staging.
 name: Deploy Cloudflare staging
 
 on:
