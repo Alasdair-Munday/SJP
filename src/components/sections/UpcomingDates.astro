@@ -1,0 +1,15 @@
+---
+import { getTargetSchedule, formatDay, timeLabel } from '../../lib/events';
+interface Props { target: string; }
+const { target } = Astro.props;
+const schedule = await getTargetSchedule(target);
+---
+<div class="upcoming-dates">
+  <h3>Upcoming dates</h3>
+  {schedule.message && <p class="calendar-status" role="status">{schedule.message}</p>}
+  {schedule.events.length > 0 ? (
+    <ul>
+      {schedule.events.map((event) => <li><time datetime={event.start}>{formatDay(event.start)} · {timeLabel(event)}</time><span>{event.title}{event.location && ` · ${event.location}`}</span></li>)}
+    </ul>
+  ) : schedule.status !== 'unavailable' && <p>No upcoming dates are listed in the calendar. Please contact us to confirm the next session.</p>}
+</div>

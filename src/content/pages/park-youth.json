@@ -44,10 +44,12 @@
         },
         {
           "title": "Cornerstone",
-          "tag": "Wednesdays, 6:00pm-7:15pm",
+          "tag": "Wednesday evenings",
           "body": "Cornerstone is our midweek Park Youth group for secondary schoolers, with friendship, faith, and space to talk honestly.",
           "tone": "pink",
-          "iconShape": "/images/shapes/star-brushstroke.png"
+          "iconShape": "/images/shapes/star-brushstroke.png",
+          "id": "cornerstone",
+          "calendarTarget": "/park-youth#cornerstone"
         }
       ]
     },

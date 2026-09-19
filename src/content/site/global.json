@@ -145,5 +145,17 @@
     "spotifyHref": "https://open.spotify.com/show/033qLwMctNUTmgjsVBUNAL?si=e9e072baa9bb4769",
     "rssLabel": "Subscribe in your podcast app",
     "rssHref": "https://audio.com/rss/author/1864352901200967"
+  },
+  "social": {
+    "facebookUrl": "",
+    "instagramUrl": "",
+    "socialMediaEmail": "hello@saintjohnspark.org",
+    "consentGuidance": "Only use identifiable photos or stories when the people shown have agreed to public use. For children and young people, follow the church safeguarding and parental consent process. Never publish names, locations or personal details that create a safeguarding risk.",
+    "canvaFolderUrl": "https://www.canva.com/folder/FAHVpElMjv8",
+    "canvaTemplates": {
+      "people": "https://www.canva.com/design?create=true&template=EAHJNq5IjBk",
+      "event": "https://www.canva.com/design?create=true&template=EAHUPIm0Rw0",
+      "story": "https://www.canva.com/d/qT6Exz_jCov8ENl"
+    }
   }
 }

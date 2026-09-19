@@ -48,7 +48,9 @@
           "label": "Get directions",
           "href": "/contact"
         }
-      ]
+      ],
+      "id": "sundays",
+      "calendarTarget": "/visit#sundays"
     },
     {
       "type": "cards",
@@ -84,7 +86,7 @@
       "body": "From younger children to teenagers, we want the next generation to know they are loved, known, and included in the life of the church.",
       "points": [
         "Tiny Tots (0-5), Park Kids (primary), and Park Youth: Faith Explorers (secondary to 16) run during term-time Sundays.",
-        "Park Youth: Cornerstone meets on Wednesdays, 6:00pm–7:15pm for secondary schoolers.",
+        "Park Youth: Cornerstone meets on Wednesday evenings for secondary schoolers.",
         "If you want to ask about children or youth before visiting, we would be happy to help."
       ],
       "backgroundTone": "pink",

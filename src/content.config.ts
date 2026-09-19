@@ -76,6 +76,8 @@ const postFeaturedImageSchema = z.preprocess((value) => {
 }, imageSchema);
 
 const cardSchema = z.object({
+  id: z.string().optional(),
+  calendarTarget: z.string().optional(),
   eyebrow: z.string().optional(),
   title: z.string(),
   body: z.string().optional(),
@@ -94,6 +96,11 @@ const optionalDateSchema = z.preprocess((value) => {
 
   return value;
 }, z.coerce.date().optional());
+
+const optionalUrlSchema = z.preprocess((value) => {
+  if (typeof value !== "string" || value.trim() === "") return undefined;
+  return value;
+}, z.string().url().optional());
 
 const postCategorySchema = z
   .enum(["event", "update", "blog", "news", "story"])
@@ -118,6 +125,7 @@ const heroSectionSchema = z.object({
 });
 
 const introSectionSchema = z.object({
+  calendarTarget: z.string().optional(),
   type: z.literal("intro"),
   id: z.string().optional(),
   eyebrow: z.string().optional(),
@@ -128,6 +136,7 @@ const introSectionSchema = z.object({
 });
 
 const splitSectionSchema = z.object({
+  calendarTarget: z.string().optional(),
   type: z.literal("split"),
   id: z.string().optional(),
   eyebrow: z.string().optional(),
@@ -184,6 +193,13 @@ const richTextSectionSchema = z.object({
   backgroundTone: toneSchema.default("stone"),
 });
 
+const whatsOnSectionSchema = z.object({
+  type: z.literal("whatsOn"),
+  id: z.string().optional(),
+  title: z.string().default("This week"),
+  backgroundTone: toneSchema.default("sky"),
+});
+
 const sectionSchema = z.discriminatedUnion("type", [
   heroSectionSchema,
   introSectionSchema,
@@ -192,6 +208,7 @@ const sectionSchema = z.discriminatedUnion("type", [
   ctaSectionSchema,
   latestSectionSchema,
   richTextSectionSchema,
+  whatsOnSectionSchema,
 ]);
 
 const pages = defineCollection({
@@ -261,6 +278,18 @@ const site = defineCollection({
       rssLabel: z.string(),
       rssHref: z.string(),
     }),
+    social: z.object({
+      facebookUrl: optionalUrlSchema,
+      instagramUrl: optionalUrlSchema,
+      socialMediaEmail: z.string().email(),
+      consentGuidance: z.string(),
+      canvaFolderUrl: z.string().url(),
+      canvaTemplates: z.object({
+        people: z.string().url(),
+        event: z.string().url(),
+        story: z.string().url(),
+      }),
+    }),
   }),
 });
 
@@ -283,11 +312,29 @@ const posts = defineCollection({
     displayOnNewsletter: z.boolean().default(true),
     newsletterDisplayUntil: optionalDateSchema,
     relevantUntil: optionalDateSchema,
+    socialEnabled: z.boolean().default(false),
+    socialCaption: z.string().optional(),
+    socialImage: optionalImageSchema,
+    socialConsentConfirmed: z.boolean().default(false),
+    socialDoNotUseAfter: optionalDateSchema,
+  }),
+});
+
+const events = defineCollection({
+  type: "content",
+  schema: z.object({
+    title: z.string(),
+    summary: z.string(),
+    calendarTargets: z.array(z.string()).min(1),
+    location: z.string().optional(),
+    timeText: z.string().optional(),
+    image: optionalImageSchema,
   }),
 });
 
 export const collections = {
   pages,
   posts,
+  events,
   site,
 };
