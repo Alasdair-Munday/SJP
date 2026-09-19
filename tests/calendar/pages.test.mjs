@@ -26,13 +26,14 @@ test('live server: bad issue dates and missing news routes return meaningful err
   }
   assert.equal((await fetch(new URL('/news/not-an-actual-post', base))).status, 404);
 });
-test('live server: connected activities show six upcoming sessions at the correct anchors', options, async () => {
+test('live server: connected activities show the next two upcoming sessions at the correct anchors', options, async () => {
   for (const [path, anchor] of [['/community', 'foodbank'], ['/park-youth', 'cornerstone'], ['/visit', 'sundays']]) {
     const response = await fetch(new URL(path, base));
     assert.equal(response.status, 200);
     const html = await response.text();
     assert.match(html, new RegExp(`id="${anchor}"`));
-    assert.ok((html.match(/<time datetime=/g) ?? []).length >= 6);
+    const dateBlocks = (html.match(/class="upcoming-dates"/g) ?? []).length;
+    assert.equal((html.match(/<time datetime=/g) ?? []).length, dateBlocks * 2);
   }
 });
 test('live server: weekly social review has three slots and calendar-backed Sunday copy', options, async () => {

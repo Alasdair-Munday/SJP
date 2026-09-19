@@ -1,17 +1,15 @@
 ---
-import { groupSchedule, timeLabel, type Schedule } from '../../lib/events';
+import { compactSchedule, type Schedule } from '../../lib/events';
 interface Props { schedule: Schedule; start: Date; end: Date; }
-const { schedule, start, end } = Astro.props;
-const groups = groupSchedule(schedule.events, start, end);
+const { schedule } = Astro.props;
+const entries = compactSchedule(schedule.events);
 ---
 {schedule.message && <p class="calendar-status" role="status">{schedule.message}</p>}
-{groups.length ? <div class="weekly-schedule">
-  {groups.map((group) => <section class="weekly-schedule__day">
-    <h3>{group.label}</h3>
-    <ul>{group.events.map((event) => <li class="weekly-schedule__event" data-calendar-id={event.id}>
-      <span class="weekly-schedule__time">{timeLabel(event)}</span>
-      <div>{event.href ? <a href={event.href}>{event.title}</a> : <strong>{event.title}</strong>}
-      {event.location && <span class="weekly-schedule__location">{event.location}</span>}</div>
-    </li>)}</ul>
-  </section>)}
+{entries.length ? <div class="weekly-schedule">
+  <ul>{entries.map((entry) => <li class="weekly-schedule__event">
+    {entry.events.map((event) => <i class="calendar-occurrence-id" aria-hidden="true" data-calendar-id={event.id}></i>)}
+    <span class="weekly-schedule__when">{entry.dayLabel} · {entry.timeLabel}</span>
+    <div>{entry.first.href ? <a href={entry.first.href}>{entry.first.title}</a> : <strong>{entry.first.title}</strong>}
+    {entry.first.location && <span class="weekly-schedule__location">{entry.first.location}</span>}</div>
+  </li>)}</ul>
 </div> : schedule.status !== 'unavailable' && <p>No events are listed for these seven days.</p>}

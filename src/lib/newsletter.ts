@@ -1,4 +1,4 @@
-import { getThisWeek, groupSchedule, dateKey, timeLabel } from "./events";
+import { getThisWeek, compactSchedule, dateKey } from "./events";
 import type { PostEntry } from "./content";
 import { getNewsletterPostsForWeek, getSiteConfig } from "./content";
 import { formatDate } from "./format";
@@ -123,11 +123,12 @@ const renderPost = (post: NewsletterPost) => `
                 </tr>`;
 
 export function renderScheduleEmail(newsletter: NewsletterData) {
-  const groups = groupSchedule(newsletter.schedule.events, newsletter.schedule.start, newsletter.schedule.end);
-  const rows = groups.map((group) => `<tr><td colspan="2" style="padding:16px 0 6px;font-weight:bold;">${escapeHtml(group.label)}</td></tr>${group.events.map((event) => {
-    const title = event.href ? `<a style="color:#226442;" href="${escapeHtml(absolutize(event.href, newsletter.onlineUrl))}">${escapeHtml(event.title)}</a>` : escapeHtml(event.title);
-    return `<tr data-calendar-id="${escapeHtml(event.id)}"><td style="padding:6px 12px 6px 0;vertical-align:top;width:140px;">${escapeHtml(timeLabel(event))}</td><td style="padding:6px 0;vertical-align:top;"><strong>${title}</strong>${event.location ? `<br />${escapeHtml(event.location)}` : ''}</td></tr>`;
-  }).join('')}`).join('');
+  const entries = compactSchedule(newsletter.schedule.events);
+  const rows = entries.map((entry) => {
+    const title = entry.first.href ? `<a style="color:#226442;" href="${escapeHtml(absolutize(entry.first.href, newsletter.onlineUrl))}">${escapeHtml(entry.first.title)}</a>` : escapeHtml(entry.first.title);
+    const ids = entry.events.map((event) => `<span data-calendar-id="${escapeHtml(event.id)}" style="display:none"></span>`).join('');
+    return `<tr><td style="padding:7px 12px 7px 0;vertical-align:top;width:140px;font-weight:bold;">${escapeHtml(entry.dayLabel)}<br /><span style="font-weight:normal">${escapeHtml(entry.timeLabel)}</span></td><td style="padding:7px 0;vertical-align:top;">${ids}<strong>${title}</strong>${entry.first.location ? `<br />${escapeHtml(entry.first.location)}` : ''}</td></tr>`;
+  }).join('');
   return `<tr><td style="padding:0 0 28px;font-family:Arial,sans-serif;color:#222f2a;">
     <h2 style="font-size:24px;margin:0 0 8px;">This week</h2><p style="margin:0 0 12px;">${escapeHtml(newsletter.schedule.label)}</p>
     ${newsletter.schedule.message ? `<p>${escapeHtml(newsletter.schedule.message)}</p>` : ''}

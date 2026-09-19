@@ -2,10 +2,11 @@ import { getCollection } from 'astro:content';
 import { expandCalendar, type Occurrence } from './calendar/core.mjs';
 import { getSnapshot, snapshotStatus, calendarUrl } from './calendar/store.mjs';
 import { canonicalTarget, resolveTarget } from './calendar/links.mjs';
+import { compactSchedule } from './calendar/compact.mjs';
 import { dateKey, formatDay, formatTime, parseIssueDate, sixMonthsFrom, timeLabel, weekRange, addDays } from './calendar/dates.mjs';
 import { mappedPageRoutes } from './pageRoutes';
 
-export { dateKey, formatDay, formatTime, parseIssueDate, timeLabel, weekRange };
+export { dateKey, formatDay, formatTime, parseIssueDate, timeLabel, weekRange, compactSchedule };
 export type EventItem = Occurrence & { href?: string };
 export type Schedule = {
   events: EventItem[];
@@ -59,7 +60,7 @@ export async function getThisWeek(date = new Date()) {
   return { ...await getSchedule(start, end), start, end, label: `${formatDay(start)} – ${formatDay(parseIssueDate(addDays(dateKey(start), 6)))}` };
 }
 
-export async function getTargetSchedule(target: string, from = new Date(), limit = 6) {
+export async function getTargetSchedule(target: string, from = new Date(), limit = 2) {
   const schedule = await getSchedule(from, sixMonthsFrom(from));
   const canonical = canonicalTarget(target);
   return { ...schedule, events: schedule.events.filter((event) => Boolean(canonical) && event.href === canonical).slice(0, limit) };

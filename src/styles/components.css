@@ -1602,13 +1602,12 @@
 }
 
 /* The calendar agenda is shared with print; calendar HTML is never injected. */
-.weekly-schedule__day { margin: 1.5rem 0; }
-.weekly-schedule__day h3 { margin: 0 0 .6rem; }
 .weekly-schedule ul, .upcoming-dates ul { list-style: none; margin: 0; padding: 0; }
 .weekly-schedule__event { display: grid; grid-template-columns: minmax(9rem, 13rem) 1fr; gap: 1rem; padding: .7rem 0; border-top: 1px solid currentColor; }
 .weekly-schedule__event a { color: inherit; text-decoration: underline; font-weight: 700; }
-.weekly-schedule__time { font-variant-numeric: tabular-nums; }
+.weekly-schedule__when { font-variant-numeric: tabular-nums; font-weight: 700; }
 .weekly-schedule__location, .upcoming-dates li span { display: block; font-size: .9em; margin-top: .2rem; }
+.calendar-occurrence-id { display: none; }
 .upcoming-dates { margin-top: 1.4rem; }
 .upcoming-dates h3 { font-size: 1.1rem; margin: 0 0 .7rem; }
 .upcoming-dates li { padding: .65rem 0; border-top: 1px solid currentColor; }
