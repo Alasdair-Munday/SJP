@@ -3,6 +3,7 @@ import { getCollection, getEntry, type CollectionEntry } from "astro:content";
 
 export type PageEntry = CollectionEntry<"pages">;
 export type PostEntry = CollectionEntry<"posts">;
+export type EventEntry = CollectionEntry<"events">;
 export type SiteEntry = CollectionEntry<"site">;
 
 export async function getSiteConfig() {
@@ -70,6 +71,12 @@ export const sortPosts = (posts: PostEntry[]) =>
 
 export async function getAllPosts() {
   return sortPosts(await getCollection("posts"));
+}
+
+export async function getAllEvents() {
+  return [...await getCollection("events")].sort((left, right) =>
+    left.data.title.localeCompare(right.data.title),
+  );
 }
 
 export async function getLatestPosts(limit = 3) {

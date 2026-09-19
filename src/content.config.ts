@@ -320,8 +320,21 @@ const posts = defineCollection({
   }),
 });
 
+const events = defineCollection({
+  type: "content",
+  schema: z.object({
+    title: z.string(),
+    summary: z.string(),
+    calendarTargets: z.array(z.string()).min(1),
+    location: z.string().optional(),
+    timeText: z.string().optional(),
+    image: optionalImageSchema,
+  }),
+});
+
 export const collections = {
   pages,
   posts,
+  events,
   site,
 };

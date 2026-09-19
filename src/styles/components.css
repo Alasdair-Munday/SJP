@@ -1612,4 +1612,9 @@
 .upcoming-dates h3 { font-size: 1.1rem; margin: 0 0 .7rem; }
 .upcoming-dates li { padding: .65rem 0; border-top: 1px solid currentColor; }
 .calendar-status { padding: .8rem; border: 1px solid currentColor; border-radius: .3rem; }
+.events-index { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; margin-top: 2rem; }
+.events-index__card { padding: 1.3rem; background: var(--paper, #fff); border-radius: .9rem; box-shadow: 0 1px 0 rgba(0,0,0,.12); }
+.events-index__card h2 { margin: .35rem 0 .55rem; font-size: 1.35rem; }
+.events-index__card p:not(.eyebrow) { margin: 0 0 1rem; }
+@media (max-width: 760px) { .events-index { grid-template-columns: 1fr; } }
 @media (max-width: 480px) { .weekly-schedule__event { grid-template-columns: 1fr; gap: .25rem; } }

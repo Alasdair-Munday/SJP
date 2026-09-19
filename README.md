@@ -99,18 +99,20 @@ These links were added to the public calendar series on 19 September 2026:
 
 | Calendar series | Website destination |
 | --- | --- |
-| Foodbank | `https://stjohnspark.org/community#foodbank` |
-| Lunch Club | `https://stjohnspark.org/community#lunch-club` |
-| Cornerstone | `https://stjohnspark.org/park-youth#cornerstone` |
-| St John's Holy Communion (first Sunday) | `https://stjohnspark.org/visit#sundays` |
-| Sunday Service (second–fifth Sundays) | `https://stjohnspark.org/visit#sundays` |
-| Simplicity: Traditional Holy Communion (second Sunday) | `https://stjohnspark.org/news/simplicity-our-new-9am-traditional-tech-free-holy-communion-service` |
-| First Sunday Prayer | `https://stjohnspark.org/get-involved` |
-| Midweek Communion, Lunch & Bible Study | `https://stjohnspark.org/get-involved` |
+| Foodbank | `https://stjohnspark.org/events/foodbank` |
+| Lunch Club | `https://stjohnspark.org/events/lunch-club` |
+| Cornerstone | `https://stjohnspark.org/events/cornerstone` |
+| Sunday Service / St John's Holy Communion | `https://stjohnspark.org/events/sunday-service` |
+| Simplicity: Traditional Holy Communion | `https://stjohnspark.org/events/simplicity` |
+| Morning Prayers | `https://stjohnspark.org/events/morning-prayers` |
+| First Sunday Prayer | `https://stjohnspark.org/events/first-sunday-prayer` |
+| Midweek Communion, Lunch & Bible Study | `https://stjohnspark.org/events/midweek-communion` |
+| Pinders dance group | `https://stjohnspark.org/events/pinders-dance-group` |
+| Manor Weavers | `https://stjohnspark.org/events/manor-weavers` |
 | Manor Weavers | `https://stjohnspark.org/community` |
 | Pinders dance group | `https://stjohnspark.org/community#pinders` |
 
-The relevant page sections/cards have a stable `id` and `calendarTarget` in the CMS.
+Each public recurring event has its own `/events/…` page, which displays the next date from the calendar. The site temporarily recognises the old links too, so event pages remain live during the calendar-link migration.
 They show up to six upcoming sessions within six months. Add descriptions on the
 site, and use the calendar for exact times. For a news-post destination, use
 `https://stjohnspark.org/news/POST-SLUG`; matching posts automatically show dates.

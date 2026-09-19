@@ -1,0 +1,21 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getAllEvents } from "../../lib/content";
+import { getTargetSchedule, formatDay, timeLabel } from "../../lib/events";
+
+export const prerender = false;
+Astro.response.headers.set("Cache-Control", "no-store");
+const events = await getAllEvents();
+const entries = await Promise.all(events.map(async (eventPage) => ({ eventPage, schedule: await getTargetSchedule(eventPage.data.calendarTargets, new Date(), 1) })));
+---
+
+<BaseLayout title="What’s on" description="Regular services, groups and community events at St John’s Park.">
+  <main class="utility-shell page-stack"><section class="content-band" data-tone="stone">
+    <p class="eyebrow">St John’s Park</p><h1 class="display-title">What’s on</h1>
+    <p class="lede">Find a regular service, group or community event. Each page includes its next date from our public calendar.</p>
+    <div class="events-index">{entries.map(({ eventPage, schedule }) => <article class="events-index__card">
+      <p class="eyebrow">{schedule.events[0] ? `${formatDay(schedule.events[0].start)} · ${timeLabel(schedule.events[0])}` : "Dates to follow"}</p>
+      <h2>{eventPage.data.title}</h2><p>{eventPage.data.summary}</p><a class="inline-link" href={`/events/${eventPage.slug}`}>Find out more</a>
+    </article>)}</div>
+  </section></main>
+</BaseLayout>

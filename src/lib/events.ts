@@ -16,8 +16,38 @@ export type Schedule = {
   diagnostics: { uid: string; title: string; issue: string }[];
 };
 
+function sundayServiceTitle(event: Occurrence) {
+  const start = new Date(event.start);
+  const isTenFortyFiveSunday = start.getDay() === 0 && start.getHours() === 10 && start.getMinutes() === 45
+    && /^(Sunday Service|St John's Holy Communion)$/i.test(event.title);
+  if (!isTenFortyFiveSunday) return event.title;
+
+  const sundayNumber = Math.ceil(start.getDate() / 7);
+  if (sundayNumber === 1) return '10:45 Service · All In Communion';
+  if (sundayNumber === 3) return '10:45 Service · Holy Communion';
+  return '10:45 Service · Service of the Word';
+}
+
+function eventPageTarget(event: Occurrence, target?: string) {
+  const byTitle: Record<string, string> = {
+    'Morning Prayers': '/events/morning-prayers',
+    'Midweek Online Prayers': '/events/morning-prayers',
+    'Midweek Communion, Lunch & Bible Study': '/events/midweek-communion',
+    'First Sunday Prayer': '/events/first-sunday-prayer',
+    Foodbank: '/events/foodbank',
+    'Lunch Club': '/events/lunch-club',
+    Cornerstone: '/events/cornerstone',
+    'Pinders dance group': '/events/pinders-dance-group',
+    'Manor Weavers': '/events/manor-weavers',
+    'Simplicity: Traditional Holy Communion': '/events/simplicity',
+    'Sunday Service': '/events/sunday-service',
+    "St John's Holy Communion": '/events/sunday-service',
+  };
+  return byTitle[event.title] ?? target;
+}
+
 export async function getCalendarTargets() {
-  const [pages, posts] = await Promise.all([getCollection('pages'), getCollection('posts')]);
+  const [pages, posts, eventPages] = await Promise.all([getCollection('pages'), getCollection('posts'), getCollection('events')]);
   const targets = new Set<string>();
   for (const page of pages) {
     const path = page.id === 'home' ? '/' : `/${mappedPageRoutes.find((route) => route.pageId === page.id)?.slug ?? page.id}`;
@@ -28,6 +58,7 @@ export async function getCalendarTargets() {
     }
   }
   for (const post of posts) targets.add(`/news/${post.slug}`);
+  for (const eventPage of eventPages) targets.add(`/events/${eventPage.slug}`);
   return targets;
 }
 
@@ -41,12 +72,12 @@ export async function getSchedule(start: Date, end: Date): Promise<Schedule> {
     const diagnostics: Schedule['diagnostics'] = [];
     const seen = new Set<string>();
     const events = expandCalendar(snapshot.text!, start, end).map((event: Occurrence) => {
-      const href = resolveTarget(event.website, targets);
+      const href = eventPageTarget(event, resolveTarget(event.website, targets));
       if (!href && !seen.has(event.uid)) {
         diagnostics.push({ uid: event.uid, title: event.title, issue: event.linkIssue || 'Website link does not match a published page or section' });
         seen.add(event.uid);
       }
-      return { ...event, href };
+      return { ...event, title: sundayServiceTitle(event), href };
     });
     return { events, status, verifiedAt, diagnostics, message: status === 'stale' ? `Calendar updates are delayed. Last checked ${formatDay(verifiedAt!)}, ${formatTime(verifiedAt!)}. Please confirm changes with us.` : '' };
   } catch (error) {
@@ -60,10 +91,10 @@ export async function getThisWeek(date = new Date()) {
   return { ...await getSchedule(start, end), start, end, label: `${formatDay(start)} – ${formatDay(parseIssueDate(addDays(dateKey(start), 6)))}` };
 }
 
-export async function getTargetSchedule(target: string, from = new Date(), limit = 2) {
+export async function getTargetSchedule(target: string | string[], from = new Date(), limit = 2) {
   const schedule = await getSchedule(from, sixMonthsFrom(from));
-  const canonical = canonicalTarget(target);
-  return { ...schedule, events: schedule.events.filter((event) => Boolean(canonical) && event.href === canonical).slice(0, limit) };
+  const canonicals = (Array.isArray(target) ? target : [target]).map((value) => canonicalTarget(value)).filter(Boolean);
+  return { ...schedule, events: schedule.events.filter((event) => canonicals.includes(event.href ?? '')).slice(0, limit) };
 }
 
 export function groupSchedule(events: EventItem[], start?: Date, end?: Date) {
