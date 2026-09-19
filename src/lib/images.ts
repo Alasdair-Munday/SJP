@@ -16,4 +16,5 @@ export const getNetlifyOptimizedImageUrl = ({
   width: number;
   height: number;
   quality: number;
-}) => `/.netlify/images?url=${encodeURIComponent(src)}&w=${width}&h=${height}&q=${quality}`;
+}) =>
+  `/__image?src=${encodeURIComponent(src)}&w=${width}&h=${height}&q=${quality}`;
