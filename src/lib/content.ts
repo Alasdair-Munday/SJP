@@ -1,3 +1,4 @@
+import { relevantToIssue } from "./calendar/newsletter-selection.mjs";
 import { getCollection, getEntry, type CollectionEntry } from "astro:content";
 
 export type PageEntry = CollectionEntry<"pages">;
@@ -93,48 +94,10 @@ export async function getPostCategories() {
   );
 }
 
-export function isRelevantForWeek(post: PostEntry, weekStartDate: Date) {
-  if (!post.data.displayOnNewsletter) return false;
-
-  const weekEndDate = new Date(weekStartDate);
-  weekEndDate.setDate(weekEndDate.getDate() + 7);
-
-  // 1. Published this week
-  if (post.data.publishDate >= weekStartDate && post.data.publishDate < weekEndDate) {
-    return true;
-  }
-
-  // 2. Explicit newsletter display window, with legacy relevantUntil fallback
-  const displayUntil = post.data.newsletterDisplayUntil ?? post.data.relevantUntil;
-  if (displayUntil && displayUntil >= weekStartDate) {
-    return true;
-  }
-
-  // 3. Upcoming/ongoing event this week
-  if (post.data.category === "event") {
-    const eventDate = post.data.eventDate;
-    const eventEndDate = post.data.eventEndDate;
-
-    if (eventDate) {
-      // Event happens this week or later
-      if (eventDate >= weekStartDate) return true;
-      // Event started before this week but ends this week or later
-      if (eventEndDate && eventEndDate >= weekStartDate) return true;
-    }
-  }
-
-  return false;
+export function isRelevantForWeek(post: PostEntry, issueDate: Date) {
+  return relevantToIssue(post.data, issueDate);
 }
 
 export async function getNewsletterPostsForWeek(targetDate: Date = new Date()) {
-  const posts = await getAllPosts();
-
-  // Create a new date to avoid mutating the original targetDate
-  const dateObj = new Date(targetDate);
-  const day = dateObj.getDay();
-  const diff = dateObj.getDate() - day + (day === 0 ? -6 : 1); // adjust when day is sunday
-  const weekStartDate = new Date(dateObj.setDate(diff));
-  weekStartDate.setHours(0, 0, 0, 0);
-
-  return posts.filter((post) => isRelevantForWeek(post, weekStartDate));
+  return (await getAllPosts()).filter((post) => isRelevantForWeek(post, targetDate));
 }

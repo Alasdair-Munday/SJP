@@ -7483,6 +7483,7 @@ __metadata:
     "@astrojs/check": "npm:^0.9.6"
     "@astrojs/netlify": "npm:^6.6.4"
     "@astrojs/rss": "npm:^4.0.15"
+    "@netlify/blobs": "npm:10.6.0"
     astro: "npm:^5.17.1"
     dayjs: "npm:^1.11.19"
     ical.js: "npm:^2.2.1"
