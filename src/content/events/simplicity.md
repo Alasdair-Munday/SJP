@@ -1,8 +1,6 @@
 ---
 title: 'Simplicity: Traditional Holy Communion'
 summary: A simple, traditional, tech-free Communion service at 9am on the second Sunday of each month.
-calendarTargets:
-  - /events/simplicity
 ---
 
 Simplicity is a quiet 30-minute Church of England Communion service with Scripture, prayer, silence and a short reflection. There is no music or screens.

@@ -1,8 +1,6 @@
 ---
 title: Foodbank
 summary: Emergency food parcels and practical support during Monday’s Community Hub.
-calendarTargets:
-  - /events/foodbank
 ---
 
 Foodbank runs on Mondays from 10am to 12 noon. Access is by referral only.

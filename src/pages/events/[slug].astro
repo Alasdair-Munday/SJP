@@ -10,7 +10,7 @@ Astro.response.headers.set("Cache-Control", "no-store");
 
 const eventPage = (await getCollection("events")).find((item) => item.slug === Astro.params.slug);
 if (!eventPage) return new Response("Not found", { status: 404 });
-const sessions = await getTargetSchedule(eventPage.data.calendarTargets);
+const sessions = await getTargetSchedule(`/events/${eventPage.slug}`);
 const { Content } = await eventPage.render();
 const next = sessions.events[0];
 const later = sessions.events.slice(1);

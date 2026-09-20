@@ -41,6 +41,28 @@ media_library:
   name: cloudflare_netlify
 
 collections:
+  - name: "events"
+    label: "Regular Events"
+    label_singular: "Regular Event"
+    folder: "src/content/events"
+    create: true
+    slug: "{{slug}}"
+    summary: "{{title}}"
+    fields:
+      - {label: "Name", name: "title", widget: "string", hint: "The name people see on the website."}
+      - {label: "Short summary", name: "summary", widget: "text", hint: "One sentence used on the What’s on page."}
+      - {label: "Location guidance", name: "location", widget: "string", required: false, hint: "Optional directions or a usual location. Exact event locations come from Google Calendar."}
+      - {label: "Usual time guidance", name: "timeText", widget: "string", required: false, hint: "Optional general wording, such as ‘term-time Wednesdays’. Exact times come from Google Calendar."}
+      - label: "Image"
+        name: "image"
+        widget: "object"
+        required: false
+        collapsed: true
+        fields:
+          - {label: "Image", name: "src", widget: "image"}
+          - {label: "Alt text", name: "alt", widget: "string", required: false}
+      - {label: "About this event", name: "body", widget: "markdown", hint: "After publishing, add a Website line to the matching Public Events Google Calendar series: Website: https://stjohnspark.org/events/your-page-name. Google Calendar controls exact dates, times, locations and cancellations."}
+
   - name: "posts"
     label: "News & Events"
     label_singular: "Post"
@@ -485,6 +507,30 @@ collections:
                   - {label: "Title", name: "title", widget: "string"}
                   - {label: "Background Tone", name: "backgroundTone", widget: "select", options: ["park", "park-dark", "stone", "sky", "pink", "pink-dark", "orange", "door", "give", "grass", "roof"], required: false}
                   - {label: "Content", name: "contentHtml", widget: "text", hint: "Accepts basic HTML."}
+
+      - label: "What’s on Page"
+        name: "events"
+        file: "src/content/pages/events.json"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Browser Description", name: "metaDescription", widget: "text"}
+          - {label: "Template", name: "template", widget: "hidden", default: "events"}
+          - {label: "Eyebrow", name: "eyebrow", widget: "string", required: false}
+          - {label: "Introduction", name: "intro", widget: "text", required: false}
+          - label: "Featured Events"
+            name: "featuredEvents"
+            widget: "list"
+            required: false
+            hint: "Optional. These events appear first in this order. All other regular events appear by their next date."
+            fields:
+              - label: "Event"
+                name: "event"
+                widget: "relation"
+                collection: "events"
+                search_fields: ["title"]
+                value_field: "{{slug}}"
+                display_fields: ["title"]
+          - {label: "Sections", name: "sections", widget: "hidden", default: []}
 
       - label: "Visit Page"
         name: "visit"

@@ -224,8 +224,12 @@ const pages = defineCollection({
       "news",
       "talks",
       "utility",
+      "events",
     ]),
     sections: z.array(sectionSchema).default([]),
+    eyebrow: z.string().optional(),
+    intro: z.string().optional(),
+    featuredEvents: z.array(z.object({ event: z.string() })).default([]),
   }),
 });
 
@@ -325,7 +329,6 @@ const events = defineCollection({
   schema: z.object({
     title: z.string(),
     summary: z.string(),
-    calendarTargets: z.array(z.string()).min(1),
     location: z.string().optional(),
     timeText: z.string().optional(),
     image: optionalImageSchema,

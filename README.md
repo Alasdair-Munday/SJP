@@ -81,19 +81,38 @@ activity descriptions. The homepage, printable newsletter and email newsletter
 share one calendar service. The agenda covers **today plus the next six days** in
 Europe/London, including every public event and any overlapping multi-day events.
 
-### Connecting an activity
+### Managing regular events
 
-Add a separate line to the Google Calendar event description:
+Google Calendar owns public dates, times, locations and cancellations. Site Admin
+owns the information pages for regular activities and the wording on the
+**What’s on** page.
+
+To add a new regular activity:
+
+1. In Site Admin, open **Regular Events**, create its page and submit it for
+   review. The page address is `https://stjohnspark.org/events/<page-name>`.
+2. When the page is published, create or update its recurring entry in the
+   Public Events Google Calendar and add a separate line to its description:
 
 ```text
-Website: https://stjohnspark.org/community#foodbank
+Website: https://stjohnspark.org/events/<page-name>
 ```
 
-Edit **the entire series** for a recurring activity. Google’s formatted links are
-supported. Keep the Website line when using “this and following” to split a series.
-A changed occurrence inherits the master link unless it supplies its own Website
-line. Renaming an event does not break the connection. Missing/invalid links do not
-hide events from the agenda; those events appear without a website link.
+The calendar link connects the timetable entry to its information page and lets
+that page display its next date. Google’s formatted links are supported. Edit the
+entire series for a recurring activity, and retain the Website line when using
+“this and following” to split it. A changed occurrence inherits the master link
+unless it supplies its own Website line. Missing or invalid links do not hide
+events from the agenda; they simply appear without a website link.
+
+To cancel one date, delete **this event only** in Google Calendar. To stop an
+activity from a given date, delete **this and following**; deleting the whole
+series removes all its dates. The timetable and newsletters update on the next
+calendar refresh.
+
+In Site Admin → **What’s on Page**, editors can change the title and introduction
+and optionally choose a manually ordered list of featured events. The rest appear
+automatically by their next date, then alphabetically when no date is scheduled.
 
 These links were added to the public calendar series on 19 September 2026:
 
@@ -106,8 +125,6 @@ These links were added to the public calendar series on 19 September 2026:
 | Simplicity: Traditional Holy Communion | `https://stjohnspark.org/events/simplicity` |
 | Morning Prayers | `https://stjohnspark.org/events/morning-prayers` |
 | Midweek Communion, Lunch & Bible Study | `https://stjohnspark.org/events/midweek-communion` |
-| Manor Weavers | `https://stjohnspark.org/community` |
-| Pinders dance group | `https://stjohnspark.org/community#pinders` |
 
 Each public recurring event has its own `/events/…` page, which displays the next date from the calendar. Building bookings and private prayer gatherings are kept off the public calendar.
 They show up to six upcoming sessions within six months. Add descriptions on the
