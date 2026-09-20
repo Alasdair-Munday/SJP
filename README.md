@@ -105,14 +105,11 @@ These links were added to the public calendar series on 19 September 2026:
 | Sunday Service / St John's Holy Communion | `https://stjohnspark.org/events/sunday-service` |
 | Simplicity: Traditional Holy Communion | `https://stjohnspark.org/events/simplicity` |
 | Morning Prayers | `https://stjohnspark.org/events/morning-prayers` |
-| First Sunday Prayer | `https://stjohnspark.org/events/first-sunday-prayer` |
 | Midweek Communion, Lunch & Bible Study | `https://stjohnspark.org/events/midweek-communion` |
-| Pinders dance group | `https://stjohnspark.org/events/pinders-dance-group` |
-| Manor Weavers | `https://stjohnspark.org/events/manor-weavers` |
 | Manor Weavers | `https://stjohnspark.org/community` |
 | Pinders dance group | `https://stjohnspark.org/community#pinders` |
 
-Each public recurring event has its own `/events/…` page, which displays the next date from the calendar. The site temporarily recognises the old links too, so event pages remain live during the calendar-link migration.
+Each public recurring event has its own `/events/…` page, which displays the next date from the calendar. Building bookings and private prayer gatherings are kept off the public calendar.
 They show up to six upcoming sessions within six months. Add descriptions on the
 site, and use the calendar for exact times. For a news-post destination, use
 `https://stjohnspark.org/news/POST-SLUG`; matching posts automatically show dates.
