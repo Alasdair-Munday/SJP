@@ -882,7 +882,7 @@
   min-width: 0;
   padding: clamp(0.8rem, 1.4vw, 1rem);
   border: 0;
-  background: var(--color-stone);
+  background: var(--surface-ink, var(--color-text));
   color: var(--color-text);
   box-shadow: 0 0.8rem 1.8rem rgba(4, 50, 27, 0.18);
   flex: 0 0 calc((100% - (var(--carousel-gap) * 2)) / 3);
