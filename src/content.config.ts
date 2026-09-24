@@ -21,6 +21,21 @@ const linkSchema = z.object({
   newTab: z.boolean().default(false),
 });
 
+const optionalLinkSchema = z.preprocess((value) => {
+  if (!value || typeof value !== "object") return undefined;
+  const link = value as { label?: unknown; href?: unknown };
+  if (typeof link.label !== "string" || !link.label.trim() ||
+      typeof link.href !== "string" || !link.href.trim()) return undefined;
+  return value;
+}, linkSchema.optional());
+
+const optionalLinksSchema = z.preprocess(
+  (value) => value ?? [],
+  z.array(optionalLinkSchema).transform((links) => links.filter(
+    (link): link is z.infer<typeof linkSchema> => link !== undefined,
+  )),
+);
+
 const imageSchema = z.object({
   src: z.string().optional(),
   alt: z.string().default(""),
@@ -111,9 +126,9 @@ const heroSectionSchema = z.object({
   title: z.string(),
   body: z.string(),
   backgroundTone: toneSchema.default("park"),
-  primaryCta: linkSchema.optional(),
-  secondaryCta: linkSchema.optional(),
-  image: imageSchema.optional(),
+  primaryCta: optionalLinkSchema,
+  secondaryCta: optionalLinkSchema,
+  image: optionalImageSchema,
   highlightLabel: z.string().optional(),
 });
 
@@ -124,7 +139,7 @@ const introSectionSchema = z.object({
   title: z.string(),
   body: z.string(),
   backgroundTone: toneSchema.default("stone"),
-  ctas: z.array(linkSchema).default([]),
+  ctas: optionalLinksSchema,
 });
 
 const splitSectionSchema = z.object({
@@ -135,9 +150,9 @@ const splitSectionSchema = z.object({
   body: z.string(),
   points: z.array(z.string()).default([]),
   backgroundTone: toneSchema.default("stone"),
-  image: imageSchema,
+  image: optionalImageSchema,
   reverse: z.boolean().default(false),
-  ctas: z.array(linkSchema).default([]),
+  ctas: optionalLinksSchema,
 });
 
 const cardsSectionSchema = z.object({
@@ -158,9 +173,9 @@ const ctaSectionSchema = z.object({
   title: z.string(),
   body: z.string(),
   backgroundTone: toneSchema.default("park-dark"),
-  primaryCta: linkSchema,
-  secondaryCta: linkSchema.optional(),
-  image: imageSchema.optional(),
+  primaryCta: optionalLinkSchema,
+  secondaryCta: optionalLinkSchema,
+  image: optionalImageSchema,
 });
 
 const latestSectionSchema = z.object({
@@ -172,7 +187,7 @@ const latestSectionSchema = z.object({
   backgroundTone: toneSchema.default("pink"),
   source: z.enum(["posts", "talks"]),
   limit: z.number().int().min(1).max(6).default(3),
-  cta: linkSchema,
+  cta: optionalLinkSchema,
 });
 
 const richTextSectionSchema = z.object({
