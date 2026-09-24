@@ -16,13 +16,13 @@ const toneSchema = z.enum([
 ]);
 
 const linkSchema = z.object({
-  label: z.string(),
-  href: z.string(),
+  label: z.string().optional(),
+  href: z.string().optional(),
   newTab: z.boolean().default(false),
 });
 
 const imageSchema = z.object({
-  src: z.string(),
+  src: z.string().optional(),
   alt: z.string().default(""),
   maskShape: z.string().optional(),
   accentShape: z.string().optional(),
