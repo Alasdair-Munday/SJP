@@ -114,9 +114,9 @@ const categoryLabels = {
   }
 
   <div class="button-row">
-    <a class="button-link--ghost" href={section.cta.href} target={section.cta.newTab ? "_blank" : undefined} rel={section.cta.newTab ? "noreferrer" : undefined}>
+    {section.cta && (<a class="button-link--ghost" href={section.cta.href} target={section.cta.newTab ? "_blank" : undefined} rel={section.cta.newTab ? "noreferrer" : undefined}>
       {section.cta.label}
-    </a>
+    </a>)}
     {
       section.source === "talks" && (
         <a class="button-link--secondary" href={site.talks.spotifyHref} target="_blank" rel="noopener noreferrer">
