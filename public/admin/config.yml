@@ -385,10 +385,9 @@ collections:
                     name: "primaryCta"
                     widget: "object"
                     collapsed: true
-                    required: false
                     fields:
-                      - {label: "Label", name: "label", widget: "string", required: false}
-                      - {label: "Link", name: "href", widget: "string", required: false}
+                      - {label: "Label", name: "label", widget: "string"}
+                      - {label: "Link", name: "href", widget: "string"}
                       - {label: "New Tab", name: "newTab", widget: "boolean", required: false, default: false}
                   - label: "Secondary Button"
                     name: "secondaryCta"
