@@ -41,6 +41,28 @@ media_library:
   name: cloudflare_netlify
 
 collections:
+  - name: "events"
+    label: "Regular Events"
+    label_singular: "Regular Event"
+    folder: "src/content/events"
+    create: true
+    slug: "{{slug}}"
+    summary: "{{title}}"
+    fields:
+      - {label: "Name", name: "title", widget: "string", hint: "The name people see on the website."}
+      - {label: "Short summary", name: "summary", widget: "text", hint: "One sentence used on the What’s on page."}
+      - {label: "Location guidance", name: "location", widget: "string", required: false, hint: "Optional directions or a usual location. Exact event locations come from Google Calendar."}
+      - {label: "Usual time guidance", name: "timeText", widget: "string", required: false, hint: "Optional general wording, such as ‘term-time Wednesdays’. Exact times come from Google Calendar."}
+      - label: "Image"
+        name: "image"
+        widget: "object"
+        required: false
+        collapsed: true
+        fields:
+          - {label: "Image", name: "src", widget: "image"}
+          - {label: "Alt text", name: "alt", widget: "string", required: false}
+      - {label: "About this event", name: "body", widget: "markdown", hint: "After publishing, add a Website line to the matching Public Events Google Calendar series: Website: https://stjohnspark.org/events/your-page-name. Google Calendar controls exact dates, times, locations and cancellations."}
+
   - name: "posts"
     label: "News & Events"
     label_singular: "Post"
@@ -55,6 +77,19 @@ collections:
       - {label: "Publish Date", name: "publishDate", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false, hint: "When this post should appear."}
       - {label: "Display on Newsletter", name: "displayOnNewsletter", widget: "boolean", default: true, required: false, hint: "On by default. Turn off to keep this item out of the weekly newsletter."}
       - {label: "Display Until", name: "newsletterDisplayUntil", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false, required: false, condition: {field: "category", pattern: "^(update|blog)$"}, hint: "News only. Set to the coming Monday by default; events use the event date instead."}
+      - {label: "Available for Social Media", name: "socialEnabled", widget: "boolean", default: false, required: false, hint: "Turn on only after this story and its image have been reviewed for public social media."}
+      - {label: "Photo Consent Confirmed", name: "socialConsentConfirmed", widget: "boolean", default: false, required: false, hint: "Required before this post can be suggested for the Tuesday people/story slot."}
+      - {label: "Social Caption Override", name: "socialCaption", widget: "text", required: false, hint: "Optional. Leave blank to use the website summary."}
+      - {label: "Do Not Use on Social After", name: "socialDoNotUseAfter", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false, required: false, hint: "Optional consent or relevance expiry date."}
+      - label: "Social Image Override"
+        name: "socialImage"
+        widget: "object"
+        required: false
+        collapsed: true
+        hint: "Optional. Uses the featured image when blank."
+        fields:
+          - {label: "Image", name: "src", widget: "image", required: false}
+          - {label: "Alt Text", name: "alt", widget: "string", required: false}
       - {label: "Body", name: "body", widget: "markdown", hint: "The main content."}
       
       # Event specifics
@@ -188,6 +223,26 @@ collections:
               - {label: "RSS Label", name: "rssLabel", widget: "string"}
               - {label: "RSS Href", name: "rssHref", widget: "string"}
 
+          - label: "Social Media"
+            name: "social"
+            widget: "object"
+            collapsed: true
+            hint: "Links and workflow settings used by the footer and weekly social review page."
+            fields:
+              - {label: "Facebook Page URL", name: "facebookUrl", widget: "string", required: false}
+              - {label: "Instagram Profile URL", name: "instagramUrl", widget: "string", required: false}
+              - {label: "Social Media Contact Email", name: "socialMediaEmail", widget: "string"}
+              - {label: "Consent Guidance", name: "consentGuidance", widget: "text"}
+              - {label: "Canva Social Folder", name: "canvaFolderUrl", widget: "string"}
+              - label: "Canva Starters"
+                name: "canvaTemplates"
+                widget: "object"
+                collapsed: true
+                fields:
+                  - {label: "People / Story", name: "people", widget: "string"}
+                  - {label: "Event / Sunday", name: "event", widget: "string"}
+                  - {label: "Story / Reel", name: "story", widget: "string"}
+
   - name: "pages"
     label: "Pages"
     files:
@@ -205,6 +260,13 @@ collections:
             widget: "list"
             hint: "Add, reorder, or edit the blocks on the page."
             types:
+              - label: "This week from Google Calendar"
+                name: "whatsOn"
+                widget: "object"
+                fields:
+                  - {label: "Title", name: "title", widget: "string", default: "This week"}
+                  - {label: "Section ID", name: "id", widget: "string", required: false}
+                  - {label: "Background Tone", name: "backgroundTone", widget: "select", options: ["sky", "stone", "park", "pink"], default: "sky"}
               - label: "Hero Section"
                 name: "hero"
                 widget: "object"
@@ -261,7 +323,8 @@ collections:
                 widget: "object"
                 summary: 'Split: {{title}}'
                 fields:
-                  - {label: "Section ID", name: "id", widget: "hidden", required: false}
+                  - {label: "Calendar information link", name: "calendarTarget", widget: "string", required: false, hint: "Exact link used in the calendar Website line, e.g. /community#lunch-club. Keep this link and its section ID stable."}
+                  - {label: "Section ID", name: "id", widget: "string", required: false}
                   - {label: "Reverse Layout", name: "reverse", widget: "hidden", required: false}
                   - {label: "Eyebrow", name: "eyebrow", widget: "string", required: false}
                   - {label: "Title", name: "title", widget: "string"}
@@ -306,6 +369,8 @@ collections:
                     widget: "list"
                     summary: "{{title}}"
                     fields:
+                      - {label: "Card ID", name: "id", widget: "string", required: false}
+                      - {label: "Calendar information link", name: "calendarTarget", widget: "string", required: false, hint: "Exact link used in Google Calendar, e.g. /community#foodbank."}
                       - {label: "Title", name: "title", widget: "string"}
                       - {label: "Tag", name: "tag", widget: "string", required: false}
                       - {label: "Body", name: "body", widget: "text", required: false}
@@ -417,6 +482,8 @@ collections:
                 widget: "object"
                 summary: 'Intro: {{title}}'
                 fields:
+                  - {label: "Calendar information link", name: "calendarTarget", widget: "string", required: false, hint: "Exact link used in the calendar Website line, e.g. /community#lunch-club. Keep this link and its section ID stable."}
+                  - {label: "Section ID", name: "id", widget: "string", required: false}
                   - {label: "Eyebrow", name: "eyebrow", widget: "string", required: false}
                   - {label: "Title", name: "title", widget: "string"}
                   - {label: "Body", name: "body", widget: "text"}
@@ -440,6 +507,30 @@ collections:
                   - {label: "Title", name: "title", widget: "string"}
                   - {label: "Background Tone", name: "backgroundTone", widget: "select", options: ["park", "park-dark", "stone", "sky", "pink", "pink-dark", "orange", "door", "give", "grass", "roof"], required: false}
                   - {label: "Content", name: "contentHtml", widget: "text", hint: "Accepts basic HTML."}
+
+      - label: "What’s on Page"
+        name: "events"
+        file: "src/content/pages/events.json"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Browser Description", name: "metaDescription", widget: "text"}
+          - {label: "Template", name: "template", widget: "hidden", default: "events"}
+          - {label: "Eyebrow", name: "eyebrow", widget: "string", required: false}
+          - {label: "Introduction", name: "intro", widget: "text", required: false}
+          - label: "Featured Events"
+            name: "featuredEvents"
+            widget: "list"
+            required: false
+            hint: "Optional. These events appear first in this order. All other regular events appear by their next date."
+            fields:
+              - label: "Event"
+                name: "event"
+                widget: "relation"
+                collection: "events"
+                search_fields: ["title"]
+                value_field: "{{slug}}"
+                display_fields: ["title"]
+          - {label: "Sections", name: "sections", widget: "hidden", default: []}
 
       - label: "Visit Page"
         name: "visit"

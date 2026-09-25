@@ -1,0 +1,7 @@
+---
+import PageRoute from "../components/PageRoute.astro";
+import StandardPageTemplate from "../components/templates/StandardPageTemplate.astro";
+export const prerender = false;
+Astro.response.headers.set('Cache-Control', 'no-store');
+---
+<PageRoute pageId="park-youth" Template={StandardPageTemplate} />

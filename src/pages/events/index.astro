@@ -1,0 +1,38 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getAllEvents, getPageContent } from "../../lib/content";
+import { getTargetSchedule, formatDay, timeLabel } from "../../lib/events";
+
+export const prerender = false;
+Astro.response.headers.set("Cache-Control", "no-store");
+const events = await getAllEvents();
+const page = await getPageContent("events");
+const entries = await Promise.all(events.map(async (eventPage) => ({ eventPage, schedule: await getTargetSchedule(`/events/${eventPage.slug}`, new Date(), 1) })));
+const bySlug = new Map(entries.map((entry) => [entry.eventPage.slug, entry]));
+const featuredEntries = page.featuredEvents.flatMap(({ event }) => {
+  const entry = bySlug.get(event);
+  return entry ? [entry] : [];
+});
+const featuredSet = new Set(featuredEntries.map((entry) => entry.eventPage.slug));
+const remainingEntries = entries.filter((entry) => !featuredSet.has(entry.eventPage.slug)).sort((left, right) => {
+  const leftNext = left.schedule.events[0]?.start;
+  const rightNext = right.schedule.events[0]?.start;
+  if (leftNext && rightNext) return new Date(leftNext).getTime() - new Date(rightNext).getTime() || left.eventPage.data.title.localeCompare(right.eventPage.data.title);
+  if (leftNext) return -1;
+  if (rightNext) return 1;
+  return left.eventPage.data.title.localeCompare(right.eventPage.data.title);
+});
+const orderedEntries = [...featuredEntries, ...remainingEntries];
+---
+
+<BaseLayout title={page.title} description={page.metaDescription}>
+  <div class="utility-shell page-stack"><section class="content-band" data-tone="stone">
+    {page.eyebrow && <p class="eyebrow">{page.eyebrow}</p>}<h1 class="display-title">{page.title}</h1>
+    {page.intro && <p class="lede">{page.intro}</p>}
+    {entries[0]?.schedule.message && <p class="calendar-status" role="status">{entries[0].schedule.message}</p>}
+    <div class="events-index">{orderedEntries.map(({ eventPage, schedule }) => <article class="events-index__card">
+      <p class="eyebrow">{schedule.events[0] ? `${formatDay(schedule.events[0].start)} · ${timeLabel(schedule.events[0])}` : "Dates to follow"}</p>
+      <h2>{eventPage.data.title}</h2><p>{eventPage.data.summary}</p><a class="inline-link" href={`/events/${eventPage.slug}`}>Find out more</a>
+    </article>)}</div>
+  </section></div>
+</BaseLayout>
