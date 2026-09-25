@@ -283,8 +283,8 @@ collections:
                     collapsed: true
                     required: false
                     fields:
-                      - {label: "Label", name: "label", widget: "string"}
-                      - {label: "Link", name: "href", widget: "string"}
+                      - {label: "Label", name: "label", widget: "string", required: false}
+                      - {label: "Link", name: "href", widget: "string", required: false}
                       - {label: "New Tab", name: "newTab", widget: "boolean", required: false, default: false}
                   - label: "Secondary Button"
                     name: "secondaryCta"
@@ -292,8 +292,8 @@ collections:
                     collapsed: true
                     required: false
                     fields:
-                      - {label: "Label", name: "label", widget: "string"}
-                      - {label: "Link", name: "href", widget: "string"}
+                      - {label: "Label", name: "label", widget: "string", required: false}
+                      - {label: "Link", name: "href", widget: "string", required: false}
                       - {label: "New Tab", name: "newTab", widget: "boolean", required: false, default: false}
                   - label: "Image Settings"
                     name: "image"
@@ -301,7 +301,7 @@ collections:
                     collapsed: false
                     required: false
                     fields:
-                      - {label: "Image", name: "src", widget: "image"}
+                      - {label: "Image", name: "src", widget: "image", required: false}
                       - {label: "Alt Text", name: "alt", widget: "string", required: false}
                       - {label: "Accent Tone", name: "accentTone", widget: "hidden", required: false}
                       - {label: "Mask Shape", name: "maskShape", widget: "hidden", required: false}
@@ -337,8 +337,8 @@ collections:
                     required: false
                     summary: "{{label}}"
                     fields:
-                      - {label: "Label", name: "label", widget: "string"}
-                      - {label: "Link", name: "href", widget: "string"}
+                      - {label: "Label", name: "label", widget: "string", required: false}
+                      - {label: "Link", name: "href", widget: "string", required: false}
                       - {label: "New Tab", name: "newTab", widget: "boolean", required: false, default: false}
                   - label: "Image Settings"
                     name: "image"
@@ -346,7 +346,7 @@ collections:
                     collapsed: false
                     required: false
                     fields:
-                      - {label: "Image", name: "src", widget: "image"}
+                      - {label: "Image", name: "src", widget: "image", required: false}
                       - {label: "Alt Text", name: "alt", widget: "string", required: false}
                       - {label: "Accent Tone", name: "accentTone", widget: "hidden", required: false}
                       - {label: "Mask Shape", name: "maskShape", widget: "hidden", required: false}
@@ -434,8 +434,8 @@ collections:
                     collapsed: true
                     required: false
                     fields:
-                      - {label: "Label", name: "label", widget: "string"}
-                      - {label: "Link", name: "href", widget: "string"}
+                      - {label: "Label", name: "label", widget: "string", required: false}
+                      - {label: "Link", name: "href", widget: "string", required: false}
                       
               - label: "CTA Section"
                 name: "cta"
@@ -452,8 +452,8 @@ collections:
                     collapsed: true
                     required: false
                     fields:
-                      - {label: "Label", name: "label", widget: "string"}
-                      - {label: "Link", name: "href", widget: "string"}
+                      - {label: "Label", name: "label", widget: "string", required: false}
+                      - {label: "Link", name: "href", widget: "string", required: false}
                       - {label: "New Tab", name: "newTab", widget: "boolean", required: false, default: false}
                   - label: "Secondary Button"
                     name: "secondaryCta"
@@ -461,8 +461,8 @@ collections:
                     collapsed: true
                     required: false
                     fields:
-                      - {label: "Label", name: "label", widget: "string"}
-                      - {label: "Link", name: "href", widget: "string"}
+                      - {label: "Label", name: "label", widget: "string", required: false}
+                      - {label: "Link", name: "href", widget: "string", required: false}
                       - {label: "New Tab", name: "newTab", widget: "boolean", required: false, default: false}
                   - label: "Image Settings"
                     name: "image"
@@ -470,7 +470,7 @@ collections:
                     collapsed: false
                     required: false
                     fields:
-                      - {label: "Image", name: "src", widget: "image"}
+                      - {label: "Image", name: "src", widget: "image", required: false}
                       - {label: "Alt Text", name: "alt", widget: "string", required: false}
                       - {label: "Accent Tone", name: "accentTone", widget: "hidden", required: false}
                       - {label: "Mask Shape", name: "maskShape", widget: "hidden", required: false}
@@ -494,8 +494,8 @@ collections:
                     required: false
                     summary: "{{label}}"
                     fields:
-                      - {label: "Label", name: "label", widget: "string"}
-                      - {label: "Link", name: "href", widget: "string"}
+                      - {label: "Label", name: "label", widget: "string", required: false}
+                      - {label: "Link", name: "href", widget: "string", required: false}
                       - {label: "New Tab", name: "newTab", widget: "boolean", required: false, default: false}
 
               - label: "Rich Text Section"

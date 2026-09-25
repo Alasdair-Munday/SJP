@@ -192,6 +192,7 @@
 .newsletter-schedule { margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 2px solid var(--newsletter-green); }
 .newsletter-schedule h2 { margin-top: 0; }
 .weekly-schedule ul { list-style: none; padding: 0; margin: 0; }
+.calendar-occurrence-id { display: none; }
 .weekly-schedule__event { display: grid; grid-template-columns: 145px 1fr; gap: .75rem; padding: .4rem 0; border-top: 1px solid var(--newsletter-border); break-inside: avoid; page-break-inside: avoid; }
 .weekly-schedule__event a { color: var(--newsletter-ink); font-weight: bold; }
 .weekly-schedule__location { display: block; font-size: .9em; }

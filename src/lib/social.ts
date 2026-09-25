@@ -77,8 +77,8 @@ export async function getSocialDrafts(targetDate = new Date()) {
     source: "Rotating evergreen website prompt",
   };
 
-  const sunday = schedule.events.find((event) => event.href === "/visit#sundays");
-  const sundayUrl = absolute("/visit#sundays", site.siteUrl);
+  const sunday = schedule.events.find((event) => event.href === "/events/sunday-service" && new Date(`${dateKey(new Date(event.start))}T12:00:00Z`).getUTCDay() === 0);
+  const sundayUrl = absolute("/events/sunday-service", site.siteUrl);
   const sundayTitle = sunday?.title ?? "Sunday at St John’s Park";
   const sundayDetails = sunday
     ? `${formatDay(sunday.start)} at ${timeLabel(sunday)}${sunday.location ? `, ${sunday.location}` : ""}. Come as you are — we would love to welcome you.`

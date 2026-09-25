@@ -41,7 +41,7 @@ const { section } = Astro.props;
       }
     </div>
     <div style={section.reverse ? "direction: ltr;" : undefined}>
-      <MaskedImage image={section.image} />
+      {section.image && <MaskedImage image={section.image} />}
     </div>
   </div>
 </section>

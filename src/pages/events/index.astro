@@ -26,12 +26,13 @@ const orderedEntries = [...featuredEntries, ...remainingEntries];
 ---
 
 <BaseLayout title={page.title} description={page.metaDescription}>
-  <main class="utility-shell page-stack"><section class="content-band" data-tone="stone">
+  <div class="utility-shell page-stack"><section class="content-band" data-tone="stone">
     {page.eyebrow && <p class="eyebrow">{page.eyebrow}</p>}<h1 class="display-title">{page.title}</h1>
     {page.intro && <p class="lede">{page.intro}</p>}
+    {entries[0]?.schedule.message && <p class="calendar-status" role="status">{entries[0].schedule.message}</p>}
     <div class="events-index">{orderedEntries.map(({ eventPage, schedule }) => <article class="events-index__card">
       <p class="eyebrow">{schedule.events[0] ? `${formatDay(schedule.events[0].start)} · ${timeLabel(schedule.events[0])}` : "Dates to follow"}</p>
       <h2>{eventPage.data.title}</h2><p>{eventPage.data.summary}</p><a class="inline-link" href={`/events/${eventPage.slug}`}>Find out more</a>
     </article>)}</div>
-  </section></main>
+  </section></div>
 </BaseLayout>

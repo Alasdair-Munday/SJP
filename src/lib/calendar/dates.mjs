@@ -42,6 +42,10 @@ export function formatDay(date) {
   return new Intl.DateTimeFormat('en-GB', { timeZone: TIME_ZONE, weekday: 'long', day: 'numeric', month: 'long' }).format(new Date(date));
 }
 
+export function formatShortDay(date) {
+  return new Intl.DateTimeFormat('en-GB', { timeZone: TIME_ZONE, weekday: 'short', day: 'numeric', month: 'short' }).format(new Date(date));
+}
+
 export function formatTime(date) {
   return new Intl.DateTimeFormat('en-GB', { timeZone: TIME_ZONE, hour: 'numeric', minute: '2-digit', hour12: true }).format(new Date(date));
 }

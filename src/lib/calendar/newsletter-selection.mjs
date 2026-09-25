@@ -8,8 +8,9 @@ export function relevantToIssue(data, issueDate) {
   const nextDay = parseIssueDate(addDays(key, 1));
   const recentStart = parseIssueDate(addDays(key, -6));
   if (data.publishDate >= nextDay) return false;
-  if (data.publishDate >= recentStart) return true;
   const displayUntil = data.newsletterDisplayUntil ?? data.relevantUntil;
+  if (displayUntil && displayUntil < start) return false;
+  if (data.publishDate >= recentStart) return true;
   if (displayUntil && displayUntil >= start) return true;
   return data.category === 'event' && Boolean(data.eventDate && (data.eventDate >= start || (data.eventEndDate && data.eventEndDate >= start)));
 }

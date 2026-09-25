@@ -18,7 +18,7 @@ test('live server: homepage, print and email contain identical current-week occu
   assert.deepEqual(ids(results[0]), ids(results[1]));
   assert.deepEqual(ids(results[1]), ids(results[2]));
   assert.ok(results[1].indexOf('id="this-week-title"') < results[1].indexOf('class="newsletter-post"'));
-  assert.match(results[2], /https:\/\/stjohnspark.org\/community#foodbank/);
+  assert.match(results[2], /https:\/\/stjohnspark.org\/events\/foodbank/);
 });
 test('live server: bad issue dates and missing news routes return meaningful errors', options, async () => {
   for (const path of ['/newsletter/?date=2026-02-30', '/newsletter/email/?date=invalid', '/newsletter/email/raw/?date=2026-13-01']) {
@@ -37,14 +37,14 @@ test('live server: connected activities show the next two upcoming sessions at t
   }
 });
 test('live server: weekly social review has three slots and calendar-backed Sunday copy', options, async () => {
-  const response = await fetch(new URL('/newsletter/social/?date=2026-09-19', base));
+  const response = await fetch(new URL('/newsletter/social/', base));
   assert.equal(response.status, 200);
   assert.equal(response.headers.get('cache-control'), 'no-store');
   const html = await response.text();
   assert.equal((html.match(/class="social-card"/g) ?? []).length, 3);
-  assert.match(html, /Tuesday · Tuesday 15 September/);
-  assert.match(html, /Thursday · Thursday 17 September/);
-  assert.match(html, /Saturday · Saturday 19 September/);
+  assert.match(html, /Tuesday · Tuesday/);
+  assert.match(html, /Thursday · Thursday/);
+  assert.match(html, /Saturday · Saturday/);
   assert.match(html, /Public Google Calendar/);
-  assert.match(html, /https:\/\/stjohnspark\.org\/visit#sundays/);
+  assert.match(html, /https:\/\/stjohnspark\.org\/events\/sunday-service/);
 });

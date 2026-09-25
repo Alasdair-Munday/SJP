@@ -33,6 +33,7 @@ const serviceType = (title?: string) => title?.startsWith("10:45 Service · ") ?
         <div class="post-detail__content"><Content /></div>
         <aside class="post-detail__aside" aria-label="Event details">
           <h2 class="post-detail__aside-title">Next time</h2>
+          {next && sessions.message && <p class="calendar-status" role="status">{sessions.message}</p>}
           {next ? <dl class="post-detail__details-list">
             <dt>Date</dt><dd>{formatDay(next.start)}</dd>
             <dt>Time</dt><dd>{timeLabel(next)}</dd>

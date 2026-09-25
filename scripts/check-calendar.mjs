@@ -35,6 +35,9 @@ try {
     targets.add(`/news/${slug}`);
   }
   const events = expandCalendar(snapshot.text, now, sixMonthsFrom(now));
+  for (const file of await readdir('src/content/events')) {
+    if (file.endsWith('.md')) targets.add(`/events/${file.replace(/\.md$/, '')}`);
+  }
   const series = new Map();
   for (const event of events) {
     const href = resolveTarget(event.website, targets);

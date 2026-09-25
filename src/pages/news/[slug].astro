@@ -17,13 +17,14 @@ const categoryLabels = {
   update: "Update",
   blog: "Blog",
 };
-const eventDateText = sessions.events[0] ? `${formatDay(sessions.events[0].start)} · ${timeLabel(sessions.events[0])}` : post.data.eventDate ? formatDate(post.data.eventDate) : undefined;
+const nextSession = sessions.events[0];
+const eventDateText = nextSession ? formatDay(nextSession.start) : post.data.eventDate ? formatDate(post.data.eventDate) : undefined;
 const detailItems = [
   post.data.category === "event"
     ? { label: "Date", value: eventDateText }
     : { label: "Posted", value: formatShortDate(post.data.publishDate) },
-  { label: "Time", value: post.data.timeText },
-  { label: "Location", value: post.data.location },
+  { label: "Time", value: nextSession ? timeLabel(nextSession) : post.data.timeText },
+  { label: "Location", value: nextSession ? nextSession.location : post.data.location },
 ].filter((item) => item.value);
 ---
 

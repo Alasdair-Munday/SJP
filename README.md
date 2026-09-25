@@ -127,7 +127,7 @@ These links were added to the public calendar series on 19 September 2026:
 | Midweek Communion, Lunch & Bible Study | `https://stjohnspark.org/events/midweek-communion` |
 
 Each public recurring event has its own `/events/…` page, which displays the next date from the calendar. Building bookings and private prayer gatherings are kept off the public calendar.
-They show up to six upcoming sessions within six months. Add descriptions on the
+They show the next two upcoming sessions within six months. Add descriptions on the
 site, and use the calendar for exact times. For a news-post destination, use
 `https://stjohnspark.org/news/POST-SLUG`; matching posts automatically show dates.
 Only existing site paths and registered section/card anchors are accepted. Avoid

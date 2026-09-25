@@ -5,6 +5,7 @@ import { canonicalTarget, resolveTarget } from './calendar/links.mjs';
 import { compactSchedule } from './calendar/compact.mjs';
 import { dateKey, formatDay, formatTime, parseIssueDate, sixMonthsFrom, timeLabel, weekRange, addDays } from './calendar/dates.mjs';
 import { mappedPageRoutes } from './pageRoutes';
+import { sundayServiceTitle, normalizeTarget } from './calendar/presentation.mjs';
 
 export { dateKey, formatDay, formatTime, parseIssueDate, timeLabel, weekRange, compactSchedule };
 export type EventItem = Occurrence & { href?: string };
@@ -15,18 +16,6 @@ export type Schedule = {
   message: string;
   diagnostics: { uid: string; title: string; issue: string }[];
 };
-
-function sundayServiceTitle(event: Occurrence) {
-  const start = new Date(event.start);
-  const isTenFortyFiveSunday = start.getDay() === 0 && start.getHours() === 10 && start.getMinutes() === 45
-    && /^(Sunday Service|St John's Holy Communion)$/i.test(event.title);
-  if (!isTenFortyFiveSunday) return event.title;
-
-  const sundayNumber = Math.ceil(start.getDate() / 7);
-  if (sundayNumber === 1) return '10:45 Service · All In Communion';
-  if (sundayNumber === 3) return '10:45 Service · Holy Communion';
-  return '10:45 Service · Service of the Word';
-}
 
 function eventPageTarget(event: Occurrence, target?: string) {
   const byTitle: Record<string, string> = {
@@ -40,7 +29,7 @@ function eventPageTarget(event: Occurrence, target?: string) {
     'Sunday Service': '/events/sunday-service',
     "St John's Holy Communion": '/events/sunday-service',
   };
-  return byTitle[event.title] ?? target;
+  return target ? normalizeTarget(target) : byTitle[event.title];
 }
 
 export async function getCalendarTargets() {
@@ -90,7 +79,7 @@ export async function getThisWeek(date = new Date()) {
 
 export async function getTargetSchedule(target: string | string[], from = new Date(), limit = 2) {
   const schedule = await getSchedule(from, sixMonthsFrom(from));
-  const canonicals = (Array.isArray(target) ? target : [target]).map((value) => canonicalTarget(value)).filter(Boolean);
+  const canonicals = (Array.isArray(target) ? target : [target]).map((value) => normalizeTarget(canonicalTarget(value))).filter(Boolean);
   return { ...schedule, events: schedule.events.filter((event) => canonicals.includes(event.href ?? '')).slice(0, limit) };
 }
 

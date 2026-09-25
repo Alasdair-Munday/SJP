@@ -1,5 +1,6 @@
 ---
-import { getTargetSchedule, formatDay, timeLabel } from '../../lib/events';
+import { getTargetSchedule, timeLabel } from '../../lib/events';
+import { formatShortDay } from '../../lib/calendar/dates.mjs';
 interface Props { target: string; }
 const { target } = Astro.props;
 const schedule = await getTargetSchedule(target);
@@ -9,7 +10,7 @@ const schedule = await getTargetSchedule(target);
   {schedule.message && <p class="calendar-status" role="status">{schedule.message}</p>}
   {schedule.events.length > 0 ? (
     <ul>
-      {schedule.events.map((event) => <li><time datetime={event.start}>{formatDay(event.start)} · {timeLabel(event)}</time><span>{event.title}{event.location && ` · ${event.location}`}</span></li>)}
+      {schedule.events.map((event, index) => <li><time datetime={event.start}>{formatShortDay(event.start)} · {timeLabel(event)}</time>{index > 0 && event.title !== schedule.events[0].title && <span>{event.title}</span>}{event.location && (index === 0 || event.location !== schedule.events[0].location) && <span>{event.location}</span>}</li>)}
     </ul>
   ) : schedule.status !== 'unavailable' && <p>No upcoming dates are listed in the calendar. Please contact us to confirm the next session.</p>}
 </div>

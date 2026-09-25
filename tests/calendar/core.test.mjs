@@ -156,6 +156,7 @@ test('newsletter includes recent news, excludes future/unpublished posts, and ho
   assert.equal(relevantToIssue(base, issue), true);
   assert.equal(relevantToIssue({ ...base, publishDate: new Date('2026-09-20') }, issue), false);
   assert.equal(relevantToIssue({ ...base, displayOnNewsletter: false }, issue), false);
+  assert.equal(relevantToIssue({ ...base, newsletterDisplayUntil: new Date('2026-09-18') }, issue), false);
   assert.equal(relevantToIssue({ ...base, publishDate: new Date('2026-08-01'), newsletterDisplayUntil: new Date('2026-09-19') }, issue), true);
   assert.equal(relevantToIssue({ ...base, publishDate: new Date('2026-08-01'), newsletterDisplayUntil: new Date('2026-09-18') }, issue), false);
 });
