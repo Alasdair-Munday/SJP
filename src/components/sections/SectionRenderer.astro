@@ -6,6 +6,7 @@ import SplitSection from "./SplitSection.astro";
 import CardsSection from "./CardsSection.astro";
 import CallToActionSection from "./CallToActionSection.astro";
 import LatestSection from "./LatestSection.astro";
+import WhatsOnSection from "./WhatsOnSection.astro";
 import RichTextSection from "./RichTextSection.astro";
 
 type PageSection = CollectionEntry<"pages">["data"]["sections"][number];
@@ -24,6 +25,7 @@ const sectionComponents = {
   cards: CardsSection as SectionComponent,
   cta: CallToActionSection as SectionComponent,
   latest: LatestSection as SectionComponent,
+  whatsOn: WhatsOnSection as SectionComponent,
   richText: RichTextSection as SectionComponent,
 } satisfies Record<PageSection["type"], SectionComponent>;
 ---

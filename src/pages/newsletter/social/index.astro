@@ -1,0 +1,130 @@
+---
+import { parseIssueDate, dateKey } from "../../../lib/events";
+import { getSocialDrafts } from "../../../lib/social";
+import "../../../styles/tokens.css";
+import "../../../styles/base.css";
+import "../../../styles/social.css";
+
+export const prerender = false;
+Astro.response.headers.set("Cache-Control", "no-store");
+let issueDate: Date;
+try { issueDate = parseIssueDate(Astro.url.searchParams.get("date")); }
+catch { return new Response("Please choose a valid issue date (YYYY-MM-DD).", { status: 400 }); }
+const key = dateKey(issueDate);
+const { site, drafts, schedule } = await getSocialDrafts(issueDate);
+const formatDate = (value: string) => new Intl.DateTimeFormat("en-GB", { weekday: "long", day: "numeric", month: "long" }).format(new Date(`${value}T12:00:00Z`));
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="robots" content="noindex,nofollow" />
+    <title>Weekly social media review | {site.shortTitle}</title>
+  </head>
+  <body class="social-review">
+    <main class="social-shell">
+      <header class="social-header">
+        <div>
+          <p class="eyebrow">Administrator workspace</p>
+          <h1>Weekly social media review</h1>
+          <p>Prepare Tuesday, Thursday and Saturday in one sitting, then schedule each post in Canva Content Planner.</p>
+        </div>
+        <nav class="social-header__actions" aria-label="Social media workflow links">
+          <a class="social-button social-button--secondary" href={`/newsletter/?date=${key}`}>Newsletter</a>
+          <a class="social-button social-button--secondary" href={site.social.canvaTemplates.story} target="_blank" rel="noreferrer">Story starter</a>
+          <a class="social-button" href={site.social.canvaFolderUrl} target="_blank" rel="noreferrer">Open Canva workspace</a>
+        </nav>
+      </header>
+
+      <form class="social-date-picker" method="get">
+        <label for="issue-date">Week containing</label>
+        <input id="issue-date" type="date" name="date" value={key} required />
+        <button type="submit">Update week</button>
+      </form>
+
+      {schedule.message && <p class="social-alert">{schedule.message}</p>}
+      {(!site.social.facebookUrl || !site.social.instagramUrl) && (
+        <p class="social-alert">Add the church’s Facebook and Instagram profile URLs in CMS → Global Settings → Social Media so the public links appear on the website.</p>
+      )}
+
+      <section class="social-workflow" aria-label="Weekly process">
+        <h2>Before you start</h2>
+        <ol>
+          <li>Check the calendar-derived details and edit any draft wording that needs a human voice.</li>
+          <li>For identifiable people, confirm the consent check below before opening Canva.</li>
+          <li>Create a copy from the linked starter, paste the short design title, and use an approved photo.</li>
+          <li>Schedule the same post for Facebook and Instagram in Canva. Check tags, links and image crop in both previews.</li>
+        </ol>
+      </section>
+
+      <div class="social-grid">
+        {drafts.map((draft) => (
+          <article class="social-card">
+            <header class="social-card__header">
+              <div>
+                <p class="social-card__day">{draft.slot} · {formatDate(draft.publicationDate)}</p>
+                <h2>{draft.theme}</h2>
+              </div>
+              <span class:list={["social-status", draft.status === "ready" ? "social-status--ready" : "social-status--attention"]}>
+                {draft.status === "ready" ? "Ready to review" : "Needs attention"}
+              </span>
+            </header>
+
+            {draft.note && <p class="social-alert social-alert--card">{draft.note}</p>}
+            <img class="social-card__image" src={draft.imageSrc} alt={draft.imageAlt} loading="lazy" />
+            <dl class="social-source">
+              <dt>Source</dt><dd>{draft.source}</dd>
+              <dt>Website link</dt><dd><a href={draft.link} target="_blank" rel="noreferrer">{draft.link}</a></dd>
+            </dl>
+
+            <div class="social-copy-block">
+              <div class="social-copy-block__header"><h3>Text on the design</h3><button type="button" data-copy={draft.designTitle}>Copy</button></div>
+              <p>{draft.designTitle}</p>
+            </div>
+            <div class="social-copy-block">
+              <div class="social-copy-block__header"><h3>Facebook caption</h3><button type="button" data-copy={draft.facebookCaption}>Copy</button></div>
+              <p class="social-caption">{draft.facebookCaption}</p>
+            </div>
+            <div class="social-copy-block">
+              <div class="social-copy-block__header"><h3>Instagram caption</h3><button type="button" data-copy={draft.instagramCaption}>Copy</button></div>
+              <p class="social-caption">{draft.instagramCaption}</p>
+            </div>
+
+            <fieldset class="social-checks">
+              <legend>Publish checks</legend>
+              <label><input type="checkbox" /> Names, facts, date and link checked</label>
+              <label><input type="checkbox" /> Photo is approved and correctly cropped</label>
+              <label><input type="checkbox" /> Consent and safeguarding checked</label>
+              <label><input type="checkbox" /> Facebook and Instagram previews checked</label>
+            </fieldset>
+            <a class="social-button" href={draft.templateUrl} target="_blank" rel="noreferrer">Open Canva starter</a>
+          </article>
+        ))}
+      </div>
+
+      <section class="social-workflow">
+        <h2>Consent rule</h2>
+        <p>{site.social.consentGuidance}</p>
+        <p>Questions or uncertain consent: <a href={`mailto:${site.social.socialMediaEmail}`}>{site.social.socialMediaEmail}</a>.</p>
+      </section>
+      <p class="social-copy-status" aria-live="polite" data-copy-status></p>
+    </main>
+    <script is:inline>
+      const status = document.querySelector("[data-copy-status]");
+      document.querySelectorAll("[data-copy]").forEach((button) => {
+        button.addEventListener("click", async () => {
+          const value = button.getAttribute("data-copy") || "";
+          try { await navigator.clipboard.writeText(value); }
+          catch {
+            const area = document.createElement("textarea");
+            area.value = value; document.body.append(area); area.select(); document.execCommand("copy"); area.remove();
+          }
+          if (status) status.textContent = "Copied to clipboard";
+          window.setTimeout(() => { if (status) status.textContent = ""; }, 1800);
+        });
+      });
+    </script>
+  </body>
+</html>

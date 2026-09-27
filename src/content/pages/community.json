@@ -50,7 +50,9 @@
         {
           "title": "Foodbank",
           "body": "Practical food support is available during the Community Hub. Access is by referral only—please call Help Through Hardship (0808 2082138) or Citizens Advice Sheffield (0808 2787820) to request one.",
-          "tone": "park"
+          "tone": "park",
+          "id": "foodbank",
+          "calendarTarget": "/community#foodbank"
         },
         {
           "title": "Tea and coffee",
@@ -64,17 +66,19 @@
         },
         {
           "title": "Lunch Club",
-          "body": "At 11:40am lunch is served, with friendly conversation and a Bible story discussion for anyone who would like to stay.",
+          "body": "Lunch is served on Mondays, with friendly conversation and a Bible story discussion for anyone who would like to stay.",
           "tone": "door"
         }
       ]
     },
     {
       "type": "intro",
-      "eyebrow": "Mondays at 11:40am",
+      "eyebrow": "Monday lunchtimes",
       "title": "Lunch Club",
-      "body": "Lunch is served from 11:40am. It is a chance to eat together, enjoy friendly conversation, and take part in a simple Bible story discussion. You do not need to know anything about church or faith to join in.",
-      "backgroundTone": "pink"
+      "body": "Join us for lunch on Mondays; see the calendar dates below for times. It is a chance to eat together, enjoy friendly conversation, and take part in a simple Bible story discussion. You do not need to know anything about church or faith to join in.",
+      "backgroundTone": "pink",
+      "id": "lunch-club",
+      "calendarTarget": "/community#lunch-club"
     },
     {
       "type": "cards",
@@ -87,7 +91,9 @@
         {
           "title": "Pinders dance group",
           "body": "A dance group for children meeting on Monday evenings.",
-          "tone": "park"
+          "tone": "park",
+          "id": "pinders",
+          "calendarTarget": "/community#pinders"
         },
         {
           "title": "Manor Weavers",

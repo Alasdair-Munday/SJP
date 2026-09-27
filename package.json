@@ -7,12 +7,16 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "migrate:assets": "node scripts/migrate-assets-to-cdn.mjs"
+    "migrate:assets": "node scripts/migrate-assets-to-cdn.mjs",
+    "test": "node --test tests/calendar/*.test.mjs",
+    "calendar:check": "node scripts/check-calendar.mjs",
+    "check": "astro check"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.6",
     "@astrojs/netlify": "^6.6.4",
     "@astrojs/rss": "^4.0.15",
+    "@netlify/blobs": "10.6.0",
     "astro": "^5.17.1",
     "dayjs": "^1.11.19",
     "ical.js": "^2.2.1",

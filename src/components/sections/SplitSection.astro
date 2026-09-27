@@ -1,4 +1,5 @@
 ---
+import UpcomingDates from "./UpcomingDates.astro";
 import type { CollectionEntry } from "astro:content";
 import MaskedImage from "./MaskedImage.astro";
 
@@ -26,6 +27,7 @@ const { section } = Astro.props;
           </ul>
         )
       }
+  {section.calendarTarget && <UpcomingDates target={section.calendarTarget} />}
       {
         section.ctas.length > 0 && (
           <div class="inline-links">

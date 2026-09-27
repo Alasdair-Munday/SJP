@@ -124,6 +124,12 @@
       ]
     },
     {
+      "type": "whatsOn",
+      "id": "this-week",
+      "title": "This week at St John’s Park",
+      "backgroundTone": "sky"
+    },
+    {
       "type": "cards",
       "eyebrow": "Life together",
       "title": "Belong, serve, give",
@@ -175,7 +181,7 @@
       "eyebrow": "From church life",
       "title": "News",
       "intro": "Keep up with community life, event announcements, and stories from St John's Park.",
-      "backgroundTone": "park-dark",
+      "backgroundTone": "park",
       "source": "posts",
       "limit": 3,
       "cta": {

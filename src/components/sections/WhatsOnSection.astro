@@ -1,0 +1,14 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { getThisWeek } from '../../lib/events';
+import WeeklySchedule from './WeeklySchedule.astro';
+interface Props { section: Extract<CollectionEntry<'pages'>['data']['sections'][number], { type: 'whatsOn' }>; }
+const { section } = Astro.props;
+const schedule = await getThisWeek();
+---
+<section id={section.id} class="content-band" data-tone={section.backgroundTone}>
+  <p class="eyebrow">This week</p>
+  <h2 class="section-title">{section.title}</h2>
+  <p>{schedule.label}</p>
+  <WeeklySchedule schedule={schedule} start={schedule.start} end={schedule.end} />
+</section>

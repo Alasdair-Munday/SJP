@@ -32,10 +32,10 @@ const categoryLabels = {
       </div>
 
       <div class="news-filter" aria-label="Filter news posts" data-news-filter>
-        <button class="filter-pill filter-button" type="button" data-filter="all" data-active="true">All</button>
+        <button class="filter-pill filter-button" type="button" data-filter="all" data-active="true" aria-pressed="true">All</button>
         {
           Object.entries(categoryLabels).map(([category, label]) => (
-            <button class="filter-pill filter-button" type="button" data-filter={category}>
+            <button class="filter-pill filter-button" type="button" data-filter={category} aria-pressed="false">
               {label}
             </button>
           ))
@@ -43,6 +43,7 @@ const categoryLabels = {
       </div>
     </div>
 
+    <p data-news-empty hidden role="status">No articles in this category yet.</p>
     <div class="news-grid" data-news-grid>
       {
         posts.map((post, index) => (
@@ -96,6 +97,7 @@ const categoryLabels = {
 
       buttons.forEach((candidate) => {
         candidate.setAttribute("data-active", candidate === button ? "true" : "false");
+        candidate.setAttribute("aria-pressed", candidate === button ? "true" : "false");
       });
 
       cards.forEach((card, index) => {
@@ -107,6 +109,8 @@ const categoryLabels = {
           card.dataset.featured = index === 0 && filter === "all" ? "true" : "false";
         }
       });
+      const empty = section.querySelector("[data-news-empty]");
+      if (empty) empty.hidden = cards.some((card) => !card.hidden);
     };
 
     document.addEventListener("click", (event) => {

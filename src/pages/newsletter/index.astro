@@ -1,8 +1,15 @@
 ---
+import { parseIssueDate } from "../../lib/events";
+import WeeklySchedule from "../../components/sections/WeeklySchedule.astro";
 import { getNewsletterData } from "../../lib/newsletter";
 import "../../styles/print.css";
 
-const newsletter = await getNewsletterData();
+export const prerender = false;
+Astro.response.headers.set('Cache-Control', 'no-store');
+let issueDate: Date;
+try { issueDate = parseIssueDate(Astro.url.searchParams.get('date')); }
+catch { return new Response('Please choose a valid issue date (YYYY-MM-DD).', { status: 400 }); }
+const newsletter = await getNewsletterData(issueDate);
 ---
 
 <!doctype html>
@@ -30,12 +37,23 @@ const newsletter = await getNewsletterData();
           </div>
         </div>
         <nav class="newsletter-actions" aria-label="Newsletter actions">
-          <a href="/newsletter/email/">Email export</a>
+          <a href={`/newsletter/email/?date=${newsletter.issueDate}`}>Email export</a>
+          <a href={`/newsletter/social/?date=${newsletter.issueDate}`}>Social media</a>
           <button onclick="window.print()" class="print-button">Print Newsletter</button>
         </nav>
       </header>
 
+      <form class="newsletter-date-picker" method="get">
+        <label for="issue-date">Issue date</label>
+        <input id="issue-date" type="date" name="date" value={newsletter.issueDate} required />
+        <button type="submit">Update newsletter</button>
+      </form>
       <main class="newsletter-content">
+        <section class="newsletter-schedule" aria-labelledby="this-week-title">
+          <h2 id="this-week-title">This week</h2>
+          <p>{newsletter.schedule.label}</p>
+          <WeeklySchedule schedule={newsletter.schedule} start={newsletter.schedule.start} end={newsletter.schedule.end} />
+        </section>
         {
           newsletter.posts.length > 0 ? (
             newsletter.posts.map((post) => {
@@ -68,6 +86,11 @@ const newsletter = await getNewsletterData();
 
       <footer class="newsletter-footer">
         <p>{newsletter.shortTitle} · {newsletter.sundaySummary}</p>
+        {(newsletter.facebookUrl || newsletter.instagramUrl) && <p>
+          {newsletter.facebookUrl && <a href={newsletter.facebookUrl}>Facebook</a>}
+          {newsletter.facebookUrl && newsletter.instagramUrl && " · "}
+          {newsletter.instagramUrl && <a href={newsletter.instagramUrl}>Instagram</a>}
+        </p>}
       </footer>
     </div>
   </body>

@@ -1,7 +1,14 @@
 ---
+import { parseIssueDate, dateKey } from "../../../lib/events";
 import { renderNewsletterEmailHtml } from "../../../lib/newsletter";
 
-const emailHtml = await renderNewsletterEmailHtml();
+export const prerender = false;
+Astro.response.headers.set('Cache-Control', 'no-store');
+let issueDate: Date;
+try { issueDate = parseIssueDate(Astro.url.searchParams.get('date')); }
+catch { return new Response('Please choose a valid issue date (YYYY-MM-DD).', { status: 400 }); }
+const key = dateKey(issueDate);
+const emailHtml = await renderNewsletterEmailHtml(issueDate);
 ---
 
 <!doctype html>
@@ -157,11 +164,17 @@ const emailHtml = await renderNewsletterEmailHtml();
         </div>
         <nav class="export-actions" aria-label="Newsletter export actions">
           <button class="export-button" type="button" data-copy-email-html>Copy HTML</button>
-          <a class="export-button export-button--secondary" href="/newsletter/email/raw/">Open raw HTML</a>
-          <a class="export-button export-button--secondary" href="/newsletter/">Print view</a>
+          <a class="export-button export-button--secondary" href={`/newsletter/email/raw/?date=${key}`}>Open raw HTML</a>
+          <a class="export-button export-button--secondary" href={`/newsletter/?date=${key}`}>Print view</a>
+          <a class="export-button export-button--secondary" href={`/newsletter/social/?date=${key}`}>Social media</a>
         </nav>
       </header>
 
+      <form method="get" style="margin-bottom: 18px;">
+        <label for="issue-date">Issue date</label>
+        <input id="issue-date" type="date" name="date" value={key} required />
+        <button type="submit">Update newsletter</button>
+      </form>
       <section class="export-grid" aria-label="Newsletter email export">
         <div class="export-panel">
           <div class="export-panel__header">

@@ -1,22 +1,22 @@
 ---
-title: Midweek Communion Service Begins
-summary: In January 2026 we began a weekly Thursday communion service followed by tea, coffee, and cake.
-publishDate: 2026-01-08
+title: Midweek Communion, Lunch and Bible Study
+summary: Join us on Wednesdays at 11am for communion, followed by toasties or a bring-your-own lunch, then Bible study.
+publishDate: 2026-09-19
 category: update
-eventDate: 2026-01-08
-timeText: Thursdays, 9:30-10:45am
+eventDate: 2026-09-23
+timeText: Wednesdays from 11:00am
 location: St John's Park
 featuredImage:
   src: /images/uploads/communion.jpeg
   alt: Communion elements prepared for worship
   maskShape: /images/shapes/church-hall-shape-2.png
   frameTone: sky
-ctaLabel: See Sunday details
-ctaHref: /visit
+ctaLabel: Find ways to join in
+ctaHref: /get-involved
 ---
 
-At the start of 2026 we began a new midweek communion service.
+Our midweek gathering now takes place every Wednesday from 11am.
 
-The Thursday service offers a quieter, more formal pattern of worship, with space for prayer, communion, and time together afterwards over tea, coffee, and cake.
+We begin with a quieter communion service, with space for prayer, Scripture and reflection. Afterwards there are toasties, or you can bring your own lunch, followed by a Bible study.
 
-It has become one of the ways our church family gathers beyond Sunday mornings.
+You are welcome to come for the whole gathering or the part that works for you.

@@ -1,4 +1,5 @@
 ---
+import UpcomingDates from "./UpcomingDates.astro";
 import type { CollectionEntry } from "astro:content";
 import MaskedImage from "./MaskedImage.astro";
 
@@ -19,6 +20,7 @@ const { section } = Astro.props;
     {
       section.cards.map((card) => (
         <article
+          id={card.id}
           class="info-card"
           data-card-tone={card.tone}
           data-has-image={Boolean(card.image)}
@@ -37,6 +39,7 @@ const { section } = Astro.props;
           <h3 class="card-title">{card.title}</h3>
           {card.tag && <span class="info-card__tag">{card.tag}</span>}
           {card.body && <p class="info-card__body">{card.body}</p>}
+          {card.calendarTarget && <UpcomingDates target={card.calendarTarget} />}
           {
             card.href && card.linkLabel && (
               <a class="inline-link" href={card.href}>

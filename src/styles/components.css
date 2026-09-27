@@ -882,7 +882,7 @@
   min-width: 0;
   padding: clamp(0.8rem, 1.4vw, 1rem);
   border: 0;
-  background: var(--color-stone);
+  background: var(--surface-ink, var(--color-text));
   color: var(--color-text);
   box-shadow: 0 0.8rem 1.8rem rgba(4, 50, 27, 0.18);
   flex: 0 0 calc((100% - (var(--carousel-gap) * 2)) / 3);
@@ -1600,3 +1600,22 @@
     flex-basis: 100%;
   }
 }
+
+/* The calendar agenda is shared with print; calendar HTML is never injected. */
+.weekly-schedule ul, .upcoming-dates ul { list-style: none; margin: 0; padding: 0; }
+.weekly-schedule__event { display: grid; grid-template-columns: minmax(9rem, 13rem) minmax(0, 1fr); gap: .6rem; padding: .4rem 0; border-top: 1px solid currentColor; font-size: .95rem; line-height: 1.35; overflow-wrap: anywhere; }
+.weekly-schedule__event a { color: inherit; text-decoration: underline; font-weight: 700; }
+.weekly-schedule__when { font-variant-numeric: tabular-nums; font-weight: 700; }
+.weekly-schedule__location, .upcoming-dates li span { display: block; font-size: .9em; margin-top: .2rem; }
+.calendar-occurrence-id { display: none; }
+.upcoming-dates { margin-top: .8rem; font-size: .95rem; line-height: 1.35; }
+.upcoming-dates h3 { font-size: 1rem; margin: 0 0 .35rem; }
+.upcoming-dates li { padding: .35rem 0; border-top: 1px solid currentColor; }
+.news-card[hidden], [data-news-empty][hidden] { display: none !important; }
+.calendar-status { padding: .8rem; border: 1px solid currentColor; border-radius: .3rem; }
+.events-index { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; margin-top: 2rem; }
+.events-index__card { padding: 1.3rem; background: var(--paper, #fff); border-radius: .9rem; box-shadow: 0 1px 0 rgba(0,0,0,.12); }
+.events-index__card h2 { margin: .35rem 0 .55rem; font-size: 1.35rem; }
+.events-index__card p:not(.eyebrow) { margin: 0 0 1rem; }
+@media (max-width: 760px) { .events-index { grid-template-columns: 1fr; } }
+@media (max-width: 480px) { .weekly-schedule__event { grid-template-columns: 1fr; gap: .25rem; } }
