@@ -2,7 +2,7 @@
 backend:
   name: git-gateway
   repo: Alasdair-Munday/SJP
-  branch: main
+  branch: cloudflare-staging
   auth_type: pkce
   base_url: https://auth.decapbridge.com
   auth_endpoint: /sites/841d76ec-38a1-4f24-94de-f54a42275281/pkce
@@ -32,13 +32,13 @@ auth:
 logo_url: https://decapbridge.com/decapcms-with-bridge.svg
 
 # Add site links in Decap CMS (optional)
-site_url: https://stjohnspark.org
+site_url: https://staging.stjohnspark.org
 
 media_folder: "/images/uploads"
 public_folder: "/images/uploads"
 
 media_library:
-  name: cloudflare_netlify
+  name: cloudflare_bridge
 
 collections:
   - name: "posts"
