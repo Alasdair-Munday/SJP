@@ -6,13 +6,18 @@
     {
       "highlightLabel": "Sundays at 10:45am",
       "backgroundTone": "park",
-      "body": "A community of Jesus-followers in Park, Sheffield. We belong to the family of God, love and serve our city, and give Jesus praise in everything we do.",
-      "eyebrow": "Church family in Park, Sheffield",
+      "body": "We are a community of Jesus-followers in Park, Sheffield. We long to see the flourishing of Eden in our community by belonging to God's family, serving God's mission, and giving God everything.",
+      "bodyEmphasis": ["Eden", "belonging", "serving", "giving", "Jesus"],
       "primaryCta": {
         "label": "Join us Sunday 10:45 AM",
         "href": "/visit"
       },
-      "title": "Welcome Home",
+      "title": "Eden in Park",
+      "titleImage": {
+        "src": "/images/shapes/park-vision.png",
+        "width": 2000,
+        "height": 1744
+      },
       "type": "hero",
       "image": {
         "src": "/images/uploads/whole-church-family-wave.jpg",
