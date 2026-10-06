@@ -124,7 +124,13 @@ const heroSectionSchema = z.object({
   id: z.string().optional(),
   eyebrow: z.string().optional(),
   title: z.string(),
+  titleImage: z.object({
+    src: z.string(),
+    width: z.number().positive(),
+    height: z.number().positive(),
+  }).optional(),
   body: z.string(),
+  bodyEmphasis: z.array(z.string()).optional(),
   backgroundTone: toneSchema.default("park"),
   primaryCta: optionalLinkSchema,
   secondaryCta: optionalLinkSchema,

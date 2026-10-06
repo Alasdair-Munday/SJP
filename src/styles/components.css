@@ -168,6 +168,22 @@
   max-width: 9ch;
 }
 
+.hero-copy .hero-title-art {
+  width: min(100%, 24rem);
+  max-width: none;
+  margin-inline: auto;
+}
+
+.hero-title-art img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.hero-copy .lede strong {
+  font-weight: 800;
+}
+
 .masked-media {
   position: relative;
   min-height: 18rem;
