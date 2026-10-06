@@ -4633,7 +4633,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"hast-util-from-html@npm:^2.0.0, hast-util-from-html@npm:^2.0.3":
+"hast-util-from-html@npm:2.0.3, hast-util-from-html@npm:^2.0.0, hast-util-from-html@npm:^2.0.3":
   version: 2.0.3
   resolution: "hast-util-from-html@npm:2.0.3"
   dependencies:
@@ -4702,7 +4702,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"hast-util-to-html@npm:^9.0.0, hast-util-to-html@npm:^9.0.5":
+"hast-util-to-html@npm:9.0.5, hast-util-to-html@npm:^9.0.0, hast-util-to-html@npm:^9.0.5":
   version: 9.0.5
   resolution: "hast-util-to-html@npm:9.0.5"
   dependencies:
@@ -7485,6 +7485,8 @@ __metadata:
     "@astrojs/rss": "npm:^4.0.15"
     astro: "npm:^5.17.1"
     dayjs: "npm:^1.11.19"
+    hast-util-from-html: "npm:2.0.3"
+    hast-util-to-html: "npm:9.0.5"
     ical.js: "npm:^2.2.1"
     typescript: "npm:^5.9.3"
     vite: "npm:^6.3.5"
