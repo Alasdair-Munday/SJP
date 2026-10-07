@@ -55,10 +55,11 @@ collections:
       - {label: "Publish Date", name: "publishDate", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false, hint: "When this post should appear."}
       - {label: "Display on Newsletter", name: "displayOnNewsletter", widget: "boolean", default: true, required: false, hint: "On by default. Turn off to keep this item out of the weekly newsletter."}
       - {label: "Display Until", name: "newsletterDisplayUntil", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false, required: false, condition: {field: "category", pattern: "^(update|blog)$"}, hint: "News only. Set to the coming Monday by default; events use the event date instead."}
-      - {label: "Body", name: "body", widget: "markdown", hint: "The main content."}
+      - {label: "Body", name: "body", widget: "markdown", hint: "The full article content, included on the news page and in both print and email newsletters."}
       
       # Event specifics
       - {label: "Event Date", name: "eventDate", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false, required: false, hint: "(Event only) The date the event happens."}
+      - {label: "Event End Date", name: "eventEndDate", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false, required: false, hint: "Optional last date for an ongoing event. Keeps it in the newsletter until it ends."}
       - {label: "Time Text", name: "timeText", widget: "string", required: false, hint: "(Event only) E.g., 'Saturday afternoon'"}
       - {label: "Location", name: "location", widget: "string", required: false, hint: "(Event only) Where the event takes place."}
       
@@ -210,9 +211,21 @@ collections:
                 widget: "object"
                 summary: 'Hero: {{title}}'
                 fields:
+                  - {label: "Section ID", name: "id", widget: "hidden", required: false}
                   - {label: "Eyebrow", name: "eyebrow", widget: "string", required: false, hint: "Small text above the title."}
                   - {label: "Title", name: "title", widget: "string"}
+                  - label: "Title Image"
+                    name: "titleImage"
+                    widget: "object"
+                    required: false
+                    collapsed: true
+                    hint: "Optional artwork in place of the heading text. The Title remains its accessible description. Clear the image to show the text heading."
+                    fields:
+                      - {label: "Image", name: "src", widget: "image", required: false}
+                      - {label: "Image Width", name: "width", widget: "number", value_type: "int", min: 1, default: 2000}
+                      - {label: "Image Height", name: "height", widget: "number", value_type: "int", min: 1, default: 1744}
                   - {label: "Body", name: "body", widget: "text"}
+                  - {label: "Bold Words", name: "bodyEmphasis", widget: "list", required: false, hint: "Words to emphasise in the body text, such as Eden or Jesus.", field: {label: "Word", name: "word", widget: "string"}}
                   - {label: "Background Tone", name: "backgroundTone", widget: "select", options: ["park", "park-dark", "stone", "sky", "pink", "pink-dark", "orange", "door", "give", "grass", "roof"], required: false}
                   - {label: "Highlight Label", name: "highlightLabel", widget: "string", required: false}
                   - label: "Primary Button"
@@ -416,6 +429,7 @@ collections:
                 widget: "object"
                 summary: 'Intro: {{title}}'
                 fields:
+                  - {label: "Section ID", name: "id", widget: "hidden", required: false}
                   - {label: "Eyebrow", name: "eyebrow", widget: "string", required: false}
                   - {label: "Title", name: "title", widget: "string"}
                   - {label: "Body", name: "body", widget: "text"}

@@ -45,6 +45,8 @@ const newsletter = await getNewsletterData();
                     class="newsletter-post__image"
                     src={post.imageSrc}
                     alt={post.imageAlt}
+                    width="144"
+                    height="108"
                   />
                   <div class="newsletter-post__content">
                     <p class="newsletter-post__category">{post.category}</p>
@@ -55,6 +57,7 @@ const newsletter = await getNewsletterData();
                       </p>
                     )}
                     <p>{post.summary}</p>
+                    <div class="newsletter-article-body" set:html={post.bodyHtml}></div>
                     <a class="newsletter-cta" href={post.ctaHref}>{post.ctaLabel}</a>
                   </div>
                 </article>

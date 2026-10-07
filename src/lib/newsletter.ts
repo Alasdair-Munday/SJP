@@ -1,8 +1,11 @@
 import type { PostEntry } from "./content";
 import { getNewsletterPostsForWeek, getSiteConfig } from "./content";
 import { formatDate } from "./format";
+import { prepareNewsletterBodyHtml } from "./newsletter-html";
 
 type NewsletterPost = {
+  bodyHtml: string;
+  emailBodyHtml: string;
   category: PostEntry["data"]["category"];
   ctaHref: string;
   ctaLabel: string;
@@ -53,15 +56,30 @@ export async function getNewsletterData(targetDate: Date = new Date()): Promise<
     onlineUrl: absolutize("/newsletter/", site.siteUrl),
     posts: posts.map((post) => {
       const postUrl = absolutize(`/news/${post.slug}/`, site.siteUrl);
+      const renderedBody = post.rendered?.html ?? "";
+      if (post.body.trim() && !renderedBody) {
+        throw new Error(`Newsletter article body was not rendered: ${post.id}`);
+      }
+      const thumbnailUrl = new URL("/.netlify/images", site.siteUrl);
+      thumbnailUrl.search = new URLSearchParams({
+        url: post.data.featuredImage.src ?? "/images/line-drawing.png",
+        w: "288",
+        h: "216",
+        fit: "cover",
+        fm: "jpg",
+        q: "80",
+      }).toString();
 
       return {
+        bodyHtml: prepareNewsletterBodyHtml(renderedBody, postUrl),
+        emailBodyHtml: prepareNewsletterBodyHtml(renderedBody, postUrl, true),
         category: post.data.category,
         ctaHref: post.data.ctaHref ? absolutize(post.data.ctaHref, site.siteUrl) : postUrl,
         ctaLabel:
           post.data.ctaLabel ?? (post.data.category === "event" ? "View event" : "Read more"),
         eventDetails: buildEventDetails(post),
         imageAlt: post.data.featuredImage.alt,
-        imageSrc: absolutize(post.data.featuredImage.src, site.siteUrl),
+        imageSrc: thumbnailUrl.toString(),
         summary: post.data.summary,
         title: post.data.title,
         url: postUrl,
@@ -85,12 +103,8 @@ const renderPost = (post: NewsletterPost) => `
                   <td style="padding: 0 0 28px 0;">
                     <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="border-collapse: collapse; border-bottom: 1px solid #d9e4dd;">
                       <tr>
-                        <td style="padding: 0 0 20px 0;">
-                          <img src="${escapeHtml(post.imageSrc)}" width="600" alt="${escapeHtml(post.imageAlt)}" style="display: block; width: 100%; max-width: 600px; height: auto; border: 0; border-radius: 8px; background: #fffaf0;" />
-                        </td>
-                      </tr>
-                      <tr>
-                        <td style="padding: 0 0 24px 0;">
+                        <td style="padding: 0 0 24px 0; color: #222f2a; font-family: Arial, sans-serif; font-size: 16px; line-height: 24px;">
+                          <img src="${escapeHtml(post.imageSrc)}" width="144" height="108" align="right" hspace="8" alt="${escapeHtml(post.imageAlt)}" style="float: right; display: block; width: 144px; max-width: 38%; height: auto; margin: 4px 0 14px 16px; border: 0; border-radius: 8px; background: #fffaf0;" />
                           <p style="margin: 0 0 6px 0; color: #47a174; font-family: Arial, sans-serif; font-size: 12px; line-height: 18px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;">${escapeHtml(post.category)}</p>
                           <h2 style="margin: 0 0 10px 0; color: #222f2a; font-family: Georgia, 'Times New Roman', serif; font-size: 24px; line-height: 30px; font-weight: 700;">${escapeHtml(post.title)}</h2>
                           ${
@@ -99,6 +113,8 @@ const renderPost = (post: NewsletterPost) => `
                               : ""
                           }
                           <p style="margin: 0 0 18px 0; color: #222f2a; font-family: Arial, sans-serif; font-size: 16px; line-height: 24px;">${escapeHtml(post.summary)}</p>
+                          ${post.emailBodyHtml}
+                          <div style="clear: both; height: 0; line-height: 0;"></div>
                           <table role="presentation" cellspacing="0" cellpadding="0" border="0" style="border-collapse: collapse;">
                             <tr>
                               <td bgcolor="#47a174" style="border-radius: 999px;">

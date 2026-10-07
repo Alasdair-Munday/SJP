@@ -132,13 +132,13 @@
       "type": "cards",
       "eyebrow": "Life together",
       "title": "Belong, serve, give",
-      "intro": "The life of our church is shaped by worship, discipleship, service, generosity, and a real commitment to our neighbourhood.",
+      "intro": "We want to be a church where everyone belongs to God’s family, serves in his mission and gives him everything.",
       "backgroundTone": "park-dark",
       "columns": 3,
       "cards": [
         {
           "title": "Belong",
-          "body": "We invite everyone to Church to celebrate together on a Sunday and to build deeper community through small groups.",
+          "body": "We want every person connected with St John’s to experience belonging: a healing invitation to feel truly at home with Jesus, among his followers.",
           "href": "/visit",
           "linkLabel": "Start with a visit",
           "tone": "pink",
@@ -146,7 +146,7 @@
         },
         {
           "title": "Serve",
-          "body": "We encourage every member of our church family to join one of our teams and serve every month.",
+          "body": "We want to be a church compelled by the love of Christ to serve others in our church, our community, our city and beyond, growing Eden life in the power of the Spirit.",
           "href": "/get-involved",
           "linkLabel": "Explore ways to join in",
           "tone": "door",
@@ -154,8 +154,8 @@
         },
         {
           "title": "Give",
-          "body": "We want to give God a whole life offering. We do this through prioritising prayer and praise. We also encourage every member to prayerfully consider giving to St John’s.",
-          "href": "/get-involved",
+          "body": "We want to be radically generous disciples of Jesus, giving God our best in prayer and praise, and offering the first fruits of all we have been blessed with.",
+          "href": "/get-involved#giving",
           "linkLabel": "See giving details",
           "tone": "give",
           "iconShape": "/images/shapes/star-brushstroke.png"
@@ -180,7 +180,7 @@
       "eyebrow": "From church life",
       "title": "News",
       "intro": "Keep up with community life, event announcements, and stories from St John's Park.",
-      "backgroundTone": "park-dark",
+      "backgroundTone": "stone",
       "source": "posts",
       "limit": 3,
       "cta": {

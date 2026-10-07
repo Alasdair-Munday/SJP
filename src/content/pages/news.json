@@ -1,6 +1,6 @@
 {
   "title": "News",
-  "metaDescription": "Read event announcements, updates, and blog posts from St John's Park, with a shared feed and category filters.",
+  "metaDescription": "Read event announcements, updates, and blog posts from St John's Park, in one shared feed.",
   "template": "news",
   "sections": [
     {
