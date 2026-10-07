@@ -124,11 +124,16 @@ const heroSectionSchema = z.object({
   id: z.string().optional(),
   eyebrow: z.string().optional(),
   title: z.string(),
-  titleImage: z.object({
+  titleImage: z.preprocess((value) => {
+    if (!value || typeof value !== "object") return undefined;
+    const image = value as { src?: unknown };
+    if (typeof image.src !== "string" || !image.src.trim()) return undefined;
+    return value;
+  }, z.object({
     src: z.string(),
-    width: z.number().positive(),
-    height: z.number().positive(),
-  }).optional(),
+    width: z.number().positive().default(2000),
+    height: z.number().positive().default(1744),
+  }).optional()),
   body: z.string(),
   bodyEmphasis: z.array(z.string()).optional(),
   backgroundTone: toneSchema.default("park"),
