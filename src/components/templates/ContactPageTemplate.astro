@@ -55,9 +55,7 @@ const site = await getSiteConfig();
       class="contact-form"
       name="contact"
       method="POST"
-      data-netlify="true"
-      netlify-honeypot="bot-field"
-      action="/contact-thank-you"
+      action="/api/contact"
     >
       <input type="hidden" name="form-name" value="contact" />
       <p class="visually-hidden">
