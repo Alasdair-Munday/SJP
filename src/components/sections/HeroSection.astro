@@ -9,14 +9,30 @@ interface Props {
 }
 
 const { section } = Astro.props;
+const emphasizedWords = new Set(section.bodyEmphasis?.map((word) => word.toLowerCase()));
+const bodyParts = section.body.split(/(\b\w+\b)/);
 ---
 
 <section id={section.id} class="content-band" data-tone={section.backgroundTone}>
   <div class="hero-grid">
     <div class="hero-copy">
       {section.eyebrow && <p class="eyebrow">{section.eyebrow}</p>}
-      <h1 class="display-title">{section.title}</h1>
-      <p class="lede">{section.body}</p>
+      <h1 class:list={["display-title", { "hero-title-art": section.titleImage }]}>
+        {section.titleImage ? (
+          <img
+            src={section.titleImage.src}
+            alt={section.title}
+            width={section.titleImage.width}
+            height={section.titleImage.height}
+            loading="eager"
+            fetchpriority="high"
+            decoding="async"
+          />
+        ) : section.title}
+      </h1>
+      <p class="lede">
+        {bodyParts.map((part) => emphasizedWords.has(part.toLowerCase()) ? <strong>{part}</strong> : part)}
+      </p>
       <div class="button-row">
         {
           section.primaryCta && (

@@ -1,4 +1,5 @@
 ---
+import QRCode from "qrcode";
 import { parseIssueDate } from "../../lib/events";
 import WeeklySchedule from "../../components/sections/WeeklySchedule.astro";
 import { getNewsletterData } from "../../lib/newsletter";
@@ -10,6 +11,9 @@ let issueDate: Date;
 try { issueDate = parseIssueDate(Astro.url.searchParams.get('date')); }
 catch { return new Response('Please choose a valid issue date (YYYY-MM-DD).', { status: 400 }); }
 const newsletter = await getNewsletterData(issueDate);
+const qrCodes = await Promise.all(newsletter.posts.map((post) => QRCode.toDataURL(post.url, {
+  errorCorrectionLevel: "M", margin: 4, width: 384, color: { dark: "#000000", light: "#ffffff" },
+})));
 ---
 
 <!doctype html>
@@ -56,13 +60,15 @@ const newsletter = await getNewsletterData(issueDate);
         </section>
         {
           newsletter.posts.length > 0 ? (
-            newsletter.posts.map((post) => {
+            newsletter.posts.map((post, index) => {
               return (
                 <article class="newsletter-post">
                   <img
                     class="newsletter-post__image"
                     src={post.imageSrc}
                     alt={post.imageAlt}
+                    width="144"
+                    height="108"
                   />
                   <div class="newsletter-post__content">
                     <p class="newsletter-post__category">{post.category}</p>
@@ -73,7 +79,10 @@ const newsletter = await getNewsletterData(issueDate);
                       </p>
                     )}
                     <p>{post.summary}</p>
-                    <a class="newsletter-cta" href={post.ctaHref}>{post.ctaLabel}</a>
+                    <a class="newsletter-story-link" href={post.url}>
+                      <img class="newsletter-qr" src={qrCodes[index]} width="128" height="128" alt={`QR code for the full story: ${post.title}`} />
+                      <span>Scan to read the full story</span>
+                    </a>
                   </div>
                 </article>
               );

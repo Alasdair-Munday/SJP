@@ -21,6 +21,20 @@ Talk entries are sourced at build time from `SERMONS_RSS_FEED_URL`, which
 defaults to `https://audio.com/rss/author/1864352901200967`. If the feed cannot
 be loaded during the build, the site falls back to `src/data/talks-fallback.json`.
 
+## Editing in the CMS
+
+Open `/admin/` to edit content through Decap CMS. Publishing changes updates
+`main` and triggers a Netlify production build.
+
+- **Pages → Home Page:** edit the hero's Title Image and Bold Words, the
+  Belong/Serve/Give cards, and the News section's background tone.
+- **Pages → Get Involved Page:** edit the Celebrate and Will you partner with us?
+  sections. The giving section keeps its anchor when saved.
+- **News & Events:** edit the title, summary, full Markdown body, featured image,
+  and buttons. The same content feeds the article page, print newsletter and
+  email export. Use Display on Newsletter and Display Until to control inclusion;
+  events use Event Date and the optional Event End Date.
+
 ## Newsletter Email Export
 
 - Review the printable newsletter at `/newsletter/`.

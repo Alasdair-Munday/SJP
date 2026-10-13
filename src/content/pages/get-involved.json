@@ -114,16 +114,21 @@
       ]
     },
     {
-      "type": "split",
+      "type": "intro",
       "id": "giving",
       "eyebrow": "Generosity",
-      "title": "Giving",
-      "body": "Your generosity helps sustain Sunday gatherings, midweek ministry, practical support in the neighbourhood, and the long-term renewal of our building for future mission.",
+      "title": "Celebrate",
+      "body": "St John’s is growing! We praise God for growth in our under-18s, Sunday attendance and core team. Our foodbank has supported over 1,500 people, and we have shared the Gospel with many in our community through events. Regular giving has increased, and fundraising has secured over £100,000 towards building improvements. We have also been invited to partner with community organisations and the Diocese to do more work beyond our walls.",
+      "backgroundTone": "give"
+    },
+    {
+      "type": "split",
+      "eyebrow": "Growing Eden life",
+      "title": "Will you partner with us?",
+      "body": "We have a vision to see Eden life spring up in our community through the love of Jesus. This requires financial resources, and your regular gift will make a huge difference in helping our kingdom dreams come to life.",
       "points": [
-        "Give online through the Parish Giving Scheme.",
-        "Bring a gift on a Sunday or use the card machine at church.",
-        "Contact us if you would like to talk through regular giving or a specific gift.",
-        "Building gifts can be discussed with the church team where helpful."
+        "A regular gift through the Parish Giving Scheme is the best way to give.",
+        "For more information, contact hello@saintjohnspark.org."
       ],
       "backgroundTone": "give",
       "image": {
@@ -136,9 +141,13 @@
       },
       "ctas": [
         {
-          "label": "Give online",
+          "label": "Set up a regular gift",
           "href": "https://www.parishgiving.org.uk/donors/find-your-parish/park-st-john-the-evangelist-sheffield/",
           "newTab": true
+        },
+        {
+          "label": "Email us about giving",
+          "href": "mailto:hello@saintjohnspark.org"
         }
       ]
     },

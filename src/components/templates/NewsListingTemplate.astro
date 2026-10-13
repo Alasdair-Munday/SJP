@@ -24,7 +24,7 @@ const categoryLabels = {
 <div class="page-stack">
   <SectionRenderer sections={page.sections} />
 
-  <section class="content-band news-feed-band" data-tone="stone" data-news-section>
+  <section class="content-band news-feed-band" data-tone="stone">
     <div class="news-feed__header">
       <div class="news-feed__intro">
         <p class="eyebrow">Stories and events</p>
@@ -49,7 +49,6 @@ const categoryLabels = {
         posts.map((post, index) => (
           <article
             class="news-card news-card--feed"
-            data-news-card
             data-category={post.data.category}
             data-featured={index === 0 ? "true" : undefined}
           >
