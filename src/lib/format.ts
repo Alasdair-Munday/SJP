@@ -1,10 +1,12 @@
 const longDateFormatter = new Intl.DateTimeFormat("en-GB", {
+  timeZone: "Europe/London",
   day: "numeric",
   month: "long",
   year: "numeric",
 });
 
 const shortDateFormatter = new Intl.DateTimeFormat("en-GB", {
+  timeZone: "Europe/London",
   day: "numeric",
   month: "short",
   year: "numeric",

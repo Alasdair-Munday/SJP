@@ -1,23 +1,15 @@
 ---
+import { getTargetSchedule, formatDay, timeLabel } from "../../lib/events";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import MaskedImage from "../../components/sections/MaskedImage.astro";
-import { getAllPosts, withoutImageMask, type PostEntry } from "../../lib/content";
+import { getAllPosts, withoutImageMask } from "../../lib/content";
 import { formatDate, formatShortDate } from "../../lib/format";
 
-export async function getStaticPaths() {
-  const posts = await getAllPosts();
-
-  return posts.map((post) => ({
-    params: { slug: post.slug },
-    props: { post },
-  }));
-}
-
-interface Props {
-  post: PostEntry;
-}
-
-const { post } = Astro.props;
+export const prerender = false;
+Astro.response.headers.set('Cache-Control', 'no-store');
+const post = (await getAllPosts()).find((item) => item.slug === Astro.params.slug);
+if (!post) return new Response('Not found', { status: 404 });
+const sessions = await getTargetSchedule(`/news/${post.slug}`);
 const { Content } = await post.render();
 
 const categoryLabels = {
@@ -25,17 +17,25 @@ const categoryLabels = {
   update: "Update",
   blog: "Blog",
 };
-const eventDateText = post.data.eventDate ? formatDate(post.data.eventDate) : undefined;
+const nextSession = sessions.events[0];
+const eventDateText = nextSession ? formatDay(nextSession.start) : post.data.eventDate ? formatDate(post.data.eventDate) : undefined;
 const detailItems = [
   post.data.category === "event"
     ? { label: "Date", value: eventDateText }
     : { label: "Posted", value: formatShortDate(post.data.publishDate) },
-  { label: "Time", value: post.data.timeText },
-  { label: "Location", value: post.data.location },
+  { label: "Time", value: nextSession ? timeLabel(nextSession) : post.data.timeText },
+  { label: "Location", value: nextSession ? nextSession.location : post.data.location },
 ].filter((item) => item.value);
 ---
 
-<BaseLayout title={post.data.title} description={post.data.summary}>
+<BaseLayout
+  title={post.data.title}
+  description={post.data.summary}
+  image={post.data.socialImage?.src ?? post.data.featuredImage.src}
+  imageAlt={post.data.socialImage?.alt ?? post.data.featuredImage.alt}
+  type="article"
+  publishedTime={post.data.publishDate}
+>
   <div class="utility-shell page-stack post-detail-shell">
     <article class="content-band post-detail-article" data-tone="stone">
       <div class="post-detail__header">
@@ -56,6 +56,11 @@ const detailItems = [
       <div class="post-detail__body-grid">
         <div class="post-detail__content">
           <Content />
+          {sessions.events.length > 0 && <section class="upcoming-dates">
+            <h2>Upcoming dates</h2>
+            {sessions.message && <p class="calendar-status">{sessions.message}</p>}
+            <ul>{sessions.events.map((event) => <li>{formatDay(event.start)} · {timeLabel(event)}{event.location && ` · ${event.location}`}</li>)}</ul>
+          </section>}
         </div>
 
         <aside class="post-detail__aside" aria-label="News post details">

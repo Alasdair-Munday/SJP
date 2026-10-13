@@ -1,4 +1,6 @@
 ---
+export const prerender = false;
+Astro.response.headers.set("Cache-Control", "no-store");
 import PageRoute from "../components/PageRoute.astro";
 ---
 
