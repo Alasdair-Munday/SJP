@@ -31,8 +31,8 @@ Open `/admin/` to edit content through Decap CMS. Publishing changes updates
 - **Pages → Get Involved Page:** edit the Celebrate and Will you partner with us?
   sections. The giving section keeps its anchor when saved.
 - **News & Events:** edit the title, summary, full Markdown body, featured image,
-  and buttons. The same content feeds the article page, print newsletter and
-  email export. Use Display on Newsletter and Display Until to control inclusion;
+  and buttons. The print newsletter shows each summary with a QR link to the
+  full story; the article page and email export include the full body. Use Display on Newsletter and Display Until to control inclusion;
   events use Event Date and the optional Event End Date.
 
 ## Newsletter Email Export
