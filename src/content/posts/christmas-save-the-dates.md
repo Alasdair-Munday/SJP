@@ -13,4 +13,4 @@ ctaHref: /contact
 featuredImage:
   src: /images/uploads/Carol-singing.jpg
 ---
-![](/images/uploads/SaveTDs-For-ChurchWebsite.jpg)
+![](/images/uploads/SaveTDs-For-Church-Website-Times.png)
