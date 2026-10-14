@@ -1,4 +1,4 @@
-import { getThisWeek, compactSchedule, dateKey } from "./events";
+import { getNewsletterWeek, groupSchedule, dateKey, timeLabel } from "./events";
 import type { PostEntry } from "./content";
 import { getNewsletterPostsForWeek, getSiteConfig } from "./content";
 import { formatDate } from "./format";
@@ -21,7 +21,7 @@ type NewsletterPost = {
 export type NewsletterData = {
   date: Date;
   issueDate: string;
-  schedule: Awaited<ReturnType<typeof getThisWeek>>;
+  schedule: Awaited<ReturnType<typeof getNewsletterWeek>>;
   formattedDate: string;
   logoAlt: string;
   logoSrc: string;
@@ -51,7 +51,7 @@ export async function getNewsletterData(targetDate: Date = new Date()): Promise<
   const [posts, site, schedule] = await Promise.all([
     getNewsletterPostsForWeek(targetDate),
     getSiteConfig(),
-    getThisWeek(targetDate),
+    getNewsletterWeek(targetDate),
   ]);
 
   return {
@@ -139,7 +139,7 @@ const renderPost = (post: NewsletterPost) => `
                 </tr>`;
 
 export function renderScheduleEmail(newsletter: NewsletterData) {
-  const entries = compactSchedule(newsletter.schedule.events);
+  const entries = groupSchedule(newsletter.schedule.events, newsletter.schedule.start, newsletter.schedule.end).flatMap((day) => day.events.map((event, index) => ({ first: event, events: [event], dayLabel: index === 0 ? day.label : "", timeLabel: timeLabel(event) })));
   const rows = entries.map((entry) => {
     const title = entry.first.href ? `<a style="color:#226442;" href="${escapeHtml(absolutize(entry.first.href, newsletter.onlineUrl))}">${escapeHtml(entry.first.title)}</a>` : escapeHtml(entry.first.title);
     const ids = entry.events.map((event) => `<span data-calendar-id="${escapeHtml(event.id)}" style="display:none"></span>`).join('');

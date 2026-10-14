@@ -29,6 +29,13 @@ export function weekRange(date = new Date()) {
   return { start: parseIssueDate(key), end: parseIssueDate(addDays(key, 7)) };
 }
 
+export function newsletterWeekRange(date = new Date()) {
+  const key = dateKey(date);
+  const weekday = new Date(`${key}T12:00:00Z`).getUTCDay();
+  const monday = addDays(key, -((weekday + 6) % 7));
+  return { start: parseIssueDate(monday), end: parseIssueDate(addDays(monday, 7)) };
+}
+
 export function sixMonthsFrom(date) {
   const key = dateKey(date);
   return dayjs.tz(dayjs(key).add(6, 'month').format('YYYY-MM-DD'), TIME_ZONE).toDate();

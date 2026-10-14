@@ -3,7 +3,7 @@ import { expandCalendar, type Occurrence } from './calendar/core.mjs';
 import { getSnapshot, snapshotStatus, calendarUrl } from './calendar/store.mjs';
 import { canonicalTarget, resolveTarget } from './calendar/links.mjs';
 import { compactSchedule } from './calendar/compact.mjs';
-import { dateKey, formatDay, formatTime, parseIssueDate, sixMonthsFrom, timeLabel, weekRange, addDays } from './calendar/dates.mjs';
+import { dateKey, formatDay, formatTime, parseIssueDate, sixMonthsFrom, timeLabel, weekRange, newsletterWeekRange, addDays } from './calendar/dates.mjs';
 import { mappedPageRoutes } from './pageRoutes';
 import { sundayServiceTitle, normalizeTarget } from './calendar/presentation.mjs';
 
@@ -75,6 +75,11 @@ export async function getSchedule(start: Date, end: Date): Promise<Schedule> {
 export async function getThisWeek(date = new Date()) {
   const { start, end } = weekRange(date);
   return { ...await getSchedule(start, end), start, end, label: `${formatDay(start)} – ${formatDay(parseIssueDate(addDays(dateKey(start), 6)))}` };
+}
+
+export async function getNewsletterWeek(date = new Date()) {
+  const { start, end } = newsletterWeekRange(date);
+  return { ...await getSchedule(start, end), start, end, label: `${formatDay(start)} – ${formatDay(parseIssueDate(addDays(dateKey(end), -1)))}` };
 }
 
 export async function getTargetSchedule(target: string | string[], from = new Date(), limit = 2) {

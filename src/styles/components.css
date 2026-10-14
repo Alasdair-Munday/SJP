@@ -1704,3 +1704,25 @@
 .events-index__card p:not(.eyebrow) { margin: 0 0 1rem; }
 @media (max-width: 760px) { .events-index { grid-template-columns: 1fr; } }
 @media (max-width: 480px) { .weekly-schedule__event { grid-template-columns: 1fr; gap: .25rem; } }
+
+.whats-on__header { display: flex; align-items: end; justify-content: space-between; gap: 1.5rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+.whats-on__header .section-title { margin-bottom: 0; }
+.whats-on__layout { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.35fr); gap: 2rem; align-items: start; }
+.next-event { background: #183e32; color: #fffaf0; padding: clamp(1.5rem, 3vw, 2.5rem); border-radius: 1.25rem; }
+.next-event .eyebrow { color: #c6deb5; }
+.next-event h3 { font-size: clamp(1.5rem, 2.7vw, 2.3rem); line-height: 1.2; margin: .8rem 0 1.5rem; }
+.next-event__date { font-weight: 700; margin-bottom: .25rem; }
+.next-event__time { font-size: 1.2rem; margin-top: 0; }
+.next-event__location { color: #e0e9dc; }
+.next-event__link { display: flex; align-items: center; justify-content: space-between; gap: 1rem; color: inherit; border-top: 1px solid #779386; padding-top: 1.2rem; margin-top: 2rem; font-weight: 700; text-decoration: none; }
+.next-event__link:hover { text-decoration: underline; }
+.upcoming-agenda h3 { margin: 0; font-size: 1.25rem; }
+.upcoming-agenda__range { margin: .3rem 0 1rem; font-size: .9rem; }
+.upcoming-agenda ul { list-style: none; padding: 0; margin: 0; }
+.upcoming-agenda__event { display: grid; grid-template-columns: minmax(7.5rem, .65fr) minmax(0, 1.5fr); gap: 1rem; padding: .8rem 0; border-top: 1px solid currentColor; overflow-wrap: anywhere; }
+.upcoming-agenda__when span { display: block; font-size: .85rem; font-variant-numeric: tabular-nums; }
+.upcoming-agenda__when span:first-child { font-weight: 800; margin-bottom: .15rem; }
+.upcoming-agenda__event a { color: inherit; font-weight: 700; }
+.upcoming-agenda__location { display: block; font-size: .85rem; margin-top: .2rem; }
+@media (max-width: 720px) { .whats-on__layout { grid-template-columns: 1fr; gap: 1.5rem; } }
+@media (max-width: 400px) { .upcoming-agenda__event { grid-template-columns: 1fr; gap: .35rem; } }

@@ -92,8 +92,10 @@ process and do not use the CMS checkbox as a substitute for recorded consent.
 
 Google Calendar owns dates, times, locations and cancellations. The website owns
 activity descriptions. The homepage, printable newsletter and email newsletter
-share one calendar service. The agenda covers **today plus the next six days** in
-Europe/London, including every public event and any overlapping multi-day events.
+share one calendar service. The homepage agenda covers **today plus the next six days** in Europe/London,
+with the next or current event featured beside the upcoming list. Finished events
+are omitted. The newsletter agenda covers **Monday–Sunday of the selected issue
+week**, including overlapping multi-day events.
 
 ### Managing regular events
 
@@ -156,7 +158,7 @@ a website destination; its existing description includes the online joining deta
 
 Choose an issue date at `/newsletter/` or `/newsletter/email/`. The `?date=YYYY-MM-DD`
 parameter carries through print, email preview and raw HTML export. All three
-views use the same seven-day agenda. Recent news looks back seven calendar days
+newsletter views use the same Monday–Sunday agenda. Recent news looks back seven calendar days
 through the issue date; explicit newsletter expiry dates and upcoming event
 announcements remain supported. Posts published after the issue date are excluded.
 These are current previews, not archived snapshots of previously issued newsletters.

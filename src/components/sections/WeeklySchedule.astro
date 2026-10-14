@@ -1,15 +1,26 @@
 ---
-import { compactSchedule, type Schedule } from '../../lib/events';
+import { groupSchedule, dateKey, parseIssueDate, timeLabel, type Schedule } from '../../lib/events';
+import { addDays } from '../../lib/calendar/dates.mjs';
 interface Props { schedule: Schedule; start: Date; end: Date; }
-const { schedule } = Astro.props;
-const entries = compactSchedule(schedule.events);
+const { schedule, start, end } = Astro.props;
+const groups = new Map(groupSchedule(schedule.events, start, end).map((group) => [group.day, group]));
+const days = Array.from({ length: 7 }, (_, index) => {
+  const key = addDays(dateKey(start), index);
+  const date = parseIssueDate(key);
+  return { key, weekday: new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/London', weekday: 'long' }).format(date),
+    dateLabel: new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/London', day: 'numeric', month: 'short' }).format(date),
+    events: groups.get(key)?.events ?? [] };
+});
 ---
 {schedule.message && <p class="calendar-status" role="status">{schedule.message}</p>}
-{entries.length ? <div class="weekly-schedule">
-  <ul>{entries.map((entry) => <li class="weekly-schedule__event">
-    {entry.events.map((event) => <i class="calendar-occurrence-id" aria-hidden="true" data-calendar-id={event.id}></i>)}
-    <span class="weekly-schedule__when">{entry.dayLabel} · {entry.timeLabel}</span>
-    <div>{entry.first.href ? <a href={entry.first.href}>{entry.first.title}</a> : <strong>{entry.first.title}</strong>}
-    {entry.first.location && <span class="weekly-schedule__location">{entry.first.location}</span>}</div>
-  </li>)}</ul>
-</div> : schedule.status !== 'unavailable' && <p>No events are listed for these seven days.</p>}
+{schedule.status !== 'unavailable' && <div class="weekly-schedule">
+  <ol>{days.map((day) => <li class="weekly-schedule__day">
+    <div class="weekly-schedule__date"><strong>{day.weekday}</strong><time datetime={day.key}>{day.dateLabel}</time></div>
+    <div class="weekly-schedule__sessions">{day.events.length ? <ul>{day.events.map((event) => <li class="weekly-schedule__event">
+      <i class="calendar-occurrence-id" aria-hidden="true" data-calendar-id={event.id}></i>
+      <span class="weekly-schedule__when">{timeLabel(event)}</span>
+      <div>{event.href ? <a href={event.href}>{event.title}</a> : <strong>{event.title}</strong>}
+      {event.location && <span class="weekly-schedule__location">{event.location}</span>}</div>
+    </li>)}</ul> : <p class="weekly-schedule__empty">No events listed</p>}</div>
+  </li>)}</ol>
+</div>}

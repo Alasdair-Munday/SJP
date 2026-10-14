@@ -5,7 +5,7 @@ const base = process.env.CALENDAR_TEST_BASE_URL;
 const options = { skip: !base };
 const ids = (html) => [...html.matchAll(/data-calendar-id="([^"]+)"/g)].map((match) => match[1]);
 
-test('live server: homepage, print and email contain identical current-week occurrences', options, async () => {
+test('live server: homepage rolls forward while print and email share Monday–Sunday occurrences', options, async () => {
   const key = dateKey();
   const paths = ['/', `/newsletter/?date=${key}`, `/newsletter/email/raw/?date=${key}`];
   const results = await Promise.all(paths.map(async (path) => {
@@ -15,7 +15,8 @@ test('live server: homepage, print and email contain identical current-week occu
     return response.text();
   }));
   assert.ok(ids(results[0]).length > 0, 'Live feed should supply this week’s events');
-  assert.deepEqual(ids(results[0]), ids(results[1]));
+  assert.match(results[0], /class="next-event"/);
+  assert.equal((results[1].match(/class="weekly-schedule__day"/g) ?? []).length, 7);
   assert.deepEqual(ids(results[1]), ids(results[2]));
   assert.ok(results[1].indexOf('id="this-week-title"') < results[1].indexOf('class="newsletter-post"'));
   assert.match(results[2], /https:\/\/stjohnspark.org\/events\/foodbank/);
