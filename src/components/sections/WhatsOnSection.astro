@@ -1,13 +1,13 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-import { getThisWeek, compactSchedule, formatDay, timeLabel } from '../../lib/events';
+import { getThisWeek, groupSchedule, formatDay, timeLabel } from '../../lib/events';
 interface Props { section: Extract<CollectionEntry<'pages'>['data']['sections'][number], { type: 'whatsOn' }>; }
 const { section } = Astro.props;
 const now = new Date();
 const schedule = await getThisWeek(now);
 const upcoming = schedule.events.filter((event) => new Date(event.end) > now || new Date(event.start) >= now);
 const next = upcoming[0];
-const entries = compactSchedule(upcoming.slice(1));
+const days = groupSchedule(upcoming.slice(1), now, schedule.end);
 const happeningNow = next && new Date(next.start) <= now && new Date(next.end) > now;
 ---
 <section id={section.id} class="content-band whats-on" data-tone={section.backgroundTone}>
@@ -28,13 +28,16 @@ const happeningNow = next && new Date(next.start) <= now && new Date(next.end) >
     </article>
     <div class="upcoming-agenda">
       <h3>Coming up</h3><p class="upcoming-agenda__range">{schedule.label}</p>
-      {entries.length ? <ul>{entries.map((entry) => <li class="upcoming-agenda__event">
-        {entry.events.map((event) => <i class="calendar-occurrence-id" aria-hidden="true" data-calendar-id={event.id}></i>)}
-        <div class="upcoming-agenda__when"><span>{entry.dayLabel}</span><span>{entry.timeLabel}</span></div>
-        <div>{entry.first.href ? <a href={entry.first.href}>{entry.first.title}</a> : <strong>{entry.first.title}</strong>}
-          {entry.first.location && <span class="upcoming-agenda__location">{entry.first.location}</span>}
-        </div>
-      </li>)}</ul> : <p>That’s the last event listed for the next seven days.</p>}
+      {days.length ? <div class="upcoming-agenda__days">{days.map((day) => <section class="upcoming-agenda__day" aria-label={day.label}>
+        <h4><time datetime={day.day}>{day.label}</time></h4>
+        <ul>{day.events.map((event) => <li class="upcoming-agenda__event">
+          <i class="calendar-occurrence-id" aria-hidden="true" data-calendar-id={event.id}></i>
+          <div class="upcoming-agenda__when"><span>{timeLabel(event)}</span></div>
+          <div>{event.href ? <a href={event.href}>{event.title}</a> : <strong>{event.title}</strong>}
+            {event.location && <span class="upcoming-agenda__location">{event.location}</span>}
+          </div>
+        </li>)}</ul>
+      </section>)}</div> : <p>That’s the last event listed for the next seven days.</p>}
     </div>
   </div> : schedule.status !== 'unavailable' && <p>No upcoming events are listed for the next seven days.</p>}
 </section>

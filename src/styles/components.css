@@ -1726,3 +1726,9 @@
 .upcoming-agenda__location { display: block; font-size: .85rem; margin-top: .2rem; }
 @media (max-width: 720px) { .whats-on__layout { grid-template-columns: 1fr; gap: 1.5rem; } }
 @media (max-width: 400px) { .upcoming-agenda__event { grid-template-columns: 1fr; gap: .35rem; } }
+
+.upcoming-agenda__day + .upcoming-agenda__day { margin-top: 1.25rem; }
+.upcoming-agenda__day h4 { margin: 0; padding-bottom: .45rem; font-size: .95rem; font-weight: 800; }
+.upcoming-agenda__day .upcoming-agenda__event { grid-template-columns: minmax(7.5rem, .65fr) minmax(0, 1.5fr); }
+.upcoming-agenda__day .upcoming-agenda__when span { font-weight: 500; }
+@media (max-width: 400px) { .upcoming-agenda__day .upcoming-agenda__event { grid-template-columns: 1fr; } }
