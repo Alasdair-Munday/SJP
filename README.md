@@ -38,9 +38,12 @@ Open `/admin/` to edit content through Decap CMS. Publishing changes updates
 ## Printable magazine PDF
 
 Choose an issue date at `/newsletter/`, then use **Download PDF**. The server
-creates an A4 magazine at `/newsletter/pdf/?date=YYYY-MM-DD`, with an editorial
-masthead, two columns, the Monday–Sunday timetable, article summaries, and
-32 mm QR codes linking to full stories. The QR area is clickable in the PDF.
+creates an A4 magazine at `/newsletter/pdf/?date=YYYY-MM-DD`, using the website’s
+Karla and Dela Gothic One fonts, church logo, Eden artwork, colours and shapes.
+The full-width timetable starts with This Sunday and Morning prayers side by
+side. Other events appear in one column per non-empty day, excluding Sunday
+and morning prayers. Two-column article summaries follow, with 32 mm QR codes
+linking to full stories. The QR area is clickable in the PDF.
 Long issues flow to additional numbered pages. Fonts are embedded for consistent
 printing; their licence is in `src/assets/pdf-fonts/LICENSE.txt`.
 No external PDF or QR service is required. The existing browser print view and
