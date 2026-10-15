@@ -37,4 +37,28 @@ try {
     }
     assert.deepEqual(links, posts.map((post) => post.url));
   });
+  await test('photos use only the site origin and render without an external image service', async () => {
+    const { logo } = await server.ssrLoadModule('/src/assets/pdf-fonts/brand.ts');
+    const originalFetch = globalThis.fetch;
+    const requests = [];
+    globalThis.fetch = async (url) => {
+      requests.push(String(url));
+      return new Response(Buffer.from(logo, 'base64'), { headers: { 'Content-Type': 'image/png' } });
+    };
+    try {
+      const doc = await PDFDocument.load(await renderNewsletterPdf({ ...issue,
+        coverImageSrc: 'https://unrelated.invalid/photo.jpg',
+        posts: [{ title: 'A church story', summary: 'A short summary.', imageSrc: 'https://stjohnspark.org/photo.jpg', eventDetails: '', url: 'https://stjohnspark.org/news/story/' }],
+      }));
+      assert.deepEqual(requests, ['https://stjohnspark.org/photo.jpg']);
+      const images = doc.getPage(0).node.Resources().lookup(PDFName.of('XObject'), PDFDict);
+      assert.ok(images.keys().length >= 4, 'Logo, Eden art, article photograph and QR must be embedded');
+    } finally { globalThis.fetch = originalFetch; }
+  });
+  await test('giving invitation does not create an extra mostly-empty page', async () => {
+    const populated = { ...issue, posts: Array.from({ length: 3 }, (_, i) => ({ title: `Church news ${i}`, summary: 'A community story and invitation. '.repeat(20), eventDetails: '', url: `https://stjohnspark.org/news/${i}/` })) };
+    const ordinary = await PDFDocument.load(await renderNewsletterPdf(populated));
+    const withGiving = await PDFDocument.load(await renderNewsletterPdf({ ...populated, givingUrl: 'https://stjohnspark.org/get-involved#giving' }));
+    assert.equal(withGiving.getPageCount(), ordinary.getPageCount());
+  });
 } finally { await server.close(); }

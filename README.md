@@ -38,19 +38,32 @@ Open `/admin/` to edit content through Decap CMS. Publishing changes updates
 ## Printable magazine PDF
 
 Choose an issue date at `/newsletter/`, then use **Download PDF**. The server
-creates an A4 magazine at `/newsletter/pdf/?date=YYYY-MM-DD`, using the website’s
-Karla and Dela Gothic One fonts, church logo, Eden artwork, colours and shapes.
-The full-width timetable starts with This Sunday and Morning prayers side by
-side. Other events appear in one column per non-empty day, excluding Sunday
-and morning prayers. Two-column article summaries follow, with 32 mm QR codes
-linking to full stories. The QR area is clickable in the PDF.
-Long issues flow to additional numbered pages. Fonts are embedded for consistent
-printing; their licence is in `src/assets/pdf-fonts/LICENSE.txt`.
-No external PDF or QR service is required. The existing browser print view and
-email export remain available. Invalid issue dates return HTTP 400.
+creates `/newsletter/pdf/?date=YYYY-MM-DD` using the website’s Karla and Dela
+Gothic One fonts, church logo and Eden artwork.
 
-Run `node --test tests/newsletter-pdf.test.mjs` to check A4 output, long-issue
-pagination, and preservation of full-story links.
+The default layout follows the newsletter mockup with a white-paper design for
+ordinary printers: a cover photograph and thought on the left, Sunday/weekday
+calendar details in an outlined sidebar, then two-column photo cards with article
+summaries and QR links. There are no solid page or panel fills. Photos are small,
+cropped and embedded; missing photos do not prevent a download. Photos are only
+fetched from the site's own URLs, with a 10-second timeout and 3 MB limit per image.
+
+In Site Admin → **Newsletter thoughts**, create an issue, enter plain-text
+paragraphs, optionally add an author or cover photo, and enable **Include in
+newsletter** after approval. Only approved, non-empty thoughts for the selected
+Monday–Sunday week appear. An unpublished empty example is provided. When there
+is no approved thought, the church introduction and home cover photo are used.
+The sample reflection used in the design review is not published.
+
+The timetable still comes from the public Calendar. Sunday and morning prayers
+appear once in their own sections; other events are grouped by occupied day.
+Long thoughts, busy schedules and articles continue onto numbered pages. A giving
+invitation appears where space permits, with a compact footer link otherwise.
+Fonts are embedded; their licences are in `src/assets/pdf-fonts/LICENSE.txt`.
+No external PDF or QR service is required. Invalid issue dates return HTTP 400.
+
+Run `node --test tests/newsletter-pdf.test.mjs` for PDF checks and `npm test` for
+calendar selection and thought approval checks.
 
 ## Newsletter Email Export
 

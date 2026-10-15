@@ -41,6 +41,28 @@ media_library:
   name: cloudflare_netlify
 
 collections:
+  - name: "newsletterIssues"
+    label: "Newsletter thoughts"
+    label_singular: "Newsletter thought"
+    folder: "src/content/newsletterIssues"
+    create: true
+    extension: "json"
+    format: "json"
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    summary: "{{issueDate}} — {{title}}"
+    fields:
+      - {label: "Title", name: "title", widget: "string", default: "Thought for the week"}
+      - {label: "Issue Date", name: "issueDate", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false, hint: "Used for the Monday–Sunday week containing this date."}
+      - {label: "Include in newsletter", name: "published", widget: "boolean", default: false, hint: "Enable only when the thought has been reviewed and approved."}
+      - {label: "Author", name: "author", widget: "string", required: false}
+      - {label: "Thought", name: "body", widget: "text", hint: "Plain text; separate paragraphs with blank lines."}
+      - label: "Cover photo"
+        name: "image"
+        widget: "object"
+        required: false
+        fields:
+          - {label: "Image", name: "src", widget: "image", required: false}
+          - {label: "Alt text", name: "alt", widget: "string", required: false}
   - name: "events"
     label: "Regular Events"
     label_singular: "Regular Event"

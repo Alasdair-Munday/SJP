@@ -1,3 +1,5 @@
+import { getCollection } from "astro:content";
+import { selectNewsletterIssue } from "./calendar/newsletter-issue.mjs";
 import { getNewsletterWeek, groupSchedule, dateKey, timeLabel } from "./events";
 import type { PostEntry } from "./content";
 import { getNewsletterPostsForWeek, getSiteConfig } from "./content";
@@ -19,6 +21,11 @@ type NewsletterPost = {
 };
 
 export type NewsletterData = {
+  coverImageSrc?: string;
+  introduction?: string;
+  contactEmail?: string;
+  givingUrl?: string;
+  thought?: { title: string; body: string; author?: string };
   date: Date;
   issueDate: string;
   schedule: Awaited<ReturnType<typeof getNewsletterWeek>>;
@@ -48,13 +55,26 @@ const buildEventDetails = (post: PostEntry) => {
 };
 
 export async function getNewsletterData(targetDate: Date = new Date()): Promise<NewsletterData> {
-  const [posts, site, schedule] = await Promise.all([
+  const [posts, site, schedule, issues, pages] = await Promise.all([
     getNewsletterPostsForWeek(targetDate),
     getSiteConfig(),
     getNewsletterWeek(targetDate),
+    getCollection("newsletterIssues"),
+    getCollection("pages"),
   ]);
 
+  const issue = selectNewsletterIssue(issues, schedule.start, schedule.end);
+  const home = pages.find((entry) => entry.id === "home");
+  const hero = home?.data.sections.find((section) => section.type === "hero");
+  const coverUrl = new URL("/.netlify/images", site.siteUrl);
+  coverUrl.search = new URLSearchParams({ url: issue?.data.image?.src ?? hero?.image?.src ?? "/images/line-drawing.png", w: "900", h: "550", fit: "cover", fm: "jpg", q: "80" }).toString();
+
   return {
+    coverImageSrc: coverUrl.toString(),
+    introduction: hero?.body ?? site.metaDescription,
+    contactEmail: site.contact.email,
+    givingUrl: absolutize("/get-involved#giving", site.siteUrl),
+    thought: issue ? { title: issue.data.title, body: issue.data.body, author: issue.data.author } : undefined,
     date: targetDate,
     issueDate: dateKey(targetDate),
     schedule,

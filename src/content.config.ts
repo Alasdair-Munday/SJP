@@ -361,7 +361,20 @@ const events = defineCollection({
   }),
 });
 
+const newsletterIssues = defineCollection({
+  type: "data",
+  schema: z.object({
+    title: z.string().default("Thought for the week"),
+    issueDate: z.coerce.date(),
+    published: z.boolean().default(false),
+    author: z.string().optional(),
+    body: z.string().default(""),
+    image: optionalImageSchema,
+  }),
+});
+
 export const collections = {
+  newsletterIssues,
   pages,
   posts,
   events,
