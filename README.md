@@ -17,9 +17,14 @@ The redesigned site uses Astro content collections:
 - Local talks fallback: `src/data/talks-fallback.json`
 - Uploaded media: `public/images/uploads`
 
-Talk entries are sourced at build time from `SERMONS_RSS_FEED_URL`, which
-defaults to `https://audio.com/rss/author/1864352901200967`. If the feed cannot
-be loaded during the build, the site falls back to `src/data/talks-fallback.json`.
+Talk entries use `SERMONS_RSS_FEED_URL`, defaulting to
+`https://audio.com/rss/author/1864352901200967`. When the default feed is empty
+or unavailable, the site reads the church's public Audio.com profile and uses
+permanent embedded players rather than expiring signed MP3 links. A saved
+snapshot in `src/data/talks-fallback.json` provides players during an outage.
+The talks page renders on request, with a five-minute cache, so new recordings
+can appear without a rebuild. Custom RSS sources do not use the Audio.com
+profile fallback. Run `node --test tests/talks.test.mjs` for parser checks.
 
 ## Editing in the CMS
 

@@ -1,4 +1,6 @@
 ---
+export const prerender = false;
+Astro.response.headers.set("Cache-Control", "public, max-age=0, s-maxage=300");
 import BaseLayout from "../layouts/BaseLayout.astro";
 import TalkListingTemplate from "../components/templates/TalkListingTemplate.astro";
 import { getPageContent } from "../lib/content";
