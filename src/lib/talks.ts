@@ -5,12 +5,17 @@ const DEFAULT_SERMONS_RSS_FEED_URL =
 const AUDIO_COM_TITLE_PATTERN =
   /^(?<day>\d{2})\/(?<month>\d{2})\/(?<year>\d{2})\s*\/\/\s*(?<message>.+?)\s*\/\/\s*(?<speaker>.+)$/;
 
-export type Talk = (typeof fallbackTalks.items)[number] & {
-  imageUrl?: string;
+export type Talk = {
+  title: string; speaker: string; date: string; series: string;
+  passage: string; audioUrl: string; description: string; duration: number;
+  imageUrl?: string; embedUrl?: string; sourceUrl?: string;
 };
+const AUDIO_COM_PROFILE_URL = "https://audio.com/stjohnsparksheffield";
 
 const decodeXmlEntities = (value: string) =>
   value
+    .replace(/&#(?:x([0-9a-f]+)|(\d+));/gi, (_, hex, decimal) =>
+      String.fromCodePoint(Number.parseInt(hex || decimal, hex ? 16 : 10)))
     .replace(/&amp;/g, "&")
     .replace(/&lt;/g, "<")
     .replace(/&gt;/g, ">")
@@ -138,7 +143,7 @@ const getFeedImageUrl = (xml: string) => {
   );
 };
 
-const parseFeed = (xml: string): Talk[] => {
+export const parseFeed = (xml: string): Talk[] => {
   const feedImageUrl = getFeedImageUrl(xml);
 
   return Array.from(xml.matchAll(/<item\b[\s\S]*?<\/item>/gi))
@@ -150,44 +155,69 @@ const parseFeed = (xml: string): Talk[] => {
 export const getTalksRssFeedUrl = () =>
   import.meta.env.SERMONS_RSS_FEED_URL || DEFAULT_SERMONS_RSS_FEED_URL;
 
+// Audio.com's RSS can be empty even while its public profile lists recordings.
+// Keep only stable player IDs, never its short-lived signed MP3 URLs.
+export const parseAudioComProfile = (html: string): Talk[] => {
+  const store = html.match(/<div\b[^>]*class="js-store"[^>]*data-content="([^"]+)"/i)?.[1];
+  if (!store) throw new Error("Audio.com profile data was not found.");
+  const data = JSON.parse(decodeXmlEntities(store)).screen?.data;
+  if (data?.author?.id !== "1864352901200967") throw new Error("Unexpected Audio.com author.");
+  const items = data.audio?.items;
+  if (!Array.isArray(items)) throw new Error("Audio.com recordings were not found.");
+  return items.flatMap((item): Talk[] => {
+    if (!/^\d+$/.test(item.id) || item.user !== data.author.id || !item.listed || !item.title || !item.play) return [];
+    const title = stripHtml(item.title);
+    const match = title.match(/^(\d{2})[/-](\d{2})[/-](\d{4})\s+(.+?)\s+-\s+([^-]+)$/);
+    const uploadedDate = toIsoDate(new Date(item.created * 1000).toISOString());
+    const titleDate = match ? `${match[3]}-${match[2]}-${match[1]}` : "";
+    const date = titleDate && titleDate <= uploadedDate ? titleDate : uploadedDate;
+    const sourceUrl = `${AUDIO_COM_PROFILE_URL}/audio/${encodeURIComponent(item.slug)}`;
+    return [{
+      title: match ? match[4].trim() : title,
+      speaker: match ? match[5].trim() : "St John's Park",
+      date, series: "Sunday Talks", passage: "", audioUrl: "",
+      embedUrl: `https://audio.com/embed/audio/${item.id}`,
+      sourceUrl, imageUrl: item.image || item.avatar || "",
+      description: stripHtml(item.description || "") || "Sunday teaching from our church family.",
+      duration: Math.round((Number(item.play.duration) || 0) / 1000),
+    }];
+  }).sort(sortByDateDescending);
+};
+
 let cachedTalksPromise: Promise<Talk[]> | null = null;
+let cacheExpiresAt = 0;
 
 export async function getTalks(): Promise<Talk[]> {
-  if (!cachedTalksPromise) {
+  if (!cachedTalksPromise || Date.now() >= cacheExpiresAt) {
+    cacheExpiresAt = Date.now() + 5 * 60 * 1000;
     cachedTalksPromise = (async () => {
       const feedUrl = getTalksRssFeedUrl();
-
-      if (!feedUrl) {
-        return fallbackTalks.items;
-      }
-
       try {
         const response = await fetch(feedUrl, {
-          headers: {
-            Accept: "application/rss+xml, application/xml, text/xml;q=0.9, */*;q=0.8",
-          },
+          headers: { Accept: "application/rss+xml, application/xml, text/xml;q=0.9" },
+          signal: AbortSignal.timeout(8000),
         });
-
-        if (!response.ok) {
-          throw new Error(`Feed request failed: ${response.status} ${response.statusText}`);
-        }
-
-        const feedItems = parseFeed(await response.text());
-
-        if (feedItems.length === 0) {
-          throw new Error("Feed returned no talk items.");
-        }
-
-        return feedItems;
+        if (!response.ok) throw new Error(`Feed request failed: ${response.status}`);
+        const items = parseFeed(await response.text());
+        if (!items.length) throw new Error("Feed returned no talk items.");
+        return items;
       } catch (error) {
-        console.warn(
-          `[talks] Falling back to local talk content because the RSS feed could not be loaded from ${feedUrl}.`,
-          error,
-        );
-        return fallbackTalks.items;
+        console.warn("[talks] RSS unavailable; trying the public Audio.com profile.", error);
       }
+      // Only use this author's profile for the default feed, not a custom source.
+      if (feedUrl === DEFAULT_SERMONS_RSS_FEED_URL) {
+        try {
+          const response = await fetch(AUDIO_COM_PROFILE_URL, { signal: AbortSignal.timeout(8000) });
+          if (!response.ok) throw new Error(`Profile request failed: ${response.status}`);
+          const items = parseAudioComProfile(await response.text());
+          if (!items.length) throw new Error("Profile returned no recordings.");
+          return items;
+        } catch (error) {
+          console.warn("[talks] Using saved recordings because Audio.com is unavailable.", error);
+        }
+      }
+      return fallbackTalks.items;
     })();
   }
-
   return cachedTalksPromise;
 }
