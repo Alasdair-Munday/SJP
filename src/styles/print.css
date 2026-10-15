@@ -313,3 +313,5 @@
 .weekly-schedule__empty { margin: .25rem 0; font-size: .85rem; color: var(--newsletter-muted); }
 @media (max-width: 480px) { .weekly-schedule__day { grid-template-columns: 80px minmax(0, 1fr); gap: .75rem; } .weekly-schedule .weekly-schedule__event { grid-template-columns: 1fr; gap: .1rem; } }
 @media print { .weekly-schedule__day { grid-template-columns: 26mm minmax(0, 1fr); padding: 2mm 0; gap: 3mm; } .weekly-schedule .weekly-schedule__event { grid-template-columns: 32mm minmax(0, 1fr); font-size: 9pt; padding: 1mm 0; } }
+
+.newsletter-actions { flex-wrap: wrap; }

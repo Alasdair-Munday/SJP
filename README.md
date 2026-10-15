@@ -35,6 +35,20 @@ Open `/admin/` to edit content through Decap CMS. Publishing changes updates
   full story; the article page and email export include the full body. Use Display on Newsletter and Display Until to control inclusion;
   events use Event Date and the optional Event End Date.
 
+## Printable magazine PDF
+
+Choose an issue date at `/newsletter/`, then use **Download PDF**. The server
+creates an A4 magazine at `/newsletter/pdf/?date=YYYY-MM-DD`, with an editorial
+masthead, two columns, the Monday–Sunday timetable, article summaries, and
+32 mm QR codes linking to full stories. The QR area is clickable in the PDF.
+Long issues flow to additional numbered pages. Fonts are embedded for consistent
+printing; their licence is in `src/assets/pdf-fonts/LICENSE.txt`.
+No external PDF or QR service is required. The existing browser print view and
+email export remain available. Invalid issue dates return HTTP 400.
+
+Run `node --test tests/newsletter-pdf.test.mjs` to check A4 output, long-issue
+pagination, and preservation of full-story links.
+
 ## Newsletter Email Export
 
 - Review the printable newsletter at `/newsletter/`.
