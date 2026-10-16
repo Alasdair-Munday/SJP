@@ -1713,22 +1713,17 @@
 .next-event h3 { font-size: clamp(1.5rem, 2.7vw, 2.3rem); line-height: 1.2; margin: .8rem 0 1.5rem; }
 .next-event__date { font-weight: 700; margin-bottom: .25rem; }
 .next-event__time { font-size: 1.2rem; margin-top: 0; }
-.next-event__location { color: #e0e9dc; }
 .next-event__link { display: flex; align-items: center; justify-content: space-between; gap: 1rem; color: inherit; border-top: 1px solid #779386; padding-top: 1.2rem; margin-top: 2rem; font-weight: 700; text-decoration: none; }
 .next-event__link:hover { text-decoration: underline; }
 .upcoming-agenda h3 { margin: 0; font-size: 1.25rem; }
 .upcoming-agenda__range { margin: .3rem 0 1rem; font-size: .9rem; }
 .upcoming-agenda ul { list-style: none; padding: 0; margin: 0; }
-.upcoming-agenda__event { display: grid; grid-template-columns: minmax(7.5rem, .65fr) minmax(0, 1.5fr); gap: 1rem; padding: .8rem 0; border-top: 1px solid currentColor; overflow-wrap: anywhere; }
-.upcoming-agenda__when span { display: block; font-size: .85rem; font-variant-numeric: tabular-nums; }
-.upcoming-agenda__when span:first-child { font-weight: 800; margin-bottom: .15rem; }
+.upcoming-agenda__event { display: flex; flex-wrap: wrap; align-items: baseline; gap: .15rem .65rem; padding: .18rem 0; line-height: 1.4; }
 .upcoming-agenda__event a { color: inherit; font-weight: 700; }
-.upcoming-agenda__location { display: block; font-size: .85rem; margin-top: .2rem; }
+.upcoming-agenda__time { font-size: .9rem; font-variant-numeric: tabular-nums; }
+.upcoming-agenda__repeat { font-size: .8rem; }
 @media (max-width: 720px) { .whats-on__layout { grid-template-columns: 1fr; gap: 1.5rem; } }
-@media (max-width: 400px) { .upcoming-agenda__event { grid-template-columns: 1fr; gap: .35rem; } }
-
-.upcoming-agenda__day + .upcoming-agenda__day { margin-top: 1.25rem; }
-.upcoming-agenda__day h4 { margin: 0; padding-bottom: .45rem; font-size: .95rem; font-weight: 800; }
-.upcoming-agenda__day .upcoming-agenda__event { grid-template-columns: minmax(7.5rem, .65fr) minmax(0, 1.5fr); }
-.upcoming-agenda__day .upcoming-agenda__when span { font-weight: 500; }
-@media (max-width: 400px) { .upcoming-agenda__day .upcoming-agenda__event { grid-template-columns: 1fr; } }
+.upcoming-agenda__day { border-top: 1px solid currentColor; padding-top: .55rem; }
+.upcoming-agenda__day + .upcoming-agenda__day { margin-top: .65rem; }
+.upcoming-agenda__days { margin-top: .65rem; }
+.upcoming-agenda__day h4 { margin: 0 0 .2rem; font-size: .95rem; font-weight: 800; }
