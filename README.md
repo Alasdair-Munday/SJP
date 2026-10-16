@@ -40,11 +40,14 @@ Open `/admin/` to edit content through Decap CMS. Publishing changes updates
   full story; the article page and email export include the full body. Use Display on Newsletter and Display Until to control inclusion;
   events use Event Date and the optional Event End Date.
 
-## Printable magazine PDF
+## Digital and printable newsletter PDFs
 
-Choose an issue date at `/newsletter/`, then use **Download PDF**. The server
-creates `/newsletter/pdf/?date=YYYY-MM-DD` using the website’s Karla and Dela
-Gothic One fonts, church logo and Eden artwork.
+Choose an issue date at `/newsletter/`, then use **Download digital PDF** or
+**Download print PDF**. Both embed Karla, Dela Gothic One, the church logo and
+Eden artwork. Digital uses the mockup’s cream background, green panels and white
+text. Print keeps white paper with small coloured accents. The endpoint accepts
+`/newsletter/pdf/?date=YYYY-MM-DD&edition=digital` or `edition=print`; omitting
+the edition keeps the printable default. Filenames include the edition.
 
 The default layout follows the newsletter mockup with a white-paper design for
 ordinary printers: a cover photograph and thought on the left, Sunday/weekday
@@ -62,8 +65,10 @@ The sample reflection used in the design review is not published.
 
 The timetable still comes from the public Calendar. Sunday and morning prayers
 appear once in their own sections; other events are grouped by occupied day.
-Long thoughts, busy schedules and articles continue onto numbered pages. A giving
-invitation appears where space permits, with a compact footer link otherwise.
+Long thoughts, busy schedules and articles continue onto numbered pages. Both
+editions include the complete giving invitation from the mockup, with a Dela
+Gothic One heading and QR/clickable link to the configured Parish Giving Scheme
+signup page. The invitation moves to a new page if necessary.
 Fonts are embedded; their licences are in `src/assets/pdf-fonts/LICENSE.txt`.
 No external PDF or QR service is required. Invalid issue dates return HTTP 400.
 

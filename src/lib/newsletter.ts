@@ -66,6 +66,11 @@ export async function getNewsletterData(targetDate: Date = new Date()): Promise<
   const issue = selectNewsletterIssue(issues, schedule.start, schedule.end);
   const home = pages.find((entry) => entry.id === "home");
   const hero = home?.data.sections.find((section) => section.type === "hero");
+  const givingPage = pages.find((entry) => entry.id === "get-involved");
+  const givingSection = givingPage?.data.sections.find((section) =>
+    section.type === "split" && section.ctas?.some((cta) => cta.href.includes('parishgiving.org.uk/')));
+  const givingSignup = givingSection?.type === "split"
+    ? givingSection.ctas?.find((cta) => cta.href.includes('parishgiving.org.uk/'))?.href : undefined;
   const coverUrl = new URL("/.netlify/images", site.siteUrl);
   coverUrl.search = new URLSearchParams({ url: issue?.data.image?.src ?? hero?.image?.src ?? "/images/line-drawing.png", w: "900", h: "550", fit: "cover", fm: "jpg", q: "80" }).toString();
 
@@ -73,7 +78,7 @@ export async function getNewsletterData(targetDate: Date = new Date()): Promise<
     coverImageSrc: coverUrl.toString(),
     introduction: hero?.body ?? site.metaDescription,
     contactEmail: site.contact.email,
-    givingUrl: absolutize("/get-involved#giving", site.siteUrl),
+    givingUrl: absolutize(givingSignup ?? "/get-involved#giving", site.siteUrl),
     thought: issue ? { title: issue.data.title, body: issue.data.body, author: issue.data.author } : undefined,
     date: targetDate,
     issueDate: dateKey(targetDate),

@@ -8,8 +8,11 @@ import { compactSchedule } from './calendar/compact.mjs';
 import { pdfTimetable, isMorningPrayer } from './calendar/pdf-timetable.mjs';
 import { timeLabel } from './calendar/dates.mjs';
 
-// A white-paper adaptation of the newsletter mockup: small accents, no solid panels.
-export async function renderNewsletterPdf(newsletter: NewsletterData): Promise<Uint8Array> {
+export type NewsletterPdfEdition = 'print' | 'digital';
+export const givingCopy = 'We have a vision to see Eden life spring up in our community through the love of Jesus.\n\nThis requires financial resources. Your regular gift will make a huge difference to us in seeing our kingdom dreams come to life. A regular gift through the Parish Giving Scheme is the best way to give.\n\nScan the QR code to sign up.';
+
+export async function renderNewsletterPdf(newsletter: NewsletterData, edition: NewsletterPdfEdition = 'print'): Promise<Uint8Array> {
+  const digital = edition === 'digital';
   const pdf = await PDFDocument.create();
   pdf.setTitle(`${newsletter.shortTitle} - ${newsletter.formattedDate}`);
   pdf.setAuthor(newsletter.shortTitle);
@@ -21,10 +24,13 @@ export async function renderNewsletterPdf(newsletter: NewsletterData): Promise<U
   const art = Object.fromEntries(await Promise.all(Object.entries(brand).map(async ([key, data]) => [key, await pdf.embedPng(Buffer.from(data, 'base64'))])));
   const hex = (value: string) => rgb(parseInt(value.slice(1, 3), 16) / 255, parseInt(value.slice(3, 5), 16) / 255, parseInt(value.slice(5, 7), 16) / 255);
   const green = hex('#1b8257'), ink = hex('#04321b'), muted = hex('#52665a'), lineColor = hex('#d9e4dd');
+  const paper = digital ? hex('#eae1cf') : rgb(1, 1, 1);
+  const panelText = digital ? rgb(1, 1, 1) : ink;
+  const panelHeading = digital ? rgb(1, 1, 1) : green;
   const width = 595.28, height = 841.89, margin = 30, gap = 24, bottom = 51;
   const fullWidth = width - margin * 2, columnWidth = (fullWidth - gap) / 2;
   const leadWidth = fullWidth * .56, sideX = margin + leadWidth + 18, sideWidth = fullWidth - leadWidth - 18;
-  let page!: PDFPage, column = 0, y = 0, top = 0;
+  let page!: PDFPage, column = 0, y = 0, top = 0, activeCard = false;
   const pageBottoms = new Map<PDFPage, number>();
   const px = () => margin + column * (columnWidth + gap);
   const sets = new Map([body, bold, headline].map((font) => [font, new Set(font.getCharacterSet())]));
@@ -95,10 +101,11 @@ export async function renderNewsletterPdf(newsletter: NewsletterData): Promise<U
   const photos = await Promise.all([photo(newsletter.coverImageSrc), ...newsletter.posts.map((post) => photo(post.imageSrc))]);
   function newPage() {
     page = pdf.addPage([width, height]); column = 0;
+    page.drawRectangle({ x: 0, y: 0, width, height, color: paper });
     const first = pdf.getPageCount() === 1;
-    page.drawLine({ start: { x: margin, y: height - 11 }, end: { x: width - margin, y: height - 11 }, thickness: 2, color: green });
+    page.drawLine({ start: { x: margin, y: height - 11 }, end: { x: width - margin, y: height - 11 }, thickness: digital ? 9 : 2, color: green });
     picture(art.logo, margin, height - 63, 128, 38);
-    const title = 'Weekly News', titleSize = 21;
+    const title = 'Weekly News', titleSize = 23;
     const titleX = (width - headline.widthOfTextAtSize(title, titleSize)) / 2 + 14;
     page.drawText(title, { x: titleX, y: height - 43, font: headline, size: titleSize, color: green });
     const date = clean(newsletter.formattedDate);
@@ -106,10 +113,14 @@ export async function renderNewsletterPdf(newsletter: NewsletterData): Promise<U
     picture(art.eden, width - margin - 62, height - 78, 62, 61);
     top = height - (first ? 98 : 96); y = top;
   }
+  function cardPanel(cardHeight: number) {
+    if (digital) page.drawRectangle({ x: px(), y: Math.max(bottom, y - cardHeight), width: columnWidth, height: Math.min(cardHeight, y - bottom), color: green });
+  }
   function ensure(space: number) {
     const required = Math.min(space, height - 96 - bottom);
     while (y - required < bottom) {
       if (column === 0) { column = 1; y = top; } else newPage();
+      if (activeCard) cardPanel(y - bottom);
     }
   }
   function text(value: string, font = body, size = 10, color = ink, leading = size * 1.35) {
@@ -130,8 +141,8 @@ export async function renderNewsletterPdf(newsletter: NewsletterData): Promise<U
   const leadResult = drawRows(leadItems, margin, leadY, frontFloor);
 
   const sidebar: Row[] = [];
-  const section = (title: string) => { if (sidebar.length) sidebar.push({ value: '', font: body, size: 9, leading: 12, color: ink }); sidebar.push(...rows(title, sideWidth - 22, headline, 12, 18, green)); };
-  const small = (value: string, strong = false) => sidebar.push(...rows(value, sideWidth - 22, strong ? bold : body, 9, 12));
+  const section = (title: string) => { if (sidebar.length) sidebar.push({ value: '', font: body, size: 9, leading: 12, color: ink }); sidebar.push(...rows(title, sideWidth - 22, headline, 12, 18, panelHeading)); };
+  const small = (value: string, strong = false) => sidebar.push(...rows(value, sideWidth - 22, strong ? bold : body, 9, 12, panelText));
   if (newsletter.schedule.message) small(newsletter.schedule.message);
   if (newsletter.schedule.status !== 'unavailable') {
     const timetable = pdfTimetable(newsletter.schedule);
@@ -153,6 +164,8 @@ export async function renderNewsletterPdf(newsletter: NewsletterData): Promise<U
     }
     if (!timetable.prayers.length && !timetable.days.length) small('No weekday events listed.');
   }
+  const sidebarFloor = Math.max(frontFloor + 12, frontTop - 12 - sidebar.reduce((sum, row) => sum + row.leading, 0)) - 12;
+  if (digital) page.drawRectangle({ x: sideX, y: Math.min(leadResult.position, sidebarFloor), width: sideWidth, height: frontTop - Math.min(leadResult.position, sidebarFloor), color: green });
   const sideResult = drawRows(sidebar, sideX + 11, frontTop - 12, frontFloor + 12);
   const frontEnd = Math.min(leadResult.position, sideResult.position - 12);
   page.drawRectangle({ x: sideX, y: frontEnd, width: sideWidth, height: frontTop - frontEnd, borderColor: green, borderWidth: .7 });
@@ -168,7 +181,7 @@ export async function renderNewsletterPdf(newsletter: NewsletterData): Promise<U
     }
     if (sideResult.remaining.length) {
       text('THIS WEEK (CONTINUED)', headline, 12, green, 18);
-      for (const item of sideResult.remaining) text(item.value || ' ', item.font, item.size, item.color, item.leading);
+      for (const item of sideResult.remaining) text(item.value || ' ', item.font, item.size, item.font === headline ? green : ink, item.leading);
       y -= 14;
     }
   }
@@ -177,46 +190,49 @@ export async function renderNewsletterPdf(newsletter: NewsletterData): Promise<U
     const titleHeight = lines(post.title.toUpperCase(), headline, 12, columnWidth - 16).length * 16;
     const summaryHeight = rows(post.summary, columnWidth - 16, body, 10, 13.5).reduce((sum, row) => sum + row.leading, 0);
     const detailsHeight = post.eventDetails ? lines(post.eventDetails, bold, 9, columnWidth - 16).length * 12 + 6 : 0;
-    ensure(photoHeight + titleHeight + summaryHeight + detailsHeight + 127);
+    activeCard = false;
+    const cardHeight = photoHeight + titleHeight + summaryHeight + detailsHeight + 127;
+    ensure(cardHeight);
+    activeCard = true;
+    cardPanel(cardHeight);
     page.drawLine({ start: { x: px(), y }, end: { x: px() + columnWidth, y }, thickness: 1.5, color: green }); y -= 10;
     if (photos[index + 1]) { cropped(photos[index + 1]!, px() + 8, y - photoHeight, columnWidth - 16, photoHeight); y -= photoHeight + 9; }
-    text(post.title.toUpperCase(), headline, 12, green, 16); y -= 7;
-    if (post.eventDetails) { text(post.eventDetails, bold, 9, ink, 12); y -= 6; }
-    text(post.summary, body, 10, ink, 13.5); y -= 9;
+    text(post.title.toUpperCase(), headline, 12, panelHeading, 16); y -= 7;
+    if (post.eventDetails) { text(post.eventDetails, bold, 9, panelText, 12); y -= 6; }
+    text(post.summary, body, 10, panelText, 13.5); y -= 9;
     ensure(75);
-    const qr = await pdf.embedPng(await QRCode.toDataURL(post.url, { errorCorrectionLevel: 'M', margin: 4, width: 384 }));
+    const qr = await pdf.embedPng(await QRCode.toDataURL(post.url, { errorCorrectionLevel: 'M', margin: 4, width: 384, color: { dark: digital ? '#1b8257' : '#000000', light: '#ffffff' } }));
     page.drawImage(qr, { x: px() + columnWidth - 80, y: y - 64, width: 64, height: 64 });
-    page.drawText('Scan for the full story', { x: px() + 8, y: y - 35, font: body, size: 9, color: muted });
+    page.drawText(digital ? 'Tap or scan for the full story' : 'Scan for the full story', { x: px() + 8, y: y - 35, font: body, size: 9, color: digital ? panelText : muted });
     const link = pdf.context.obj({ Type: 'Annot', Subtype: 'Link', Rect: [px(), y - 64, px() + columnWidth, y], Border: [0, 0, 0], A: { Type: 'Action', S: 'URI', URI: PDFString.of(post.url) } });
     page.node.addAnnot(pdf.context.register(link)); y -= 76;
     page.drawLine({ start: { x: px(), y }, end: { x: px() + columnWidth, y }, thickness: .5, color: lineColor }); y -= 16;
-    // Deliberately white cards: the photo and small rules carry the colour.
+    activeCard = false;
     pageBottoms.set(page, Math.min(pageBottoms.get(page) ?? height, y));
   }
   if (!newsletter.posts.length) text('No news for this week.', body, 10, muted);
-  let fullGivingPanel = false;
-  if (newsletter.givingUrl && Math.min(y, pageBottoms.get(page) ?? y) - 8 - 108 >= bottom) {
-    fullGivingPanel = true;
-    // A full-width final invitation matches the mockup without a solid colour fill.
-    // Use a compact footer link if a larger invitation would require an extra page.
-    y = Math.min(y, pageBottoms.get(page) ?? y) - 8; column = 0;
+  activeCard = false;
+  if (newsletter.givingUrl) {
+    const heading = 'Will You Partner With Us?';
+    const givingRows = rows(givingCopy, fullWidth - 95, body, 10, 13);
+    const panelHeight = 48 + Math.max(64, givingRows.reduce((sum, row) => sum + row.leading, 0));
+    y = Math.min(y, pageBottoms.get(page) ?? y) - 8;
+    if (y - panelHeight < bottom) newPage();
+    column = 0;
+    page.drawRectangle({ x: margin - 2, y: y - panelHeight, width: fullWidth + 4, height: panelHeight + 4, color: paper });
     page.drawLine({ start: { x: margin, y }, end: { x: width - margin, y }, thickness: 1, color: green }); y -= 12;
-    const heading = 'Will you partner with us?';
-    page.drawText(heading, { x: margin, y: y - 13, font: headline, size: 13, color: green }); y -= 27;
-    drawRows(rows('Help Eden life grow in our community. Your regular giving supports the life and mission of St John’s Park. Scan to explore ways to give.', fullWidth - 95, body, 10, 13), margin, y, bottom);
-    const qr = await pdf.embedPng(await QRCode.toDataURL(newsletter.givingUrl, { margin: 4, width: 320 }));
-    page.drawImage(qr, { x: width - margin - 70, y: y - 55, width: 64, height: 64 });
+    page.drawText(heading, { x: margin, y: y - 17, font: headline, size: 17, color: green }); y -= 31;
+    drawRows(givingRows, margin, y, bottom);
+    const qr = await pdf.embedPng(await QRCode.toDataURL(newsletter.givingUrl, { margin: 4, width: 320, color: { dark: digital ? '#1b8257' : '#000000', light: '#ffffff' } }));
+    page.drawImage(qr, { x: width - margin - 70, y: y - 64, width: 64, height: 64 });
+    const action = pdf.context.obj({ Type: 'Annot', Subtype: 'Link', Rect: [margin, y - panelHeight + 43, width - margin, y + 31], Border: [0, 0, 0], A: { Type: 'Action', S: 'URI', URI: PDFString.of(newsletter.givingUrl) } });
+    page.node.addAnnot(pdf.context.register(action));
   }
   const pages = pdf.getPages();
   pages.forEach((footer, index) => {
     footer.drawLine({ start: { x: margin, y: 36 }, end: { x: width - margin, y: 36 }, thickness: .6, color: green });
     const contact = [newsletter.contactEmail, new URL(newsletter.onlineUrl).hostname].filter(Boolean).join('   ·   ');
     footer.drawText(clean(contact), { x: margin, y: 22, size: 8, font: body, color: muted });
-    if (index === pages.length - 1 && newsletter.givingUrl && !fullGivingPanel) {
-      footer.drawText('Partner with us: stjohnspark.org/get-involved#giving', { x: margin, y: 42, size: 7, font: body, color: muted });
-      const action = pdf.context.obj({ Type: 'Annot', Subtype: 'Link', Rect: [margin, 40, width - margin, 51], Border: [0, 0, 0], A: { Type: 'Action', S: 'URI', URI: PDFString.of(newsletter.givingUrl) } });
-      footer.node.addAnnot(pdf.context.register(action));
-    }
     footer.drawText(`${index + 1} / ${pages.length}`, { x: width - margin - 28, y: 22, size: 8, font: body, color: muted });
   });
   return pdf.save();

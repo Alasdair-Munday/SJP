@@ -55,10 +55,16 @@ try {
       assert.ok(images.keys().length >= 4, 'Logo, Eden art, article photograph and QR must be embedded');
     } finally { globalThis.fetch = originalFetch; }
   });
-  await test('giving invitation does not create an extra mostly-empty page', async () => {
+  await test('both editions preserve the full giving invitation and clickable giving link', async () => {
     const populated = { ...issue, posts: Array.from({ length: 3 }, (_, i) => ({ title: `Church news ${i}`, summary: 'A community story and invitation. '.repeat(20), eventDetails: '', url: `https://stjohnspark.org/news/${i}/` })) };
     const ordinary = await PDFDocument.load(await renderNewsletterPdf(populated));
     const withGiving = await PDFDocument.load(await renderNewsletterPdf({ ...populated, givingUrl: 'https://stjohnspark.org/get-involved#giving' }));
-    assert.equal(withGiving.getPageCount(), ordinary.getPageCount());
+    assert.ok(withGiving.getPageCount() <= ordinary.getPageCount() + 1);
+    for (const edition of ['print', 'digital']) {
+      const bytes = await renderNewsletterPdf({ ...populated, givingUrl: 'https://stjohnspark.org/get-involved#giving' }, edition);
+      const doc = await PDFDocument.load(bytes);
+      const annotations = doc.getPages().at(-1).node.lookup(PDFName.of('Annots'), PDFArray);
+      assert.ok(annotations.asArray().some((ref) => doc.context.lookup(ref, PDFDict).lookup(PDFName.of('A'), PDFDict).lookup(PDFName.of('URI'), PDFString).decodeText().endsWith('#giving')));
+    }
   });
 } finally { await server.close(); }
