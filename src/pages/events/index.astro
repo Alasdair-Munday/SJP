@@ -1,13 +1,22 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getAllEvents, getPageContent } from "../../lib/content";
-import { getTargetSchedule, formatDay, timeLabel } from "../../lib/events";
+import { getSchedule, formatDay, timeLabel } from "../../lib/events";
 
 export const prerender = false;
 Astro.response.headers.set("Cache-Control", "no-store");
 const events = await getAllEvents();
 const page = await getPageContent("events");
-const entries = await Promise.all(events.map(async (eventPage) => ({ eventPage, schedule: await getTargetSchedule(`/events/${eventPage.slug}`, new Date(), 1) })));
+const now = new Date();
+const until = new Date(now);
+until.setMonth(until.getMonth() + 6);
+const schedule = await getSchedule(now, until);
+const entries = events.map((eventPage) => ({
+  eventPage,
+  schedule: { ...schedule, events: schedule.events.filter((event) => event.href === `/events/${eventPage.slug}`).slice(0, 1) },
+}));
+const eventPageRoutes = new Set(events.map((eventPage) => `/events/${eventPage.slug}`));
+const upcomingEvents = schedule.events.filter((event) => !eventPageRoutes.has(event.href ?? ""));
 const bySlug = new Map(entries.map((entry) => [entry.eventPage.slug, entry]));
 const featuredEntries = page.featuredEvents.flatMap(({ event }) => {
   const entry = bySlug.get(event);
@@ -29,7 +38,17 @@ const orderedEntries = [...featuredEntries, ...remainingEntries];
   <div class="utility-shell page-stack"><section class="content-band" data-tone="stone">
     {page.eyebrow && <p class="eyebrow">{page.eyebrow}</p>}<h1 class="display-title">{page.title}</h1>
     {page.intro && <p class="lede">{page.intro}</p>}
-    {entries[0]?.schedule.message && <p class="calendar-status" role="status">{entries[0].schedule.message}</p>}
+    {schedule.message && <p class="calendar-status" role="status">{schedule.message}</p>}
+    {upcomingEvents.length > 0 && <section aria-labelledby="upcoming-events-title">
+      <h2 id="upcoming-events-title">Upcoming events</h2>
+      <div class="events-index">{upcomingEvents.map((event) => <article class="events-index__card">
+        <p class="eyebrow">{formatDay(event.start)} · {timeLabel(event)}</p>
+        <h3>{event.title}</h3>
+        {event.location && <p>{event.location}</p>}
+        {event.href && <a class="inline-link" href={event.href}>Find out more</a>}
+      </article>)}</div>
+    </section>}
+    <h2>Regular activities</h2>
     <div class="events-index">{orderedEntries.map(({ eventPage, schedule }) => <article class="events-index__card">
       <p class="eyebrow">{schedule.events[0] ? `${formatDay(schedule.events[0].start)} · ${timeLabel(schedule.events[0])}` : "Dates to follow"}</p>
       <h2>{eventPage.data.title}</h2><p>{eventPage.data.summary}</p><a class="inline-link" href={`/events/${eventPage.slug}`}>Find out more</a>
