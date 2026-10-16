@@ -1,0 +1,49 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import MaskedImage from "../../components/sections/MaskedImage.astro";
+import { getTargetSchedule, formatDay, timeLabel } from "../../lib/events";
+import { withoutImageMask } from "../../lib/content";
+
+export const prerender = false;
+Astro.response.headers.set("Cache-Control", "no-store");
+
+const eventPage = (await getCollection("events")).find((item) => item.slug === Astro.params.slug);
+if (!eventPage) return new Response("Not found", { status: 404 });
+const sessions = await getTargetSchedule(`/events/${eventPage.slug}`);
+const { Content } = await eventPage.render();
+const next = sessions.events[0];
+const later = sessions.events.slice(1);
+const serviceType = (title?: string) => title?.startsWith("10:45 Service · ") ? title.replace("10:45 Service · ", "") : undefined;
+---
+
+<BaseLayout title={eventPage.data.title} description={eventPage.data.summary}>
+  <div class="utility-shell page-stack post-detail-shell">
+    <article class="content-band post-detail-article event-detail" data-tone="stone">
+      <div class="post-detail__header">
+        <div class="post-detail__intro">
+          <a class="inline-link post-detail__back" href="/events">What’s on</a>
+          <p class="eyebrow">Regular event</p>
+          <h1 class="display-title post-detail__title">{eventPage.data.title}</h1>
+          <p class="lede post-detail__lede">{eventPage.data.summary}</p>
+        </div>
+        {eventPage.data.image && <MaskedImage image={withoutImageMask(eventPage.data.image)} class="post-detail__media" priority />}
+      </div>
+      <div class="post-detail__body-grid">
+        <div class="post-detail__content"><Content /></div>
+        <aside class="post-detail__aside" aria-label="Event details">
+          <h2 class="post-detail__aside-title">Next time</h2>
+          {next && sessions.message && <p class="calendar-status" role="status">{sessions.message}</p>}
+          {next ? <dl class="post-detail__details-list">
+            <dt>Date</dt><dd>{formatDay(next.start)}</dd>
+            <dt>Time</dt><dd>{timeLabel(next)}</dd>
+            {serviceType(next.title) && <><dt>Service</dt><dd>{serviceType(next.title)}</dd></>}
+            {next.location && <><dt>Location</dt><dd>{next.location}</dd></>}
+          </dl> : <p>{sessions.message || "The next date will be added soon."}</p>}
+          {later.length > 0 && <div class="upcoming-dates"><h3>Also coming up</h3><ul>{later.map((event) => <li>{formatDay(event.start)} · {timeLabel(event)}{serviceType(event.title) && ` · ${serviceType(event.title)}`}</li>)}</ul></div>}
+          <div class="button-row post-detail__actions"><a class="button-link--secondary" href="/events">All events</a></div>
+        </aside>
+      </div>
+    </article>
+  </div>
+</BaseLayout>

@@ -31,6 +31,14 @@ const site = await getSiteConfig();
           </p>
           <h3 class="card-title">Email</h3>
           <p><a href={`mailto:${site.contact.email}`}>{site.contact.email}</a></p>
+          {(site.social.facebookUrl || site.social.instagramUrl) && <>
+            <h3 class="card-title">Follow us</h3>
+            <p>
+              {site.social.facebookUrl && <a class="inline-link" href={site.social.facebookUrl} target="_blank" rel="noreferrer">Facebook</a>}
+              {site.social.facebookUrl && site.social.instagramUrl && " · "}
+              {site.social.instagramUrl && <a class="inline-link" href={site.social.instagramUrl} target="_blank" rel="noreferrer">Instagram</a>}
+            </p>
+          </>}
         </div>
         <div class="map-frame">
           <iframe

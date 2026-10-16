@@ -1,0 +1,62 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { getThisWeek, groupSchedule, formatDay, compactSchedule } from '../../lib/events';
+import { dateKey } from '../../lib/calendar/dates.mjs';
+import { groupHomeRecurrences } from '../../lib/calendar/home-groups.mjs';
+interface Props { section: Extract<CollectionEntry<'pages'>['data']['sections'][number], { type: 'whatsOn' }>; }
+const { section } = Astro.props;
+const now = new Date();
+const schedule = await getThisWeek(now);
+const upcoming = schedule.events.filter((event) => new Date(event.end) > now || new Date(event.start) >= now);
+const next = upcoming[0];
+const recurringGroups = groupHomeRecurrences(upcoming);
+const groupedIds = new Set(recurringGroups.flatMap((group) => group.events.map((event) => event.id)));
+const days = groupSchedule(upcoming.slice(1).filter((event) => !groupedIds.has(event.id)), now, schedule.end);
+const weekday = new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/London', weekday: 'long' });
+const clock = new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/London', hour: '2-digit', minute: '2-digit', hourCycle: 'h23' });
+const compactTime = (event: { start: string; end: string; allDay: boolean }) => {
+  if (event.allDay) return 'All day';
+  const start = clock.format(new Date(event.start));
+  if (event.start === event.end) return start;
+  const end = clock.format(new Date(event.end));
+  return dateKey(new Date(event.start)) === dateKey(new Date(event.end))
+    ? `${start}–${end}` : `${start}–${weekday.format(new Date(event.end))} ${end}`;
+};
+const happeningNow = next && new Date(next.start) <= now && new Date(next.end) > now;
+---
+<section id={section.id} class="content-band whats-on" data-tone={section.backgroundTone}>
+  <div class="whats-on__header">
+    <div><p class="eyebrow">Come and join us</p><h2 class="section-title">{section.title}</h2></div>
+    <a class="inline-link" href="/events/">Explore our regular events →</a>
+  </div>
+  {schedule.message && <p class="calendar-status" role="status">{schedule.message}</p>}
+  {next ? <div class="whats-on__layout">
+    <article class="next-event">
+      <i class="calendar-occurrence-id" aria-hidden="true" data-calendar-id={next.id}></i>
+      <p class="eyebrow">{happeningNow ? 'Happening now' : 'Next up'}</p>
+      <h3>{next.title}</h3>
+      <p class="next-event__date"><time datetime={next.start}>{formatDay(next.start)}</time></p>
+      <p class="next-event__time">{compactTime(next)}</p>
+      {next.href && <a class="next-event__link" href={next.href}>Find out more <span aria-hidden="true">→</span></a>}
+    </article>
+    <div class="upcoming-agenda">
+      <h3>Coming up</h3><p class="upcoming-agenda__range">{schedule.label}</p>
+      {recurringGroups.length > 0 && <section class="upcoming-agenda__day" aria-label="Regular this week">
+        <h4>Regular this week</h4>
+        <ul>{recurringGroups.map((group) => <li class="upcoming-agenda__event">
+          <span class="upcoming-agenda__name">{group.first.href ? <a href={group.first.href}>{group.first.title}</a> : <strong>{group.first.title}</strong>}</span>
+          <span class="upcoming-agenda__time">{compactTime(group.first)} <span class="upcoming-agenda__repeat">· {compactSchedule(group.events).map((run) => run.dayLabel).join(', ')}</span></span>
+          {group.events.map((event) => <i class="calendar-occurrence-id" aria-hidden="true" data-calendar-id={event.id}></i>)}
+        </li>)}</ul>
+      </section>}
+      {days.length ? <div class="upcoming-agenda__days">{days.map((day) => <section class="upcoming-agenda__day" aria-label={day.label}>
+        <h4><time datetime={day.day}>{weekday.format(new Date(`${day.day}T12:00:00Z`))}</time></h4>
+        <ul>{day.events.map((event) => <li class="upcoming-agenda__event">
+          <i class="calendar-occurrence-id" aria-hidden="true" data-calendar-id={event.id}></i>
+          <span class="upcoming-agenda__name">{event.href ? <a href={event.href}>{event.title}</a> : <strong>{event.title}</strong>}</span>
+          <time class="upcoming-agenda__time" datetime={event.start}>{compactTime(event)}</time>
+        </li>)}</ul>
+      </section>)}</div> : !recurringGroups.length && <p>That’s the last event listed for the next seven days.</p>}
+    </div>
+  </div> : schedule.status !== 'unavailable' && <p>No upcoming events are listed for the next seven days.</p>}
+</section>

@@ -21,6 +21,7 @@ const categoryLabels = {
   event: "Events",
   update: "Updates",
   blog: "Blog",
+  thought: "Thought for the week",
 };
 ---
 
@@ -48,6 +49,7 @@ const categoryLabels = {
                 <div class="latest-news-card__content">
                   <div class="news-card__meta">
                     <span class="meta-chip">{categoryLabels[post.data.category]}</span>
+                    {post.data.author && <span>By {post.data.author}</span>}
                     <span>{post.data.category === "event" && post.data.eventDate ? formatDate(post.data.eventDate) : formatShortDate(post.data.publishDate)}</span>
                   </div>
                   <h3 class="post-title">
@@ -101,7 +103,9 @@ const categoryLabels = {
             </div>
             <h3 class="post-title">{talk.title}</h3>
             <p class="talk-card__summary">{talk.description}</p>
-            {talk.audioUrl && (
+            {talk.embedUrl ? (
+                <iframe src={talk.embedUrl} title={`Listen to ${talk.title}`} width="100%" height="180" loading="lazy" style="border: 0; border-radius: 12px;" allow="autoplay" />
+              ) : talk.audioUrl && (
               <div class="talk-player-wrapper">
                 <audio controls src={talk.audioUrl} class="talk-player"></audio>
               </div>

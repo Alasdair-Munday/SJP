@@ -1,3 +1,6 @@
+import { getCollection } from "astro:content";
+import { selectNewsletterIssue } from "./calendar/newsletter-issue.mjs";
+import { getNewsletterWeek, groupSchedule, dateKey, timeLabel } from "./events";
 import type { PostEntry } from "./content";
 import { getNewsletterPostsForWeek, getSiteConfig } from "./content";
 import { formatDate } from "./format";
@@ -18,7 +21,14 @@ type NewsletterPost = {
 };
 
 export type NewsletterData = {
+  coverImageSrc?: string;
+  introduction?: string;
+  contactEmail?: string;
+  givingUrl?: string;
+  thought?: { title: string; body: string; author?: string };
   date: Date;
+  issueDate: string;
+  schedule: Awaited<ReturnType<typeof getNewsletterWeek>>;
   formattedDate: string;
   logoAlt: string;
   logoSrc: string;
@@ -26,6 +36,8 @@ export type NewsletterData = {
   posts: NewsletterPost[];
   shortTitle: string;
   sundaySummary: string;
+  facebookUrl?: string;
+  instagramUrl?: string;
 };
 
 const absolutize = (href: string, baseUrl: string) => new URL(href, baseUrl).toString();
@@ -43,17 +55,38 @@ const buildEventDetails = (post: PostEntry) => {
 };
 
 export async function getNewsletterData(targetDate: Date = new Date()): Promise<NewsletterData> {
-  const [posts, site] = await Promise.all([
+  const [posts, site, schedule, issues, pages] = await Promise.all([
     getNewsletterPostsForWeek(targetDate),
     getSiteConfig(),
+    getNewsletterWeek(targetDate),
+    getCollection("newsletterIssues"),
+    getCollection("pages"),
   ]);
 
+  const issue = selectNewsletterIssue(issues, schedule.start, schedule.end);
+  const home = pages.find((entry) => entry.id === "home");
+  const hero = home?.data.sections.find((section) => section.type === "hero");
+  const givingPage = pages.find((entry) => entry.id === "get-involved");
+  const givingSection = givingPage?.data.sections.find((section) =>
+    section.type === "split" && section.ctas?.some((cta) => cta.href.includes('parishgiving.org.uk/')));
+  const givingSignup = givingSection?.type === "split"
+    ? givingSection.ctas?.find((cta) => cta.href.includes('parishgiving.org.uk/'))?.href : undefined;
+  const coverUrl = new URL("/.netlify/images", site.siteUrl);
+  coverUrl.search = new URLSearchParams({ url: issue?.data.image?.src ?? hero?.image?.src ?? "/images/line-drawing.png", w: "900", h: "550", fit: "cover", fm: "jpg", q: "80" }).toString();
+
   return {
+    coverImageSrc: coverUrl.toString(),
+    introduction: hero?.body ?? site.metaDescription,
+    contactEmail: site.contact.email,
+    givingUrl: absolutize(givingSignup ?? "/get-involved#giving", site.siteUrl),
+    thought: issue ? { title: issue.data.title, body: issue.data.body, author: issue.data.author } : undefined,
     date: targetDate,
+    issueDate: dateKey(targetDate),
+    schedule,
     formattedDate: formatDate(targetDate),
     logoAlt: site.brand.lockupAlt,
     logoSrc: absolutize(site.brand.lockupSrc, site.siteUrl),
-    onlineUrl: absolutize("/newsletter/", site.siteUrl),
+    onlineUrl: absolutize(`/newsletter/?date=${dateKey(targetDate)}`, site.siteUrl),
     posts: posts.map((post) => {
       const postUrl = absolutize(`/news/${post.slug}/`, site.siteUrl);
       const renderedBody = post.rendered?.html ?? "";
@@ -87,6 +120,8 @@ export async function getNewsletterData(targetDate: Date = new Date()): Promise<
     }),
     shortTitle: site.shortTitle,
     sundaySummary: site.sundaySummary,
+    facebookUrl: site.social.facebookUrl,
+    instagramUrl: site.social.instagramUrl,
   };
 }
 
@@ -128,6 +163,20 @@ const renderPost = (post: NewsletterPost) => `
                   </td>
                 </tr>`;
 
+export function renderScheduleEmail(newsletter: NewsletterData) {
+  const entries = groupSchedule(newsletter.schedule.events, newsletter.schedule.start, newsletter.schedule.end).flatMap((day) => day.events.map((event, index) => ({ first: event, events: [event], dayLabel: index === 0 ? day.label : "", timeLabel: timeLabel(event) })));
+  const rows = entries.map((entry) => {
+    const title = entry.first.href ? `<a style="color:#226442;" href="${escapeHtml(absolutize(entry.first.href, newsletter.onlineUrl))}">${escapeHtml(entry.first.title)}</a>` : escapeHtml(entry.first.title);
+    const ids = entry.events.map((event) => `<span data-calendar-id="${escapeHtml(event.id)}" style="display:none"></span>`).join('');
+    return `<tr><td style="padding:7px 12px 7px 0;vertical-align:top;width:140px;font-weight:bold;">${escapeHtml(entry.dayLabel)}<br /><span style="font-weight:normal">${escapeHtml(entry.timeLabel)}</span></td><td style="padding:7px 0;vertical-align:top;">${ids}<strong>${title}</strong>${entry.first.location ? `<br />${escapeHtml(entry.first.location)}` : ''}</td></tr>`;
+  }).join('');
+  return `<tr><td style="padding:0 0 28px;font-family:Arial,sans-serif;color:#222f2a;">
+    <h2 style="font-size:24px;margin:0 0 8px;">This week</h2><p style="margin:0 0 12px;">${escapeHtml(newsletter.schedule.label)}</p>
+    ${newsletter.schedule.message ? `<p>${escapeHtml(newsletter.schedule.message)}</p>` : ''}
+    ${rows ? `<table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;font-size:15px;line-height:22px;">${rows}</table>` : newsletter.schedule.status !== 'unavailable' ? '<p>No events are listed for these seven days.</p>' : ''}
+  </td></tr>`;
+}
+
 export async function renderNewsletterEmailHtml(targetDate: Date = new Date()) {
   const newsletter = await getNewsletterData(targetDate);
   const preheader =
@@ -167,6 +216,7 @@ export async function renderNewsletterEmailHtml(targetDate: Date = new Date()) {
             <tr>
               <td style="padding: 28px;">
                 <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="border-collapse: collapse;">
+${renderScheduleEmail(newsletter)}
 ${postsHtml}
                 </table>
               </td>
@@ -174,6 +224,7 @@ ${postsHtml}
             <tr>
               <td bgcolor="#fffaf0" align="center" style="padding: 22px 28px; border-top: 1px solid #d9e4dd;">
                 <p style="margin: 0 0 10px 0; color: #5f6f68; font-family: Arial, sans-serif; font-size: 14px; line-height: 22px;">${escapeHtml(newsletter.shortTitle)} &#183; ${escapeHtml(newsletter.sundaySummary)}</p>
+                ${(newsletter.facebookUrl || newsletter.instagramUrl) ? `<p style="margin:0 0 10px;color:#5f6f68;font-family:Arial,sans-serif;font-size:14px;line-height:22px;">${newsletter.facebookUrl ? `<a href="${escapeHtml(newsletter.facebookUrl)}" style="color:#47a174;font-weight:700;">Facebook</a>` : ''}${newsletter.facebookUrl && newsletter.instagramUrl ? ' &#183; ' : ''}${newsletter.instagramUrl ? `<a href="${escapeHtml(newsletter.instagramUrl)}" style="color:#47a174;font-weight:700;">Instagram</a>` : ''}</p>` : ''}
                 <p style="margin: 0; color: #5f6f68; font-family: Arial, sans-serif; font-size: 14px; line-height: 22px;"><a href="${escapeHtml(newsletter.onlineUrl)}" style="color: #47a174; font-weight: 700; text-decoration: underline;">View this newsletter online</a></p>
               </td>
             </tr>

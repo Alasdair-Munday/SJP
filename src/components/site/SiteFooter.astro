@@ -21,6 +21,12 @@ const { site } = Astro.props;
           <p class="site-footer__meta">
             <a href={`mailto:${site.contact.email}`}>{site.footer.contactLabel}</a>
           </p>
+          {(site.social.facebookUrl || site.social.instagramUrl) && (
+            <ul class="site-footer__list site-footer__social" aria-label="Social media">
+              {site.social.facebookUrl && <li><a href={site.social.facebookUrl} target="_blank" rel="noreferrer">Facebook</a></li>}
+              {site.social.instagramUrl && <li><a href={site.social.instagramUrl} target="_blank" rel="noreferrer">Instagram</a></li>}
+            </ul>
+          )}
         </section>
 
         <section>

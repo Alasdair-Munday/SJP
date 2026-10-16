@@ -5,7 +5,7 @@ import UtilityPageTemplate from "../components/templates/UtilityPageTemplate.ast
 import { getMappedPageRoute, mappedPageRoutes, type PageTemplateKey } from "../lib/pageRoutes";
 
 export function getStaticPaths() {
-  return mappedPageRoutes.map((route) => ({
+  return mappedPageRoutes.filter((route) => !["visit", "community", "park-youth"].includes(route.slug)).map((route) => ({
     params: { slug: route.slug },
   }));
 }
