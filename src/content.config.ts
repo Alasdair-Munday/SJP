@@ -118,7 +118,7 @@ const optionalUrlSchema = z.preprocess((value) => {
 }, z.string().url().optional());
 
 const postCategorySchema = z
-  .enum(["event", "update", "blog", "news", "story"])
+  .enum(["event", "update", "blog", "thought", "news", "story"])
   .default("update")
   .transform((category) => {
     if (category === "news") return "update";
@@ -330,6 +330,7 @@ const posts = defineCollection({
     summary: z.string(),
     publishDate: z.coerce.date(),
     category: postCategorySchema,
+    author: z.string().optional(),
     featuredImage: postFeaturedImageSchema.default(defaultPostFeaturedImage),
     featuredShape: z.string().optional(),
     eventDate: optionalDateSchema,

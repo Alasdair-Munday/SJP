@@ -16,6 +16,7 @@ const categoryLabels = {
   event: "Event",
   update: "Update",
   blog: "Blog",
+  thought: "Thought for the week",
 };
 const nextSession = sessions.events[0];
 const eventDateText = nextSession ? formatDay(nextSession.start) : post.data.eventDate ? formatDate(post.data.eventDate) : undefined;
@@ -43,6 +44,7 @@ const detailItems = [
           <a class="inline-link post-detail__back" href="/news">News</a>
           <p class="eyebrow">{categoryLabels[post.data.category]}</p>
           <h1 class="display-title post-detail__title">{post.data.title}</h1>
+          {post.data.author && <p class="post-detail__author">By {post.data.author}</p>}
           <p class="lede post-detail__lede">{post.data.summary}</p>
         </div>
 

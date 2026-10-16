@@ -95,10 +95,11 @@ collections:
     fields:
       - {label: "Title", name: "title", widget: "string", hint: "The main headline for the post or event."}
       - {label: "Summary", name: "summary", widget: "text", hint: "A short sentence describing the post."}
-      - {label: "Category", name: "category", widget: "select", options: ["event", "update", "blog"], default: "update", required: false, hint: "Tag to organize the post."}
+      - {label: "Category", name: "category", widget: "select", options: [{label: "Event", value: "event"}, {label: "Update", value: "update"}, {label: "Blog", value: "blog"}, {label: "Thought for the week", value: "thought"}], default: "update", required: false, hint: "Tag to organize the post."}
+      - {label: "Author", name: "author", widget: "string", required: false, hint: "Optional byline, especially for Thought for the week posts."}
       - {label: "Publish Date", name: "publishDate", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false, hint: "When this post should appear."}
       - {label: "Display on Newsletter", name: "displayOnNewsletter", widget: "boolean", default: true, required: false, hint: "On by default. Turn off to keep this item out of the weekly newsletter."}
-      - {label: "Display Until", name: "newsletterDisplayUntil", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false, required: false, condition: {field: "category", pattern: "^(update|blog)$"}, hint: "News only. Set to the coming Monday by default; events use the event date instead."}
+      - {label: "Display Until", name: "newsletterDisplayUntil", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false, required: false, condition: {field: "category", pattern: "^(update|blog|thought)$"}, hint: "News only. Set to the coming Monday by default; events use the event date instead."}
       - {label: "Available for Social Media", name: "socialEnabled", widget: "boolean", default: false, required: false, hint: "Turn on only after this story and its image have been reviewed for public social media."}
       - {label: "Photo Consent Confirmed", name: "socialConsentConfirmed", widget: "boolean", default: false, required: false, hint: "Required before this post can be suggested for the Tuesday people/story slot."}
       - {label: "Social Caption Override", name: "socialCaption", widget: "text", required: false, hint: "Optional. Leave blank to use the website summary."}

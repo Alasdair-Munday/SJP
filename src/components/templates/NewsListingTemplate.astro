@@ -18,6 +18,7 @@ const categoryLabels = {
   event: "Events",
   update: "Updates",
   blog: "Blog",
+  thought: "Thought for the week",
 };
 ---
 
@@ -61,6 +62,7 @@ const categoryLabels = {
             <div class="news-card__body">
               <div class="news-card__meta news-card__meta--primary">
                 <span class="meta-chip">{categoryLabels[post.data.category]}</span>
+                    {post.data.author && <span>By {post.data.author}</span>}
                 <span>{post.data.category === "event" && post.data.eventDate ? formatDate(post.data.eventDate) : formatShortDate(post.data.publishDate)}</span>
               </div>
               <h2 class="post-title">
