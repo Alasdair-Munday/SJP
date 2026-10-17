@@ -3,10 +3,7 @@ title: Join Our Kids Team!
 summary: >-
   Help the next generation discover the goodness of God.
 
-  What if you could help a child discover that they belong, that God loves them, and that following Jesus makes a difference to their everyday life?
-
-
-  At St John's Park, we believe children aren't just the future of the church — they're an important part of our church family today. Our children's and youth groups are made possible by a wonderful team of volunteers who give their time, energy and creativity to help our youngest members grow in faith. We're looking for some more people to join us, particularly in our two younger age groups:  Park Tots (Pre-School kids) and Park Kids (Reception - Year 5) 
+  What if YOU could help a child discover that they belong, that God loves them, and that following Jesus makes a difference to their everyday life?
 
 
   Get in touch or read the rest of the post to find out more!
