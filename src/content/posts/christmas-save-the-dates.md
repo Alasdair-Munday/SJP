@@ -1,8 +1,12 @@
 ---
 title: "Christmas Save The Dates "
-summary: "We have some exciting events at Church during this Christmas period.
-  Save the dates in your diaries and calendars, we would love to see you there.
-  "
+summary: >-
+  We have some exciting events at Church during this Christmas period. 4th
+  December - Worship night, 12th - Busking Carols, 13th - Jingle Bell Jollof,
+  19th - Christmas Extravaganza, 20th - Carol Service, 24th - Christmas Eve Film
+  night.
+
+  Save the dates in your diaries and calendars, we would love to see you there. 
 category: event
 publishDate: 2026-10-05
 displayOnNewsletter: true
