@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { createServer } from 'vite';
-import { PDFDocument, PDFName, PDFDict, PDFArray, PDFString } from 'pdf-lib';
+import { PDFDocument, PDFPage, PDFName, PDFDict, PDFArray, PDFString } from 'pdf-lib';
 
 // Load the same TypeScript renderer used by the server route.
 const server = await createServer({ configFile: false, server: { middlewareMode: true } });
@@ -36,6 +36,53 @@ try {
       }
     }
     assert.deepEqual(links, posts.map((post) => post.url));
+  });
+  await test('article text wraps beside a bottom-right QR with its caption below in both editions', async () => {
+    const originalText = PDFPage.prototype.drawText, originalImage = PDFPage.prototype.drawImage;
+    let textItems = [], images = [];
+    PDFPage.prototype.drawText = function (value, options) {
+      textItems.push({ page: this, value, ...options });
+      return originalText.call(this, value, options);
+    };
+    PDFPage.prototype.drawImage = function (image, options) {
+      images.push({ page: this, ...options });
+      return originalImage.call(this, image, options);
+    };
+    try {
+      for (const edition of ['print', 'digital']) {
+        for (const repetitions of [1, 12, 120]) {
+          textItems = []; images = [];
+          const summary = `${'Our community gathers to share food, friendship and faith. '.repeat(repetitions)}\n\nEveryone is welcome to join us and find out more.`;
+          const url = 'https://stjohnspark.org/news/community/';
+          const doc = await PDFDocument.load(await renderNewsletterPdf({ ...issue, posts: [{ title: 'Community life', summary, url }], givingUrl: repetitions === 120 ? 'https://stjohnspark.org/get-involved#giving' : undefined }, edition));
+          const givingIndex = textItems.findIndex((item) => item.value === 'Will You Partner With Us?');
+          const summaryText = (givingIndex === -1 ? textItems : textItems.slice(0, givingIndex)).filter((item) => item.size === 10);
+          assert.equal(summaryText.map((item) => item.value).join(' '), summary.replace(/\s+/g, ' ').trim(), 'Every summary word must survive wrapping and page breaks');
+          if (givingIndex !== -1) {
+            const givingTitle = textItems[givingIndex];
+            for (const item of summaryText.filter((item) => item.page === givingTitle.page)) assert.ok(item.y >= givingTitle.y + 32, 'Giving invitation must stay below both article columns');
+          }
+          const qr = images.find((item) => item.width === 64 && item.height === 64);
+          assert.ok(qr, 'Article QR must retain its scannable size');
+          const captions = textItems.filter((item) => item.page === qr.page && item.size === 8 && item.y >= 51 && item.y < qr.y && item.x >= qr.x && item.x < qr.x + qr.width);
+          assert.equal(captions.map((item) => item.value).join(' '), edition === 'digital' ? 'Tap or scan for the full story' : 'Scan for the full story');
+          assert.ok(Math.abs(qr.y - (captions[0].y + captions[0].size) - 4) < .01, 'Caption must sit directly below QR');
+          const beside = summaryText.filter((item) => item.page === qr.page && item.y < qr.y + qr.height && item.y + item.size > captions.at(-1).y);
+          assert.ok(beside.length > 0, 'Summary text must occupy the space beside QR');
+          for (const item of beside) assert.ok(item.x + item.font.widthOfTextAtSize(item.value, item.size) <= qr.x - 10 + .01, 'Text must not overlap QR or its caption');
+          assert.ok(qr.x > beside[0].x, 'QR belongs at the right of the article');
+          for (const page of doc.getPages()) {
+            const annotations = page.node.lookupMaybe(PDFName.of('Annots'), PDFArray);
+            for (const ref of annotations?.asArray() ?? []) {
+              const rect = doc.context.lookup(ref, PDFDict).lookup(PDFName.of('Rect'), PDFArray).asArray().map((value) => value.asNumber());
+              assert.ok(rect[1] >= 51, 'QR and caption must stay above the footer');
+              const target = doc.context.lookup(ref, PDFDict).lookup(PDFName.of('A'), PDFDict).lookup(PDFName.of('URI'), PDFString).decodeText();
+              if (target === url) assert.ok(Math.abs(rect[2] - rect[0] - 64) < .01, 'Clickable area must cover QR and caption');
+            }
+          }
+        }
+      }
+    } finally { PDFPage.prototype.drawText = originalText; PDFPage.prototype.drawImage = originalImage; }
   });
   await test('photos use only the site origin and render without an external image service', async () => {
     const { logo } = await server.ssrLoadModule('/src/assets/pdf-fonts/brand.ts');
