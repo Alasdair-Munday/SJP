@@ -36,6 +36,14 @@ export function newsletterWeekRange(date = new Date()) {
   return { start: parseIssueDate(monday), end: parseIssueDate(addDays(monday, 7)) };
 }
 
+// Newsletter editions always begin on Monday. Keep older dated links usable.
+export function parseNewsletterDate(value, now = new Date()) {
+  if (value != null) return newsletterWeekRange(parseIssueDate(value)).start;
+  const key = dateKey(now);
+  const weekday = new Date(`${key}T12:00:00Z`).getUTCDay();
+  return parseIssueDate(addDays(key, ((8 - weekday) % 7) || 7));
+}
+
 export function sixMonthsFrom(date) {
   const key = dateKey(date);
   return dayjs.tz(dayjs(key).add(6, 'month').format('YYYY-MM-DD'), TIME_ZONE).toDate();

@@ -1,12 +1,12 @@
 import type { APIRoute } from 'astro';
 import { getNewsletterData } from '../../../lib/newsletter';
-import { parseIssueDate, dateKey } from '../../../lib/events';
+import { parseNewsletterDate, dateKey } from '../../../lib/events';
 import { renderNewsletterPdf } from '../../../lib/newsletter-pdf';
 
 export const prerender = false;
 export const GET: APIRoute = async ({ url }) => {
   let issueDate: Date;
-  try { issueDate = parseIssueDate(url.searchParams.get('date')); }
+  try { issueDate = parseNewsletterDate(url.searchParams.get('date')); }
   catch { return new Response('Please choose a valid issue date (YYYY-MM-DD).', { status: 400 }); }
   const edition = url.searchParams.get('edition') ?? 'print';
   if (edition !== 'print' && edition !== 'digital') return new Response('Choose print or digital edition.', { status: 400 });

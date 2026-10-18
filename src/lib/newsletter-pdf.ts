@@ -51,7 +51,7 @@ export async function renderNewsletterPdf(newsletter: NewsletterData, edition: N
     if (current) result.push(current);
     return result;
   }
-  type Row = { value: string; font: PDFFont; size: number; leading: number; color: ReturnType<typeof rgb> };
+  type Row = { href?: string; value: string; font: PDFFont; size: number; leading: number; color: ReturnType<typeof rgb> };
   function rows(value: string, available: number | ((offset: number) => number), font = body, size = 10, leading = size * 1.35, color = ink): Row[] {
     const result: Row[] = [];
     let offset = 0;
@@ -69,6 +69,10 @@ export async function renderNewsletterPdf(newsletter: NewsletterData, edition: N
     for (const item of items) {
       if (position - item.leading < floor) break;
       if (item.value) page.drawText(item.value, { x, y: position - item.size, font: item.font, size: item.size, color: item.color });
+      if (item.href && item.value) {
+        const link = pdf.context.obj({ Type: 'Annot', Subtype: 'Link', Rect: [x, position - item.leading, x + item.font.widthOfTextAtSize(item.value, item.size), position], Border: [0, 0, 0], A: { Type: 'Action', S: 'URI', URI: PDFString.of(item.href) } });
+        page.node.addAnnot(pdf.context.register(link));
+      }
       position -= item.leading; consumed++;
     }
     return { position, remaining: items.slice(consumed) };
@@ -163,7 +167,9 @@ export async function renderNewsletterPdf(newsletter: NewsletterData, edition: N
     section('THIS WEEK');
     if (timetable.prayers.length) {
       small('Morning prayer', true);
-      for (const entry of compactSchedule(timetable.prayers)) { small(`${entry.dayLabel} · ${entry.timeLabel}`); if (entry.first.location) small(entry.first.location); }
+      for (const entry of compactSchedule(timetable.prayers)) small(`${entry.dayLabel} · ${entry.timeLabel}`);
+      small('online.stjohnspark.org');
+      sidebar[sidebar.length - 1].href = 'https://online.stjohnspark.org';
     }
     for (const day of timetable.days) {
       sidebar.push({ value: '', font: body, size: 9, leading: 8, color: ink });

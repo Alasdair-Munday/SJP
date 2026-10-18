@@ -1,6 +1,8 @@
 import { getCollection } from "astro:content";
 import { selectNewsletterIssue } from "./calendar/newsletter-issue.mjs";
 import { getNewsletterWeek, groupSchedule, dateKey, timeLabel } from "./events";
+import { isMorningPrayer } from "./calendar/pdf-timetable.mjs";
+import { parseNewsletterDate } from "./calendar/dates.mjs";
 import type { PostEntry } from "./content";
 import { getNewsletterPostsForWeek, getSiteConfig } from "./content";
 import { formatDate } from "./format";
@@ -54,7 +56,7 @@ const buildEventDetails = (post: PostEntry) => {
     .join(" \u00b7 ");
 };
 
-export async function getNewsletterData(targetDate: Date = new Date()): Promise<NewsletterData> {
+export async function getNewsletterData(targetDate: Date = parseNewsletterDate(null)): Promise<NewsletterData> {
   const [posts, site, schedule, issues, pages] = await Promise.all([
     getNewsletterPostsForWeek(targetDate),
     getSiteConfig(),
@@ -62,6 +64,10 @@ export async function getNewsletterData(targetDate: Date = new Date()): Promise<
     getCollection("newsletterIssues"),
     getCollection("pages"),
   ]);
+
+  schedule.events = schedule.events.map((event) => isMorningPrayer(event)
+    ? { ...event, href: 'https://online.stjohnspark.org', location: 'online.stjohnspark.org' }
+    : event);
 
   const issue = selectNewsletterIssue(issues, schedule.start, schedule.end);
   const home = pages.find((entry) => entry.id === "home");
@@ -177,7 +183,7 @@ export function renderScheduleEmail(newsletter: NewsletterData) {
   </td></tr>`;
 }
 
-export async function renderNewsletterEmailHtml(targetDate: Date = new Date()) {
+export async function renderNewsletterEmailHtml(targetDate: Date = parseNewsletterDate(null)) {
   const newsletter = await getNewsletterData(targetDate);
   const preheader =
     newsletter.posts.length > 0

@@ -1,6 +1,6 @@
 ---
 import QRCode from "qrcode";
-import { parseIssueDate } from "../../lib/events";
+import { parseNewsletterDate } from "../../lib/events";
 import WeeklySchedule from "../../components/sections/WeeklySchedule.astro";
 import { getNewsletterData } from "../../lib/newsletter";
 import "../../styles/print.css";
@@ -8,7 +8,7 @@ import "../../styles/print.css";
 export const prerender = false;
 Astro.response.headers.set('Cache-Control', 'no-store');
 let issueDate: Date;
-try { issueDate = parseIssueDate(Astro.url.searchParams.get('date')); }
+try { issueDate = parseNewsletterDate(Astro.url.searchParams.get('date')); }
 catch { return new Response('Please choose a valid issue date (YYYY-MM-DD).', { status: 400 }); }
 const newsletter = await getNewsletterData(issueDate);
 const qrCodes = await Promise.all(newsletter.posts.map((post) => QRCode.toDataURL(post.url, {
@@ -42,7 +42,6 @@ const qrCodes = await Promise.all(newsletter.posts.map((post) => QRCode.toDataUR
         </div>
         <nav class="newsletter-actions" aria-label="Newsletter actions">
           <a href={`/newsletter/email/?date=${newsletter.issueDate}`}>Email export</a>
-          <a href={`/newsletter/social/?date=${newsletter.issueDate}`}>Social media</a>
           <a href={`/newsletter/pdf/?date=${newsletter.issueDate}&edition=digital`}>Download digital PDF</a>
           <a href={`/newsletter/pdf/?date=${newsletter.issueDate}&edition=print`}>Download print PDF</a>
           <button onclick="window.print()" class="print-button">Print this page</button>
@@ -50,9 +49,10 @@ const qrCodes = await Promise.all(newsletter.posts.map((post) => QRCode.toDataUR
       </header>
 
       <form class="newsletter-date-picker" method="get">
-        <label for="issue-date">Issue date</label>
-        <input id="issue-date" type="date" name="date" value={newsletter.issueDate} required />
+        <label for="issue-date">Week starting Monday</label>
+        <input id="issue-date" type="date" name="date" value={newsletter.issueDate} min="1970-01-05" step="7" aria-describedby="issue-date-help" required />
         <button type="submit">Update newsletter</button>
+        <span id="issue-date-help">Choose a Monday.</span>
       </form>
       <main class="newsletter-content">
         <section class="newsletter-schedule" aria-labelledby="this-week-title">

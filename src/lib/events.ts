@@ -3,11 +3,11 @@ import { expandCalendar, type Occurrence } from './calendar/core.mjs';
 import { getSnapshot, snapshotStatus, calendarUrl } from './calendar/store.mjs';
 import { canonicalTarget, resolveTarget } from './calendar/links.mjs';
 import { compactSchedule } from './calendar/compact.mjs';
-import { dateKey, formatDay, formatTime, parseIssueDate, sixMonthsFrom, timeLabel, weekRange, newsletterWeekRange, addDays } from './calendar/dates.mjs';
+import { dateKey, formatDay, formatTime, parseIssueDate, sixMonthsFrom, timeLabel, weekRange, newsletterWeekRange, parseNewsletterDate, addDays } from './calendar/dates.mjs';
 import { mappedPageRoutes } from './pageRoutes';
 import { sundayServiceTitle, normalizeTarget } from './calendar/presentation.mjs';
 
-export { dateKey, formatDay, formatTime, parseIssueDate, timeLabel, weekRange, compactSchedule };
+export { dateKey, formatDay, formatTime, parseIssueDate, timeLabel, weekRange, compactSchedule, parseNewsletterDate };
 export type EventItem = Occurrence & { href?: string };
 export type Schedule = {
   events: EventItem[];

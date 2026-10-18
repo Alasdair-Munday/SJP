@@ -1,11 +1,11 @@
 ---
-import { parseIssueDate, dateKey } from "../../../lib/events";
+import { parseNewsletterDate, dateKey } from "../../../lib/events";
 import { renderNewsletterEmailHtml } from "../../../lib/newsletter";
 
 export const prerender = false;
 Astro.response.headers.set('Cache-Control', 'no-store');
 let issueDate: Date;
-try { issueDate = parseIssueDate(Astro.url.searchParams.get('date')); }
+try { issueDate = parseNewsletterDate(Astro.url.searchParams.get('date')); }
 catch { return new Response('Please choose a valid issue date (YYYY-MM-DD).', { status: 400 }); }
 const key = dateKey(issueDate);
 const emailHtml = await renderNewsletterEmailHtml(issueDate);
@@ -171,9 +171,10 @@ const emailHtml = await renderNewsletterEmailHtml(issueDate);
       </header>
 
       <form method="get" style="margin-bottom: 18px;">
-        <label for="issue-date">Issue date</label>
-        <input id="issue-date" type="date" name="date" value={key} required />
+        <label for="issue-date">Week starting Monday</label>
+        <input id="issue-date" type="date" name="date" value={key} min="1970-01-05" step="7" aria-describedby="issue-date-help" required />
         <button type="submit">Update newsletter</button>
+        <span id="issue-date-help">Choose a Monday.</span>
       </form>
       <section class="export-grid" aria-label="Newsletter email export">
         <div class="export-panel">
