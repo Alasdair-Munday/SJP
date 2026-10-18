@@ -1,7 +1,7 @@
 ---
-title: Shining the light of Jesus in Wybourne this Halloween
+title: Shining the light of Jesus in Wybourn this Halloween
 summary: >-
-  We are setting up a table in Wybourne this Halloween to meet trick-or-treaters
+  We are setting up a table in Wybourn this Halloween to meet trick-or-treaters
   with hot chocolate, sweets and some Gospel goodies. We'll be there from 4-6pm
   Please join us!
 
@@ -24,7 +24,7 @@ featuredImage:
 ---
 ## Happy Halloween!
 
-we are taking to the streets of the Wybourne estate to use this opportunity to share the love of Jesus through a friendly greeting and the message of the gospel. We will be handing out some fantastic resources designed to share the Gospel in a friendly and accessible way during Halloween and we hope that people will know that they are loved and hear the invitation to explore the Gospel message.
+we are taking to the streets of the Wybourn estate to use this opportunity to share the love of Jesus through a friendly greeting and the message of the gospel. We will be handing out some fantastic resources designed to share the Gospel in a friendly and accessible way during Halloween and we hope that people will know that they are loved and hear the invitation to explore the Gospel message.
 
 ## Event Info
 
