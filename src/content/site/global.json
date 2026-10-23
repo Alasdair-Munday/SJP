@@ -8,7 +8,9 @@
     "lockupSrc": "/logo-text.svg",
     "lockupAlt": "St John's Church Park",
     "iconLabel": "St John's Park",
-    "iconColor": "#47A174"
+    "iconColor": "#47A174",
+    "favicon": "/favicon.svg",
+    "socialImage": "/images/line-drawing.png"
   },
   "navigation": [
     {
