@@ -272,6 +272,8 @@ const site = defineCollection({
       lockupAlt: z.string(),
       iconLabel: z.string(),
       iconColor: z.string(),
+      favicon: z.string().optional(),
+      socialImage: z.string().optional(),
     }),
     navigation: z.array(linkSchema),
     navCta: linkSchema.optional(),
