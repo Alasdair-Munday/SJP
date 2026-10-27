@@ -1,3 +1,4 @@
+import { newsPosts, eventAnnouncements } from "./content-selection.mjs";
 import { relevantToIssue } from "./calendar/newsletter-selection.mjs";
 import { getCollection, getEntry, type CollectionEntry } from "astro:content";
 
@@ -73,6 +74,14 @@ export async function getAllPosts() {
   return sortPosts(await getCollection("posts"));
 }
 
+export async function getNewsPosts() {
+  return newsPosts(await getAllPosts());
+}
+
+export async function getEventAnnouncements(now = new Date()) {
+  return eventAnnouncements(await getAllPosts(), now);
+}
+
 export async function getAllEvents() {
   return [...await getCollection("events")].sort((left, right) =>
     left.data.title.localeCompare(right.data.title),
@@ -80,7 +89,7 @@ export async function getAllEvents() {
 }
 
 export async function getLatestPosts(limit = 3) {
-  return (await getAllPosts()).slice(0, limit);
+  return (await getNewsPosts()).slice(0, limit);
 }
 
 export async function getPostsByCategory(category?: PostEntry["data"]["category"]) {
