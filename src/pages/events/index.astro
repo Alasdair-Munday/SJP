@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { getAllEvents, getPageContent } from "../../lib/content";
-import { getSchedule, formatDay, timeLabel } from "../../lib/events";
+import { getAllEvents, getEventAnnouncements, getPageContent } from "../../lib/content";
+import { getSchedule, groupSchedule, formatDay, timeLabel } from "../../lib/events";
 
 export const prerender = false;
 Astro.response.headers.set("Cache-Control", "no-store");
@@ -15,8 +15,8 @@ const entries = events.map((eventPage) => ({
   eventPage,
   schedule: { ...schedule, events: schedule.events.filter((event) => event.href === `/events/${eventPage.slug}`).slice(0, 1) },
 }));
-const eventPageRoutes = new Set(events.map((eventPage) => `/events/${eventPage.slug}`));
-const upcomingEvents = schedule.events.filter((event) => !eventPageRoutes.has(event.href ?? ""));
+const days = groupSchedule(schedule.events, now, until);
+const announcements = await getEventAnnouncements(now);
 const bySlug = new Map(entries.map((entry) => [entry.eventPage.slug, entry]));
 const featuredEntries = page.featuredEvents.flatMap(({ event }) => {
   const entry = bySlug.get(event);
@@ -39,19 +39,39 @@ const orderedEntries = [...featuredEntries, ...remainingEntries];
     {page.eyebrow && <p class="eyebrow">{page.eyebrow}</p>}<h1 class="display-title">{page.title}</h1>
     {page.intro && <p class="lede">{page.intro}</p>}
     {schedule.message && <p class="calendar-status" role="status">{schedule.message}</p>}
-    {upcomingEvents.length > 0 && <section aria-labelledby="upcoming-events-title">
-      <h2 id="upcoming-events-title">Upcoming events</h2>
-      <div class="events-index">{upcomingEvents.map((event) => <article class="events-index__card">
-        <p class="eyebrow">{formatDay(event.start)} · {timeLabel(event)}</p>
-        <h3>{event.title}</h3>
-        {event.location && <p>{event.location}</p>}
-        {event.href && <a class="inline-link" href={event.href}>Find out more</a>}
+    {announcements.length > 0 && <section aria-labelledby="event-announcements-title">
+      <h2 id="event-announcements-title">Coming up at St John’s Park</h2>
+      <div class="events-index">{announcements.map((post) => <article class="events-index__card">
+        {post.data.eventDate && <p class="eyebrow">{formatDay(post.data.eventDate)}{post.data.eventEndDate && ` – ${formatDay(post.data.eventEndDate)}`}</p>}
+        <h3><a href={`/news/${post.slug}`}>{post.data.title}</a></h3>
+        <p>{post.data.summary}</p>
+        <a class="inline-link" href={`/news/${post.slug}`}>Event details</a>
       </article>)}</div>
     </section>}
+    <section aria-labelledby="events-calendar-title">
+      <h2 id="events-calendar-title">Dates for your diary</h2>
+      <p>Regular activities and one-off events for the next six months. Select an event for more information.</p>
+      {days.length > 0 && <div class="weekly-schedule upcoming-events-schedule">
+        <ol>{days.map((day) => <li class="weekly-schedule__day">
+          <div class="weekly-schedule__date"><time datetime={day.day}>{day.label}</time></div>
+          <div class="weekly-schedule__sessions"><ul>{day.events.map((event) => <li class="weekly-schedule__event" data-calendar-id={event.id}>
+            <span class="weekly-schedule__when">{timeLabel(event)}</span>
+            <div>{event.href ? <a href={event.href}>{event.title}</a> : <strong>{event.title}</strong>}
+              {event.location && <span class="weekly-schedule__location">{event.location}</span>}
+            </div>
+          </li>)}</ul></div>
+        </li>)}</ol>
+      </div>}
+      {schedule.status !== 'unavailable' && days.length === 0 && <p>No upcoming dates are currently listed. Please <a href="/contact">contact us</a> to find out more.</p>}
+    </section>
     <h2>Regular activities</h2>
     <div class="events-index">{orderedEntries.map(({ eventPage, schedule }) => <article class="events-index__card">
       <p class="eyebrow">{schedule.events[0] ? `${formatDay(schedule.events[0].start)} · ${timeLabel(schedule.events[0])}` : "Dates to follow"}</p>
-      <h2>{eventPage.data.title}</h2><p>{eventPage.data.summary}</p><a class="inline-link" href={`/events/${eventPage.slug}`}>Find out more</a>
+      <h3>{eventPage.data.title}</h3><p>{eventPage.data.summary}</p><a class="inline-link" href={`/events/${eventPage.slug}`}>Find out more</a>
     </article>)}</div>
   </section></div>
 </BaseLayout>
+
+<style>
+  .events-index__card h3 { margin: .35rem 0 .55rem; font-size: 1.35rem; }
+</style>

@@ -27,7 +27,7 @@ const happeningNow = next && new Date(next.start) <= now && new Date(next.end) >
 <section id={section.id} class="content-band whats-on" data-tone={section.backgroundTone}>
   <div class="whats-on__header">
     <div><p class="eyebrow">Come and join us</p><h2 class="section-title">{section.title}</h2></div>
-    <a class="inline-link" href="/events/">Explore our regular events →</a>
+    <a class="inline-link" href="/events/">See all upcoming events →</a>
   </div>
   {schedule.message && <p class="calendar-status" role="status">{schedule.message}</p>}
   {next ? <div class="whats-on__layout">

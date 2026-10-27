@@ -1,13 +1,13 @@
 {
   "title": "News",
-  "metaDescription": "Read event announcements, updates, and blog posts from St John's Park, in one shared feed.",
+  "metaDescription": "Updates, stories and reflections from St John's Park.",
   "template": "news",
   "sections": [
     {
       "type": "hero",
       "eyebrow": "News feed",
       "title": "News",
-      "body": "Our shared feed brings together event announcements, practical updates, and longer reflections from the life of St John's Park.",
+      "body": "Updates, practical news and longer reflections from the life of St John's Park. Visit Upcoming events for regular activities and one-off gatherings.",
       "backgroundTone": "pink",
       "image": {
         "src": "/images/uploads/Family-bustle.jpg",

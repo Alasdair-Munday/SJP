@@ -28,6 +28,10 @@
       "href": "/get-involved"
     },
     {
+      "label": "Upcoming events",
+      "href": "/events"
+    },
+    {
       "label": "News",
       "href": "/news"
     },
@@ -62,6 +66,10 @@
       {
         "label": "Talks",
         "href": "/talks"
+      },
+      {
+        "label": "Upcoming events",
+        "href": "/events"
       },
       {
         "label": "News",

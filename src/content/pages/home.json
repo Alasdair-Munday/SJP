@@ -185,7 +185,7 @@
       "type": "latest",
       "eyebrow": "From church life",
       "title": "News",
-      "intro": "Keep up with community life, event announcements, and stories from St John's Park.",
+      "intro": "Keep up with community life, news, and stories from St John's Park.",
       "backgroundTone": "stone",
       "source": "posts",
       "limit": 3,

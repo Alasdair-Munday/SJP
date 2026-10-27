@@ -18,6 +18,9 @@ const categoryLabels = {
   blog: "Blog",
   thought: "Thought for the week",
 };
+const isEvent = post.data.category === "event";
+const listingHref = isEvent ? "/events" : "/news";
+const listingLabel = isEvent ? "Upcoming events" : "News";
 const nextSession = sessions.events[0];
 const eventDateText = nextSession ? formatDay(nextSession.start) : post.data.eventDate ? formatDate(post.data.eventDate) : undefined;
 const detailItems = [
@@ -41,7 +44,7 @@ const detailItems = [
     <article class="content-band post-detail-article" data-tone="stone">
       <div class="post-detail__header">
         <div class="post-detail__intro">
-          <a class="inline-link post-detail__back" href="/news">News</a>
+          <a class="inline-link post-detail__back" href={listingHref}>{listingLabel}</a>
           <p class="eyebrow">{categoryLabels[post.data.category]}</p>
           <h1 class="display-title post-detail__title">{post.data.title}</h1>
           {post.data.author && <p class="post-detail__author">By {post.data.author}</p>}
@@ -65,7 +68,7 @@ const detailItems = [
           </section>}
         </div>
 
-        <aside class="post-detail__aside" aria-label="News post details">
+        <aside class="post-detail__aside" aria-label={isEvent ? "Event details" : "News post details"}>
           <h2 class="post-detail__aside-title">Details</h2>
           <dl class="post-detail__details-list">
             {
@@ -83,7 +86,7 @@ const detailItems = [
                 <a class="button-link" href={post.data.ctaHref}>{post.data.ctaLabel}</a>
               )
             }
-            <a class="button-link--secondary" href="/news">Back to news</a>
+            <a class="button-link--secondary" href={listingHref}>Back to {listingLabel.toLowerCase()}</a>
           </div>
         </aside>
       </div>
