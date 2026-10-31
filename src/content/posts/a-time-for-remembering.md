@@ -1,10 +1,10 @@
 ---
 title: A Time for Remembering
 summary: This Saturday, we are holding a special service to remember loved ones.
-  The service will hold quiet space to reflect and give thanks for those who are
-  no longer with us with music, poems and prayer. There will be an opportunity
-  to pray with somebody if you would like to after the service. Refreshments
-  will be included
+  The service will hold quiet space to reflect upon and give thanks for those
+  who are no longer with us. The service will include music, poems and prayer.
+  There will be an opportunity to pray with somebody after the service if you
+  would like to. Refreshments will be included
 category: event
 publishDate: 2026-10-31
 displayOnNewsletter: true
