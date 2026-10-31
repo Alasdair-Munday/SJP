@@ -1,16 +1,23 @@
 ---
 title: A Time for Remembering
-summary: A special service to remember loved ones with reflective music, poems and prayer.
+summary: This Saturday, we are holding a special service to remember loved ones.
+  The service will hold quiet space to reflect and give thanks for those who are
+  no longer with us with music, poems and prayer. There will be an opportunity
+  to pray with somebody if you would like to after the service. Refreshments
+  will be included
 category: event
 publishDate: 2026-10-31
+displayOnNewsletter: true
+newsletterDisplayUntil: 2026-11-06
 eventDate: 2026-11-07
 timeText: 4–5pm
 location: St John’s Park Church, Bernard Street, Sheffield S2 5PU
 featuredImage:
-  src: /images/events/a-time-for-remembering-2026.jpg
-  alt: Flyer for A Time for Remembering at St John’s Park Church on Saturday 7 November 2026
+  src: /images/uploads/Cherry Blossom.jpg
+  alt: ""
 ---
+A special service to remember loved ones with reflective music, poems and prayer. Everyone welcome; refreshments included.
 
-A special service to remember loved ones with reflective music, poems and prayer.
 
-Everyone welcome; refreshments included.
+
+![](/images/uploads/IMG-20261024-WA0007.jpg)
