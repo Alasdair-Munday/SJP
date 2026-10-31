@@ -6,7 +6,7 @@ summary: An antidote to the constant grind and distraction of modern life. Come
 category: update
 publishDate: 2026-09-12
 displayOnNewsletter: true
-newsletterDisplayUntil: 2026-11-08
+newsletterDisplayUntil: 2026-10-31
 ctaLabel: Any Questions? Get in touch!
 ctaHref: /contact
 featuredImage:
