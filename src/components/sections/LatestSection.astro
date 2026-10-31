@@ -103,12 +103,14 @@ const categoryLabels = {
             </div>
             <h3 class="post-title">{talk.title}</h3>
             <p class="talk-card__summary">{talk.description}</p>
-            {talk.embedUrl ? (
-                <iframe src={talk.embedUrl} title={`Listen to ${talk.title}`} width="100%" height="180" loading="lazy" style="border: 0; border-radius: 12px;" allow="autoplay" />
-              ) : talk.audioUrl && (
+            {talk.audioUrl ? (
               <div class="talk-player-wrapper">
                 <audio controls src={talk.audioUrl} class="talk-player"></audio>
               </div>
+            ) : talk.sourceUrl && (
+              <a class="button-link--ghost" href={talk.sourceUrl} target="_blank" rel="noopener noreferrer">
+                Listen to this talk
+              </a>
             )}
           </article>
         ))}
