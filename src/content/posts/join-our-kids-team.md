@@ -10,7 +10,7 @@ summary: >-
 category: update
 publishDate: 2026-10-17
 displayOnNewsletter: true
-newsletterDisplayUntil: 2026-12-05
+newsletterDisplayUntil: 2026-10-31
 socialEnabled: false
 socialConsentConfirmed: false
 ctaLabel: Email Kirsty to find out more
