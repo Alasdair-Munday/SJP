@@ -145,7 +145,7 @@ export async function renderNewsletterPdf(newsletter: NewsletterData, edition: N
   newPage();
   const frontTop = y, frontFloor = Math.max(bottom + 230, frontTop - 420);
   let leadY = frontTop;
-  if (photos[0]) { cropped(photos[0], margin, leadY - 138, leadWidth, 138); leadY -= 151; }
+  if (photos[0]) { cropped(photos[0], margin, leadY - 180, leadWidth, 180); leadY -= 193; }
   const leadTitle = newsletter.thought?.title ?? (newsletter.introduction ? 'Life at St John’s Park' : '');
   const leadText = newsletter.thought?.body ?? newsletter.introduction ?? '';
   const leadItems = [...rows(leadTitle.toUpperCase(), leadWidth, headline, 13, 18, green), ...rows(' ', leadWidth), ...rows(leadText, leadWidth, body, 10, 13.5)];
@@ -214,7 +214,7 @@ export async function renderNewsletterPdf(newsletter: NewsletterData, edition: N
       if (summaryRows.reduce((sum, row) => sum + row.leading, 0) <= summaryHeight) break;
       summaryHeight += summaryLeading;
     }
-    const photoHeight = photos[index + 1] ? 80 : 0;
+    const photoHeight = photos[index + 1] ? 110 : 0;
     const titleHeight = lines(post.title.toUpperCase(), headline, 12, columnWidth - 16).length * 16;
     const detailsHeight = post.eventDetails ? lines(post.eventDetails, bold, 9, columnWidth - 16).length * 12 + 6 : 0;
     activeCard = false;
