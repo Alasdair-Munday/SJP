@@ -5,7 +5,9 @@ const AUDIO_COM_API_URL = "https://api.audio.com/v1";
 const AUDIO_COM_TOKEN_URL = "https://api.audio.com/auth/token";
 const AUDIO_COM_PROFILE_URL = "https://audio.com/stjohnsparksheffield";
 const DEFAULT_AUDIO_COM_USERNAME = "stjohnsparksheffield";
-const TOKEN_STORE_NAME = "audio-com-oauth-v1";
+const TOKEN_STORE_NAME = process.env.CONTEXT === "production"
+  ? "audio-com-oauth-v1"
+  : "audio-com-oauth-preview-v1";
 const TOKEN_STORE_KEY = "tokens";
 const PAGE_SIZE = 100;
 
@@ -43,6 +45,7 @@ type TokenState = {
   accessToken: string;
   refreshToken: string;
   expiresAt: number;
+  clientId?: string;
 };
 
 type NetlifyRuntime = typeof globalThis & {
@@ -104,7 +107,7 @@ const saveTokenState = async (state: TokenState) => {
 };
 
 const refreshAccessToken = async (state: TokenState): Promise<TokenState> => {
-  const clientId = readEnv("AUDIO_COM_CLIENT_ID");
+  const clientId = state.clientId || readEnv("AUDIO_COM_CLIENT_ID");
   const refreshToken = state.refreshToken || readEnv("AUDIO_COM_REFRESH_TOKEN");
 
   if (!clientId || !refreshToken) {
@@ -139,6 +142,7 @@ const refreshAccessToken = async (state: TokenState): Promise<TokenState> => {
   }
 
   const refreshedState = {
+    clientId,
     accessToken: token.access_token,
     refreshToken: token.refresh_token || refreshToken,
     expiresAt: Date.now() + Math.max(Number(token.expires_in) || 3600, 60) * 1000,
