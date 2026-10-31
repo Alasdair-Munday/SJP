@@ -15,6 +15,12 @@
   conditions = {Host = ["stjohnspark.netlify.app", "www.stjohnspark.org"]}
 
 [[redirects]]
+  from = "/events/a-time-for-remembering"
+  to = "/news/a-time-for-remembering"
+  status = 301
+  force = true
+
+[[redirects]]
   from = "/images/uploads/*"
   to = "/.netlify/functions/cdn-asset?path=images/uploads/:splat"
   status = 200
