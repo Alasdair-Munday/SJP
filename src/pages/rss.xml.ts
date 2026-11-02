@@ -8,6 +8,7 @@ export async function GET(context: { site?: string }) {
   const site = await getSiteConfig();
   const talks = await getTalks();
   const baseSite = context.site || site.siteUrl;
+  const coverArt = new URL("/images/podcast-cover.png", baseSite).toString();
   const escapeXml = (value: string) =>
     value
       .replace(/&/g, "&amp;")
@@ -52,6 +53,20 @@ export async function GET(context: { site?: string }) {
             <itunes:summary>${escapeXml(talk.description)}</itunes:summary>
           `,
         })),
-    customData: "<language>en-gb</language>",
+    customData: `
+      <language>en-gb</language>
+      <author>${escapeXml(site.contact.email)}</author>
+      <itunes:author>${escapeXml(site.title)}</itunes:author>
+      <itunes:owner>
+        <itunes:name>${escapeXml(site.title)}</itunes:name>
+        <itunes:email>${escapeXml(site.contact.email)}</itunes:email>
+      </itunes:owner>
+      <itunes:image href="${escapeXml(coverArt)}" />
+      <image>
+        <url>${escapeXml(coverArt)}</url>
+        <title>${escapeXml(`${site.shortTitle} Talks`)}</title>
+        <link>${escapeXml(baseSite)}</link>
+      </image>
+    `,
   });
 }
