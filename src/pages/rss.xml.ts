@@ -7,7 +7,7 @@ export const prerender = false;
 export async function GET(context: { site?: string }) {
   const site = await getSiteConfig();
   const talks = await getTalks();
-  const baseSite = context.site || site.siteUrl;
+  const baseSite = String(context.site || site.siteUrl).replace(/\/$/, "");
   const coverArt = new URL("/images/podcast-cover.png", baseSite).toString();
   const escapeXml = (value: string) =>
     value
