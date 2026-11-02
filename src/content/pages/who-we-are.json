@@ -325,20 +325,7 @@
             "frameTone": "sky"
           },
           "tone": "stone"
-        },
-        {
-          "title": "Comfort M Ariwoola",
-          "tag": "Treasurer",
-          "body": "Comfort M Ariwoola helps steward church finances with care, clarity, and accountability.",
-          "image": {
-            "src": "/images/uploads/headshot-placeholder.svg",
-            "alt": "Placeholder headshot",
-            "maskShape": "/images/shapes/circle-shape-4.png",
-            "objectPosition": "43% 45%",
-            "frameTone": "grass"
-          },
-          "tone": "stone"
-        }
+        } 
       ]
     },
     {
