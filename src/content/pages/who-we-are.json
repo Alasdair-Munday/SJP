@@ -127,7 +127,7 @@
       "cards": [
         {
           "title": "Elizabeth \"Bess\" Cooper",
-          "tag": "Churchwarden",
+          "tag": "Churchwarden & acting treasurer",
           "image": {
             "src": "/images/profile-photos/bess.jpeg",
             "alt": "Bess Cooper",
@@ -265,6 +265,7 @@
             "objectPosition": "55% 25%",
             "frameTone": "pink"
           },
+          "tag": "PCC Secretary",
           "tone": "stone"
         },
         {
