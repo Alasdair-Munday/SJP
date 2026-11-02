@@ -17,14 +17,13 @@ The redesigned site uses Astro content collections:
 - Local talks fallback: `src/data/talks-fallback.json`
 - Uploaded media: `public/images/uploads`
 
-Talk entries use `SERMONS_RSS_FEED_URL`, defaulting to
-`https://audio.com/rss/author/1864352901200967`. When the default feed is empty
-or unavailable, the site reads the church's public Audio.com profile and uses
-permanent embedded players rather than expiring signed MP3 links. A saved
-snapshot in `src/data/talks-fallback.json` provides players during an outage.
+Talk entries come from Audio.com's authenticated public API. The site maps the
+provider response into its own `Talk` model and exposes stable playback URLs at
+`/podcast/audio/:id`, so the native players and the church-owned `/rss.xml` feed
+do not depend on Audio.com's embed or RSS feed URLs. A saved snapshot in
+`src/data/talks-fallback.json` supplies the archive when the API is unavailable.
 The talks page renders on request, with a five-minute cache, so new recordings
-can appear without a rebuild. Custom RSS sources do not use the Audio.com
-profile fallback. Run `node --test tests/talks.test.mjs` for parser checks.
+can appear without a rebuild.
 
 ## Editing in the CMS
 
@@ -86,8 +85,18 @@ calendar selection and thought approval checks.
 
 ## Deployment
 
-The site builds with Astro and deploys with the Netlify adapter. Set
-`SERMONS_RSS_FEED_URL` in Netlify to override the default talks feed.
+The site builds with Astro and deploys with the Netlify adapter. Configure these
+server-side Audio.com OAuth values in Netlify:
+
+- `AUDIO_COM_CLIENT_ID`
+- `AUDIO_COM_REFRESH_TOKEN`
+- `AUDIO_COM_ACCESS_TOKEN` as an optional initial token
+- `AUDIO_COM_USERNAME` only when the account username differs from
+  `stjohnsparksheffield`
+
+The adapter refreshes expired access tokens and persists refreshed token state
+in the site-scoped `audio-com-oauth-v1` Netlify Blobs store. These values must
+remain server-only.
 
 Set `PUBLIC_CLOUDFLARE_WEB_ANALYTICS_TOKEN` to the site token from Cloudflare Web
 Analytics to load its privacy-first beacon in production. Leave it unset locally.
