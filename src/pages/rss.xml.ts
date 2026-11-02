@@ -8,7 +8,8 @@ export async function GET(context: { site?: string }) {
   const site = await getSiteConfig();
   const talks = await getTalks();
   const baseSite = String(context.site || site.siteUrl).replace(/\/$/, "");
-  const coverArt = new URL("/images/podcast-cover.png", baseSite).toString();
+  const coverArtSource = talks.find((talk) => talk.imageUrl)?.imageUrl || "/images/podcast-cover.png";
+  const coverArt = new URL(coverArtSource, baseSite).toString();
   const escapeXml = (value: string) =>
     value
       .replace(/&/g, "&amp;")
