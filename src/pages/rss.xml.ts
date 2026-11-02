@@ -56,11 +56,11 @@ export async function GET(context: { site?: string }) {
         })),
     customData: `
       <language>en-gb</language>
-      <author>${escapeXml(site.contact.email)}</author>
+      <author>av@stjohnspark.org</author>
       <itunes:author>${escapeXml(site.title)}</itunes:author>
       <itunes:owner>
         <itunes:name>${escapeXml(site.title)}</itunes:name>
-        <itunes:email>${escapeXml(site.contact.email)}</itunes:email>
+        <itunes:email>av@stjohnspark.org</itunes:email>
       </itunes:owner>
       <itunes:image href="${escapeXml(coverArt)}" />
       <image>
