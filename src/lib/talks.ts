@@ -16,6 +16,15 @@ export type Talk = {
   audioType?: string;
 };
 
+export const talkAnchorId = (talk: Pick<Talk, "id" | "date" | "title">) => {
+  const slug = `${talk.id || `${talk.date}-${talk.title}`}`
+    .replace(/[^a-z0-9]+/gi, "-")
+    .replace(/^-+|-+$/g, "")
+    .toLowerCase();
+
+  return `talk-${slug || "untitled"}`;
+};
+
 let cachedTalksPromise: Promise<Talk[]> | null = null;
 let cacheExpiresAt = 0;
 

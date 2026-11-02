@@ -8,7 +8,7 @@
     "preview": "astro preview",
     "astro": "astro",
     "migrate:assets": "node scripts/migrate-assets-to-cdn.mjs",
-    "test": "node --test tests/calendar/*.test.mjs",
+    "test": "node --test tests/calendar/*.test.mjs tests/talks.test.mjs",
     "calendar:check": "node scripts/check-calendar.mjs",
     "check": "astro check"
   },

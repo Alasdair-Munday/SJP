@@ -208,10 +208,18 @@ const toIsoDate = (timestamp = 0) => {
 const parseDatedTitle = (rawTitle: string, uploadedDate: string) => {
   const title = stripHtml(rawTitle);
   const match = title.match(
-    /^(?<day>\d{2})[/-](?<month>\d{2})[/-](?<year>\d{2}|\d{4})(?:\s*\/\/\s*|\s+)(?<message>.+?)(?:\s*\/\/\s*|\s+-\s+)(?<speaker>.+)$/,
+    /^(?<day>\d{2})[/-](?<month>\d{2})[/-](?<year>\d{2}|\d{4})(?:\s*\/\/\s*|\s+)(?<rest>.+)$/,
   );
 
   if (!match?.groups) {
+    return { title, speaker: "St John's Park", date: uploadedDate };
+  }
+
+  const slashSeparator = match.groups.rest.lastIndexOf(" // ");
+  const hyphenSeparator = match.groups.rest.lastIndexOf(" - ");
+  const separator = Math.max(slashSeparator, hyphenSeparator);
+
+  if (separator < 0) {
     return { title, speaker: "St John's Park", date: uploadedDate };
   }
 
@@ -219,22 +227,26 @@ const parseDatedTitle = (rawTitle: string, uploadedDate: string) => {
     ? `20${match.groups.year}`
     : match.groups.year;
   const titleDate = `${year}-${match.groups.month}-${match.groups.day}`;
+  const separatorLength = slashSeparator > hyphenSeparator ? 4 : 3;
 
   return {
-    title: match.groups.message.trim(),
-    speaker: match.groups.speaker.trim(),
+    title: match.groups.rest.slice(0, separator).trim(),
+    speaker: match.groups.rest.slice(separator + separatorLength).trim(),
     date: titleDate <= uploadedDate ? titleDate : uploadedDate,
   };
 };
 
-const toTalk = (audio: AudioComAudio): Talk | null => {
+export const mapAudioComAudio = (
+  audio: AudioComAudio,
+  username = expectedUsername(),
+): Talk | null => {
   if (
     !audio.id ||
     !audio.slug ||
     !audio.title ||
     !audio.is_listed ||
     !audio.play?.url ||
-    audio.username !== expectedUsername()
+    audio.username !== username
   ) {
     return null;
   }
@@ -275,7 +287,7 @@ export const getAudioComTalks = async (): Promise<Talk[]> => {
   }
 
   return audio
-    .map(toTalk)
+    .map((item) => mapAudioComAudio(item))
     .filter((talk): talk is Talk => Boolean(talk))
     .sort(sortByDateDescending);
 };

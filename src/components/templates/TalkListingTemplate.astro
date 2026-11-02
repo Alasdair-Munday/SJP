@@ -2,7 +2,7 @@
 import type { CollectionEntry } from "astro:content";
 import SectionRenderer from "../sections/SectionRenderer.astro";
 import { formatDate, formatTalkDuration } from "../../lib/format";
-import { getTalks } from "../../lib/talks";
+import { getTalks, talkAnchorId } from "../../lib/talks";
 import { getSiteConfig } from "../../lib/content";
 
 type PageData = CollectionEntry<"pages">["data"];
@@ -25,7 +25,7 @@ const site = await getSiteConfig();
     <div class="talk-archive">
       {
         talks.map((talk) => (
-          <article class="talk-row">
+          <article class="talk-row" id={talkAnchorId(talk)}>
             {talk.imageUrl && (
               <img
                 src={talk.imageUrl}

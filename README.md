@@ -88,6 +88,9 @@ calendar selection and thought approval checks.
 The site builds with Astro and deploys with the Netlify adapter. Configure these
 server-side Audio.com OAuth values in Netlify:
 
+- The OAuth setup page is intentionally open; it does not need a setup secret.
+- `AUDIO_COM_OAUTH_CALLBACK` — the exact HTTPS URL of the setup function, normally
+  `https://stjohnspark.org/.netlify/functions/audio-oauth`
 - `AUDIO_COM_CLIENT_ID`
 - `AUDIO_COM_REFRESH_TOKEN`
 - `AUDIO_COM_ACCESS_TOKEN` as an optional initial token
@@ -97,6 +100,11 @@ server-side Audio.com OAuth values in Netlify:
 The adapter refreshes expired access tokens and persists refreshed token state
 in the site-scoped `audio-com-oauth-v1` Netlify Blobs store. These values must
 remain server-only.
+
+After deploying the function, open the callback URL to register the Audio.com
+client, authorize the church account, and save the refresh token. The client
+and refresh token environment variables remain useful as a recovery path if the
+stored OAuth state is unavailable.
 
 Set `PUBLIC_CLOUDFLARE_WEB_ANALYTICS_TOKEN` to the site token from Cloudflare Web
 Analytics to load its privacy-first beacon in production. Leave it unset locally.

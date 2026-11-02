@@ -2,7 +2,7 @@
 import type { CollectionEntry } from "astro:content";
 import { getLatestPosts, getSiteConfig, withoutImageMask } from "../../lib/content";
 import { formatDate, formatShortDate, formatTalkDuration } from "../../lib/format";
-import { getTalks } from "../../lib/talks";
+import { getTalks, talkAnchorId } from "../../lib/talks";
 import MaskedImage from "./MaskedImage.astro";
 
 type PageSection = CollectionEntry<"pages">["data"]["sections"][number];
@@ -86,7 +86,7 @@ const categoryLabels = {
     ) : (
       <div class="latest-list">
         {talks.map((talk, index) => (
-          <article class="talk-card" id={index === 0 ? "latest-talk" : undefined}>
+          <article class="talk-card" id={index === 0 ? "latest-talk" : talkAnchorId(talk)}>
             {talk.imageUrl && (
               <img
                 src={talk.imageUrl}
