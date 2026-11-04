@@ -3,7 +3,7 @@ title: The Marvellous Picnic and a Generous Harvest!
 summary: A Harvest celebration at Emmaus School saw children bring the story of
   the Feeding of the 5,000 to life, alongside a generous food donation shared
   between two local foodbanks.
-category: null
+category: update
 publishDate: 2026-11-04
 displayOnNewsletter: true
 socialEnabled: false
