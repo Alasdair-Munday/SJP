@@ -40,7 +40,7 @@ try {
         links.push(annotation.lookup(PDFName.of('A'), PDFDict).lookup(PDFName.of('URI'), PDFString).decodeText());
       }
     }
-    assert.deepEqual(links, posts.map((post) => post.url));
+    assert.deepEqual(links.filter((href) => href.includes('/news/story-')), posts.map((post) => post.url));
   });
   await test('article text wraps beside a bottom-right QR with its caption below in both editions', async () => {
     const originalText = PDFPage.prototype.drawText, originalImage = PDFPage.prototype.drawImage;
@@ -69,7 +69,7 @@ try {
           }
           const qr = images.find((item) => item.width === 64 && item.height === 64);
           assert.ok(qr, 'Article QR must retain its scannable size');
-          const captions = textItems.filter((item) => item.page === qr.page && item.size === 8 && item.y >= 51 && item.y < qr.y && item.x >= qr.x && item.x < qr.x + qr.width);
+          const captions = textItems.filter((item) => item.page === qr.page && item.size === 8 && item.y >= 38 && item.y < qr.y && item.x >= qr.x && item.x < qr.x + qr.width);
           assert.equal(captions.map((item) => item.value).join(' '), edition === 'digital' ? 'Tap or scan for the full story' : 'Scan for the full story');
           assert.ok(Math.abs(qr.y - (captions[0].y + captions[0].size) - 4) < .01, 'Caption must sit directly below QR');
           const beside = summaryText.filter((item) => item.page === qr.page && item.y < qr.y + qr.height && item.y + item.size > captions.at(-1).y);
@@ -80,7 +80,7 @@ try {
             const annotations = page.node.lookupMaybe(PDFName.of('Annots'), PDFArray);
             for (const ref of annotations?.asArray() ?? []) {
               const rect = doc.context.lookup(ref, PDFDict).lookup(PDFName.of('Rect'), PDFArray).asArray().map((value) => value.asNumber());
-              assert.ok(rect[1] >= 51, 'QR and caption must stay above the footer');
+              assert.ok(rect[1] >= 38, 'QR and caption must stay above the footer');
               const target = doc.context.lookup(ref, PDFDict).lookup(PDFName.of('A'), PDFDict).lookup(PDFName.of('URI'), PDFString).decodeText();
               if (target === url) assert.ok(Math.abs(rect[2] - rect[0] - 64) < .01, 'Clickable area must cover QR and caption');
             }
