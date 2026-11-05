@@ -6,6 +6,7 @@ summary: A Harvest celebration at Emmaus School saw children bring the story of
 category: update
 publishDate: 2026-11-09
 displayOnNewsletter: true
+newsletterDisplayUntil: 2026-11-10
 socialEnabled: false
 socialConsentConfirmed: true
 featuredImage:
