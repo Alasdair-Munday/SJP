@@ -4,7 +4,7 @@ summary: A Harvest celebration at Emmaus School saw children bring the story of
   the Feeding of the 5,000 to life, alongside a generous food donation shared
   between two local foodbanks.
 category: update
-publishDate: 2026-11-09
+publishDate: 2026-11-05
 displayOnNewsletter: true
 newsletterDisplayUntil: 2026-11-10
 socialEnabled: false
