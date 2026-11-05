@@ -1,4 +1,4 @@
-import { PDFDocument, PDFString, rgb, pushGraphicsState, popGraphicsState, rectangle, clip, endPath, type PDFFont, type PDFPage, type PDFImage } from 'pdf-lib';
+import { PDFDocument, PDFString, PDFName, PDFArray, PDFDict, rgb, pushGraphicsState, popGraphicsState, rectangle, clip, endPath, type PDFFont, type PDFPage, type PDFImage } from 'pdf-lib';
 import QRCode from 'qrcode';
 import fontkit from '@pdf-lib/fontkit';
 import * as fonts from '../assets/pdf-fonts/fonts';
@@ -27,9 +27,11 @@ export async function renderNewsletterPdf(newsletter: NewsletterData, edition: N
   const paper = digital ? hex('#eae1cf') : rgb(1, 1, 1);
   const panelText = digital ? rgb(1, 1, 1) : ink;
   const panelHeading = digital ? rgb(1, 1, 1) : green;
-  const width = 595.28, height = 841.89, margin = 30, gap = 24, bottom = 51;
+  // The reading pages are A5. The print edition later places two of these pages
+  // on each side of an A4 landscape sheet in booklet order.
+  const width = 420.94, height = 595.28, margin = 22, gap = 14, bottom = 38;
   const fullWidth = width - margin * 2, columnWidth = (fullWidth - gap) / 2;
-  const leadWidth = fullWidth * .56, sideX = margin + leadWidth + 18, sideWidth = fullWidth - leadWidth - 18;
+  const leadWidth = fullWidth * .54, sideX = margin + leadWidth + 12, sideWidth = fullWidth - leadWidth - 12;
   let page!: PDFPage, column = 0, y = 0, top = 0, activeCard = false;
   const pageBottoms = new Map<PDFPage, number>();
   const px = () => margin + column * (columnWidth + gap);
@@ -114,15 +116,19 @@ export async function renderNewsletterPdf(newsletter: NewsletterData, edition: N
     page = pdf.addPage([width, height]); column = 0;
     page.drawRectangle({ x: 0, y: 0, width, height, color: paper });
     const first = pdf.getPageCount() === 1;
-    page.drawLine({ start: { x: margin, y: height - 11 }, end: { x: width - margin, y: height - 11 }, thickness: digital ? 9 : 2, color: green });
-    picture(art.logo, margin, height - 63, 128, 38);
-    const title = 'Weekly News', titleSize = 23;
-    const titleX = (width - headline.widthOfTextAtSize(title, titleSize)) / 2 + 14;
-    page.drawText(title, { x: titleX, y: height - 43, font: headline, size: titleSize, color: green });
+    page.drawLine({ start: { x: margin, y: height - 8 }, end: { x: width - margin, y: height - 8 }, thickness: digital ? 7 : 1.5, color: green });
+    picture(art.logo, margin, height - 46, 92, 28);
+    const title = 'Weekly News', titleSize = 17;
+    const titleX = (width - headline.widthOfTextAtSize(title, titleSize)) / 2 + 5;
+    page.drawText(title, { x: titleX, y: height - 32, font: headline, size: titleSize, color: green });
     const date = clean(newsletter.formattedDate);
-    page.drawText(date, { x: (width - body.widthOfTextAtSize(date, 11)) / 2 + 14, y: height - 62, font: body, size: 11, color: ink });
-    picture(art.eden, width - margin - 62, height - 78, 62, 61);
-    top = height - (first ? 98 : 96); y = top;
+    page.drawText(date, { x: (width - body.widthOfTextAtSize(date, 9)) / 2 + 5, y: height - 47, font: body, size: 9, color: ink });
+    picture(art.eden, width - margin - 42, height - 55, 42, 41);
+    top = height - (first ? 72 : 70); y = top;
+  }
+  function blankPage() {
+    page = pdf.addPage([width, height]); column = 0; top = height - 70; y = top;
+    page.drawRectangle({ x: 0, y: 0, width, height, color: paper });
   }
   function cardPanel(cardHeight: number) {
     if (digital) page.drawRectangle({ x: px(), y: Math.max(bottom, y - cardHeight), width: columnWidth, height: Math.min(cardHeight, y - bottom), color: green });
@@ -143,9 +149,9 @@ export async function renderNewsletterPdf(newsletter: NewsletterData, edition: N
     }
   }
   newPage();
-  const frontTop = y, frontFloor = Math.max(bottom + 230, frontTop - 420);
+  const frontTop = y, frontFloor = Math.max(bottom + 135, frontTop - 290);
   let leadY = frontTop;
-  if (photos[0]) { cropped(photos[0], margin, leadY - 180, leadWidth, 180); leadY -= 193; }
+  if (photos[0]) { cropped(photos[0], margin, leadY - 115, leadWidth, 115); leadY -= 125; }
   const leadTitle = newsletter.thought?.title ?? (newsletter.introduction ? 'Life at St John’s Park' : '');
   const leadText = newsletter.thought?.body ?? newsletter.introduction ?? '';
   const leadItems = [...rows(leadTitle.toUpperCase(), leadWidth, headline, 13, 18, green), ...rows(' ', leadWidth), ...rows(leadText, leadWidth, body, 10, 13.5)];
@@ -199,7 +205,7 @@ export async function renderNewsletterPdf(newsletter: NewsletterData, edition: N
       y -= 14;
     }
   }
-  for (const [index, post] of newsletter.posts.entries()) {
+  const postLayouts = newsletter.posts.map((post, index) => {
     const qrSize = 64, qrGap = 10, labelGap = 4, summaryLeading = 13.5;
     const captionRows = rows(digital ? 'Tap or scan for the full story' : 'Scan for the full story', qrSize, body, 8, 10, digital ? panelText : muted);
     const captionHeight = captionRows.reduce((sum, row) => sum + row.leading, 0);
@@ -214,11 +220,18 @@ export async function renderNewsletterPdf(newsletter: NewsletterData, edition: N
       if (summaryRows.reduce((sum, row) => sum + row.leading, 0) <= summaryHeight) break;
       summaryHeight += summaryLeading;
     }
-    const photoHeight = photos[index + 1] ? 110 : 0;
+    const photoHeight = photos[index + 1] ? 90 : 0;
     const titleHeight = lines(post.title.toUpperCase(), headline, 12, columnWidth - 16).length * 16;
     const detailsHeight = post.eventDetails ? lines(post.eventDetails, bold, 9, columnWidth - 16).length * 12 + 6 : 0;
-    activeCard = false;
     const cardHeight = 10 + photoHeight + (photoHeight ? 9 : 0) + titleHeight + 7 + detailsHeight + summaryHeight + 12;
+    return { qrSize, qrGap, labelGap, captionRows, captionHeight, qrHeight, summaryRows, summaryHeight, photoHeight, cardHeight };
+  });
+
+  async function drawPost(index: number) {
+    const post = newsletter.posts[index];
+    const layout = postLayouts[index];
+    const { qrSize, labelGap, captionRows, captionHeight, qrHeight, summaryRows, summaryHeight, photoHeight, cardHeight } = layout;
+    activeCard = false;
     ensure(cardHeight);
     activeCard = true;
     cardPanel(cardHeight);
@@ -253,30 +266,130 @@ export async function renderNewsletterPdf(newsletter: NewsletterData, edition: N
     activeCard = false;
     pageBottoms.set(page, Math.min(pageBottoms.get(page) ?? height, y));
   }
+
+  // Fill across the page before moving down it. A normal pair therefore starts
+  // at the same vertical position, while an unusually long card can still flow
+  // through subsequent columns and pages without losing text.
+  for (let index = 0; index < newsletter.posts.length;) {
+    const next = postLayouts[index + 1];
+    const maximumCardHeight = height - 70 - bottom;
+    const pair = next && postLayouts[index].cardHeight <= maximumCardHeight && next.cardHeight <= maximumCardHeight;
+    if (pair) {
+      const rowHeight = Math.max(postLayouts[index].cardHeight, next.cardHeight);
+      if (column !== 0 || y - rowHeight < bottom) newPage();
+      const rowPage = page, rowTop = y;
+      column = 0;
+      await drawPost(index);
+      const leftEnd = y;
+      page = rowPage; column = 1; y = rowTop;
+      await drawPost(index + 1);
+      const rightEnd = y;
+      page = rowPage; column = 0; y = Math.min(leftEnd, rightEnd);
+      pageBottoms.set(page, Math.min(pageBottoms.get(page) ?? height, y));
+      index += 2;
+    } else {
+      await drawPost(index);
+      index++;
+    }
+  }
   if (!newsletter.posts.length) text('No news for this week.', body, 10, muted);
   activeCard = false;
+
+  // A booklet must contain a multiple of four logical pages. Add any necessary
+  // inside blanks before the back cover so the back-cover content always remains
+  // on the outside of the folded booklet.
+  if (!digital) {
+    const blanks = (4 - ((pdf.getPageCount() + 1) % 4)) % 4;
+    for (let index = 0; index < blanks; index++) blankPage();
+  }
+
+  newPage();
+  const backTop = y;
+  const givingHeading = 'Will You Partner With Us?';
+  const givingRows = rows(givingCopy, fullWidth - 84, body, 9, 12, ink);
+  const givingPanelHeight = 43 + Math.max(68, givingRows.reduce((sum, row) => sum + row.leading, 0));
+  page.drawLine({ start: { x: margin, y }, end: { x: width - margin, y }, thickness: 1.2, color: green });
+  y -= 11;
+  page.drawText(givingHeading, { x: margin, y: y - 15, font: headline, size: 15, color: green });
+  y -= 29;
+  drawRows(givingRows, margin, y, y - givingPanelHeight);
   if (newsletter.givingUrl) {
-    const heading = 'Will You Partner With Us?';
-    const givingRows = rows(givingCopy, fullWidth - 95, body, 10, 13);
-    const panelHeight = 48 + Math.max(64, givingRows.reduce((sum, row) => sum + row.leading, 0));
-    y = Math.min(y, pageBottoms.get(page) ?? y) - 8;
-    if (y - panelHeight < bottom) newPage();
-    column = 0;
-    page.drawRectangle({ x: margin - 2, y: y - panelHeight, width: fullWidth + 4, height: panelHeight + 4, color: paper });
-    page.drawLine({ start: { x: margin, y }, end: { x: width - margin, y }, thickness: 1, color: green }); y -= 12;
-    page.drawText(heading, { x: margin, y: y - 17, font: headline, size: 17, color: green }); y -= 31;
-    drawRows(givingRows, margin, y, bottom);
+    const qrSize = 68;
+    const qrX = width - margin - qrSize, qrY = backTop - givingPanelHeight + 6;
     const qr = await pdf.embedPng(await QRCode.toDataURL(newsletter.givingUrl, { margin: 4, width: 320, color: { dark: digital ? '#1b8257' : '#000000', light: '#ffffff' } }));
-    page.drawImage(qr, { x: width - margin - 70, y: y - 64, width: 64, height: 64 });
-    const action = pdf.context.obj({ Type: 'Annot', Subtype: 'Link', Rect: [margin, y - panelHeight + 43, width - margin, y + 31], Border: [0, 0, 0], A: { Type: 'Action', S: 'URI', URI: PDFString.of(newsletter.givingUrl) } });
+    page.drawImage(qr, { x: qrX, y: qrY, width: qrSize, height: qrSize });
+    const action = pdf.context.obj({ Type: 'Annot', Subtype: 'Link', Rect: [qrX, qrY, qrX + qrSize, qrY + qrSize], Border: [0, 0, 0], A: { Type: 'Action', S: 'URI', URI: PDFString.of(newsletter.givingUrl) } });
     page.node.addAnnot(pdf.context.register(action));
   }
+
+  y = backTop - givingPanelHeight - 18;
+  page.drawText('Keep In Touch', { x: margin, y: y - 15, font: headline, size: 15, color: green });
+  y -= 31;
+  const boxTop = y, boxWidth = columnWidth, boxHeight = Math.min(160, boxTop - bottom);
+  async function contactCard(x: number, title: string, copy: string, email: string, subject: string) {
+    page.drawRectangle({ x, y: boxTop - boxHeight, width: boxWidth, height: boxHeight, borderColor: green, borderWidth: .8 });
+    page.drawText(title, { x: x + 9, y: boxTop - 20, font: headline, size: 10.5, color: green });
+    drawRows(rows(copy, boxWidth - 18, body, 8.5, 11, ink), x + 9, boxTop - 31, boxTop - 60);
+    const mailto = `mailto:${email}?subject=${encodeURIComponent(subject)}`;
+    const qrSize = 64, qrX = x + (boxWidth - qrSize) / 2, qrY = boxTop - 124;
+    const qr = await pdf.embedPng(await QRCode.toDataURL(mailto, { margin: 4, width: 320, color: { dark: digital ? '#1b8257' : '#000000', light: '#ffffff' } }));
+    page.drawImage(qr, { x: qrX, y: qrY, width: qrSize, height: qrSize });
+    const emailText = clean(email);
+    page.drawText(emailText, { x: x + (boxWidth - body.widthOfTextAtSize(emailText, 7.5)) / 2, y: boxTop - 142, font: body, size: 7.5, color: muted });
+    const link = pdf.context.obj({ Type: 'Annot', Subtype: 'Link', Rect: [qrX, qrY, qrX + qrSize, qrY + qrSize], Border: [0, 0, 0], A: { Type: 'Action', S: 'URI', URI: PDFString.of(mailto) } });
+    page.node.addAnnot(pdf.context.register(link));
+  }
+  await contactCard(margin, 'Prayer Requests', 'Share something you would like us to pray for.', 'prayer@stjohnspark.org', 'Prayer request');
+  await contactCard(margin + boxWidth + gap, 'Newsletter Feedback', 'Tell us what is useful and what we could improve.', 'feedback@stjohnspark.org', 'Newsletter feedback');
+
   const pages = pdf.getPages();
   pages.forEach((footer, index) => {
-    footer.drawLine({ start: { x: margin, y: 36 }, end: { x: width - margin, y: 36 }, thickness: .6, color: green });
+    footer.drawLine({ start: { x: margin, y: 28 }, end: { x: width - margin, y: 28 }, thickness: .6, color: green });
     const contact = [newsletter.contactEmail, new URL(newsletter.onlineUrl).hostname].filter(Boolean).join('   ·   ');
-    footer.drawText(clean(contact), { x: margin, y: 22, size: 8, font: body, color: muted });
-    footer.drawText(`${index + 1} / ${pages.length}`, { x: width - margin - 28, y: 22, size: 8, font: body, color: muted });
+    footer.drawText(clean(contact), { x: margin, y: 16, size: 7, font: body, color: muted });
+    footer.drawText(`${index + 1} / ${pages.length}`, { x: width - margin - 25, y: 16, size: 7, font: body, color: muted });
   });
-  return pdf.save();
+
+  if (digital) return pdf.save();
+
+  // Booklet imposition: outside is [back | front], then [page 2 | penultimate],
+  // continuing inward. Printing double-sided and folding at the centre restores
+  // normal reading order.
+  const logicalBytes = await pdf.save();
+  const booklet = await PDFDocument.create();
+  booklet.setTitle(`${newsletter.shortTitle} - ${newsletter.formattedDate} - folded booklet`);
+  booklet.setAuthor(newsletter.shortTitle);
+  booklet.setSubject('A4 folded weekly-news booklet');
+  function copyLinks(source: PDFPage, target: PDFPage, xOffset: number) {
+    const annotations = source.node.lookupMaybe(PDFName.of('Annots'), PDFArray);
+    for (const ref of annotations?.asArray() ?? []) {
+      const annotation = pdf.context.lookup(ref, PDFDict);
+      const values = annotation.lookup(PDFName.of('Rect'), PDFArray).asArray().map((value: any) => value.asNumber());
+      const action = annotation.lookup(PDFName.of('A'), PDFDict);
+      const uri = action.lookup(PDFName.of('URI'), PDFString).decodeText();
+      const link = booklet.context.obj({
+        Type: 'Annot', Subtype: 'Link',
+        Rect: [values[0] + xOffset, values[1], values[2] + xOffset, values[3]],
+        Border: [0, 0, 0],
+        A: { Type: 'Action', S: 'URI', URI: PDFString.of(uri) },
+      });
+      target.node.addAnnot(booklet.context.register(link));
+    }
+  }
+  const pairings: Array<[number, number]> = [];
+  for (let sheet = 0; sheet < pages.length / 4; sheet++) {
+    pairings.push([pages.length - 1 - sheet * 2, sheet * 2]);
+    pairings.push([sheet * 2 + 1, pages.length - 2 - sheet * 2]);
+  }
+  for (const [leftIndex, rightIndex] of pairings) {
+    const sheet = booklet.addPage([width * 2, height]);
+    const [left, right] = await booklet.embedPdf(logicalBytes, [leftIndex, rightIndex]);
+    sheet.drawPage(left, { x: 0, y: 0, width, height });
+    sheet.drawPage(right, { x: width, y: 0, width, height });
+    sheet.drawLine({ start: { x: width, y: 0 }, end: { x: width, y: 10 }, thickness: .35, color: green });
+    sheet.drawLine({ start: { x: width, y: height - 10 }, end: { x: width, y: height }, thickness: .35, color: green });
+    copyLinks(pages[leftIndex], sheet, 0);
+    copyLinks(pages[rightIndex], sheet, width);
+  }
+  return booklet.save();
 }
