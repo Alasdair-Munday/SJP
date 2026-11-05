@@ -51,7 +51,8 @@ the edition keeps the printable default. Filenames include the edition.
 The digital edition uses A5 pages in normal reading order for comfortable viewing
 on a phone, tablet or computer. The print edition uses the same logical pages but
 imposes them two-up on double-sided A4 landscape sheets in booklet order. Print
-the file double-sided, fold the sheets at the centre and the pages read in order.
+the file at actual size, double-sided with short-edge flipping, then fold the sheets
+at the centre and the pages read in order.
 Blank inside pages are inserted when required so the cover and back cover always
 land on the outside.
 
