@@ -48,12 +48,19 @@ text. Print keeps white paper with small coloured accents. The endpoint accepts
 `/newsletter/pdf/?date=YYYY-MM-DD&edition=digital` or `edition=print`; omitting
 the edition keeps the printable default. Filenames include the edition.
 
-The default layout follows the newsletter mockup with a white-paper design for
-ordinary printers: a cover photograph and thought on the left, Sunday/weekday
-calendar details in an outlined sidebar, then two-column photo cards with article
-summaries and QR links. There are no solid page or panel fills. Photos are small,
-cropped and embedded; missing photos do not prevent a download. Photos are only
-fetched from the site's own URLs, with a 10-second timeout and 3 MB limit per image.
+The digital edition uses A5 pages in normal reading order for comfortable viewing
+on a phone, tablet or computer. The print edition uses the same logical pages but
+imposes them two-up on double-sided A4 landscape sheets in booklet order. Print
+the file double-sided, fold the sheets at the centre and the pages read in order.
+Blank inside pages are inserted when required so the cover and back cover always
+land on the outside.
+
+The cover holds the weekly thought and timetable. Article cards fill across each
+row before moving down, so two stories appear side by side rather than stacking
+in the left column. The final back cover contains giving information plus QR
+email links for prayer requests and newsletter feedback. Photos are cropped and
+embedded; missing photos do not prevent a download. Photos are only fetched from
+the site's own URLs, with a 10-second timeout and 3 MB limit per image.
 
 In Site Admin → **Newsletter thoughts**, create an issue, enter plain-text
 paragraphs, optionally add an author or cover photo, and enable **Include in
