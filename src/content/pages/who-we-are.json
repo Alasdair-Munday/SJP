@@ -4,19 +4,19 @@
   "template": "standard",
   "sections": [
     {
-      "type": "hero",
-      "eyebrow": "Church identity",
-      "title": "Who We Are",
-      "body": "St John's Park is part of the Church of England in the Diocese of Sheffield. We want to be a church that worships Jesus deeply, serves our neighbours faithfully, and makes room for people of every age and background to belong.",
       "backgroundTone": "park-dark",
+      "body": "St John's Park is part of the Church of England in the Diocese of Sheffield. We want to be a church that worships Jesus deeply, serves our neighbours faithfully, and makes room for people of every age and background to belong.",
+      "titleImage": {
+        "width": 5,
+        "height": 5
+      },
+      "eyebrow": "Church identity",
       "primaryCta": {
         "label": "Visit on Sunday",
         "href": "/visit"
       },
-      "secondaryCta": {
-        "label": "See ways to get involved",
-        "href": "/get-involved"
-      },
+      "title": "Who We Are",
+      "type": "hero",
       "image": {
         "src": "/images/uploads/Diversity.jpg",
         "alt": "People smiling and talking together inside St John's Park",
@@ -24,6 +24,10 @@
         "accentShape": "/images/shapes/concentric-circles.png",
         "objectPosition": "center center",
         "frameTone": "roof"
+      },
+      "secondaryCta": {
+        "label": "See ways to get involved",
+        "href": "/get-involved"
       }
     },
     {
@@ -38,8 +42,8 @@
       ],
       "backgroundTone": "stone",
       "image": {
-        "src": "/images/uploads/stained-glass-cross.jpg",
-        "alt": "A stained glass cross inside the church building",
+        "src": "/images/uploads/Whole-congregation-outdoors-group-photoshoot-warm.jpg",
+        "alt": "Congregation at St John's Park Church standing in front of the building",
         "accentShape": "/images/shapes/squiggle-ball.png",
         "frameTone": "door"
       }
@@ -326,7 +330,7 @@
             "frameTone": "sky"
           },
           "tone": "stone"
-        } 
+        }
       ]
     },
     {
