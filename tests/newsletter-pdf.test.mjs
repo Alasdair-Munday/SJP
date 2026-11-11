@@ -14,18 +14,23 @@ const issue = {
   posts: [],
 };
 try {
-  await test('empty issue produces a printable A4 PDF', async () => {
-    const doc = await PDFDocument.load(await renderNewsletterPdf(issue));
-    assert.equal(doc.getPageCount(), 1);
-    assert.equal(Math.round(doc.getPage(0).getWidth()), 595);
-    assert.equal(Math.round(doc.getPage(0).getHeight()), 842);
+  await test('digital uses A5 reading pages and print uses imposed A4 landscape sheets', async () => {
+    const digital = await PDFDocument.load(await renderNewsletterPdf(issue, 'digital'));
+    assert.equal(digital.getPageCount(), 2, 'Front and back covers remain in reading order');
+    assert.equal(Math.round(digital.getPage(0).getWidth()), 421);
+    assert.equal(Math.round(digital.getPage(0).getHeight()), 595);
+
+    const print = await PDFDocument.load(await renderNewsletterPdf(issue, 'print'));
+    assert.equal(print.getPageCount(), 2, 'Four logical pages make one double-sided sheet');
+    assert.equal(Math.round(print.getPage(0).getWidth()), 842);
+    assert.equal(Math.round(print.getPage(0).getHeight()), 595);
   });
   await test('long summaries flow across pages and preserve every full-story link', async () => {
     const posts = Array.from({ length: 8 }, (_, i) => ({
       title: `Community story ${i + 1}`, category: 'update', summary: 'Our community gathers to share food, friendship and faith. '.repeat(i === 0 ? 120 : 8),
       eventDetails: '', url: `https://stjohnspark.org/news/story-${i + 1}/`,
     }));
-    const doc = await PDFDocument.load(await renderNewsletterPdf({ ...issue, posts }));
+    const doc = await PDFDocument.load(await renderNewsletterPdf({ ...issue, posts }, 'digital'));
     assert.ok(doc.getPageCount() > 1);
     const links = [];
     for (const page of doc.getPages()) {
@@ -35,7 +40,7 @@ try {
         links.push(annotation.lookup(PDFName.of('A'), PDFDict).lookup(PDFName.of('URI'), PDFString).decodeText());
       }
     }
-    assert.deepEqual(links, posts.map((post) => post.url));
+    assert.deepEqual(links.filter((href) => href.includes('/news/story-')), posts.map((post) => post.url));
   });
   await test('article text wraps beside a bottom-right QR with its caption below in both editions', async () => {
     const originalText = PDFPage.prototype.drawText, originalImage = PDFPage.prototype.drawImage;
@@ -64,7 +69,7 @@ try {
           }
           const qr = images.find((item) => item.width === 64 && item.height === 64);
           assert.ok(qr, 'Article QR must retain its scannable size');
-          const captions = textItems.filter((item) => item.page === qr.page && item.size === 8 && item.y >= 51 && item.y < qr.y && item.x >= qr.x && item.x < qr.x + qr.width);
+          const captions = textItems.filter((item) => item.page === qr.page && item.size === 8 && item.y >= 38 && item.y < qr.y && item.x >= qr.x && item.x < qr.x + qr.width);
           assert.equal(captions.map((item) => item.value).join(' '), edition === 'digital' ? 'Tap or scan for the full story' : 'Scan for the full story');
           assert.ok(Math.abs(qr.y - (captions[0].y + captions[0].size) - 4) < .01, 'Caption must sit directly below QR');
           const beside = summaryText.filter((item) => item.page === qr.page && item.y < qr.y + qr.height && item.y + item.size > captions.at(-1).y);
@@ -75,7 +80,7 @@ try {
             const annotations = page.node.lookupMaybe(PDFName.of('Annots'), PDFArray);
             for (const ref of annotations?.asArray() ?? []) {
               const rect = doc.context.lookup(ref, PDFDict).lookup(PDFName.of('Rect'), PDFArray).asArray().map((value) => value.asNumber());
-              assert.ok(rect[1] >= 51, 'QR and caption must stay above the footer');
+              assert.ok(rect[1] >= 38, 'QR and caption must stay above the footer');
               const target = doc.context.lookup(ref, PDFDict).lookup(PDFName.of('A'), PDFDict).lookup(PDFName.of('URI'), PDFString).decodeText();
               if (target === url) assert.ok(Math.abs(rect[2] - rect[0] - 64) < .01, 'Clickable area must cover QR and caption');
             }
@@ -84,6 +89,38 @@ try {
       }
     } finally { PDFPage.prototype.drawText = originalText; PDFPage.prototype.drawImage = originalImage; }
   });
+  await test('two ordinary stories fill across the page before moving down', async () => {
+    const originalText = PDFPage.prototype.drawText;
+    const items = [];
+    PDFPage.prototype.drawText = function (value, options) {
+      items.push({ page: this, value, ...options });
+      return originalText.call(this, value, options);
+    };
+    try {
+      await renderNewsletterPdf({ ...issue, posts: [
+        { title: 'Left story', summary: 'A short first story.', url: 'https://stjohnspark.org/news/left/' },
+        { title: 'Right story', summary: 'A short second story.', url: 'https://stjohnspark.org/news/right/' },
+      ] }, 'digital');
+      const left = items.find((item) => item.value === 'LEFT STORY');
+      const right = items.find((item) => item.value === 'RIGHT STORY');
+      assert.ok(left && right);
+      assert.equal(left.page, right.page);
+      assert.ok(Math.abs(left.y - right.y) < .01, 'Paired stories should share a top line');
+      assert.ok(right.x > left.x, 'Second story should occupy the right column');
+    } finally { PDFPage.prototype.drawText = originalText; }
+  });
+
+  await test('back cover includes giving, prayer and newsletter-feedback links', async () => {
+    const doc = await PDFDocument.load(await renderNewsletterPdf({ ...issue, givingUrl: 'https://stjohnspark.org/get-involved#giving' }, 'digital'));
+    const links = doc.getPages().flatMap((page) => {
+      const annotations = page.node.lookupMaybe(PDFName.of('Annots'), PDFArray);
+      return (annotations?.asArray() ?? []).map((ref) => doc.context.lookup(ref, PDFDict).lookup(PDFName.of('A'), PDFDict).lookup(PDFName.of('URI'), PDFString).decodeText());
+    });
+    assert.ok(links.includes('https://stjohnspark.org/get-involved#giving'));
+    assert.ok(links.some((href) => href.startsWith('mailto:prayer@stjohnspark.org')));
+    assert.ok(links.some((href) => href.startsWith('mailto:feedback@stjohnspark.org')));
+  });
+
   await test('photos use only the site origin and render without an external image service', async () => {
     const { logo } = await server.ssrLoadModule('/src/assets/pdf-fonts/brand.ts');
     const originalFetch = globalThis.fetch;
@@ -96,7 +133,7 @@ try {
       const doc = await PDFDocument.load(await renderNewsletterPdf({ ...issue,
         coverImageSrc: 'https://unrelated.invalid/photo.jpg',
         posts: [{ title: 'A church story', summary: 'A short summary.', imageSrc: 'https://stjohnspark.org/photo.jpg', eventDetails: '', url: 'https://stjohnspark.org/news/story/' }],
-      }));
+      }, 'digital'));
       assert.deepEqual(requests, ['https://stjohnspark.org/photo.jpg']);
       const images = doc.getPage(0).node.Resources().lookup(PDFName.of('XObject'), PDFDict);
       assert.ok(images.keys().length >= 4, 'Logo, Eden art, article photograph and QR must be embedded');
@@ -110,8 +147,11 @@ try {
     for (const edition of ['print', 'digital']) {
       const bytes = await renderNewsletterPdf({ ...populated, givingUrl: 'https://stjohnspark.org/get-involved#giving' }, edition);
       const doc = await PDFDocument.load(bytes);
-      const annotations = doc.getPages().at(-1).node.lookup(PDFName.of('Annots'), PDFArray);
-      assert.ok(annotations.asArray().some((ref) => doc.context.lookup(ref, PDFDict).lookup(PDFName.of('A'), PDFDict).lookup(PDFName.of('URI'), PDFString).decodeText().endsWith('#giving')));
+      const links = doc.getPages().flatMap((page) => {
+        const annotations = page.node.lookupMaybe(PDFName.of('Annots'), PDFArray);
+        return (annotations?.asArray() ?? []).map((ref) => doc.context.lookup(ref, PDFDict).lookup(PDFName.of('A'), PDFDict).lookup(PDFName.of('URI'), PDFString).decodeText());
+      });
+      assert.ok(links.some((href) => href.endsWith('#giving')));
     }
   });
 } finally { await server.close(); }
