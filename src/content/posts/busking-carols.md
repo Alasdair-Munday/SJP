@@ -11,6 +11,9 @@ newsletterDisplayUntil: 2026-12-12
 socialEnabled: false
 socialConsentConfirmed: true
 socialCaption: ""
+eventDate: 2026-12-12
+timeText: 4:00pm - 6:00pm
+location: St John's Park, Bernard Street, Sheffield, S2 5PU
 featuredImage:
   src: /images/uploads/Carol-singing.jpg
 ---
