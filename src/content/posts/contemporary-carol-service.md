@@ -1,7 +1,7 @@
 ---
 title: "Contemporary Carol Service "
 summary: "On Sunday 20th December at 4pm we'll be joining together for our
-  carols service - we would to see you there! "
+  carols service - we would love to see you there! "
 category: event
 publishDate: 2026-11-17
 displayOnNewsletter: true
