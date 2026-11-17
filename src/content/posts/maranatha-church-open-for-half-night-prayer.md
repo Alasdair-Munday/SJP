@@ -10,6 +10,7 @@ displayOnNewsletter: true
 socialEnabled: false
 socialConsentConfirmed: false
 eventDate: 2026-12-04
+timeText: 4pm - Midnight
 ctaLabel: Email Al to get involved
 ctaHref: mailto:al@saintjohnspark.org
 featuredImage:
