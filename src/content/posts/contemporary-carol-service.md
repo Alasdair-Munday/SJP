@@ -9,7 +9,7 @@ newsletterDisplayUntil: ""
 socialEnabled: false
 socialConsentConfirmed: false
 eventDate: 2026-12-20
-eventEndDate: 2026-11-20
+eventEndDate: 2026-12-20
 location: St John's Park, Bernard Street, Sheffield, S2 5PU
 ctaLabel: Contact Us
 ctaHref: /contact
