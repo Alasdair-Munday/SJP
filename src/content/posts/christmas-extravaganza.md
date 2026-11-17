@@ -14,7 +14,7 @@ location: St John's Park Church, Bernard Street, Sheffield, S2 5PU
 featuredImage:
   src: /images/uploads/Extravaganza-event-1-.png
 ---
-We cannot wait to see you for our Easter Extravaganza on Saturday the 19th of December!
+We cannot wait to see you for our Christmas Extravaganza on Saturday the 19th of December!
 
 There will be festive activities for everyone to get involved in like making a Christingle together, searching for Nativity characters to find out about the best gift of all, hot dogs and much more!
 
