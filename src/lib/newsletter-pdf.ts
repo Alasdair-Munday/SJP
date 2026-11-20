@@ -32,9 +32,10 @@ export async function renderNewsletterPdf(newsletter: NewsletterData, edition: N
   const width = 420.94, height = 595.28, margin = 22, gap = 14, bottom = 38;
   const fullWidth = width - margin * 2, columnWidth = (fullWidth - gap) / 2;
   const leadWidth = fullWidth * .54, sideX = margin + leadWidth + 12, sideWidth = fullWidth - leadWidth - 12;
-  let page!: PDFPage, column = 0, y = 0, top = 0, activeCard = false;
+  let page!: PDFPage, column = 0, y = 0, top = 0, activeCard = false, fullRowMode = false;
   const pageBottoms = new Map<PDFPage, number>();
-  const px = () => margin + column * (columnWidth + gap);
+  const px = () => fullRowMode ? margin : margin + column * (columnWidth + gap);
+  const activeWidth = () => fullRowMode ? fullWidth : columnWidth;
   const sets = new Map([body, bold, headline].map((font) => [font, new Set(font.getCharacterSet())]));
   const clean = (value: string, font = body) => [...value.normalize('NFC')].map((char) => /\s/.test(char) ? ' ' : sets.get(font)!.has(char.codePointAt(0)!) ? char : '').join('');
   function lines(value: string, font = body, size = 10, available: number | ((row: number) => number) = columnWidth) {
@@ -131,18 +132,20 @@ export async function renderNewsletterPdf(newsletter: NewsletterData, edition: N
     page.drawRectangle({ x: 0, y: 0, width, height, color: paper });
   }
   function cardPanel(cardHeight: number) {
-    if (digital) page.drawRectangle({ x: px(), y: Math.max(bottom, y - cardHeight), width: columnWidth, height: Math.min(cardHeight, y - bottom), color: green });
+    if (digital) page.drawRectangle({ x: px(), y: Math.max(bottom, y - cardHeight), width: activeWidth(), height: Math.min(cardHeight, y - bottom), color: green });
   }
   function ensure(space: number) {
     const required = Math.min(space, height - 96 - bottom);
     while (y - required < bottom) {
       pageBottoms.set(page, Math.min(pageBottoms.get(page) ?? height, y));
-      if (column === 0) { column = 1; y = top; } else newPage();
+      if (fullRowMode) newPage();
+      else if (column === 0) { column = 1; y = top; }
+      else newPage();
       if (activeCard) cardPanel(y - bottom);
     }
   }
   function text(value: string, font = body, size = 10, color = ink, leading = size * 1.35) {
-    for (const item of rows(value, columnWidth - 16, font, size, leading, color)) {
+    for (const item of rows(value, activeWidth() - 16, font, size, leading, color)) {
       ensure(item.leading);
       if (item.value) page.drawText(item.value, { x: px() + 8, y: y - size, font, size, color });
       y -= item.leading;
@@ -205,12 +208,15 @@ export async function renderNewsletterPdf(newsletter: NewsletterData, edition: N
       y -= 14;
     }
   }
+  // Articles use a single full-width column. Each post is one horizontal row,
+  // stacked from the top in reading order in both digital and booklet editions.
+  fullRowMode = true;
   const postLayouts = newsletter.posts.map((post, index) => {
     const qrSize = 64, qrGap = 10, labelGap = 4, summaryLeading = 13.5;
     const captionRows = rows(digital ? 'Tap or scan for the full story' : 'Scan for the full story', qrSize, body, 8, 10, digital ? panelText : muted);
     const captionHeight = captionRows.reduce((sum, row) => sum + row.leading, 0);
     const qrHeight = qrSize + labelGap + captionHeight;
-    const summaryWidth = columnWidth - 16;
+    const summaryWidth = fullWidth - 16;
     let summaryRows = rows(post.summary, summaryWidth, body, 10, summaryLeading, panelText);
     let summaryHeight = Math.max(qrHeight, summaryRows.reduce((sum, row) => sum + row.leading, 0));
     // Measure the exclusion at the bottom right before drawing. Only the final
@@ -221,8 +227,8 @@ export async function renderNewsletterPdf(newsletter: NewsletterData, edition: N
       summaryHeight += summaryLeading;
     }
     const photoHeight = photos[index + 1] ? 90 : 0;
-    const titleHeight = lines(post.title.toUpperCase(), headline, 12, columnWidth - 16).length * 16;
-    const detailsHeight = post.eventDetails ? lines(post.eventDetails, bold, 9, columnWidth - 16).length * 12 + 6 : 0;
+    const titleHeight = lines(post.title.toUpperCase(), headline, 12, fullWidth - 16).length * 16;
+    const detailsHeight = post.eventDetails ? lines(post.eventDetails, bold, 9, fullWidth - 16).length * 12 + 6 : 0;
     const cardHeight = 10 + photoHeight + (photoHeight ? 9 : 0) + titleHeight + 7 + detailsHeight + summaryHeight + 12;
     return { qrSize, qrGap, labelGap, captionRows, captionHeight, qrHeight, summaryRows, summaryHeight, photoHeight, cardHeight };
   });
@@ -235,8 +241,8 @@ export async function renderNewsletterPdf(newsletter: NewsletterData, edition: N
     ensure(cardHeight);
     activeCard = true;
     cardPanel(cardHeight);
-    page.drawLine({ start: { x: px(), y }, end: { x: px() + columnWidth, y }, thickness: 1.5, color: green }); y -= 10;
-    if (photos[index + 1]) { cropped(photos[index + 1]!, px() + 8, y - photoHeight, columnWidth - 16, photoHeight); y -= photoHeight + 9; }
+    page.drawLine({ start: { x: px(), y }, end: { x: px() + activeWidth(), y }, thickness: 1.5, color: green }); y -= 10;
+    if (photos[index + 1]) { cropped(photos[index + 1]!, px() + 8, y - photoHeight, activeWidth() - 16, photoHeight); y -= photoHeight + 9; }
     text(post.title.toUpperCase(), headline, 12, panelHeading, 16); y -= 7;
     if (post.eventDetails) { text(post.eventDetails, bold, 9, panelText, 12); y -= 6; }
     let prefixHeight = 0, prefixRows = 0;
@@ -250,7 +256,7 @@ export async function renderNewsletterPdf(newsletter: NewsletterData, edition: N
     const tailHeight = summaryHeight - prefixHeight;
     ensure(tailHeight + 12);
     drawRows(summaryRows.slice(prefixRows), px() + 8, y, y - tailHeight);
-    const summaryBottom = y - tailHeight, qrX = px() + columnWidth - 8 - qrSize;
+    const summaryBottom = y - tailHeight, qrX = px() + activeWidth() - 8 - qrSize;
     const qr = await pdf.embedPng(await QRCode.toDataURL(post.url, { errorCorrectionLevel: 'M', margin: 4, width: 384, color: { dark: digital ? '#1b8257' : '#000000', light: '#ffffff' } }));
     page.drawImage(qr, { x: qrX, y: summaryBottom + captionHeight + labelGap, width: qrSize, height: qrSize });
     let captionY = summaryBottom + captionHeight;
@@ -261,39 +267,17 @@ export async function renderNewsletterPdf(newsletter: NewsletterData, edition: N
     const link = pdf.context.obj({ Type: 'Annot', Subtype: 'Link', Rect: [qrX, summaryBottom, qrX + qrSize, summaryBottom + qrHeight], Border: [0, 0, 0], A: { Type: 'Action', S: 'URI', URI: PDFString.of(post.url) } });
     page.node.addAnnot(pdf.context.register(link)); y = summaryBottom - 12;
     // A continued card starts with a full-column panel. Trim its unused tail.
-    if (digital && y > bottom) page.drawRectangle({ x: px(), y: bottom, width: columnWidth, height: y - bottom, color: paper });
-    page.drawLine({ start: { x: px(), y }, end: { x: px() + columnWidth, y }, thickness: .5, color: lineColor }); y -= 16;
+    if (digital && y > bottom) page.drawRectangle({ x: px(), y: bottom, width: activeWidth(), height: y - bottom, color: paper });
+    page.drawLine({ start: { x: px(), y }, end: { x: px() + activeWidth(), y }, thickness: .5, color: lineColor }); y -= 16;
     activeCard = false;
     pageBottoms.set(page, Math.min(pageBottoms.get(page) ?? height, y));
   }
 
-  // Fill across the page before moving down it. A normal pair therefore starts
-  // at the same vertical position, while an unusually long card can still flow
-  // through subsequent columns and pages without losing text.
-  for (let index = 0; index < newsletter.posts.length;) {
-    const next = postLayouts[index + 1];
-    const maximumCardHeight = height - 70 - bottom;
-    const pair = next && postLayouts[index].cardHeight <= maximumCardHeight && next.cardHeight <= maximumCardHeight;
-    if (pair) {
-      const rowHeight = Math.max(postLayouts[index].cardHeight, next.cardHeight);
-      if (column !== 0 || y - rowHeight < bottom) newPage();
-      const rowPage = page, rowTop = y;
-      column = 0;
-      await drawPost(index);
-      const leftEnd = y;
-      page = rowPage; column = 1; y = rowTop;
-      await drawPost(index + 1);
-      const rightEnd = y;
-      page = rowPage; column = 0; y = Math.min(leftEnd, rightEnd);
-      pageBottoms.set(page, Math.min(pageBottoms.get(page) ?? height, y));
-      index += 2;
-    } else {
-      await drawPost(index);
-      index++;
-    }
-  }
+  for (let index = 0; index < newsletter.posts.length; index++) await drawPost(index);
   if (!newsletter.posts.length) text('No news for this week.', body, 10, muted);
   activeCard = false;
+  fullRowMode = false;
+  column = 0;
 
   // A booklet must contain a multiple of four logical pages. Add any necessary
   // inside blanks before the back cover so the back-cover content always remains
