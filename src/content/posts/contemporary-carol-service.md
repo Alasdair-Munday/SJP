@@ -1,6 +1,6 @@
 ---
 campaignTags:
-  - christmas-2026
+  - christmas
 title: "Contemporary Carol Service "
 summary: "On Sunday 20th December at 4pm we'll be joining together for our
   carols service - we would love to see you there! "

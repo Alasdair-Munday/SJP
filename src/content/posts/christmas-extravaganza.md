@@ -1,6 +1,6 @@
 ---
 campaignTags:
-  - christmas-2026
+  - christmas
 title: Christmas Extravaganza!
 summary: "Join us for festive family fun at St John's Park Church for our
   Christmas Extravaganza at 4pm on Saturday the 19th of December! There will be

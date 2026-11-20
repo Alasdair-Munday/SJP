@@ -1,6 +1,6 @@
 ---
 campaignTags:
-  - christmas-2026
+  - christmas
 title: JINGLE BELL JOLLOF
 summary: Come to our Church family Christmas celebration! It will be a good time
   to celebrate together and to connect with each other. It will be a nice time

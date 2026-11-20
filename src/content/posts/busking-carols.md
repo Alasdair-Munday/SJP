@@ -1,6 +1,6 @@
 ---
 campaignTags:
-  - christmas-2026
+  - christmas
 title: "Busking Carols "
 summary: "This year we are going out onto the streets, on Saturday the 12th 4pm
   to 6 pm, to busk some carols and share the other events we have going on with
