@@ -96,6 +96,16 @@ collections:
       - {label: "Title", name: "title", widget: "string", hint: "The main headline for the post or event."}
       - {label: "Summary", name: "summary", widget: "text", hint: "A short sentence describing the post."}
       - {label: "Category", name: "category", widget: "select", options: [{label: "Event", value: "event"}, {label: "Update", value: "update"}, {label: "Blog", value: "blog"}, {label: "Thought for the week", value: "thought"}], default: "update", required: false, hint: "Tag to organize the post."}
+      - label: "Campaigns"
+        name: "campaignTags"
+        widget: "relation"
+        collection: "campaigns"
+        search_fields: ["title"]
+        value_field: "{{slug}}"
+        display_fields: ["title"]
+        multiple: true
+        required: false
+        hint: "Select one or more existing campaign pages to include this post."
       - {label: "Author", name: "author", widget: "string", required: false, hint: "Optional byline, especially for Thought for the week posts."}
       - {label: "Publish Date", name: "publishDate", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false, hint: "When this post should appear."}
       - {label: "Display on Newsletter", name: "displayOnNewsletter", widget: "boolean", default: true, required: false, hint: "On by default. Turn off to keep this item out of the weekly newsletter."}
@@ -284,6 +294,20 @@ collections:
             widget: "list"
             hint: "Add, reorder, or edit the blocks on the page."
             types:
+              - label: "Campaign posts"
+                name: "campaignPosts"
+                widget: "object"
+                summary: 'Posts for {{tag}}'
+                fields:
+                  - label: "Campaign"
+                    name: "tag"
+                    widget: "relation"
+                    collection: "campaigns"
+                    search_fields: ["title"]
+                    value_field: "{{slug}}"
+                    display_fields: ["title"]
+                    hint: "Show posts assigned to the selected campaign."
+                  - {label: "Section colours", name: "backgroundTones", widget: "select", multiple: true, options: ["park", "park-dark", "stone", "sky", "pink", "pink-dark", "orange", "door", "give", "grass", "roof"], default: ["sky", "pink", "grass", "door"], hint: "Colours repeat across the matching posts."}
               - label: "This week from Google Calendar"
                 name: "whatsOn"
                 widget: "object"
@@ -656,3 +680,17 @@ collections:
           - {label: "Meta Description", name: "metaDescription", widget: "text"}
           - {label: "Template", name: "template", widget: "hidden", default: "utility"}
           - *page_sections
+
+  - name: "campaigns"
+    label: "Campaign Pages"
+    label_singular: "Campaign Page"
+    folder: "src/content/campaigns"
+    create: true
+    extension: "json"
+    format: "json"
+    slug: "{{slug}}"
+    summary: "{{title}}"
+    fields:
+      - {label: "Title", name: "title", widget: "string", hint: "The page is available at /campaigns/ followed by its filename."}
+      - {label: "Meta Description", name: "metaDescription", widget: "text"}
+      - *page_sections

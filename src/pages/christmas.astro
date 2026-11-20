@@ -1,0 +1,7 @@
+---
+import { getEntry } from "astro:content";
+import CampaignPage from "../components/templates/CampaignPage.astro";
+const entry = await getEntry("campaigns", "christmas");
+if (!entry) throw new Error("Missing Christmas campaign");
+---
+<CampaignPage campaign={entry.data} />

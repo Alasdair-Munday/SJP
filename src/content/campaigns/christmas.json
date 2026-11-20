@@ -1,0 +1,39 @@
+{
+  "title": "Christmas at St John's Park",
+  "metaDescription": "Join us for Christmas events and celebrations at St John's Park, Sheffield.",
+  "sections": [
+    {
+      "type": "hero",
+      "eyebrow": "Celebrate with us",
+      "title": "Christmas at St John's Park",
+      "body": "Join us for carols, festive food and celebrations this Christmas. There is something for everyone, and you are warmly welcome.",
+      "backgroundTone": "park",
+      "primaryCta": {
+        "label": "Find us",
+        "href": "/contact"
+      },
+      "image": {
+        "src": "/images/uploads/Carol-singing.jpg",
+        "alt": "Carol singing",
+        "accentShape": "/images/shapes/star-brushstroke.png"
+      }
+    },
+    {
+      "type": "intro",
+      "title": "Christmas together",
+      "body": "Come along to one of our events and celebrate with our community.",
+      "backgroundTone": "stone"
+    },
+    {
+      "type": "campaignPosts",
+      "tag": "christmas",
+      "backgroundTones": [
+        "sky",
+        "pink",
+        "grass",
+        "door",
+        "stone"
+      ]
+    }
+  ]
+}

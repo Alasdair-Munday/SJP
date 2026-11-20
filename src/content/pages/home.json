@@ -7,7 +7,13 @@
       "highlightLabel": "Sundays at 10:45am",
       "backgroundTone": "park",
       "body": "We are a community of Jesus-followers in Park, Sheffield. We long to see the flourishing of Eden in our community by belonging to God's family, serving God's mission, and giving God everything.",
-      "bodyEmphasis": ["Eden", "belonging", "serving", "giving", "Jesus"],
+      "bodyEmphasis": [
+        "Eden",
+        "belonging",
+        "serving",
+        "giving",
+        "Jesus"
+      ],
       "primaryCta": {
         "label": "Join us Sunday 10:45 AM",
         "href": "/visit"
@@ -102,6 +108,31 @@
         "label": "Find us",
         "href": "/contact"
       }
+    },
+    {
+      "type": "split",
+      "eyebrow": "Celebrate with us",
+      "title": "Christmas at St John's Park",
+      "body": "Join us for carols, festive food, family activities and Christmas celebrations. Everyone is welcome.",
+      "points": [
+        "Busking Carols and Jingle Bell Jollof",
+        "Christmas Extravaganza and Carol Service",
+        "Christmas Day celebration"
+      ],
+      "backgroundTone": "pink",
+      "image": {
+        "src": "/images/uploads/Carol-singing.jpg",
+        "alt": "Carol singing",
+        "accentShape": "/images/shapes/star-brushstroke.png",
+        "objectPosition": "center center",
+        "frameTone": "sky"
+      },
+      "ctas": [
+        {
+          "label": "Explore Christmas at St John's Park",
+          "href": "/christmas"
+        }
+      ]
     },
     {
       "type": "split",
