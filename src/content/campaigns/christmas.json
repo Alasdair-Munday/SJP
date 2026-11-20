@@ -26,7 +26,13 @@
     {
       "type": "campaignPosts",
       "tag": "christmas-2026",
-      "backgroundTone": "stone"
+      "backgroundTones": [
+        "sky",
+        "pink",
+        "grass",
+        "door",
+        "stone"
+      ]
     }
   ]
 }

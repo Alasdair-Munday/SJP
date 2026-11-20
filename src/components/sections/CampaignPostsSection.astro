@@ -10,10 +10,10 @@ const posts = (await getCollection("posts"))
   .filter(post => post.data.campaignTags.some(value => value.trim().toLowerCase() === tag))
   .sort((a, b) => (a.data.eventDate?.getTime() ?? Number.MAX_SAFE_INTEGER) - (b.data.eventDate?.getTime() ?? Number.MAX_SAFE_INTEGER) || a.data.title.localeCompare(b.data.title));
 ---
-<div id={section.id}>
-  {posts.map((post, index) => (
+{posts.map((post, index) => (
     <SplitSection section={{
       type: "split",
+      id: index === 0 ? section.id : undefined,
       title: post.data.title,
       body: post.data.summary,
       points: [
@@ -21,10 +21,9 @@ const posts = (await getCollection("posts"))
         post.data.timeText ?? "",
         post.data.location ?? "",
       ].filter(Boolean),
-      backgroundTone: section.backgroundTone,
+      backgroundTone: section.backgroundTones[index % section.backgroundTones.length],
       image: post.data.featuredImage,
       reverse: index % 2 === 1,
       ctas: [{ label: "Find out more", href: `/news/${post.slug}`, newTab: false }],
     }} />
-  ))}
-</div>
+))}

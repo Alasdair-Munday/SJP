@@ -151,9 +151,15 @@
 .split-grid,
 .cta-grid {
   display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
   gap: clamp(1.5rem, 4vw, 3rem);
   align-items: center;
+}
+
+.hero-grid > *,
+.split-grid > *,
+.cta-grid > * {
+  min-width: 0;
 }
 
 .hero-copy,
@@ -1554,7 +1560,7 @@
   .cta-grid,
   .site-footer__grid,
   .contact-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .masked-media {

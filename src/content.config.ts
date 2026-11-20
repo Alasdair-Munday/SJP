@@ -230,7 +230,7 @@ const campaignPostsSectionSchema = z.object({
   type: z.literal("campaignPosts"),
   id: z.string().optional(),
   tag: z.string().min(1),
-  backgroundTone: toneSchema.default("stone"),
+  backgroundTones: z.array(toneSchema).min(1).default(["sky", "pink", "grass", "door"]),
 });
 
 const sectionSchema = z.discriminatedUnion("type", [

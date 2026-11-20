@@ -291,7 +291,7 @@ collections:
                 summary: 'Posts tagged {{tag}}'
                 fields:
                   - {label: "Campaign tag", name: "tag", widget: "string", hint: "Show every post with this exact campaign tag."}
-                  - {label: "Background color", name: "backgroundTone", widget: "select", options: ["park", "park-dark", "stone", "sky", "pink", "pink-dark", "orange", "door", "give", "grass", "roof"], default: "stone"}
+                  - {label: "Section colours", name: "backgroundTones", widget: "select", multiple: true, options: ["park", "park-dark", "stone", "sky", "pink", "pink-dark", "orange", "door", "give", "grass", "roof"], default: ["sky", "pink", "grass", "door"], hint: "Colours repeat across the matching posts."}
               - label: "This week from Google Calendar"
                 name: "whatsOn"
                 widget: "object"
