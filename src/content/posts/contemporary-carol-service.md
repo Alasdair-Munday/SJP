@@ -1,4 +1,6 @@
 ---
+campaignTags:
+  - christmas
 title: "Contemporary Carol Service "
 summary: "On Sunday 20th December at 4pm we'll be joining together for our
   carols service - we would love to see you there! "
@@ -8,6 +10,7 @@ displayOnNewsletter: true
 newsletterDisplayUntil: ""
 socialEnabled: false
 socialConsentConfirmed: false
+timeText: 4pm
 eventDate: 2026-12-20
 eventEndDate: 2026-12-20
 location: St John's Park, Bernard Street, Sheffield, S2 5PU

@@ -1,4 +1,6 @@
 ---
+campaignTags:
+  - christmas
 title: Christmas Day at St Johns Park
 summary: "Join us for our Christmas Day service at the earlier time of 10am for
   an hour of carols, celebration and fun. Children are welcome bring a gift to

@@ -1,10 +1,13 @@
 ---
+campaignTags:
+  - christmas
 title: JINGLE BELL JOLLOF
 summary: Come to our Church family Christmas celebration! It will be a good time
   to celebrate together and to connect with each other. It will be a nice time
   to eat and enjoy an African delicacy jollof rice
 category: event
 publishDate: 2026-11-17
+eventDate: 2026-12-13
 displayOnNewsletter: true
 socialEnabled: false
 socialConsentConfirmed: false
