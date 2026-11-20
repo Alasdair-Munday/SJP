@@ -95,7 +95,7 @@ export async function renderNewsletterPdf(newsletter: NewsletterData, edition: N
     try {
       const url = new URL(source, newsletter.onlineUrl);
       if (url.origin !== new URL(newsletter.onlineUrl).origin) return undefined;
-      if (url.pathname === '/.netlify/images') { url.searchParams.set('w', '720'); url.searchParams.set('h', '440'); }
+      if (url.pathname === '/.netlify/images') { url.searchParams.set('w', '720'); url.searchParams.set('h', '720'); }
       const response = await fetch(url, { signal: AbortSignal.timeout(10000), redirect: 'error' });
       if (!response.ok || !response.body) return undefined;
       const reader = response.body.getReader(), chunks: Uint8Array[] = [];
@@ -152,9 +152,16 @@ export async function renderNewsletterPdf(newsletter: NewsletterData, edition: N
     }
   }
   newPage();
-  const frontTop = y, frontFloor = Math.max(bottom + 135, frontTop - 290);
+  const upcoming = newsletter.posts.filter((post) => post.category === 'event' && post.eventDetails);
+  const upcomingRows: Row[] = upcoming.flatMap((post) => [
+    ...rows(post.title, fullWidth - 24, bold, 11, 14, ink).map((row) => ({ ...row, href: post.url })),
+    ...rows(post.eventDetails.replace(/^Event Date: /, '').split(' · ').slice(0, 2).join(' · '), fullWidth - 24, body, 9, 12, muted),
+    { value: '', font: body, size: 9, leading: 5, color: ink },
+  ]);
+  const upcomingHeight = upcoming.length ? Math.min(260, 46 + upcomingRows.reduce((sum, row) => sum + row.leading, 0)) : 0;
+  const frontTop = y, frontFloor = Math.max(bottom + upcomingHeight + 16, frontTop - 290);
   let leadY = frontTop;
-  if (photos[0]) { cropped(photos[0], margin, leadY - 115, leadWidth, 115); leadY -= 125; }
+  if (photos[0]) { cropped(photos[0], margin, leadY - 80, leadWidth, 80); leadY -= 90; }
   const leadTitle = newsletter.thought?.title ?? (newsletter.introduction ? 'Life at St John’s Park' : '');
   const leadText = newsletter.thought?.body ?? newsletter.introduction ?? '';
   const leadItems = [...rows(leadTitle.toUpperCase(), leadWidth, headline, 13, 18, green), ...rows(' ', leadWidth), ...rows(leadText, leadWidth, body, 10, 13.5)];
@@ -193,9 +200,17 @@ export async function renderNewsletterPdf(newsletter: NewsletterData, edition: N
   const frontEnd = Math.min(leadResult.position, sideResult.position - 12);
   page.drawRectangle({ x: sideX, y: frontEnd, width: sideWidth, height: frontTop - frontEnd, borderColor: green, borderWidth: .7 });
   top = frontEnd - 20; y = top; column = 0;
+  let upcomingRemaining: Row[] = [];
+  if (upcoming.length) {
+    page.drawRectangle({ x: margin, y: y - 32, width: fullWidth, height: 32, color: green });
+    page.drawText('UPCOMING EVENTS', { x: margin + 12, y: y - 23, font: headline, size: 18, color: rgb(1, 1, 1) });
+    const result = drawRows(upcomingRows, margin + 12, y - 42, bottom + 8);
+    upcomingRemaining = result.remaining;
+    y = result.position - 18;
+  }
   pageBottoms.set(page, y);
   // Very long editorials or busy schedules continue without dropping any text.
-  if (leadResult.remaining.length || sideResult.remaining.length) {
+  if (leadResult.remaining.length || sideResult.remaining.length || upcomingRemaining.length) {
     newPage();
     if (leadResult.remaining.length) {
       text(`${leadTitle} (continued)`, headline, 13, green, 19);
@@ -207,56 +222,76 @@ export async function renderNewsletterPdf(newsletter: NewsletterData, edition: N
       for (const item of sideResult.remaining) text(item.value || ' ', item.font, item.size, item.font === headline ? green : ink, item.leading);
       y -= 14;
     }
+    if (upcomingRemaining.length) {
+      fullRowMode = true;
+      text('UPCOMING EVENTS (CONTINUED)', headline, 14, green, 20);
+      for (const item of upcomingRemaining) text(item.value || ' ', item.font, item.size, item.color, item.leading);
+      y -= 14;
+    }
   }
   // Articles use a single full-width column. Each post is one horizontal row,
   // stacked from the top in reading order in both digital and booklet editions.
   fullRowMode = true;
   const postLayouts = newsletter.posts.map((post, index) => {
-    const qrSize = 64, qrGap = 10, labelGap = 4, summaryLeading = 13.5;
+    const photoSize = photos[index + 1] ? 100 : 0, photoGap = 12;
+    const qrSize = 64, labelGap = 4;
     const captionRows = rows(digital ? 'Tap or scan for the full story' : 'Scan for the full story', qrSize, body, 8, 10, digital ? panelText : muted);
     const captionHeight = captionRows.reduce((sum, row) => sum + row.leading, 0);
     const qrHeight = qrSize + labelGap + captionHeight;
-    const summaryWidth = fullWidth - 16;
-    let summaryRows = rows(post.summary, summaryWidth, body, 10, summaryLeading, panelText);
-    let summaryHeight = Math.max(qrHeight, summaryRows.reduce((sum, row) => sum + row.leading, 0));
-    // Measure the exclusion at the bottom right before drawing. Only the final
-    // lines narrow beside the QR and its caption; earlier lines use the column.
+    const leftInset = (offset: number) => photoSize && offset < photoSize + 6 ? photoSize + photoGap : 0;
+    const available = (offset: number) => fullWidth - 16 - leftInset(offset);
+    const titleRows = rows(post.title.toUpperCase(), (offset) => available(offset), headline, 12, 16, panelHeading);
+    const titleHeight = titleRows.reduce((sum, row) => sum + row.leading, 0) + 7;
+    const detailRows = post.eventDetails ? rows(post.eventDetails, (offset) => available(titleHeight + offset), bold, 9, 12, panelText) : [];
+    const headingHeight = titleHeight + detailRows.reduce((sum, row) => sum + row.leading, 0) + (detailRows.length ? 6 : 0);
+    let summaryHeight = Math.max(qrHeight, photoSize - headingHeight);
+    let summaryRows: Row[] = [];
+    // Measure both exclusions using the same offsets used to draw each line.
     while (true) {
-      summaryRows = rows(post.summary, (offset) => offset + summaryLeading > summaryHeight - qrHeight ? summaryWidth - qrSize - qrGap : summaryWidth, body, 10, summaryLeading, panelText);
+      summaryRows = rows(post.summary, (offset) => available(headingHeight + offset) - (offset + 13.5 > summaryHeight - qrHeight ? qrSize + 10 : 0), body, 10, 13.5, panelText);
       if (summaryRows.reduce((sum, row) => sum + row.leading, 0) <= summaryHeight) break;
-      summaryHeight += summaryLeading;
+      summaryHeight += 13.5;
     }
-    const photoHeight = photos[index + 1] ? 90 : 0;
-    const titleHeight = lines(post.title.toUpperCase(), headline, 12, fullWidth - 16).length * 16;
-    const detailsHeight = post.eventDetails ? lines(post.eventDetails, bold, 9, fullWidth - 16).length * 12 + 6 : 0;
-    const cardHeight = 10 + photoHeight + (photoHeight ? 9 : 0) + titleHeight + 7 + detailsHeight + summaryHeight + 12;
-    return { qrSize, qrGap, labelGap, captionRows, captionHeight, qrHeight, summaryRows, summaryHeight, photoHeight, cardHeight };
+    return { photoSize, leftInset, titleRows, titleHeight, detailRows, headingHeight, summaryRows, summaryHeight, qrSize, qrHeight, captionRows, captionHeight, labelGap,
+      cardHeight: 10 + headingHeight + summaryHeight + 12 };
   });
 
   async function drawPost(index: number) {
-    const post = newsletter.posts[index];
-    const layout = postLayouts[index];
-    const { qrSize, labelGap, captionRows, captionHeight, qrHeight, summaryRows, summaryHeight, photoHeight, cardHeight } = layout;
+    const post = newsletter.posts[index], layout = postLayouts[index];
+    const { photoSize, leftInset, titleRows, titleHeight, detailRows, headingHeight, summaryRows, summaryHeight, qrSize, qrHeight, captionRows, captionHeight, labelGap, cardHeight } = layout;
     activeCard = false;
-    ensure(cardHeight);
+    // Use the actual measured height, not an estimate that adds a photo above
+    // the text. Oversized stories may continue, but ordinary rows stay intact.
+    if (cardHeight <= height - 70 - bottom) {
+      if (y - cardHeight < bottom) newPage();
+    } else if (y - Math.max(photoSize + 20, headingHeight + 40) < bottom) newPage();
     activeCard = true;
     cardPanel(cardHeight);
-    page.drawLine({ start: { x: px(), y }, end: { x: px() + activeWidth(), y }, thickness: 1.5, color: green }); y -= 10;
-    if (photos[index + 1]) { cropped(photos[index + 1]!, px() + 8, y - photoHeight, activeWidth() - 16, photoHeight); y -= photoHeight + 9; }
-    text(post.title.toUpperCase(), headline, 12, panelHeading, 16); y -= 7;
-    if (post.eventDetails) { text(post.eventDetails, bold, 9, panelText, 12); y -= 6; }
+    page.drawLine({ start: { x: margin, y }, end: { x: width - margin, y }, thickness: 1.5, color: green });
+    y -= 10;
+    if (photoSize) cropped(photos[index + 1]!, margin + 8, y - photoSize, photoSize, photoSize);
+    let offset = 0;
+    const drawItem = (item: Row) => {
+      ensure(item.leading);
+      if (item.value) page.drawText(item.value, { x: margin + 8 + leftInset(offset), y: y - item.size, font: item.font, size: item.size, color: item.color });
+      y -= item.leading; offset += item.leading;
+    };
+    for (const item of titleRows) drawItem(item);
+    y -= 7; offset = titleHeight;
+    for (const item of detailRows) drawItem(item);
+    if (detailRows.length) y -= 6;
+    offset = headingHeight;
     let prefixHeight = 0, prefixRows = 0;
     for (const item of summaryRows) {
       if (prefixHeight + item.leading > summaryHeight - qrHeight) break;
-      ensure(item.leading);
-      if (item.value) page.drawText(item.value, { x: px() + 8, y: y - item.size, font: item.font, size: item.size, color: item.color });
-      y -= item.leading; prefixHeight += item.leading; prefixRows++;
+      drawItem(item);
+      prefixHeight += item.leading; prefixRows++;
     }
-    // Keep the wrapped final lines, QR and instruction on the same column/page.
     const tailHeight = summaryHeight - prefixHeight;
     ensure(tailHeight + 12);
-    drawRows(summaryRows.slice(prefixRows), px() + 8, y, y - tailHeight);
-    const summaryBottom = y - tailHeight, qrX = px() + activeWidth() - 8 - qrSize;
+    const summaryBottom = y - tailHeight;
+    for (const item of summaryRows.slice(prefixRows)) drawItem(item);
+    const qrX = width - margin - 8 - qrSize;
     const qr = await pdf.embedPng(await QRCode.toDataURL(post.url, { errorCorrectionLevel: 'M', margin: 4, width: 384, color: { dark: digital ? '#1b8257' : '#000000', light: '#ffffff' } }));
     page.drawImage(qr, { x: qrX, y: summaryBottom + captionHeight + labelGap, width: qrSize, height: qrSize });
     let captionY = summaryBottom + captionHeight;
@@ -265,14 +300,14 @@ export async function renderNewsletterPdf(newsletter: NewsletterData, edition: N
       captionY -= item.leading;
     }
     const link = pdf.context.obj({ Type: 'Annot', Subtype: 'Link', Rect: [qrX, summaryBottom, qrX + qrSize, summaryBottom + qrHeight], Border: [0, 0, 0], A: { Type: 'Action', S: 'URI', URI: PDFString.of(post.url) } });
-    page.node.addAnnot(pdf.context.register(link)); y = summaryBottom - 12;
-    // A continued card starts with a full-column panel. Trim its unused tail.
-    if (digital && y > bottom) page.drawRectangle({ x: px(), y: bottom, width: activeWidth(), height: y - bottom, color: paper });
-    page.drawLine({ start: { x: px(), y }, end: { x: px() + activeWidth(), y }, thickness: .5, color: lineColor }); y -= 16;
+    page.node.addAnnot(pdf.context.register(link));
+    y = summaryBottom - 12;
+    if (digital && y > bottom) page.drawRectangle({ x: margin, y: bottom, width: fullWidth, height: y - bottom, color: paper });
+    page.drawLine({ start: { x: margin, y }, end: { x: width - margin, y }, thickness: .5, color: lineColor });
+    y -= 12;
     activeCard = false;
     pageBottoms.set(page, Math.min(pageBottoms.get(page) ?? height, y));
   }
-
   for (let index = 0; index < newsletter.posts.length; index++) await drawPost(index);
   if (!newsletter.posts.length) text('No news for this week.', body, 10, muted);
   activeCard = false;

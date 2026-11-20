@@ -14,6 +14,39 @@ const issue = {
   posts: [],
 };
 try {
+  await test('square left photos wrap text and upcoming events sit below the thought', async () => {
+    const { logo } = await server.ssrLoadModule('/src/assets/pdf-fonts/brand.ts');
+    const originalFetch = globalThis.fetch, originalText = PDFPage.prototype.drawText, originalOperators = PDFPage.prototype.pushOperators;
+    const items = [], crops = [];
+    globalThis.fetch = async () => new Response(Buffer.from(logo, 'base64'));
+    PDFPage.prototype.drawText = function (value, options) { items.push({ page: this, value, ...options }); return originalText.call(this, value, options); };
+    PDFPage.prototype.pushOperators = function (...operators) {
+      for (const op of operators) if (op.name === 're') crops.push({ page: this, args: op.args.map(Number) });
+      return originalOperators.apply(this, operators);
+    };
+    try {
+      for (const edition of ['digital', 'print']) {
+        items.length = 0; crops.length = 0;
+        const posts = Array.from({ length: 7 }, (_, i) => ({ title: `Event ${i + 1}`, category: 'event', eventDetails: `${i + 1} December 2026`, summary: 'Come and join our community celebration. '.repeat(8), imageSrc: 'https://stjohnspark.org/photo.jpg', url: `https://stjohnspark.org/news/event-${i}/` }));
+        await renderNewsletterPdf({ ...issue, thought: { title: 'Weekly thought', body: 'A reflection for our church.' }, posts }, edition);
+        const thought = items.find((item) => item.value === 'WEEKLY THOUGHT');
+        const heading = items.find((item) => item.value === 'UPCOMING EVENTS');
+        assert.equal(heading.page, thought.page);
+        assert.ok(heading.y < thought.y);
+        assert.ok(heading.size >= 18);
+        assert.equal(crops.length, 7);
+        for (const crop of crops) {
+          const [x, y, width, height] = crop.args;
+          assert.equal(width, 100); assert.equal(height, 100);
+          const beside = items.filter((item) => item.page === crop.page && item.y < y + height && item.y + item.size > y);
+          for (const item of beside) assert.ok(item.x >= x + width + 10, 'Text must clear the left photo');
+        }
+        const titles = items.filter((item) => /^EVENT [1-7]$/.test(item.value));
+        assert.equal(titles.length, 7);
+        assert.ok(items.some((item) => item.size === 10 && item.x === 30), 'Body text must return to the full width below the photo');
+      }
+    } finally { globalThis.fetch = originalFetch; PDFPage.prototype.drawText = originalText; PDFPage.prototype.pushOperators = originalOperators; }
+  });
   await test('digital uses A5 reading pages and print uses imposed A4 landscape sheets', async () => {
     const digital = await PDFDocument.load(await renderNewsletterPdf(issue, 'digital'));
     assert.equal(digital.getPageCount(), 2, 'Front and back covers remain in reading order');
