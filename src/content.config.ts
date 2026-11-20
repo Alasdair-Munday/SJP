@@ -226,7 +226,15 @@ const whatsOnSectionSchema = z.object({
   backgroundTone: toneSchema.default("sky"),
 });
 
+const campaignPostsSectionSchema = z.object({
+  type: z.literal("campaignPosts"),
+  id: z.string().optional(),
+  tag: z.string().min(1),
+  backgroundTone: toneSchema.default("stone"),
+});
+
 const sectionSchema = z.discriminatedUnion("type", [
+  campaignPostsSectionSchema,
   heroSectionSchema,
   introSectionSchema,
   splitSectionSchema,
@@ -256,6 +264,15 @@ const pages = defineCollection({
     eyebrow: z.string().optional(),
     intro: z.string().optional(),
     featuredEvents: z.array(z.object({ event: z.string() })).default([]),
+  }),
+});
+
+const campaigns = defineCollection({
+  type: "data",
+  schema: z.object({
+    title: z.string(),
+    metaDescription: z.string(),
+    sections: z.array(sectionSchema).default([]),
   }),
 });
 
@@ -331,6 +348,7 @@ const posts = defineCollection({
     publishDate: z.coerce.date(),
     category: postCategorySchema,
     author: z.string().optional(),
+    campaignTags: z.array(z.string()).default([]),
     featuredImage: postFeaturedImageSchema.default(defaultPostFeaturedImage),
     featuredShape: z.string().optional(),
     eventDate: optionalDateSchema,
@@ -376,6 +394,7 @@ const newsletterIssues = defineCollection({
 
 export const collections = {
   newsletterIssues,
+  campaigns,
   pages,
   posts,
   events,

@@ -1,0 +1,30 @@
+---
+import { getCollection, type CollectionEntry } from "astro:content";
+import SplitSection from "./SplitSection.astro";
+import { formatDate } from "../../lib/format";
+
+type Section = Extract<CollectionEntry<"pages">["data"]["sections"][number], { type: "campaignPosts" }>;
+const { section } = Astro.props as { section: Section };
+const tag = section.tag.trim().toLowerCase();
+const posts = (await getCollection("posts"))
+  .filter(post => post.data.campaignTags.some(value => value.trim().toLowerCase() === tag))
+  .sort((a, b) => (a.data.eventDate?.getTime() ?? Number.MAX_SAFE_INTEGER) - (b.data.eventDate?.getTime() ?? Number.MAX_SAFE_INTEGER) || a.data.title.localeCompare(b.data.title));
+---
+<div id={section.id}>
+  {posts.map((post, index) => (
+    <SplitSection section={{
+      type: "split",
+      title: post.data.title,
+      body: post.data.summary,
+      points: [
+        post.data.eventDate ? formatDate(post.data.eventDate) : "",
+        post.data.timeText ?? "",
+        post.data.location ?? "",
+      ].filter(Boolean),
+      backgroundTone: section.backgroundTone,
+      image: post.data.featuredImage,
+      reverse: index % 2 === 1,
+      ctas: [{ label: "Find out more", href: `/news/${post.slug}`, newTab: false }],
+    }} />
+  ))}
+</div>

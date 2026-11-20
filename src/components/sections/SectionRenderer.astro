@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from "astro:content";
+import CampaignPostsSection from "./CampaignPostsSection.astro";
 import HeroSection from "./HeroSection.astro";
 import IntroSection from "./IntroSection.astro";
 import SplitSection from "./SplitSection.astro";
@@ -19,6 +20,7 @@ interface Props {
 const { sections } = Astro.props as Props;
 
 const sectionComponents = {
+  campaignPosts: CampaignPostsSection as SectionComponent,
   hero: HeroSection as SectionComponent,
   intro: IntroSection as SectionComponent,
   split: SplitSection as SectionComponent,
