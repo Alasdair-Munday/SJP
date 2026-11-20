@@ -14,7 +14,8 @@
       },
       "image": {
         "src": "/images/uploads/Carol-singing.jpg",
-        "alt": "Carol singing"
+        "alt": "Carol singing",
+        "accentShape": "/images/shapes/star-brushstroke.png"
       }
     },
     {

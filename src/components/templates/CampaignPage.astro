@@ -5,5 +5,5 @@ import type { CollectionEntry } from "astro:content";
 const { campaign } = Astro.props as { campaign: CollectionEntry<"campaigns">["data"] };
 ---
 <BaseLayout title={campaign.title} description={campaign.metaDescription}>
-  <div class="page-stack"><SectionRenderer sections={campaign.sections} /></div>
+  <div class="page-stack campaign-page"><SectionRenderer sections={campaign.sections} /></div>
 </BaseLayout>

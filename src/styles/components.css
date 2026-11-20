@@ -115,6 +115,19 @@
   }
 }
 
+/* Campaign pages retain their image accents on small screens. */
+@media (max-width: 700px) {
+  .campaign-page .masked-media__accent {
+    display: block;
+  }
+}
+
+@media (prefers-reduced-data: reduce) {
+  .campaign-page .masked-media__accent {
+    display: none;
+  }
+}
+
 .site-footer__band {
   padding:
     clamp(3.25rem, 5vw, 5rem) var(--footer-inline) clamp(2.5rem, 4vw, 4rem);
