@@ -89,7 +89,7 @@ try {
       }
     } finally { PDFPage.prototype.drawText = originalText; PDFPage.prototype.drawImage = originalImage; }
   });
-  await test('two ordinary stories fill across the page before moving down', async () => {
+  await test('seven stories use a single full-width column with one post per row', async () => {
     const originalText = PDFPage.prototype.drawText;
     const items = [];
     PDFPage.prototype.drawText = function (value, options) {
@@ -97,16 +97,29 @@ try {
       return originalText.call(this, value, options);
     };
     try {
-      await renderNewsletterPdf({ ...issue, posts: [
-        { title: 'Left story', summary: 'A short first story.', url: 'https://stjohnspark.org/news/left/' },
-        { title: 'Right story', summary: 'A short second story.', url: 'https://stjohnspark.org/news/right/' },
-      ] }, 'digital');
-      const left = items.find((item) => item.value === 'LEFT STORY');
-      const right = items.find((item) => item.value === 'RIGHT STORY');
-      assert.ok(left && right);
-      assert.equal(left.page, right.page);
-      assert.ok(Math.abs(left.y - right.y) < .01, 'Paired stories should share a top line');
-      assert.ok(right.x > left.x, 'Second story should occupy the right column');
+      const posts = Array.from({ length: 7 }, (_, index) => ({
+        title: `News ${index + 1}`,
+        summary: 'A community story with enough detail to exercise the normal newsletter row layout. '.repeat(3),
+        url: `https://stjohnspark.org/news/story-${index + 1}/`,
+      }));
+      await renderNewsletterPdf({ ...issue, posts }, 'digital');
+      const titles = items.filter((item) => /^NEWS [1-7]$/.test(item.value));
+      assert.equal(titles.length, 7);
+      assert.ok(titles.every((item) => Math.abs(item.x - titles[0].x) < .01), 'Every post must use the same single-column left edge');
+
+      const byPage = new Map();
+      for (const title of titles) {
+        const pageItems = byPage.get(title.page) ?? [];
+        pageItems.push(title);
+        byPage.set(title.page, pageItems);
+      }
+      assert.ok([...byPage.values()].some((pageItems) => pageItems.length > 1), 'Rows should stack vertically where space allows');
+      for (const pageItems of byPage.values()) {
+        pageItems.sort((a, b) => b.y - a.y);
+        for (let index = 1; index < pageItems.length; index++) {
+          assert.ok(pageItems[index - 1].y - pageItems[index].y > 50, 'Successive post rows must not overlap');
+        }
+      }
     } finally { PDFPage.prototype.drawText = originalText; }
   });
 
