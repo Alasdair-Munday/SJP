@@ -41,10 +41,11 @@ const qrCodes = await Promise.all(newsletter.posts.map((post) => QRCode.toDataUR
           </div>
         </div>
         <nav class="newsletter-actions" aria-label="Newsletter actions">
-          <a href={`/newsletter/email/?date=${newsletter.issueDate}`}>Email export</a>
-          <a href={`/newsletter/pdf/?date=${newsletter.issueDate}&edition=digital`}>Download digital PDF</a>
-          <a href={`/newsletter/pdf/?date=${newsletter.issueDate}&edition=print`}>Download folded print PDF</a>
-          <button onclick="window.print()" class="print-button">Print this page</button>
+          <span>Download newsletter:</span>
+          <a href={`/newsletter/pdf/?date=${newsletter.issueDate}&edition=print`}>Print version auto</a>
+          <a href={`/newsletter/pdf/?date=${newsletter.issueDate}&edition=print-full-page`}>Print version full page</a>
+          <a href={`/newsletter/pdf/?date=${newsletter.issueDate}&edition=print-booklet`}>Print version booklet</a>
+          <a href={`/newsletter/pdf/?date=${newsletter.issueDate}&edition=digital`}>Digital</a>
         </nav>
       </header>
 
