@@ -124,6 +124,20 @@ try {
     }
     assert.deepEqual(links.filter((href) => href.includes('/news/story-')), posts.map((post) => post.url));
   });
+  await test('manual print choices override automatic selection and retain every story', async () => {
+    const posts = Array.from({ length: 15 }, (_, i) => ({
+      title: `Story ${i + 1}`, summary: 'A community story.', url: `https://stjohnspark.org/news/story-${i + 1}/`,
+    }));
+    const portrait = await PDFDocument.load(await renderNewsletterPdf({ ...issue, posts, givingUrl: 'https://stjohnspark.org/give' }, 'print-full-page'));
+    assert.ok(portrait.getPageCount() > 2);
+    assert.ok(portrait.getPages().every(page => Math.round(page.getWidth()) === 595 && Math.round(page.getHeight()) === 842));
+    const links = portrait.getPages().flatMap(page => (page.node.lookupMaybe(PDFName.of('Annots'), PDFArray)?.asArray() ?? []).map(ref => portrait.context.lookup(ref, PDFDict).lookup(PDFName.of('A'), PDFDict).lookup(PDFName.of('URI'), PDFString).decodeText()));
+    for (const post of posts) assert.ok(links.includes(post.url));
+    assert.ok(links.includes('https://stjohnspark.org/give'));
+    const booklet = await PDFDocument.load(await renderNewsletterPdf({ ...issue, posts: posts.slice(0, 2) }, 'print-booklet'));
+    assert.equal(Math.round(booklet.getPage(0).getWidth()), 842);
+    assert.equal(Math.round(booklet.getPage(0).getHeight()), 595);
+  });
   await test('fixed rows truncate long posts, preserve links, and leave room for giving', async () => {
     const original = PDFPage.prototype.drawText, items = [];
     PDFPage.prototype.drawText = function (value, options) { items.push({ page: this, value, ...options }); return original.call(this, value, options); };

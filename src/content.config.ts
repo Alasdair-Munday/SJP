@@ -361,6 +361,7 @@ const posts = defineCollection({
     displayOnNewsletter: z.boolean().default(true),
     newsletterDisplayUntil: optionalDateSchema,
     relevantUntil: optionalDateSchema,
+    // Legacy metadata remains readable for existing posts and the social review.
     socialEnabled: z.boolean().default(false),
     socialCaption: z.string().optional(),
     socialImage: optionalImageSchema,

@@ -8,11 +8,12 @@ import { compactSchedule } from './calendar/compact.mjs';
 import { pdfTimetable, isMorningPrayer } from './calendar/pdf-timetable.mjs';
 import { timeLabel } from './calendar/dates.mjs';
 
-export type NewsletterPdfEdition = 'print' | 'digital';
+export type NewsletterPdfEdition = 'print' | 'print-full-page' | 'print-booklet' | 'digital';
 export const givingCopy = 'We have a vision to see Eden life spring up in our community through the love of Jesus.\n\nThis requires financial resources. Your regular gift will make a huge difference to us in seeing our kingdom dreams come to life. A regular gift through the Parish Giving Scheme is the best way to give.\n\nScan the QR code to sign up.';
 
 export async function renderNewsletterPdf(newsletter: NewsletterData, edition: NewsletterPdfEdition = 'print'): Promise<Uint8Array> {
-  return renderLayout(newsletter, edition, edition === 'print' && newsletter.posts.length <= 8);
+  const portrait = edition === 'print-full-page' || (edition === 'print' && newsletter.posts.length <= 8);
+  return renderLayout(newsletter, edition, portrait);
 }
 
 async function renderLayout(newsletter: NewsletterData, edition: NewsletterPdfEdition, portrait: boolean): Promise<Uint8Array> {
@@ -338,7 +339,13 @@ async function renderLayout(newsletter: NewsletterData, edition: NewsletterPdfEd
       await drawPortraitRows(Math.min(newsletter.posts.length, frontRows * 2));
     }
     newPage();
-    const remainingRows = Math.ceil((newsletter.posts.length - index) / 2);
+    let remainingRows = Math.ceil((newsletter.posts.length - index) / 2);
+    while (remainingRows > 4) {
+      cardHeight = (height - 70 - bottom) / 5;
+      await drawPortraitRows(index + 10);
+      newPage();
+      remainingRows = Math.ceil((newsletter.posts.length - index) / 2);
+    }
     if (remainingRows) {
       cardHeight = Math.min(220, (height - 70 - bottom - 160) / remainingRows);
       await drawPortraitRows(newsletter.posts.length);
