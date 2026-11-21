@@ -1,0 +1,58 @@
+---
+import type { CollectionEntry } from "astro:content";
+import MaskedImage from "./MaskedImage.astro";
+import { formatDate } from "../../lib/format";
+
+type CampaignSection = Extract<CollectionEntry<"pages">["data"]["sections"][number], { type: "campaignPosts" }>;
+interface Props {
+  post: CollectionEntry<"posts">;
+  id?: string;
+  backgroundTone: CampaignSection["backgroundTones"][number];
+  accentShape: string;
+  reverse: boolean;
+}
+const { post, id, backgroundTone, accentShape, reverse } = Astro.props;
+const { eventDate, eventEndDate, timeText, location } = post.data;
+const endDate = eventDate && eventEndDate && formatDate(eventDate) !== formatDate(eventEndDate) ? eventEndDate : undefined;
+const image = { ...post.data.featuredImage, accentShape: post.data.featuredImage.accentShape || accentShape };
+---
+
+<section id={id} class="content-band" data-tone={backgroundTone}>
+  <div class="split-grid" style={reverse ? "direction: rtl;" : undefined}>
+    <div class="split-copy" style={reverse ? "direction: ltr;" : undefined}>
+      <h2 class="section-title">{post.data.title}</h2>
+      <div class="section-copy"><p>{post.data.summary}</p></div>
+      {(eventDate || timeText?.trim() || location?.trim()) && (
+        <dl class="event-details" aria-label="Event details">
+          {eventDate && <div class="event-detail"><dt>When</dt><dd><time datetime={eventDate.toISOString().slice(0, 10)}>{formatDate(eventDate)}</time>{endDate && <> – <time datetime={endDate.toISOString().slice(0, 10)}>{formatDate(endDate)}</time></>}</dd></div>}
+          {timeText?.trim() && <div class="event-detail"><dt>Time</dt><dd>{timeText}</dd></div>}
+          {location?.trim() && <div class="event-detail"><dt>Where</dt><dd>{location}</dd></div>}
+        </dl>
+      )}
+      <div class="inline-links"><a class="button-link--ghost" href={`/news/${post.slug}`}>Find out more</a></div>
+    </div>
+    <div style={reverse ? "direction: ltr;" : undefined}><MaskedImage image={image} /></div>
+  </div>
+</section>
+
+<style>
+  .event-details {
+    margin: 1.5rem 0;
+    padding: 1rem 1.25rem;
+    border-left: 4px solid currentColor;
+    background: rgba(255, 255, 255, 0.88);
+    color: #172c2b;
+  }
+  .event-detail {
+    display: grid;
+    grid-template-columns: 4.5rem minmax(0, 1fr);
+    gap: 0.5rem;
+    padding: 0.5rem 0;
+  }
+  .event-detail + .event-detail { border-top: 1px solid rgba(23, 44, 43, 0.2); }
+  dt { font-weight: 700; }
+  dd { margin: 0; font-weight: 600; overflow-wrap: anywhere; }
+  @media (max-width: 400px) {
+    .event-detail { grid-template-columns: 1fr; gap: 0.15rem; }
+  }
+</style>
