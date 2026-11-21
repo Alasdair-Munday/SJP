@@ -12,6 +12,14 @@ export type NewsletterPdfEdition = 'print' | 'digital';
 export const givingCopy = 'We have a vision to see Eden life spring up in our community through the love of Jesus.\n\nThis requires financial resources. Your regular gift will make a huge difference to us in seeing our kingdom dreams come to life. A regular gift through the Parish Giving Scheme is the best way to give.\n\nScan the QR code to sign up.';
 
 export async function renderNewsletterPdf(newsletter: NewsletterData, edition: NewsletterPdfEdition = 'print'): Promise<Uint8Array> {
+  if (edition === 'print') {
+    const portrait = await renderLayout(newsletter, edition, true);
+    if (portrait) return portrait;
+  }
+  return (await renderLayout(newsletter, edition, false))!;
+}
+
+async function renderLayout(newsletter: NewsletterData, edition: NewsletterPdfEdition, portrait: boolean): Promise<Uint8Array | undefined> {
   const digital = edition === 'digital';
   const pdf = await PDFDocument.create();
   pdf.setTitle(`${newsletter.shortTitle} - ${newsletter.formattedDate}`);
@@ -29,7 +37,7 @@ export async function renderNewsletterPdf(newsletter: NewsletterData, edition: N
   const panelHeading = digital ? rgb(1, 1, 1) : green;
   // The reading pages are A5. The print edition later places two of these pages
   // on each side of an A4 landscape sheet in booklet order.
-  const width = 420.94, height = 595.28, margin = 22, gap = 14, bottom = 38;
+  const width = portrait ? 595.28 : 420.94, height = portrait ? 841.89 : 595.28, margin = 22, gap = 14, bottom = 38;
   const fullWidth = width - margin * 2, columnWidth = (fullWidth - gap) / 2;
   let page!: PDFPage, column = 0, y = 0, top = 0, activeCard = false, fullRowMode = false;
   const pageBottoms = new Map<PDFPage, number>();
@@ -243,7 +251,7 @@ export async function renderNewsletterPdf(newsletter: NewsletterData, edition: N
   // Articles use a single full-width column. Each post is one horizontal row,
   // stacked from the top in reading order in both digital and booklet editions.
   fullRowMode = true;
-  const cardHeight = (height - 70 - bottom) / 3;
+  const cardHeight = portrait ? (height - 70 - bottom - 160) / 4 : (height - 70 - bottom) / 3;
   async function drawPost(index: number) {
     const post = newsletter.posts[index];
     const cardTop = y, photoSize = photos[index + 1] ? 100 : 0, photoGap = 12;
@@ -302,12 +310,13 @@ export async function renderNewsletterPdf(newsletter: NewsletterData, edition: N
 
   // Leave one or two stories for the back cover alongside the giving invitation.
   let index = 0;
-  while (newsletter.posts.length - index > 2) {
+  const backCapacity = portrait ? 4 : 2;
+  while (newsletter.posts.length - index > backCapacity) {
     newPage();
     for (let count = 0; count < 3; count++) await drawPost(index++);
   }
   // Insert blanks before the back cover to preserve folded booklet ordering.
-  if (!digital) {
+  if (!digital && !portrait) {
     const blanks = (4 - ((pdf.getPageCount() + 1) % 4)) % 4;
     for (let count = 0; count < blanks; count++) blankPage();
   }
@@ -342,6 +351,7 @@ export async function renderNewsletterPdf(newsletter: NewsletterData, edition: N
     footer.drawText(`${index + 1} / ${pages.length}`, { x: width - margin - 25, y: 16, size: 7, font: body, color: muted });
   });
 
+  if (portrait) return pages.length <= 2 ? pdf.save() : undefined;
   if (digital) return pdf.save();
 
   // Booklet imposition: outside is [back | front], then [page 2 | penultimate],
