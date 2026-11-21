@@ -188,15 +188,11 @@ export async function renderNewsletterPdf(newsletter: NewsletterData, edition: N
     section('THIS WEEK');
   }
 
-  // Reserve space for the timetable before drawing the thought. Excess content
-  // continues on following pages rather than crossing the front-page footer.
   const scheduleHeight = Math.max(...[sunday, week].map(items => items.reduce((sum, row) => sum + row.leading, 0))) + 20;
-  const reserved = Math.max(80, Math.min(220, scheduleHeight));
-  const frontFloor = bottom + reserved + 18;
   const leadTitle = newsletter.thought?.title ?? (newsletter.introduction ? 'Life at St John’s Park' : '');
   const leadText = newsletter.thought?.body ?? newsletter.introduction ?? '';
   const image = photos[0];
-  const imageSize = image?.scaleToFit(130, Math.min(130, frontTop - frontFloor));
+  const imageSize = image?.scaleToFit(130, 130);
   const imageHeight = imageSize?.height ?? 0;
   if (image && imageSize) page.drawImage(image, { x: width - margin - imageSize.width, y: frontTop - imageSize.height, ...imageSize });
   const available = (offset: number) => offset < imageHeight + 6 ? fullWidth - (imageSize?.width ?? 0) - (image ? 12 : 0) : fullWidth;
@@ -207,33 +203,43 @@ export async function renderNewsletterPdf(newsletter: NewsletterData, edition: N
   leadItems.push(...bodyRows);
   leadOffset += bodyRows.reduce((sum, row) => sum + row.leading, 0);
   if (newsletter.thought?.author) leadItems.push(...rows(`— ${newsletter.thought.author}`, (offset) => available(leadOffset + offset), bold, 9, 13));
-  const leadResult = drawRows(leadItems, margin, frontTop, frontFloor);
+  const leadHeight = leadItems.reduce((sum, row) => sum + row.leading, 0);
+  const fitsTogether = frontTop - Math.max(leadHeight, imageHeight) - 18 - scheduleHeight >= bottom + 8;
+  const leadResult = drawRows(leadItems, margin, frontTop, bottom + 8);
   const scheduleTop = Math.min(leadResult.position, frontTop - imageHeight) - 18;
-  if (digital) page.drawRectangle({ x: margin, y: bottom, width: fullWidth, height: Math.max(0, scheduleTop - bottom), color: green });
-  const sundayResult = drawRows(sunday, margin + 10, scheduleTop - 10, bottom + 8);
-  const weekResult = drawRows(week, margin + columnWidth + gap + 10, scheduleTop - 10, bottom + 8);
-  pageBottoms.set(page, Math.min(sundayResult.position, weekResult.position));
+  pageBottoms.set(page, leadResult.position);
 
-  if (leadResult.remaining.length || sundayResult.remaining.length || weekResult.remaining.length) {
+  if (leadResult.remaining.length) {
     newPage();
     fullRowMode = true;
-    // Keep existing row widths and links when carrying text onto continuation pages.
-    const continuation = (title: string, remaining: Row[]) => {
-      if (!remaining.length) return;
-      text(title, headline, 12, green, 18);
-      let pending = remaining.map(item => ({ ...item, color: item.font === headline ? green : ink }));
-      while (pending.length) {
-        const result = drawRows(pending, margin + 8, y, bottom);
-        y = result.position;
-        pending = result.remaining;
-        if (pending.length) newPage();
-      }
-      y -= 14;
-    };
-    continuation(`${leadTitle} (continued)`, leadResult.remaining);
-    continuation('THIS SUNDAY (CONTINUED)', sundayResult.remaining);
-    continuation('THIS WEEK (CONTINUED)', weekResult.remaining);
+    text(`${leadTitle} (continued)`, headline, 12, green, 18);
+    let pending = leadResult.remaining;
+    while (pending.length) {
+      const result = drawRows(pending, margin + 8, y, bottom + 8);
+      y = result.position;
+      pending = result.remaining;
+      if (pending.length) newPage();
+    }
   }
+
+  // Move both columns as one unit if they cannot fit below the entire thought.
+  // Only a timetable taller than a fresh page may continue onto another page.
+  if (!fitsTogether) newPage();
+  let timetableTop = fitsTogether ? scheduleTop : y;
+  let sundayPending = sunday, weekPending = week;
+  let continued = false;
+  do {
+    if (digital) page.drawRectangle({ x: margin, y: bottom, width: fullWidth, height: Math.max(0, timetableTop - bottom), color: green });
+    const continuationHeading = (title: string): Row[] => rows(`${title} (CONTINUED)`, columnWidth - 24, headline, 11, 18, panelHeading);
+    const sundayRows = continued && sundayPending.length ? [...continuationHeading('THIS SUNDAY'), ...sundayPending] : sundayPending;
+    const weekRows = continued && weekPending.length ? [...continuationHeading('THIS WEEK'), ...weekPending] : weekPending;
+    const sundayResult = drawRows(sundayRows, margin + 10, timetableTop - 10, bottom + 8);
+    const weekResult = drawRows(weekRows, margin + columnWidth + gap + 10, timetableTop - 10, bottom + 8);
+    sundayPending = sundayResult.remaining;
+    weekPending = weekResult.remaining;
+    pageBottoms.set(page, Math.min(sundayResult.position, weekResult.position));
+    if (sundayPending.length || weekPending.length) { newPage(); timetableTop = y; continued = true; }
+  } while (sundayPending.length || weekPending.length);
   // Articles use a single full-width column. Each post is one horizontal row,
   // stacked from the top in reading order in both digital and booklet editions.
   fullRowMode = true;

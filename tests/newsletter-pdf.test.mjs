@@ -36,7 +36,7 @@ try {
     PDFPage.prototype.drawText = function (value, options) { items.push({ page: this, value, ...options }); return originalText.call(this, value, options); };
     PDFPage.prototype.drawImage = function (image, options) { images.push({ page: this, ...options }); return originalImage.call(this, image, options); };
     try {
-      const events = Array.from({ length: 30 }, (_, i) => ({ title: `Weekday event ${i}`, start: new Date('2026-10-12T12:00:00Z'), end: new Date('2026-10-12T13:00:00Z') }));
+      const events = Array.from({ length: 60 }, (_, i) => ({ title: `Weekday event ${i}`, start: new Date('2026-10-12T12:00:00Z'), end: new Date('2026-10-12T13:00:00Z') }));
       await renderNewsletterPdf({ ...issue, coverImageSrc: 'https://stjohnspark.org/.netlify/images?url=%2Fphoto.png&w=900&h=550&fit=cover', thought: { title: 'A reflection', body: 'The community gathers for food and friendship. '.repeat(180) }, schedule: { ...issue.schedule, events } }, 'digital');
       const front = items.find(item => item.value === 'A REFLECTION').page;
       const photo = images.find(item => item.page === front && Math.abs(item.width / item.height - 2) < .001);
@@ -45,18 +45,34 @@ try {
       const beside = items.filter(item => item.page === front && item.value.includes('community gathers') && item.y < photo.y + photo.height && item.y + item.size > photo.y);
       assert.ok(beside.length);
       for (const item of beside) assert.ok(item.x + item.font.widthOfTextAtSize(item.value, item.size) <= photo.x - 10);
-      const sunday = items.find(item => item.page === front && item.value === 'THIS SUNDAY');
-      const week = items.find(item => item.page === front && item.value === 'THIS WEEK');
-      assert.ok(sunday && week && week.x > sunday.x + 150);
+      const sunday = items.find(item => item.value === 'THIS SUNDAY');
+      const week = items.find(item => item.value === 'THIS WEEK');
+      assert.ok(sunday && week && sunday.page === week.page && sunday.page !== front && week.x > sunday.x + 150);
       assert.equal(sunday.y, week.y);
-      assert.ok(sunday.y < photo.y);
+      assert.ok(items.some(item => item.value === 'Weekday event 0' || item.value.includes('Weekday event 0')));
       for (const item of items.filter(item => item.page === front && item.size > 7)) assert.ok(item.y >= 46, `Front-page text crossed the footer: ${item.value}`);
-      assert.ok(items.some(item => item.value === 'THIS WEEK (CONTINUED)'));
+      assert.ok(items.filter(item => item.value.startsWith('THIS WEEK')).length > 1);
       assert.ok(items.some(item => item.value === 'A reflection (continued)'));
       const request = new URL(requests[0]);
       assert.equal(request.searchParams.has('h'), false);
       assert.equal(request.searchParams.has('fit'), false);
     } finally { globalThis.fetch = originalFetch; PDFPage.prototype.drawText = originalText; PDFPage.prototype.drawImage = originalImage; }
+  });
+  await test('moves the entire timetable when it cannot fit below the thought', async () => {
+    const original = PDFPage.prototype.drawText, items = [];
+    PDFPage.prototype.drawText = function (value, options) { items.push({ page: this, value, ...options }); return original.call(this, value, options); };
+    try {
+      const events = Array.from({ length: 9 }, (_, i) => ({ title: `Gathering ${i}`, start: new Date('2026-10-12T12:00:00Z'), end: new Date('2026-10-12T13:00:00Z') }));
+      await renderNewsletterPdf({ ...issue, thought: { title: 'Reflection', body: 'A sentence about our community. '.repeat(65) }, schedule: { ...issue.schedule, events } }, 'digital');
+      const front = items.find(item => item.value === 'REFLECTION').page;
+      const sunday = items.find(item => item.value === 'THIS SUNDAY');
+      const week = items.find(item => item.value === 'THIS WEEK');
+      assert.notEqual(sunday.page, front);
+      assert.equal(sunday.page, week.page);
+      assert.equal(sunday.y, week.y);
+      assert.ok(!items.some(item => item.value === 'THIS WEEK (CONTINUED)'));
+      for (let i = 0; i < events.length; i++) assert.ok(items.some(item => item.page === week.page && item.value.includes(`Gathering ${i}`)));
+    } finally { PDFPage.prototype.drawText = original; }
   });
   await test('digital uses A5 reading pages and print uses imposed A4 landscape sheets', async () => {
     const digital = await PDFDocument.load(await renderNewsletterPdf(issue, 'digital'));
