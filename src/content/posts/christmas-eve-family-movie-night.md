@@ -5,12 +5,14 @@ summary: >
   out of the house and get cosy with a festive film on the big screen with
   festive snacks and pizza for the kids. Optional fancy dress: come in your
   pyjamas. Free entry. 
-category: update
+category: event
 publishDate: 2026-11-17
 displayOnNewsletter: true
 socialEnabled: false
 socialConsentConfirmed: false
 eventDate: 2026-12-24
+eventEndDate: ""
+timeText: 4pm Christmas Eve
 featuredImage:
   src: /images/uploads/Polar-Express.jpeg
 ---
