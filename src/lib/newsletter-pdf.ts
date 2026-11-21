@@ -209,6 +209,8 @@ async function renderLayout(newsletter: NewsletterData, edition: NewsletterPdfEd
   if (newsletter.thought?.author) leadItems.push(...rows(`— ${newsletter.thought.author}`, (offset) => available(leadOffset + offset), bold, 9, 13));
   const leadHeight = leadItems.reduce((sum, row) => sum + row.leading, 0);
   const fitsTogether = frontTop - Math.max(leadHeight, imageHeight) - 18 - scheduleHeight >= bottom + 8;
+  // A rule introduces the thought without boxing in its wrapped photograph.
+  if (leadItems.length || image) page.drawLine({ start: { x: margin, y: frontTop + 5 }, end: { x: width - margin, y: frontTop + 5 }, thickness: 1.2, color: green });
   const leadResult = drawRows(leadItems, margin, frontTop, bottom + 8);
   const scheduleTop = Math.min(leadResult.position, frontTop - imageHeight) - 18;
   pageBottoms.set(page, leadResult.position);
@@ -233,15 +235,20 @@ async function renderLayout(newsletter: NewsletterData, edition: NewsletterPdfEd
   let sundayPending = sunday, weekPending = week;
   let continued = false;
   do {
-    if (digital) page.drawRectangle({ x: margin, y: bottom, width: fullWidth, height: Math.max(0, timetableTop - bottom), color: green });
     const continuationHeading = (title: string): Row[] => rows(`${title} (CONTINUED)`, columnWidth - 24, headline, 11, 18, panelHeading);
     const sundayRows = continued && sundayPending.length ? [...continuationHeading('THIS SUNDAY'), ...sundayPending] : sundayPending;
     const weekRows = continued && weekPending.length ? [...continuationHeading('THIS WEEK'), ...weekPending] : weekPending;
+    const panelHeight = Math.min(timetableTop - bottom, Math.max(...[sundayRows, weekRows].map(items => items.reduce((sum, row) => sum + row.leading, 0))) + 20);
+    if (digital) page.drawRectangle({ x: margin, y: timetableTop - panelHeight, width: fullWidth, height: panelHeight, color: green });
     const sundayResult = drawRows(sundayRows, margin + 10, timetableTop - 10, bottom + 8);
     const weekResult = drawRows(weekRows, margin + columnWidth + gap + 10, timetableTop - 10, bottom + 8);
     sundayPending = sundayResult.remaining;
     weekPending = weekResult.remaining;
-    pageBottoms.set(page, Math.min(sundayResult.position, weekResult.position));
+    const panelBottom = Math.max(bottom, Math.min(sundayResult.position, weekResult.position) - 8);
+    const ruleColor = digital ? rgb(1, 1, 1) : green;
+    page.drawRectangle({ x: margin, y: panelBottom, width: fullWidth, height: timetableTop - panelBottom, borderColor: ruleColor, borderWidth: 0.8 });
+    page.drawLine({ start: { x: margin + columnWidth + gap / 2, y: timetableTop }, end: { x: margin + columnWidth + gap / 2, y: panelBottom }, thickness: 0.6, color: ruleColor });
+    pageBottoms.set(page, panelBottom);
     if (sundayPending.length || weekPending.length) { newPage(); timetableTop = y; continued = true; }
   } while (sundayPending.length || weekPending.length);
   // Articles use a single full-width column. Each post is one horizontal row,
