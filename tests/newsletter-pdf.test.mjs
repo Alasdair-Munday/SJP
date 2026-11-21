@@ -86,12 +86,17 @@ try {
     assert.equal(Math.round(print.getPage(0).getHeight()), 842);
     const fourPosts = Array.from({ length: 8 }, (_, i) => ({ title: `Story ${i}`, summary: 'A short story.', url: `https://stjohnspark.org/news/${i}` }));
     const original = PDFPage.prototype.drawText, drawn = [];
-    PDFPage.prototype.drawText = function (value, options) { drawn.push({ value, ...options }); return original.call(this, value, options); };
+    PDFPage.prototype.drawText = function (value, options) { drawn.push({ page: this, value, ...options }); return original.call(this, value, options); };
     try {
       const four = await PDFDocument.load(await renderNewsletterPdf({ ...issue, posts: fourPosts, givingUrl: 'https://stjohnspark.org/give' }, 'print'));
       assert.equal(four.getPageCount(), 2);
       assert.equal(Math.round(four.getPage(0).getWidth()), 595);
       assert.equal(drawn.filter(item => /^STORY [0-7]$/.test(item.value)).length, 8);
+      const titles = drawn.filter(item => /^STORY [0-7]$/.test(item.value));
+      const timetable = drawn.find(item => item.value === 'THIS WEEK');
+      assert.equal(titles[0].page, timetable.page);
+      assert.ok(titles[0].y < timetable.y - 20);
+      assert.notEqual(titles[0].page, titles[7].page);
       const links = four.getPages().flatMap(page => (page.node.lookupMaybe(PDFName.of('Annots'), PDFArray)?.asArray() ?? []).map(ref => four.context.lookup(ref, PDFDict).lookup(PDFName.of('A'), PDFDict).lookup(PDFName.of('URI'), PDFString).decodeText()));
       for (const post of fourPosts) assert.ok(links.includes(post.url));
       assert.ok(drawn.some(item => item.value.includes('Scan the QR code to sign up.')));
@@ -134,7 +139,6 @@ try {
           assert.equal(titles[0].page, titles[2].page);
           assert.equal(titles[3].page, titles[4].page);
         } else {
-          assert.ok(titles.every(title => title.page === titles[0].page));
           assert.equal(titles[0].y, titles[1].y);
           assert.ok(titles[1].x > titles[0].x);
         }

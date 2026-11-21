@@ -247,11 +247,11 @@ async function renderLayout(newsletter: NewsletterData, edition: NewsletterPdfEd
   // Articles use a single full-width column. Each post is one horizontal row,
   // stacked from the top in reading order in both digital and booklet editions.
   fullRowMode = true;
-  const cardHeight = portrait ? (height - 70 - bottom - 160) / 4 : (height - 70 - bottom) / 3;
+  let cardHeight = (height - 70 - bottom) / 3;
   async function drawPost(index: number, cardX = margin, cardWidth = fullWidth) {
     const post = newsletter.posts[index];
     const cardTop = y, photoSize = photos[index + 1] ? (portrait ? 65 : 100) : 0, photoGap = portrait ? 8 : 12;
-    const qrSize = portrait ? 50 : 64, labelGap = 4;
+    const qrSize = digital ? 64 : (portrait ? 44 : 52), labelGap = 4;
     const captionRows = rows(digital ? 'Tap or scan for the full story' : 'Scan for the full story', qrSize, body, 8, 10, digital ? panelText : muted);
     const captionHeight = captionRows.reduce((sum, row) => sum + row.leading, 0);
     const qrHeight = qrSize + labelGap + captionHeight;
@@ -306,16 +306,35 @@ async function renderLayout(newsletter: NewsletterData, edition: NewsletterPdfEd
 
   let index = 0;
   if (portrait) {
-    // Four rows of two compact cards leave space for giving on the reverse.
-    newPage();
+    // Fill the space below the timetable first, without splitting it. Keep a
+    // useful minimum height for every article and give the remaining rows the
+    // available space on the reverse, above the giving invitation.
     const cardWidth = (fullWidth - gap) / 2;
-    while (index < newsletter.posts.length) {
-      const rowTop = y;
-      await drawPost(index++, margin, cardWidth);
-      if (index < newsletter.posts.length) {
-        y = rowTop;
-        await drawPost(index++, margin + cardWidth + gap, cardWidth);
+    const frontBottom = pageBottoms.get(page) ?? bottom;
+    const frontTop = frontBottom - 10;
+    const availableFront = frontTop - bottom;
+    const frontRows = pdf.getPageCount() === 1
+      ? Math.min(2, Math.floor(availableFront / 160), Math.ceil(newsletter.posts.length / 2)) : 0;
+    async function drawPortraitRows(limit: number) {
+      while (index < limit) {
+        const rowTop = y;
+        await drawPost(index++, margin, cardWidth);
+        if (index < limit) {
+          y = rowTop;
+          await drawPost(index++, margin + cardWidth + gap, cardWidth);
+        }
       }
+    }
+    if (frontRows) {
+      y = frontTop;
+      cardHeight = Math.min(220, availableFront / frontRows);
+      await drawPortraitRows(Math.min(newsletter.posts.length, frontRows * 2));
+    }
+    newPage();
+    const remainingRows = Math.ceil((newsletter.posts.length - index) / 2);
+    if (remainingRows) {
+      cardHeight = Math.min(220, (height - 70 - bottom - 160) / remainingRows);
+      await drawPortraitRows(newsletter.posts.length);
     }
   } else {
     // Leave one or two stories for the back cover alongside giving.
@@ -343,7 +362,7 @@ async function renderLayout(newsletter: NewsletterData, edition: NewsletterPdfEd
   y -= 29;
   drawRows(givingRows, margin, y, y - givingPanelHeight);
   if (newsletter.givingUrl) {
-    const qrSize = 68;
+    const qrSize = digital ? 68 : 56;
     const qrX = width - margin - qrSize, qrY = backTop - givingPanelHeight + 6;
     const qr = await pdf.embedPng(await QRCode.toDataURL(newsletter.givingUrl, { margin: 4, width: 320, color: { dark: digital ? '#1b8257' : '#000000', light: '#ffffff' } }));
     page.drawImage(qr, { x: qrX, y: qrY, width: qrSize, height: qrSize });
