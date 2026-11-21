@@ -78,7 +78,7 @@ export async function getNewsletterData(targetDate: Date = parseNewsletterDate(n
   const givingSignup = givingSection?.type === "split"
     ? givingSection.ctas?.find((cta) => cta.href.includes('parishgiving.org.uk/'))?.href : undefined;
   const coverUrl = new URL("/.netlify/images", site.siteUrl);
-  coverUrl.search = new URLSearchParams({ url: issue?.data.image?.src ?? hero?.image?.src ?? "/images/line-drawing.png", w: "900", h: "550", fit: "cover", fm: "jpg", q: "80" }).toString();
+  coverUrl.search = new URLSearchParams({ url: issue?.data.image?.src ?? hero?.image?.src ?? "/images/line-drawing.png", w: "900", fm: "jpg", q: "80" }).toString();
 
   return {
     coverImageSrc: coverUrl.toString(),

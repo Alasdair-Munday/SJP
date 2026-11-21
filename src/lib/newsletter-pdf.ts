@@ -31,7 +31,6 @@ export async function renderNewsletterPdf(newsletter: NewsletterData, edition: N
   // on each side of an A4 landscape sheet in booklet order.
   const width = 420.94, height = 595.28, margin = 22, gap = 14, bottom = 38;
   const fullWidth = width - margin * 2, columnWidth = (fullWidth - gap) / 2;
-  const leadWidth = fullWidth;
   let page!: PDFPage, column = 0, y = 0, top = 0, activeCard = false, fullRowMode = false;
   const pageBottoms = new Map<PDFPage, number>();
   const px = () => fullRowMode ? margin : margin + column * (columnWidth + gap);
@@ -90,12 +89,16 @@ export async function renderNewsletterPdf(newsletter: NewsletterData, edition: N
     page.pushOperators(popGraphicsState());
   }
   // Only request the site's own image URLs; cap reads and timeouts. Missing photos are optional.
-  async function photo(source?: string) {
+  async function photo(source?: string, cover = false) {
     if (!source) return undefined;
     try {
       const url = new URL(source, newsletter.onlineUrl);
       if (url.origin !== new URL(newsletter.onlineUrl).origin) return undefined;
-      if (url.pathname === '/.netlify/images') { url.searchParams.set('w', '720'); url.searchParams.set('h', '720'); }
+      if (url.pathname === '/.netlify/images') {
+        url.searchParams.set('w', '720');
+        if (cover) { url.searchParams.delete('h'); url.searchParams.delete('fit'); }
+        else url.searchParams.set('h', '720');
+      }
       const response = await fetch(url, { signal: AbortSignal.timeout(10000), redirect: 'error' });
       if (!response.ok || !response.body) return undefined;
       const reader = response.body.getReader(), chunks: Uint8Array[] = [];
@@ -112,7 +115,7 @@ export async function renderNewsletterPdf(newsletter: NewsletterData, edition: N
       return bytes[0] === 0x89 ? await pdf.embedPng(bytes) : await pdf.embedJpg(bytes);
     } catch { return undefined; }
   }
-  const photos = await Promise.all([photo(newsletter.coverImageSrc), ...newsletter.posts.map((post) => photo(post.imageSrc))]);
+  const photos = await Promise.all([photo(newsletter.coverImageSrc, true), ...newsletter.posts.map((post) => photo(post.imageSrc))]);
   function newPage() {
     page = pdf.addPage([width, height]); column = 0;
     page.drawRectangle({ x: 0, y: 0, width, height, color: paper });
@@ -152,58 +155,84 @@ export async function renderNewsletterPdf(newsletter: NewsletterData, edition: N
     }
   }
   newPage();
-  const frontTop = y, frontFloor = bottom + 180;
-  let leadY = frontTop;
-  if (photos[0]) { cropped(photos[0], margin, leadY - 80, leadWidth, 80); leadY -= 90; }
-  const leadTitle = newsletter.thought?.title ?? (newsletter.introduction ? 'Life at St John’s Park' : '');
-  const leadText = newsletter.thought?.body ?? newsletter.introduction ?? '';
-  const leadItems = [...rows(leadTitle.toUpperCase(), leadWidth, headline, 13, 18, green), ...rows(' ', leadWidth), ...rows(leadText, leadWidth, body, 10, 13.5)];
-  if (newsletter.thought?.author) leadItems.push(...rows(`— ${newsletter.thought.author}`, leadWidth, bold, 9, 13));
-  const leadResult = drawRows(leadItems, margin, leadY, frontFloor);
-
-  const sidebar: Row[] = [];
-  const section = (title: string) => { if (sidebar.length) sidebar.push({ value: '', font: body, size: 9, leading: 12, color: ink }); sidebar.push(...rows(title, fullWidth - 24, headline, 12, 18, panelHeading)); };
-  const small = (value: string, strong = false) => sidebar.push(...rows(value, fullWidth - 24, strong ? bold : body, 9, 12, panelText));
+  const frontTop = y;
+  const sunday: Row[] = [], week: Row[] = [];
+  let current = sunday;
+  const section = (title: string) => current.push(...rows(title, columnWidth - 24, headline, 12, 18, panelHeading));
+  const small = (value: string, strong = false) => current.push(...rows(value, columnWidth - 24, strong ? bold : body, 9, 12, panelText));
+  section('THIS SUNDAY');
   if (newsletter.schedule.message) small(newsletter.schedule.message);
   if (newsletter.schedule.status !== 'unavailable') {
     const timetable = pdfTimetable(newsletter.schedule);
-    section('THIS SUNDAY');
     const sundayEvents = timetable.sunday?.events.filter((event) => !isMorningPrayer(event)) ?? [];
     if (sundayEvents.length) {
       small(timetable.sunday!.label);
       for (const event of sundayEvents) { small(timeLabel(event), true); small(event.title.replace(/^10:45 Service · /, '')); }
     } else small('No Sunday events listed.');
+    current = week;
     section('THIS WEEK');
     if (timetable.prayers.length) {
       small('Morning prayer', true);
       for (const entry of compactSchedule(timetable.prayers)) small(`${entry.dayLabel} · ${entry.timeLabel}`);
       small('online.stjohnspark.org');
-      sidebar[sidebar.length - 1].href = 'https://online.stjohnspark.org';
+      week[week.length - 1].href = 'https://online.stjohnspark.org';
     }
     for (const day of timetable.days) {
-      sidebar.push({ value: '', font: body, size: 9, leading: 8, color: ink });
+      week.push({ value: '', font: body, size: 9, leading: 6, color: ink });
       small(day.label, true);
-      for (const event of day.events) { small(`${timeLabel(event)} · ${event.title}`); }
+      for (const event of day.events) small(`${timeLabel(event)} · ${event.title}`);
     }
     if (!timetable.prayers.length && !timetable.days.length) small('No weekday events listed.');
+  } else {
+    current = week;
+    section('THIS WEEK');
   }
-  // Put the timetable beneath the full-width thought, using the former events area.
-  y = leadResult.position - 18;
-  if (digital) page.drawRectangle({ x: margin, y: bottom, width: fullWidth, height: Math.max(0, y - bottom), color: green });
-  const sideResult = drawRows(sidebar, margin + 12, y - 10, bottom + 8);
-  pageBottoms.set(page, sideResult.position);
-  if (leadResult.remaining.length || sideResult.remaining.length) {
+
+  // Reserve space for the timetable before drawing the thought. Excess content
+  // continues on following pages rather than crossing the front-page footer.
+  const scheduleHeight = Math.max(...[sunday, week].map(items => items.reduce((sum, row) => sum + row.leading, 0))) + 20;
+  const reserved = Math.max(80, Math.min(220, scheduleHeight));
+  const frontFloor = bottom + reserved + 18;
+  const leadTitle = newsletter.thought?.title ?? (newsletter.introduction ? 'Life at St John’s Park' : '');
+  const leadText = newsletter.thought?.body ?? newsletter.introduction ?? '';
+  const image = photos[0];
+  const imageSize = image?.scaleToFit(130, Math.min(130, frontTop - frontFloor));
+  const imageHeight = imageSize?.height ?? 0;
+  if (image && imageSize) page.drawImage(image, { x: width - margin - imageSize.width, y: frontTop - imageSize.height, ...imageSize });
+  const available = (offset: number) => offset < imageHeight + 6 ? fullWidth - (imageSize?.width ?? 0) - (image ? 12 : 0) : fullWidth;
+  const leadItems = rows(leadTitle.toUpperCase(), available, headline, 13, 18, green);
+  let leadOffset = leadItems.reduce((sum, row) => sum + row.leading, 0);
+  if (leadTitle && leadText) { leadItems.push({ value: '', font: body, size: 10, leading: 6, color: ink }); leadOffset += 6; }
+  const bodyRows = rows(leadText, (offset) => available(leadOffset + offset), body, 10, 13.5);
+  leadItems.push(...bodyRows);
+  leadOffset += bodyRows.reduce((sum, row) => sum + row.leading, 0);
+  if (newsletter.thought?.author) leadItems.push(...rows(`— ${newsletter.thought.author}`, (offset) => available(leadOffset + offset), bold, 9, 13));
+  const leadResult = drawRows(leadItems, margin, frontTop, frontFloor);
+  const scheduleTop = Math.min(leadResult.position, frontTop - imageHeight) - 18;
+  if (digital) page.drawRectangle({ x: margin, y: bottom, width: fullWidth, height: Math.max(0, scheduleTop - bottom), color: green });
+  const sundayResult = drawRows(sunday, margin + 10, scheduleTop - 10, bottom + 8);
+  const weekResult = drawRows(week, margin + columnWidth + gap + 10, scheduleTop - 10, bottom + 8);
+  pageBottoms.set(page, Math.min(sundayResult.position, weekResult.position));
+
+  if (leadResult.remaining.length || sundayResult.remaining.length || weekResult.remaining.length) {
     newPage();
     fullRowMode = true;
-    if (leadResult.remaining.length) {
-      text(`${leadTitle} (continued)`, headline, 13, green, 19);
-      for (const item of leadResult.remaining) text(item.value || ' ', item.font, item.size, item.color, item.leading);
+    // Keep existing row widths and links when carrying text onto continuation pages.
+    const continuation = (title: string, remaining: Row[]) => {
+      if (!remaining.length) return;
+      text(title, headline, 12, green, 18);
+      let pending = remaining.map(item => ({ ...item, color: item.font === headline ? green : ink }));
+      while (pending.length) {
+        const result = drawRows(pending, margin + 8, y, bottom);
+        y = result.position;
+        pending = result.remaining;
+        if (pending.length) newPage();
+      }
       y -= 14;
-    }
-    if (sideResult.remaining.length) {
-      text('THIS WEEK (CONTINUED)', headline, 12, green, 18);
-      for (const item of sideResult.remaining) text(item.value || ' ', item.font, item.size, item.font === headline ? green : ink, item.leading);
-    }
+    };
+    continuation(`${leadTitle} (continued)`, leadResult.remaining);
+    continuation('THIS SUNDAY (CONTINUED)', sundayResult.remaining);
+    continuation('THIS WEEK (CONTINUED)', weekResult.remaining);
   }
   // Articles use a single full-width column. Each post is one horizontal row,
   // stacked from the top in reading order in both digital and booklet editions.

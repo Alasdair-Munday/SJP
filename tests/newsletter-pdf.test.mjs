@@ -27,6 +27,37 @@ try {
       assert.ok(items.some(item => item.page === thought.page && item.value.includes('full width of the page')));
     } finally { PDFPage.prototype.drawText = original; }
   });
+  await test('thought photo retains aspect ratio, wraps text, and timetable stays within two columns', async () => {
+    const sharp = (await import('sharp')).default;
+    const image = await sharp({ create: { width: 320, height: 160, channels: 3, background: '#cd1234' } }).png().toBuffer();
+    const originalFetch = globalThis.fetch, originalText = PDFPage.prototype.drawText, originalImage = PDFPage.prototype.drawImage;
+    const items = [], images = [], requests = [];
+    globalThis.fetch = async url => { requests.push(String(url)); return new Response(image); };
+    PDFPage.prototype.drawText = function (value, options) { items.push({ page: this, value, ...options }); return originalText.call(this, value, options); };
+    PDFPage.prototype.drawImage = function (image, options) { images.push({ page: this, ...options }); return originalImage.call(this, image, options); };
+    try {
+      const events = Array.from({ length: 30 }, (_, i) => ({ title: `Weekday event ${i}`, start: new Date('2026-10-12T12:00:00Z'), end: new Date('2026-10-12T13:00:00Z') }));
+      await renderNewsletterPdf({ ...issue, coverImageSrc: 'https://stjohnspark.org/.netlify/images?url=%2Fphoto.png&w=900&h=550&fit=cover', thought: { title: 'A reflection', body: 'The community gathers for food and friendship. '.repeat(180) }, schedule: { ...issue.schedule, events } }, 'digital');
+      const front = items.find(item => item.value === 'A REFLECTION').page;
+      const photo = images.find(item => item.page === front && Math.abs(item.width / item.height - 2) < .001);
+      assert.ok(photo, 'Thought image must keep its original proportions');
+      assert.ok(photo.x > 200, 'Thought image sits on the right');
+      const beside = items.filter(item => item.page === front && item.value.includes('community gathers') && item.y < photo.y + photo.height && item.y + item.size > photo.y);
+      assert.ok(beside.length);
+      for (const item of beside) assert.ok(item.x + item.font.widthOfTextAtSize(item.value, item.size) <= photo.x - 10);
+      const sunday = items.find(item => item.page === front && item.value === 'THIS SUNDAY');
+      const week = items.find(item => item.page === front && item.value === 'THIS WEEK');
+      assert.ok(sunday && week && week.x > sunday.x + 150);
+      assert.equal(sunday.y, week.y);
+      assert.ok(sunday.y < photo.y);
+      for (const item of items.filter(item => item.page === front && item.size > 7)) assert.ok(item.y >= 46, `Front-page text crossed the footer: ${item.value}`);
+      assert.ok(items.some(item => item.value === 'THIS WEEK (CONTINUED)'));
+      assert.ok(items.some(item => item.value === 'A reflection (continued)'));
+      const request = new URL(requests[0]);
+      assert.equal(request.searchParams.has('h'), false);
+      assert.equal(request.searchParams.has('fit'), false);
+    } finally { globalThis.fetch = originalFetch; PDFPage.prototype.drawText = originalText; PDFPage.prototype.drawImage = originalImage; }
+  });
   await test('digital uses A5 reading pages and print uses imposed A4 landscape sheets', async () => {
     const digital = await PDFDocument.load(await renderNewsletterPdf(issue, 'digital'));
     assert.equal(digital.getPageCount(), 2, 'Front and back covers remain in reading order');
