@@ -6,6 +6,8 @@ summary: >
   festive snacks and pizza for the kids. Optional fancy dress: come in your
   pyjamas. Free entry. 
 category: event
+campaignTags:
+  - christmas
 publishDate: 2026-11-17
 displayOnNewsletter: true
 socialEnabled: false
