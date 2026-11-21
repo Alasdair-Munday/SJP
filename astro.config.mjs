@@ -1,9 +1,7 @@
 // @ts-check
 import { defineConfig } from "astro/config";
-import netlify from "@astrojs/netlify";
 
-// https://astro.build/config
+// Cloudflare staging is a static Astro build. Netlify remains unchanged on main.
 export default defineConfig({
-  site: "https://stjohnspark.org",
-  adapter: netlify(),
+  site: process.env.PUBLIC_SITE_URL ?? "https://staging.stjohnspark.org",
 });
