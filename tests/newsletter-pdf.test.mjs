@@ -84,16 +84,20 @@ try {
     assert.equal(print.getPageCount(), 2);
     assert.equal(Math.round(print.getPage(0).getWidth()), 595);
     assert.equal(Math.round(print.getPage(0).getHeight()), 842);
-    const fourPosts = Array.from({ length: 4 }, (_, i) => ({ title: `Story ${i}`, summary: 'A short story.', url: `https://stjohnspark.org/news/${i}` }));
+    const fourPosts = Array.from({ length: 8 }, (_, i) => ({ title: `Story ${i}`, summary: 'A short story.', url: `https://stjohnspark.org/news/${i}` }));
     const original = PDFPage.prototype.drawText, drawn = [];
     PDFPage.prototype.drawText = function (value, options) { drawn.push({ value, ...options }); return original.call(this, value, options); };
     try {
       const four = await PDFDocument.load(await renderNewsletterPdf({ ...issue, posts: fourPosts, givingUrl: 'https://stjohnspark.org/give' }, 'print'));
+      assert.equal(four.getPageCount(), 2);
       assert.equal(Math.round(four.getPage(0).getWidth()), 595);
+      assert.equal(drawn.filter(item => /^STORY [0-7]$/.test(item.value)).length, 8);
+      const links = four.getPages().flatMap(page => (page.node.lookupMaybe(PDFName.of('Annots'), PDFArray)?.asArray() ?? []).map(ref => four.context.lookup(ref, PDFDict).lookup(PDFName.of('A'), PDFDict).lookup(PDFName.of('URI'), PDFString).decodeText()));
+      for (const post of fourPosts) assert.ok(links.includes(post.url));
       assert.ok(drawn.some(item => item.value.includes('Scan the QR code to sign up.')));
       assert.ok(drawn.filter(item => item.size >= 9).every(item => item.y >= 38));
     } finally { PDFPage.prototype.drawText = original; }
-    const posts = Array.from({ length: 5 }, (_, i) => ({ title: `Story ${i}`, summary: 'A short story.', url: `https://stjohnspark.org/news/${i}` }));
+    const posts = Array.from({ length: 9 }, (_, i) => ({ title: `Story ${i}`, summary: 'A short story.', url: `https://stjohnspark.org/news/${i}` }));
     const booklet = await PDFDocument.load(await renderNewsletterPdf({ ...issue, posts }, 'print'));
     assert.equal(Math.round(booklet.getPage(0).getWidth()), 842);
     assert.equal(Math.round(booklet.getPage(0).getHeight()), 595);
@@ -126,11 +130,17 @@ try {
         // A print attempt can first render and reject a portrait candidate.
         const titles = items.filter(item => /^STORY [1-5]$/.test(item.value)).slice(-5);
         assert.equal(titles.length, 5);
-        assert.equal(titles[0].page, titles[2].page);
-        assert.equal(titles[3].page, titles[4].page);
+        if (edition === 'digital') {
+          assert.equal(titles[0].page, titles[2].page);
+          assert.equal(titles[3].page, titles[4].page);
+        } else {
+          assert.ok(titles.every(title => title.page === titles[0].page));
+          assert.equal(titles[0].y, titles[1].y);
+          assert.ok(titles[1].x > titles[0].x);
+        }
         const giving = items.filter(item => item.value === 'Will You Partner With Us?').at(-1);
         assert.equal(giving.page, titles[4].page);
-        assert.ok(giving.y < titles[4].y - 140);
+        assert.ok(giving.y < titles[4].y - 100);
         assert.ok(items.filter(item => item.value.includes('Long story content')).length < 100);
         const links = doc.getPages().flatMap(page => (page.node.lookupMaybe(PDFName.of('Annots'), PDFArray)?.asArray() ?? []).map(ref => doc.context.lookup(ref, PDFDict).lookup(PDFName.of('A'), PDFDict).lookup(PDFName.of('URI'), PDFString).decodeText()));
         for (const post of posts) assert.ok(links.includes(post.url));

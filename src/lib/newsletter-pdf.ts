@@ -12,14 +12,10 @@ export type NewsletterPdfEdition = 'print' | 'digital';
 export const givingCopy = 'We have a vision to see Eden life spring up in our community through the love of Jesus.\n\nThis requires financial resources. Your regular gift will make a huge difference to us in seeing our kingdom dreams come to life. A regular gift through the Parish Giving Scheme is the best way to give.\n\nScan the QR code to sign up.';
 
 export async function renderNewsletterPdf(newsletter: NewsletterData, edition: NewsletterPdfEdition = 'print'): Promise<Uint8Array> {
-  if (edition === 'print') {
-    const portrait = await renderLayout(newsletter, edition, true);
-    if (portrait) return portrait;
-  }
-  return (await renderLayout(newsletter, edition, false))!;
+  return renderLayout(newsletter, edition, edition === 'print' && newsletter.posts.length <= 8);
 }
 
-async function renderLayout(newsletter: NewsletterData, edition: NewsletterPdfEdition, portrait: boolean): Promise<Uint8Array | undefined> {
+async function renderLayout(newsletter: NewsletterData, edition: NewsletterPdfEdition, portrait: boolean): Promise<Uint8Array> {
   const digital = edition === 'digital';
   const pdf = await PDFDocument.create();
   pdf.setTitle(`${newsletter.shortTitle} - ${newsletter.formattedDate}`);
@@ -37,7 +33,7 @@ async function renderLayout(newsletter: NewsletterData, edition: NewsletterPdfEd
   const panelHeading = digital ? rgb(1, 1, 1) : green;
   // The reading pages are A5. The print edition later places two of these pages
   // on each side of an A4 landscape sheet in booklet order.
-  const width = portrait ? 595.28 : 420.94, height = portrait ? 841.89 : 595.28, margin = 22, gap = 14, bottom = 38;
+  const width = portrait ? 595.28 : 420.94, height = portrait ? 841.89 : 595.28, margin = digital ? 22 : 16, gap = portrait ? 10 : 14, bottom = 38;
   const fullWidth = width - margin * 2, columnWidth = (fullWidth - gap) / 2;
   let page!: PDFPage, column = 0, y = 0, top = 0, activeCard = false, fullRowMode = false;
   const pageBottoms = new Map<PDFPage, number>();
@@ -252,19 +248,19 @@ async function renderLayout(newsletter: NewsletterData, edition: NewsletterPdfEd
   // stacked from the top in reading order in both digital and booklet editions.
   fullRowMode = true;
   const cardHeight = portrait ? (height - 70 - bottom - 160) / 4 : (height - 70 - bottom) / 3;
-  async function drawPost(index: number) {
+  async function drawPost(index: number, cardX = margin, cardWidth = fullWidth) {
     const post = newsletter.posts[index];
-    const cardTop = y, photoSize = photos[index + 1] ? 100 : 0, photoGap = 12;
-    const qrSize = 64, labelGap = 4;
+    const cardTop = y, photoSize = photos[index + 1] ? (portrait ? 65 : 100) : 0, photoGap = portrait ? 8 : 12;
+    const qrSize = portrait ? 50 : 64, labelGap = 4;
     const captionRows = rows(digital ? 'Tap or scan for the full story' : 'Scan for the full story', qrSize, body, 8, 10, digital ? panelText : muted);
     const captionHeight = captionRows.reduce((sum, row) => sum + row.leading, 0);
     const qrHeight = qrSize + labelGap + captionHeight;
     const cardFloor = cardTop - cardHeight;
     const contentTop = cardTop - 7, contentFloor = cardFloor + 7;
-    const qrX = width - margin - 8 - qrSize, qrY = contentFloor + captionHeight + labelGap;
-    if (digital) page.drawRectangle({ x: margin, y: cardFloor, width: fullWidth, height: cardHeight, color: green });
-    page.drawLine({ start: { x: margin, y: cardTop }, end: { x: width - margin, y: cardTop }, thickness: 1.5, color: green });
-    if (photoSize) cropped(photos[index + 1]!, margin + 8, contentTop - photoSize, photoSize, photoSize);
+    const qrX = cardX + cardWidth - 6 - qrSize, qrY = contentFloor + captionHeight + labelGap;
+    if (digital) page.drawRectangle({ x: cardX, y: cardFloor, width: cardWidth, height: cardHeight, color: green });
+    page.drawLine({ start: { x: cardX, y: cardTop }, end: { x: cardX + cardWidth, y: cardTop }, thickness: 1.5, color: green });
+    if (photoSize) cropped(photos[index + 1]!, cardX + 6, contentTop - photoSize, photoSize, photoSize);
     let cursor = contentTop;
     const inset = () => photoSize && cursor > contentTop - photoSize - 6 ? photoSize + photoGap : 0;
     // Wrap each line around both the photo and QR code. Stop at the card edge;
@@ -272,8 +268,8 @@ async function renderLayout(newsletter: NewsletterData, edition: NewsletterPdfEd
     const drawWrapped = (value: string, font: PDFFont, size: number, leading: number, color: ReturnType<typeof rgb>) => {
       const words = clean(value, font).trim().split(/\s+/).filter(Boolean);
       while (words.length && cursor - leading >= contentFloor) {
-        const x = margin + 8 + inset();
-        const right = cursor - leading < contentFloor + qrHeight ? qrX - 10 : width - margin - 8;
+        const x = cardX + 6 + inset();
+        const right = cursor - leading < contentFloor + qrHeight ? qrX - 10 : cardX + cardWidth - 6;
         const available = right - x;
         let line = '';
         while (words.length) {
@@ -308,20 +304,32 @@ async function renderLayout(newsletter: NewsletterData, edition: NewsletterPdfEd
     y = cardFloor;
   }
 
-  // Leave one or two stories for the back cover alongside the giving invitation.
   let index = 0;
-  const backCapacity = portrait ? 4 : 2;
-  while (newsletter.posts.length - index > backCapacity) {
+  if (portrait) {
+    // Four rows of two compact cards leave space for giving on the reverse.
     newPage();
-    for (let count = 0; count < 3; count++) await drawPost(index++);
+    const cardWidth = (fullWidth - gap) / 2;
+    while (index < newsletter.posts.length) {
+      const rowTop = y;
+      await drawPost(index++, margin, cardWidth);
+      if (index < newsletter.posts.length) {
+        y = rowTop;
+        await drawPost(index++, margin + cardWidth + gap, cardWidth);
+      }
+    }
+  } else {
+    // Leave one or two stories for the back cover alongside giving.
+    while (newsletter.posts.length - index > 2) {
+      newPage();
+      for (let count = 0; count < 3; count++) await drawPost(index++);
+    }
+    if (!digital) {
+      const blanks = (4 - ((pdf.getPageCount() + 1) % 4)) % 4;
+      for (let count = 0; count < blanks; count++) blankPage();
+    }
+    newPage();
+    while (index < newsletter.posts.length) await drawPost(index++);
   }
-  // Insert blanks before the back cover to preserve folded booklet ordering.
-  if (!digital && !portrait) {
-    const blanks = (4 - ((pdf.getPageCount() + 1) % 4)) % 4;
-    for (let count = 0; count < blanks; count++) blankPage();
-  }
-  newPage();
-  while (index < newsletter.posts.length) await drawPost(index++);
   activeCard = false;
   fullRowMode = false;
   column = 0;
@@ -351,7 +359,7 @@ async function renderLayout(newsletter: NewsletterData, edition: NewsletterPdfEd
     footer.drawText(`${index + 1} / ${pages.length}`, { x: width - margin - 25, y: 16, size: 7, font: body, color: muted });
   });
 
-  if (portrait) return pages.length <= 2 ? pdf.save() : undefined;
+  if (portrait) return pdf.save();
   if (digital) return pdf.save();
 
   // Booklet imposition: outside is [back | front], then [page 2 | penultimate],
