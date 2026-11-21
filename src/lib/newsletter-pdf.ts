@@ -341,26 +341,6 @@ export async function renderNewsletterPdf(newsletter: NewsletterData, edition: N
     page.node.addAnnot(pdf.context.register(action));
   }
 
-  y = backTop - givingPanelHeight - 18;
-  page.drawText('Keep In Touch', { x: margin, y: y - 15, font: headline, size: 15, color: green });
-  y -= 31;
-  const boxTop = y, boxWidth = columnWidth, boxHeight = Math.min(160, boxTop - bottom);
-  async function contactCard(x: number, title: string, copy: string, email: string, subject: string) {
-    page.drawRectangle({ x, y: boxTop - boxHeight, width: boxWidth, height: boxHeight, borderColor: green, borderWidth: .8 });
-    page.drawText(title, { x: x + 9, y: boxTop - 20, font: headline, size: 10.5, color: green });
-    drawRows(rows(copy, boxWidth - 18, body, 8.5, 11, ink), x + 9, boxTop - 31, boxTop - 60);
-    const mailto = `mailto:${email}?subject=${encodeURIComponent(subject)}`;
-    const qrSize = 64, qrX = x + (boxWidth - qrSize) / 2, qrY = boxTop - 124;
-    const qr = await pdf.embedPng(await QRCode.toDataURL(mailto, { margin: 4, width: 320, color: { dark: digital ? '#1b8257' : '#000000', light: '#ffffff' } }));
-    page.drawImage(qr, { x: qrX, y: qrY, width: qrSize, height: qrSize });
-    const emailText = clean(email);
-    page.drawText(emailText, { x: x + (boxWidth - body.widthOfTextAtSize(emailText, 7.5)) / 2, y: boxTop - 142, font: body, size: 7.5, color: muted });
-    const link = pdf.context.obj({ Type: 'Annot', Subtype: 'Link', Rect: [qrX, qrY, qrX + qrSize, qrY + qrSize], Border: [0, 0, 0], A: { Type: 'Action', S: 'URI', URI: PDFString.of(mailto) } });
-    page.node.addAnnot(pdf.context.register(link));
-  }
-  await contactCard(margin, 'Prayer Requests', 'Share something you would like us to pray for.', 'prayer@stjohnspark.org', 'Prayer request');
-  await contactCard(margin + boxWidth + gap, 'Newsletter Feedback', 'Tell us what is useful and what we could improve.', 'feedback@stjohnspark.org', 'Newsletter feedback');
-
   const pages = pdf.getPages();
   pages.forEach((footer, index) => {
     footer.drawLine({ start: { x: margin, y: 28 }, end: { x: width - margin, y: 28 }, thickness: .6, color: green });

@@ -156,15 +156,15 @@ try {
     } finally { PDFPage.prototype.drawText = originalText; }
   });
 
-  await test('back cover includes giving, prayer and newsletter-feedback links', async () => {
+  await test('back cover includes giving without prayer or newsletter-feedback links', async () => {
     const doc = await PDFDocument.load(await renderNewsletterPdf({ ...issue, givingUrl: 'https://stjohnspark.org/get-involved#giving' }, 'digital'));
     const links = doc.getPages().flatMap((page) => {
       const annotations = page.node.lookupMaybe(PDFName.of('Annots'), PDFArray);
       return (annotations?.asArray() ?? []).map((ref) => doc.context.lookup(ref, PDFDict).lookup(PDFName.of('A'), PDFDict).lookup(PDFName.of('URI'), PDFString).decodeText());
     });
     assert.ok(links.includes('https://stjohnspark.org/get-involved#giving'));
-    assert.ok(links.some((href) => href.startsWith('mailto:prayer@stjohnspark.org')));
-    assert.ok(links.some((href) => href.startsWith('mailto:feedback@stjohnspark.org')));
+    assert.ok(!links.some((href) => href.startsWith('mailto:prayer@stjohnspark.org')));
+    assert.ok(!links.some((href) => href.startsWith('mailto:feedback@stjohnspark.org')));
   });
 
   await test('photos use only the site origin and render without an external image service', async () => {
