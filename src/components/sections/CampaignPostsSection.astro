@@ -5,7 +5,7 @@ import { formatDate } from "../../lib/format";
 
 type Section = Extract<CollectionEntry<"pages">["data"]["sections"][number], { type: "campaignPosts" }>;
 const { section } = Astro.props as { section: Section };
-const tag = section.tag.trim().toLowerCase();
+const tag = section.tag?.trim().toLowerCase();
 const accentShapes = [
   "/images/shapes/star-brushstroke.png",
   "/images/shapes/circle-brushstroke-medium.png",
@@ -13,7 +13,7 @@ const accentShapes = [
   "/images/shapes/heart-outline.png",
 ];
 const posts = (await getCollection("posts"))
-  .filter(post => post.data.campaignTags.some(value => value.trim().toLowerCase() === tag))
+  .filter(post => tag && post.data.campaignTags.some(value => value.trim().toLowerCase() === tag))
   .sort((a, b) => (a.data.eventDate?.getTime() ?? Number.MAX_SAFE_INTEGER) - (b.data.eventDate?.getTime() ?? Number.MAX_SAFE_INTEGER) || a.data.title.localeCompare(b.data.title));
 ---
 {posts.map((post, index) => (
