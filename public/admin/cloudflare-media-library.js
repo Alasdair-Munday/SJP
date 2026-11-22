@@ -34,7 +34,7 @@
     formData.append("file", file);
     formData.append("folder", normalizePath(targetFolder));
 
-    return requestJson("/.netlify/functions/cdn-media", {
+    return requestJson("/api/media", {
       method: "POST",
       body: formData,
     });
@@ -55,7 +55,7 @@
         <header class="sjp-media-library__header">
           <div>
             <strong>Cloudflare media library</strong>
-            <p>Images keep their existing site paths and are served through Netlify.</p>
+            <p>Images keep their existing site paths and are served through the Cloudflare staging bridge.</p>
           </div>
           <button type="button" data-close aria-label="Close media library">×</button>
         </header>
@@ -108,7 +108,7 @@
 
     const refresh = async () => {
       setStatus("Loading assets…");
-      const data = await requestJson(`/.netlify/functions/cdn-media?folder=${encodeURIComponent(folder)}`);
+      const data = await requestJson(`/api/media?folder=${encodeURIComponent(folder)}`);
       renderAssets(data.items || []);
     };
 
@@ -148,7 +148,7 @@
   };
 
   window.CMS.registerMediaLibrary({
-    name: "cloudflare_netlify",
+    name: "cloudflare_bridge",
     init: ({ handleInsert }) => ({
       show: ({ config }) => {
         dialog = createDialog({
