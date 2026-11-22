@@ -358,8 +358,6 @@ const posts = defineCollection({
     ctaLabel: z.string().optional(),
     ctaHref: z.string().optional(),
     featured: z.boolean().default(false),
-    displayOnNewsletter: z.boolean().default(true),
-    newsletterDisplayUntil: optionalDateSchema,
     relevantUntil: optionalDateSchema,
     // Legacy metadata remains readable for existing posts and the social review.
     socialEnabled: z.boolean().default(false),
