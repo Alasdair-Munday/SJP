@@ -229,7 +229,7 @@ const whatsOnSectionSchema = z.object({
 const campaignPostsSectionSchema = z.object({
   type: z.literal("campaignPosts"),
   id: z.string().optional(),
-  tag: z.string().min(1),
+  tag: z.string().optional(),
   backgroundTones: z.array(toneSchema).min(1).default(["sky", "pink", "grass", "door"]),
 });
 
