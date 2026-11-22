@@ -2,8 +2,8 @@
 import { getCollection } from "astro:content";
 import CampaignPage from "../../components/templates/CampaignPage.astro";
 export async function getStaticPaths() {
-  return (await getCollection("campaigns")).map(entry => ({ params: { slug: entry.id }, props: { campaign: entry.data } }));
+  return (await getCollection("campaigns")).map(entry => ({ params: { slug: entry.id }, props: { campaign: entry.data, campaignSlug: entry.id } }));
 }
-const { campaign } = Astro.props;
+const { campaign, campaignSlug } = Astro.props;
 ---
-<CampaignPage campaign={campaign} />
+<CampaignPage campaign={campaign} campaignSlug={campaignSlug} />

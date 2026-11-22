@@ -293,7 +293,8 @@ collections:
                     search_fields: ["title"]
                     value_field: "{{slug}}"
                     display_fields: ["title"]
-                    hint: "Show posts assigned to the selected campaign."
+                    required: false
+                    hint: "On a campaign page, posts for that campaign are shown automatically. On other pages, select a campaign."
                   - {label: "Section colours", name: "backgroundTones", widget: "select", multiple: true, options: ["park", "park-dark", "stone", "sky", "pink", "pink-dark", "orange", "door", "give", "grass", "roof"], default: ["sky", "pink", "grass", "door"], hint: "Colours repeat across the matching posts."}
               - label: "This week from Google Calendar"
                 name: "whatsOn"
