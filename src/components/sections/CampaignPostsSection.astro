@@ -1,6 +1,7 @@
 ---
 import { getCollection, type CollectionEntry } from "astro:content";
 import SplitSection from "./SplitSection.astro";
+import EventSection from "./EventSection.astro";
 import { formatDate } from "../../lib/format";
 
 type Section = Extract<CollectionEntry<"pages">["data"]["sections"][number], { type: "campaignPosts" }>;
@@ -17,19 +18,21 @@ const posts = (await getCollection("posts"))
   .sort((a, b) => (a.data.eventDate?.getTime() ?? Number.MAX_SAFE_INTEGER) - (b.data.eventDate?.getTime() ?? Number.MAX_SAFE_INTEGER) || a.data.title.localeCompare(b.data.title));
 ---
 {posts.map((post, index) => (
+  post.data.category === "event" ? (
+    <EventSection post={post} id={index === 0 ? section.id : undefined}
+      backgroundTone={section.backgroundTones[index % section.backgroundTones.length]}
+      accentShape={accentShapes[index % accentShapes.length]} reverse={index % 2 === 1} />
+  ) : (
     <SplitSection section={{
       type: "split",
       id: index === 0 ? section.id : undefined,
       title: post.data.title,
       body: post.data.summary,
-      points: [
-        post.data.eventDate ? formatDate(post.data.eventDate) : "",
-        post.data.timeText ?? "",
-        post.data.location ?? "",
-      ].filter(Boolean),
+      points: [post.data.eventDate ? formatDate(post.data.eventDate) : "", post.data.timeText ?? "", post.data.location ?? ""].filter(Boolean),
       backgroundTone: section.backgroundTones[index % section.backgroundTones.length],
       image: { ...post.data.featuredImage, accentShape: post.data.featuredImage.accentShape || accentShapes[index % accentShapes.length] },
       reverse: index % 2 === 1,
       ctas: [{ label: "Find out more", href: `/news/${post.slug}`, newTab: false }],
     }} />
+  )
 ))}
