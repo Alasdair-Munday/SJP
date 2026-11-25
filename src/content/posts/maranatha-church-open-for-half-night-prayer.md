@@ -32,7 +32,7 @@ Come for as much or as little of the evening as you can.
 - **8–8:30pm — Prayer for schools, families and young people in the parish**
 - **8:30–9pm — Worship**
 - **9–9:30pm — Prayer for Nigeria**
-- **9:30–10pm — Prayer for the city:** Praying for the church in the city and for evangelism.
+- **9:30–10pm — Prayer for the church in Sheffield:** Praying that the message of the gospel would reach every person in the city.
 - **10pm–midnight — Free prayer and worship**
 
 ## Worship
