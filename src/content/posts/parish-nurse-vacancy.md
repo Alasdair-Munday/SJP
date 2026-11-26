@@ -8,8 +8,8 @@ newsletterDisplayUntil: 2026-11-30
 featuredImage:
   src: /images/uploads/park hill.jpeg
   alt: Park Hill, Sheffield
-ctaLabel: Download application pack (Word)
-ctaHref: /downloads/parish-nurse-application-pack.docx
+ctaLabel: Download application pack (PDF)
+ctaHref: /downloads/parish-nurse-application-pack.pdf
 ---
 
 **St John's Park, Sheffield · 14 hours per week · £20.65 per hour**
@@ -44,7 +44,7 @@ The role is based at **St John's Church, Bernard Street, Sheffield S2 5PU**, wit
 
 ## How to apply
 
-[**Download the application pack (Word)**](/downloads/parish-nurse-application-pack.docx). Please also download the accompanying [job description (Word)](/downloads/parish-nurse-job-description.docx) and [person specification (Word)](/downloads/parish-nurse-person-specification.docx).
+[**Download the application pack (PDF)**](/downloads/parish-nurse-application-pack.pdf). Please also download the accompanying [job description (PDF)](/downloads/parish-nurse-job-description.pdf) and [person specification (PDF)](/downloads/parish-nurse-person-specification.pdf).
 
 Email your **CV and a covering letter of up to two A4 pages** to [Revd Al Munday](mailto:al@saintjohnspark.org), using **Parish Nurse application** as the subject. Please show how you meet the essential criteria and include the referee details requested in the pack.
 
