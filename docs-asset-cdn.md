@@ -35,3 +35,10 @@ Set these in Netlify before enabling the CDN-backed media library or running the
    ```
 
 The manifest maps each existing site path to its Cloudflare object key and CDN URL. Content is intentionally not rewritten because the site continues to use the existing paths.
+
+
+## Image delivery
+
+The photo component already requests responsive sizes through Netlify Image CDN. It negotiates WebP or AVIF automatically; no explicit format or changes to the source files are needed. The hero title artwork, card icons and decorative image masks also use source-only Image CDN requests, which retain their original dimensions and negotiate an appropriate format. SVGs, GIFs, external URLs and local Astro development use their original paths. CSS-defined shapes and images embedded in rich text are not covered by this change.
+
+Validate a Netlify Deploy Preview with a browser that accepts WebP: check the content type of artwork and managed photos, including transparent masks, and compare Lighthouse against production. Test local Astro development separately. Netlify Image CDN is not emulated by plain Astro preview; use Netlify Dev or a Deploy Preview for CDN verification.

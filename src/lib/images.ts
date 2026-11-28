@@ -17,3 +17,11 @@ export const getNetlifyOptimizedImageUrl = ({
   height: number;
   quality: number;
 }) => `/.netlify/images?url=${encodeURIComponent(src)}&w=${width}&h=${height}&q=${quality}`;
+
+
+// Decorative artwork is kept at its original size; Netlify negotiates a modern
+// format while preserving transparency. Keep original paths in local Astro dev.
+export const getDisplayImageUrl = (src: string) =>
+  import.meta.env.DEV || !isLocalRasterImage(src) || /\.gif$/i.test(src)
+    ? src
+    : `/.netlify/images?url=${encodeURIComponent(src)}`;
