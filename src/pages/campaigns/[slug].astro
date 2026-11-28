@@ -1,9 +1,10 @@
 ---
 import { getCollection } from "astro:content";
 import CampaignPage from "../../components/templates/CampaignPage.astro";
-export async function getStaticPaths() {
-  return (await getCollection("campaigns")).map(entry => ({ params: { slug: entry.id }, props: { campaign: entry.data } }));
-}
-const { campaign } = Astro.props;
+export const prerender = false;
+Astro.response.headers.set("Cache-Control", "no-store");
+const slug = Astro.params.slug ?? "";
+const campaign = (await getCollection("campaigns")).find(entry => entry.id === slug)?.data;
+if (!campaign) return new Response("Not found", { status: 404 });
 ---
-<CampaignPage campaign={campaign} />
+<CampaignPage campaign={campaign} slug={slug} />
