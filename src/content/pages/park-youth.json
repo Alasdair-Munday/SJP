@@ -54,6 +54,19 @@
       ]
     },
     {
+      "type": "intro",
+      "id": "youth-programme",
+      "title": "Park Youth programme 2026/27",
+      "body": "Explore the activities we’re planning over the coming months. Dates are provisional until confirmed by the youth team. Contact us for the latest details and arrangements.",
+      "backgroundTone": "stone",
+      "ctas": [
+        {
+          "label": "View the youth programme",
+          "href": "/campaigns/park-youth"
+        }
+      ]
+    },
+    {
       "type": "campaignPosts",
       "tag": "park-youth",
       "backgroundTones": [
