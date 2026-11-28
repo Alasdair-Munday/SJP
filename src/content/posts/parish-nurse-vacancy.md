@@ -50,8 +50,8 @@ The role is based at **St John's Church, Bernard Street, Sheffield S2 5PU**, wit
 
 Email your **CV and a covering letter of up to two A4 pages** to [Revd Al Munday](mailto:al@saintjohnspark.org), using **Parish Nurse application** as the subject. Please show how you meet the essential criteria and include the referee details requested in the pack.
 
-**Closing date:** to be confirmed.  
-**Interviews:** to be arranged with shortlisted candidates and PNMUK.
+**Closing date:** Wednesday 23 December 2026.  
+**Interviews:** Early January 2027; date to be confirmed with PNMUK.
 
 For an informal conversation, or if you need an adjustment to the application or interview process, email [al@saintjohnspark.org](mailto:al@saintjohnspark.org).
 
