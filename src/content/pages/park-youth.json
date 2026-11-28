@@ -54,6 +54,15 @@
       ]
     },
     {
+      "type": "campaignPosts",
+      "tag": "park-youth",
+      "backgroundTones": [
+        "sky",
+        "pink",
+        "door"
+      ]
+    },
+    {
       "type": "cards",
       "eyebrow": "Youth lead",
       "title": "Meet Revd Wachira",
