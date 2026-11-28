@@ -1,4 +1,5 @@
 import { getCollection } from "astro:content";
+import { filterNewsletterItems, newsletterSelectionQuery } from "./calendar/newsletter-selection.mjs";
 import { selectNewsletterIssue } from "./calendar/newsletter-issue.mjs";
 import { getNewsletterWeek, groupSchedule, dateKey, timeLabel } from "./events";
 import { isMorningPrayer } from "./calendar/pdf-timetable.mjs";
@@ -9,6 +10,7 @@ import { formatDate } from "./format";
 import { prepareNewsletterBodyHtml } from "./newsletter-html";
 
 type NewsletterPost = {
+  id: string;
   bodyHtml: string;
   emailBodyHtml: string;
   category: PostEntry["data"]["category"];
@@ -110,6 +112,7 @@ export async function getNewsletterData(targetDate: Date = parseNewsletterDate(n
       }).toString();
 
       return {
+        id: post.slug,
         bodyHtml: prepareNewsletterBodyHtml(renderedBody, postUrl),
         emailBodyHtml: prepareNewsletterBodyHtml(renderedBody, postUrl, true),
         category: post.data.category,
@@ -183,8 +186,21 @@ export function renderScheduleEmail(newsletter: NewsletterData) {
   </td></tr>`;
 }
 
-export async function renderNewsletterEmailHtml(targetDate: Date = parseNewsletterDate(null)) {
-  const newsletter = await getNewsletterData(targetDate);
+export function applyNewsletterSelection(newsletter: NewsletterData, params: URLSearchParams): NewsletterData {
+  const query = newsletterSelectionQuery(params);
+  query.set("date", newsletter.issueDate);
+  const onlineUrl = new URL(newsletter.onlineUrl);
+  onlineUrl.search = query.toString();
+  return {
+    ...newsletter,
+    onlineUrl: onlineUrl.toString(),
+    posts: filterNewsletterItems(newsletter.posts, params, "post") as NewsletterData["posts"],
+    schedule: { ...newsletter.schedule, events: filterNewsletterItems(newsletter.schedule.events, params, "event") as NewsletterData["schedule"]["events"] },
+  };
+}
+
+export async function renderNewsletterEmailHtml(targetDate: Date = parseNewsletterDate(null), params = new URLSearchParams()) {
+  const newsletter = applyNewsletterSelection(await getNewsletterData(targetDate), params);
   const preheader =
     newsletter.posts.length > 0
       ? `${newsletter.shortTitle} weekly newsletter for ${newsletter.formattedDate}: ${newsletter.posts
