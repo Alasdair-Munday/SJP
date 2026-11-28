@@ -1,6 +1,6 @@
 ---
 import type { CollectionEntry } from "astro:content";
-import { getNetlifyOptimizedImageUrl, isLocalRasterImage } from "../../lib/images";
+import { getDisplayImageUrl, getNetlifyOptimizedImageUrl, isLocalRasterImage } from "../../lib/images";
 
 type PageSection = CollectionEntry<"pages">["data"]["sections"][number];
 type SectionImage = Extract<PageSection, { image?: unknown }>["image"];
@@ -98,13 +98,13 @@ const backdropShape =
 >
   <span
     class="masked-media__backdrop"
-    style={`--backdrop-shape: url('${backdropShape}');`}
+    style={`--backdrop-shape: url('${getDisplayImageUrl(backdropShape)}');`}
   ></span>
   <div
     class="masked-media__shape"
     data-gallery={hasGallery ? "true" : undefined}
     data-mask={maskName}
-    style={maskShape ? `--mask-shape: url('${maskShape}');` : undefined}
+    style={maskShape ? `--mask-shape: url('${getDisplayImageUrl(maskShape)}');` : undefined}
   >
     {
       galleryImages.map((galleryImage, index) => {
@@ -171,7 +171,7 @@ const backdropShape =
     image.accentShape && (
       <span
         class="masked-media__accent"
-        style={`--accent-shape: url('${image.accentShape}');`}
+        style={`--accent-shape: url('${getDisplayImageUrl(image.accentShape)}');`}
       ></span>
     )
   }
@@ -179,7 +179,7 @@ const backdropShape =
     image.wordArtShape && (
       <span
         class="masked-media__word"
-        style={`--word-shape: url('${image.wordArtShape}');`}
+        style={`--word-shape: url('${getDisplayImageUrl(image.wordArtShape)}');`}
       ></span>
     )
   }

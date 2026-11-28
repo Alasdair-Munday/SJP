@@ -17,3 +17,17 @@ export const getNetlifyOptimizedImageUrl = ({
   height: number;
   quality: number;
 }) => `/.netlify/images?url=${encodeURIComponent(src)}&w=${width}&h=${height}&q=${quality}`;
+
+
+// Keep local development, external URLs, vector files and animation unchanged.
+export const getDisplayImageUrl = (src: string, width = 1024) =>
+  import.meta.env.DEV || !isLocalRasterImage(src) || /\.gif$/i.test(src)
+    ? src
+    : `/.netlify/images?url=${encodeURIComponent(src)}&w=${width}&q=80`;
+
+export const getDisplayImageSrcset = (src: string) =>
+  import.meta.env.DEV || !isLocalRasterImage(src) || /\.gif$/i.test(src)
+    ? undefined
+    : [320, 480, 640, 768, 960, 1200]
+        .map((width) => `${getDisplayImageUrl(src, width)} ${width}w`)
+        .join(", ");

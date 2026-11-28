@@ -2,6 +2,7 @@
 import UpcomingDates from "./UpcomingDates.astro";
 import type { CollectionEntry } from "astro:content";
 import MaskedImage from "./MaskedImage.astro";
+import { getDisplayImageUrl } from "../../lib/images";
 
 type PageSection = CollectionEntry<"pages">["data"]["sections"][number];
 
@@ -32,7 +33,7 @@ const { section } = Astro.props;
               <span
                 class="info-card__icon"
                 aria-hidden="true"
-                style={`--card-icon-shape: url('${card.iconShape}');`}
+                style={`--card-icon-shape: url('${getDisplayImageUrl(card.iconShape)}');`}
               ></span>
             )
           }
