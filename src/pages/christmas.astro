@@ -1,7 +1,9 @@
 ---
 import { getEntry } from "astro:content";
 import CampaignPage from "../components/templates/CampaignPage.astro";
+export const prerender = false;
+Astro.response.headers.set("Cache-Control", "no-store");
 const entry = await getEntry("campaigns", "christmas");
 if (!entry) throw new Error("Missing Christmas campaign");
 ---
-<CampaignPage campaign={entry.data} />
+<CampaignPage campaign={entry.data} slug="christmas" />
