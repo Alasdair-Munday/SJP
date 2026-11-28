@@ -8,7 +8,10 @@ let issueDate: Date;
 try { issueDate = parseNewsletterDate(Astro.url.searchParams.get('date')); }
 catch { return new Response('Please choose a valid issue date (YYYY-MM-DD).', { status: 400 }); }
 const key = dateKey(issueDate);
-const emailHtml = await renderNewsletterEmailHtml(issueDate);
+import { newsletterSelectionQuery } from "../../../lib/calendar/newsletter-selection.mjs";
+const query = newsletterSelectionQuery(Astro.url.searchParams);
+query.set("date", key);
+const emailHtml = await renderNewsletterEmailHtml(issueDate, query);
 ---
 
 <!doctype html>
@@ -164,8 +167,8 @@ const emailHtml = await renderNewsletterEmailHtml(issueDate);
         </div>
         <nav class="export-actions" aria-label="Newsletter export actions">
           <button class="export-button" type="button" data-copy-email-html>Copy HTML</button>
-          <a class="export-button export-button--secondary" href={`/newsletter/email/raw/?date=${key}`}>Open raw HTML</a>
-          <a class="export-button export-button--secondary" href={`/newsletter/?date=${key}`}>Print view</a>
+          <a class="export-button export-button--secondary" href={`/newsletter/email/raw/?${query}`}>Open raw HTML</a>
+          <a class="export-button export-button--secondary" href={`/newsletter/?${query}`}>Print view</a>
           <a class="export-button export-button--secondary" href={`/newsletter/social/?date=${key}`}>Social media</a>
         </nav>
       </header>

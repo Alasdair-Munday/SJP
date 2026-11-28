@@ -1,7 +1,11 @@
 ---
+import FeedCards from "../../components/templates/FeedCards.astro";
+import SectionRenderer from "../../components/sections/SectionRenderer.astro";
+import HeroSection from "../../components/sections/HeroSection.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { getAllEvents, getPageContent } from "../../lib/content";
-import { getSchedule, formatDay, timeLabel } from "../../lib/events";
+import { getAllEvents, getPageContent, getUpcomingEventPosts } from "../../lib/content";
+import { formatDate } from "../../lib/format";
+import { getSchedule, formatDay, timeLabel, dateKey } from "../../lib/events";
 
 export const prerender = false;
 Astro.response.headers.set("Cache-Control", "no-store");
@@ -16,7 +20,32 @@ const entries = events.map((eventPage) => ({
   schedule: { ...schedule, events: schedule.events.filter((event) => event.href === `/events/${eventPage.slug}`).slice(0, 1) },
 }));
 const eventPageRoutes = new Set(events.map((eventPage) => `/events/${eventPage.slug}`));
-const upcomingEvents = schedule.events.filter((event) => !eventPageRoutes.has(event.href ?? ""));
+const announcements = await getUpcomingEventPosts();
+const announcementRoutes = new Set(announcements.map(post => `/news/${post.slug}`));
+// Calendar entries may retain older campaign-wide URLs. Match an unambiguous
+// title and London date as a fallback, not a loose title-only match.
+const normaliseTitle = (title: string) => title.toLowerCase().replace(/[^\p{L}\p{N}]+/gu, " ").trim();
+const matchedSessions = new Map<string, typeof schedule.events[number]>();
+const matchedIds = new Set<string>();
+for (const post of announcements) {
+  const href = `/news/${post.slug}`;
+  const exact = schedule.events.find(event => event.href === href);
+  const candidates = schedule.events.filter(event =>
+    !eventPageRoutes.has(event.href ?? "") && !announcementRoutes.has(event.href ?? "") &&
+    normaliseTitle(event.title) === normaliseTitle(post.data.title) &&
+    dateKey(new Date(event.start)) === dateKey(post.data.eventDate!)
+  );
+  const session = exact ?? (candidates.length === 1 ? candidates[0] : undefined);
+  if (session) { matchedSessions.set(post.slug, session); matchedIds.add(session.id); }
+}
+const upcomingEvents = schedule.events.filter(event => !eventPageRoutes.has(event.href ?? "") && !announcementRoutes.has(event.href ?? "") && !matchedIds.has(event.id));
+const upcoming = [
+  ...announcements.map(post => {
+    const session = matchedSessions.get(post.slug);
+    return { date: session?.start ?? post.data.eventDate!, label: "Event", category: "event", dateLabel: session ? formatDay(session.start) : [formatDate(post.data.eventDate!), post.data.eventEndDate && +post.data.eventEndDate > +post.data.eventDate! ? formatDate(post.data.eventEndDate) : undefined].filter(Boolean).join(" – "), time: session ? timeLabel(session) : post.data.timeText, image: post.data.featuredImage, title: post.data.title, summary: post.data.summary, location: session?.location ?? post.data.location, href: `/news/${post.slug}` };
+  }),
+  ...upcomingEvents.map(event => ({ date: event.start, label: "Event", category: "event", dateLabel: formatDay(event.start), time: timeLabel(event), image: undefined, title: event.title, summary: undefined, location: event.location, href: event.href })),
+].sort((a,b) => +new Date(a.date) - +new Date(b.date));
 const bySlug = new Map(entries.map((entry) => [entry.eventPage.slug, entry]));
 const featuredEntries = page.featuredEvents.flatMap(({ event }) => {
   const entry = bySlug.get(event);
@@ -35,23 +64,34 @@ const orderedEntries = [...featuredEntries, ...remainingEntries];
 ---
 
 <BaseLayout title={page.title} description={page.metaDescription}>
-  <div class="utility-shell page-stack"><section class="content-band" data-tone="stone">
-    {page.eyebrow && <p class="eyebrow">{page.eyebrow}</p>}<h1 class="display-title">{page.title}</h1>
-    {page.intro && <p class="lede">{page.intro}</p>}
-    {schedule.message && <p class="calendar-status" role="status">{schedule.message}</p>}
-    {upcomingEvents.length > 0 && <section aria-labelledby="upcoming-events-title">
-      <h2 id="upcoming-events-title">Upcoming events</h2>
-      <div class="events-index">{upcomingEvents.map((event) => <article class="events-index__card">
-        <p class="eyebrow">{formatDay(event.start)} · {timeLabel(event)}</p>
-        <h3>{event.title}</h3>
-        {event.location && <p>{event.location}</p>}
-        {event.href && <a class="inline-link" href={event.href}>Find out more</a>}
-      </article>)}</div>
-    </section>}
-    <h2>Regular activities</h2>
-    <div class="events-index">{orderedEntries.map(({ eventPage, schedule }) => <article class="events-index__card">
-      <p class="eyebrow">{schedule.events[0] ? `${formatDay(schedule.events[0].start)} · ${timeLabel(schedule.events[0])}` : (eventPage.data.timeText || "Dates to follow")}</p>
-      <h2>{eventPage.data.title}</h2><p>{eventPage.data.summary}</p><a class="inline-link" href={`/events/${eventPage.slug}`}>Find out more</a>
-    </article>)}</div>
-  </section></div>
+  <div class="page-stack">
+    {page.sections.length ? <SectionRenderer sections={page.sections} /> : <HeroSection section={{
+      type: "hero", title: page.title, eyebrow: page.eyebrow, body: page.intro ?? "Find out what’s coming up at St John’s Park.",
+      backgroundTone: "pink", image: { src: "/images/uploads/Family-bustle.jpg", alt: "Church family and neighbours smiling together outdoors", maskShape: "/images/shapes/arch-shape-filled.png", accentShape: "/images/shapes/firework.png", objectPosition: "center center", frameTone: "sky" },
+    }} />}
+    <section class="content-band news-feed-band" data-tone="stone" aria-labelledby="upcoming-events-title">
+      <div class="news-feed__header">
+        <div class="news-feed__intro">
+          <p class="eyebrow">Dates for your diary</p>
+          <h2 class="section-title" id="upcoming-events-title">Upcoming events</h2>
+        </div>
+        <a class="inline-link" href="/news">Looking for updates? Read the news</a>
+      </div>
+      {schedule.message && <p class="calendar-status" role="status">{schedule.message}</p>}
+      {upcoming.length ? <FeedCards cards={upcoming.map(event => ({ ...event, date: event.dateLabel }))} readMore="Find out more" /> : <p>No upcoming events listed yet.</p>}
+    </section>
+    <section class="content-band news-feed-band" data-tone="stone" aria-labelledby="regular-activities-title">
+      <div class="news-feed__header"><div class="news-feed__intro">
+        <p class="eyebrow">Life together</p>
+        <h2 class="section-title" id="regular-activities-title">Regular activities</h2>
+      </div></div>
+      <FeedCards cards={orderedEntries.map(({ eventPage, schedule }) => ({
+        title: eventPage.data.title, summary: eventPage.data.summary, category: "event", label: "Regular activity",
+        date: schedule.events[0] ? formatDay(schedule.events[0].start) : undefined,
+        time: schedule.events[0] ? timeLabel(schedule.events[0]) : eventPage.data.timeText || "Dates to follow",
+        location: schedule.events[0]?.location || eventPage.data.location,
+        image: eventPage.data.image, href: `/events/${eventPage.slug}`,
+      }))} readMore="Find out more" />
+    </section>
+  </div>
 </BaseLayout>

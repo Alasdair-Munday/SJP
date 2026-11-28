@@ -1,5 +1,7 @@
 ---
 title: Cornerstone
+campaignTags:
+  - park-youth
 summary: A Wednesday night youth group for secondary-school-age young people.
 ---
 

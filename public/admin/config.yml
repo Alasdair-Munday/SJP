@@ -73,6 +73,15 @@ collections:
     fields:
       - {label: "Name", name: "title", widget: "string", hint: "The name people see on the website."}
       - {label: "Short summary", name: "summary", widget: "text", hint: "One sentence used on the What’s on page."}
+      - label: "Campaigns & Ministries"
+        name: "campaignTags"
+        widget: "relation"
+        collection: "campaigns"
+        search_fields: ["title"]
+        value_field: "{{slug}}"
+        display_fields: ["title"]
+        multiple: true
+        required: false
       - {label: "Location guidance", name: "location", widget: "string", required: false, hint: "Optional directions or a usual location. Exact event locations come from Google Calendar."}
       - {label: "Usual time guidance", name: "timeText", widget: "string", required: false, hint: "Optional general wording, such as ‘term-time Wednesdays’. Exact times come from Google Calendar."}
       - label: "Image"
@@ -95,8 +104,8 @@ collections:
     fields:
       - {label: "Title", name: "title", widget: "string", hint: "The main headline for the post or event."}
       - {label: "Summary", name: "summary", widget: "text", hint: "A short sentence describing the post."}
-      - {label: "Category", name: "category", widget: "select", options: [{label: "Event", value: "event"}, {label: "Update", value: "update"}, {label: "Blog", value: "blog"}, {label: "Thought for the week", value: "thought"}], default: "update", required: false, hint: "Tag to organize the post."}
-      - label: "Campaigns"
+      - {label: "Category", name: "category", widget: "select", options: [{label: "Event", value: "event"}, {label: "Update", value: "update"}, {label: "Blog", value: "blog"}, {label: "Thought for the week", value: "thought"}], default: "update", required: false, hint: "Event announcements appear on What’s on; updates, blogs and thoughts appear in News. Both remain eligible for the newsletter."}
+      - label: "Campaigns & Ministries"
         name: "campaignTags"
         widget: "relation"
         collection: "campaigns"
@@ -105,7 +114,7 @@ collections:
         display_fields: ["title"]
         multiple: true
         required: false
-        hint: "Select one or more existing campaign pages to include this post."
+        hint: "Select campaigns or ministries where this item should appear."
       - {label: "Author", name: "author", widget: "string", required: false, hint: "Optional byline, especially for Thought for the week posts."}
       - {label: "Publish Date", name: "publishDate", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false, hint: "When this post should appear."}
       - {label: "Display on Newsletter", name: "displayOnNewsletter", widget: "boolean", default: true, required: false, hint: "On by default. Turn off to keep this item out of the weekly newsletter."}
@@ -281,7 +290,7 @@ collections:
             widget: "list"
             hint: "Add, reorder, or edit the blocks on the page."
             types:
-              - label: "Campaign posts"
+              - label: "Campaign or ministry news & events"
                 name: "campaignPosts"
                 widget: "object"
                 summary: 'Posts for {{tag}}'
@@ -293,7 +302,8 @@ collections:
                     search_fields: ["title"]
                     value_field: "{{slug}}"
                     display_fields: ["title"]
-                    hint: "Show posts assigned to the selected campaign."
+                    required: false
+                    hint: "Select a campaign or ministry on a normal page. Leave blank on its own campaign page."
                   - {label: "Section colours", name: "backgroundTones", widget: "select", multiple: true, options: ["park", "park-dark", "stone", "sky", "pink", "pink-dark", "orange", "door", "give", "grass", "roof"], default: ["sky", "pink", "grass", "door"], hint: "Colours repeat across the matching posts."}
               - label: "This week from Google Calendar"
                 name: "whatsOn"
@@ -473,7 +483,7 @@ collections:
                   - {label: "Title", name: "title", widget: "string"}
                   - {label: "Intro Text", name: "intro", widget: "text", required: false}
                   - {label: "Background Color", name: "backgroundTone", widget: "select", options: ["park", "park-dark", "stone", "sky", "pink", "pink-dark", "orange", "door", "give", "grass", "roof"], required: false}
-                  - {label: "Source", name: "source", widget: "select", options: ["posts", "talks"], hint: "What to show in the feed"}
+                  - {label: "Source", name: "source", widget: "select", options: ["posts", "events", "talks"], hint: "What to show in the feed"}
                   - {label: "Number of Items", name: "limit", widget: "number"}
                   - label: "View All Button"
                     name: "cta"
@@ -669,8 +679,8 @@ collections:
           - *page_sections
 
   - name: "campaigns"
-    label: "Campaign Pages"
-    label_singular: "Campaign Page"
+    label: "Campaign & Ministry Pages"
+    label_singular: "Campaign or Ministry Page"
     folder: "src/content/campaigns"
     create: true
     extension: "json"

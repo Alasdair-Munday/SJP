@@ -3,6 +3,8 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import NewsListingTemplate from "../../components/templates/NewsListingTemplate.astro";
 import { getPageContent } from "../../lib/content";
 
+export const prerender = false;
+Astro.response.headers.set("Cache-Control", "no-store");
 const page = await getPageContent("news");
 ---
 

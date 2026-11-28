@@ -1,0 +1,53 @@
+---
+import type { CollectionEntry } from "astro:content";
+import MaskedImage from "../sections/MaskedImage.astro";
+import { withoutImageMask } from "../../lib/content";
+
+interface Card {
+  title: string;
+  summary?: string;
+  category: string;
+  label: string;
+  date?: string;
+  author?: string;
+  time?: string;
+  location?: string;
+  href?: string;
+  image?: CollectionEntry<"posts">["data"]["featuredImage"];
+}
+interface Props {
+  cards: Card[];
+  readMore?: string;
+}
+const { cards, readMore = "Read more" } = Astro.props;
+const fallbackImage = { src: "/images/line-drawing.png", alt: "Line drawing of St John's Park" };
+---
+<div class="news-grid" data-news-grid>
+  {cards.map((card, index) => (
+    <article class="news-card news-card--feed" data-category={card.category} data-featured={index === 0 ? "true" : undefined}>
+      {card.href ? (
+        <a class="news-card__image-link" href={card.href} aria-label={card.title}>
+          <MaskedImage image={withoutImageMask(card.image ?? fallbackImage)} class="news-card__media news-card__media--article" />
+        </a>
+      ) : (
+        <div class="news-card__image-link">
+          <MaskedImage image={withoutImageMask(card.image ?? fallbackImage)} class="news-card__media news-card__media--article" />
+        </div>
+      )}
+      <div class="news-card__body">
+        <div class="news-card__meta news-card__meta--primary">
+          <span class="meta-chip">{card.label}</span>
+          {card.author && <span>By {card.author}</span>}
+          {card.date && <span>{card.date}</span>}
+        </div>
+        <h3 class="post-title">{card.href ? <a class="news-card__link" href={card.href}>{card.title}</a> : card.title}</h3>
+        {card.summary && <p class="news-card__summary">{card.summary}</p>}
+        {(card.time || card.location) && <div class="news-card__meta news-card__meta--event">
+          {card.time && <span>{card.time}</span>}
+          {card.location && <span>{card.location}</span>}
+        </div>}
+        {card.href && <a class="inline-link news-card__readmore" href={card.href}>{readMore}</a>}
+      </div>
+    </article>
+  ))}
+</div>
