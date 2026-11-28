@@ -5,7 +5,7 @@ import HeroSection from "../../components/sections/HeroSection.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getAllEvents, getPageContent, getUpcomingEventPosts } from "../../lib/content";
 import { formatDate } from "../../lib/format";
-import { getSchedule, formatDay, timeLabel } from "../../lib/events";
+import { getSchedule, formatDay, timeLabel, dateKey } from "../../lib/events";
 
 export const prerender = false;
 Astro.response.headers.set("Cache-Control", "no-store");
@@ -22,10 +22,26 @@ const entries = events.map((eventPage) => ({
 const eventPageRoutes = new Set(events.map((eventPage) => `/events/${eventPage.slug}`));
 const announcements = await getUpcomingEventPosts();
 const announcementRoutes = new Set(announcements.map(post => `/news/${post.slug}`));
-const upcomingEvents = schedule.events.filter(event => !eventPageRoutes.has(event.href ?? "") && !announcementRoutes.has(event.href ?? ""));
+// Calendar entries may retain older campaign-wide URLs. Match an unambiguous
+// title and London date as a fallback, not a loose title-only match.
+const normaliseTitle = (title: string) => title.toLowerCase().replace(/[^\p{L}\p{N}]+/gu, " ").trim();
+const matchedSessions = new Map<string, typeof schedule.events[number]>();
+const matchedIds = new Set<string>();
+for (const post of announcements) {
+  const href = `/news/${post.slug}`;
+  const exact = schedule.events.find(event => event.href === href);
+  const candidates = schedule.events.filter(event =>
+    !eventPageRoutes.has(event.href ?? "") && !announcementRoutes.has(event.href ?? "") &&
+    normaliseTitle(event.title) === normaliseTitle(post.data.title) &&
+    dateKey(new Date(event.start)) === dateKey(post.data.eventDate!)
+  );
+  const session = exact ?? (candidates.length === 1 ? candidates[0] : undefined);
+  if (session) { matchedSessions.set(post.slug, session); matchedIds.add(session.id); }
+}
+const upcomingEvents = schedule.events.filter(event => !eventPageRoutes.has(event.href ?? "") && !announcementRoutes.has(event.href ?? "") && !matchedIds.has(event.id));
 const upcoming = [
   ...announcements.map(post => {
-    const session = schedule.events.find(event => event.href === `/news/${post.slug}`);
+    const session = matchedSessions.get(post.slug);
     return { date: session?.start ?? post.data.eventDate!, label: "Event", category: "event", dateLabel: session ? formatDay(session.start) : [formatDate(post.data.eventDate!), post.data.eventEndDate && +post.data.eventEndDate > +post.data.eventDate! ? formatDate(post.data.eventEndDate) : undefined].filter(Boolean).join(" – "), time: session ? timeLabel(session) : post.data.timeText, image: post.data.featuredImage, title: post.data.title, summary: post.data.summary, location: session?.location ?? post.data.location, href: `/news/${post.slug}` };
   }),
   ...upcomingEvents.map(event => ({ date: event.start, label: "Event", category: "event", dateLabel: formatDay(event.start), time: timeLabel(event), image: undefined, title: event.title, summary: undefined, location: event.location, href: event.href })),
