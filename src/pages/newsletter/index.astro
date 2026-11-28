@@ -1,8 +1,10 @@
 ---
 import QRCode from "qrcode";
-import { parseNewsletterDate } from "../../lib/events";
+import { formatDay, parseNewsletterDate, timeLabel } from "../../lib/events";
 import WeeklySchedule from "../../components/sections/WeeklySchedule.astro";
 import { getNewsletterData } from "../../lib/newsletter";
+import { getCampaigns } from "../../lib/content";
+import { newsletterOptions, newsletterQuery } from "../../lib/newsletter-options";
 import "../../styles/print.css";
 
 export const prerender = false;
@@ -10,7 +12,14 @@ Astro.response.headers.set('Cache-Control', 'no-store');
 let issueDate: Date;
 try { issueDate = parseNewsletterDate(Astro.url.searchParams.get('date')); }
 catch { return new Response('Please choose a valid issue date (YYYY-MM-DD).', { status: 400 }); }
-const newsletter = await getNewsletterData(issueDate);
+const options = newsletterOptions(Astro.url.searchParams);
+const [newsletter, campaigns] = await Promise.all([getNewsletterData(issueDate, options), getCampaigns()]);
+const query = newsletterQuery(newsletter.issueDate, options);
+const campaignTitle = campaigns.find((campaign) => campaign.id === options.campaign)?.data.title;
+const groups = [
+  { title: "News", posts: newsletter.availablePosts.filter((post) => post.category !== "event") },
+  { title: "Event announcements", posts: newsletter.availablePosts.filter((post) => post.category === "event") },
+];
 const qrCodes = await Promise.all(newsletter.posts.map((post) => QRCode.toDataURL(post.url, {
   errorCorrectionLevel: "M", margin: 4, width: 384, color: { dark: "#000000", light: "#ffffff" },
 })));
@@ -28,6 +37,12 @@ const qrCodes = await Promise.all(newsletter.posts.map((post) => QRCode.toDataUR
       href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Karla:wght@400;500;700;800&display=swap"
       rel="stylesheet"
     />
+    <style>
+      .newsletter-selection { margin-block: 1rem; }
+      .newsletter-selection fieldset { margin-block: 0.75rem; }
+      .newsletter-selection label { display: block; }
+      @media print { .newsletter-selection { display: none; } }
+    </style>
   </head>
   <body class="newsletter-body newsletter-body--print">
     <div class="newsletter-container">
@@ -41,19 +56,44 @@ const qrCodes = await Promise.all(newsletter.posts.map((post) => QRCode.toDataUR
           </div>
         </div>
         <nav class="newsletter-actions" aria-label="Newsletter actions">
-          <span>Download newsletter:</span>
-          <a href={`/newsletter/pdf/?date=${newsletter.issueDate}&edition=print`}>Print version auto</a>
-          <a href={`/newsletter/pdf/?date=${newsletter.issueDate}&edition=print-full-page`}>Print version full page</a>
-          <a href={`/newsletter/pdf/?date=${newsletter.issueDate}&edition=print-booklet`}>Print version booklet</a>
-          <a href={`/newsletter/pdf/?date=${newsletter.issueDate}&edition=digital`}>Digital</a>
+          <span>Export newsletter:</span>
+          <a href={`/newsletter/pdf/?${query}&edition=print`}>Print version auto</a>
+          <a href={`/newsletter/pdf/?${query}&edition=print-full-page`}>Print version full page</a>
+          <a href={`/newsletter/pdf/?${query}&edition=print-booklet`}>Print version booklet</a>
+          <a href={`/newsletter/pdf/?${query}&edition=digital`}>Digital</a>
+          <a href={`/newsletter/email/?${query}`}>Email export</a>
         </nav>
       </header>
 
       <form class="newsletter-date-picker" method="get">
         <label for="issue-date">Week starting Monday</label>
         <input id="issue-date" type="date" name="date" value={newsletter.issueDate} min="1970-01-05" step="7" aria-describedby="issue-date-help" required />
-        <button type="submit">Update newsletter</button>
+        <label for="campaign">Campaign or ministry</label>
+        <select id="campaign" name="campaign">
+          <option value="">All campaigns</option>
+          {campaigns.map((campaign) => <option value={campaign.id} selected={campaign.id === options.campaign}>{campaign.data.title}</option>)}
+        </select>
+        <button type="submit">Load items</button>
         <span id="issue-date-help">Choose a Monday.</span>
+      </form>
+      <form method="get" class="newsletter-selection">
+        <input type="hidden" name="date" value={newsletter.issueDate} />
+        {options.campaign && <input type="hidden" name="campaign" value={options.campaign} />}
+        <input type="hidden" name="select" value="1" />
+        <h2>Compile newsletter{campaignTitle && ` for ${campaignTitle}`}</h2>
+        <p>Uncheck items to leave them out, then update the preview before exporting.</p>
+        {groups.map(({ title, posts }) => posts.length > 0 && (
+          <fieldset>
+            <legend>{title}</legend>
+            {posts.map((post) => <label><input type="checkbox" name="post" value={post.id} checked={options.includedPosts?.has(post.id) ?? true} /> {post.title}{post.eventDetails && ` · ${post.eventDetails}`}</label>)}
+          </fieldset>
+        ))}
+        {newsletter.availableEvents.length > 0 && <fieldset>
+          <legend>Church calendar</legend>
+          {options.campaign && <p>Select any churchwide calendar entries you want to include.</p>}
+          {newsletter.availableEvents.map((event) => <label><input type="checkbox" name="event" value={event.id} checked={options.includedEvents?.has(event.id) ?? !options.campaign} /> {event.title} · {formatDay(event.start)} · {timeLabel(event)}</label>)}
+        </fieldset>}
+        <button type="submit">Update preview</button>
       </form>
       <main class="newsletter-content">
         <section class="newsletter-schedule" aria-labelledby="this-week-title">
@@ -91,7 +131,7 @@ const qrCodes = await Promise.all(newsletter.posts.map((post) => QRCode.toDataUR
               );
             })
           ) : (
-            <p>No news for this week.</p>
+            <p>No news or event announcements selected.</p>
           )
         }
       </main>

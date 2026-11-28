@@ -2,13 +2,17 @@
 import { parseNewsletterDate, dateKey } from "../../../lib/events";
 import { renderNewsletterEmailHtml } from "../../../lib/newsletter";
 
+import { newsletterOptions, newsletterQuery } from "../../../lib/newsletter-options";
+
 export const prerender = false;
 Astro.response.headers.set('Cache-Control', 'no-store');
 let issueDate: Date;
 try { issueDate = parseNewsletterDate(Astro.url.searchParams.get('date')); }
 catch { return new Response('Please choose a valid issue date (YYYY-MM-DD).', { status: 400 }); }
 const key = dateKey(issueDate);
-const emailHtml = await renderNewsletterEmailHtml(issueDate);
+const options = newsletterOptions(Astro.url.searchParams);
+const query = newsletterQuery(key, options);
+const emailHtml = await renderNewsletterEmailHtml(issueDate, options);
 ---
 
 <!doctype html>
@@ -164,13 +168,14 @@ const emailHtml = await renderNewsletterEmailHtml(issueDate);
         </div>
         <nav class="export-actions" aria-label="Newsletter export actions">
           <button class="export-button" type="button" data-copy-email-html>Copy HTML</button>
-          <a class="export-button export-button--secondary" href={`/newsletter/email/raw/?date=${key}`}>Open raw HTML</a>
-          <a class="export-button export-button--secondary" href={`/newsletter/?date=${key}`}>Print view</a>
+          <a class="export-button export-button--secondary" href={`/newsletter/email/raw/?${query}`}>Open raw HTML</a>
+          <a class="export-button export-button--secondary" href={`/newsletter/?${query}`}>Edit newsletter selection</a>
           <a class="export-button export-button--secondary" href={`/newsletter/social/?date=${key}`}>Social media</a>
         </nav>
       </header>
 
       <form method="get" style="margin-bottom: 18px;">
+        {options.campaign && <input type="hidden" name="campaign" value={options.campaign} />}
         <label for="issue-date">Week starting Monday</label>
         <input id="issue-date" type="date" name="date" value={key} min="1970-01-05" step="7" aria-describedby="issue-date-help" required />
         <button type="submit">Update newsletter</button>

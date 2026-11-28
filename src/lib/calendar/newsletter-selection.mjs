@@ -1,4 +1,4 @@
-import { addDays, dateKey, parseIssueDate } from './dates.mjs';
+import { addDays, dateKey, newsletterWeekRange, parseIssueDate } from './dates.mjs';
 
 // An issue looks back for recent news and forward for event announcements.
 export function relevantToIssue(data, issueDate) {
@@ -13,4 +13,16 @@ export function relevantToIssue(data, issueDate) {
   if (data.publishDate >= recentStart) return true;
   if (displayUntil && displayUntil >= start) return true;
   return data.category === 'event' && Boolean(data.eventDate && (data.eventDate >= start || (data.eventEndDate && data.eventEndDate >= start)));
+}
+
+export function relevantToCampaignIssue(data, issueDate) {
+  if (!data.displayOnNewsletter) return false;
+  const { start, end } = newsletterWeekRange(issueDate);
+  if (data.publishDate >= end) return false;
+  const displayUntil = data.newsletterDisplayUntil ?? data.relevantUntil;
+  if (displayUntil && displayUntil < start) return false;
+  if (data.category === 'event' && data.eventDate) {
+    return data.eventDate < end && (data.eventEndDate ?? data.eventDate) >= start;
+  }
+  return data.publishDate >= start || Boolean(displayUntil);
 }

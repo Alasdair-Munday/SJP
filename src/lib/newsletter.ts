@@ -5,10 +5,12 @@ import { isMorningPrayer } from "./calendar/pdf-timetable.mjs";
 import { parseNewsletterDate } from "./calendar/dates.mjs";
 import type { PostEntry } from "./content";
 import { getNewsletterPostsForWeek, getSiteConfig } from "./content";
+import { newsletterOptions, newsletterQuery } from "./newsletter-options";
 import { formatDate } from "./format";
 import { prepareNewsletterBodyHtml } from "./newsletter-html";
 
 type NewsletterPost = {
+  id: string;
   bodyHtml: string;
   emailBodyHtml: string;
   category: PostEntry["data"]["category"];
@@ -36,6 +38,8 @@ export type NewsletterData = {
   logoSrc: string;
   onlineUrl: string;
   posts: NewsletterPost[];
+  availablePosts: Pick<NewsletterPost, "id" | "title" | "category" | "eventDetails">[];
+  availableEvents: Awaited<ReturnType<typeof getNewsletterWeek>>["events"];
   shortTitle: string;
   sundaySummary: string;
   facebookUrl?: string;
@@ -44,28 +48,28 @@ export type NewsletterData = {
 
 const absolutize = (href: string, baseUrl: string) => new URL(href, baseUrl).toString();
 
-const buildEventDetails = (post: PostEntry) => {
-  if (post.data.category !== "event" || !post.data.eventDate) return "";
+const buildEventDetails = ({ data }: Pick<PostEntry, "data">) => {
+  if (data.category !== "event" || !data.eventDate) return "";
 
   return [
-    `Event Date: ${formatDate(post.data.eventDate)}`,
-    post.data.timeText,
-    post.data.location,
+    `Event Date: ${formatDate(data.eventDate)}`,
+    data.timeText,
+    data.location,
   ]
     .filter(Boolean)
     .join(" \u00b7 ");
 };
 
-export async function getNewsletterData(targetDate: Date = parseNewsletterDate(null)): Promise<NewsletterData> {
+export async function getNewsletterData(targetDate: Date = parseNewsletterDate(null), options = newsletterOptions(new URLSearchParams())): Promise<NewsletterData> {
   const [posts, site, schedule, issues, pages] = await Promise.all([
-    getNewsletterPostsForWeek(targetDate),
+    getNewsletterPostsForWeek(targetDate, options.campaign),
     getSiteConfig(),
     getNewsletterWeek(targetDate),
     getCollection("newsletterIssues"),
     getCollection("pages"),
   ]);
 
-  schedule.events = schedule.events.map((event) => isMorningPrayer(event)
+  const availableEvents = schedule.events.map((event) => isMorningPrayer(event)
     ? { ...event, href: 'https://online.stjohnspark.org', location: 'online.stjohnspark.org' }
     : event);
 
@@ -88,12 +92,14 @@ export async function getNewsletterData(targetDate: Date = parseNewsletterDate(n
     thought: issue ? { title: issue.data.title, body: issue.data.body, author: issue.data.author } : undefined,
     date: targetDate,
     issueDate: dateKey(targetDate),
-    schedule,
+    schedule: { ...schedule, events: availableEvents.filter((event) => options.includedEvents?.has(event.id) ?? !options.campaign) },
+    availableEvents,
+    availablePosts: posts.map(({ id, data }) => ({ id, title: data.title, category: data.category, eventDetails: buildEventDetails({ data }) })),
     formattedDate: formatDate(targetDate),
     logoAlt: site.brand.lockupAlt,
     logoSrc: absolutize(site.brand.lockupSrc, site.siteUrl),
-    onlineUrl: absolutize(`/newsletter/?date=${dateKey(targetDate)}`, site.siteUrl),
-    posts: posts.map((post) => {
+    onlineUrl: absolutize(`/newsletter/?${newsletterQuery(dateKey(targetDate), options)}`, site.siteUrl),
+    posts: posts.filter((post) => options.includedPosts?.has(post.id) ?? true).map((post) => {
       const postUrl = absolutize(`/news/${post.slug}/`, site.siteUrl);
       const renderedBody = post.rendered?.html ?? "";
       if (post.body.trim() && !renderedBody) {
@@ -110,6 +116,7 @@ export async function getNewsletterData(targetDate: Date = parseNewsletterDate(n
       }).toString();
 
       return {
+        id: post.id,
         bodyHtml: prepareNewsletterBodyHtml(renderedBody, postUrl),
         emailBodyHtml: prepareNewsletterBodyHtml(renderedBody, postUrl, true),
         category: post.data.category,
@@ -183,8 +190,8 @@ export function renderScheduleEmail(newsletter: NewsletterData) {
   </td></tr>`;
 }
 
-export async function renderNewsletterEmailHtml(targetDate: Date = parseNewsletterDate(null)) {
-  const newsletter = await getNewsletterData(targetDate);
+export async function renderNewsletterEmailHtml(targetDate: Date = parseNewsletterDate(null), options = newsletterOptions(new URLSearchParams())) {
+  const newsletter = await getNewsletterData(targetDate, options);
   const preheader =
     newsletter.posts.length > 0
       ? `${newsletter.shortTitle} weekly newsletter for ${newsletter.formattedDate}: ${newsletter.posts
@@ -196,7 +203,7 @@ export async function renderNewsletterEmailHtml(targetDate: Date = parseNewslett
   const postsHtml =
     newsletter.posts.length > 0
       ? newsletter.posts.map(renderPost).join("")
-      : `<tr><td style="padding: 0 0 28px 0; color: #222f2a; font-family: Arial, sans-serif; font-size: 16px; line-height: 24px;">No news for this week.</td></tr>`;
+      : `<tr><td style="padding: 0 0 28px 0; color: #222f2a; font-family: Arial, sans-serif; font-size: 16px; line-height: 24px;">No news or event announcements selected.</td></tr>`;
 
   return `<!doctype html>
 <html lang="en">
