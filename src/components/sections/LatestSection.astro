@@ -1,6 +1,6 @@
 ---
 import type { CollectionEntry } from "astro:content";
-import { getLatestPosts, getSiteConfig, withoutImageMask } from "../../lib/content";
+import { getLatestPosts, getUpcomingEventPosts, getSiteConfig, withoutImageMask } from "../../lib/content";
 import { formatDate, formatShortDate, formatTalkDuration } from "../../lib/format";
 import { getTalks, talkAnchorId } from "../../lib/talks";
 import MaskedImage from "./MaskedImage.astro";
@@ -14,7 +14,7 @@ interface Props {
 const { section } = Astro.props;
 const site = await getSiteConfig();
 
-const posts = section.source === "posts" ? await getLatestPosts(section.limit) : [];
+const posts = section.source === "posts" ? await getLatestPosts(section.limit) : section.source === "events" ? (await getUpcomingEventPosts()).slice(0, section.limit) : [];
 const talks = section.source === "talks" ? (await getTalks()).slice(0, section.limit) : [];
 
 const categoryLabels = {
@@ -31,7 +31,7 @@ const categoryLabels = {
   {section.intro && <p class="lede">{section.intro}</p>}
 
   {
-    section.source === "posts" ? (
+    section.source !== "talks" ? (
       <div class="latest-carousel" data-news-carousel aria-roledescription="carousel" aria-label={section.title}>
         <div class="latest-carousel__viewport" data-news-carousel-viewport tabindex="0">
           <div class="latest-carousel__track">
@@ -40,7 +40,7 @@ const categoryLabels = {
                 class="news-card latest-news-card"
                 data-news-carousel-slide
                 data-news-tone={post.data.category}
-                aria-label={`News story ${index + 1} of ${posts.length}`}
+                aria-label={`${section.source === "events" ? "Event" : "News story"} ${index + 1} of ${posts.length}`}
               >
                 <MaskedImage
                   image={withoutImageMask(post.data.featuredImage)}
@@ -72,11 +72,11 @@ const categoryLabels = {
         </div>
         {
           posts.length > 1 && (
-            <div class="latest-carousel__controls" aria-label="News carousel controls">
-              <button class="carousel-button" type="button" data-news-carousel-prev aria-label="Previous news story">
+            <div class="latest-carousel__controls" aria-label="Carousel controls">
+              <button class="carousel-button" type="button" data-news-carousel-prev aria-label="Previous item">
                 &larr;
               </button>
-              <button class="carousel-button" type="button" data-news-carousel-next aria-label="Next news story">
+              <button class="carousel-button" type="button" data-news-carousel-next aria-label="Next item">
                 &rarr;
               </button>
             </div>
@@ -132,7 +132,7 @@ const categoryLabels = {
   </div>
 
 {
-  section.source === "posts" && posts.length > 1 && (
+  section.source !== "talks" && posts.length > 1 && (
     <script is:inline>
       (() => {
         const carousels = Array.from(document.querySelectorAll("[data-news-carousel]"));
