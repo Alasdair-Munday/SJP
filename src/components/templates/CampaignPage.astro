@@ -2,8 +2,9 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import SectionRenderer from "../sections/SectionRenderer.astro";
 import type { CollectionEntry } from "astro:content";
-const { campaign } = Astro.props as { campaign: CollectionEntry<"campaigns">["data"] };
+const { campaign, slug } = Astro.props as { campaign: CollectionEntry<"campaigns">["data"]; slug: string };
+const sections = campaign.sections.map(section => section.type === "campaignPosts" ? { ...section, tag: section.tag || slug } : section);
 ---
 <BaseLayout title={campaign.title} description={campaign.metaDescription}>
-  <div class="page-stack campaign-page"><SectionRenderer sections={campaign.sections} /></div>
+  <div class="page-stack campaign-page"><SectionRenderer sections={sections} /></div>
 </BaseLayout>
