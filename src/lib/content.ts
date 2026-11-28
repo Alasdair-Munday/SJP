@@ -79,8 +79,20 @@ export async function getAllEvents() {
   );
 }
 
+export async function getPublishedPosts(now = new Date()) {
+  return (await getAllPosts()).filter(post => post.data.publishDate <= now);
+}
+
+export async function getNewsPosts() {
+  return (await getPublishedPosts()).filter(post => !isEventPost(post));
+}
+
+export async function getUpcomingEventPosts() {
+  return (await getPublishedPosts()).filter(isUpcomingEventPost);
+}
+
 export async function getLatestPosts(limit = 3) {
-  return (await getAllPosts()).slice(0, limit);
+  return (await getNewsPosts()).slice(0, limit);
 }
 
 export async function getPostsByCategory(category?: PostEntry["data"]["category"]) {
