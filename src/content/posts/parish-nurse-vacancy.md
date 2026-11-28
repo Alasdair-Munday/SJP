@@ -32,6 +32,8 @@ Working alongside NHS and community services, you'll:
 - Develop activities shaped by local needs, with possibilities including health education, movement and mobility groups, and mental health or addiction support with appropriate partners.
 - Explore outreach through local schools, housing providers and community organisations, and equip volunteers to sustain suitable activities beyond the initial funding.
 
+The working pattern includes the Monday Community Hub clinic, 10 am–12:30 pm, and the Tuesday staff meeting, 9–11 am. The remaining hours can be arranged flexibly with the team around the needs of the right candidate.
+
 We'll agree realistic priorities together within the role's 14 hours a week. The service will be open to **people of all faiths and none**, with no expectation of attending church or taking part in religious activities.
 
 ## Who we're looking for
