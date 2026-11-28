@@ -205,7 +205,7 @@ const latestSectionSchema = z.object({
   title: z.string(),
   intro: z.string().optional(),
   backgroundTone: toneSchema.default("pink"),
-  source: z.enum(["posts", "talks"]),
+  source: z.enum(["posts", "events", "talks"]),
   limit: z.number().int().min(1).max(6).default(3),
   cta: optionalLinkSchema,
 });
@@ -229,7 +229,7 @@ const whatsOnSectionSchema = z.object({
 const campaignPostsSectionSchema = z.object({
   type: z.literal("campaignPosts"),
   id: z.string().optional(),
-  tag: z.string().min(1),
+  tag: z.string().optional(),
   backgroundTones: z.array(toneSchema).min(1).default(["sky", "pink", "grass", "door"]),
 });
 
@@ -373,6 +373,7 @@ const posts = defineCollection({
 const events = defineCollection({
   type: "content",
   schema: z.object({
+    campaignTags: z.array(z.string()).default([]),
     title: z.string(),
     summary: z.string(),
     location: z.string().optional(),
