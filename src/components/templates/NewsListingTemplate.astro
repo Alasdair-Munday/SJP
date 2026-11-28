@@ -1,9 +1,9 @@
 ---
 import type { CollectionEntry } from "astro:content";
 import SectionRenderer from "../sections/SectionRenderer.astro";
-import MaskedImage from "../sections/MaskedImage.astro";
-import { formatDate, formatShortDate } from "../../lib/format";
-import { getNewsPosts, withoutImageMask } from "../../lib/content";
+import FeedCards from "./FeedCards.astro";
+import { formatShortDate } from "../../lib/format";
+import { getNewsPosts } from "../../lib/content";
 
 type PageData = CollectionEntry<"pages">["data"];
 
@@ -36,44 +36,11 @@ const categoryLabels = {
     </div>
 
     {posts.length === 0 && <p>No news articles yet.</p>}
-    <div class="news-grid" data-news-grid>
-      {
-        posts.map((post, index) => (
-          <article
-            class="news-card news-card--feed"
-            data-category={post.data.category}
-            data-featured={index === 0 ? "true" : undefined}
-          >
-            <a class="news-card__image-link" href={`/news/${post.slug}`} aria-label={post.data.title}>
-              <MaskedImage
-                image={withoutImageMask(post.data.featuredImage)}
-                class="news-card__media news-card__media--article"
-              />
-            </a>
-            <div class="news-card__body">
-              <div class="news-card__meta news-card__meta--primary">
-                <span class="meta-chip">{categoryLabels[post.data.category]}</span>
-                    {post.data.author && <span>By {post.data.author}</span>}
-                <span>{post.data.category === "event" && post.data.eventDate ? formatDate(post.data.eventDate) : formatShortDate(post.data.publishDate)}</span>
-              </div>
-              <h2 class="post-title">
-                <a class="news-card__link" href={`/news/${post.slug}`}>{post.data.title}</a>
-              </h2>
-              <p class="news-card__summary">{post.data.summary}</p>
-              {
-                post.data.category === "event" && (
-                  <div class="news-card__meta news-card__meta--event">
-                    {post.data.timeText && <span>{post.data.timeText}</span>}
-                    {post.data.location && <span>{post.data.location}</span>}
-                  </div>
-                )
-              }
-              <a class="inline-link news-card__readmore" href={`/news/${post.slug}`}>Read more</a>
-            </div>
-          </article>
-        ))
-      }
-    </div>
+    <FeedCards cards={posts.map(post => ({
+      title: post.data.title, summary: post.data.summary, category: post.data.category,
+      label: categoryLabels[post.data.category], date: formatShortDate(post.data.publishDate),
+      author: post.data.author, image: post.data.featuredImage, href: `/news/${post.slug}`,
+    }))} />
   </section>
 </div>
 
