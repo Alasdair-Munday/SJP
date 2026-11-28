@@ -1,0 +1,21 @@
+{
+  "title": "Park Youth",
+  "metaDescription": "News and upcoming events for Park Youth at St John's Park.",
+  "sections": [
+    {
+      "type": "intro",
+      "title": "Park Youth",
+      "body": "Find news and upcoming events from Park Youth.",
+      "backgroundTone": "door",
+      "ctas": [
+        {
+          "label": "About Park Youth",
+          "href": "/park-youth"
+        }
+      ]
+    },
+    {
+      "type": "campaignPosts"
+    }
+  ]
+}
