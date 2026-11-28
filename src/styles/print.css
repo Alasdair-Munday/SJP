@@ -315,3 +315,12 @@
 @media print { .weekly-schedule__day { grid-template-columns: 26mm minmax(0, 1fr); padding: 2mm 0; gap: 3mm; } .weekly-schedule .weekly-schedule__event { grid-template-columns: 32mm minmax(0, 1fr); font-size: 9pt; padding: 1mm 0; } }
 
 .newsletter-actions { flex-wrap: wrap; }
+
+.newsletter-selection { padding: 1rem 2rem; border-bottom: 1px solid var(--newsletter-border); background: var(--newsletter-paper); }
+.newsletter-selection h2 { margin: 0; font-size: 1.25rem; }
+.newsletter-selection details { margin: .75rem 0; }
+.newsletter-selection summary { font-weight: 700; cursor: pointer; }
+.newsletter-selection label { display: block; padding: .25rem 0; }
+.newsletter-selection button { margin-right: 1rem; }
+.newsletter-actions { flex-wrap: wrap; }
+@media print { .newsletter-selection, .newsletter-date-picker { display: none; } }
