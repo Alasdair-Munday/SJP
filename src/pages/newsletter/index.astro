@@ -1,8 +1,8 @@
 ---
 import QRCode from "qrcode";
-import { parseNewsletterDate } from "../../lib/events";
+import { parseNewsletterDate, formatDay, timeLabel } from "../../lib/events";
 import WeeklySchedule from "../../components/sections/WeeklySchedule.astro";
-import { getNewsletterData } from "../../lib/newsletter";
+import { getNewsletterData, applyNewsletterSelection } from "../../lib/newsletter";
 import "../../styles/print.css";
 
 export const prerender = false;
@@ -10,7 +10,15 @@ Astro.response.headers.set('Cache-Control', 'no-store');
 let issueDate: Date;
 try { issueDate = parseNewsletterDate(Astro.url.searchParams.get('date')); }
 catch { return new Response('Please choose a valid issue date (YYYY-MM-DD).', { status: 400 }); }
-const newsletter = await getNewsletterData(issueDate);
+const candidates = await getNewsletterData(issueDate);
+const newsletter = applyNewsletterSelection(candidates, Astro.url.searchParams);
+const selectedPosts = new Set(newsletter.posts.map(post => post.id));
+const selectedEvents = new Set(newsletter.schedule.events.map(event => event.id));
+const downloadHref = (edition: string) => {
+  const query = new URL(newsletter.onlineUrl).searchParams;
+  query.set("edition", edition);
+  return `/newsletter/pdf/?${query}`;
+};
 const qrCodes = await Promise.all(newsletter.posts.map((post) => QRCode.toDataURL(post.url, {
   errorCorrectionLevel: "M", margin: 4, width: 384, color: { dark: "#000000", light: "#ffffff" },
 })));
@@ -42,10 +50,10 @@ const qrCodes = await Promise.all(newsletter.posts.map((post) => QRCode.toDataUR
         </div>
         <nav class="newsletter-actions" aria-label="Newsletter actions">
           <span>Download newsletter:</span>
-          <a href={`/newsletter/pdf/?date=${newsletter.issueDate}&edition=print`}>Print version auto</a>
-          <a href={`/newsletter/pdf/?date=${newsletter.issueDate}&edition=print-full-page`}>Print version full page</a>
-          <a href={`/newsletter/pdf/?date=${newsletter.issueDate}&edition=print-booklet`}>Print version booklet</a>
-          <a href={`/newsletter/pdf/?date=${newsletter.issueDate}&edition=digital`}>Digital</a>
+          <a href={downloadHref("print")}>Print version auto</a>
+          <a href={downloadHref("print-full-page")}>Print version full page</a>
+          <a href={downloadHref("print-booklet")}>Print version booklet</a>
+          <a href={downloadHref("digital")}>Digital</a>
         </nav>
       </header>
 
@@ -54,6 +62,22 @@ const qrCodes = await Promise.all(newsletter.posts.map((post) => QRCode.toDataUR
         <input id="issue-date" type="date" name="date" value={newsletter.issueDate} min="1970-01-05" step="7" aria-describedby="issue-date-help" required />
         <button type="submit">Update newsletter</button>
         <span id="issue-date-help">Choose a Monday.</span>
+      </form>
+      <form class="newsletter-selection" method="get">
+        <input type="hidden" name="date" value={newsletter.issueDate} />
+        <input type="hidden" name="selection" value="custom" />
+        <h2>Choose what to include</h2>
+        <p>Untick any items you want to leave out, then apply your selection before downloading. This does not change published content.</p>
+        <details open>
+          <summary>News and event announcements ({selectedPosts.size} selected)</summary>
+          {candidates.posts.map(post => <label><input type="checkbox" name="post" value={post.id} checked={selectedPosts.has(post.id)} /> {post.title}</label>)}
+        </details>
+        <details>
+          <summary>Weekly timetable ({selectedEvents.size} selected)</summary>
+          {candidates.schedule.events.map(event => <label><input type="checkbox" name="event" value={event.id} checked={selectedEvents.has(event.id)} /> {formatDay(event.start)} · {timeLabel(event)} · {event.title}</label>)}
+        </details>
+        <button type="submit">Apply selection</button>
+        <a href={`/newsletter/?date=${newsletter.issueDate}`}>Reset selection</a>
       </form>
       <main class="newsletter-content">
         <section class="newsletter-schedule" aria-labelledby="this-week-title">
