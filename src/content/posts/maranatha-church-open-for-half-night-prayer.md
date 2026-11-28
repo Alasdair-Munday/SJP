@@ -26,13 +26,13 @@ Come for as much or as little of the evening as you can.
 
 - **4–5:30pm — Family prayer and worship:** All-age worship, creative prayer activities and hot dogs.
 - **5:30–6:30pm — Reflective prayer space:** A calm space to explore the prayer stations at your own pace.
-- **6:30–7pm — Prayer for the parish:** Particularly around food security.
+- **6:30–7pm — Food security — led by Sophie Dudgeon:** Praying for families struggling to afford food, those providing emergency food, and lasting food security locally.
 - **7–7:30pm — Honest Advent:** Reflections on the Honest Advent artwork.
 - **7:30–8pm — Worship**
-- **8–8:30pm — Prayer for schools, families and young people in the parish**
+- **8–8:30pm — Children, families and schools — led by Bess Cooper:** Praying for Wybourn and Emmaus schools, their staff, families and young people.
 - **8:30–9pm — Worship**
-- **9–9:30pm — Prayer for Nigeria**
-- **9:30–10pm — Prayer for the church in Sheffield:** Praying that the message of the gospel would reach every person in the city.
+- **9–9:30pm — Nigeria — led by Christian Nwachukwu:** Praying for peace and protection, food security, and families displaced from their homes.
+- **9:30–10pm — The Church in Sheffield — led by Nick Phoenix:** Praying for unity, for the gospel to reach every person, and for the Spirit to draw people to Jesus through dreams, visions, healing and miracles.
 - **10pm–midnight — Free prayer and worship**
 
 ## Worship
