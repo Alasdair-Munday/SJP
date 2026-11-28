@@ -1,6 +1,6 @@
 ---
 import type { CollectionEntry } from "astro:content";
-import { getLatestPosts, getSiteConfig, withoutImageMask } from "../../lib/content";
+import { getNewsPosts, getSiteConfig, withoutImageMask } from "../../lib/content";
 import { formatDate, formatShortDate, formatTalkDuration } from "../../lib/format";
 import { getTalks, talkAnchorId } from "../../lib/talks";
 import MaskedImage from "./MaskedImage.astro";
@@ -14,7 +14,7 @@ interface Props {
 const { section } = Astro.props;
 const site = await getSiteConfig();
 
-const posts = section.source === "posts" ? await getLatestPosts(section.limit) : [];
+const posts = section.source === "posts" ? (await getNewsPosts()).slice(0, section.limit) : [];
 const talks = section.source === "talks" ? (await getTalks()).slice(0, section.limit) : [];
 
 const categoryLabels = {
@@ -56,14 +56,6 @@ const categoryLabels = {
                     <a class="news-card__link" href={`/news/${post.slug}`}>{post.data.title}</a>
                   </h3>
                   <p class="news-card__summary">{post.data.summary}</p>
-                  {
-                    post.data.category === "event" && (
-                      <div class="news-card__meta">
-                        {post.data.timeText && <span>{post.data.timeText}</span>}
-                        {post.data.location && <span>{post.data.location}</span>}
-                      </div>
-                    )
-                  }
                   <a class="inline-link" href={`/news/${post.slug}`}>Read more</a>
                 </div>
               </article>
@@ -119,6 +111,7 @@ const categoryLabels = {
   }
 
   <div class="button-row">
+    {section.source === "posts" && <a class="button-link--ghost" href="/events/">Upcoming events</a>}
     {section.cta && (<a class="button-link--ghost" href={section.cta.href} target={section.cta.newTab ? "_blank" : undefined} rel={section.cta.newTab ? "noreferrer" : undefined}>
       {section.cta.label}
     </a>)}

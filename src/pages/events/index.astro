@@ -1,11 +1,12 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { getAllEvents, getPageContent } from "../../lib/content";
+import { getAllEvents, getPageContent, getUpcomingEventPosts } from "../../lib/content";
+import { formatDate } from "../../lib/format";
 import { getSchedule, formatDay, timeLabel } from "../../lib/events";
 
 export const prerender = false;
 Astro.response.headers.set("Cache-Control", "no-store");
-const events = await getAllEvents();
+const [events, announcements] = await Promise.all([getAllEvents(), getUpcomingEventPosts()]);
 const page = await getPageContent("events");
 const now = new Date();
 const until = new Date(now);
@@ -46,6 +47,16 @@ const orderedEntries = [...featuredEntries, ...remainingEntries];
         <h3>{event.title}</h3>
         {event.location && <p>{event.location}</p>}
         {event.href && <a class="inline-link" href={event.href}>Find out more</a>}
+      </article>)}</div>
+    </section>}
+    {announcements.length > 0 && <section aria-labelledby="event-announcements-title">
+      <h2 id="event-announcements-title">Event announcements</h2>
+      <div class="events-index">{announcements.map(({ slug, data }) => <article class="events-index__card">
+        <p class="eyebrow">{data.eventDate && formatDate(data.eventDate)}{data.timeText && ` · ${data.timeText}`}</p>
+        <h3>{data.title}</h3>
+        {data.location && <p>{data.location}</p>}
+        <p>{data.summary}</p>
+        <a class="inline-link" href={`/news/${slug}`}>View event</a>
       </article>)}</div>
     </section>}
     <h2>Regular activities</h2>

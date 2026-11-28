@@ -1,4 +1,4 @@
-import { relevantToIssue } from "./calendar/newsletter-selection.mjs";
+import { relevantToCampaignIssue, relevantToIssue } from "./calendar/newsletter-selection.mjs";
 import { getCollection, getEntry, type CollectionEntry } from "astro:content";
 
 export type PageEntry = CollectionEntry<"pages">;
@@ -73,6 +73,31 @@ export async function getAllPosts() {
   return sortPosts(await getCollection("posts"));
 }
 
+export async function getNewsPosts() {
+  return (await getAllPosts()).filter((post) => !isEventPost(post));
+}
+
+export async function getUpcomingEventPosts() {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  return (await getAllPosts()).filter((post) =>
+    isUpcomingEventPost(post) ||
+    (isEventPost(post) && !post.data.eventDate &&
+      ((post.data.newsletterDisplayUntil ?? post.data.relevantUntil)?.getTime() ?? 0) >= today.getTime()),
+  );
+}
+
+export async function getCampaigns() {
+  return (await getCollection("campaigns")).sort((left, right) =>
+    left.data.title.localeCompare(right.data.title),
+  );
+}
+
+export function hasCampaign(post: PostEntry, campaign: string) {
+  const tag = campaign.trim().toLowerCase();
+  return post.data.campaignTags.some((value) => value.trim().toLowerCase() === tag);
+}
+
 export async function getAllEvents() {
   return [...await getCollection("events")].sort((left, right) =>
     left.data.title.localeCompare(right.data.title),
@@ -105,6 +130,11 @@ export function isRelevantForWeek(post: PostEntry, issueDate: Date) {
   return relevantToIssue(post.data, issueDate);
 }
 
-export async function getNewsletterPostsForWeek(targetDate: Date = new Date()) {
-  return (await getAllPosts()).filter((post) => isRelevantForWeek(post, targetDate));
+export async function getNewsletterPostsForWeek(targetDate: Date = new Date(), campaign = "") {
+  const posts = await getAllPosts();
+  if (!campaign) return posts.filter((post) => isRelevantForWeek(post, targetDate));
+
+  return posts.filter((post) =>
+    hasCampaign(post, campaign) && relevantToCampaignIssue(post.data, targetDate),
+  );
 }

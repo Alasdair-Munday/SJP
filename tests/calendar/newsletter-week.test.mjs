@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { relevantToCampaignIssue } from '../../src/lib/calendar/newsletter-selection.mjs';
 import { newsletterWeekRange, weekRange, dateKey, parseIssueDate, parseNewsletterDate } from '../../src/lib/calendar/dates.mjs';
 
 test('newsletter anchors every issue date to its Monday–Sunday week; homepage remains rolling', () => {
@@ -23,6 +24,18 @@ test('newsletter weeks preserve local Monday boundaries across DST and year roll
     assert.equal(dateKey(range.end), end);
     assert.equal((range.end - range.start) / 3600000, hours);
   }
+});
+
+test('campaign issues use publication dates for news and overlapping dates for events', () => {
+  const issue = parseIssueDate('2026-12-21');
+  const news = { category: 'update', displayOnNewsletter: true, publishDate: parseIssueDate('2026-12-23') };
+  assert.equal(relevantToCampaignIssue(news, issue), true);
+  assert.equal(relevantToCampaignIssue({ ...news, publishDate: parseIssueDate('2026-12-28') }, issue), false);
+  assert.equal(relevantToCampaignIssue({ ...news, displayOnNewsletter: false }, issue), false);
+  const event = { ...news, category: 'event', publishDate: parseIssueDate('2026-11-30'), eventDate: parseIssueDate('2026-12-20') };
+  assert.equal(relevantToCampaignIssue(event, issue), false);
+  assert.equal(relevantToCampaignIssue({ ...event, eventEndDate: parseIssueDate('2026-12-22') }, issue), true);
+  assert.equal(relevantToCampaignIssue({ ...event, eventDate: parseIssueDate('2026-12-28') }, issue), false);
 });
 
 
