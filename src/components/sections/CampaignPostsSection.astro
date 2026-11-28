@@ -25,7 +25,7 @@ const eventItems = [
     if (!session && !isUpcomingEventPost(post)) return [];
     return [{ title: post.data.title, body: post.data.summary, image: post.data.featuredImage, href,
       date: session ? +new Date(session.start) : +(post.data.eventDate ?? now),
-      points: [session ? formatDay(session.start) : post.data.eventDate ? formatDate(post.data.eventDate) : "", session ? timeLabel(session) : post.data.timeText, session?.location ?? post.data.location].filter((value): value is string => Boolean(value)) }];
+      points: [session ? formatDay(session.start) : post.data.eventDate ? (post.data.eventEndDate && +post.data.eventEndDate > +post.data.eventDate ? `${formatDate(post.data.eventDate)} – ${formatDate(post.data.eventEndDate)}` : formatDate(post.data.eventDate)) : "", session ? timeLabel(session) : post.data.timeText, session?.location ?? post.data.location].filter((value): value is string => Boolean(value)) }];
   }),
   ...matchingRegular.map(event => {
     const href = `/events/${event.slug}`;
@@ -36,7 +36,8 @@ const eventItems = [
   }),
 ].sort((a,b) => a.date - b.date);
 const newsItems = matchingPosts.filter(post => !isEventPost(post)).map(post => ({ title: post.data.title, body: post.data.summary, image: post.data.featuredImage, href: `/news/${post.slug}`, points: [formatDate(post.data.publishDate)] }));
-const groups = [{ title: "Upcoming events", items: eventItems }, { title: "Latest news", items: newsItems }];
+const undatedItems = matchingPosts.filter(post => isEventPost(post) && !post.data.eventDate && !next(`/news/${post.slug}`)).map(post => ({ title: post.data.title, body: post.data.summary, image: post.data.featuredImage, href: `/news/${post.slug}`, points: [post.data.timeText || "Date to be confirmed", post.data.location].filter((value): value is string => Boolean(value)) }));
+const groups = [{ title: "Upcoming events", items: eventItems }, { title: "Dates to be confirmed", items: undatedItems }, { title: "Latest news", items: newsItems }];
 ---
 {groups.filter(group => group.items.length).map(group => (
   <>
