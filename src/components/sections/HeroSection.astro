@@ -1,7 +1,7 @@
 ---
 import type { CollectionEntry } from "astro:content";
 import MaskedImage from "./MaskedImage.astro";
-import { getDisplayImageUrl } from "../../lib/images";
+import { getDisplayImageSrcset, getDisplayImageUrl } from "../../lib/images";
 
 type PageSection = CollectionEntry<"pages">["data"]["sections"][number];
 
@@ -21,7 +21,9 @@ const bodyParts = section.body.split(/(\b\w+\b)/);
       <h1 class:list={["display-title", { "hero-title-art": section.titleImage }]}>
         {section.titleImage ? (
           <img
-            src={getDisplayImageUrl(section.titleImage.src)}
+            src={getDisplayImageUrl(section.titleImage.src, 768)}
+            srcset={getDisplayImageSrcset(section.titleImage.src)}
+            sizes="(max-width: 420px) calc(100vw - 3rem), 24rem"
             alt={section.title}
             width={section.titleImage.width}
             height={section.titleImage.height}
