@@ -14,3 +14,22 @@ export function relevantToIssue(data, issueDate) {
   if (displayUntil && displayUntil >= start) return true;
   return data.category === 'event' && Boolean(data.eventDate && (data.eventDate >= start || (data.eventEndDate && data.eventEndDate >= start)));
 }
+
+/** A custom selection is scoped to the issue in the URL, not the CMS content. */
+export function filterNewsletterItems(items, params, key) {
+  if (params.get('selection') !== 'custom') return items;
+  const selected = new Set(params.getAll(key));
+  return items.filter(item => selected.has(item.id));
+}
+
+export function newsletterSelectionQuery(params) {
+  const query = new URLSearchParams();
+  if (params.get('date')) query.set('date', params.get('date'));
+  if (params.get('selection') === 'custom') {
+    query.set('selection', 'custom');
+    for (const key of ['post', 'event']) {
+      for (const id of params.getAll(key)) query.append(key, id);
+    }
+  }
+  return query;
+}
